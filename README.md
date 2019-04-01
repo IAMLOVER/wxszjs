@@ -1,0 +1,2 @@
+# wepy
+wxstore
