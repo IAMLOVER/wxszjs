@@ -4,23 +4,58 @@
 <script>
 import wepy from 'wepy';
 import 'wepy-async-function';
+import request from './common/request.js';
+import sendUserInfo from './common/sendUserInfo.js';
+import getUserInfo_ from './common/getUserInfo.js';
 export default class extends wepy.app {
   constructor() {
     super();
     this.use('promisify');
   }
   config = {
-    pages: ['pages/index'],
+    pages: [
+      'pages/index/index',
+      'pages/classification/classification',
+      'pages/shop/shop',
+      // 我的
+      'pages/myCenter/myCenter/myCenter',
+      'pages/myCenter/myOrder/myOrder',
+      'pages/myCenter/myCoupon/myCoupon',
+      'pages/myCenter/myPackage/myPackage',
+      'pages/myCenter/myShop/myShop',
+      'pages/myCenter/myTask/myTask'
+    ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: '神州集市',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      custom: false,
+      color: '#000000',
+      selectedColor: '#000000',
+      backgroundColor: '#fffff',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '首页'
+        },
+        {
+          pagePath: 'pages/classification/classification',
+          text: '分类'
+        },
+         {
+          pagePath: 'pages/shop/shop',
+          text: '店铺'
+        },
+         {
+          pagePath: 'pages/myCenter/myCenter/myCenter',
+          text: '我的'
+        }
+      ]
     }
   };
-
-  onLaunch() {
-    console.log('on launch');
-  }
+  onLaunch() {}
 }
 </script>

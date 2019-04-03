@@ -1,0 +1,21 @@
+<style lang="less">
+</style>
+<template>
+  <view class="page">
+    我的中心
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的'
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>

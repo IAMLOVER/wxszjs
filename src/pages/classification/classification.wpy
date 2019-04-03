@@ -2,18 +2,20 @@
 </style>
 <template>
   <view class="page">
+    分类
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: 'test'
+    navigationBarTitleText: '分类'
   };
   onLoad() {
-    console.log('onLoad');
   }
+  data = {
+  };
+  methods = {};  
 }
 </script>
