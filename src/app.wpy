@@ -1,4 +1,4 @@
-<style lang="less" src="./style/weui.less">
+<style lang="css" src="./style/weui.css">
 </style>
 
 <script>
@@ -15,6 +15,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
+      'pages/search/search',
       'pages/classification/classification',
       'pages/shop/shop',
       // 我的

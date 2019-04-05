@@ -11,5 +11,39 @@
 	"appid": "wx4045733d67978dd9",
 	"projectname": "wxstore",
 	"miniprogramRoot": "dist/",
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "dianpu",
+					"pathName": "pages/shop/shop",
+					"scene": null
+				}
+			]
+		}
+	}
 }
