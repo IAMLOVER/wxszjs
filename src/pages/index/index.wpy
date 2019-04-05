@@ -1,4 +1,7 @@
 <style lang="less">
+page{
+  height: auto;
+}
 .swiper-wrapper {
   position: relative;
   .swiper {
@@ -17,8 +20,8 @@
 .search-wrapper {
   position: fixed;
   top: 30rpx;
-  left: 50%;
-  margin-left: -335rpx;
+  z-index: 1;
+  width: 100%;
   .search {
     position: relative;
     input {
@@ -30,15 +33,29 @@
       padding-left: 78rpx;
       color: #959595;
       box-sizing: border-box;
+      margin: 0 auto;
     }
     image {
       width: 36rpx;
       height: 36rpx;
       position: absolute;
-      left: 30rpx;
+      left: 60rpx;
       top: 14rpx;
     }
   }
+}
+.scroll-active{
+ background-color: #fff;
+ top: 0;
+position: fixed;
+  z-index: 1;
+  .search{
+    input{
+      color: #959595;
+    }
+  }
+
+
 }
 .main {
   display: flex;
@@ -49,7 +66,9 @@
     flex: 1;
     background-image: linear-gradient(0deg, #fc88a4 0%, #ffdae7 100%);
     border-radius: 10px 0px 0px 10px;
-    padding: 24rpx;
+    padding: 12rpx 24rpx;
+    height: 178rpx;
+    box-sizing: border-box;
     .title {
       image {
         width: 36rpx;
@@ -67,6 +86,21 @@
       color: #F25664;
       font-size: 28rpx;
     }
+   .button-wrapper{
+     position: relative;
+      .rightNow{
+     color: #ffffff;
+     font-size: 24rpx;
+     position: absolute;
+     top: 6rpx;
+     left: 12rpx;
+    }
+    .button{
+      z-index: 1000;
+      width: 120rpx;
+      height: 40rpx;
+    }
+   }
   }
   .skil{
     margin-right: 3rpx;
@@ -77,12 +111,228 @@
     margin-left: 3rpx;
   }
 }
+.new-store{
+  .title{
+    display: flex;
+    justify-content:space-between;
+    padding: 40rpx 30rpx 24rpx 40rpx;
+    view{
+      image{
+        width: 24rpx;
+        height: 24rpx;
+        margin-left: 12rpx;
+        vertical-align:middle;
+      }
+      .more{
+        font-size: 24rpx;
+        color: #959595;
+        line-height: 24rpx;
+      }
+    }
+    .tip{
+        font-size: 32rpx;
+        color: #F25664;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar{
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #F25664;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+  }
+  .content-wrapper{
+   .swiper{
+      height: 326rpx !important;
+      position: relative;
+   }
+    .store{
+       width: 98%;
+       height: 326rpx !important;       
+       background-color: #fff;
+       margin: 0 auto;
+       border-radius: 12rpx;
+       padding: 24rpx;
+       box-sizing: border-box;
+       overflow: hidden;
+      .logo{
+        width: 80rpx;
+        height: 80rpx;
+        border-radius: 8rpx;
+        vertical-align: middle;
+        margin-right: 16rpx;
+      }
+      text{
+        width: 360rpx;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 28rpx;
+        color: #222222;
+        line-height: 28rpx;
+      }
+      .button-wrapper{
+         position: relative;
+         float: right;
+         margin-top: 12rpx;
+       .rightNow{
+         color: #ffffff;
+         font-size: 24rpx;
+         position: absolute;
+         top: 6rpx;
+         left: 12rpx;
+      }
+      .button{
+        z-index: 1000;
+        width: 122rpx;
+        height: 48rpx;
+      }
+    }
+    .images{
+      margin-top: 44rpx;
+      .produce-images{
+        image{
+          width: 170rpx;
+          height: 170rpx;
+          float: left;
+          margin-right: 24rpx;
+        }
+      }
+      .more{
+        width: 50rpx;
+        height: 14rpx;
+        float: right;
+        margin-top: 50rpx;
+      }
+    }
+
+    }
+  }
+}
+.new-produce{
+.title{
+    display: flex;
+    justify-content:space-between;
+    padding: 40rpx 30rpx 24rpx 40rpx;
+    view{
+      image{
+        width: 24rpx;
+        height: 24rpx;
+        margin-left: 12rpx;
+        vertical-align:middle;
+      }
+      .more{
+        font-size: 24rpx;
+        color: #959595;
+        line-height: 24rpx;
+      }
+    }
+    .tip{
+        font-size: 32rpx;
+        color: #0473F1;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar{
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #0473F1;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+  }
+  .produce-items{
+    padding: 0px 30rpx;
+    .produce-item{
+      width: 336rpx;
+      height: 464rpx;
+      background-color: #fff;
+      border-radius: 8rpx;
+      float: left;
+      margin-right: 18rpx;
+      margin-bottom: 18rpx;
+      position: relative;
+      .produce-info{
+        .produce-img{
+          image{
+          width: 336rpx;
+          height: 336rpx;
+          border-radius: 8rpx;
+      }
+    }
+    .produce-name{
+      width: 288rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #222222;
+      font-size: 32rpx;
+      padding-left: 24rpx;
+    }
+    .produce-money{
+      .number{
+        font-size: 40rpx;
+        color: #F25664;
+      }
+      .money-type{
+        font-size: 26rpx;
+        color: #F25664;
+        padding-left: 24rpx;
+      }
+    }
+  }
+    }
+    .produce-item:nth-child(2n+2){
+      margin-right: 0rpx;
+    }
+  }
+}
+  .go-top{
+    position: fixed;
+    bottom: 74rpx;
+    right: 30rpx;
+    image{
+      width: 80rpx;
+      height: 80rpx;
+    }
+  }
+  .produce-skill{
+    position: absolute;
+    top: 0px;
+    left:32rpx;
+    .tip{
+      position: relative;
+      image{
+        z-index: 1000;
+        width: 64rpx;
+        height: 44rpx;
+      }
+      view{
+         color: #ffffff;
+         font-size: 24rpx;
+         position: absolute;
+         top: 3rpx;
+         left: 8rpx;
+      }
+    }
+  }
 </style>
 <template>
   <view class="page">
   <!--轮播图-->
-  <view  class="swiper-wrapper">
-    <swiper  class="swiper"
+  <view class="swiper-wrapper">
+    <!--搜索框-->
+    <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':'11'}}">
+    <view class="search">
+      <input type="text" placeholder="搜你想要" placeholder-style="color:#ffffff" @tap="navSearch"/>
+     <image src="../../images/index/search02.png"/>
+    </view>
+  </view>
+    <swiper class="swiper"
     circular="true" 
     indicator-active-color="#ffffff" 
     indicator-dots="{{indicatorDots}}"
@@ -92,24 +342,17 @@
   <repeat for="{{swiperimgUrls}}">
   <navigator url="">
    <swiper-item>
-      <image src="{{item.item}}" class="slide-image" mode="widthFix"/>
+      <image src="{{item.item}}" class="slide-image"/>
     </swiper-item>
   </navigator>
   </repeat>
- 
 </swiper>
-  <!--搜索框-->
-  <view class="search-wrapper">
-    <view class="search">
-      <input type="text" placeholder="搜你想要" placeholder-class="color:#959595">
-     <image src="../../images/index/search02.png"/>
-    </view>
-  </view>
+  
 </view>
 
   <!--快秒杀,大满减-->
   <view class="main">
-    <view class="skil">
+        <navigator  class="skil">
         <view class="title">
           <image src="../../images/index/miaosha.png"/>
           <text>快秒杀</text>
@@ -117,9 +360,12 @@
         <view class="tip">
           每日限量抢，先到先得
         </view>
-        <view>立即抢购</view>
-    </view>
-    <view class="reduce">
+        <view class="button-wrapper">
+          <view class="rightNow">立即抢购</view>
+        <image class="button" src="../../images/index/button.png"/>
+        </view>
+    </navigator>
+       <navigator class="reduce">
         <view class="title">
           <image src="../../images/index/discount.png"/>
           <text>大满减</text>
@@ -127,16 +373,98 @@
         <view class="tip">
           满199立减20，超优惠
         </view>
-        <view>立即抢购</view>
-    </view>
+         <view class="button-wrapper">
+          <view class="rightNow">立即抢购</view>
+        <image class="button" src="../../images/index/button.png"/>
+         </view>
+    </navigator>
   </view>
 
   <!--新品推荐-->
-  <view></view>
+  <view class="new-store">
+    <view class="title">
+      <view class="tip">
+       <text class="bar"></text>
+        新店推荐
+        </view>
+      <view>
+        <text class="more">更多</text>
+        <image src="../../images/index/more01.png"/>
+      </view>
+    </view>
+    <view class="content-wrapper">
+    <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
+      <swiper-item>
+           <view class="store">
+             <image class="logo" src="../../images/index/timg.png"/>
+              <text>农夫山泉东北大兴安岭旗舰店</text>
+             <view class="button-wrapper">
+             <view class="rightNow">进店逛逛</view>
+            <image class="button" src="../../images/index/button.png"/>
+            </view>
+          <view class="images">
+            <view class="produce-images">
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+          </view>
+          <image src="../../images/index/more03.png" class="more"/>     
+          </view>
+    </view>
+    </swiper-item>
+  </swiper>
+  </view>
+  </view>
 
  <!--最新单品-->
-  <view></view>
+  <view class="new-produce">
+    <view class="title">
+      <view class="tip">
+       <text class="bar"></text>
+        最新单品
+        </view>
+      <view>
+        <text class="more">更多</text>
+        <image src="../../images/index/more02.png"/>
+      </view>
+    </view>
+    <view class="produce-items">
+       <view class="produce-item">
+         <view class="produce-info">
+            <view class="produce-img">
+              <image src="../../images/index/timg.png"/>
+         </view>
+         <view class="produce-name">
+          春雨蜂蜜滋养面膜11111111
+          </view>
+        <view class="produce-money">
+            <text class="money-type">￥</text>
+            <text class="number">100</text>
+          </view>
+        </view>
+        <!-- 商品销售类型(满减，任务) -->
+        <view class="produce-skill">
+           <view class="tip">
+             <image src="../../images/index/type01.png" />
+             <view>满减</view>
+           </view>
+        </view>
+          <view class="produce-skill">
+           <view class="tip">
+             <image src="../../images/index/type02.png" />
+             <view>任务</view>
+           </view>
+        </view>
+       </view>
+    </view>
+  </view>
 
+
+  <!-- 回到顶部 -->
+  <view class="go-top">
+    <image src="../../images/index/top.png"  @tap="goTop" wx:if="{{scrollTop>0?true:false}}"/> 
+  </view>
+  
   </view>
 </template>
 
@@ -146,7 +474,8 @@ export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
   };
-  onLoad() {}
+  onLoad() {
+  }
   data = {
     swiperimgUrls: [
       {
@@ -162,8 +491,25 @@ export default class Index extends wepy.page {
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
-    duration: 1000
+    duration: 1000,
+    scrollTop:0
   };
-  methods = {};
+  methods = {
+    goTop() {
+       wx.pageScrollTo({
+          scrollTop:0,
+        })
+        this.scrollTop = 0;
+    },
+    onPageScroll (e) { // 获取滚动条当前位置
+    this.scrollTop = e.scrollTop;
+  }
+  };
+ 
+  navSearch(){
+    this.$navigate({
+      url:'../search/search'
+    })
+  }
 }
 </script>

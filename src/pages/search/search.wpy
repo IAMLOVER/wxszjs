@@ -1,0 +1,346 @@
+<style lang="less">
+page{
+  background-color: #ffffff;
+  .search-wrapper {
+    display: flex;
+  .search {
+    position: relative;
+    flex: 5;
+    input {
+      height: 64rpx;
+      background: rgba(237,237,237,0.5);
+      border-radius: 16px;
+      font-size: 32rpx;
+      padding-left: 78rpx;
+      color: #959595;
+      box-sizing: border-box;
+      margin-left: 30rpx;
+    }
+    image {
+      width: 36rpx;
+      height: 36rpx;
+      position: absolute;
+      left: 60rpx;
+      top: 14rpx;
+    }
+  }
+  .search-btn{
+    flex: 1;
+    font-size: 32rpx;
+    color: #F25664;
+    text-align: center;
+    line-height: 64rpx;
+  }
+}
+.tab-warpper{
+  display: flex;
+  text-align: center;
+  height: 108rpx;
+  color: #959595;
+  font-size: 32rpx;
+  line-height: 108rpx;
+  background: #EDEDED;
+  margin-top: 14rpx;
+  view{
+    flex: 1;
+  }
+  .active{
+    text{
+      color: #F25664;
+      padding-bottom: 6rpx;
+      border-bottom:2px solid #F25664;
+    }
+  }
+}
+}
+.produce-items{
+  display: none;
+  .item{
+    background-color: #fff;
+    height: 274rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content:space-between;
+    .item-left{
+      flex: 1;
+      image{
+        width: 220rpx;
+        height: 220rpx;
+        border-radius: 12rpx;
+        margin-right: 16rpx;
+      }
+    }
+    .item-right{
+      flex: 5;
+      .item-name{
+        color: #222222;
+        font-size: 32rpx;
+        line-height: 50rpx;
+      }
+      .item-wrapper{
+        display: flex;
+        .item-detail{
+          flex: 4;
+          .item-money{
+            .mt{
+              font-size: 24rpx;
+              color: #F25664;
+            }
+            .mc{
+              font-size: 36rpx;
+              color: #F25664;
+              display: inline-block;
+              margin-right: 14rpx;
+            }
+            .mi{
+              color: #B5B5B5;
+              font-size: 22rpx;
+              text-decoration: line-through;
+            }
+          }
+          .item-store{
+            color: #B5B5B5;
+            font-size: 24rpx;
+            display: inline-block;
+            // width: 250rpx;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
+          }
+          .jiantou{
+            width: 10rpx;
+            height: 16rpx;
+            margin-left: 5rpx;
+            vertical-align: middle;
+          }
+        }
+        .hot{
+          flex: 2;
+          image{
+            width: 18rpx;
+            height: 22rpx;
+            vertical-align: middle;
+            margin-right: 5rpx;
+          }
+          text{
+            font-size: 24rpx;
+            color: #F25664;
+          }
+        }
+      }
+    }
+  }
+}
+.store-items{
+  border-radius: 20rpx 20rpx 0px 0px;
+  display: none;
+  .item{
+    height: 372rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+    border-bottom:1px solid #F5F5F5;
+    border-radius: 20rpx 20rpx 0px 0px;
+  }
+  .item-title{
+    display: flex;
+    justify-content: space-around;
+    .item-detail{
+      flex: 5;
+      .logo{
+        width: 70rpx;
+        height: 70rpx;
+        border-radius: 8rpx;
+        vertical-align: middle;
+        margin-right: 16rpx;
+      }
+      text{
+        color: #222222;
+        font-size: 28rpx;
+      }
+    }
+    .button-wrapper{
+      flex: 1
+    }
+  }
+  .item-images{
+    margin-top: 24rpx;
+    image{
+      width: 214rpx;
+      height: 214rpx;
+      border-radius: 8rpx;
+      margin-right: 24rpx;
+    }
+    image:last-child{
+      margin-right: 0rpx;
+    }
+  }
+}
+ .button-wrapper{
+         position: relative;
+         float: right;
+         margin-top: 12rpx;
+       .rightNow{
+         color: #ffffff;
+         font-size: 24rpx;
+         position: absolute;
+         top: 6rpx;
+         left: 12rpx;
+      }
+      .button{
+        z-index: 1000;
+        width: 122rpx;
+        height: 48rpx;
+      }
+      }
+
+.empty{
+  text-align: center;
+  color: #959595;
+  font-size: 28rpx;
+  margin-top: 120rpx;
+  image{
+    width: 420rpx;  
+    height: 360rpx;
+  }
+}
+
+
+
+
+</style>
+<template>
+  <view class="page">
+    <!--搜索框-->
+  <view class="search-wrapper">
+    <view class="search">
+      <input type="text" placeholder="搜你想要" placeholder-style="color:#959595" bindfocus="navSearch"/>
+     <image src="../../images/index/search02.png"/>
+    </view>
+    <view class="search-btn">搜索</view>
+  </view>
+
+  <!-- 搜索选择 -->
+  <view class="tab-warpper">
+    <view class="produce active">
+      <text>商品</text>
+    </view>
+    <view class="store"><text>店铺</text></view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="produce-items">
+    <view class="item">
+      <view class="item-left">
+        <image src="../../images/index/timg.png"/>
+      </view>
+      <view class="item-right">
+        <view class="item-name">儿童内衣男童棉内衣套装春秋新款小孩睡衣</view>
+        <view class="item-wrapper">
+           <view class="item-detail">
+            <view class="item-money">
+            <text class="mt">￥</text>
+            <text class="mc">100.00</text>
+            <i class="mi">299.00</i>
+           </view>
+           <view>
+            <text class="item-store">海囤全球凌美自营旗舰店</text>
+            <image src="../../images/index/more04.png" class="jiantou"/>
+           </view>
+         </view>
+          <view class="hot">
+            <image src="../../images/index/hot01.png"/>
+            <text>热度:16007</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="item-left">
+        <image src="../../images/index/timg.png"/>
+      </view>
+      <view class="item-right">
+        <view class="item-name">儿童内衣男童棉内衣套装春秋新款小孩睡衣</view>
+        <view class="item-wrapper">
+           <view class="item-detail">
+            <view class="item-money">
+            <text class="mt">￥</text>
+            <text class="mc">100.00</text>
+            <i class="mi">299.00</i>
+           </view>
+           <view>
+            <text class="item-store">海囤全球凌美自营旗舰店</text>
+            <image src="../../images/index/more04.png" class="jiantou"/>
+           </view>
+         </view>
+          <view class="hot">
+            <image src="../../images/index/hot01.png"/>
+            <text>热度:16007</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 店铺列表 -->
+  <view class="store-items">
+    <view class="item">
+    <view class="item-title">
+      <view class="item-detail">
+        <image src="../../images/index/timg.png" class="logo"/>
+        <text>PUMA凌美官方旗舰店</text>
+      </view>
+      <view class="button-wrapper">
+        <view class="rightNow">进店逛逛</view>
+          <image class="button" src="../../images/index/button.png"/>
+       </view>
+      </view>
+    <view class="item-images">
+      <image src="../../images/index/timg.png"/>
+      <image src="../../images/index/timg.png"/>
+      <image src="../../images/index/timg.png"/>
+    </view>
+    </view>
+    <view class="item">
+    <view class="item-title">
+      <view class="item-detail">
+        <image src="../../images/index/timg.png" class="logo"/>
+        <text>PUMA凌美官方旗舰店</text>
+      </view>
+      <view class="button-wrapper">
+        <view class="rightNow">进店逛逛</view>
+          <image class="button" src="../../images/index/button.png"/>
+       </view>
+      </view>
+    <view class="item-images">
+      <image src="../../images/index/timg.png"/>
+      <image src="../../images/index/timg.png"/>
+      <image src="../../images/index/timg.png"/>
+    </view>
+    </view>
+  </view>
+
+
+  <!-- 空内容 -->
+  <view class="empty">
+    <image src="../../images/index/null.png"/>
+    <view>找不到你想查找的内容呢</view>
+    <view>换个关键词试试吧</view>
+  </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '搜索',
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>
