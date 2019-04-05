@@ -471,7 +471,8 @@ export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
   };
-  onLoad() {}
+  onLoad() {
+  }
   data = {
     swiperimgUrls: [
       {
