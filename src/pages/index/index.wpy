@@ -1,8 +1,142 @@
 <style lang="less">
+.swiper-wrapper {
+  position: relative;
+  .swiper {
+    width: 100%;
+    height: 374rpx;
+    swiper-item {
+      width: 100%;
+      height: 374rpx;
+      image {
+        width: 100%;
+        height: 374rpx;
+      }
+    }
+  }
+}
+.search-wrapper {
+  position: fixed;
+  top: 30rpx;
+  left: 50%;
+  margin-left: -335rpx;
+  .search {
+    position: relative;
+    input {
+      width: 670rpx;
+      height: 64rpx;
+      background: rgba(225, 225, 225, 0.5);
+      border-radius: 16px;
+      font-size: 32rpx;
+      padding-left: 78rpx;
+      color: #959595;
+      box-sizing: border-box;
+    }
+    image {
+      width: 36rpx;
+      height: 36rpx;
+      position: absolute;
+      left: 30rpx;
+      top: 14rpx;
+    }
+  }
+}
+.main {
+  display: flex;
+  margin-top: 24rpx;
+  padding: 0rpx 30rpx;
+  .skil,
+  .reduce {
+    flex: 1;
+    background-image: linear-gradient(0deg, #fc88a4 0%, #ffdae7 100%);
+    border-radius: 10px 0px 0px 10px;
+    padding: 24rpx;
+    .title {
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        vertical-align: sub;
+        margin-right: 12rpx;
+        margin-top: -1px;
+      }
+      text {
+        font-size: 36rpx;
+        color: #f25664;
+      }
+    }
+    .tip{
+      color: #F25664;
+      font-size: 28rpx;
+    }
+  }
+  .skil{
+    margin-right: 3rpx;
+  }
+  .reduce{
+    background-image: linear-gradient(-180deg, #FCE2FF 0%, #F2B5F9 100%);
+    border-radius: 0px 10px 10px 0px;
+    margin-left: 3rpx;
+  }
+}
 </style>
 <template>
   <view class="page">
-    首页
+  <!--轮播图-->
+  <view  class="swiper-wrapper">
+    <swiper  class="swiper"
+    circular="true" 
+    indicator-active-color="#ffffff" 
+    indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}">
+  <repeat for="{{swiperimgUrls}}">
+  <navigator url="">
+   <swiper-item>
+      <image src="{{item.item}}" class="slide-image" mode="widthFix"/>
+    </swiper-item>
+  </navigator>
+  </repeat>
+ 
+</swiper>
+  <!--搜索框-->
+  <view class="search-wrapper">
+    <view class="search">
+      <input type="text" placeholder="搜你想要" placeholder-class="color:#959595">
+     <image src="../../images/index/search02.png"/>
+    </view>
+  </view>
+</view>
+
+  <!--快秒杀,大满减-->
+  <view class="main">
+    <view class="skil">
+        <view class="title">
+          <image src="../../images/index/miaosha.png"/>
+          <text>快秒杀</text>
+        </view>
+        <view class="tip">
+          每日限量抢，先到先得
+        </view>
+        <view>立即抢购</view>
+    </view>
+    <view class="reduce">
+        <view class="title">
+          <image src="../../images/index/discount.png"/>
+          <text>大满减</text>
+        </view>
+        <view class="tip">
+          满199立减20，超优惠
+        </view>
+        <view>立即抢购</view>
+    </view>
+  </view>
+
+  <!--新品推荐-->
+  <view></view>
+
+ <!--最新单品-->
+  <view></view>
+
   </view>
 </template>
 
@@ -10,12 +144,26 @@
 import wepy from 'wepy';
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '神州集市'
   };
-  onLoad() {
-  }
+  onLoad() {}
   data = {
+    swiperimgUrls: [
+      {
+        item: '../../images/index/timg.png'
+      },
+      {
+        item: '../../images/index/timg.png'
+      },
+      {
+        item: '../../images/index/timg.png'
+      }
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000
   };
-  methods = {};  
+  methods = {};
 }
 </script>
