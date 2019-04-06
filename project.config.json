@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -39,8 +39,30 @@
 				},
 				{
 					"id": -1,
-					"name": "dianpu",
-					"pathName": "pages/shop/shop",
+					"name": "快秒杀",
+					"pathName": "pages/secKill/secKill",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "大满减",
+					"pathName": "pages/fullReduction/fullReduction",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "店铺详情",
+					"pathName": "pages/shop/shopDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "秒杀详情",
+					"pathName": "pages/secKill/secKillFirst",
+					"query": "",
 					"scene": null
 				}
 			]

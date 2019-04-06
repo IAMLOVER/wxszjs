@@ -1,0 +1,108 @@
+<style lang="less">
+page{
+  background-color: #f5f5f5;
+}
+.company-info{
+  height:1060rpx;
+  width: 100%;
+  background-image: url('https://img-blog.csdnimg.cn/2019040616003268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
+  background-size: 690rpx 1060rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+  .info{
+   .info-name{
+    text-align: center;
+    padding-top: 80rpx;
+    border-bottom: 1px solid #EB4D4E;
+    width: 464rpx;
+    font-size: 32rpx;
+    color: #222222;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+   }
+    .input{
+      display: flex;
+      width: 596rpx;
+      margin: 0 auto;
+      color: #222222;
+      font-size: 28rpx;
+      height: 98rpx;
+      line-height: 98rpx;
+      view{
+        flex: 4;
+        text-align: right;
+        padding: 0rpx 20rpx;
+      }
+      view:nth-child(1){
+        flex: 2;
+        text-align: left;
+        margin-left: 0rpx;
+      }
+    }
+     .input:last-child{
+        .value{
+          line-height: 50rpx;
+          text-align: left;
+          padding-top: 20rpx;
+        }
+      }
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <!-- 企业资料 -->
+    <view class="company-info">
+      <view class="info">
+        <view class="info-name">
+          深圳市荟友网络科技有限公司
+        </view>
+        <view class="input">
+          <view>法人代表</view>
+          <view class="value">罗峻云</view>
+        </view>
+        <view class="input">
+          <view>注册资本</view>
+          <view class="value">1202万人民币</view>
+        </view>
+        <view class="input">
+          <view>统一信用代码</view>
+          <view class="value">91440300359257558B</view>
+        </view>
+        <view class="input">
+          <view>企业类型</view>
+          <view class="value">有限责任公司</view>
+        </view>
+        <view class="input">
+          <view>行业</view>
+          <view class="value">互联网</view>
+        </view>
+        <view class="input">
+          <view>登记机关</view>
+          <view class="value">深圳市市场监督管理局</view>
+        </view>
+        <view class="input">
+          <view>注册地址</view>
+          <view class="value">深圳市前海深港合作区前湾一路中一号A栋2607室</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '企业资料'
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>

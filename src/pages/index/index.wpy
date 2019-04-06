@@ -349,7 +349,7 @@ page {
 
   <!--快秒杀,大满减-->
   <view class="main">
-        <navigator  class="skil">
+        <navigator url="../secKill/secKill" class="skil">
         <view class="title">
           <image src="../../images/index/miaosha.png"/>
           <text>快秒杀</text>
@@ -362,7 +362,7 @@ page {
         <image class="button" src="../../images/index/button.png"/>
         </view>
     </navigator>
-       <navigator class="reduce">
+       <navigator url="../fullReduction/fullReduction" class="reduce">
         <view class="title">
           <image src="../../images/index/discount.png"/>
           <text>大满减</text>
@@ -372,7 +372,7 @@ page {
         </view>
          <view class="button-wrapper">
           <view class="rightNow">立即抢购</view>
-        <image class="button" src="../../images/index/button.png"/>
+          <image class="button" src="../../images/index/button.png"/>
          </view>
     </navigator>
   </view>

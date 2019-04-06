@@ -16,8 +16,17 @@ export default class extends wepy.app {
     pages: [
       'pages/index/index',
       'pages/search/search',
+      'pages/address/address',
+      'pages/secKill/secKill',
+      'pages/secKill/secKillFirst',
+      'pages/fullReduction/fullReduction',
       'pages/classification/classification',
       'pages/shop/shop',
+      'pages/shop/shopDetail',
+      'pages/shop/company',
+      'pages/shop/companyInfo',
+      'pages/newType/newReduce',
+      'pages/newType/newTask',
       // 我的
       'pages/myCenter/myCenter/myCenter',
       'pages/myCenter/myOrder/myOrder',

@@ -1,9 +1,14 @@
 <style lang="less">
+page{
+  background-color: #f5f5f5;
+}
 .search-wrapper {
-  position: fixed;
-  top: 30rpx;
-  z-index: 1;
-  width: 100%;
+  // position: fixed;
+  // top: 30rpx;
+  // z-index: 1;
+  // width: 100%;
+  background-color: #fff;
+  padding: 14rpx 0rpx;
   .search {
     position: relative;
     input {
@@ -27,7 +32,8 @@
   }
 }
 .shop-classfiy {
-  padding-top: 110rpx;
+  // padding-top: 110rpx;
+  background-color: #fff;
   .new-item {
     width: 116rpx !important;
     height: 80rpx;
@@ -63,14 +69,16 @@
     border-bottom:2px solid red;
   }
 
-  .store-items{
+.store-items{
   border-radius: 20rpx 20rpx 0px 0px;
+  padding: 30rpx;
   .item{
     height: 372rpx;
-    padding: 30rpx;
     box-sizing: border-box;
     border-radius: 20rpx;
     margin-bottom: 24rpx;
+    background-color: #ffffff;
+    padding: 24rpx;
   }
   .item-title{
     display: flex;
@@ -96,8 +104,8 @@
   .item-images{
     margin-top: 24rpx;
     image{
-      width: 214rpx;
-      height: 214rpx;
+      width: 198rpx;
+      height: 198rpx;
       border-radius: 20rpx;
       margin-right: 24rpx;
     }
@@ -105,6 +113,13 @@
       margin-right: 0rpx;
     }
   }
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
  .button-wrapper{
          position: relative;
@@ -153,7 +168,7 @@
 
       <!-- 店铺列表 -->
   <view class="store-items">
-    <view class="item">
+    <navigator url="./shopDetail" class="item">
     <view class="item-title">
       <view class="item-detail">
         <image src="../../images/index/timg.png" class="logo"/>
@@ -169,24 +184,7 @@
       <image src="../../images/index/timg.png"/>
       <image src="../../images/index/timg.png"/>
     </view>
-    </view>
-    <view class="item">
-    <view class="item-title">
-      <view class="item-detail">
-        <image src="../../images/index/timg.png" class="logo"/>
-        <text>PUMA凌美官方旗舰店</text>
-      </view>
-      <view class="button-wrapper">
-        <view class="rightNow">进店逛逛</view>
-          <image class="button" src="../../images/index/button.png"/>
-       </view>
-      </view>
-    <view class="item-images">
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-    </view>
-    </view>
+    </navigator>
   </view>
 
   </view>
