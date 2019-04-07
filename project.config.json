@@ -60,8 +60,8 @@
 				},
 				{
 					"id": 4,
-					"name": "秒杀详情",
-					"pathName": "pages/secKill/secKillFirst",
+					"name": "支付成功",
+					"pathName": "pages/payResult/paySuccess",
 					"query": "",
 					"scene": null
 				}

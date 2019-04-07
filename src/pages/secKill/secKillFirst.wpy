@@ -1,6 +1,7 @@
 <style lang="less">
 page{
   background-color: #f5f5f5;
+  padding-bottom: 100rpx;
 }
 .image{
   position: relative;
@@ -29,17 +30,222 @@ page{
       display: inline-block;
       margin-top: 6rpx;
     }
+    .swiper{
+      height: 56rpx;
+      position: absolute;
+      top: 0rpx;
+      width: 420rpx;
+      left: 120rpx;
+      swiper-item{
+        height: 56rpx;
+      }
+    }
+  }
+}
+
+.skill{
+  height: 100rpx;
+  background-image: linear-gradient(-45deg, #E176FF 7%,#F25664 100%);
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  color: #fff;
+  .price{
+    flex: 2;
+    text{
+      font-size: 32rpx;
+    }
+    .type{
+      font-size: 24rpx;
+      padding-left:10rpx;
+    }
+    .now{
+      font-size: 40rpx;
+      display: inline-block;
+      padding-right:10rpx;
+    }
+    .old{
+      font-size: 24rpx;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: line-through;
+    }
+  }
+  .hot{
+    flex: 1;
+    text-align: right;
+    image{
+      width: 18rpx;
+      height: 20rpx;
+      vertical-align: middle;
+      margin-right: 8rpx;
+    }
+    text{
+      font-size: 24rpx;
+    }
+  }
+}
+.main{
+  width: 100%;
+  height: 184rpx;
+  background-color: #fff;
+  padding: 24rpx 30rpx;
+  box-sizing: border-box;
+  position: relative;
+  .produce-name{
+    font-size: 32rpx;
+    color: #222;
+  }
+  .limit{
+    color: #959595;
+    font-size: 24rpx;
+  }
+  .share{
+    color: #F25664;
+    font-size: 28rpx;
+    position: absolute;
+    bottom: 30rpx;
+    right: 30rpx;
+    image{
+      width: 30rpx;
+      height: 26rpx;
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: -4rpx;
+      margin-right: 10rpx;
+    }
+  }
+}
+.produce-detail{
+  .title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 24rpx;
+    color: #959595;
+    .line{
+      width: 28rpx;
+      height: 4rpx;
+      background-color: #959595;
+      margin: 30rpx 20rpx;
+      box-sizing: border-box;
+    }
+    .tip{
+      padding-top: 14rpx;
+    }
+  }
+  .detail{
+    image{
+      width: 100%;
+    }
+  }
+}
+.dosome{
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  padding: 8rpx 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  box-shadow: 0 -2px 3px -1px #959595;
+  .kefu{
+    flex: 1;
+    text-align: center;
+    line-height: 30rpx;
+    image{
+      width: 32rpx;
+      height: 32rpx;
+      margin-top: 14rpx;
+    }
+    view{
+      font-size: 24rpx;
+      color: #666;
+    }
+  }
+  .skill-btn{
+    flex: 6;
+    text{
+      display: inline-block;
+      width: 598rpx;
+      height: 84rpx;
+      background-image: linear-gradient(-43deg, #D577EF 8%,#F25664  100%);
+      border-radius: 42rpx;
+      text-align: center;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+    }
   }
 }
 </style>
 <template>
   <view class="page">
+    <!-- 商品大图和滚动文字 -->
     <view class="image">
       <image src="../../images/index/bg_02.png"/>
       <view class="tip">
         <image src="../../images/index/laba.png"/>
-        <text>**2431也正在浏览此商品</text>
+        <swiper autoplay="true" vertical="true" circular="true" class="swiper">
+          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+        </swiper>
       </view>
+    </view>
+    <!-- 秒杀价和热度 -->
+    <view class="skill">
+      <view class="price">
+        <text>秒杀价:</text>
+        <text class="type">￥</text>
+        <text class="now">9.99</text>
+        <text class="old">￥120</text>
+      </view>
+      <view class="hot">
+        <image src="../../images/index/hot02.png"/>
+        <text>热度2880</text>
+      </view>
+    </view>
+
+    <!-- 商品名称以及限购 -->
+    <view class="main">
+      <view class="produce-name">
+        新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
+        礼盒装 顺丰空运
+      </view>
+      <view class="produce-tip">
+        <view class="limit">
+          每人限购1份
+        </view>
+      </view>
+      <view class="share">
+        <image src="../../images/index/share02.png"/>
+        <text>分享有奖</text>
+      </view>
+    </view>
+
+    <!-- 商品详情 -->
+    <view class="produce-detail">
+      <view class="title">
+        <view class="line"></view>
+        <view class="tip">商品详情</view>
+        <view class="line"></view>
+      </view>
+      <view class="detail">
+        <image src="../../images/index/timg.png"/>
+      </view>
+    </view>
+
+    <!-- 客服，立即秒杀 -->
+    <view class="dosome">
+      <view class="kefu">
+        <image src="../../images/index/kefu.png"/>
+        <view>客服</view>
+      </view>
+      <navigator url="./secKillSecond" class="skill-btn">
+        <text>立即秒杀</text>
+      </navigator>
     </view>
   </view>
 </template>

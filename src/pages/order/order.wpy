@@ -1,0 +1,276 @@
+<style lang="less">
+page{
+  background-color: #f5f5f5;
+}
+.bar{
+  width: 720rpx;
+  background: #FCC5CA;
+  border-radius: 16rpx;
+  height: 44rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  z-index: 1;
+}
+.order-info{
+  width: 690rpx;
+  margin: 0 auto;
+  background-color: #fff;
+  height: 224rpx;
+  font-size: 28rpx;
+  border-top: 8rpx solid #EE4555;
+  border-radius: 8rpx 8rpx;
+  margin-top: -24rpx;
+  z-index: 999;
+  padding: 30rpx 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  .order-accept{
+    text{
+      font-weight: 600;
+    }
+  }
+  .jiantou{
+    width: 10rpx;
+    height: 16rpx;
+    position: absolute;
+    right: 50rpx;
+    top: 80rpx;
+  }
+}
+.order-content{
+  width: 690rpx;
+  background-color: #fff;
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  padding: 24rpx 30rpx;
+  .title{
+    font-size: 24rpx;
+  }
+}
+.content-lists{
+  border-radius: 16rpx;
+      .list{
+        border-bottom: 1px solid #F5F5F5;
+        box-sizing: border-box;
+        padding-top: 28rpx;
+        height: 250rpx;
+        clear: both;
+        .list-left{
+          float: left;
+          image{
+            width: 180rpx;
+            height: 180rpx;
+            border-radius: 16rpx;
+            margin-right: 20rpx;
+          }
+        }
+        .list-right{
+          float: left;
+          width: 400rpx;
+          .list-name{
+            color: #222222;
+            font-size: 28rpx;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+          .list-type{
+            color: #959595;
+            font-size: 24rpx;
+          }
+          .list-text{
+            display: flex;
+            justify-content: space-between;
+            view{
+              flex: 1;
+              font-size: 32rpx;
+              color: #F25664;
+            }
+            view:last-child{
+              text-align: right;
+              color: #F25664;
+              font-size: 24rpx;
+              padding-top: 10rpx;
+            }
+          }
+        }
+      }
+      .list:last-child{
+        border-bottom: none;
+      }
+}
+.action{
+  width: 690rpx;
+  height: 164rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  margin-top: 10rpx;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  .view{
+    display: flex;
+    justify-content: space-around;
+    color: #666666;
+    font-size: 24rpx;
+    view{
+      flex: 1;
+      line-height: 40rpx;
+    }
+    view:last-child{
+      text-align: right;
+    }
+    .tip{
+      color: #F25664;
+    }
+  }
+}
+.footer{
+  display: flex;
+  height: 108rpx;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0rpx 30rpx;
+  box-sizing: border-box;
+  view{
+    flex: 1;
+    text-align: center;
+  }
+  .number{
+    flex: 4;
+    margin-right: 20rpx;
+    margin-top: 10rpx;
+    .total{
+      font-size: 32rpx;
+      text-align: right;
+    }
+    .youhui{
+      font-size: 24rpx;
+      text-align: right;
+    }
+  }
+  .btn{
+    background-image: linear-gradient(-51deg, #F25664 0%, #E176FF 100%);
+    border-radius: 44rpx;
+    height: 84rpx;
+    width: 216rpx;
+    line-height: 84rpx;
+    color: #fff;
+    font-size: 36rpx;
+    margin-top: 12rpx;
+    flex: 3
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <!-- 一个背景长条 -->
+    <view class="bar">
+    </view>
+
+  <!-- 收货详情 -->
+  <navigator url="../address/address" class="order-info">
+    <view class="order-accept">
+      收件人：<text>陈晓卫</text>
+    </view>
+    <view class="order-phone">
+      186 8243 6882
+    </view>
+    <view class="order-address">
+      收货地址：广东省深圳市福田区香蜜湖别888号A单元1301
+    </view>
+    <!-- 小箭头 -->
+    <image src = "../../images/index/more06.png" class="jiantou"/>
+  </navigator>
+
+  <!-- 订单内容 -->
+  <view class="order-content">
+    <view class="title">
+      订单内容
+    </view>
+    <view class="content-lists">
+      <view class="list">
+            <view class="list-left">
+              <image src="../../images/index/timg.png"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
+              <view class="list-type">规格：20kg</view>
+              <view class="list-text">
+                <view class="price">￥2.99</view>
+                <view class="count">数量：1</view>
+              </view>
+            </view>
+      </view>
+       <view class="list">
+            <view class="list-left">
+              <image src="../../images/index/timg.png"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">新庄新小莓红红颜奶新庄新小莓红颜奶颜奶</view>
+              <view class="list-type">规格：20kg</view>
+              <view class="list-text">
+                <view class="price">￥2.99</view>
+                <view class="count">数量：1</view>
+              </view>
+            </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 优惠活动 -->
+  <view class="action">
+    <view class="view">
+      <view>优惠活动：</view>
+      <view class="tip">满500减50</view>
+    </view>
+    <view class="view">
+      <view>有无优惠券：</view>
+      <view>有</view>
+    </view>
+    <view class="view">
+      <view>运费：</view>
+      <view>包邮</view>
+    </view>
+  </view>
+
+
+  <!-- 底部 立即支付按钮区域 -->
+  <view class="footer">
+    <view></view>
+    <view class="number">
+      <view class="total">
+        <text>合计：</text>
+        <text style="color: #F25664;">￥1350.00</text>
+      </view>
+      <view class="youhui">
+        <text>优惠金额：</text>
+        <text>50.00</text>
+      </view>
+    </view>
+    <view class="btn">
+      立即支付
+    </view>
+  </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单确认'
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>
