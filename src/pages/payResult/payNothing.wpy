@@ -1,0 +1,160 @@
+<style lang="less">
+page{
+  background-color: #f5f5f5;
+}
+.success{
+   background: #F25664;
+   width: 100%;
+   height: 450rpx;
+   text-align: center;
+   color: #fff;
+   image{
+     width: 96rpx;
+     height: 96rpx;
+   }
+   .btns{
+     display: flex;
+     margin-top: 40rpx;
+     view{
+       width: 176rpx;
+       height: 68rpx;
+       font-size: 28rpx;
+       line-height: 68rpx;
+       text-align: center;
+       border-radius: 38rpx;
+       border:1px solid #fff;
+     }
+     .go-index{
+         margin: 0 auto;
+         background: #FFFFFF;
+         color: #F25664;
+     }
+   }
+}
+.order-content{
+  width: 690rpx;
+  background-color: #fff;
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: -80rpx;
+  padding: 24rpx 30rpx;
+  border-radius: 16rpx;
+}
+.content-lists{
+  border-radius: 16rpx;
+      .list{
+        border-bottom: 1px solid #F5F5F5;
+        box-sizing: border-box;
+        padding-top: 28rpx;
+        height: 250rpx;
+        clear: both;
+        .list-left{
+          float: left;
+          image{
+            width: 180rpx;
+            height: 180rpx;
+            border-radius: 16rpx;
+            margin-right: 20rpx;
+          }
+        }
+        .list-right{
+          float: left;
+          width: 400rpx;
+          .list-name{
+            color: #222222;
+            font-size: 28rpx;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+          .list-type{
+            color: #959595;
+            font-size: 24rpx;
+          }
+          .list-text{
+            display: flex;
+            justify-content: space-between;
+            view{
+              flex: 1;
+              font-size: 32rpx;
+              color: #F25664;
+            }
+            view:last-child{
+              text-align: right;
+              color: #F25664;
+              font-size: 24rpx;
+              padding-top: 10rpx;
+            }
+          }
+        }
+      }
+      .list:last-child{
+        border-bottom: none;
+      }
+}
+</style>
+<template>
+  <view class="page">
+    <!-- 支付成功 -->
+    <view class="success">
+      <image src="../../images/index/close.png"/>
+      <view>被抢光了</view>
+      <view style="font-size:24rpx">宝贝太抢手，被抢光啦！</view>
+      <view class="btns">
+        <view class="go-index">
+          返回首页
+        </view>
+      </view>
+    </view>
+
+     <!-- 订单内容 -->
+  <view class="order-content">
+    <view class="content-lists">
+      <view class="list">
+            <view class="list-left">
+              <image src="../../images/index/timg.png"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
+              <view class="list-type">规格：20kg</view>
+              <view class="list-text">
+                <view class="price">￥2.99</view>
+                <view class="count">数量：1</view>
+              </view>
+            </view>
+      </view>
+       <view class="list">
+            <view class="list-left">
+              <image src="../../images/index/timg.png"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">新庄新小莓红红颜奶新庄新小莓红颜奶颜奶</view>
+              <view class="list-type">规格：20kg</view>
+              <view class="list-text">
+                <view class="price">￥2.99</view>
+                <view class="count">数量：1</view>
+              </view>
+            </view>
+      </view>
+    </view>
+  </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '',
+    navigationBarBackgroundColor: '#F25664',
+    navigationBarTextStyle: 'white'
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>

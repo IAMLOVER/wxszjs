@@ -60,8 +60,8 @@
 				},
 				{
 					"id": 4,
-					"name": "支付成功",
-					"pathName": "pages/payResult/paySuccess",
+					"name": "商品详情",
+					"pathName": "pages/fullReduction/fullProduceDetail",
 					"query": "",
 					"scene": null
 				}
