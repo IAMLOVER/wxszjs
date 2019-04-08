@@ -43,7 +43,7 @@ page{
   }
 }
 
-.reduce{
+.general{
   height: 88rpx;
   width: 100%;
   display: flex;
@@ -66,16 +66,11 @@ page{
       display: inline-block;
       padding-right:10rpx;
     }
-   
-  }
-  .range{
-      display: inline-block;
-      font-size: 20rpx;
-      color: #F25664;
-      background: #FCE6E7;
-      padding: 4rpx 8rpx;
-      margin-top: 6rpx;
-      vertical-align: middle;
+    .old{
+      color: #b5b5b5;
+      text-decoration: line-through;
+      font-size: 24rpx;
+    }
   }
 }
 .main{
@@ -163,7 +158,7 @@ page{
       color: #666;
     }
   }
-  .reduce-btn{
+  .general-btn{
     flex: 4;
     text{
       display: inline-block;
@@ -187,7 +182,7 @@ page{
   top: 0;
   .content{
     width: 100%;
-    height: 690rpx;
+    height: 650rpx;
     background-color: #fff;
     position: absolute;
     bottom: 0;
@@ -276,14 +271,6 @@ page{
       }
       
     }
-    .tip{
-        background-color: #FCE6E7;
-        font-size: 24rpx;
-        height: 40rpx;
-        line-height: 40rpx;
-        padding-left: 30rpx;
-        color: #F25664;
-    }
     .line{
       width: 100%;
       height: 4rpx;
@@ -327,14 +314,12 @@ page{
         </swiper>
       </view>
     </view>
-    <!-- 满减商品价和满减范围 -->
-    <view class="reduce">
+    <!-- 普通商品价 -->
+    <view class="general">
       <view class="price">
         <text class="type">￥</text>
         <text class="now">9.99-1200</text>
-      </view>
-      <view class="range">
-        满199元可用20元券
+        <text class="old">9.99</text>
       </view>
     </view>
 
@@ -380,12 +365,12 @@ page{
         <image src="../../images/index/store02.png"/>
         <view>店铺</view>
       </view>
-      <view class="reduce-btn"  @tap="openShadow">
+      <view class="general-btn" @tap="openShadow">
         <text>立即购买</text>
       </view>
     </view>
 
-   <!-- 满减商品购买时出现的弹出框 -->
+   <!-- 普通商品购买时出现的弹出框 -->
    <view class="shadow" wx:if="{{showShadow}}">
      <view class="content">
        <view class="info">
@@ -420,16 +405,11 @@ page{
           数量
         </view>
         <view class="control">
-          <image src="../../images/index/reduce@2x.png" class="reduce-img"/>
+          <image src="../../images/index/reduce@2x.png" class="general-img"/>
           <text class="number">150</text>
           <image src="../../images/index/add@2x.png" class="add-img"/>
         </view>
       </view>
-      <!-- 用户操作提示是否符合满减要求 -->
-      <view class="tip">
-          还差49元可减20元（满199减20）
-      </view>
-
       <view class="line">
 
       </view>
@@ -456,7 +436,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
-    showShadow: false
+    showShadow: true
   };
   methods = {
     openShadow() {

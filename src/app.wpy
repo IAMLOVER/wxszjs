@@ -26,6 +26,8 @@ export default class extends wepy.app {
       'pages/payResult/payNothing',
       'pages/fullReduction/fullReduction',
       'pages/fullReduction/fullProduceDetail',
+      'pages/generalGoods/generalGoods',
+      'pages/taskGoods/taskGoods',
       'pages/classification/classification',
       'pages/shop/shop',
       'pages/shop/shopDetail',

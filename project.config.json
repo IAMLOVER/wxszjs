@@ -60,8 +60,8 @@
 				},
 				{
 					"id": 4,
-					"name": "商品详情",
-					"pathName": "pages/fullReduction/fullProduceDetail",
+					"name": "分类",
+					"pathName": "pages/taskGoods/taskGoods",
 					"query": "",
 					"scene": null
 				}

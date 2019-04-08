@@ -1,6 +1,6 @@
 <style lang="less">
 page{
-  background-color: #FC88A4;
+  background-color: #FFe1eb;
 }
 .search-wrapper {
   position: fixed;

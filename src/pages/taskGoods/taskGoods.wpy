@@ -43,7 +43,7 @@ page{
   }
 }
 
-.reduce{
+.task{
   height: 88rpx;
   width: 100%;
   display: flex;
@@ -66,16 +66,11 @@ page{
       display: inline-block;
       padding-right:10rpx;
     }
-   
-  }
-  .range{
-      display: inline-block;
-      font-size: 20rpx;
-      color: #F25664;
-      background: #FCE6E7;
-      padding: 4rpx 8rpx;
-      margin-top: 6rpx;
-      vertical-align: middle;
+    .old{
+      color: #b5b5b5;
+      text-decoration: line-through;
+      font-size: 24rpx;
+    }
   }
 }
 .main{
@@ -112,6 +107,67 @@ page{
       vertical-align: middle;
       margin-top: -4rpx;
       margin-right: 10rpx;
+    }
+  }
+}
+.task-wrapper{
+  padding: 24rpx 30rpx;
+  background-color: #fff;
+  border-top: 1px solid #f5f5f5;
+  .task-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .tip{
+      color: #F25664;
+      font-size: 32rpx;
+    }
+    .rule{
+      color: #959595;
+      font-size: 24rpx;
+      image{
+        width: 24rpx;
+        height: 24rpx;
+        vertical-align:middle;
+        margin-left: 8rpx;
+        display: inline-block;
+        margin-top: -4rpx;
+      }
+    }
+  }
+  .tip{
+    font-size: 28rpx;
+    color: #666666;
+    image{
+      width: 36rpx;
+      height: 36rpx;
+      display: inline-block;
+      margin-top: -4rpx;
+      vertical-align: middle;
+      margin-left: 16rpx;
+    }
+  }
+  .task-items{
+    .item{
+      display: flex;
+      padding: 10rpx 0rpx;
+      .item-left{
+        background: url('https://img-blog.csdnimg.cn/20190408171225857.png');
+        background-repeat: no-repeat;
+        color: #fff;
+        font-size: 24rpx;
+        background-size: 96rpx 40rpx;
+        text-align: center;
+        width: 96rpx;
+        height: 40rpx;
+      }
+      .item-right{
+        font-size: 26rpx;
+        color: #959595;
+        text{
+          color: #F25664;
+        }
+      }
     }
   }
 }
@@ -163,18 +219,24 @@ page{
       color: #666;
     }
   }
-  .reduce-btn{
+  .task-btn{
     flex: 4;
-    text{
+    display: flex;
+    view{
       display: inline-block;
-      width: 508rpx;
+      width: 253rpx;
       height: 84rpx;
-      background-image: linear-gradient(-43deg, #D577EF 8%,#F25664  100%);
-      border-radius: 42rpx;
+      border-radius: 42rpx 0rpx 0rpx 42rpx;
+      background-image: linear-gradient(-43deg, #F25664 68%, #D577EF 100%);
       text-align: center;
       color: #fff;
       font-size: 28rpx;
       line-height: 84rpx;
+    }
+    view:last-child{
+      border-radius: 0rpx 42rpx 42rpx 0rpx;
+      background-image: linear-gradient(143deg, #D577EF 50%,#F25664  100%);
+      margin-left: 5rpx;
     }
   }
 }
@@ -187,7 +249,7 @@ page{
   top: 0;
   .content{
     width: 100%;
-    height: 690rpx;
+    height: 650rpx;
     background-color: #fff;
     position: absolute;
     bottom: 0;
@@ -276,14 +338,6 @@ page{
       }
       
     }
-    .tip{
-        background-color: #FCE6E7;
-        font-size: 24rpx;
-        height: 40rpx;
-        line-height: 40rpx;
-        padding-left: 30rpx;
-        color: #F25664;
-    }
     .line{
       width: 100%;
       height: 4rpx;
@@ -296,12 +350,12 @@ page{
       .btn{
         width: 690rpx;
         height: 84rpx;
-        background-image: linear-gradient(-23deg, #D577EF 0%,#F25664 100%);
         border-radius: 21px;
         font-size: 32rpx;
         color: #fff;
         text-align: center;
         line-height: 84rpx;
+        background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
       }
     }
     .close-shadow{
@@ -327,18 +381,16 @@ page{
         </swiper>
       </view>
     </view>
-    <!-- 满减商品价和满减范围 -->
-    <view class="reduce">
+    <!-- 任务商品价 -->
+    <view class="task">
       <view class="price">
         <text class="type">￥</text>
         <text class="now">9.99-1200</text>
-      </view>
-      <view class="range">
-        满199元可用20元券
+        <text class="old">9.99</text>
       </view>
     </view>
 
-    <!-- 商品名称以及限购 -->
+    <!-- 商品名称 -->
     <view class="main">
       <view class="produce-name">
         新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
@@ -358,6 +410,33 @@ page{
       </view>
     </view>
 
+    <!-- 任务榜 -->
+    <view class="task-wrapper">
+      <view class="task-title">
+        <view class="tip">
+          任务榜
+        </view>
+        <view class="rule">
+          规则
+          <image src="../../images/index/more01.png"/>
+        </view>
+      </view>
+      <view class="tip">在4个小时内成功推荐者，可获得相应佣金<image src="../../images/index/gold.png"/></view>
+      <view class="task-items">
+        <view class="item">
+          <view class="item-left">任务1：</view>
+          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
+        </view>
+         <view class="item">
+          <view class="item-left">任务1：</view>
+          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
+        </view>
+         <view class="item">
+          <view class="item-left">任务1：</view>
+          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
+        </view>
+      </view>
+    </view>
     <!-- 商品详情 -->
     <view class="produce-detail">
       <view class="title">
@@ -380,12 +459,13 @@ page{
         <image src="../../images/index/store02.png"/>
         <view>店铺</view>
       </view>
-      <view class="reduce-btn"  @tap="openShadow">
-        <text>立即购买</text>
+      <view class="task-btn" @tap="openShadow">
+        <view>立即购买</view>
+        <view>领取任务</view>
       </view>
     </view>
 
-   <!-- 满减商品购买时出现的弹出框 -->
+   <!-- 任务商品购买时出现的弹出框 -->
    <view class="shadow" wx:if="{{showShadow}}">
      <view class="content">
        <view class="info">
@@ -420,16 +500,11 @@ page{
           数量
         </view>
         <view class="control">
-          <image src="../../images/index/reduce@2x.png" class="reduce-img"/>
+          <image src="../../images/index/reduce@2x.png" class="task-img"/>
           <text class="number">150</text>
           <image src="../../images/index/add@2x.png" class="add-img"/>
         </view>
       </view>
-      <!-- 用户操作提示是否符合满减要求 -->
-      <view class="tip">
-          还差49元可减20元（满199减20）
-      </view>
-
       <view class="line">
 
       </view>
@@ -439,7 +514,6 @@ page{
             确定(共￥23.98)
           </view>
       </view>
-
       <!-- 关闭按钮 -->
       <image src="../../images/index/close02@2x.png" class="close-shadow" @tap="closeShadow"/>
      </view>
