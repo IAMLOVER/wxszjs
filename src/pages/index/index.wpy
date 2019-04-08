@@ -1,6 +1,7 @@
 <style lang="less">
 page {
   height: auto;
+  background-color: #f5f5f5;
 }
 .swiper-wrapper {
   position: relative;
@@ -392,6 +393,42 @@ page {
     <view class="content-wrapper">
     <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
       <swiper-item>
+           <view class="store">
+             <image class="logo" src="../../images/index/timg.png"/>
+              <text>农夫山泉东北大兴安岭旗舰店</text>
+             <view class="button-wrapper">
+             <view class="rightNow">进店逛逛</view>
+            <image class="button" src="../../images/index/button.png"/>
+            </view>
+          <view class="images">
+            <view class="produce-images">
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+          </view>
+          <image src="../../images/index/more03.png" class="more"/>     
+          </view>
+    </view>
+    </swiper-item>
+        <swiper-item>
+           <view class="store">
+             <image class="logo" src="../../images/index/timg.png"/>
+              <text>农夫山泉东北大兴安岭旗舰店</text>
+             <view class="button-wrapper">
+             <view class="rightNow">进店逛逛</view>
+            <image class="button" src="../../images/index/button.png"/>
+            </view>
+          <view class="images">
+            <view class="produce-images">
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="../../images/index/timg.png" mode="widthFix"/>
+          </view>
+          <image src="../../images/index/more03.png" class="more"/>     
+          </view>
+    </view>
+    </swiper-item>
+        <swiper-item>
            <view class="store">
              <image class="logo" src="../../images/index/timg.png"/>
               <text>农夫山泉东北大兴安岭旗舰店</text>
