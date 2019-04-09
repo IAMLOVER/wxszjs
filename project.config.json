@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -45,9 +45,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "大满减",
-					"pathName": "pages/fullReduction/fullReduction",
+					"pathName": "pages/fullReduction/fullProduceDetail",
 					"query": "",
 					"scene": null
 				},
@@ -61,7 +61,7 @@
 				{
 					"id": 4,
 					"name": "分类",
-					"pathName": "pages/taskGoods/taskGoods",
+					"pathName": "pages/address/address",
 					"query": "",
 					"scene": null
 				}

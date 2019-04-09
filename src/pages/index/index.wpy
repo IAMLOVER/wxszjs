@@ -496,7 +496,7 @@ page {
 
   <!-- 回到顶部 -->
   <view class="go-top">
-    <image src="../../images/index/top.png"  @tap="goTop" wx:if="{{scrollTop>0?true:false}}"/> 
+    <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
   </view>
   
   </view>
@@ -504,6 +504,7 @@ page {
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
@@ -511,6 +512,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
+    imagePath:path.path.imagePath,
     swiperimgUrls: [
       {
         item: '../../images/index/timg.png'

@@ -4,7 +4,7 @@ page{
 }
 .main{
   width: 100%;
-  height: 744rpx;
+  height: 694rpx;
   background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
   background-repeat: no-repeat;
   background-size: 90% 100%;
@@ -24,7 +24,7 @@ page{
     color: #5F3118;
     font-size: 34rpx;
     font-weight: 600;
-    margin-top: 50rpx;
+    margin-top: 30rpx;
     position: relative;
   }
   .time-range,.count{
@@ -66,6 +66,103 @@ page{
     margin: 0 auto;
   }
 }
+.other{
+  position: relative;
+  .title{
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/title_task.png');
+    width: 348rpx;
+    background-size: 100%;
+    height: 64rpx;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 32rpx;
+    text-align: center;
+    line-height: 64rpx;
+    z-index: 999;
+    position: absolute;
+    left: 50%;
+    margin-left: -174rpx;
+    top: -30rpx;
+  }
+}
+.new-task{
+  z-index: 1;
+}
+.task-produces{
+  padding: 20rpx 30rpx;
+  .item{
+    background-color: #fff;
+    border-radius: 20rpx;
+    padding: 24rpx;
+    box-sizing: border-box;
+    width: 690rpx;
+    height: 240rpx;
+    position: relative;
+    margin-top: -14rpx;
+    .item-left{
+      float: left;
+      margin-right: 16rpx;
+      image{
+        width: 180rpx;
+        height: 180rpx;
+        border-radius: 16rpx;
+      }
+    }
+    .item-right{
+      .item-title{
+        font-size: 32rpx;
+        color: #222222;
+      }
+      .hot{
+        font-size: 24rpx;
+        color:#F25664;
+        margin-bottom: 10rpx;
+        margin-top: 10rpx;
+        image{
+          width: 18rpx;
+          height: 20rpx;
+          margin-right: 8rpx;
+        }
+      }
+      .commision{
+        font-size: 24rpx;
+        color: #959595;
+      }
+      .item-price{
+        float: left;
+        .price{
+          min-width: 168rpx;
+          height: 48rpx;
+          line-height: 48rpx;
+          display: inline-block;
+          padding: 0rpx 6rpx;
+          border-radius: 24rpx;
+          margin-right: 16rpx;
+          font-size: 24rpx;
+          color: #F25664;
+          font-weight: 600;
+          .really{
+            font-size: 36rpx;
+            color: #F25664;
+          }
+        }
+      }
+    }
+    .tip{
+      display: inline-block;
+      padding: 0rpx 10rpx;
+      border:1px solid #F25664;
+      color: #F25664;
+      background-color: #fff;
+      border-radius: 8rpx;
+      font-size: 24rpx;
+      height: 36rpx;
+      position: absolute;
+      right: 24rpx;
+      bottom: 34rpx;
+    }
+  }
+}
 </style>
 <template>
   <view class="page">
@@ -74,10 +171,10 @@ page{
           <view>你成功领取了任务</view>
           <view>为了奖金快去完成任务吧！</view>
           <view class="time-range">
-            <image src="../../images/index/daojishi.png"/>任务时间：4小时
+            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：4小时
           </view>
           <view class="count">
-            <image src="../../images/index/count.png"/>任务数量：100
+            <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}"/>任务数量：100
           </view>
           <view class="sanjiao">
           </view>
@@ -89,14 +186,55 @@ page{
     <!-- 其他人气任务 -->
     <view class="other">
       <view class="title">
-        
+        其他人气任务
       </view>
+       <view class="new-task">
+    <view class="task-produces">
+       <view class="item">
+          <view class="item-left">
+              <image src="../../images/index/timg.png"/>
+          </view>
+          <view class="item-right">
+            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+            <view class="commision">
+              佣金：1%-5%
+            </view>
+            <view class="hot">
+              <image src="../../images/index/hot01.png"/>              
+              <text>拼团总数：1.8w</text>
+            </view>
+          </view>
+          <view class="tip">
+            已经有20人领取
+          </view>
+        </view>
+         <view class="item">
+          <view class="item-left">
+              <image src="../../images/index/timg.png"/>
+          </view>
+          <view class="item-right">
+            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+            <view class="commision">
+              佣金：1%-5%
+            </view>
+            <view class="hot">
+              <image src="../../images/index/hot01.png"/>              
+              <text>拼团总数：1.8w</text>
+            </view>
+          </view>
+          <view class="tip">
+            已经有20人领取
+          </view>
+        </view>
+    </view>
+  </view>
     </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '任务领取成功'
@@ -104,6 +242,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
+    imagePath:path.path.imagePath,
   };
   methods = {};  
 }

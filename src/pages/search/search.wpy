@@ -321,10 +321,9 @@ page{
     </view>
   </view>
 
-
   <!-- 空内容 -->
   <view class="empty">
-    <image src="../../images/index/null.png"/>
+    <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}"/>
     <view>找不到你想查找的内容呢</view>
     <view>换个关键词试试吧</view>
   </view>
@@ -333,6 +332,7 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '搜索',
@@ -340,6 +340,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
+    imagePath:path.path.imagePath,
   };
   methods = {};  
 }

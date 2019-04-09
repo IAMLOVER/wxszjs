@@ -7,6 +7,7 @@ import 'wepy-async-function';
 import request from './common/request.js';
 import sendUserInfo from './common/sendUserInfo.js';
 import getUserInfo_ from './common/getUserInfo.js';
+import path from './common/path.js';
 export default class extends wepy.app {
   constructor() {
     super();
@@ -84,6 +85,10 @@ export default class extends wepy.app {
       ]
     }
   };
-  onLaunch() {}
+  onLaunch() {
+  }
+  globalData = {
+    path:path,
+  }
 }
 </script>
