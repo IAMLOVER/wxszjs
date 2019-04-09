@@ -1,0 +1,110 @@
+<style lang="less">
+page{
+  background-image: linear-gradient(-180deg, #F59562 0%, #F26D49 100%);
+}
+.main{
+  width: 100%;
+  height: 744rpx;
+  background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
+  background-repeat: no-repeat;
+  background-size: 90% 100%;
+  background-position:center;
+  background-position-y: 30rpx;
+  .content{
+    opacity: 0.8;
+    background: #FFFFFF;
+    border-radius: 12rpx;
+    background-color: #fff;
+    width: 560rpx;
+    height: 290rpx;
+    margin: 0 auto;
+    padding: 56rpx 48rpx;
+    box-sizing: border-box;
+    text-align: center;
+    color: #5F3118;
+    font-size: 34rpx;
+    font-weight: 600;
+    margin-top: 50rpx;
+    position: relative;
+  }
+  .time-range,.count{
+    font-size: 28rpx;
+    color: #666;
+    font-weight: normal;
+    text-align: left;
+    padding-left: 100rpx;
+    image{
+      width: 28rpx;
+      height: 34rpx;
+      margin-right: 16rpx;
+      vertical-align: middle;
+    }
+  }
+  .time-range{
+    margin-top: 10rpx;
+  }
+  .sanjiao{
+    width: 0;
+    height: 0;
+    border-width: 28rpx;
+    border-color:  transparent #fff transparent  transparent;
+    border-style:solid;
+    position: absolute;
+    border-radius: 20rpx;
+    left: 40%;
+    margin-left: 15rpx;
+  }
+  .send{
+    width: 320rpx;
+    height: 84rpx;
+    background-image: linear-gradient(-133deg, #F25664 13%, #D577EF 100%);
+    border-radius: 44rpx;
+    color: #fff;
+    font-size: 32rpx;
+    line-height: 84rpx;
+    font-weight: normal;
+    margin: 0 auto;
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <view class="main">
+      <view class="content">
+          <view>你成功领取了任务</view>
+          <view>为了奖金快去完成任务吧！</view>
+          <view class="time-range">
+            <image src="../../images/index/daojishi.png"/>任务时间：4小时
+          </view>
+          <view class="count">
+            <image src="../../images/index/count.png"/>任务数量：100
+          </view>
+          <view class="sanjiao">
+          </view>
+          <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:84rpx;"/>
+          <view class="send">立即转发拼团</view>
+      </view>
+    </view>
+
+    <!-- 其他人气任务 -->
+    <view class="other">
+      <view class="title">
+        
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '任务领取成功'
+  };
+  onLoad() {
+  }
+  data = {
+  };
+  methods = {};  
+}
+</script>

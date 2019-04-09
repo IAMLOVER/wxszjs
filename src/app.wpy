@@ -20,6 +20,8 @@ export default class extends wepy.app {
       'pages/secKill/secKill',
       'pages/secKill/secKillFirst',
       'pages/secKill/secKillSecond',
+      'pages/secKill/choseGroup',
+      'pages/secKill/choseTaskSuccess',
       'pages/order/order',
       'pages/payResult/paySuccess',
       'pages/payResult/payFail',
