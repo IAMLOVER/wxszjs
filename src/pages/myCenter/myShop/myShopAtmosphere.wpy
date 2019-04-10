@@ -1,0 +1,73 @@
+<style lang="less">
+page{
+  background-image: url('https://pictest.sqplus.cn/szjs/user/images/my/bg_store.png');
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0 -30rpx;
+  overflow: hidden;
+}
+.atmosphere-wrapper{
+  width: 690rpx;
+  margin: 0 auto;
+  margin-top: 120rpx;
+  height: 954rpx;
+  overflow: hidden;
+  .item{
+    display: flex;
+    width: 690rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: rgba(255,255,255,0.60);
+    border: 2rpx solid #FFEAEA;
+    border-radius: 49rpx;
+    padding: 0rpx 15rpx;
+    box-sizing: border-box;
+    margin-bottom: 16rpx;
+    .who{
+      flex: 3;
+      font-size: 30rpx;
+      color: #f25564;
+    }
+    .time{
+      flex: 2;
+      font-size: 24rpx;
+      color: #f25564;
+    }
+  }
+  .item:last-child{
+    margin-bottom: 0rpx;
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <!-- 氛围的item -->
+    <view class="atmosphere-wrapper">
+      <view class="item" wx:for="{{arr}}" wx:key="{{index}}">
+        <view class="who">**5439浏览了你的商品</view>
+        <view class="time">2019-04-03  09:46:11</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import path from '../../../common/path.js';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的店铺',
+    navigationBarBackgroundColor:'#F25664',
+    navigationBarTextStyle:'white'
+  };
+  onLoad() {
+  }
+  data = {
+    imagePath:path.path.imagePath,
+    arr:['1','2','3','4','5','6','7','8','9','10']
+  };
+  methods = {};  
+}
+</script>

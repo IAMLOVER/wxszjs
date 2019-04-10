@@ -1,12 +1,175 @@
 <style lang="less">
+page{
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  padding: 30rpx;
+  .income{
+    width: 690rpx;
+    height: 348rpx;
+    margin: 0 auto;
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_page.png');
+    background-repeat: no-repeat;
+    border-radius: 16rpx;
+    box-sizing: border-box;
+    padding: 30rpx 0rpx;
+   view{
+     text-align: center;
+     color: #fff;
+   }
+   .tip{
+     font-size: 32rpx;
+     padding-top: 20rpx;
+   }
+   .my-money{
+     font-size: 60rpx;
+   }
+   .btn{
+     width: 200rpx;
+     height: 72rpx;
+     line-height: 72rpx;
+     border-radius: 16rpx;
+     background-color: #fff;
+     color: #F25664; 
+     margin: 0 auto;
+     margin-top: 40rpx;
+   }
+  }
+  .record-title{
+    display: flex;
+    justify-content:space-evenly;
+    font-size: 28rpx;
+    align-items: center;
+    color: #222;
+    margin-top: 22rpx;
+    .line{
+      width: 60rpx;
+      height: 4rpx;
+      background-color: #F25664;
+      opacity: 0.3;
+      margin-left: 150rpx;
+      box-sizing: border-box;
+    }
+    .line:last-child{
+      margin-right: 150rpx;
+      margin-left: 0rpx;
+    }
+  }
+  .record-items{
+    width: 690rpx;
+    margin: 0 auto;
+    margin-top: 22rpx;
+    border-radius: 16px;
+    padding: 0rpx 30rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    .item{
+      height: 124rpx;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 30rpx 0rpx;
+      box-sizing: border-box;
+      border-bottom: 2rpx solid #E6E6E6;
+      .item-info{
+        .name{
+            font-size: 28rpx;
+            color: #222;
+        }
+        .time{
+            font-size: 24rpx;
+            color: #959595;
+        }
+      }
+      .item-number{
+        font-size: 32rpx;
+        color: #000;
+        padding-top: 10rpx;
+        image{
+          width: 12rpx;
+          height: 20rpx;
+          margin-left: 15rpx;
+        }
+      }
+    }
+    .item:last-child{
+      border-bottom: 0rpx;
+    }
+  }
+  .empty{
+    text-align: center;
+    font-size: 28rpx;
+    color: #959595;
+    margin-top: 120rpx;
+    .empty-img{
+      width: 350rpx;
+      height: 260rpx;
+    }
+  }
+}
 </style>
 <template>
   <view class="page">
+    <!-- 我的收入 -->
+    <view class="income">
+      <view class="tip">我的收入(元)</view>
+      <view class="my-money">23,457.00</view>
+      <view class="btn">提现</view>
+    </view>
+
+    <!-- 交易记录 -->
+    <view class="record-title">
+      <view class="line"></view>
+      <view>交易记录</view>
+      <view class="line"></view>
+    </view>
+
+    <view class="record-items">
+      <view class="item">
+        <view class="item-info">
+          <view class="name">
+            任务奖励
+          </view>
+          <view class="time">
+            2019-04-21  15:00:00
+          </view>
+        </view>
+        <view class="item-number">
+          <view class="number">
+            -2000.00<image src="../../../images/index/more04.png"/>
+          </view>
+        </view>
+      </view>
+       <view class="item">
+        <view class="item-info">
+          <view class="name">
+            任务奖励
+          </view>
+          <view class="time">
+            2019-04-21  15:00:00
+          </view>
+        </view>
+        <view class="item-number">
+          <view class="number">
+            -2000.00<image src="../../../images/index/more04.png"/>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 交易记录为空 -->
+    <view class="empty">
+      <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" class="empty-img"/>
+      <view class="tip">
+        暂无交易记录
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的钱包'
@@ -14,6 +177,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
+    imagePath:path.path.imagePath
   };
   methods = {};  
 }

@@ -1,0 +1,120 @@
+<!--  -->
+<template>
+  <view class='container'>
+    <view class="main">
+      <image src="{{imagePath+'bg_02.png'}}" wx:if="{{imagePath}}" class="bg-top"/>
+      <view class="tip">恭喜你获得一张优惠券</view>
+      <view class="red">
+        <view class="left">
+          <view><text style="font-size:50rpx;">80</text><text>满300可使用</text></view>
+          <view style="font-size:24rpx;">(用于购买"大满减"商品)</view>
+        </view>
+        <view class="right">
+          <view>去使用</view>
+        </view>
+      </view>
+      <view class="msg">已存入“我的-我的优惠券”中</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import path from '../common/path.js';
+  export default class redPacket extends wepy.component {
+    props = {};
+
+    data = {
+      imagePath:path.path.imagePath,
+    };
+
+    components = {};
+
+    methods = {};
+
+    events = {};
+
+    watch = {};
+
+    computed = {};
+
+    onLoad() { };
+
+    onShow() { };
+  }
+</script>
+
+<style lang='less'>
+.container{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.3);
+  .main{
+    width: 556rpx;
+    height: 630rpx;
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_03.png');
+    background-size: 556rpx;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -315rpx;
+    margin-left: -278rpx;
+    .bg-top{
+      width: 320rpx;
+      height: 136rpx;
+      margin: 0 auto;
+      display: block;
+      margin-top: -60rpx;
+    }
+    .tip{
+      font-size: 30rpx;
+      color: #F25664;
+      text-align: center;
+      margin-top: 30rpx;
+    }
+    .red{
+      width: 420rpx;
+      height: 124rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/coupon.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      margin-top: 30rpx;
+      margin-left: 54rpx;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .left{
+        flex: 2;
+        color: #fff;
+        font-size: 26rpx;
+        line-height: 36rpx;
+        padding-left: 26rpx;
+        padding-top: 6rpx;
+      }
+      .right{
+        flex: 1;
+        view{
+          font-size: 24rpx;
+          color: #fff;
+          text-align: center;
+          border-radius: 8rpx;
+          border:2rpx solid #fff;
+          width: 90rpx;
+          height: 40rpx;
+          margin-left: 10rpx;
+        }
+      }
+    }
+    .msg{
+      font-size: 22rpx;
+      color: #959595;
+      text-align: center;
+      margin-top: 20rpx;
+    }
+  }
+}
+</style>

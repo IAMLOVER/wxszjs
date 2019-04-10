@@ -1,0 +1,308 @@
+<style lang="less">
+page{
+  background-color: #f5f5f5;
+}
+.you-can-with{
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  margin-top: 24rpx;
+  background-color: #fff;
+  .title{
+    font-size: 32rpx;
+    color: #666;
+    width: 160rpx;
+    padding: 0rpx 30rpx;
+    line-height: 88rpx;
+  }
+  .you-can-number{
+    line-height: 88rpx;
+    padding-left: 30rpx;
+    font-size: 32rpx;
+    color: #666;
+  }
+}
+.user-input{
+  background-color: #fff;
+  padding: 30rpx 30rpx 26rpx 30rpx;
+  margin-top: 26rpx;
+  .title{
+    font-size: 30rpx;
+    color: #666;
+  }
+  .input-wrapper{
+    height: 90rpx;
+    border-bottom: 2rpx solid #F5F5F5;
+    line-height: 90rpx;
+    display: flex;
+    text{
+      font-size: 60rpx;
+      color: #222;
+    }
+    input{
+      width: 640rpx;
+      height: 90rpx;
+      font-size: 60rpx;
+    }
+    image{
+      width: 36rpx;
+      height: 36rpx;
+      margin-top: 20rpx;
+    }
+  }
+  .input-tip-wrapper{
+    color: #959595;
+    font-size: 24rpx;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 23rpx;
+    .all{
+      color: #f25664;
+    }
+  }
+}
+.rule{
+  margin-top: 40rpx;
+  padding-left: 30rpx;
+  .title{
+    font-size: 24rpx;
+    color: #959595;
+    line-height: 48rpx;
+  }
+}
+.btn{
+  width: 530rpx;
+  height: 88rpx;
+  background-color: #b5b5b5;
+  text-align: center;
+  line-height: 88rpx;
+  border-radius: 48rpx;
+  margin: 0 auto;
+  margin-top: 180rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+.label-2__icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 32rpx;
+  height: 32rpx;
+  background:  #fff;
+  border-radius: 50px;
+  border: 2rpx solid #B5b5b5;
+  box-sizing: border-box;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.label-2__icon-checked {
+  position: absolute;
+  left: 6rpx;
+  top: 6rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #F25664;;
+  border-radius: 50%;
+}
+.agree{
+  display: flex;
+  font-size: 24rpx;
+  margin-top: 40rpx;
+  margin-left: 130rpx;
+}
+.shadow{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  .content{
+    width: 610rpx;
+    height: 608rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    left: 50%;
+    margin-left: -305rpx;
+    top: 10%;
+    position: absolute;
+    padding: 60rpx 50rpx;
+    box-sizing: border-box;
+    .title{
+      color: #222222;
+      text-align: center;
+      font-size: 32rpx;
+    }
+    .phone{
+      margin-top: 40rpx;
+      margin-bottom: 40rpx;
+      input{
+        background: #F0F0F0;
+        border-radius: 4rpx;
+        width: 510rpx;
+        height: 76rpx;
+        font-size: 32rpx;
+        color: #999;
+        padding-left: 24rpx;
+        box-sizing: border-box;
+      }
+    }
+    .code-wrapper{
+      display: flex;
+      input{
+        flex: 3;
+        height: 76rpx;
+        font-size: 32rpx;
+        color: #999;
+        padding-left: 24rpx;
+        background: #F0F0F0;
+        border-radius: 4rpx 0rpx 0rpx 4rpx;
+      }
+      button{
+        flex: 2;
+        height: 76rpx;
+        background: #F25664;
+        color: #fff;
+        border-radius: 0rpx 4rpx 4rpx 0rpx;
+        font-size: 28rpx;
+      }
+      .disabled{
+        background: #B5B5B5;
+        color: #fff;
+      }
+    }
+    .sure-btn{
+      width: 490rpx;
+      height: 96rpx;
+      line-height: 96rpx;
+      background-color: #b5b5b5;
+      text-align: center;
+      font-size: 32rpx;
+      color: #fff;
+      margin: 0 auto;
+      margin-top: 60rpx;
+      clear: both;
+      border-radius: 8rpx;
+    }
+  }
+  .close-shadow{
+    width: 56rpx;
+    height: 56rpx;
+    position: absolute;
+    bottom: 260rpx;
+    left: 50%;
+    margin-left: -28rpx;
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <!-- 可以提现金额 -->
+    <view class="you-can-with">
+      <view class="title">
+        可提现金额
+      </view>
+      <view class="you-can-number">
+        2527.46元
+      </view>
+    </view>
+
+    <!-- 提现金额的输入提示区域 -->
+    <view class="user-input">
+      <view class="title">
+        提现金额
+      </view>
+      <view class="input-wrapper">
+          <text>￥</text><input type="number" name="" id=""/>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'close02@2x.png'}}"/>
+      </view>
+      <view class="input-tip-wrapper">
+        <view class="tip">提现金额为整数，本次可提现¥2527</view>
+        <view class="all">全部提现</view>
+      </view>
+    </view>
+
+    <view class="rule">
+      <view class="title">提现规则：</view>
+      <view class="title">1.提现至微信钱包，只能提现整数金额；</view>
+      <view class="title">2.单笔提现最小金额为5元，最多不超过5000元；</view>
+      <view class="title">3.每个用户每天最多可提现1次；</view>
+      <view class="title">4.每次提现将收取提现金额的1%作为税额<text style="color:#7BB6FB">（税额说明）</text></view>
+    </view>
+
+    <!-- 提现到微信的按钮 -->
+    <view class="btn">
+      提现至微信
+    </view>
+
+    <!-- 同意协议 -->
+    <view class="agree">
+       <view class="label-2__icon" style="border-color:{{true ? '#F25664': '#B5B5B5'}}" >
+            <view class="label-2__icon-checked" style="opacity:{{true ? 1: 0}}"></view>
+        </view>
+        <view style="color: #959595;">继续即表示同意</view>
+        <view style="color: #F25664;">《神州集市钱包服务协议》</view>
+    </view>
+
+    <!-- 手机验证的弹出框 -->
+    <view class="shadow" wx:if="{{showShadow}}">
+      <view class="content">
+        <view class="title">
+          <view>为了确保你的账户安全</view>
+          <view>请输入你的手机号码和验证码</view>
+        </view>
+        <view class="phone">
+          <input type="tel" name="" id="" placeholder="输入手机号码" />
+        </view>
+        <view class="code-wrapper">
+          <input type="number" name="" id="" placeholder="输入验证码" />
+          <button @tap="getCode" disabled="{{disabledCodeBtn}}" class="{{disabledCodeBtn?'disabled':''}}">{{btnText}}</button>
+        </view>
+        <view class="sure-btn">确认</view>
+      </view>
+
+      <!-- 关闭shadow按钮 -->
+      <image wx:if="{{imagePath}}" src="{{imagePath+'close.png'}}" class="close-shadow"/>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import path from '../../../common/path.js';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '提现'
+  };
+  onLoad() {
+  }
+  data = {
+    imagePath:path.path.imagePath,
+    btnText:'获取验证码',
+    number:60,
+    disabledCodeBtn:false,
+    showShadow:false,
+  };
+  methods = {
+    // 验证码的点击事件
+    getCode() {
+      this.disabledCodeBtn = true;
+      let interval = setInterval(() => {
+        if(this.number>0){
+          this.number = this.number - 1;    
+          this.btnText = this.number + 's';
+          this.$apply();      
+        }
+        else{
+          this.number = 60;
+          this.disabledCodeBtn = false;
+          this.btnText = '获取验证码'
+          clearInterval(interval);
+          this.$apply();      
+        }
+      }, 1000);
+    }
+  };  
+}
+</script>

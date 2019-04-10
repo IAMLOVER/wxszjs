@@ -1,12 +1,206 @@
 <style lang="less">
+page{
+  background-image: linear-gradient(-180deg, #F59562 0%, #F26D49 100%);
+}
+.main{
+  width: 690rpx;
+  height: 328rpx;
+  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task02.png');
+  margin: 0 auto;
+  margin-top: 30rpx;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: center;
+  .title{
+    font-size: 32rpx;
+    color: #5F3118;
+    padding-top: 60rpx;
+  }
+  .money{
+    font-size: 60rpx;
+    color: #5F3118;
+    font-weight: 600;
+  }
+  .total-task{
+    font-size: 32rpx;
+    color: #C0623C;
+    padding-top: 30rpx;
+    border-top: 2rpx solid rgba(251,212,196,0.5);
+  }
+}
+.tab-area{
+  display: flex;
+  margin-top: 40rpx;
+  justify-content: center;
+  .tab-item{
+    width: 200rpx;
+    height: 76rpx;
+    border-radius: 12rpx 12rpx 0px 0px;
+    text-align: center;
+    line-height: 76rpx;
+    font-size: 32rpx;
+    color: #fff;
+    background: #C0623C; 
+    margin-right: 16rpx;
+    font-weight: 600;
+  }
+  .tab-item:last-child{
+    margin-right: 0;
+  }
+  .active{
+    background: #FFFBF5;
+    color: #5F3118;
+  }
+}
+ .task-lists{
+    padding: 0rpx 24rpx;
+    background: #FFFBF5;
+    border-radius: 12rpx;
+    width: 690rpx;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: none;
+    .list{
+      display: flex;
+      padding-top: 24rpx;
+      .list-left{
+        image{
+          width: 180rpx;
+          height: 180rpx;
+          border-radius: 16rpx;
+          margin-right: 16rpx;
+        }
+      }
+      .list-right{
+        .list-title{
+          font-size: 32rpx;
+          color: #222;
+        }
+        .time-money{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 12rpx;
+          view{
+            font-size: 24rpx;
+            color: #959595;
+          }
+        }
+        .progress-box{
+          background: #FFDCE1;
+          border-radius: 12rpx;
+          width: 446rpx;
+          height: 24rpx;
+          position: relative;
+          .progress{
+            background: #FFDCE1;
+            border-radius: 12rpx;
+            height: 24rpx;
+            background-image: linear-gradient(-269deg, #FF9E51 0%, #FF624A 98%);
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+          .tip{
+            color: #fff;
+            font-size: 20rpx;
+            position: absolute;
+            left: 16rpx;
+            display: inline-block;
+            top: -4rpx;
+          }
+          .percent{
+            color: #F25664;
+            font-size: 20rpx;
+            position: absolute;
+            right: 16rpx;
+            display: inline-block;
+            top: -4rpx;
+          }
+        }
+      }
+    }
+  }
+
+.empty{
+  width: 690rpx;
+  height: 486rpx;
+  background: #FFFBF5;
+  border-radius: 6px;
+  margin: 0 auto;
+  padding-top: 80rpx;
+  text-align: center;
+  image{
+    width: 400rpx;
+    height: 250rpx;
+  }
+  view{
+    font-size: 28rpx;
+    color: #959595;
+  }
+}
 </style>
 <template>
   <view class="page">
+    <!-- 累计记录，领取的任务的总数，累计佣金 -->
+    <view class="main">
+      <view class="title">累计佣金(元)</view>
+      <view class="money">1521.65</view>
+      <view class="total-task">我一共领取了<text style="color:#5f3118;font-weight:600">3</text>次拼团任务</view>
+    </view>
+
+    <!-- tab栏的内容 -->
+    <view class="tab-area">
+      <view class="tab-item active" >进行中</view>
+      <view class="tab-item">已成功</view>
+      <view class="tab-item">已失败</view>
+    </view>
+    <!-- 任务列表 -->
+    <view class="task-lists">
+        <view class="list">
+          <view class="list-left"><image src="../../../images/index/timg.png"/></view>
+          <view class="list-right">
+            <view class="list-title">婴儿被子纯棉春秋夏四季通用儿童棉被</view>
+            <view class="time-money">
+              <view class="time">2019-06-06 14:00截止</view>
+              <view class="money">佣金：8%</view>
+            </view>
+            <!-- 进度条 -->
+            <view class="progress-box">
+              <view class="progress" style="width:60%"></view>
+              <text class="tip">已完成</text>
+              <text class="percent">50%</text>
+            </view>
+          </view>
+        </view>
+        <view class="list">
+          <view class="list-left"><image src="../../../images/index/timg.png"/></view>
+          <view class="list-right">
+            <view class="list-title">婴儿被子纯棉春秋夏四季通用儿童棉被</view>
+            <view class="time-money">
+              <view class="time">2019-06-06 14:00截止</view>
+              <view class="money">佣金：8%</view>
+            </view>
+            <!-- 进度条 -->
+            <view class="progress-box">
+              <view class="progress" style="width:60%"></view>
+              <text class="tip">已完成</text>
+              <text class="percent">50%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    <view class="empty">
+      <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
+      <view>你与赏金擦肩而过，快去领任务吧</view>
+    </view>
+  
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的任务'
@@ -14,6 +208,7 @@ export default class Index extends wepy.page {
   onLoad() {
   }
   data = {
+    imagePath:path.path.imagePath,
   };
   methods = {};  
 }

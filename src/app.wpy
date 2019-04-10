@@ -16,6 +16,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
+      'pages/authorize/authorize',
       'pages/search/search',
       'pages/address/address',
       'pages/secKill/secKill',
@@ -43,7 +44,12 @@ export default class extends wepy.app {
       'pages/myCenter/myOrder/myOrder',
       'pages/myCenter/myCoupon/myCoupon',
       'pages/myCenter/myPackage/myPackage',
+      'pages/myCenter/myPackage/packWithDraw',
+      'pages/myCenter/myPackage/drawSuccess',
+      'pages/myCenter/myPackage/drawFail',
       'pages/myCenter/myShop/myShop',
+      'pages/myCenter/myShop/myShopAtmosphere',
+      'pages/myCenter/myShop/myShopManagement',
       'pages/myCenter/myTask/myTask'
     ],
     window: {

@@ -1,0 +1,84 @@
+<style lang="less">
+page{
+  position: fixed;
+  width: 100%;
+  height:100%;
+  background-color:rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  z-index: 999;
+  .give-me{
+    background-color: #fff;
+    position: absolute;
+    width: 630rpx;
+    height: 550rpx;
+    left: 50%;
+    top: 40%;
+    margin-left: -315rpx;
+    margin-top: -275rpx;
+    border-radius: 20rpx;
+    text-align: center;
+    .logo{
+      height: 220rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_01.png');
+      background-repeat: no-repeat;
+      background-size: 630rpx 220rpx;
+      image{
+        width: 170rpx;
+        height: 170rpx;
+        padding-top: 50rpx;
+      }
+    }
+    .title{
+      font-size: 32rpx;
+      color: #666;
+      margin-top: 40rpx;
+    }
+    .title:last-child{
+      margin-top: 20rpx;
+    }
+    .btn{
+      width: 510rpx;
+      height: 84rpx;
+      line-height: 84rpx;
+      text-align: center;
+      background-color: #EB4D4E;
+      border-radius: 42rpx;
+      margin: 0 auto;
+      margin-top: 30rpx;
+      font-size: 32rpx;
+      color: #fff;
+    }
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <view class="give-me">
+      <view class="logo">
+        <image src="{{imagePath+'logo.png'}}" wx:if="{{imagePath}}"/> 
+      </view>
+
+      <view class="title">很高兴与你相遇</view>
+      <view class="title">点击授权即可加入神州集市</view>
+      <!-- 确定按钮 -->
+      <view class="btn">确定</view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import path from '../../common/path.js';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '神州集市'
+  };
+  onLoad() {
+  }
+  data = {
+    imagePath:path.path.imagePath,
+  };
+  methods = {};  
+}
+</script>

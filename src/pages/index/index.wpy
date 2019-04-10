@@ -324,7 +324,7 @@ page {
   <!--轮播图-->
   <view class="swiper-wrapper">
     <!--搜索框-->
-    <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':'11'}}">
+    <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
     <view class="search">
       <input type="text" placeholder="搜你想要" placeholder-style="color:#ffffff" @tap="navSearch"/>
      <image src="../../images/index/search02.png"/>
