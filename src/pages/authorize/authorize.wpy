@@ -56,13 +56,13 @@ page{
   <view class="page">
     <view class="give-me">
       <view class="logo">
-        <image src="{{imagePath+'logo.png'}}" wx:if="{{imagePath}}"/> 
+        <image lazy-load src="{{imagePath+'logo.png'}}" wx:if="{{imagePath}}"/> 
       </view>
 
       <view class="title">很高兴与你相遇</view>
       <view class="title">点击授权即可加入神州集市</view>
       <!-- 确定按钮 -->
-      <view class="btn">确定</view>
+      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="btn">确定</button>
     </view>
   </view>
 </template>
@@ -70,6 +70,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import sendUserInfo from '../../common/sendUserInfo.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
@@ -79,6 +80,44 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
   };
-  methods = {};  
+  methods = {}; 
+  bindGetUserInfo(e) {
+    let that = this;
+    let detail = e.detail.errMsg
+    let code = that.data.code;
+    if (detail == "getUserInfo:ok") { //用户授权
+      wx.showLoading({
+        title: '加载中'
+      })
+      wx.getUserInfo({
+        success: function(res) {
+          wx.hideLoading();
+          let iv = res.iv;
+          let encryptedData = res.encryptedData;
+        }
+      })
+    } else if (detail == "getUserInfo:fail auth deny") { //用户取消授权
+      wx.openSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            wx.showLoading({
+              title: '加载中'
+            })
+            wx.getUserInfo({
+              //重新授权后的用户信息
+              success: res => {
+                wx.hideLoading();
+                let iv = res.iv;
+                let encryptedData = res.encryptedData;
+              }
+            })
+          } else {
+            
+          }
+        }
+      })
+    }
+  }
 }
 </script>

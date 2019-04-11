@@ -14,7 +14,10 @@
         </view>
       </view>
       <view class="msg">已存入“我的-我的优惠券”中</view>
+      <!-- 倒数3秒的效果 -->
+      <view style="text-align:center;font-size:28rpx;color:#fff;padding-top:80rpx;">知道了（{{secend}}s）</view>
     </view>
+    <image src="{{imagePath+'close.png'}}" wx:if="{{imagePath}}" class="close"/>
   </view>
 </template>
 
@@ -26,21 +29,25 @@
 
     data = {
       imagePath:path.path.imagePath,
+      secend:3
     };
-
-    components = {};
 
     methods = {};
 
-    events = {};
-
-    watch = {};
-
     computed = {};
 
-    onLoad() { };
-
-    onShow() { };
+    onLoad() { 
+       let interval = setInterval(() => {
+        if(this.secend >0){
+           this.secend = this.secend - 1;
+           this.$apply();
+        }
+        else{
+          clearInterval(interval);
+        }
+      }, 1000);
+    };
+    onShow() {}
   }
 </script>
 
@@ -116,5 +123,13 @@
       margin-top: 20rpx;
     }
   }
+  .close{
+      width: 56rpx;
+      height: 56rpx;
+      position: absolute;
+      bottom: 16.2%;
+      left: 50%;
+      margin-left: -28rpx;
+    }
 }
 </style>

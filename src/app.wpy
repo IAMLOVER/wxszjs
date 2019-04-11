@@ -15,8 +15,8 @@ export default class extends wepy.app {
   }
   config = {
     pages: [
-      'pages/index/index',
       'pages/authorize/authorize',
+      'pages/index/index',
       'pages/search/search',
       'pages/address/address',
       'pages/secKill/secKill',
@@ -50,7 +50,8 @@ export default class extends wepy.app {
       'pages/myCenter/myShop/myShop',
       'pages/myCenter/myShop/myShopAtmosphere',
       'pages/myCenter/myShop/myShopManagement',
-      'pages/myCenter/myTask/myTask'
+      'pages/myCenter/myTask/myTask',
+      'pages/myCenter/myTask/myTaskDetail',
     ],
     window: {
       backgroundTextStyle: 'light',

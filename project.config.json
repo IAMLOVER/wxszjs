@@ -61,7 +61,7 @@
 				{
 					"id": 4,
 					"name": "提现",
-					"pathName": "pages/myCenter/myCenter/myCenter",
+					"pathName": "pages/myCenter/myTask/myTaskDetail",
 					"query": "",
 					"scene": null
 				}

@@ -1,0 +1,301 @@
+<style lang="less">
+page{
+  background-color:#F59562;
+}
+.header{
+  height: 340rpx;
+  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task01.png');
+  background-repeat: no-repeat;
+  background-size: 690rpx 660rpx;
+  background-position: center;
+  background-position-y: 36rpx;
+ .tip{
+     text-align: center;
+     color: #fff;
+     font-size: 36rpx;
+     padding-top: 50rpx;
+ }
+ .time-wrapper{
+   width: 510rpx;
+   height: 252rpx;
+   margin: 0 auto;
+   .time{
+     width: 500rpx;
+     height: 336rpx;
+     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/time2.png');
+     background-repeat: no-repeat;
+     background-size: 100%;
+      color: #fff;
+     font-size: 48rpx;
+     text-align: center;
+     line-height: 326rpx;
+     margin: 0 auto;
+   }
+ }
+}
+.main{
+  width: 690rpx;
+  height: 470rpx;
+  background-color: #fffbf5;
+  border-radius: 12rpx;
+  margin: 0 auto;
+  padding:  40rpx 20rpx ;
+  box-sizing: border-box;
+  .main-title{
+    font-size: 32rpx;
+    color:#5f3118;
+    font-weight: 600;
+  }
+  .main-count{
+    font-size: 28rpx;
+    color: #666;
+  }
+  .progress-wrapper{
+    width: 610rpx;
+    height: 40rpx;
+    background-color: #ffdce1;
+    border-radius: 26rpx;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 30rpx;
+    .progress{
+      position: absolute;
+      left:0 ;
+      top: 0;
+      background-image: linear-gradient(-269deg, #FF9E51 0%, #FF624A 98%);
+      border-radius: 26rpx;
+      width: 60%;
+      height: 40rpx;
+    }
+    text{
+      font-size: 28rpx;
+      color: #fff;
+      position: absolute;
+      top: 0rpx;
+    }
+    text:last-child{
+      right: 15rpx;
+    }
+  }
+  .main-produce{
+    display: flex;
+    margin-top: 60rpx;
+    .produce-left{
+      image{
+        width: 180rpx;
+        height: 180rpx;
+        border-radius: 8rpx;
+        margin-right: 16rpx;
+      }
+    }
+    .produce-right{
+      .produce-title{
+        font-size: 32rpx;
+        color: #222;
+      }
+      .produce-bottom{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40rpx;
+        .money-precent{
+          font-size: 24rpx;
+          color: #959595;
+        }
+        .hot{
+            font-size: 24rpx;
+          image{
+            width: 18rpx;
+            height: 22rpx;
+            margin-right: 8rpx;
+          }
+        }
+      }
+    }
+  }
+}
+.task-situation{
+  width: 690rpx;
+  background-color: #FCE3DB;
+  margin: 0 auto;
+  margin-top: 24rpx;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  .situation-title{
+    text-align: center;
+    color: #5F3118;
+    font-size: 32rpx;
+    font-weight: 600;
+    position: relative;
+    &:before{
+      content: ' ';
+      width: 220rpx;
+      height: 2rpx;
+      background-color: rgba(251,212,196,0.5);
+      position: absolute;
+      left: 0;
+      top:20rpx;
+    }
+    &:after{
+      content: ' ';
+      width: 220rpx;
+      height: 2rpx;
+      background-color: rgba(251,212,196,0.5);
+      position: absolute;
+      right: 0;
+      top:20rpx;
+    }
+  }
+  .situation-items{
+    .item{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20rpx;
+      .item-left{
+        display: flex;
+        align-items: center;
+        .item-number{
+        font-size: 32rpx;
+        color: #222;
+      }
+      .item-image{
+        image{
+          width: 70rpx;
+          height: 70rpx;
+          margin-left: 16rpx;
+          margin-right: 16rpx;
+          vertical-align: bottom;
+        }
+      }
+      .item-info{
+        .item-name{
+          font-size: 28rpx;
+          color: #222;
+        }
+        .item-time{
+          font-size: 24rpx;
+          color: #959595;
+        }
+      }
+      }
+      .item-counts{
+        font-size: 28rpx;
+        color: #f25564;
+      }
+    }
+  }
+}
+.footer{
+  display: flex;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 8rpx 30rpx;
+  box-sizing: border-box;
+  justify-content: center;
+  width: 100%;
+  view{
+    flex: 1;
+    color: #fff;
+    font-size: 28rpx;
+    text-align: center;
+    height: 84rpx;
+    line-height: 84rpx;
+    background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 20%);
+    border-radius: 42rpx 0rpx 0rpx 42rpx;
+    margin-right: 1rpx;
+  }
+  view:last-child{
+    border-radius: 0rpx 42rpx 42rpx 0rpx;
+    background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
+  }
+}
+</style>
+<template>
+  <view class="page">
+    <view class="header">
+      <view class="tip">距完成任务还剩</view>
+      <view class="time-wrapper">
+        <view class="time">03:46:23</view>
+      </view>
+    </view>
+    <!-- 任务进度 -->
+    <view class="main">
+      <view class="main-title">
+        你已经完成了一半了呢，继续加油！
+      </view>
+      <view class="main-count">
+        任务数100，已完成56
+      </view>
+      <view class="progress-wrapper">
+        <view class="progress"></view>
+        <text style="left:15rpx">已完成</text>
+        <text style="color:#F25664">56%</text>
+      </view>
+      <view class="main-produce">
+        <view class="produce-left">
+          <image src="../../../images/index/timg.png"/>
+        </view>
+        <view class="produce-right">
+          <view class="produce-title">
+            婴儿被子纯棉春秋夏四季通用儿童棉被
+          </view>
+          <view class="produce-bottom">
+            <view class="money-precent">佣金：8%</view>
+            <view class="hot">
+              <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
+              <text style="color:#f25664">热度18664</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 任务情况 -->
+    <view class="task-situation">
+      <view class="situation-title">
+        任务情况
+      </view>
+      <view class="situation-items">
+        <view class="item">
+          <view class="item-left">
+              <view class="item-number">1.</view>
+              <view class="item-image"><image wx:if="{{imagePath}}" src="{{imagePath+'default@3x.png'}}"/></view>
+              <view class="item-info">
+                <view class="item-name">李瑞活</view>
+                <view class="item-time">2019-04-06 18:34</view>
+              </view>
+          </view>
+          <view class="item-counts">
+            购买数量：2
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="footer">
+      <view class="poster">生成助力海报</view>
+      <view class="poster">转发给好友</view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import path from '../../../common/path.js';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的任务'
+  };
+  onLoad() {
+  }
+  data = {
+    imagePath:path.path.imagePath,
+  };
+  methods = {};  
+}
+</script>

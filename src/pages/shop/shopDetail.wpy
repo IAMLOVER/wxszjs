@@ -4,7 +4,10 @@ page{
 }
 .shop-info{
   height: 200rpx;
-  background-image: linear-gradient(-180deg, #EB4D4E 4%, rgba(240,88,109,0.50) 47%, rgba(255,255,255,0.00) 86%);
+  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/store_bg.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: #EB4D4E;
   padding: 40rpx;
   box-sizing: border-box;
   .info-left{
