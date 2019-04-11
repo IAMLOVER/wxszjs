@@ -70,7 +70,6 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
-import sendUserInfo from '../../common/sendUserInfo.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
@@ -82,42 +81,28 @@ export default class Index extends wepy.page {
   };
   methods = {}; 
   bindGetUserInfo(e) {
-    let that = this;
-    let detail = e.detail.errMsg
-    let code = that.data.code;
-    if (detail == "getUserInfo:ok") { //用户授权
-      wx.showLoading({
-        title: '加载中'
-      })
-      wx.getUserInfo({
-        success: function(res) {
-          wx.hideLoading();
-          let iv = res.iv;
-          let encryptedData = res.encryptedData;
-        }
-      })
-    } else if (detail == "getUserInfo:fail auth deny") { //用户取消授权
-      wx.openSetting({
-        success: res => {
-          if (res.authSetting['scope.userInfo']) {
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-            wx.showLoading({
-              title: '加载中'
+        if (e.detail.userInfo) {
+            //用户按了允许授权按钮
+            var that = this;
+            //插入登录的用户的相关信息到数据库
+            console.log(e.detail.userInfo);
+            wx.switchTab({
+                      url:'../index/index'
             })
-            wx.getUserInfo({
-              //重新授权后的用户信息
-              success: res => {
-                wx.hideLoading();
-                let iv = res.iv;
-                let encryptedData = res.encryptedData;
-              }
+        } else {
+            //用户按了拒绝按钮
+            wx.showModal({
+                title:'警告',
+                content:'您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+                showCancel:false,
+                confirmText:'返回授权',
+                success:function(res){
+                    if (res.confirm) {
+                        console.log('用户点击了“返回授权”')
+                    } 
+                }
             })
-          } else {
-            
-          }
         }
-      })
     }
-  }
 }
 </script>
