@@ -1,25 +1,227 @@
 <style lang="less">
+.container {
+  background: #f2f2f2;
+  min-height: 100vh;
+  display: block;
+  .header {
+    height: 342rpx;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/store_bg.png');
+    background-size: 100%;
+    background-color: #EB4D4E ;
+    position: relative;
+    .avatar {
+      height: 120rpx;
+      width: 120rpx;
+      border-radius: 120rpx;
+      overflow: hidden;
+      image{
+        width:  120rpx;
+        height: 120rpx;
+      }
+    }
+    .name {
+      font-size: 32rpx;
+      margin-top: 24rpx;
+    }
+    .head-type{
+      position: absolute;
+      right: 214rpx;
+      bottom: 75rpx;
+    }
+  }
+  .my-order {
+    height: 242rpx;
+    width: 690rpx;
+    margin: 40rpx auto auto auto;
+    background: white;
+    box-shadow: 0 4rpx 12rpx 0 rgba(179, 179, 179, 0.2);
+    border-radius: 20rpx;
+    .my-order-header {
+      height: 62rpx;
+      display: flex;
+      align-items: center;
+      padding-left: 30rpx;
+      font-size: 32rpx;
+      color: #222222;
+      border-bottom: 1px solid #f8f8f8;
+    }
+    .my-order-content {
+      display: flex;
+      height: 176rpx;
+      .detail {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        .content-icon,.content-icon2,.content-icon3 {
+          height: 46rpx;
+          width: 40rpx;
+          background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/all.png');
+          background-size: 100% 100%;
+          position: relative;
+          .remind {
+            height: 24rpx;
+            width: 24rpx;
+            border-radius: 24rpx;
+            font-size: 20rpx;
+            color: #f25664;
+            border: 2.6rpx solid #f25664;
+            position: absolute;
+            right: -15rpx;
+            top: -10rpx;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .content-icon2{
+          width:66rpx;
+          height: 42rpx;
+          background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/car.png');
+          background-size: 100% 100%;
+        }
+        .content-icon3{
+          background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/finish.png');
+        }
+        .content-text {
+          font-size: 28rpx;
+          color: #666666;
+          margin-top: 26rpx;
+        }
+      }
+    }
+  }
+  .items {
+    width: 690rpx;
+    margin: 40rpx auto auto auto;
+    background: white;
+    box-shadow: 0 2px 6px 0 rgba(179, 179, 179, 0.2);
+    border-radius: 10px;
+    .item {
+      height: 102rpx;
+      width: 690rpx;
+      border: 2rpx solid #f5f5f5;
+      font-size: 32rpx;
+      display: flex;
+      align-items: center;
+      .item-icon{
+        width:102rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        image{
+          height:36rpx;
+          width:36rpx;
+        }
+      }
+      .item-text{
+        color:#222222;
+        font-size:32rpx;
+        display: flex;
+        align-items: center
+      } 
+
+    }
+  }
+}
 </style>
 <template>
-  <view class="page">
-    <redPacket></redPacket>
+  <view class="container">
+    <view class="header">
+      <view class="avatar">
+        <image src="{{imagePath+'default@3x.png'}}" wx:if="{{imagePath}}"/>
+      </view>
+      <text class="name" style="color:#fff">陈晓薇</text>
+      <!-- <image style="width:96rpx;height:42rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath}}" class="head-type"/> -->
+      <image style="width:104rpx;height:46rpx;bottom:71rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath}}" class="head-type"/>
+    </view>
+    <view class="my-order">
+      <view>
+        <view class="my-order-header">我的订单</view>
+        <view class="my-order-content">
+          <view class="detail">
+            <view class="content-icon">
+            </view>
+            <view class="content-text">
+              查看全部
+            </view>
+          </view>
+          <view class="detail">
+            <view class="content-icon2">
+              <view class="remind">2</view>
+            </view>
+            <view class="content-text">
+              待收货
+            </view>
+          </view>
+          <view class="detail">
+            <view class="content-icon3">
+            </view>
+            <view class="content-text">
+              已完成
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="items">
+      <view class="item">
+        <view class="item-icon">
+          <image src="{{imagePath+'wallet.png'}}" wx:if="{{imagePath}}"/>
+        </view>
+        <view class="item-text">我的钱包</view>
+      </view>
+       <view class="item">
+        <view class="item-icon">
+          <image src="{{imagePath+'task.png'}}" wx:if="{{imagePath}}"/>
+        </view>
+        <view class="item-text">我的任务</view>
+      </view>
+       <view class="item">
+        <view class="item-icon">
+          <image src="{{imagePath+'coupon02.png'}}" wx:if="{{imagePath}}"/>
+        </view>
+        <view class="item-text">我的优惠券</view>
+      </view>
+       <view class="item">
+        <view class="item-icon">
+          <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
+        </view>
+        <view class="item-text">我的店铺</view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-import redPacket from '../../../components/redPacket'
+import path from '../../../common/path.js'
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '店铺',
+    navigationBarBackgroundColor: '#EB4D4E',
+    navigationBarTextStyle: 'white'
   };
-  onLoad() {
-  }
   data = {
+    imagePath:path.path.imagePath,
+    items: ['我的钱包', '我的任务', '我的优惠券', '我的店铺']
   };
-  methods = {};  
-  components = {
-    redPacket
+  methods={
+      goOrder(){
+          wx.navigateTo({
+              url:'order'
+          })
+      }
+  }
+  onLoad() {
+    console.log('onLoad');
   }
 }
 </script>

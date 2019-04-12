@@ -147,7 +147,7 @@ page{
             </view>
             <!-- 后台获取的items -->
             <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:key="index" @tap='goIndex' data-index="{{index}}">
-                {{item}}
+                {{item.title}}
             </view>
           </scroll-view>
         </veiw>
@@ -256,14 +256,17 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '分类'
   };
   onLoad() {
+    this.getClass();
   }
   data = {
-    classArr:["个人清洁","电脑办公","电脑办公","电脑办公","电脑办公","电脑办公","电脑办公","电脑办公","电脑办公","电脑办公","电脑办"],
+    apiPath:path.path.apiPath,
+    classArr:{},
     idx:-1,
     newSelect:true
   };
@@ -276,6 +279,31 @@ export default class Index extends wepy.page {
       this.newSelect = true;
       this.idx = -1;
     }
-  };  
+  };
+    getClass(){
+    wx.request({
+      url: this.apiPath + '/szmktbackstage/goodsClassify/children', //开发者服务器接口地址",
+      method: 'post',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {
+        let data = res.data.data
+        console.log(data)
+        this.classArr = data;
+      },
+      fail: () => {
+          wepy.showToast({
+          title: '加载失败', //提示的内容,
+          icon: 'fail', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+        
+      },
+      complete: () => {
+      }
+    });
+      
+  }
 }
 </script>

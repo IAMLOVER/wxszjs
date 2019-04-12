@@ -1,14 +1,15 @@
 {
 	"description": "A WePY project",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"appid": "wx4045733d67978dd9",
+	"appid": "wxc24abbe285a3542d",
 	"projectname": "wxstore",
 	"miniprogramRoot": "dist/",
 	"condition": {
@@ -31,9 +32,9 @@
 			"current": 4,
 			"list": [
 				{
-					"id": -1,
-					"name": "搜索",
-					"pathName": "pages/search/search",
+					"id": 0,
+					"name": "分类",
+					"pathName": "pages/classification/classification",
 					"query": "",
 					"scene": null
 				},
@@ -61,7 +62,7 @@
 				{
 					"id": 4,
 					"name": "提现",
-					"pathName": "pages/myCenter/myTask/myTaskDetail",
+					"pathName": "pages/myCenter/myOrder/myOrder",
 					"query": "",
 					"scene": null
 				}

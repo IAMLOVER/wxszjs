@@ -1,20 +1,179 @@
 <style lang="less">
+.container{
+    min-height: 100vh;
+    background: #f2f2f2;
+    .tab{
+        height:88rpx;
+        width:100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        .tab-list{
+            flex:1;
+            color:#959595;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28rpx;
+            .tab-text{
+                height: 88rpx;
+                line-height: 88rpx;
+            }
+        }
+        .tab-list-active{
+            flex:1;
+            color:#f25664;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28rpx;
+            .tab-text{
+                height: 80rpx;
+                line-height: 80rpx;
+                border-bottom: 4rpx solid #f25664;
+                font-weight: bold
+            }
+        }
+        
+    }
+    .order-wrapper{
+            width:100vw;
+            .order-list{
+                width:690rpx;
+                background: white;
+                margin: 30rpx auto auto auto;
+                border-radius: 12rpx;
+                padding:30rpx 40rpx;
+                box-sizing: border-box;
+                .list-header{
+                    height:42rpx;
+                    display: flex;
+                    align-items: center;
+                    .list-icon{
+                        height:32rpx;
+                        width:32rpx;
+                    }
+                    .list-store{
+                        font-size:32rpx;
+                        color:#222222;
+                        margin-left:16rpx
+                    }
+                    .list-type{
+                        font-size:28rpx;
+                        color:#f25664;
+                        margin-left:280rpx
+                    }
+                    .arrow{
+                        height:16rpx;
+                        width:10rpx;
+                        margin-left:16rpx;
+                    }
+                }
+                .order-detail{
+                    height:180rpx;
+                    width:100%;
+                    padding-bottom:30rpx;
+                    margin-top: 30rpx;
+                    border-bottom: 2rpx solid #F5F5F5; 
+                    display: flex;
+                    .goods-pic{
+                        height:180rpx;
+                        width:180rpx;
+                    }
+                    .goods-text{
+                        margin-left:20rpx;
+                        flex:1;
+                        .goods-name{
+                            font-size:28rpx;
+                            color:#222222;
+                        }
+                        .goods-style{
+                            margin-top:16rpx;
+                            font-size:24rpx;
+                            color:#959595;
+                        }
+                        .goods-price{
+                            color:#f25664;
+                            .price{
+                                font-size:32rpx;
+                            }
+                            .count{
+                                font-size:24rpx;
+                                margin-left:220rpx;
+                            }
+                        }
+                    }
+                }
+                .list-footer{
+                    font-size:28rpx;
+                    color:#666666;
+                    text-align: right;
+                    margin-top:30rpx;
+                }
+            }
+        }
+}
 </style>
 <template>
-  <view class="page">
+  <view class="container">
+    <view class="tab">
+        <view class="{{index==nowIndex?'tab-list-active':'tab-list'}}" wx:for="{{tabLists}}" wx:key="{{item.id}}" wx:for-index="index" bindtap="chooseTab({{index}})">
+            <view class="tab-text">{{item}}</view>
+        </view>
+    </view>
+    <view class="order-wrapper">
+        <view class="order-list">
+            <view class="list-header">
+                <image src="{{imagePath+'store02.png'}}" class="list-icon" wx:if="{{imagePath}}"/>
+                <text class="list-store">兰蔻旗舰店</text>
+                <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}"/>
+                <text class="list-type">已完成</text>
+            </view>
+            <view class="order-detail"  wx:for="{{2}}" wx:key="{{item.id}}" wx:for-index="index" bindtap="goDetail"> 
+                <image class="goods-pic" src="https://pic.cnblogs.com/face/1093000/20170109103659.png" />
+                <view class="goods-text">
+                    <view class="goods-name">兰蔻真爱物业玫瑰香水发过优雅浪漫女士持久香氛正品</view>
+                    <view class="goods-style">规格：50ml</view>
+                    <view class="goods-price">
+                        <text class="price">￥750</text>
+                        <text class="count">数量：1</text>
+                    </view>
+                </view>
+            </view>
+            <view class="list-footer">共两件商品，实付款：￥23.00</view>
+        </view>
+    </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../../common/path.js'
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '我的订单'
+    navigationBarTitleText: '我的订单',
+    navigationBarBackgroundColor: 'white',
+    navigationBarTextStyle: 'black'
   };
-  onLoad() {
-  }
   data = {
+      imagePath:path.path.imagePath,
+      tabLists:['全部','待收货','已完成'],
+      nowIndex:0,
   };
-  methods = {};  
+  methods= {
+      chooseTab(index){
+          this.nowIndex = index
+      },
+      goDetail(){
+          wx.navigateTo({
+              url:'order-detail'
+          })
+      }
+  };
+  onShow() {
+  }
+  onLoad() {
+    console.log('onLoad');
+  }
 }
 </script>
