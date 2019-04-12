@@ -78,6 +78,8 @@ export default class Index extends wepy.page {
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    code:''
   };
   methods = {}; 
   bindGetUserInfo(e) {
@@ -85,10 +87,11 @@ export default class Index extends wepy.page {
             //用户按了允许授权按钮
             var that = this;
             //插入登录的用户的相关信息到数据库
-            console.log(e.detail.userInfo);
-            wx.switchTab({
-                      url:'../index/index'
-            })
+            that.queryUserInfo(e);
+            console.log(e.detail);
+            // wx.switchTab({
+            //           url:'../index/index'
+            // })
         } else {
             //用户按了拒绝按钮
             wx.showModal({
@@ -103,6 +106,39 @@ export default class Index extends wepy.page {
                 }
             })
         }
-    }
+  }
+  queryUserInfo(e){
+    var that = this;
+      wx.getUserInfo({
+          success: function (res) {
+           wx.login({
+            success: res => {
+            // 获取到用户的 code 之后：res.code
+               that.code = res.code 
+               console.log(that.code);
+                wx.request({
+                url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
+                header: {
+      'content-type': 'application/x-www-form-urlencoded' // 默认值
+},
+                data: {
+                  'encryptedData':e.detail.encryptedData,
+                  'code':that.code,
+                  'iv':e.detail.iv
+                }, //请求的参数",
+                method: 'post',
+                dataType: 'json',
+                success: res => {
+                  console.log(res);
+                },
+                fail: () => {
+                },
+                complete: () => {}
+            });
+             }
+            });                  
+        }
+    });
+  }
 }
 </script>

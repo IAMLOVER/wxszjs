@@ -61,9 +61,13 @@ page{
         font-size: 24rpx;
         color:#F25664;
         margin-bottom: 24rpx;
+        margin-top: 8rpx;
       }
       .item-price{
         float: left;
+        position: absolute;
+        bottom: 30rpx;
+        left: 260rpx;
         .price{
           min-width: 168rpx;
           height: 48rpx;
@@ -134,26 +138,26 @@ page{
     <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" placeholder="搜你想要" placeholder-style="color:#959595"/>
+            <input type="text" @blur="changeValue" @input="changeValue" @confirm="changeValue" placeholder="搜你想要" placeholder-style="color:#959595"/>
             <image src="../../images/index/search02.png"/>
         </view>
       </view>
 
       <!-- 商品列表 -->
       <view class="items">
-        <navigator url="./secKillFirst" class="item">
+        <navigator url="./secKillFirst" wx:for="{{produceItems}}" wx:for-item="item" wx:key="{{index}}" class="item">
           <view class="item-left">
-              <image src="../../images/index/timg.png"/>
+              <image lazyload mode="aspectFill" src="{{item.picUrl1}}"/>
           </view>
           <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
-            <view class="hot">热度964</view>
+            <view class="item-title">{{item.title}}</view>
+            <view class="hot">热度{{item.visitNum}}</view>
             <view class="item-price">
               <view class="price">
                 <image src="../../images/index/miaosa02.png"/>
-                <text class="really">￥39.9</text>
+                <text class="really">￥{{item.chaPrice*0.01}}</text>
               </view>
-                <text class="old">￥239</text>
+                <text class="old">￥{{item.titPrice*0.01}}</text>
             </view>
           </view>
           <!-- 可以抢还是不可以抢 -->
@@ -161,8 +165,8 @@ page{
               抢
           </view>
           <!-- 不可以抢的遮罩 -->
-          <view class="nocan-shadow">
-            <image src="../../images/index/over.png"/>
+          <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
+            <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}"/>
           </view>
         </navigator>
       </view>
@@ -171,14 +175,49 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '快秒杀'
   };
   onLoad() {
+    this.getSeckills();
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    searchValue:'',
+    produceItems:{}
   };
-  methods = {};  
+  methods = {
+    changeValue(e){
+      this.searchValue = e.detail.value;
+    }
+  };
+  getSeckills(){
+    wx.request({
+      url: this.apiPath + '/szmktbackstage/channel/secKill/search', //开发者服务器接口地址",
+      data: {keyWord:this.searchValue}, //请求的参数",
+      method: 'post',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {
+        let data = res.data.data.content
+        this.produceItems = data
+        console.log(data);
+        this.$apply();
+      },
+      fail: () => {
+         wepy.showToast({
+          title: '加载失败', //提示的内容,
+          icon: 'fail', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+      },
+      complete: () => {}
+    });
+    
+  }
 }
 </script>
