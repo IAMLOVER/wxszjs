@@ -41,7 +41,7 @@
 				{
 					"id": 1,
 					"name": "快秒杀",
-					"pathName": "pages/secKill/secKill",
+					"pathName": "pages/search/search",
 					"query": "",
 					"scene": null
 				},

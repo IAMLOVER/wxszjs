@@ -60,7 +60,7 @@ page{
       </view>
 
       <view class="title">很高兴与你相遇</view>
-      <view class="title">点击授权即可加入神州集市</view>
+      <view class="title">点击授权即可加入</view>
       <!-- 确定按钮 -->
       <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="btn">确定</button>
     </view>
@@ -88,7 +88,6 @@ export default class Index extends wepy.page {
             var that = this;
             //插入登录的用户的相关信息到数据库
             that.queryUserInfo(e);
-            console.log(e.detail);
             // wx.switchTab({
             //           url:'../index/index'
             // })
@@ -111,20 +110,23 @@ export default class Index extends wepy.page {
     var that = this;
       wx.getUserInfo({
           success: function (res) {
+          console.log(res);
+          var encryptedData = res.encryptedData;
+          var iv = res.iv;
            wx.login({
             success: res => {
             // 获取到用户的 code 之后：res.code
                that.code = res.code 
-               console.log(that.code);
+               console.log(res);
                 wx.request({
                 url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
                 header: {
-      'content-type': 'application/x-www-form-urlencoded' // 默认值
-},
+                  'content-type': 'application/x-www-form-urlencoded'
+                  },// 默认值,
                 data: {
-                  'encryptedData':e.detail.encryptedData,
+                  'encryptedData':encryptedData,
                   'code':that.code,
-                  'iv':e.detail.iv
+                  'iv':iv,
                 }, //请求的参数",
                 method: 'post',
                 dataType: 'json',

@@ -395,7 +395,7 @@ page {
       </view>
     </view>
     <view class="content-wrapper">
-    <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
+  <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
       <swiper-item>
            <view class="store">
              <image class="logo" src="../../images/index/timg.png"/>
