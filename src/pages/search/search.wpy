@@ -3,6 +3,12 @@ page{
   background-color: #ffffff;
   .search-wrapper {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    height: 80rpx;
   .search {
     position: relative;
     flex: 5;
@@ -40,7 +46,7 @@ page{
   font-size: 32rpx;
   line-height: 108rpx;
   background: #EDEDED;
-  margin-top: 14rpx;
+  margin-top: 80rpx;
   view{
     flex: 1;
   }
@@ -136,7 +142,6 @@ page{
 }
 .store-items{
   border-radius: 20rpx 20rpx 0px 0px;
-  display: none;
   .item{
     height: 372rpx;
     padding: 30rpx;
@@ -159,6 +164,7 @@ page{
       text{
         color: #222222;
         font-size: 28rpx;
+        font-weight: 600;
       }
     }
     .button-wrapper{
@@ -261,11 +267,11 @@ page{
 
   <!-- 店铺列表 -->
   <view class="store-items" wx:if="{{showStore}}">
-    <view class="item">
+    <navigator url="../shop/shopDetail?id={{item.id}}" class="item" wx:for="{{storeArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
     <view class="item-title">
       <view class="item-detail">
         <image src="../../images/index/timg.png" class="logo"/>
-        <text>PUMA凌美官方旗舰店</text>
+        <text>{{item.name}}</text>
       </view>
       <view class="button-wrapper">
         <view class="rightNow">进店逛逛</view>
@@ -273,28 +279,9 @@ page{
        </view>
       </view>
     <view class="item-images">
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
+      <image wx:for="{{item.goods}}" wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.cover}}"/>
     </view>
-    </view>
-    <view class="item">
-    <view class="item-title">
-      <view class="item-detail">
-        <image src="../../images/index/timg.png" class="logo"/>
-        <text>PUMA凌美官方旗舰店</text>
-      </view>
-      <view class="button-wrapper">
-        <view class="rightNow">进店逛逛</view>
-          <image class="button" src="../../images/index/button.png"/>
-       </view>
-      </view>
-    <view class="item-images">
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-    </view>
-    </view>
+    </navigator>
   </view>
 
   <!-- 空内容 -->
@@ -325,6 +312,7 @@ export default class Index extends wepy.page {
     produceArr:{},
     storeArr:{},
     seachValue:'',
+    producePage:0
   };
   methods = {
     showProduce(){
@@ -332,18 +320,22 @@ export default class Index extends wepy.page {
       this.showStore = false
     },
     showStore(){
-      this.showProduce = false,
+      this.showProduce = false
       this.showStore = true
+      this.getStore()
     },
     searchResult(){
       if(this.showProduce){
         this.getProdece()
+      }else{
+        this.getStore()
       }
     },
     getValue(e){
       this.seachValue  = e.detail.value;
     }
   };
+  // 获取商品搜索结果
   getProdece(){
     var that = this;
     wepy.showLoading({
@@ -352,15 +344,18 @@ export default class Index extends wepy.page {
       success: res => {}
     });
     wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
+      url: that.apiPath + '/szmktstore/goodsInfo/search',
       data: 'data', //请求的参数",
       method: 'post',
       header: {'content-type': 'application/x-www-form-urlencoded'},// 默认值,
       dataType: 'json',
       data:{
-        keyWord:that.seachValue
+        keyWord:that.seachValue,
+        size:15,
+        page:that.producePage
       },
       success: res => {
+        console.log(res)
         that.produceArr = res.data.data.content
         if(that.produceArr.length == 0){
           that.empty = true
@@ -384,5 +379,57 @@ export default class Index extends wepy.page {
     });
     
   } 
+  // 获取商店搜索结果
+  getStore(){
+     var that = this
+     wepy.showLoading({
+      title: '加载中...', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
+     wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/search',
+      data: 'data', //请求的参数",
+      method: 'post',
+      header: {'content-type': 'application/x-www-form-urlencoded'},// 默认值,
+      dataType: 'json',
+      data:{
+        keyWord:that.seachValue
+      },
+      success: res => {
+        console.log(res)
+        that.storeArr = res.data.data.content
+        if(that.storeArr.length == 0){
+          that.empty = true
+        }else{
+          that.empty = false
+        }
+        that.$apply()
+      },
+      fail: () => {
+        wepy.showToast({
+          title: '加载失败', //提示的内容,
+          icon: 'false', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+      },
+      complete: () => {
+        wepy.hideLoading();
+      }
+    });
+  }
+
+  // 上拉加载
+  // onReachBottom(){
+  //   var that = this
+  //   if(that.showProduce){
+  //     console.log('加载商品')
+  //   }
+  //   else{
+  //     console.log('加载店铺')
+  //   }
+  // }
 }
 </script>

@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -40,8 +40,8 @@
 				},
 				{
 					"id": 1,
-					"name": "快秒杀",
-					"pathName": "pages/search/search",
+					"name": "店铺详情",
+					"pathName": "pages/shop/shopDetail",
 					"query": "",
 					"scene": null
 				},
@@ -53,16 +53,16 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "店铺详情",
-					"pathName": "pages/shop/shopDetail",
+					"id": 3,
+					"name": "搜索",
+					"pathName": "pages/search/search",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 4,
-					"name": "提现",
-					"pathName": "pages/myCenter/myOrder/myOrder",
+					"name": "企业详情",
+					"pathName": "pages/shop/company",
 					"query": "",
 					"scene": null
 				}

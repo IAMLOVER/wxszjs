@@ -356,7 +356,7 @@ page {
   <view class="main">
         <navigator url="../secKill/secKill" class="skil">
         <view class="title">
-          <image src="../../images/index/miaosha.png"/>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'miaosha.png'}}"/>
           <text>快秒杀</text>
         </view>
         <view class="tip">
@@ -364,12 +364,12 @@ page {
         </view>
         <view class="button-wrapper">
           <view class="rightNow">立即抢购</view>
-        <image class="button" src="../../images/index/button.png"/>
+        <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
         </view>
     </navigator>
        <navigator url="../fullReduction/fullReduction" class="reduce">
         <view class="title">
-          <image src="../../images/index/discount.png"/>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'discount.png'}}"/>
           <text>大满减</text>
         </view>
         <view class="tip">
@@ -377,7 +377,7 @@ page {
         </view>
          <view class="button-wrapper">
           <view class="rightNow">立即抢购</view>
-          <image class="button" src="../../images/index/button.png"/>
+          <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
          </view>
     </navigator>
   </view>
@@ -391,62 +391,24 @@ page {
         </view>
       <view>
         <text class="more">更多</text>
-        <image src="../../images/index/more01.png"/>
+        <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
       </view>
     </view>
     <view class="content-wrapper">
   <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
-      <swiper-item>
-           <view class="store">
-             <image class="logo" src="../../images/index/timg.png"/>
-              <text>农夫山泉东北大兴安岭旗舰店</text>
+      <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
+           <view class="store" data-id="{{item.id}}" @tap="goShop">
+             <image class="logo" src="{{item.logo?item.logo:'../../images/index/timg.png'}}"/>
+              <text>{{item.name}}</text>
              <view class="button-wrapper">
              <view class="rightNow">进店逛逛</view>
-            <image class="button" src="../../images/index/button.png"/>
+            <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
             </view>
           <view class="images">
             <view class="produce-images">
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
+            <image src="{{goods.cover}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
           </view>
-          <image src="../../images/index/more03.png" class="more"/>     
-          </view>
-    </view>
-    </swiper-item>
-        <swiper-item>
-           <view class="store">
-             <image class="logo" src="../../images/index/timg.png"/>
-              <text>农夫山泉东北大兴安岭旗舰店</text>
-             <view class="button-wrapper">
-             <view class="rightNow">进店逛逛</view>
-            <image class="button" src="../../images/index/button.png"/>
-            </view>
-          <view class="images">
-            <view class="produce-images">
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-          </view>
-          <image src="../../images/index/more03.png" class="more"/>     
-          </view>
-    </view>
-    </swiper-item>
-        <swiper-item>
-           <view class="store">
-             <image class="logo" src="../../images/index/timg.png"/>
-              <text>农夫山泉东北大兴安岭旗舰店</text>
-             <view class="button-wrapper">
-             <view class="rightNow">进店逛逛</view>
-            <image class="button" src="../../images/index/button.png"/>
-            </view>
-          <view class="images">
-            <view class="produce-images">
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-            <image src="../../images/index/timg.png" mode="widthFix"/>
-          </view>
-          <image src="../../images/index/more03.png" class="more"/>     
+          <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
           </view>
     </view>
     </swiper-item>
@@ -502,21 +464,26 @@ page {
   <view class="go-top">
     <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
   </view>
-  
+
+    <!-- <redPacket wx:if="{{}}"></redPacket> -->
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js';
+import wepy from 'wepy'
+import path from '../../common/path.js'
+import redPacket from '../../components/redPacket'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
   };
   onLoad() {
+    // 新店推荐
+    this.getRecommend()
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
     swiperimgUrls: [
       {
         item: '../../images/index/timg.png'
@@ -528,6 +495,7 @@ export default class Index extends wepy.page {
         item: '../../images/index/timg.png'
       }
     ],
+    recommendArr:{},
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -544,13 +512,30 @@ export default class Index extends wepy.page {
     onPageScroll(e) {
       // 获取滚动条当前位置
       this.scrollTop = e.scrollTop;
+    },
+    navSearch() {
+    this.$navigate({url: '../search/search'})
+    },
+    goShop(e) {
+      console.log(e.currentTarget.dataset.id)
+      this.$navigate('../shop/shopDetail',{id:e.currentTarget.dataset.id})
     }
-  };
+};
 
-  navSearch() {
-    this.$navigate({
-      url: '../search/search'
+  getRecommend(){
+    var that =  this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/recommend', 
+      method: 'post',
+      dataType: 'json', 
+      success: res => {
+        that.recommendArr = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
     });
+    
   }
 }
 </script>

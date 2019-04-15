@@ -113,6 +113,30 @@ page{
     line-height: 92rpx;
   }
 }
+.empty{
+  text-align: center;
+  margin-top: 200rpx;
+  image{
+    width: 50%;
+    margin: 0 auto;
+    height: 250rpx;
+  }
+  view{
+    font-size: 28rpx;
+    color: #959595;
+    margin-top: 20rpx;
+  }
+}
+.share{
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+  display: inline;
+  border-color: #fff;
+}
+button[plain]{
+  border-color: #fff !important;  
+}
 </style>
 <template>
   <view class="page">
@@ -130,7 +154,6 @@ page{
         </swiper-item>
       </repeat>
    </swiper>
-
    <!-- 企业基本信息 -->
    <view class="company-info">
      <view class="info-logo">
@@ -138,53 +161,67 @@ page{
      </view>
      <view class="info-right">
        <view class="info-name">
-         深圳市荟友网络科技有限公司
+         {{companyInfo.companyName}}
        </view>
        <view class="info-type">
-         软件和信息技术服务
+         {{companyInfo.description}}
        </view>
      </view>
    </view>
 
    <!-- 企业详细信息 -->
    <view class="compant-detail">
-     <view>公司规模：500人</view>
-     <view>成立时间：2018年3月14日</view>
-     <view><navigator url="./companyInfo"><text>更多</text><image src="../../images/index/more01.png"/></navigator></view>
+     <view>公司规模：{{companyInfo.employeeNum}}人</view>
+     <view>成立时间：{{companyInfo.updateTime}}</view>
+     <view><navigator url="./companyInfo"><text>更多</text><image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/></navigator></view>
    </view>
-
    <!-- 公司地址联系方式 -->
    <view class="touch-info">
      <view class="address">
-       <image src="../../images/index/location@2x.png"/>
-      <text>深圳福田区上梅林地铁站A出口中康路128号卓越城1期1栋16楼</text>
+       <image wx:if="{{imagePath}}"  src="{{imagePath+'location@2x.png'}}"/>
+      <text>{{companyInfo.address}}</text>
      </view>
      <view>
-       <image src="../../images/index/call@2x.png"/>
+       <image wx:if="{{imagePath}}" src="{{imagePath+'call@2x.png'}}"/>
      </view>
       <view>
-       <image src="../../images/index/share@2x.png"/>
+        <button open-type="share" class="share" plain="true">
+       <image wx:if="{{imagePath}}" src="{{imagePath+'share@2x.png'}}"/>
+        </button>
      </view>
    </view>
-
    <!-- 企业介绍 -->
    <view class="company-introduce">
      <view class="title">
        企业介绍
      </view>
    </view>
+
+
+   <!--  掌柜太懒了 -->
+   <view class="empty" wx:if="{{showEmpty}}">
+     <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
+     <view class="tip">掌柜太懒了，啥也没留下</view>
+     <view class="tip">还是去看看他的店铺好货吧</view>
+   </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'; 
+import time from '../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '企业详情'
   };
-  onLoad() {
+  onLoad(options) {
+    this.storeId = options.storeId
+    this.getInfo()
   }
   data = {
+     imagePath:path.path.imagePath,
+     apiPath:path.path.apiPath,
      swiperimgUrls: [
       {
         item: '../../images/index/timg.png'
@@ -200,7 +237,38 @@ export default class Index extends wepy.page {
     autoplay: true,
     interval: 3000,
     duration: 1000,
+    showEmpty:false,
+    companyInfo:{}
   };
-  methods = {};  
+  methods = {
+   onShareAppMessage(){
+     console.log(123)
+   }
+  };  
+  getInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/brandInfo',
+      data: {
+        'storeId':1,
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        if(res.data.data == null){
+          that.showEmpty = true
+          that.$apply()
+        }else{
+          that.companyInfo = res.data.data
+          that.companyInfo.updateTime = time.formatTime(that.companyInfo.updateTime,'Y年M月D日')
+          that.$apply()
+        }
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

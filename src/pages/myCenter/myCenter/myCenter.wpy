@@ -172,30 +172,30 @@
       </view>
     </view>
     <view class="items">
-      <view class="item">
+      <navigator url="../myPackage/myPackage" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'wallet.png'}}" wx:if="{{imagePath}}"/>
         </view>
         <view class="item-text">我的钱包</view>
-      </view>
-       <view class="item">
+      </navigator>
+       <navigator url="../myTask/myTask" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'task.png'}}" wx:if="{{imagePath}}"/>
         </view>
         <view class="item-text">我的任务</view>
-      </view>
-       <view class="item">
+      </navigator>
+       <navigator url="../myCoupon/myCoupon" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'coupon02.png'}}" wx:if="{{imagePath}}"/>
         </view>
         <view class="item-text">我的优惠券</view>
-      </view>
-       <view class="item">
+      </navigator>
+       <navigator url="../myShop/myShop" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
         </view>
         <view class="item-text">我的店铺</view>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>
@@ -211,7 +211,6 @@ export default class Index extends wepy.page {
   };
   data = {
     imagePath:path.path.imagePath,
-    items: ['我的钱包', '我的任务', '我的优惠券', '我的店铺']
   };
   methods={
       goOrder(){

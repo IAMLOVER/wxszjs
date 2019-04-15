@@ -57,7 +57,8 @@ export default class extends wepy.app {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '神州集市',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
+      onReachBottomDistance: 50
     },
     tabBar: {
       custom: false,
@@ -100,26 +101,38 @@ export default class extends wepy.app {
                 if (res.authSetting['scope.userInfo']) {
                     wx.getUserInfo({
                         success: function (res) {
+                            var encryptedData = res.encryptedData;
+                            var iv = res.iv;
                            wx.login({
                                 success: res => {
-                                    // 获取到用户的 code 之后：res.code
-                                    // console.log("用户的code:" + res);
-                                    // 可以传给后台，再经过解析获取用户的 openid
-                                    // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
-                                    // wx.request({
-                                    //     // 自行补上自己的 APPID 和 SECRET
-                                    //     url: 'https://api.weixin.qq.com/sns/jscode2session?appid=自己的APPID&secret=自己的SECRET&js_code=' + res.code + '&grant_type=authorization_code',
-                                    //     success: res => {
-                                    //         // 获取到用户的 openid
-                                    //         console.log("用户的openid:" + res.data.openid);
-                                    //     }
-                                    // });
+                                     // 获取到用户的 code 之后：res.code
+                                that.code = res.code 
+                                wx.request({
+                                  url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
+                                  header: {
+                                  'content-type': 'application/x-www-form-urlencoded'
+                                  },// 默认值,
+                                  data: {
+                                  'encryptedData':encryptedData,
+                                  'code':that.code,
+                                  'iv':iv,
+                                  }, //请求的参数",
+                                  method: 'post',
+                                  dataType: 'json',
+                                  success: res => {
+                                  // console.log(res);
+                                    that.globalData.useId = res.data.data.userid
+                                  },
+                                  fail: () => {
+                                   },
+                                  complete: () => {}
+                                  });
                                 }
                             });                  
                         }
                     });
                     // wx.switchTab({
-                    //   // url:'../index/index'
+                    //   url:'/pages/index/index'
                     // })
                 }
                 else{
@@ -131,7 +144,7 @@ export default class extends wepy.app {
         })
   }
   globalData = {
-    path:path,
+    useId:''
   }
 }
 </script>

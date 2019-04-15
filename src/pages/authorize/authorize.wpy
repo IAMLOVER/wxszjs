@@ -88,9 +88,6 @@ export default class Index extends wepy.page {
             var that = this;
             //插入登录的用户的相关信息到数据库
             that.queryUserInfo(e);
-            // wx.switchTab({
-            //           url:'../index/index'
-            // })
         } else {
             //用户按了拒绝按钮
             wx.showModal({
@@ -110,16 +107,16 @@ export default class Index extends wepy.page {
     var that = this;
       wx.getUserInfo({
           success: function (res) {
-          console.log(res);
-          var encryptedData = res.encryptedData;
-          var iv = res.iv;
+          var encryptedData = res.encryptedData
+          console.log(encryptedData)
+          var iv = res.iv
            wx.login({
             success: res => {
             // 获取到用户的 code 之后：res.code
                that.code = res.code 
-               console.log(res);
+               console.log(res.code)
                 wx.request({
-                url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
+                url: that.apiPath + '/szmktuser/user/authorize',
                 header: {
                   'content-type': 'application/x-www-form-urlencoded'
                   },// 默认值,
@@ -131,7 +128,17 @@ export default class Index extends wepy.page {
                 method: 'post',
                 dataType: 'json',
                 success: res => {
-                  console.log(res);
+                  console.log(res)
+                  that.$parent.globalData.useId = res.data.data.userid
+                  console.log(res.data.data.newcoupon)
+                  console.log(JSON.stringify(res.data.data.newcoupon))
+                  wx.setStorage({
+                      key:'newcoupon',
+                      data:JSON.stringify(res.data.data.newcoupon)
+                  })
+                  wx.switchTab({
+                      url:'../index/index'
+                  })
                 },
                 fail: () => {
                 },

@@ -26,6 +26,8 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        height: 100rpx;
+        font-weight: 600;
       }
       .hot{
         font-size: 24rpx;
@@ -92,24 +94,24 @@ page{
     <!-- 最新任务 -->
   <view class="new-task">
     <view class="task-produces">
-       <view class="item">
+       <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{item.cover}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+            <view class="item-title">{{item.title}}</view>
             <view class="commision">
-              佣金：1%-5%
+               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-              <image src="../../images/index/hot01.png"/>              
-              <text>热度964</text>
+               <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>                
+              <text>热度{{item.visitNum}}</text>
             </view>
           </view>
           <view class="tip">
-            已经有20人领取
+            已经有{{item.receivedNum}}人领取
           </view>
-        </view>
+        </navigator>
     </view>
   </view>
   <view class="footer">
@@ -120,14 +122,40 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '最新任务'
   };
-  onLoad() {
+  onLoad(options) {
+     this.storeId = options.storeId
+    this.getTaskProduce()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    storeId:'',
+    taskArr:{},
   };
   methods = {};  
+  // 店铺内的最新任务
+  getTaskProduce(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/store/targets', 
+      data: {
+        'storeId':that.storeId,
+        // 'size':1
+      }, //请求的参数",
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        that.taskArr = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
 }
 </script>

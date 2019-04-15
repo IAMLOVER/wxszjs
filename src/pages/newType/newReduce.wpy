@@ -26,6 +26,8 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        height: 100rpx;
+        font-weight: 600;
       }
       .hot{
         font-size: 24rpx;
@@ -92,27 +94,27 @@ page{
      <!-- 最新满减 -->
   <view class="new-reduction">
     <view class="reduce-produces">
-       <view class="item">
+       <navigator class="item" url='../fullReduction/fullProduceDetail?id={{item.id}}' wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{item.cover}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+            <view class="item-title">{{item.title}}</view>
             <view class="hot">
-              <image src="../../images/index/hot01.png"/>              
-              <text>热度964</text>
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>              
+              <text>热度{{item.visitNum}}</text>
             </view>
             <view class="item-price">
               <view class="price">
                 <text>￥</text>
-                <text class="really">39.9</text>
+                <text class="really">{{item.minPrice}}</text>
               </view>
             </view>
           </view>
           <view class="tip">
-            满199减20
+            满{{item.standard}}减{{item.privilege}}
           </view>
-        </view>
+        </navigator>
     </view>
   </view>
   <view class="footer">
@@ -123,14 +125,39 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '最新满减'
   };
-  onLoad() {
+  onLoad(options) {
+    this.storeId = options.storeId
+    this.getReduceProduce()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    storeId:'',
+    reduceArr:{},
   };
   methods = {};  
+  // 店铺内的满减商品
+  getReduceProduce(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/store/coupons', 
+      data: {
+        'storeId':that.storeId,
+      }, //请求的参数",
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        that.reduceArr = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
 }
 </script>

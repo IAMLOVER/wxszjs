@@ -1,20 +1,468 @@
 <style lang="less">
+.container {
+  min-height: 100vh;
+  background: #f2f2f2;
+  .header {
+    height: 200rpx;
+    width: 100%;
+    background-image: linear-gradient(
+      -180deg,
+      #f25664 4%,
+      rgba(240, 88, 109, 0.5) 49%,
+      rgba(255, 255, 255, 0) 85%
+    );
+    display: flex;
+    padding: 42rpx 0 0 40rpx;
+    .header-icon {
+      height: 120rpx;
+      width: 120rpx;
+      border-radius: 8rpx;
+    }
+    .header-text {
+      margin-left: 24rpx;
+      .shop-name {
+        font-size: 32rpx;
+        color: white;
+        margin-top: 11rpx;
+        display: flex;
+        align-items: center;
+        .more {
+          height: 32rpx;
+          width: 32rpx;
+          border: 2rpx solid white;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 20rpx;
+          image {
+            height: 16rpx;
+            width: 10rpx;
+          }
+        }
+      }
+    }
+  }
+  .hot {
+    height: 76rpx;
+    width: 100%;
+    background: #ffe3e7;
+    font-size: 28rpx;
+    color: #f25664;
+    line-height: 76rpx;
+    padding-left: 44rpx;
+    .more {
+      margin-left: 274rpx;
+      border-bottom: 2rpx solid #f25664;
+    }
+  }
+  .top {
+    font-size: 32rpx;
+    color: #f25664;
+    font-weight: bold;
+    position: relative;
+    margin-left: 50rpx;
+    margin-top: 40rpx;
+    &:before {
+      content: ' ';
+      position: absolute;
+      height: 28rpx;
+      width: 8rpx;
+      background: #f25664;
+      left: -16rpx;
+      top: 10rpx;
+      border-radius: 4rpx;
+    }
+  }
+  .top-wrapper {
+    height: 360rpx;
+    width: 690rpx;
+    margin: 24rpx auto auto auto;
+    background: white;
+    border-radius: 20rpx;
+    display: flex;
+    padding: 24rpx 0;
+    box-sizing: border-box;
+    .top-list {
+      width: 198rpx;
+      margin-left: 24rpx;
+      font-size: 24rpx;
+      position: relative;
+      image {
+        height: 198rpx;
+        width: 198rpx;
+      }
+      .purchases {
+        color: #959595;
+        font-size: 20rpx;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+  .tab-is-top {
+    background: white;
+    position: fixed;
+  }
+  .tab {
+    height: 88rpx;
+    width: 100%;
+    // background: white;
+    display: flex;
+    align-items: center;
+    // position: fixed;
+    top: 0;
+    z-index: 10;
+    .tab-list {
+      flex: 1;
+      color: #222222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28rpx;
+      .tab-text {
+        height: 55rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .tab-list-active {
+      flex: 1;
+      color: #f25664;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32rpx;
+      .tab-text {
+        height: 55rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 4rpx solid #f25664;
+      }
+    }
+  }
+  .goods-wrapper {
+    width: 100%;
+    padding: 0 30rpx 0 12rpx;
+    min-height:100vh;
+    padding-bottom: 100rpx;
+    box-sizing: border-box;
+    .goods-list {
+      height: 496rpx;
+      width: 336rpx;
+      margin-top: 20rpx;
+      border-radius: 12rpx;
+      overflow: hidden;
+      background: white;
+      position: relative;
+      margin-left: 18rpx;
+      display: inline-block;
+      .active-ar {
+        height: 44rpx;
+        width: 64rpx;
+        position: absolute;
+        top: 0;
+        left: 24rpx;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/type01.png');
+        background-size: 100% 100%;
+        color: white;
+        font-size: 24rpx;
+        display: flex;
+        justify-content: center;
+      }
+      .active-mission {
+        height: 44rpx;
+        width: 64rpx;
+        position: absolute;
+        top: 0;
+        left: 24rpx;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/type02.png');
+        background-size: 100% 100%;
+        color: white;
+        font-size: 24rpx;
+        display: flex;
+        justify-content: center;
+      }
+      .goods-pic {
+        height: 336rpx;
+        width: 336rpx;
+      }
+      .name {
+        color: #222222;
+        font-size: 32rpx;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        padding: 0 24rpx;
+        font-family: PingFangSC-Regular;
+      }
+      .price {
+        font-size: 33rpx;
+        color: #f25664;
+        font-weight: bold;
+        padding: 0 20rpx;
+      }
+      .active {
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
+        font-size: 20rpx;
+        color: #f25664;
+        padding: 0 5rpx;
+        height: 32rpx;
+        border: 2rpx solid #f25664;
+        border-radius: 4rpx;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .mission-wrapper {
+    min-height:100vh;
+    padding-bottom: 100rpx;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    .mission-list {
+      height: 228rpx;
+      width: 690rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      display: flex;
+      background: white;
+      margin-top: 20rpx;
+      border-radius: 16rpx;
+      position: relative;
+      .image {
+        height: 180rpx;
+        width: 180rpx;
+        border-radius: 16rpx;
+      }
+      .text {
+        margin-left: 16rpx;
+        width: 450rpx;
+        .name {
+          font-size: 32rpx;
+          color: #222222;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          margin-top: 10rpx;
+        }
+        .commission {
+          font-size: 24rpx;
+          color: #959595;
+          margin-top: 10rpx;
+        }
+        .hot-count {
+          font-size: 24rpx;
+          color: #f25664;
+          margin-top: 10rpx;
+          image {
+            width: 18rpx;
+            height: 22rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .accept-count {
+          position: absolute;
+          right: 24rpx;
+          bottom: 24rpx;
+          border: 1px solid #f25664;
+          border-radius: 4px;
+          font-size: 22rpx;
+          color: #f25664;
+          padding: 4rpx;
+        }
+      }
+    }
+  }
+  .empty-wrapper {
+      padding-bottom: 100rpx;
+      width: 100%;
+      border-radius: 16rpx;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      color:#959595;
+      font-size:28rpx;
+      min-height:100vh;
+      box-sizing: border-box;
+      image{
+          margin-top:280rpx;
+          margin-bottom:20rpx;
+          height:276rpx;
+          width:384rpx;
+      }
+    }
+    .no-more {
+      color: #b5b5b5;
+      font-size: 24rpx;
+      margin: 40rpx 0;
+      text-align: center;
+    }
+  .is-top {
+    padding-top: 88rpx;
+  }
+  .footer {
+    height: 100rpx;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .more {
+      height: 84rpx;
+      width: 690rpx;
+      background-image: linear-gradient(-23deg, #f25664 0%, #d577ef 100%);
+      border-radius: 42rpx;
+      color: white;
+      font-size: 28rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 </style>
 <template>
-  <view class="page">
-  </view>
+    <view class="container">
+        <view class="header">
+            <image src="../../../images/index/timg.png" class="header-icon"/>
+            <view class="header-text">
+                <view class="shop-name">
+                    <text>全棉时代神州自营店</text>
+                    <view class="more">
+                        <image src="../../assets/images/white-more.png"/>
+                    </view>
+                </view>
+                <view style="font-size:24rpx;color:#F25664;margin-top:16rpx">
+                    <text>总浏览量：456123</text>
+                    <text>总成交额：112348</text>
+                </view>
+            </view>
+        </view>
+        <view class="hot">
+            **5349查看了你的店铺
+            <text class="more">更多</text>
+        </view>
+        <view class="top">成交量Top3</view>
+        <view class="top-wrapper">
+            <view class="top-list" wx:for="{{3}}" wx:key="{{key}}">
+                <image src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1438931843,1833293181&fm=58&bpow=400&bpoh=284" />
+                <view style="">全棉时代全棉宝宝专用毛巾</view>
+                <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
+                <text class="purchases">345人购买</text>
+            </view>
+        </view>
+        <view class="top">浏览量Top3</view>
+        <view class="top-wrapper">
+            <view class="top-list" wx:for="{{3}}" wx:key="{{key}}">
+                <image src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1438931843,1833293181&fm=58&bpow=400&bpoh=284" />
+                <view style="">全棉时代全棉宝宝专用毛巾</view>
+                <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
+                <text class="purchases">345人购买</text>
+            </view>
+        </view>
+        <view class="tab {{isTop?'tab-is-top':''}}">
+            <view
+                class="{{index==nowIndex?'tab-list-active':'tab-list'}}"
+                wx:for="{{tabLists}}"
+                wx:key="{{item.id}}"
+                wx:for-index="index"
+                bindtap="chooseTab({{index}})"
+            >
+                <view class="tab-text">{{item}}</view>
+            </view>
+        </view>
+        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==0&&count>0}}">
+            <view class="goods-list" wx:for="{{count}}" wx:key="{{key}}">
+                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="goods-pic"/>
+                <text class="name">雅诗兰黛时光修复眼霜眼部精华抗皱去雅诗兰黛时光修复眼霜眼部精华抗皱去</text>
+                <text class="price">￥350</text>
+                <view class="active">满188减200</view>
+            </view>
+        </view>
+        <view class="mission-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==1&&count>0}}">
+            <view class="mission-list" wx:for="{{count}}" wx:key="{{key}}">
+                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="image"/>
+                <view class="text">
+                    <view class="name">婴儿被子纯棉春秋夏冬四季通用儿童棉被</view>
+                    <view class="commission">佣金：1%~5%</view>
+                    <view class="hot-count">
+                        <image src="https://pictest.sqplus.cn/szjs/user/images/index/hot01.png"/>
+                        <text>热度：18664</text>
+                    </view>
+                    <view class="accept-count">已有30人领取</view>
+                </view>
+            </view>
+            <text class="no-more">没有更多啦</text>
+        </view>
+        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==2&&count>0}}" >
+            <view class="goods-list" wx:for="{{count}}" wx:key="{{key}}">
+                <view class="active-ar">满减</view>
+                <view class="active-mission">任务</view>
+                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="goods-pic"/>
+                <text class="name">雅诗兰黛时光修复眼霜眼部精华抗皱去雅诗兰黛时光修复眼霜眼部精华抗皱去</text>
+                <text class="price">￥350</text>
+                <view class="active">满188减200</view>
+            </view>
+        </view>
+
+        <view class="empty-wrapper" wx:if="{{count==0}}">
+            <image src="https://pictest.sqplus.cn/szjs/user/images/index/null.png"/>
+            <view>暂无好物</view>
+            <view>点击更多店铺管理上传好物吧</view>
+        </view>
+        <view class="footer">
+            <view class="more">更多店铺管理</view>
+        </view>
+    </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '我的店铺'
+    navigationBarTitleText: '我的店铺',
+    navigationBarBackgroundColor: '#EB4D4E',
+    navigationBarTextStyle: 'white'
   };
-  onLoad() {
-  }
   data = {
+    tabLists: ['最新满减', '最新任务', '最新单品'],
+    nowIndex: 0,
+    isTop: false,
+    count:0
   };
-  methods = {};  
+  methods = {
+    chooseTab(index) {
+      this.nowIndex = index;
+    },
+    onPageScroll(e){
+        let scroll = e.scrollTop
+        if(scroll>=625){
+            this.isTop = true;
+        }else{
+            this.isTop = false
+        }
+    }
+  };
+  onShow() {}
+  onLoad() {
+    console.log('onLoad');
+  }
 }
 </script>

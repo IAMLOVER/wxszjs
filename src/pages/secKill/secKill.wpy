@@ -56,6 +56,7 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        font-weight: 600;
       }
       .hot{
         font-size: 24rpx;
@@ -138,7 +139,7 @@ page{
     <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" @blur="changeValue" @input="changeValue" @confirm="changeValue" placeholder="搜你想要" placeholder-style="color:#959595"/>
+            <input type="text" @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595"/>
             <image src="../../images/index/search02.png"/>
         </view>
       </view>
@@ -190,9 +191,9 @@ export default class Index extends wepy.page {
     produceItems:{}
   };
   methods = {
-    changeValue(e){
-      this.searchValue = e.detail.value;
-    }
+    navSearch() {
+    this.$navigate({url: '../search/search'})
+    },
   };
   getSeckills(){
     wx.request({
