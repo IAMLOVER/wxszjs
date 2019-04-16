@@ -120,8 +120,10 @@ export default class extends wepy.app {
                                   method: 'post',
                                   dataType: 'json',
                                   success: res => {
-                                  // console.log(res);
-                                    that.globalData.useId = res.data.data.userid
+                                  console.log(res);
+                                    that.globalData.userId = res.data.data.userid
+                                    that.globalData.userName = res.data.data.username
+                                    that.globalData.identityType = res.data.data.identityType
                                   },
                                   fail: () => {
                                    },
@@ -144,7 +146,9 @@ export default class extends wepy.app {
         })
   }
   globalData = {
-    useId:''
+    userId:'',
+    userName:'',
+    identityType:'',
   }
 }
 </script>

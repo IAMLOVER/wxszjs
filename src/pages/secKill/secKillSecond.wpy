@@ -50,6 +50,8 @@ page{
     .produce-title{
       font-size: 32rpx;
       color: #222;
+      font-weight: 600;
+      height: 116rpx;
     }
     .produce-price{
       .new{
@@ -207,6 +209,8 @@ page{
             color: #222222;
             font-size: 28rpx;
             width: 430rpx;
+            font-weight: 600;
+            height: 126rpx;
           }
           .one-type{
             color: #959595;
@@ -360,7 +364,7 @@ page{
 <template>
   <view class="page">
     <view class="top">
-      <image src="../../images/index/isover.png"/>
+      <image src="{{imagePath+'isover.png'}}" wx:if="{{imagePath}}"/>
       <view>客官来晚了！宝贝被秒光了</view>
       <view class="tip">
         <view>其他摊位有更划算的套装商品哦！</view>
@@ -369,17 +373,16 @@ page{
     <!-- 商品 -->
     <view class="produce">
       <view class="produce-left">
-        <image src="../../images/index/timg.png"/>
+        <image src="{{produceInfo.cover}}" mode="aspectFill"/>
       </view>
       <view class="produce-right">
         <view class="produce-title">
-          新庄新小莓红颜奶油草莓新鲜草
-          莓现摘发货
+        {{produceInfo.title}}
         </view>
         <view class="produce-price">
-          <text class="new">￥2.99</text>
-          <text class="old">2.99</text>
-          <text class="older">￥2.99</text>
+          <text class="new">￥{{produceInfo.chaPrice*0.01}}</text>
+          <text class="old">{{produceInfo.mktPrice*0.01}}</text>
+          <text class="older">￥{{produceInfo.purPrice*0.01}}</text>
         </view>
       </view>
     </view>
@@ -390,22 +393,22 @@ page{
         选择优惠套装
       </view>
       <view class="suit-items">
-        <view class="item">
+        <view class="item" wx:for="{{produceItem}}" wx:for-item="item" wx:key="{{index}}">
           <view class="add">
-            <image src="../../images/index/add.png"/>
+            <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="../../images/index/timg.png"/>
-            <view class="item-name">春雨蜂蜜面膜</view>
+            <image src="{{item.cover}}" lazyload mode="aspectFill"/>
+            <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
-            <image src="../../images/index/equal.png"/>
+            <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-price">
             <view class="new">￥100</view>
             <view class="old">¥245</view>
           </view>
-          <view class="right-now" @tap="rightNow">
+          <view class="right-now" @tap="rightNow" data-id="{{item.id}}">
             马上抢
           </view>
         </view>
@@ -418,20 +421,19 @@ page{
          <view class="title">
             <view>选择数量</view>
             <view @tap="closeShadow">
-              <image src="../../images/index/close02@2x.png"/>
+              <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}"/>
             </view>
         </view>
         <!-- 被选择的商品展示 -->
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{produceInfo.cover}}" mode="aspectFill"/>
             </view>
             <view class="one-right">
-              <view class="one-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
-              <view class="one-type">规格：20kg</view>
+              <view class="one-name">{{produceInfo.title}}</view>
               <view class="one-text">
-                <view class="price">￥2.99</view>
+                <view class="price">￥{{produceInfo.chaPrice*0.01}}</view>
                 <view class="count">数量：1</view>
               </view>
             </view>
@@ -442,7 +444,7 @@ page{
             </view>
             <view class="two-right">
               <view class="two-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
-              <view class="two-type" @tap="showTwoType">规格：20kg<image src="../../images/index/xiala@2x.png"/></view>
+              <view class="two-type" @tap="showTwoType">规格：20kg<image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}"/></view>
               <view class="two-text">
                 <view class="price">￥2.99</view>
                 <view class="count">数量：1</view>
@@ -461,9 +463,9 @@ page{
         <view class="counts">
           <view>组合数量：</view>
           <view class="controal">
-            <image src="../../images/index/reduce@2x.png" class="reduce"/>
+            <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="reduce"/>
             <input type="text"/>
-            <image src="../../images/index/add02@2x.png" class="add"/>
+            <image src="{{imagePath+'add02@2x.png'}}" wx:if="{{imagePath}}" class="add"/>
           </view>
         </view>
 
@@ -481,15 +483,25 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '秒杀详情'
   };
-  onLoad() {
+  onLoad(options) {
+    console.log(options)
+    this.produceId = options.id
+    this.getProduceInfo()
+    this.getProduceItems()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
     showPosition:false,
-    showShadow:false
+    showShadow:false,
+    produceId:'',
+    produceInfo:{},
+    produceItem:{}
   };
   methods = {
     rightNow(){
@@ -501,6 +513,46 @@ export default class Index extends wepy.page {
     showTwoType(){
       this.showPosition = !this.showPosition;
     }
-  };  
+  }; 
+  // 获取引流商品详情
+  getProduceInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/channel/info',
+      method: 'get',
+      data:{
+        'channelInfoId':that.produceId
+      },
+      dataType: 'json', 
+      success: res => {
+        that.produceInfo = res.data.data.channel
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  // 获取引流商品的配套商品列表
+  getProduceItems() {
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/collocation/list', 
+      data: {
+        channelId: that.produceId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceItem = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

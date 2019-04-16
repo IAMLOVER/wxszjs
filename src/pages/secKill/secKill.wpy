@@ -140,13 +140,13 @@ page{
      <view class="search-wrapper">
         <view class="search">
             <input type="text" @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595"/>
-            <image src="../../images/index/search02.png"/>
+            <image src="{{imagePath+'search02.png'}}"  wx:if="{{imagePath}}"/>
         </view>
       </view>
 
       <!-- 商品列表 -->
       <view class="items">
-        <navigator url="./secKillFirst" wx:for="{{produceItems}}" wx:for-item="item" wx:key="{{index}}" class="item">
+        <navigator url="./secKillFirst?id={{item.id}}" wx:for="{{produceItems}}" wx:for-item="item" wx:key="{{index}}" class="item">
           <view class="item-left">
               <image lazyload mode="aspectFill" src="{{item.picUrl1}}"/>
           </view>
@@ -155,7 +155,7 @@ page{
             <view class="hot">热度{{item.visitNum}}</view>
             <view class="item-price">
               <view class="price">
-                <image src="../../images/index/miaosa02.png"/>
+                <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}"/>
                 <text class="really">￥{{item.chaPrice*0.01}}</text>
               </view>
                 <text class="old">￥{{item.titPrice*0.01}}</text>
@@ -197,10 +197,10 @@ export default class Index extends wepy.page {
   };
   getSeckills(){
     wx.request({
-      url: this.apiPath + '/szmktbackstage/channel/secKill/search', //开发者服务器接口地址",
-      data: {keyWord:this.searchValue}, //请求的参数",
+      url: this.apiPath + '/szmktbackstage/channel/secKill/search',
+      data: {keyWord:this.searchValue},
       method: 'post',
-      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      dataType: 'json',
       success: res => {
         let data = res.data.data.content
         this.produceItems = data
@@ -209,10 +209,10 @@ export default class Index extends wepy.page {
       },
       fail: () => {
          wepy.showToast({
-          title: '加载失败', //提示的内容,
-          icon: 'fail', //图标,
-          duration: 2000, //延迟时间,
-          mask: true, //显示透明蒙层，防止触摸穿透,
+          title: '加载失败', 
+          icon: 'fail', 
+          duration: 2000, 
+          mask: true, 
           success: res => {}
         });
       },

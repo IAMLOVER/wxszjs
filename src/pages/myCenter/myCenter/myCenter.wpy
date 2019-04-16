@@ -138,9 +138,11 @@
       <view class="avatar">
         <image src="{{imagePath+'default@3x.png'}}" wx:if="{{imagePath}}"/>
       </view>
-      <text class="name" style="color:#fff">陈晓薇</text>
-      <!-- <image style="width:96rpx;height:42rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath}}" class="head-type"/> -->
-      <image style="width:104rpx;height:46rpx;bottom:71rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath}}" class="head-type"/>
+      <text class="name" style="color:#fff">{{userName}}</text>
+      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==1}}" class="head-type"/>
+      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'diamonds.png'}}" wx:if="{{imagePath && identityType==2}}" class="head-type"/>
+      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'low.png'}}" wx:if="{{imagePath && identityType==0}}" class="head-type"/>
+      <image style="width:104rpx;height:46rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath && identityType==3}}" class="head-type"/>
     </view>
     <view class="my-order">
       <view>
@@ -211,6 +213,8 @@ export default class Index extends wepy.page {
   };
   data = {
     imagePath:path.path.imagePath,
+    identityType:'',
+    userName:''
   };
   methods={
       goOrder(){
@@ -220,7 +224,8 @@ export default class Index extends wepy.page {
       }
   }
   onLoad() {
-    console.log('onLoad');
+    this.identityType = this.$parent.globalData.identityType
+    this.userName = this.$parent.globalData.userName
   }
 }
 </script>

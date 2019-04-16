@@ -9,6 +9,14 @@ page{
     width: 100%;
     height: 650rpx;
   }
+  swiper{
+    height: 650rpx;
+    width: 100%;
+    image{
+       height: 650rpx;
+       width: 100%;
+    }
+  }
   .tip{
     width: 446rpx;
     height: 56rpx;
@@ -96,6 +104,8 @@ page{
   .produce-name{
     font-size: 32rpx;
     color: #222;
+    font-weight: 600;
+    height: 96rpx;
   }
   .limit{
     color: #959595;
@@ -185,9 +195,13 @@ page{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <image src="../../images/index/bg_02.png"/>
+      <swiper autoplay circular>
+              <swiper-item>
+                  <image mode="aspectFill" src="{{produceInfo.cover}}" />
+              </swiper-item>
+      </swiper>
       <view class="tip">
-        <image src="../../images/index/laba.png"/>
+        <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
           <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
           <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
@@ -199,20 +213,19 @@ page{
       <view class="price">
         <text>秒杀价:</text>
         <text class="type">￥</text>
-        <text class="now">9.99</text>
-        <text class="old">￥120</text>
+        <text class="now">{{produceInfo.chaPrice*0.01}}</text>
+        <text class="old">￥{{produceInfo.mktPrice*0.01}}</text>
       </view>
       <view class="hot">
-        <image src="../../images/index/hot02.png"/>
-        <text>热度2880</text>
+        <image src="{{imagePath+'hot02.png'}}" wx:if="{{imagePath}}"/>
+        <text>热度{{produceInfo.visitNum}}</text>
       </view>
     </view>
 
     <!-- 商品名称以及限购 -->
     <view class="main">
       <view class="produce-name">
-        新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
-        礼盒装 顺丰空运
+       {{produceInfo.title}}
       </view>
       <view class="produce-tip">
         <view class="limit">
@@ -220,7 +233,7 @@ page{
         </view>
       </view>
       <view class="share">
-        <image src="../../images/index/share02.png"/>
+        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
         <text>分享有奖</text>
       </view>
     </view>
@@ -232,18 +245,18 @@ page{
         <view class="tip">商品详情</view>
         <view class="line"></view>
       </view>
-      <view class="detail">
-        <image src="../../images/index/timg.png"/>
+      <view class="detail" style="padding:30rpx;padding-top:0rpx">
+        <rich-text nodes="{{produceInfo.description}}"></rich-text>
       </view>
     </view>
 
     <!-- 客服，立即秒杀 -->
     <view class="dosome">
       <view class="kefu">
-        <image src="../../images/index/kefu.png"/>
+        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
-      <navigator url="./secKillSecond" class="skill-btn">
+      <navigator url="./secKillSecond?id={{produceId}}" class="skill-btn">
         <text>立即秒杀</text>
       </navigator>
     </view>
@@ -252,14 +265,41 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '秒杀详情'
   };
-  onLoad() {
+  onLoad(options) {
+    this.produceId = options.id
+    this.getProduceInfo()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    produceId:'',
+    produceInfo:{}
   };
   methods = {};  
+  // 获取商品详情
+  getProduceInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/channel/info',
+      method: 'get',
+      data:{
+        'channelInfoId':that.produceId
+      },
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data.channel
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

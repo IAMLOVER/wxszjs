@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -63,6 +63,20 @@
 					"id": 4,
 					"name": "企业详情",
 					"pathName": "pages/shop/company",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/myCenter/myCoupon/myCoupon",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/myCenter/myShop/myShopAtmosphere",
 					"query": "",
 					"scene": null
 				}

@@ -147,7 +147,8 @@ button[plain]{
             indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}"
             interval="{{interval}}"
-           duration="{{duration}}">
+           duration="{{duration}}"
+           wx:if="{{!showEmpty}}">
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
           <image src="{{item.item}}" class="slide-image"/>
@@ -155,7 +156,7 @@ button[plain]{
       </repeat>
    </swiper>
    <!-- 企业基本信息 -->
-   <view class="company-info">
+   <view class="company-info" wx:if="{{!showEmpty}}">
      <view class="info-logo">
        <image src="../../images/index/timg.png"/>
      </view>
@@ -170,13 +171,13 @@ button[plain]{
    </view>
 
    <!-- 企业详细信息 -->
-   <view class="compant-detail">
+   <view class="compant-detail" wx:if="{{!showEmpty}}">
      <view>公司规模：{{companyInfo.employeeNum}}人</view>
      <view>成立时间：{{companyInfo.updateTime}}</view>
      <view><navigator url="./companyInfo"><text>更多</text><image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/></navigator></view>
    </view>
    <!-- 公司地址联系方式 -->
-   <view class="touch-info">
+   <view class="touch-info" wx:if="{{!showEmpty}}">
      <view class="address">
        <image wx:if="{{imagePath}}"  src="{{imagePath+'location@2x.png'}}"/>
       <text>{{companyInfo.address}}</text>
@@ -191,7 +192,7 @@ button[plain]{
      </view>
    </view>
    <!-- 企业介绍 -->
-   <view class="company-introduce">
+   <view class="company-introduce" wx:if="{{!showEmpty}}">
      <view class="title">
        企业介绍
      </view>
@@ -242,7 +243,6 @@ export default class Index extends wepy.page {
   };
   methods = {
    onShareAppMessage(){
-     console.log(123)
    }
   };  
   getInfo(){
@@ -250,7 +250,7 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/storeInfo/brandInfo',
       data: {
-        'storeId':1,
+        'storeId':that.storeId,
       },
       method: 'GET',
       dataType: 'json',
@@ -272,7 +272,6 @@ export default class Index extends wepy.page {
       fail: () => {},
       complete: () => {}
     });
-    
   }
 }
 </script>

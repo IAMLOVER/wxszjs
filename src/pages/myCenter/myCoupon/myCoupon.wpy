@@ -137,7 +137,7 @@
             <view class="use">已失效</view>
         </view>
         <view class="empty">
-            <image src="https://pictest.sqplus.cn/szjs/user/images/index/null.png" />
+            <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
             <view>你的卷包空空如也呢</view>
         </view>
     </view>
@@ -145,7 +145,7 @@
 
 <script>
 import wepy from 'wepy';
-
+import path from '../../../common/path.js'; 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的优惠券',
@@ -153,6 +153,8 @@ export default class Index extends wepy.page {
     navigationBarTextStyle: 'black'
   };
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
     tabLists: ['可使用', '已失效'],
     nowIndex: 0,
     count:0
@@ -166,25 +168,32 @@ export default class Index extends wepy.page {
         url: 'order-detail'
       });
     },
-    aaa(){
-      wx.getSystemInfo({
-        success(res) {
-          console.log(res.model)
-          console.log(res.pixelRatio)
-          console.log(res.windowWidth)
-          console.log(res.windowHeight)
-          console.log(res.language)
-          console.log(res.version)
-          console.log(res.platform)
-        }
-      })
-    }
   };
-  onShow() {
-    this.methods.aaa();
-  }
   onLoad() {
-    console.log('onLoad');
+    this.getMyCoupon()
+    console.log(this.$parent.globalData.userId)
+  }
+
+  // 查看我的优惠劵
+  getMyCoupon(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/user/querycouponlist', //开发者服务器接口地址",
+      data: {
+        userid:that.$parent.globalData.userId,
+        status:0,
+        page:1,
+        rows:100
+      }, //请求的参数",
+      method: 'get',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {
+        console.log(res)
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
   }
 }
 </script>
