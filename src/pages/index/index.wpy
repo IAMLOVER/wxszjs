@@ -331,7 +331,7 @@ page {
     <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
     <view class="search">
       <input type="text" placeholder="搜你想要" placeholder-style="color:#ffffff" @tap="navSearch"/>
-     <image src="../../images/index/search02.png"/>
+     <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
     </view>
   </view>
     <swiper class="swiper"
@@ -390,7 +390,7 @@ page {
         新店推荐
         </view>
       <view>
-        <text class="more">更多</text>
+        <text class="more" @tap="moreShop">更多</text>
         <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
       </view>
     </view>
@@ -519,6 +519,9 @@ export default class Index extends wepy.page {
     goShop(e) {
       console.log(e.currentTarget.dataset.id)
       this.$navigate('../shop/shopDetail',{id:e.currentTarget.dataset.id})
+    },
+    moreShop(){
+      this.$switch('../shop/shop')
     }
 };
 

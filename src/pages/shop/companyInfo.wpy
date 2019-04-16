@@ -62,31 +62,31 @@ page{
         </view>
         <view class="input">
           <view>法人代表</view>
-          <view class="value">罗峻云</view>
+          <view class="value">{{companyInfo.legalpersonname}}</view>
         </view>
         <view class="input">
           <view>注册资本</view>
-          <view class="value">1202万人民币</view>
+          <view class="value">{{companyInfo.regcapital}}</view>
         </view>
         <view class="input">
           <view>统一信用代码</view>
-          <view class="value">91440300359257558B</view>
+          <view class="value">{{companyInfo.creditcode}}</view>
         </view>
         <view class="input">
           <view>企业类型</view>
-          <view class="value">有限责任公司</view>
+        <view class="value">{{companyInfo.companyorgtype}}</view>
         </view>
         <view class="input">
           <view>行业</view>
-          <view class="value">互联网</view>
+          <view class="value">{{companyInfo.industry}}</view>
         </view>
         <view class="input">
           <view>登记机关</view>
-          <view class="value">深圳市市场监督管理局</view>
+          <view class="value">{{companyInfo.reginstitute}}</view>
         </view>
         <view class="input">
           <view>注册地址</view>
-          <view class="value">深圳市前海深港合作区前湾一路中一号A栋2607室</view>
+          <view class="value">{{companyInfo.reglocation}}</view>
         </view>
       </view>
     </view>
@@ -95,14 +95,53 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'; 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '企业资料'
   };
   onLoad() {
+    var companyName = wx.getStorage({
+      key: 'companyName',
+      success: (result)=>{
+         this.getCompanyInfo(result.data)
+      },
+      fail: ()=>{},
+      complete: ()=>{}
+    });
   }
   data = {
+     imagePath:path.path.imagePath,
+     apiPath:path.path.apiPath,
+     companyInfo:{}
   };
-  methods = {};  
+  methods = {}; 
+  getCompanyInfo(String){
+    wx.showLoading({
+      title: '加载中', 
+      mask: true,
+      success: res => {}
+    });
+    
+    var that = this
+    wx.request({
+      url: that.apiPath + '/sbchcompany/company/regcompany', 
+      data: {
+        company:String
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res.data)
+        that.companyInfo = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
+    
+  } 
 }
 </script>

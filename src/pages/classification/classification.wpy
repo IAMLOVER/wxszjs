@@ -88,8 +88,10 @@ page{
         padding: 20rpx;
         box-sizing: border-box;
         margin-bottom: 24rpx;
+        position: relative;
         .item-left{
           margin-right: 16rpx;
+          flex: 1;
           image{
             width: 170rpx;
             height: 170rpx;
@@ -97,9 +99,12 @@ page{
           }
         }
         .item-right{
+          flex: 2;
           .item-title{
             font-size: 32rpx;
             color: #222;
+            font-weight: 600;
+            height: 96rpx;
           }
           .item-info{
             display: flex;
@@ -126,14 +131,34 @@ page{
   height: 0;
   color: transparent;
 }
+.produce-skill {
+  position: absolute;
+  top: 20rpx;
+  left: 32rpx;
+  .tip {
+    position: relative;
+    image {
+      z-index: 1000;
+      width: 64rpx;
+      height: 44rpx;
+    }
+    view {
+      color: #ffffff;
+      font-size: 24rpx;
+      position: absolute;
+      top: 3rpx;
+      left: 8rpx;
+    }
+  }
+}
 </style>
 <template>
   <view class="page">
      <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" placeholder="搜你想要"/>
-            <image src="../../images/index/search02.png"/>
+            <input type="text" placeholder="搜你想要" @tap="navSearch"/>
+            <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
 
@@ -143,108 +168,45 @@ page{
           <scroll-view scroll-y scroll-with-animation>
             <!-- 最新 -->
             <view class="new {{newSelect?'active':''}}" @tap="choseNew">
-              最新<image src="../../images/index/new.png"/>
+              最新<image src="{{imagePath+'new.png'}}" wx:if="{{imagePath}}"/>
             </view>
             <!-- 后台获取的items -->
-            <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:key="index" @tap='goIndex' data-index="{{index}}">
+            <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">
                 {{item.title}}
             </view>
           </scroll-view>
         </veiw>
         <view class="main-right">
           <scroll-view class="items" scroll-y scroll-with-animation>
-            <view class="item">
+            <view class="item" @tap="goDetails" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
               <view class="item-left">
-                <image src="../../images/index/timg.png"/>
+                <image src="{{item.cover}}" mode="aspectFill" lazyload/>
               </view>
               <view class="item-right">
                 <view class="item-title">
-                  橙舍实木复合书桌简单易用书桌
+                  {{item.title}}
                 </view>
                 <view class="item-info">
                   <view class="price">
                     <text>￥</text>
-                    <text>98.90</text>
+                    <text>{{item.minPrice}}</text>
                   </view>
                   <view class="how-many">
-                    188人购买
+                    {{item.saleNum}}人购买
                   </view>
                 </view>
               </view>
-            </view>
-            <view class="item">
-              <view class="item-left">
-                <image src="../../images/index/timg.png"/>
-              </view>
-              <view class="item-right">
-                <view class="item-title">
-                  橙舍实木复合书桌简单易用书桌
-                </view>
-                <view class="item-info">
-                  <view class="price">
-                    <text>￥</text>
-                    <text>98.90</text>
-                  </view>
-                  <view class="how-many">
-                    188人购买
-                  </view>
+                <!-- 商品销售类型(满减，任务) -->
+              <view class="produce-skill" wx:if="{{item.activityType == 2}}">
+                <view class="tip">
+                  <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
+                  <view>满减</view>
                 </view>
               </view>
-            </view>
-            <view class="item">
-              <view class="item-left">
-                <image src="../../images/index/timg.png"/>
-              </view>
-              <view class="item-right">
-                <view class="item-title">
-                  橙舍实木复合书桌简单易用书桌
-                </view>
-                <view class="item-info">
-                  <view class="price">
-                    <text>￥</text>
-                    <text>98.90</text>
-                  </view>
-                  <view class="how-many">
-                    188人购买
-                  </view>
-                </view>
-              </view>
-            </view>
-            <view class="item">
-              <view class="item-left">
-                <image src="../../images/index/timg.png"/>
-              </view>
-              <view class="item-right">
-                <view class="item-title">
-                  橙舍实木复合书桌简单易用书桌
-                </view>
-                <view class="item-info">
-                  <view class="price">
-                    <text>￥</text>
-                    <text>98.90</text>
-                  </view>
-                  <view class="how-many">
-                    188人购买
-                  </view>
-                </view>
-              </view>
-            </view>
-            <view class="item">
-              <view class="item-left">
-                <image src="../../images/index/timg.png"/>
-              </view>
-              <view class="item-right">
-                <view class="item-title">
-                  橙舍实木复合书桌简单易用书桌
-                </view>
-                <view class="item-info">
-                  <view class="price">
-                    <text>￥</text>
-                    <text>98.90</text>
-                  </view>
-                  <view class="how-many">
-                    188人购买
-                  </view>
+              <view class="produce-skill" wx:if="{{item.activityType == 1}}">
+                <view class="tip">
+                  <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
+                  <view>任务</view>
                 </view>
               </view>
             </view>
@@ -263,39 +225,62 @@ export default class Index extends wepy.page {
   };
   onLoad() {
     this.getClass();
+    this.getClassfiyProduce();
   }
   data = {
+    imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     classArr:{},
     idx:-1,
-    newSelect:true
+    newSelect:true,
+    classifyId:'',
+    classifyProduce:{}
   };
   methods = {
-    goIndex(e){
-      this.idx = e.currentTarget.dataset.index;
-      this.newSelect = false;
+    getProduce(e){
+      this.idx = e.currentTarget.dataset.index
+      this.newSelect = false
+      this.classifyId = e.currentTarget.dataset.id
+      this.getClassfiyProduce()
     },
     choseNew(){
-      this.newSelect = true;
-      this.idx = -1;
+      this.newSelect = true
+      this.idx = -1
+      this.classifyId = ''
+      this.getClassfiyProduce()
+    },
+    goDetails(e){
+      if(e.currentTarget.dataset.type == 0){
+        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 1){
+        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 2){
+        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+      }
+    },
+    navSearch() {
+    this.$navigate({url: '../search/search'})
     }
   };
-    getClass(){
+  // 获取分类列表
+  getClass(){
+    var that = this    
     wx.request({
-      url: this.apiPath + '/szmktbackstage/goodsClassify/children', //开发者服务器接口地址",
+      url: that.apiPath + '/szmktbackstage/goodsClassify/children', 
       method: 'post',
-      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      dataType: 'json', 
       success: res => {
         let data = res.data.data
         console.log(data)
-        this.classArr = data;
+        that.classArr = data
+        that.$apply()
       },
       fail: () => {
-          wepy.showToast({
-          title: '加载失败', //提示的内容,
-          icon: 'fail', //图标,
-          duration: 2000, //延迟时间,
-          mask: true, //显示透明蒙层，防止触摸穿透,
+          wx.showToast({
+          title: '加载失败', 
+          icon: 'fail', 
+          duration: 2000, 
+          mask: true,
           success: res => {}
         });
         
@@ -304,6 +289,27 @@ export default class Index extends wepy.page {
       }
     });
       
+  }
+
+  // 根据分类选择中的id筛选出对应的商品
+  getClassfiyProduce(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
+      data: {
+        'classifyId': that.classifyId
+      }, //请求的参数",
+      method: 'get',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {
+        console.log(res)
+        that.classifyProduce = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
   }
 }
 </script>

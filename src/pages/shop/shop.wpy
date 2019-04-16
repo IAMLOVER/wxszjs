@@ -137,7 +137,7 @@ page{
         width: 122rpx;
         height: 48rpx;
       }
-      }
+}
 
 </style>
 <template>
@@ -145,8 +145,8 @@ page{
     <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" placeholder="搜你想要" placeholder-style="color:#F25664"/>
-            <image src="../../images/index/search02.png"/>
+            <input type="text" placeholder="搜你想要" placeholder-style="color:#959595" @tap="navSearch"/>
+            <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
     <!-- 店铺分类选择 -->
@@ -156,11 +156,11 @@ page{
             <view>
               <view class="view new-item {{newSelect?'active':''}}" @tap="choseNew">
               <text>最新</text>
-              <image src="../../images/index/new.png"/>
+              <image src="{{imagePath+'new.png'}}" wx:if="{{imagePath}}"/>
             </view>
             </view>
              <view wx:for-items="{{classArr}}" wx:key="index">
-                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" @tap='goIndex'>{{item}}</view>
+                <view class="view {{index==idx?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" @tap='getShopById'>{{item.title}}</view>
               </view>
            </view>
         </scroll-view>
@@ -168,21 +168,19 @@ page{
 
       <!-- 店铺列表 -->
   <view class="store-items">
-    <navigator url="./shopDetail" class="item">
+    <navigator url="./shopDetail?id={{item.id}}" class="item" wx:for="{{shopArr}}" wx:for-item="item" wx:key="{{index}}">
     <view class="item-title">
       <view class="item-detail">
-        <image src="../../images/index/timg.png" class="logo"/>
-        <text>PUMA凌美官方旗舰店</text>
+        <image src="{{item.logo?item.logo:'../../images/index/timg.png'}}" class="logo"/>
+        <text>{{item.name}}</text>
       </view>
       <view class="button-wrapper">
         <view class="rightNow">进店逛逛</view>
-          <image class="button" src="../../images/index/button.png"/>
+          <image class="button" src="{{imagePath+'button.png'}}" wx:if="{{imagePath}}"/>
        </view>
       </view>
     <view class="item-images">
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
-      <image src="../../images/index/timg.png"/>
+      <image src="{{goods.cover}}" mode="aspectFill" lazyload wx:for="{{item.goods}}" wx:key="{{index}}" wx:for-item="goods"/>
     </view>
     </navigator>
   </view>
@@ -192,27 +190,85 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'; 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '店铺',
     navigationBarBackgroundColor: '#EB4D4E',
     navigationBarTextStyle: 'white'
   };
-  onLoad() {}
+  onLoad() {
+    this.getShopClassfiy()
+    this.getShop()
+  }
   data = {
-    classArr: ['批发零售', '日常百货', '水果生鲜', '医疗器械'],
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    classArr: [],
     idx:-1,
-    newSelect:true
+    newSelect:true,
+    classifyId:'',
+    shopArr:{}
   };
   methods = {
-    goIndex(e){
-      this.idx = e.currentTarget.dataset.index;
-      this.newSelect = false;
+    getShopById(e){
+      this.idx = e.currentTarget.dataset.index
+      this.newSelect = false
+      this.classifyId = e.currentTarget.dataset.id
+      this.getShop()
     },
     choseNew(){
-      this.newSelect = true;
-      this.idx = -1;
-    }
+      this.newSelect = true
+      this.idx = -1
+    },
+    navSearch() {
+      this.$navigate({url: '../search/search'})
+    },
   };
+  // 获取店铺的类别
+  getShopClassfiy(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/storeClassify/list',
+      method: 'post',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.classArr = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  // 根据类别id获取店铺
+  getShop(){
+    wx.showLoading({
+      title: '加载中', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/search',
+      data: {
+        'classifyId': that.classifyId
+      },
+      method: 'post',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.shopArr = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
+    
+  }
 }
 </script>

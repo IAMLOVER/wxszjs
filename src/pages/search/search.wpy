@@ -223,7 +223,7 @@ page{
   <view class="search-wrapper">
     <view class="search">
       <input type="text" placeholder="搜你想要" bindinput="getValue" placeholder-style="color:#959595" bindfocus="navSearch"/>
-     <image src="../../images/index/search02.png"/>
+     <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
     </view>
     <view class="search-btn" @tap="searchResult">搜索</view>
   </view>
@@ -238,7 +238,7 @@ page{
 
   <!-- 商品列表 -->
   <view class="produce-items" wx:if="{{showProduce}}">
-    <view class="item" wx:for="{{produceArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
+    <view class="item" wx:for="{{produceArr}}" wx:key="index"  wx:for-item="item" data-index="{{item.id}}" data-type="{{item.activityType}}" @tap="goDetails">
       <view class="item-left">
         <image src="{{item.cover}}" lazyload mode="aspectFill"/>
       </view>
@@ -333,6 +333,15 @@ export default class Index extends wepy.page {
     },
     getValue(e){
       this.seachValue  = e.detail.value;
+    },
+    goDetails(e){
+      if(e.currentTarget.dataset.type == 0){
+        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 1){
+        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 2){
+        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+      }
     }
   };
   // 获取商品搜索结果

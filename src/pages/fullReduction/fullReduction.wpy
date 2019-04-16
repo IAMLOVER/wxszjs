@@ -3,10 +3,10 @@ page{
   background-color:#F7DCFB ;
 }
 .search-wrapper {
-  // position: fixed;
-  // top: 30rpx;
-  // z-index: 1;
-  // width: 100%;
+  position: fixed;
+  top: 0rpx;
+  z-index: 1;
+  width: 100%;
   background-color: #fff;
   padding: 14rpx 0rpx;
   .search {
@@ -32,7 +32,7 @@ page{
   }
 }
 .type-classfiy {
-  // padding-top: 110rpx;
+  margin-top: 92rpx;
   background-color: #fff;
   border-top: 2rpx solid #d5d5d5;
 }
@@ -137,15 +137,15 @@ page{
      <view class="search-wrapper">
         <view class="search">
             <input type="text" placeholder="搜你想要" placeholder-style="color:#959595"/>
-            <image src="../../images/index/search02.png"/>
+            <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
     <!-- 满减分类选择 -->
       <view class="type-classfiy">
         <scroll-view scroll-x="true">
           <view class="scroll-x">
-             <view wx:for-items="{{typeArr}}" wx:key="index" class="view-box">
-                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" @tap='goIndex'>{{item}}</view>
+             <view wx:for="{{typeArr}}" wx:for-item="item" data-id = "{{item.id}}" wx:key="{{index}}" class="view-box">
+                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" @tap='goIndex'>满{{item.standard}}减{{item.privilege}}</view>
               </view>
            </view>
         </scroll-view>
@@ -176,20 +176,41 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '大满减'
   };
   onLoad() {
+    this.getType()
   }
   data = {
-    typeArr:['满199减20','满199减20','满199减20','满199减20'],
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    typeArr:[],
     idx:0
   };
   methods = {
     goIndex(e){
-      this.idx = e.currentTarget.dataset.index;
+      this.idx = e.currentTarget.dataset.index
     },
   };  
+  // 获取满减类别
+  getType() {
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/couponActivity/list', 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.typeArr = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

@@ -263,6 +263,10 @@ export default class Index extends wepy.page {
           that.companyInfo = res.data.data
           that.companyInfo.updateTime = time.formatTime(that.companyInfo.updateTime,'Y年M月D日')
           that.$apply()
+          wx.setStorage({
+            key: 'companyName',
+            data: that.companyInfo.companyName,
+          });
         }
       },
       fail: () => {},
