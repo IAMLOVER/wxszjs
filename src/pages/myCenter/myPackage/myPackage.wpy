@@ -112,7 +112,7 @@ page{
     <!-- 我的收入 -->
     <view class="income">
       <view class="tip">我的收入(元)</view>
-      <view class="my-money">23,457.00</view>
+      <view class="my-money">{{myInCome}}</view>
       <view class="btn">提现</view>
     </view>
 
@@ -175,10 +175,53 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '我的钱包'
   };
   onLoad() {
+    this.getMyIncome()
+    this.getMyRecords()
   }
   data = {
-    imagePath:path.path.imagePath
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    myInCome:''
   };
   methods = {};  
+
+  // 我的收入接口
+  getMyIncome(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/balance/queryuserbalance', 
+      data: {
+        'userid':that.$parent.globalData.userId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        that.myInCome = res.data.data.balance
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  // 我的交易记录
+  getMyRecords(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/balance/usercashlog',
+      data: {
+        'userid':that.$parent.globalData.userId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

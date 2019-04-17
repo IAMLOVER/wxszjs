@@ -5,14 +5,11 @@
   .header {
     height: 200rpx;
     width: 100%;
-    background-image: linear-gradient(
-      -180deg,
-      #f25664 4%,
-      rgba(240, 88, 109, 0.5) 49%,
-      rgba(255, 255, 255, 0) 85%
-    );
+    background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg');
+    background-size: 750rpx 200rpx;
     display: flex;
     padding: 42rpx 0 0 40rpx;
+    box-sizing: border-box;
     .header-icon {
       height: 120rpx;
       width: 120rpx;
@@ -75,7 +72,7 @@
     }
   }
   .top-wrapper {
-    height: 360rpx;
+    height: 320rpx;
     width: 690rpx;
     margin: 24rpx auto auto auto;
     background: white;
@@ -304,12 +301,6 @@
           width:384rpx;
       }
     }
-    .no-more {
-      color: #b5b5b5;
-      font-size: 24rpx;
-      margin: 40rpx 0;
-      text-align: center;
-    }
   .is-top {
     padding-top: 88rpx;
   }
@@ -336,44 +327,51 @@
     }
   }
 }
+.navigator-hover{
+  opacity: 1;
+}
+.no-more {
+      color: #b5b5b5;
+      font-size: 24rpx;
+      margin: 40rpx 0;
+      text-align: center;
+}
 </style>
 <template>
     <view class="container">
-        <view class="header">
-            <image src="../../../images/index/timg.png" class="header-icon"/>
+        <navigator url="../../shop/company?storeId={{storeId}}" class="header">
+            <image src="{{storeLogo?storeLogo:'../../../images/index/timg.png'}}" class="header-icon"/>
             <view class="header-text">
                 <view class="shop-name">
-                    <text>全棉时代神州自营店</text>
-                    <view class="more">
-                        <image src="../../assets/images/white-more.png"/>
-                    </view>
+                    <text>{{storeName}}</text>
+                        <image src="{{imagePath+'storeD.png'}}" wx:if="{{imagePath}}" style="width:32rpx;height:32rpx;margin-left:20rpx;"/>
                 </view>
                 <view style="font-size:24rpx;color:#F25664;margin-top:16rpx">
-                    <text>总浏览量：456123</text>
-                    <text>总成交额：112348</text>
+                    <text>总浏览量：{{storePromote}}</text>
+                    <text>总成交额：{{storeTurnover}}</text>
                 </view>
             </view>
-        </view>
+        </navigator>
         <view class="hot">
             **5349查看了你的店铺
             <text class="more">更多</text>
         </view>
         <view class="top">成交量Top3</view>
         <view class="top-wrapper">
-            <view class="top-list" wx:for="{{3}}" wx:key="{{key}}">
-                <image src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1438931843,1833293181&fm=58&bpow=400&bpoh=284" />
-                <view style="">全棉时代全棉宝宝专用毛巾</view>
-                <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
-                <text class="purchases">345人购买</text>
+            <view class="top-list" wx:for="{{topGoods.saleTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
+                <image src="{{item.cover}}" mode="aspectFill"/>
+                <view style="">{{item.title}}</view>
+                <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
+                <text class="purchases">345人购买</text> -->
             </view>
         </view>
         <view class="top">浏览量Top3</view>
         <view class="top-wrapper">
-            <view class="top-list" wx:for="{{3}}" wx:key="{{key}}">
-                <image src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1438931843,1833293181&fm=58&bpow=400&bpoh=284" />
-                <view style="">全棉时代全棉宝宝专用毛巾</view>
-                <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
-                <text class="purchases">345人购买</text>
+            <view class="top-list" wx:for="{{topGoods.visitTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
+                <image src="{{item.cover}}" mode="aspectFill"/>
+                <view style="">{{item.title}}</view>
+                <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
+                <text class="purchases">345人购买</text> -->
             </view>
         </view>
         <view class="tab {{isTop?'tab-is-top':''}}">
@@ -387,54 +385,54 @@
                 <view class="tab-text">{{item}}</view>
             </view>
         </view>
-        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==0&&count>0}}">
-            <view class="goods-list" wx:for="{{count}}" wx:key="{{key}}">
-                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="goods-pic"/>
-                <text class="name">雅诗兰黛时光修复眼霜眼部精华抗皱去雅诗兰黛时光修复眼霜眼部精华抗皱去</text>
-                <text class="price">￥350</text>
-                <view class="active">满188减200</view>
-            </view>
+        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==0&&reduceArr.length>0}}">
+            <navigator url="../../fullReduction/fullProduceDetail?id={{item.id}}" class="goods-list" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+                <image src="{{item.cover}}" mode="aspectFill" lazyload class="goods-pic"/>
+                <text class="name">{{item.title}}</text>
+                <text class="price">￥{{item.minPrice}}</text>
+                <view class="active">满{{item.standard}}减{{item.privilege}}</view>
+            </navigator>
         </view>
-        <view class="mission-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==1&&count>0}}">
-            <view class="mission-list" wx:for="{{count}}" wx:key="{{key}}">
-                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="image"/>
+        <view class="mission-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==1&&taskArr.length>0}}">
+            <navigator url="../../taskGoods/taskGoods?id={{item.id}}" class="mission-list" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+                <image src="{{item.cover}}" mode="aspectFill" lazyload class="image"/>
                 <view class="text">
-                    <view class="name">婴儿被子纯棉春秋夏冬四季通用儿童棉被</view>
-                    <view class="commission">佣金：1%~5%</view>
+                    <view class="name">{{item.title}}</view>
+                    <view class="commission"> 佣金：{{item.minPercent}}%-{{item.maxPercent}}%</view>
                     <view class="hot-count">
-                        <image src="https://pictest.sqplus.cn/szjs/user/images/index/hot01.png"/>
-                        <text>热度：18664</text>
+                        <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
+                        <text>热度：{{item.visitNum}}</text>
                     </view>
-                    <view class="accept-count">已有30人领取</view>
+                    <view class="accept-count">已经有{{item.receivedNum}}人领取</view>
                 </view>
-            </view>
+            </navigator>
             <text class="no-more">没有更多啦</text>
         </view>
-        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==2&&count>0}}" >
-            <view class="goods-list" wx:for="{{count}}" wx:key="{{key}}">
-                <view class="active-ar">满减</view>
-                <view class="active-mission">任务</view>
-                <image src="https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/861463858486a644132493edab5aee7b_121_121.jpg" class="goods-pic"/>
-                <text class="name">雅诗兰黛时光修复眼霜眼部精华抗皱去雅诗兰黛时光修复眼霜眼部精华抗皱去</text>
-                <text class="price">￥350</text>
-                <view class="active">满188减200</view>
+        <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==2&&newArr.length>0}}" >
+            <view class="goods-list" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
+                <view class="active-ar" wx:if="{{item.activityType == 2}}">满减</view>
+                <view class="active-mission" wx:if="{{item.activityType == 1}}">任务</view>
+                <image src="{{item.cover}}" mode="aspectFill" lazy-load class="goods-pic"/>
+                <text class="name">{{item.title}}</text>
+                <text class="price">￥{{item.minPrice}}</text>
+                <view class="active">{{item.saleNum}}人购买</view>
             </view>
         </view>
 
-        <view class="empty-wrapper" wx:if="{{count==0}}">
-            <image src="https://pictest.sqplus.cn/szjs/user/images/index/null.png"/>
+        <view class="empty-wrapper" wx:if="{{empty}}">
+            <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
             <view>暂无好物</view>
             <view>点击更多店铺管理上传好物吧</view>
         </view>
         <view class="footer">
-            <view class="more">更多店铺管理</view>
+            <view class="more" @tap="moreManagement">更多店铺管理</view>
         </view>
     </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-
+import path from '../../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的店铺',
@@ -442,27 +440,199 @@ export default class Index extends wepy.page {
     navigationBarTextStyle: 'white'
   };
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    empty:false,
+    storeId:'',
+    storeName:'',
+    storeLogo:'',
+    storePromote:'',
+    storeTurnover:'',
+    topGoods:{},
     tabLists: ['最新满减', '最新任务', '最新单品'],
+    reduceArr:{},
+    taskArr:{},
+    newArr:{},
     nowIndex: 0,
     isTop: false,
-    count:0
+    count:0,
+    userId:''
   };
   methods = {
     chooseTab(index) {
       this.nowIndex = index;
+      if(this.nowIndex == 0){
+        this.getReduceProduce()
+      }else if(this.nowIndex == 1){
+        this.getTaskProduce()
+      }else if(this.nowIndex == 2){
+        this.getNewProduce()
+      }
     },
     onPageScroll(e){
         let scroll = e.scrollTop
-        if(scroll>=625){
+        if(scroll>=565){
             this.isTop = true;
         }else{
             this.isTop = false
         }
+    },
+    moreManagement(){
+      this.$navigate({url:'./myShopManagement'})
+    },
+    goDetails(e){
+      if(e.currentTarget.dataset.type == 0){
+        this.$navigate('../../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 1){
+        this.$navigate('../../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 2){
+        this.$navigate('../../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+      }
     }
   };
-  onShow() {}
   onLoad() {
-    console.log('onLoad');
+    this.userId = this.$parent.globalData.userId
+    this.getStoreInfo()
+  }
+  // 获取我的店铺的简要信息
+   getStoreInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/myStore', 
+      data: {
+        'userid':that.userId
+      },
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        // console.log(res)
+        that.storeId = res.data.data.id
+        that.storeName = res.data.data.name
+        that.storeLogo = res.data.data.logo
+        that.storePromote = res.data.data.promote
+        that.storeTurnover = res.data.data.turnover
+        that.$apply()
+        that.getTopGoods()
+        that.getReduceProduce()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  // 获取成交量
+  getTopGoods(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/myStore/topGoods',
+      data: {
+        storeId:that.storeId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        that.topGoods = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+   // 店铺内的满减商品
+  getReduceProduce(){
+    var that = this
+     wx.showLoading({
+      title: '加载中',
+      mask: true,
+      success: res => {}
+    });
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/store/coupons', 
+      data: {
+        'storeId':that.storeId,
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        that.reduceArr = res.data.data.content
+        if(that.reduceArr.length<=0){
+          that.empty = true
+        }else{
+          that.empty = false
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
+    
+  }
+
+  getTaskProduce(){
+    var that = this
+     wx.showLoading({
+      title: '加载中',
+      mask: true,
+      success: res => {}
+    });
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/store/targets', 
+      data: {
+        'storeId':that.storeId,
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        that.taskArr = res.data.data.content
+         if(that.taskArr.length<=0){
+          that.empty = true
+        }else{
+          that.empty = false
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+         wx.hideLoading();
+      }
+    });
+  }
+
+  getNewProduce(){
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+      mask: true,
+      success: res => {}
+    });
+    
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/store/all', 
+      data: {
+        'storeId':that.storeId,
+      }, 
+      method: 'get',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.newArr = res.data.data.content
+         if(that.newArr.length<=0){
+          that.empty = true
+        }else{
+          that.empty = false
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+         wx.hideLoading();
+      }
+    });
   }
 }
 </script>

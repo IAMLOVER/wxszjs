@@ -85,6 +85,8 @@ page{
     font-size: 32rpx;
     color: #222;
     padding-bottom: 10rpx;
+    height: 100rpx;
+    font-weight: 600;
   }
   .produce-tip{
       display: flex;
@@ -367,17 +369,156 @@ page{
     }
   }
 }
+.rule-shadow{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.3);
+  .content{
+    width: 656rpx;
+    height: 732rpx;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    margin-left: -328rpx;
+    background-image: url('https://img-blog.csdnimg.cn/20190409112030922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 40rpx;
+    box-sizing: border-box;
+  }
+  view{
+    font-size: 28rpx;
+    color: #666;
+    line-height: 50rpx;
+  }
+  .title{
+    font-size: 32rpx;
+    color: #222;
+    text-align: center;
+  }
+  image{
+    width: 56rpx;
+    height: 56rpx;
+    position: absolute;
+    left: 50%;
+    margin-left: -28rpx;
+    bottom: 20%;
+  }
+}
+.chose-task-shadow{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  .content{
+    width: 100%;
+    height: 474rpx;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 20rpx 20rpx 0px 0px;
+    .title{
+      display: flex;
+      height: 94rpx;
+      line-height: 94rpx;
+      justify-content: space-between;
+      padding: 0rpx 30rpx;
+      font-size: 28rpx;
+      color: #222;
+      border-bottom: 2rpx solid #F5F5F5;
+      image{
+        width: 36rpx;
+        height: 36rpx;
+        vertical-align: middle;
+      }
+    }
+    .btn{
+      width: 100%;
+      height: 100rpx;
+      text-align: center;
+      margin-top: 30rpx;
+      border-top:2rpx solid #F5F5F5;
+      padding-top: 4rpx;
+      position: absolute;
+      bottom: -10rpx;
+      text{
+       width: 690rpx;
+       height: 84rpx;
+       line-height: 84rpx;
+       text-align: center;
+       font-size: 32rpx;
+       color: #fff;
+       background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
+       border-radius: 42rpx;
+       margin: 0 auto;
+       display: inline-block;
+      }
+    }
+  }
+}
+.label-2 {
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: #959595;
+}
+.label-2__text {
+   display: flex;
+  justify-content: space-between;
+}
+
+.label-2__icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 32rpx;
+  height: 32rpx;
+  background:  #fff;
+  border-radius: 50%;
+  border: 2rpx solid #B5b5b5;
+  box-sizing: border-box;
+}
+
+.label-2__icon-checked {
+  position: absolute;
+  left: 6rpx;
+  top: 6rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #F25664;;
+  border-radius: 50%;
+}
+
+.label-4_text {
+  text-align: center;
+  margin-top: 30rpx;
+}
+button[plain]{
+  border-color: #fff !important;  
+  line-height: 1 !important;
+  font-size: 24rpx !important;
+  padding: 0 !important;
+  color: #959595
+}
 </style>
 <template>
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <image src="../../images/index/bg_02.png"/>
+      <image src="{{produceInfo.cover}}"/>
       <view class="tip">
-        <image src="../../images/index/laba.png"/>
+        <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
           <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**7626也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**6201也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
     </view>
@@ -385,28 +526,29 @@ page{
     <view class="task">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">9.99-1200</text>
-        <text class="old">9.99</text>
+        <text class="now">{{minPrice*0.01}}-{{maxPrice*0.01}}</text>
+        <!-- <text class="old">9.99</text> -->
       </view>
     </view>
 
     <!-- 商品名称 -->
     <view class="main">
       <view class="produce-name">
-        新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
-        礼盒装 顺丰空运
+        {{produceInfo.title}}
       </view>
       <view class="produce-tip">
         <view class="limit">
           邮费：包邮
         </view>
         <view class="limit" style="flex:3;">
-            2678人购买
+            {{produceInfo.saleNum}}人购买
         </view>
       </view>
       <view class="share">
-        <image src="../../images/index/share02.png"/>
-        <text>分享</text>
+        <button open-type="share" plain="true">
+          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+          <text>分享</text>
+        </button>
       </view>
     </view>
 
@@ -416,24 +558,16 @@ page{
         <view class="tip">
           任务榜
         </view>
-        <view class="rule">
+        <view class="rule" @tap="showRule">
           规则
-          <image src="../../images/index/more01.png"/>
+          <image src="{{imagePath+'more01.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
-      <view class="tip">在4个小时内成功推荐者，可获得相应佣金<image src="../../images/index/gold.png"/></view>
+      <view class="tip">在4个小时内成功推荐者，可获得相应佣金<image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}"/></view>
       <view class="task-items">
-        <view class="item">
-          <view class="item-left">任务1：</view>
-          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
-        </view>
-         <view class="item">
-          <view class="item-left">任务1：</view>
-          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
-        </view>
-         <view class="item">
-          <view class="item-left">任务1：</view>
-          <view class="item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
+        <view class="item" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+          <view class="item-left">任务{{index+1}}：</view>
+          <view class="item-right">推荐<text>{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text>{{item.percent}}</text>%</view>
         </view>
       </view>
     </view>
@@ -459,9 +593,9 @@ page{
         <image src="../../images/index/store02.png"/>
         <view>店铺</view>
       </view>
-      <view class="task-btn" @tap="openShadow">
-        <view>立即购买</view>
-        <view>领取任务</view>
+      <view class="task-btn">
+        <view @tap="openShadow">立即购买</view>
+        <view @tap="openTaskChoseShadow">领取任务</view>
       </view>
     </view>
 
@@ -518,19 +652,77 @@ page{
       <image src="../../images/index/close02@2x.png" class="close-shadow" @tap="closeShadow"/>
      </view>
    </view>
+
+
+    <!-- 规则的弹出框 -->
+    <view class="rule-shadow" wx:if="{{showRule}}">
+      <view class="content">
+        <view class="title">拼团任务规则</view>
+        <view>1、选择并领取任务；</view>
+        <view>2、将商品链接分享给好友，邀请好友购买链接商品；</view>
+        <view>3、好友提交订单并成功支付，即视为参团成功；</view>
+        <view>4、在任务有效时间内成功推荐购买的人数达到任务中要求的人数，即视为任务成功；</view>
+        <view>5、任务完成后，您获得的佣金将发至您的钱包，可实时提现（未完成任务则无法获得相应佣金奖励）；</view>
+        <view>6、用户可在“神州集市小程序”-“我的”，查看自己的任务。</view>
+      </view>
+      <image src="../../images/index/close.png" @tap="closeRule"/>
+    </view>
+
+    <!-- 选择任务弹出框 -->
+    <view class="chose-task-shadow" wx:if="{{showChoseTask}}">
+      <view class="content">
+        <view class="title">
+          <view>选择任务</view>
+          <view><image src="../../images/index/close02@2x.png" @tap="closeTaskChoseShadow"/></view>
+        </view>
+        <view class="chose-task-items">
+            <radio-group class="group" bindchange="radioChange">
+              <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
+                 <label class="label-2__text" for="{{item.id}}">
+                  <text>推荐<text style="color:#F25664">{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                  <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                     <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                 </view>
+                 </label>
+               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
+              </view>
+           </radio-group>
+        </view>
+        <!-- 领取任务按钮 -->
+        <view class="btn" @tap="receiveTask">
+          <text>领取任务</text>
+        </view>
+      </view>
+    </view>
+
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'
+import time from '../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '商品详情'
   };
-  onLoad() {
+  onLoad(options) {
+    this.produceId = options.id
+    this.getProduceInfo()
   }
   data = {
-    showShadow: false
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    showShadow: false,
+    produceId:'',
+    produceInfo:{},
+    maxPrice:'',
+    minPrice:'',
+    taskItems:{},
+    storeId:'',
+    choseTaskId:'',
+    showChoseTask:false,
+    showRule:false
   };
   methods = {
     openShadow() {
@@ -538,7 +730,96 @@ export default class Index extends wepy.page {
     },
     closeShadow() {
       this.showShadow = false;
+    },
+    openTaskChoseShadow(){
+      this.showChoseTask = true
+    },
+    closeTaskChoseShadow(){
+      this.showChoseTask = false
+    },
+    showRule(){
+      this.showRule = true
+    },
+    closeRule(){
+      this.showRule = false
     }
-  };  
+  }; 
+  // 获取商品详情
+  getProduceInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
+      method: 'get',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data.goods
+        that.minPrice = res.data.data.minPrice
+        that.maxPrice = res.data.data.maxPrice
+        that.taskItems = res.data.data.targetList
+        for(var item in that.taskItems){
+          that.taskItems[item].checked = false
+        }
+        // 店铺id
+        that.storeId = res.data.data.goods.storeId
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  };
+   radioChange(e) {
+     const checked = e.detail.value
+     const changed = {}
+      for (let i = 0; i < this.data.taskItems.length; i++) {
+       if (checked.indexOf(this.data.taskItems[i].id) !== -1) {
+         changed['taskItems[' + i + '].checked'] = true
+        } else {
+         changed['taskItems[' + i + '].checked'] = false
+       }
+     }
+     this.setData(changed)
+     this.choseTaskId = e.detail.value
+  }
+  // 领取任务
+  receiveTask(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/usergettarget', 
+      data: {
+        'userid':that.$parent.globalData.userId,
+        'targetid':that.choseTaskId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+       if(res.data.code==1000){
+        wx.showToast({
+          title: '领取成功', 
+          icon: 'success', 
+          duration: 2000, 
+          mask: true, 
+          success: res => {
+            that.$navigate({url:'../secKill/choseTaskSuccess'})
+          }
+        });
+        that.showChoseTask = false
+        that.$apply()
+       }else{
+          wx.showToast({
+          title: '领取失败', 
+          icon: 'none', 
+          duration: 2000, 
+          mask: true,
+          success: res => {}
+        });
+       }
+      },
+      fail: () => {
+      },
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

@@ -330,7 +330,7 @@ page {
     <!--搜索框-->
     <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
     <view class="search">
-      <input type="text" placeholder="搜你想要" placeholder-style="color:#ffffff" @tap="navSearch"/>
+      <input type="text" placeholder="搜你想要" placeholder-style="color:#959595" @tap="navSearch"/>
      <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
     </view>
   </view>
@@ -341,15 +341,14 @@ page {
   autoplay="{{autoplay}}"
   interval="{{interval}}"
   duration="{{duration}}">
-  <repeat for="{{swiperimgUrls}}">
+  <repeat for="{{swiperArr}}">
   <navigator url="">
    <swiper-item>
-      <image src="{{item.item}}" class="slide-image"/>
+      <image src="{{item.picUrl}}" class="slide-image"  mode="aspectFill"/>
     </swiper-item>
   </navigator>
   </repeat>
 </swiper>
-  
 </view>
 
   <!--快秒杀,大满减-->
@@ -429,27 +428,27 @@ page {
       </view>
     </view>
     <view class="produce-items">
-       <view class="produce-item">
+       <view class="produce-item"  @tap="goDetails" wx:for="{{newProduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}"  data-type="{{item.activityType}}">
          <view class="produce-info">
             <view class="produce-img">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{item.cover}}" mode="aspectFill" lazy-load/>
          </view>
          <view class="produce-name">
-          春雨蜂蜜滋养面膜11111111
+          {{item.title}}
           </view>
         <view class="produce-money">
             <text class="money-type">￥</text>
-            <text class="number">100</text>
+            <text class="number">{{item.minPrice*0.01}}</text>
           </view>
         </view>
         <!-- 商品销售类型(满减，任务) -->
-        <view class="produce-skill">
+        <view class="produce-skill" wx:if="{{item.activityType == 2}}">
            <view class="tip">
              <image src="../../images/index/type01.png" />
              <view>满减</view>
            </view>
         </view>
-          <view class="produce-skill">
+          <view class="produce-skill" wx:if="{{item.activityType == 1}}">
            <view class="tip">
              <image src="../../images/index/type02.png" />
              <view>任务</view>
@@ -480,22 +479,16 @@ export default class Index extends wepy.page {
   onLoad() {
     // 新店推荐
     this.getRecommend()
+    //轮播图
+    this.getSwiper()
+    this.getNewProduce()
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
-    swiperimgUrls: [
-      {
-        item: '../../images/index/timg.png'
-      },
-      {
-        item: '../../images/index/timg.png'
-      },
-      {
-        item: '../../images/index/timg.png'
-      }
-    ],
+    swiperArr:{},
     recommendArr:{},
+    newProduceArr:{},
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -522,6 +515,15 @@ export default class Index extends wepy.page {
     },
     moreShop(){
       this.$switch('../shop/shop')
+    },
+    goDetails(e){
+      if(e.currentTarget.dataset.type == 0){
+        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 1){
+        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+      }else if(e.currentTarget.dataset.type == 2){
+        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+      }
     }
 };
 
@@ -533,6 +535,41 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         that.recommendArr = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  //首页轮播的商品图
+  getSwiper(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/banner/home/list', 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.swiperArr = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+  // 获取最新单品
+  getNewProduce(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/search', 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.newProduceArr = res.data.data.content
         that.$apply()
       },
       fail: () => {},

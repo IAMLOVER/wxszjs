@@ -141,7 +141,7 @@
       <text class="name" style="color:#fff">{{userName}}</text>
       <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==1}}" class="head-type"/>
       <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'diamonds.png'}}" wx:if="{{imagePath && identityType==2}}" class="head-type"/>
-      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'low.png'}}" wx:if="{{imagePath && identityType==0}}" class="head-type"/>
+      <image style="width:106rpx;height:44rpx;bottom:104rpx;right:320rpx" src="{{imagePath+'low.png'}}" wx:if="{{imagePath && identityType==0}}" class="head-type"/>
       <image style="width:104rpx;height:46rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath && identityType==3}}" class="head-type"/>
     </view>
     <view class="my-order">

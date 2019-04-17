@@ -129,7 +129,7 @@ export default class Index extends wepy.page {
                 dataType: 'json',
                 success: res => {
                   console.log(res)
-                  that.$parent.globalData.useId = res.data.data.userid
+                  that.$parent.globalData.userId = res.data.data.userid
                   console.log(res.data.data.newcoupon)
                   console.log(JSON.stringify(res.data.data.newcoupon))
                   wx.setStorage({
