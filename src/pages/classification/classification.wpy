@@ -192,7 +192,7 @@ page{
                     <text>{{item.minPrice}}</text>
                   </view>
                   <view class="how-many">
-                    {{item.saleNum}}人购买
+                    {{item.buyNum}}人购买
                   </view>
                 </view>
               </view>

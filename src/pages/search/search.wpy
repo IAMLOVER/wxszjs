@@ -336,11 +336,11 @@ export default class Index extends wepy.page {
     },
     goDetails(e){
       if(e.currentTarget.dataset.type == 0){
-        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
+        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.index})
       }else if(e.currentTarget.dataset.type == 1){
-        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.index})
       }else if(e.currentTarget.dataset.type == 2){
-        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.index})
       }
     }
   };

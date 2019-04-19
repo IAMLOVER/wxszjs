@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -84,6 +84,27 @@
 					"id": -1,
 					"name": "我的店铺",
 					"pathName": "pages/myCenter/myShop/myShop",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收获地址",
+					"pathName": "pages/address/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我i的钱包",
+					"pathName": "pages/myCenter/myPackage/myPackage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/myCenter/myOrder/myOrder",
 					"query": "",
 					"scene": null
 				}

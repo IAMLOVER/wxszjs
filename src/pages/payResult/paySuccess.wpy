@@ -15,7 +15,7 @@ page{
    .btns{
      display: flex;
      margin-top: 40rpx;
-     view{
+     navigator,view{
        width: 176rpx;
        height: 68rpx;
        font-size: 28rpx;
@@ -71,6 +71,8 @@ page{
             text-overflow: ellipsis;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            height: 90rpx;
+            font-weight: 600;
           }
           .list-type{
             color: #959595;
@@ -102,16 +104,16 @@ page{
   <view class="page">
     <!-- 支付成功 -->
     <view class="success">
-      <image src="../../images/index/success.png"/>
+      <image src="{{imagePath+'success.png'}}" wx:if="{{imagePath}}"/>
       <view>支付成功</view>
       <view style="font-size:24rpx">尽快为你安排发货</view>
       <view class="btns">
-        <view class="go-index">
+        <view class="go-index" @tap="goIndex">
           返回首页
         </view>
-        <view class="order-detail">
+        <navigator class="order-detail">
           订单详情
-        </view>
+        </navigator>
       </view>
     </view>
 
@@ -120,27 +122,14 @@ page{
     <view class="content-lists">
       <view class="list">
             <view class="list-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{produceInfo.cover}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
-              <view class="list-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
-              <view class="list-type">规格：20kg</view>
+              <view class="list-name">{{produceInfo.goodsName}}{{produceInfo.goodsName}}{{produceInfo.goodsName}}</view>
+              <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
-                <view class="price">￥2.99</view>
-                <view class="count">数量：1</view>
-              </view>
-            </view>
-      </view>
-       <view class="list">
-            <view class="list-left">
-              <image src="../../images/index/timg.png"/>
-            </view>
-            <view class="list-right">
-              <view class="list-name">新庄新小莓红红颜奶新庄新小莓红颜奶颜奶</view>
-              <view class="list-type">规格：20kg</view>
-              <view class="list-text">
-                <view class="price">￥2.99</view>
-                <view class="count">数量：1</view>
+                <view class="price">￥{{produceInfo.salPrice*0.01}}</view>
+                <view class="count">数量：{{pay.count}}</view>
               </view>
             </view>
       </view>
@@ -151,6 +140,7 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '',
@@ -158,9 +148,40 @@ export default class Index extends wepy.page {
     navigationBarTextStyle: 'white'
   };
   onLoad() {
+    this.pay = wx.getStorageSync('pay')
+    this.getOrderInfo()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    pay:{},
+    produceInfo:{}
   };
-  methods = {};  
+  methods = {
+     // 返回首页
+    goIndex(){
+      this.$switch('../index/index')
+    }
+  };  
+   // 根据商品的规格id筛选出来订单里的商品
+  getOrderInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath +  '/szmktstore/goodsInfo/classType',
+      data: {
+        'classId': that.pay.classid,
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

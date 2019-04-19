@@ -1,0 +1,297 @@
+<style lang="less">
+.container{
+    min-height: 100vh;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .confirm-wrapper{
+        position: absolute;
+        height:100vh;
+        width:100vw;
+        left:0;
+        bottom:0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .confirm-window{
+            height:292rpx;
+            width:540rpx;
+            background: #fcfcfc;
+            border-radius: 20rpx;
+            .question{
+                height:203rpx;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size:32rpx;
+            }
+            .button-wrapper{
+                height:87rpx;
+                width:100%;
+                border:1rpx solid rgba(77,77,77,0.1);
+                font-size:32rpx;
+                display: flex;
+                align-items: center;
+                .cancel{
+                    color:#3C96FF;
+                    flex:1;
+                    border-right:1rpx solid rgba(77,77,77,0.1);
+                    text-align: center;
+                }
+                .confirm{
+                    color:#267FFE;
+                    font-weight: bold;
+                    flex:1;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .header{
+        height:180rpx;
+        background-image: linear-gradient(0deg, #F78486 0%, #EB4D4E 82%);
+        color:white;
+        font-size:32rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width:100vw;
+        position: fixed;
+        top:0;
+        image{
+            height:90rpx;
+            width:140rpx;
+            margin-left:140rpx;
+        }
+    }
+    .pink{
+        height:44rpx;
+        width:720rpx;
+        margin-top:210rpx;
+        background: #fcc5ca;
+        border-radius: 16rpx;
+        position:absolute;
+        z-index:0;
+    }
+    .info-wrapper{
+        background: white;
+        border-top:8rpx solid #ee4555;
+        width:690rpx;
+        height:224rpx;
+        margin-top: 236rpx;
+        z-index:1;
+        padding: 32rpx 0 0 40rpx;
+        box-sizing:border-box;
+        font-size: 28rpx;
+        position:relative;
+        .name{
+            font-size:32rpx;
+        }
+        .more{
+            height:16rpx;
+            width:10rpx;
+            position:absolute;
+            top:86rpx;
+            right:40rpx;
+        }
+        .left-circle{
+            height:40rpx;
+            width:40rpx;
+            position: absolute;
+            left:-15rpx;
+            bottom:-25rpx;
+            background: #f2f2f2;
+            border-radius: 40rpx;
+        }
+        .right-circle{
+            height:40rpx;
+            width:40rpx;
+            position: absolute;
+            right:-15rpx;
+            bottom:-25rpx;
+            background: #f2f2f2;
+            border-radius: 40rpx;
+        }
+    }
+    .order-wrapper{
+        height:300rpx;
+        width:690rpx;
+        background: white;
+        margin-top:10rpx;
+        padding: 24rpx 20rpx 0 40rpx;
+        font-size: 28rpx;
+        box-sizing: border-box;
+        border-radius: 0px 0px 4px 4px;
+        .order-detail{
+            height:180rpx;
+            width:100%;
+            padding-bottom:30rpx;
+            margin-top: 30rpx;
+            display: flex;
+            .goods-pic{
+                height:180rpx;
+                width:180rpx;
+            }
+            .goods-text{
+                margin-left:20rpx;
+                flex:1;
+                .goods-name{
+                    font-size:28rpx;
+                    color:#222222;
+                }
+                .goods-style{
+                    margin-top:16rpx;
+                    font-size:24rpx;
+                    color:#959595;
+                }
+                .goods-price{
+                    color:#f25664;
+                    margin-top:32rpx;
+                    .price{
+                        font-size:32rpx;
+                    }
+                    .count{
+                        font-size:24rpx;
+                        margin-left:220rpx;
+                    }
+                }
+            }
+        }
+    }
+    .active-wrapper{
+        height:164rpx;
+        width:690rpx;
+        margin-top:10rpx;
+        background: white;
+        font-size:28rpx;
+        padding: 0 40rpx;
+        box-sizing:border-box;
+        border-radius: 8rpx;
+        view{
+            margin-top:10rpx;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .logistics-wrapper{
+        height:164rpx;
+        width:690rpx;
+        margin-top:10rpx;
+        background: white;
+        font-size:28rpx;
+        padding: 0 40rpx;
+        box-sizing:border-box;
+        border-radius: 8rpx;
+        color:#959595;
+        margin-bottom:120rpx;
+        view{
+            margin-top:10rpx;
+        }
+    }
+    .footer{
+        height:108rpx;
+        width:100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        font-size:32rpx;
+        position: fixed;
+        bottom:0;
+        .confirm{
+            background-image: linear-gradient(-45deg, #F25664 7%, #E176FF 100%);
+            border-radius: 22px;
+            width:216rpx;
+            height:84rpx;
+            color:white;
+            font-size:36rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+    }
+}
+</style>
+<template>
+  <view class="container">
+      <view class="confirm-wrapper" wx:if="{{isConfirm}}">
+          <view class="confirm-window">
+              <view class="question">是否确认收货？</view>
+              <view class="button-wrapper">
+                  <view class="cancel">取消</view>
+                  <view class="confirm">确认</view>
+              </view>
+          </view>
+      </view>
+      <view class="header">
+          <text class="">待收货</text>
+          <image src="https://pictest.sqplus.cn/szjs/user/images/index/car02.png"/>
+      </view>
+      <view class="pink"></view>
+      <view class="info-wrapper">
+          <view class="name">收件人：<text style="font-weight:bold">陈晓薇</text></view>
+          <view>18682436882</view>
+          <view>收货地址：广东省深圳市福田香蜜湖别墅</view>
+          <view>888号A单元1301</view>
+          <image src="../assets/images/more.png" class="more"/>
+          <view class="left-circle"></view>
+          <view class="right-circle"></view>
+      </view>
+      <view class="order-wrapper">
+          <text style="">订单内容</text>
+          <view class="order-detail"> 
+                <image class="goods-pic" src="https://pic.cnblogs.com/face/1093000/20170109103659.png" />
+                <view class="goods-text">
+                    <view class="goods-name">兰蔻真爱物业玫瑰香水发过优雅浪漫女士持久香氛正品</view>
+                    <view class="goods-style">规格：50ml</view>
+                    <view class="goods-price">
+                        <text class="price">￥750</text>
+                        <text class="count">数量：1</text>
+                    </view>
+                </view>
+            </view>
+      </view>
+      <view class="active-wrapper">
+          <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
+          <view><text>有无优惠券：</text><text>无</text></view>
+          <view><text>运费：</text><text>包邮</text></view>
+      </view>
+      <view class="logistics-wrapper">
+          <view>订单编号：DD584542255</view>
+          <view>订单时间：2019-2-30 23:45</view>
+          <view>快递单号：圆通 55682423335512</view>
+      </view>
+      <view class="footer">
+          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥700.00</text></text>
+          <view class="confirm" bindtap="confirm">确认收货</view>
+      </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单详情',
+    navigationBarBackgroundColor: '#EB4D4E',
+    navigationBarTextStyle: 'white'
+  };
+  data = {
+      isConfirm:false
+  };
+  methods= {
+      confirm(){
+          this.isConfirm = true
+      }
+  };
+  onShow() {
+  }
+  onLoad() {
+    console.log('onLoad');
+  }
+}
+</script>

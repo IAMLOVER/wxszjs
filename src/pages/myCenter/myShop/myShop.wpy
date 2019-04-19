@@ -415,7 +415,7 @@
                 <image src="{{item.cover}}" mode="aspectFill" lazy-load class="goods-pic"/>
                 <text class="name">{{item.title}}</text>
                 <text class="price">￥{{item.minPrice}}</text>
-                <view class="active">{{item.saleNum}}人购买</view>
+                <view class="active">{{item.buyNum}}人购买</view>
             </view>
         </view>
 

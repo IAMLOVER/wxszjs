@@ -64,7 +64,6 @@ page{
       top: 0;
       background-image: linear-gradient(-269deg, #FF9E51 0%, #FF624A 98%);
       border-radius: 26rpx;
-      width: 60%;
       height: 40rpx;
     }
     text{
@@ -81,6 +80,7 @@ page{
     display: flex;
     margin-top: 60rpx;
     .produce-left{
+      flex: 1;
       image{
         width: 180rpx;
         height: 180rpx;
@@ -89,9 +89,12 @@ page{
       }
     }
     .produce-right{
+      flex: 2;
       .produce-title{
         font-size: 32rpx;
         color: #222;
+        font-weight: 600;
+        height: 90rpx;
       }
       .produce-bottom{
         display: flex;
@@ -218,32 +221,32 @@ page{
     <view class="header">
       <view class="tip">距完成任务还剩</view>
       <view class="time-wrapper">
-        <view class="time">03:46:23</view>
+        <view class="time">{{overTime}}</view>
       </view>
     </view>
     <!-- 任务进度 -->
     <view class="main">
       <view class="main-title">
-        你已经完成了一半了呢，继续加油！
+        {{tip}}
       </view>
       <view class="main-count">
-        任务数100，已完成56
+        任务数{{taskInfo.targetNum}}，已完成{{taskInfo.inviteNum}}
       </view>
       <view class="progress-wrapper">
-        <view class="progress"></view>
+        <view class="progress" style="width:{{taskInfo.inviteNum/taskInfo.targetNum*100}}%"></view>
         <text style="left:15rpx">已完成</text>
-        <text style="color:#F25664">56%</text>
+        <text style="color:#F25664">{{taskInfo.inviteNum/taskInfo.targetNum*100}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">
-          <image src="../../../images/index/timg.png"/>
+          <image src="{{taskInfo.picUrl}}" mode="aspectFill"/>
         </view>
         <view class="produce-right">
           <view class="produce-title">
-            婴儿被子纯棉春秋夏四季通用儿童棉被
+            {{taskInfo.title}}
           </view>
           <view class="produce-bottom">
-            <view class="money-precent">佣金：8%</view>
+            <view class="money-precent">佣金：{{taskInfo.percent}}%</view>
             <view class="hot">
               <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
               <text style="color:#f25664">热度18664</text>
@@ -260,9 +263,9 @@ page{
         任务情况
       </view>
       <view class="situation-items">
-        <view class="item">
+        <view class="item" wx:for="{{groupContent}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
           <view class="item-left">
-              <view class="item-number">1.</view>
+              <view class="item-number">{{index+1}}.</view>
               <view class="item-image"><image wx:if="{{imagePath}}" src="{{imagePath+'default@3x.png'}}"/></view>
               <view class="item-info">
                 <view class="item-name">李瑞活</view>
@@ -270,7 +273,7 @@ page{
               </view>
           </view>
           <view class="item-counts">
-            购买数量：2
+            购买数量：{{item.buyNum}}
           </view>
         </view>
       </view>
@@ -287,15 +290,93 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import time from '../../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的任务'
   };
-  onLoad() {
+  onLoad(options) {
+    this.taskId = options.id
+    console.log(options)
+    this.getTaskDetails()
+    this.getGrounp()
+  }
+  onUnload(){
+    clearInterval(this.interval)
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    taskId:'',
+    taskInfo:'',
+    overTime:'00:00:00',
+    interval:'',
+    tip:'',
+    groupContent:[{
+      "id": 1,
+      "userId": 1000000021,
+      "heading": "1000000026_15552896899726SJHF.jpg",
+      "buyNum":100
+    }],
   };
   methods = {};  
+  // 获取任务详情
+  getTaskDetails(){
+     var that = this
+     that.taskInfo = wx.getStorageSync('myTaskArr')
+     console.log(that.taskInfo)
+    if(that.taskInfo.inviteNum/that.taskInfo.targetNum*100<50){
+      that.tip = '您已开团，快分享给好友!'
+    }else if(50<that.taskInfo.inviteNum/that.taskInfo.targetNum*100<100){
+      that.tip = '已经完成一半啦，继续加油!'
+    }else if( that.taskInfo.inviteNum/that.taskInfo.targetNum*100 == 100 ){
+      that.tip = '恭喜您！拼团成功，佣金将在24小时内发至您的账户!'
+    }
+     var blockingTime = (new Date(that.taskInfo.blockingTime).getTime())/1000
+     that.interval = setInterval(() => {
+        var currentTime = parseInt((new Date().getTime())/1000)
+        var Mytime = blockingTime - currentTime
+       if(Mytime>=1){
+          that.overTime = that.formatDuring(Mytime*1000)
+          that.$apply()
+       }else{
+         clearInterval(that.interval)
+       }
+     }, 1000);
+  }
+
+  formatDuring(mss) {
+       var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+       var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+       var seconds = (mss % (1000 * 60)) / 1000;
+       hours = hours < 10 ? ('0' + hours) : hours;
+       minutes = minutes < 10 ? ('0' + minutes) : minutes;
+       seconds = seconds < 10 && seconds >= 1 ? ('0' + seconds) : seconds;
+       return  hours + " :" + minutes + " :" + seconds;
+ }
+  // 获取任务完成情况
+  getGrounp(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/groupcontent', 
+      data: {
+        targetid: that.taskId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+ 
 }
+
+
+
+
 </script>

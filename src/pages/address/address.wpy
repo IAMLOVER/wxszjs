@@ -67,7 +67,7 @@ width: 100%;
         <view class="weui-label">收件人</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入收件人姓名" />
+        <input class="weui-input" placeholder="请输入收件人姓名" value="{{userName}}" bindinput="userNameInput"  />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -75,7 +75,7 @@ width: 100%;
         <view class="weui-label">手机号</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" type="number" placeholder="请输入手机号码"/>
+        <input class="weui-input" type="number" bindinput="userNumberInput" value="{{userNumber}}" placeholder="请输入手机号码"/>
       </view>
     </view>
     <view class="section">
@@ -90,13 +90,13 @@ width: 100%;
         <view class="weui-label">详细地址</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入详细地址"/>
+        <input class="weui-input" placeholder="请输入详细地址" value="{{detailAddress}}" bindinput="detailAddressInput"/>
       </view>
     </view>
 
     <!-- 确定按钮 -->
     <view class="btn-box">
-      <view class="btn active">
+      <view class="btn {{warn?'active':''}}" @tap="saveAddress">
         确定
       </view>
     </view>
@@ -111,15 +111,128 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '收货地址'
   };
   onLoad() {
+    this.userId = this.$parent.globalData.userId
+    console.log(this.$parent.globalData.userId)
+    this.getUserAddress()
   }
   data = {
     imagePath:path.path.imagePath,
-    region: ['广东省', '深圳市', '福田区']
+    apiPath:path.path.apiPath,
+    userId:'',
+    warn:false,
+    userName:'',
+    userNumber:'',
+    region: ['广东省', '深圳市', '福田区'],
+    detailAddress:'',
   };
-  methods = {};
+  methods = {
+    userNameInput(e){
+      this.userName = e.detail.value
+      if(this.userName != '' && this.userNumber != '' && this.detailAddress != ''){
+        this.warn = true
+      }else{
+        this.warn = false
+      }
+    },
+    userNumberInput(e){
+      this.userNumber = e.detail.value
+      if(this.userName != '' && this.userNumber != '' && this.detailAddress != ''){
+        this.warn = true
+      }else{
+        this.warn = false
+      }
+    },
+    detailAddressInput(e){
+      this.detailAddress = e.detail.value
+      if(this.userName != '' && this.userNumber != '' && this.detailAddress != ''){
+        this.warn = true
+      }else{
+        this.warn = false
+      }
+    },
+     // 保存用户地址
+     saveAddress(){
+        if(this.userName == '' || this.userNumber == '' || this.detailAddress == ''){
+           wx.showToast({
+           title: '请输入完整信息', 
+           icon: 'none',
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+       }
+       if(this.warn){
+         wx.request({
+           url: this.apiPath + '/szmktuser/user/setaddress', 
+           data: {
+             userid: this.$parent.globalData.userId,
+             name: this.userName,
+             phone: this.userNumber,
+             province: this.region[0],
+             city:this.region[1],
+             county: this.region[2],
+             address: this.detailAddress
+           }, 
+           method: 'GET',
+           dataType: 'json', 
+           success: res => {
+             if(res.data.code==1000){
+               wx.showToast({
+                 title: '保存成功',
+                 icon: 'success',
+                 duration: 2000,
+                 mask: true,
+                 success: res => {}
+               });
+               wx.setStorage({
+                 key: 'addressId',
+                 data: res.data.data
+               });
+               this.$navigate({url:'../order/order'})
+             }else{
+               wx.showToast({
+                 title: '保存失败',
+                 icon: 'none',
+                 duration: 2000,
+                 mask: true,
+                 success: res => {}
+               });
+             }
+           },
+           fail: () => {},
+           complete: () => {}
+         });
+         
+       }
+  }
+};
   //省市区选择器：
   bindRegionChange(e) {
     this.region = e.detail.value
   }
+  // 获取用户的地址
+  getUserAddress(){
+    var that = this 
+    wx.request({
+      url: this.apiPath + '/szmktuser/user/getaddress', 
+      data: {
+        userid:that.userId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.userName = res.data.data.name
+        that.userNumber = res.data.data.phone
+        that.detailAddress = res.data.data.address
+        that.region = [res.data.data.province,res.data.data.city,res.data.data.county]
+        that.warn = true
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
+
 }
 </script>

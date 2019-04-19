@@ -124,6 +124,7 @@ export default class extends wepy.app {
                                     that.globalData.userId = res.data.data.userid
                                     that.globalData.userName = res.data.data.username
                                     that.globalData.identityType = res.data.data.identityType
+                                    // that.$apply()
                                   },
                                   fail: () => {
                                    },

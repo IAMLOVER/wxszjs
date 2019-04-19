@@ -106,6 +106,12 @@ page{
     }
   }
 }
+.red{
+  color: red;
+  text{
+    color: red;
+  }
+}
 </style>
 <template>
   <view class="page">
@@ -124,33 +130,19 @@ page{
     </view>
 
     <view class="record-items">
-      <view class="item">
+      <view class="item" wx:for="{{records}}" wx:for-item="item" wx:key="{{index}}">
         <view class="item-info">
           <view class="name">
-            任务奖励
+            {{item.type == 0 ?'提现':'入账'}}
           </view>
           <view class="time">
             2019-04-21  15:00:00
           </view>
         </view>
         <view class="item-number">
-          <view class="number">
-            -2000.00<image src="../../../images/index/more04.png"/>
-          </view>
-        </view>
-      </view>
-       <view class="item">
-        <view class="item-info">
-          <view class="name">
-            任务奖励
-          </view>
-          <view class="time">
-            2019-04-21  15:00:00
-          </view>
-        </view>
-        <view class="item-number">
-          <view class="number">
-            -2000.00<image src="../../../images/index/more04.png"/>
+          <view class="number {{item.type == 1 ?'red':''}} ">
+            <text wx:if="{{item.type == 1 }}">+</text>
+            <text wx:if="{{item.type == 0 }}">-</text>{{item.amount}}
           </view>
         </view>
       </view>
@@ -158,7 +150,7 @@ page{
 
 
     <!-- 交易记录为空 -->
-    <view class="empty">
+    <view class="empty" wx:if="{{records.length<=0}}">
       <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" class="empty-img"/>
       <view class="tip">
         暂无交易记录
@@ -181,7 +173,24 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
-    myInCome:''
+    myInCome:'',
+    records:[{
+      "id":1,
+      "userId":1000000021,
+      "orderNo":"DD20190401104936XY7E",
+      "amount":100,
+      "createtime":1555225415011,
+      "status":1,
+      "type":1
+    },{
+      "id":1,
+      "userId":1000000021,
+      "orderNo":"DD20190401104936XY7E",
+      "amount":100,
+      "createtime":1555225415011,
+      "status":1,
+      "type":0
+    }]
   };
   methods = {};  
 
@@ -217,6 +226,11 @@ export default class Index extends wepy.page {
       dataType: 'json',
       success: res => {
         console.log(res)
+        that.records = res.data.data
+         for (var item of that.records){
+          item.createtime = time.formatTime(item.createtime,'Y-M-D h:m:s')
+        }
+         that.$apply()
       },
       fail: () => {},
       complete: () => {}

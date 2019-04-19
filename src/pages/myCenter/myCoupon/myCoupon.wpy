@@ -110,7 +110,7 @@
                 <view class="tab-text">{{item}}</view>
             </view>
         </view>
-        <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
+        <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
                 <view style="display:flex;align-items:center;padding-top:4rpx;">
                     <view style="font-size:80rpx;">{{item.privilege}}</view>
@@ -122,7 +122,7 @@
                 <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
             </view>
             <view class="use">去使用</view>
-        </view>
+        </navigator>
         <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" style="background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/coupon04.png')" wx:if="{{couponStatus == 1 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
                 <view style="display:flex;align-items:center;padding-top:4rpx;">

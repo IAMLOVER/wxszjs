@@ -59,7 +59,6 @@ page{
     width: 690rpx;
     box-sizing: border-box;
     margin: 0 auto;
-    display: none;
     .list{
       display: flex;
       padding-top: 24rpx;
@@ -75,6 +74,8 @@ page{
         .list-title{
           font-size: 32rpx;
           color: #222;
+          height:100rpx;
+          font-weight: 600;
         }
         .time-money{
           display: flex;
@@ -138,6 +139,15 @@ page{
     color: #959595;
   }
 }
+.fail{
+  background-color: #B5B5B5 !important;
+  .progress{
+   background: #B5B5B5 !important;
+  }
+  .percent{
+    color: #fff !important;
+  }
+}
 </style>
 <template>
   <view class="page">
@@ -150,47 +160,31 @@ page{
 
     <!-- tab栏的内容 -->
     <view class="tab-area">
-      <view class="tab-item active" >进行中</view>
-      <view class="tab-item">已成功</view>
-      <view class="tab-item">已失败</view>
+      <view class="tab-item {{index == activeIndex?'active':''}}" @tap="choseType" wx:for="{{type}}" wx:key="{{index}}" wx:for-item="item" data-index="{{index}}" >{{item}}</view>
     </view>
     <!-- 任务列表 -->
     <view class="task-lists">
-        <view class="list">
-          <view class="list-left"><image src="../../../images/index/timg.png"/></view>
+        <view class="list" @tap="goTaskDetail" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.targetId}}">
+          <view class="list-left"><image src="{{item.picUrl}}" mode="aspectFill"/></view>
           <view class="list-right">
-            <view class="list-title">婴儿被子纯棉春秋夏四季通用儿童棉被</view>
+            <view class="list-title">{{item.title}}</view>
             <view class="time-money">
-              <view class="time">2019-06-06 14:00截止</view>
-              <view class="money">佣金：8%</view>
+              <view class="time">{{item.blockingTime}}截止</view>
+              <view class="money">佣金：{{item.percent}}%</view>
             </view>
             <!-- 进度条 -->
-            <view class="progress-box">
-              <view class="progress" style="width:60%"></view>
-              <text class="tip">已完成</text>
-              <text class="percent">50%</text>
-            </view>
-          </view>
-        </view>
-        <view class="list">
-          <view class="list-left"><image src="../../../images/index/timg.png"/></view>
-          <view class="list-right">
-            <view class="list-title">婴儿被子纯棉春秋夏四季通用儿童棉被</view>
-            <view class="time-money">
-              <view class="time">2019-06-06 14:00截止</view>
-              <view class="money">佣金：8%</view>
-            </view>
-            <!-- 进度条 -->
-            <view class="progress-box">
-              <view class="progress" style="width:60%"></view>
-              <text class="tip">已完成</text>
-              <text class="percent">50%</text>
+            <view class="progress-box {{status==2?'fail':''}}">
+              <view class="progress" style="width:{{(item.inviteNum/item.targetNum)*100}}%"></view>
+              <text class="tip" wx:if="{{status == 0}}">进行中</text>
+              <text class="tip" wx:if="{{status == 1}}">已成功</text>
+              <text class="tip" wx:if="{{status == 2}}">已失败</text>
+              <text class="percent">{{(item.inviteNum/item.targetNum)*100}}%</text>
             </view>
           </view>
         </view>
       </view>
 
-    <view class="empty">
+    <view class="empty" wx:if="{{empty}}">
       <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
       <view>你与赏金擦肩而过，快去领任务吧</view>
     </view>
@@ -201,15 +195,67 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import time from '../../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的任务'
   };
   onLoad() {
+    this.getMytask()
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    status: 0,
+    activeIndex:0,
+    taskArr:{},
+    type:['进行中','已成功','已失败'],
+    empty:false
   };
-  methods = {};  
+  methods = {
+    choseType(e){
+      this.activeIndex = e.currentTarget.dataset.index
+      this.status = this.activeIndex
+      this.getMytask()
+    },
+    goTaskDetail(e){
+      let taskId = e.currentTarget.dataset.id
+      let index = e.currentTarget.dataset.index
+      console.log(taskId)
+      console.log(this.taskArr[index])
+      wx.setStorageSync('myTaskArr',this.taskArr[index]);
+      this.$navigate('./myTaskDetail',{id:taskId})
+    }
+  };
+  // 获取我的任务
+  getMytask(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/querytargetlist', 
+      data: {
+        userid:that.$parent.globalData.userId,
+        status:that.status
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.taskArr = res.data.data
+        console.log(that.taskArr)
+        for (var item of that.taskArr){
+          item.blockingTime = time.formatTime(item.blockingTime,'Y-M-D h:m:s')
+        }
+        if(that.taskArr.length<=0){
+          that.empty = true
+        }else{
+          that.empty = false
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }  
 }
 </script>

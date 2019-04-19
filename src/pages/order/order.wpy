@@ -76,6 +76,8 @@ page{
             text-overflow: ellipsis;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            height: 100rpx;
+            font-weight: 600;
           }
           .list-type{
             color: #959595;
@@ -177,16 +179,16 @@ page{
   <!-- 收货详情 -->
   <navigator url="../address/address" class="order-info">
     <view class="order-accept">
-      收件人：<text>陈晓卫</text>
+      收件人：<text>{{userName}}</text>
     </view>
     <view class="order-phone">
-      186 8243 6882
+     {{userNumber}}
     </view>
     <view class="order-address">
-      收货地址：广东省深圳市福田区香蜜湖别888号A单元1301
+      收货地址：{{detailAddress}}
     </view>
     <!-- 小箭头 -->
-    <image src = "../../images/index/more06.png" class="jiantou"/>
+    <image src = "{{imagePath+'more06.png'}}" class="jiantou" wx:if="{{imagePath}}"/>
   </navigator>
 
   <!-- 订单内容 -->
@@ -197,27 +199,14 @@ page{
     <view class="content-lists">
       <view class="list">
             <view class="list-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{produceInfo.cover}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
-              <view class="list-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
-              <view class="list-type">规格：20kg</view>
+              <view class="list-name">{{produceInfo.goodsName}}</view>
+              <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
-                <view class="price">￥2.99</view>
-                <view class="count">数量：1</view>
-              </view>
-            </view>
-      </view>
-       <view class="list">
-            <view class="list-left">
-              <image src="../../images/index/timg.png"/>
-            </view>
-            <view class="list-right">
-              <view class="list-name">新庄新小莓红红颜奶新庄新小莓红颜奶颜奶</view>
-              <view class="list-type">规格：20kg</view>
-              <view class="list-text">
-                <view class="price">￥2.99</view>
-                <view class="count">数量：1</view>
+                <view class="price">￥{{produceInfo.salPrice*0.01}}</view>
+                <view class="count">数量：{{pay.count}}</view>
               </view>
             </view>
       </view>
@@ -240,21 +229,20 @@ page{
     </view>
   </view>
 
-
   <!-- 底部 立即支付按钮区域 -->
   <view class="footer">
     <view></view>
     <view class="number">
       <view class="total">
         <text>合计：</text>
-        <text style="color: #F25664;">￥1350.00</text>
+        <text style="color: #F25664;">￥{{produceInfo.salPrice * pay.count * 0.01}}</text>
       </view>
       <view class="youhui">
         <text>优惠金额：</text>
         <text>50.00</text>
       </view>
     </view>
-    <view class="btn">
+    <view class="btn" @tap="payMoney">
       立即支付
     </view>
   </view>
@@ -263,14 +251,135 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '订单确认'
   };
   onLoad() {
+    this.userId = this.$parent.globalData.userId
+    this.getUserAddress()
+    this.pay = wx.getStorageSync('pay')
+    this.addressId = wx.getStorageSync('addressId')
+    this.getOrderInfo()
   }
   data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    userId:'',
+    addressId:'',
+    userName:'',
+    userNumber:'',
+    detailAddress:'',
+    pay:{},
+    produceInfo:{}
   };
   methods = {};  
+  // 获取用户的地址
+  getUserAddress(){
+    var that = this 
+    wx.request({
+      url: this.apiPath + '/szmktuser/user/getaddress', 
+      data: {
+        userid:that.userId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.userName = res.data.data.name
+        that.userNumber = res.data.data.phone
+        that.detailAddress = res.data.data.province + res.data.data.city  + res.data.data.county +  res.data.data.address
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
+
+  // 根据商品的规格id筛选出来订单里的商品
+  getOrderInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath +  '/szmktstore/goodsInfo/classType',
+      data: {
+        'classId': this.pay.classid,
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  // 点击立即支付
+  payMoney(){
+    var that = this
+    wx.showLoading({
+      title: '生成订单中',
+      mask: true, 
+      success: res => {}
+    }); 
+    wx.request({
+      url: that.apiPath + '/szmktuser/pay/createordergoods', 
+      data: {
+        'userid':that.userId,
+        'classid': that.pay.classid,
+        'count':that.pay.count,
+        'type': that.pay.type,
+        'activityid':that.pay.activityId,
+        'addressid':that.addressId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        if(res.data.code == 1000){
+          wx.hideLoading();
+          wx.request({
+            url: that.apiPath + '/szmktuser/pay/awakenpay', 
+            data: {
+              userid:that.userId,
+              orderno:res.data.data.orderNo
+            }, 
+            method: 'GET',
+            dataType: 'json', 
+            success: res => {
+              console.log(res)
+              if(res.data.code == 200){
+                wx.requestPayment({
+                  appId:res.data.data.appId,
+                  timeStamp: res.data.data.timeStamp,
+                  nonceStr: res.data.data.nonceStr,
+                  package: res.data.data.package,
+                  signType: 'MD5',
+                  paySign: res.data.data.paySign,
+                  success(res) {  
+                    console.log(res)
+                    that.$navigate({url:'../payResult/paySuccess'})
+                  },
+                  fail(res) { 
+                    console.log(res)
+                    that.$navigate({url:'../payResult/payFail'})
+                  }
+                })
+              }
+            },
+            fail: () => {},
+            complete: () => {}
+          });
+          
+        }
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

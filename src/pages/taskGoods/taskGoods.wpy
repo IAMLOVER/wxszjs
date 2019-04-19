@@ -5,6 +5,18 @@ page{
 }
 .image{
   position: relative;
+  swiper{
+    width: 100%;
+    height: 650rpx;
+    swiper-item{
+      width: 100%;
+      height: 650rpx;
+      image{
+        width: 100%;
+        height: 650rpx;
+      }
+    }
+  }
   image{
     width: 100%;
     height: 650rpx;
@@ -511,7 +523,11 @@ button[plain]{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <image src="{{produceInfo.cover}}"/>
+     <swiper autoplay circular>
+       <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+          <image src="{{item}}"/>
+       </swiper-item>
+     </swiper>
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
@@ -526,7 +542,7 @@ button[plain]{
     <view class="task">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">{{minPrice*0.01}}-{{maxPrice*0.01}}</text>
+        <text class="now">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
@@ -541,7 +557,7 @@ button[plain]{
           邮费：包邮
         </view>
         <view class="limit" style="flex:3;">
-            {{produceInfo.saleNum}}人购买
+            {{produceInfo.buyNum}}人购买
         </view>
       </view>
       <view class="share">
@@ -586,13 +602,13 @@ button[plain]{
     <!-- 客服，立即购买 -->
     <view class="dosome">
       <view class="kefu">
-        <image src="../../images/index/kefu.png"/>
+        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
-       <view class="kefu">
-        <image src="../../images/index/store02.png"/>
+       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
+        <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
         <view>店铺</view>
-      </view>
+      </navigator>
       <view class="task-btn">
         <view @tap="openShadow">立即购买</view>
         <view @tap="openTaskChoseShadow">领取任务</view>
@@ -604,14 +620,14 @@ button[plain]{
      <view class="content">
        <view class="info">
          <view class="info-left">
-           <image src ="../../images/index/timg.png"/>
+           <image src ="{{produceInfo.cover}}" mode="aspectFill"/>
          </view>
          <view class="info-right">
            <view class="price">
-             ￥150
+             ￥{{goodsClassList[activeIndex].salPrice*0.01}}
            </view>
            <view class="kuncun">
-             库存：100
+             库存：{{goodsClassList[activeIndex].stock}}
            </view>
          </view>
        </view>
@@ -622,9 +638,7 @@ button[plain]{
            规格：
          </view>
          <view class="type-item">
-           <view class="active">1kg</view>
-           <view>1kg</view>
-           <view>1kg</view>
+           <view wx:for="{{goodsClassList}}" @tap="changeIndex" class="{{index==activeIndex?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{index}}" wx:for-item="item">{{item.className}}</view>
          </view>
        </view>
 
@@ -634,9 +648,9 @@ button[plain]{
           数量
         </view>
         <view class="control">
-          <image src="../../images/index/reduce@2x.png" class="task-img"/>
-          <text class="number">150</text>
-          <image src="../../images/index/add@2x.png" class="add-img"/>
+          <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="task-img" @tap="reduceAccount"/>
+          <text class="number">{{account}}</text>
+          <image src="{{imagePath+'add@2x.png'}}" wx:if="{{imagePath}}"  class="add-img" @tap="addAccount"/>
         </view>
       </view>
       <view class="line">
@@ -644,12 +658,12 @@ button[plain]{
       </view>
      <!-- 确定按钮 -->
       <view class="btn-box">
-          <view class="btn">
-            确定(共￥23.98)
+          <view class="btn" @tap="payMoney">
+            确定(共￥{{money}})
           </view>
       </view>
       <!-- 关闭按钮 -->
-      <image src="../../images/index/close02@2x.png" class="close-shadow" @tap="closeShadow"/>
+      <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" class="close-shadow" @tap="closeShadow"/>
      </view>
    </view>
 
@@ -716,13 +730,18 @@ export default class Index extends wepy.page {
     showShadow: false,
     produceId:'',
     produceInfo:{},
+    goodsClassList:{},
     maxPrice:'',
     minPrice:'',
     taskItems:{},
     storeId:'',
     choseTaskId:'',
     showChoseTask:false,
-    showRule:false
+    showRule:false,
+    activeIndex:0,
+    typeId:'',
+    account:0,
+    money:0
   };
   methods = {
     openShadow() {
@@ -742,6 +761,75 @@ export default class Index extends wepy.page {
     },
     closeRule(){
       this.showRule = false
+    },
+    //选规格
+    changeIndex(e){
+      console.log(e)
+      this.activeIndex = e.currentTarget.dataset.index
+      this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      this.typeId = e.currentTarget.dataset.id
+    },
+    // 加
+    addAccount(){
+      if(this.account>= this.goodsClassList[this.activeIndex].stock){
+        wx.showToast({
+          title: '库存不足', 
+          icon: 'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        })
+      }else{
+        this.account++
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }
+    },
+    //减
+    reduceAccount(){
+      if(this.account>0){
+        this.account--
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }else{
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+    },
+    //购买数量的确定按钮
+    payMoney(){
+      if(this.account<=0){
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+      else{
+        var pay = {}
+        // 商品id 
+        pay.id = this.produceInfo.id
+        // 商品规格id
+        pay.classid = this.typeId
+        // 商品数量
+        pay.count = this.account
+        // 商品活动类型
+        pay.type = 0
+        // 商品活动id
+        pay.activityId = 0
+        // 商品的价钱
+        pay.money = this.money
+        wx.setStorage({
+          key: 'pay',
+          data: pay
+        })
+        this.getUserAddress()
+      }
     }
   }; 
   // 获取商品详情
@@ -754,9 +842,9 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.goods
-        that.minPrice = res.data.data.minPrice
-        that.maxPrice = res.data.data.maxPrice
         that.taskItems = res.data.data.targetList
+        that.goodsClassList = res.data.data.goods.goodsClassList
+        that.typeId = that.goodsClassList[this.activeIndex].id
         for(var item in that.taskItems){
           that.taskItems[item].checked = false
         }
@@ -794,6 +882,8 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
        if(res.data.code==1000){
+        wx.setStorageSync('activityId',res.data.data.id)
+        wx.setStorageSync('targetId',res.data.data.targetId)
         wx.showToast({
           title: '领取成功', 
           icon: 'success', 
@@ -820,6 +910,35 @@ export default class Index extends wepy.page {
       complete: () => {}
     });
     
+  }
+
+
+    // 获取用户的地址
+  getUserAddress(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/user/getaddress', 
+      data: {
+        userid:that.$parent.globalData.userId,
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        if(res.data.data){
+           wx.setStorage({
+            key: 'addressId',
+            data: res.data.data.id
+          });
+          that.$navigate({url:'../order/order'})
+        }else{
+          that.$navigate({url:'../address/address'})
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
   }
 }
 </script>
