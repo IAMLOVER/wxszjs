@@ -49,6 +49,7 @@
                     height:42rpx;
                     display: flex;
                     align-items: center;
+                    justify-content: space-between;
                     .list-icon{
                         height:32rpx;
                         width:32rpx;
@@ -61,7 +62,6 @@
                     .list-type{
                         font-size:28rpx;
                         color:#f25664;
-                        margin-left:280rpx
                     }
                     .arrow{
                         height:16rpx;
@@ -122,25 +122,31 @@
         </view>
     </view>
     <view class="order-wrapper">
-        <view class="order-list">
+        <view class="order-list" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
             <view class="list-header">
-                <image src="{{imagePath+'store02.png'}}" class="list-icon" wx:if="{{imagePath}}"/>
-                <text class="list-store">兰蔻旗舰店</text>
-                <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}"/>
-                <text class="list-type">已完成</text>
-            </view>
-            <view class="order-detail"  wx:for="{{2}}" wx:key="{{item.id}}" wx:for-index="index" bindtap="goDetail"> 
-                <image class="goods-pic" src="https://pic.cnblogs.com/face/1093000/20170109103659.png" />
-                <view class="goods-text">
-                    <view class="goods-name">兰蔻真爱物业玫瑰香水发过优雅浪漫女士持久香氛正品</view>
-                    <view class="goods-style">规格：50ml</view>
-                    <view class="goods-price">
-                        <text class="price">￥750</text>
-                        <text class="count">数量：1</text>
-                    </view>
+                <view class="header-left">
+                 <image src="{{imagePath+'store02.png'}}" style="vertical-align:middle" class="list-icon" wx:if="{{imagePath}}"/>
+                 <text class="list-store" style="font-size:28rpx">{{item.storeName}}</text>
+                 <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}"/>
+                </view>
+                <view class="header-right">
+                  <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 1}}">已完成</text>
+                  <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 0}}">待收货</text>
+                 <text class="list-type" wx:if="{{item.orderStatus == 0}}" style="color:#959595">已取消</text>
                 </view>
             </view>
-            <view class="list-footer">共两件商品，实付款：￥23.00</view>
+            <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
+                <image class="goods-pic" src="{{item.goodsPic}}" />
+                <view class="goods-text">
+                    <view class="goods-name">{{item.goodsName}}</view>
+                    <view class="goods-style">规格：{{item.className}}</view>
+                    <view class="goods-price">
+                        <text class="price">￥{{item.goodsPrice*0.01}}</text>
+                        <text class="count">数量：{{item.goodsCount}}</text>
+                    </view>
+                </view>
+            </navigator>
+            <view class="list-footer">共两件商品，实付款：￥{{item.totalFee*0.01}}</view>
         </view>
     </view>
   </view>
@@ -157,23 +163,98 @@ export default class Index extends wepy.page {
   };
   data = {
       imagePath:path.path.imagePath,
+      apiPath:path.path.apiPath,
       tabLists:['全部','待收货','已完成'],
       nowIndex:0,
+      orderList:{},
+      type:''
   };
   methods= {
       chooseTab(index){
           this.nowIndex = index
+          if(this.nowIndex == 0){
+              this.getOrderAllList()
+          }else if(this.nowIndex == 1){
+              this.type = 0
+              this.getOrderList()
+          }else{
+              this.type = 1
+              this.getOrderList()
+          }
       },
-      goDetail(){
-          wx.navigateTo({
-              url:'order-detail'
-          })
-      }
   };
-  onShow() {
+  onLoad(options) {
+      this.type = options.type
+      console.log(options)
+      if(this.type == '3'){
+          this.getOrderAllList()
+          this.nowIndex = 0
+      }else if(this.type == '0'){
+          this.nowIndex = 1
+          this.getOrderList()
+      }else{
+          this.nowIndex = 2
+          this.getOrderList()
+      }
   }
-  onLoad() {
-    console.log('onLoad');
-  }
+//   获取订单列表
+    getOrderList(){
+        var that = this 
+        wx.showLoading({
+          title: '加载中', 
+          mask: true, 
+          success: res => {}
+        });
+        wx.request({
+          url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
+          data: {
+              userid:that.$parent.globalData.userId,
+              page:1,
+              rows:100,
+              type:that.type
+          }, 
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+              console.log(res)
+              that.orderList = res.data.data
+              that.$apply()
+              wx.hideLoading();
+          },
+          fail: () => {},
+          complete: () => {}
+        });
+        
+    }
+
+    //   获取订单列表
+    getOrderAllList(){
+        console.log('全部调用')
+        var that = this 
+        wx.showLoading({
+          title: '加载中', 
+          mask: true, 
+          success: res => {}
+        });
+        wx.request({
+          url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
+          data: {
+              userid:that.$parent.globalData.userId,
+              page:1,
+              rows:100,
+          }, 
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+              console.log(res)
+              that.orderList = res.data.data
+              that.$apply()
+              wx.hideLoading();
+          },
+          fail: () => {},
+          complete: () => {}
+        });
+        
+    }
 }
 </script>

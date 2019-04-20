@@ -542,9 +542,9 @@ export default class Index extends wepy.page {
         // 商品数量
         pay.count = this.account
         // 商品活动类型
-        pay.type = this.produceInfo.activityType
+        pay.type = 0
         // 商品活动id
-        pay.activityId = this.produceInfo.activityId
+        pay.activityId = 0
         // 商品的价钱
         pay.money = this.money
         wx.setStorage({

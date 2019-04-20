@@ -148,28 +148,28 @@
       <view>
         <view class="my-order-header">我的订单</view>
         <view class="my-order-content">
-          <view class="detail">
+          <navigator url="../myOrder/myOrder?type=3" class="detail">
             <view class="content-icon">
             </view>
             <view class="content-text">
               查看全部
             </view>
-          </view>
-          <view class="detail">
+          </navigator>
+          <navigator url="../myOrder/myOrder?type=0" class="detail">
             <view class="content-icon2">
-              <view class="remind">2</view>
+              <view class="remind" wx:if="{{orderForWait}}">{{orderForWait}}</view>
             </view>
             <view class="content-text">
               待收货
             </view>
-          </view>
-          <view class="detail">
+          </navigator>
+          <navigator url="../myOrder/myOrder?type=1" class="detail">
             <view class="content-icon3">
             </view>
             <view class="content-text">
               已完成
             </view>
-          </view>
+          </navigator>
         </view>
       </view>
     </view>
@@ -213,19 +213,45 @@ export default class Index extends wepy.page {
   };
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
     identityType:'',
-    userName:''
+    userName:'',
+    orderForWait:0
   };
   methods={
-      goOrder(){
-          wx.navigateTo({
-              url:'order'
-          })
-      }
   }
   onLoad() {
     this.identityType = this.$parent.globalData.identityType
     this.userName = this.$parent.globalData.userName
   }
+   getOrderList(){
+        var that = this 
+        wx.showLoading({
+          title: '加载中', 
+          mask: true, 
+          success: res => {}
+        });
+        wx.request({
+          url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
+          data: {
+              userid:that.$parent.globalData.userId,
+              page:1,
+              rows:100,
+              type:0
+          }, 
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+              console.log(res)
+              that.orderForWait = res.data.data.length
+              that.$apply()
+              wx.hideLoading();
+          },
+          fail: () => {},
+          complete: () => {}
+        });
+        
+    }
+
 }
 </script>

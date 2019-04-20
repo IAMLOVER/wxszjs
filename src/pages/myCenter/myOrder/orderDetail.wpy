@@ -198,9 +198,11 @@
         background: white;
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         font-size:32rpx;
         position: fixed;
         bottom:0;
+        padding-right: 40rpx;
         .confirm{
             background-image: linear-gradient(-45deg, #F25664 7%, #E176FF 100%);
             border-radius: 22px;
@@ -210,7 +212,7 @@
             font-size:36rpx;
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
         }
     }
 }
@@ -221,59 +223,62 @@
           <view class="confirm-window">
               <view class="question">是否确认收货？</view>
               <view class="button-wrapper">
-                  <view class="cancel">取消</view>
-                  <view class="confirm">确认</view>
+                  <view class="cancel" @tap="cancel">取消</view>
+                  <view class="confirm" @tap="shou">确认</view>
               </view>
           </view>
       </view>
       <view class="header">
-          <text class="">待收货</text>
-          <image src="https://pictest.sqplus.cn/szjs/user/images/index/car02.png"/>
+          <text class="" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</text>
+          <text class="" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">待收货</text>
+          <text class="" wx:if="{{orderInfo.orderStatus == 0}}">已取消</text>
+          <image src="{{imagePath+'car02.png'}}" wx:if="{{imagePath}}"/>
       </view>
       <view class="pink"></view>
       <view class="info-wrapper">
-          <view class="name">收件人：<text style="font-weight:bold">陈晓薇</text></view>
-          <view>18682436882</view>
-          <view>收货地址：广东省深圳市福田香蜜湖别墅</view>
-          <view>888号A单元1301</view>
-          <image src="../assets/images/more.png" class="more"/>
+          <view class="name">收件人：<text style="font-weight:bold">{{orderInfo.name}}</text></view>
+          <view>{{orderInfo.phone}}</view>
+          <view>收货地址：{{orderInfo.address}}</view>
+          <image src="{{imagePath + 'more04.png'}}" wx:if="{{imagePath}}" class="more"/>
           <view class="left-circle"></view>
           <view class="right-circle"></view>
       </view>
       <view class="order-wrapper">
           <text style="">订单内容</text>
           <view class="order-detail"> 
-                <image class="goods-pic" src="https://pic.cnblogs.com/face/1093000/20170109103659.png" />
+                <image class="goods-pic" src="{{orderInfo.goodsPic}}" />
                 <view class="goods-text">
-                    <view class="goods-name">兰蔻真爱物业玫瑰香水发过优雅浪漫女士持久香氛正品</view>
-                    <view class="goods-style">规格：50ml</view>
+                    <view class="goods-name">{{orderInfo.goodsName}}</view>
+                    <view class="goods-style">规格：{{orderInfo.className}}</view>
                     <view class="goods-price">
-                        <text class="price">￥750</text>
-                        <text class="count">数量：1</text>
+                        <text class="price">￥{{orderInfo.goodsPrice*0.01}}</text>
+                        <text class="count">数量：{{orderInfo.goodsCount}}</text>
                     </view>
                 </view>
             </view>
       </view>
-      <view class="active-wrapper">
+      <!-- <view class="active-wrapper">
           <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
           <view><text>有无优惠券：</text><text>无</text></view>
           <view><text>运费：</text><text>包邮</text></view>
-      </view>
+      </view> -->
       <view class="logistics-wrapper">
-          <view>订单编号：DD584542255</view>
-          <view>订单时间：2019-2-30 23:45</view>
-          <view>快递单号：圆通 55682423335512</view>
+          <view>订单编号：{{orderInfo.orderNo}}</view>
+          <view>订单时间：{{orderInfo.payTime}}</view>
+          <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}}</view>
       </view>
       <view class="footer">
-          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥700.00</text></text>
-          <view class="confirm" bindtap="confirm">确认收货</view>
+          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥{{orderInfo.totalFee}}</text></text>
+          <view class="confirm" @tap="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">确认收货</view>
+          <view class="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</view>
       </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-
+import path from '../../../common/path.js'
+import time from '../../../common/time.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '订单详情',
@@ -281,17 +286,74 @@ export default class Index extends wepy.page {
     navigationBarTextStyle: 'white'
   };
   data = {
-      isConfirm:false
+      imagePath:path.path.imagePath,
+      apiPath:path.path.apiPath,
+      isConfirm:false,
+      orderNo:'',
+      orderInfo:{}
   };
   methods= {
       confirm(){
           this.isConfirm = true
+      },
+      cancel(){
+          this.isConfirm = false
+      },
+      shou(){
+          this.getSure();
       }
   };
-  onShow() {
+  onLoad(options) {
+   console.log(options)
+   this.orderNo = options.id
+   this.getOrderDetail()
   }
-  onLoad() {
-    console.log('onLoad');
+  getOrderDetail(){
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/order/queryOrderContent',
+        data: {
+            orderno:that.orderNo
+        },
+        method: 'GET',
+        dataType: 'json', 
+        success: res => {
+            console.log(res)
+            that.orderInfo = res.data.data
+            that.orderInfo.payTime = time.formatTime( that.orderInfo.payTime,'Y-M-D h:m:s')
+            that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+      
+  }
+
+  //点击收货按钮
+  getSure(){
+      var that = this 
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/userconfirmreceipt',
+        data: {
+            orderno:that.orderNo
+        }, 
+        method: 'GET',
+        dataType: 'json', 
+        success: res => {
+            wx.showToast({
+              title: '确认成功', 
+              icon: 'success', 
+              duration: 2000, 
+              mask: true, 
+              success: res => {}
+            })
+            that.isConfirm = false
+            that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+      
   }
 }
 </script>

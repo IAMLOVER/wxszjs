@@ -42,6 +42,7 @@ export default class extends wepy.app {
       // 我的
       'pages/myCenter/myCenter/myCenter',
       'pages/myCenter/myOrder/myOrder',
+      'pages/myCenter/myOrder/orderDetail',
       'pages/myCenter/myCoupon/myCoupon',
       'pages/myCenter/myPackage/myPackage',
       'pages/myCenter/myPackage/packWithDraw',

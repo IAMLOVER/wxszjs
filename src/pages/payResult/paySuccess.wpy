@@ -111,9 +111,9 @@ page{
         <view class="go-index" @tap="goIndex">
           返回首页
         </view>
-        <navigator class="order-detail">
+        <view class="order-detail" @tap="goOrderDetail"> 
           订单详情
-        </navigator>
+        </view>
       </view>
     </view>
 
@@ -150,17 +150,23 @@ export default class Index extends wepy.page {
   onLoad() {
     this.pay = wx.getStorageSync('pay')
     this.getOrderInfo()
+    this.orderNo = wx.getStorageSync('orderNo')
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     pay:{},
-    produceInfo:{}
+    produceInfo:{},
+    orderNo:''
   };
   methods = {
      // 返回首页
     goIndex(){
       this.$switch('../index/index')
+    },
+    //去订单详情
+    goOrderDetail(){
+      this.$navigate('../myCenter/myOrder/orderDetail',{id:this.orderNo})
     }
   };  
    // 根据商品的规格id筛选出来订单里的商品
