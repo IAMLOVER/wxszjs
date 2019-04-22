@@ -86,6 +86,8 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        height: 100rpx;
+        font-weight: 600;
       }
       .quan{
         display: inline-block;
@@ -145,7 +147,7 @@ page{
         <scroll-view scroll-x="true">
           <view class="scroll-x">
              <view wx:for="{{typeArr}}" wx:for-item="item" data-id = "{{item.id}}" wx:key="{{index}}" class="view-box">
-                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" @tap='goIndex'>满{{item.standard}}减{{item.privilege}}</view>
+                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" data-id = "{{item.id}}"  @tap='goIndex'>满{{item.standard*0.01}}减{{item.privilege*0.01}}</view>
               </view>
            </view>
         </scroll-view>
@@ -153,23 +155,23 @@ page{
 
      <!-- 商品列表 -->
     <view class="items">
-        <view class="item">
+        <navigator url="./fullProduceDetail?id={{item.id}}" class="item" wx:for="{{productItem}}" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{item.cover}}" mode="aspectFill" lazyload/>
           </view>
           <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
-            <view class="quan">券</view>
-            <view class="tip">满199减20</view>
+            <view class="item-title">{{item.title}}</view>
+            <!-- <view class="quan">券</view> -->
+            <view class="tip">满{{item.standard*0.01}}减{{item.privilege*0.01}}</view>
             <view class="price-box">
               <text class="price-type">￥</text>
-              <text class="price">129.9</text>
+              <text class="price">{{item.minPrice*0.01}}</text>
             </view>
             <view class="how-many">
-              223人购买
+              {{item.saleNum}}人购买
             </view>
           </view>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>
@@ -188,11 +190,15 @@ export default class Index extends wepy.page {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     typeArr:[],
-    idx:0
+    idx:0,
+    activityId:'',
+    productItem:{}
   };
   methods = {
     goIndex(e){
       this.idx = e.currentTarget.dataset.index
+      this.activityId = e.currentTarget.dataset.id
+      this.getReduceProduct()
     },
   };  
   // 获取满减类别
@@ -205,6 +211,28 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.typeArr = res.data.data
+        that.$apply()
+        that.activityId = that.typeArr[0].id
+        that.getReduceProduct()
+      },
+      fail: () => {},
+      complete: () => {}
+    }); 
+  }
+  //获取满减商品列表
+  getReduceProduct(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/search', 
+      data: {
+        activityId:that.activityId,
+        activityType:2
+      },
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.productItem = res.data.data.content
         that.$apply()
       },
       fail: () => {},

@@ -32,6 +32,7 @@ page{
      color: #F25664; 
      margin: 0 auto;
      margin-top: 40rpx;
+     text-align: center;
    }
   }
   .record-title{
@@ -118,8 +119,8 @@ page{
     <!-- 我的收入 -->
     <view class="income">
       <view class="tip">我的收入(元)</view>
-      <view class="my-money">{{myInCome}}</view>
-      <view class="btn">提现</view>
+      <view class="my-money">{{m1.filter(myInCome*0.01)}}</view>
+      <navigator url="./packWithDraw" class="btn">提现</navigator>
     </view>
 
     <!-- 交易记录 -->
@@ -136,18 +137,17 @@ page{
             {{item.type == 0 ?'提现':'入账'}}
           </view>
           <view class="time">
-            2019-04-21  15:00:00
+            {{item.createTime}}
           </view>
         </view>
         <view class="item-number">
           <view class="number {{item.type == 1 ?'red':''}} ">
             <text wx:if="{{item.type == 1 }}">+</text>
-            <text wx:if="{{item.type == 0 }}">-</text>{{item.amount}}
+            <text wx:if="{{item.type == 0 }}">-</text>{{item.amount*0.01}}
           </view>
         </view>
       </view>
     </view>
-
 
     <!-- 交易记录为空 -->
     <view class="empty" wx:if="{{records.length<=0}}">
@@ -162,6 +162,8 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import time from '../../../common/time.js'
+import mywxs from '../../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的钱包'
@@ -193,7 +195,9 @@ export default class Index extends wepy.page {
     }]
   };
   methods = {};  
-
+  wxs = {
+      m1: mywxs
+  }
   // 我的收入接口
   getMyIncome(){
     var that = this
@@ -228,7 +232,7 @@ export default class Index extends wepy.page {
         console.log(res)
         that.records = res.data.data
          for (var item of that.records){
-          item.createtime = time.formatTime(item.createtime,'Y-M-D h:m:s')
+          item.createTime = time.formatTime(item.createTime,'Y-M-D h:m:s')
         }
          that.$apply()
       },

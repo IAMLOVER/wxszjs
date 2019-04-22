@@ -249,12 +249,11 @@ page{
             <view class="money-precent">佣金：{{taskInfo.percent}}%</view>
             <view class="hot">
               <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
-              <text style="color:#f25664">热度18664</text>
+              <text style="color:#f25664">热度{{taskInfo.visitNum}}</text>
             </view>
           </view>
         </view>
       </view>
-
     </view>
 
     <!-- 任务情况 -->
@@ -366,7 +365,7 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         console.log(res)
-        
+        that.groupContent = res.data.data
       },
       fail: () => {},
       complete: () => {}

@@ -116,7 +116,6 @@ page{
         </view>
       </view>
     </view>
-
      <!-- 订单内容 -->
   <view class="order-content">
     <view class="content-lists">

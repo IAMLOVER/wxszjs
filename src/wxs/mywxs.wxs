@@ -1,0 +1,9 @@
+module.exports = {
+  text: 'This is from wxs',
+  filter: function (num) {
+    return num.toFixed(2);
+  }
+  filterDown:function(num){
+    return Math.floor(num)
+  }
+};

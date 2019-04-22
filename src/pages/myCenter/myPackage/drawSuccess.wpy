@@ -29,7 +29,7 @@ page{
   <view class="page">
     <image src="{{imagePath+'sucess03.png'}}" wx:if="{{imagePath}}"/>
     <view class="tip">提现成功，请留意账户金额</view>
-    <view class="btn">返回我的钱包</view>
+    <navigator url='./myPackage' class="btn">返回我的钱包</navigator>
   </view>
 </template>
 

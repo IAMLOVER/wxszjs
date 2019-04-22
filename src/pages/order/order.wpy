@@ -196,7 +196,22 @@ page{
     <view class="title">
       订单内容
     </view>
-    <view class="content-lists">
+    <view class="content-lists" wx:if="{{channelInfo != null}}">
+      <view class="list">
+            <view class="list-left">
+              <image src="{{channelInfo.cover}}" mode="aspectFill"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">{{channelInfo.title}}</view>
+              <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
+              <view class="list-text">
+                <view class="price">￥{{channelInfo.chaPrice*0.01}}</view>
+                <view class="count">数量：{{pay.count}}</view>
+              </view>
+            </view>
+      </view>
+    </view>
+     <view class="content-lists">
       <view class="list">
             <view class="list-left">
               <image src="{{produceInfo.cover}}" mode="aspectFill"/>
@@ -215,13 +230,14 @@ page{
 
   <!-- 优惠活动 -->
   <view class="action">
-    <view class="view">
+    <view class="view" wx:if="{{haveJoinActivity}}">
       <view>优惠活动：</view>
-      <view class="tip">满500减50</view>
+      <view class="tip">满{{couponActivity.standard*0.01}}减{{couponActivity.privilege*0.01}}</view>
     </view>
     <view class="view">
       <view>有无优惠券：</view>
-      <view>有</view>
+      <view wx:if="{{pay.have}}">有</view>
+      <view wx:if="{{!pay.have}}">无</view>
     </view>
     <view class="view">
       <view>运费：</view>
@@ -235,11 +251,11 @@ page{
     <view class="number">
       <view class="total">
         <text>合计：</text>
-        <text style="color: #F25664;">￥{{produceInfo.salPrice * pay.count * 0.01}}</text>
+        <text style="color: #F25664;">￥{{pay.money}}</text>
       </view>
       <view class="youhui">
         <text>优惠金额：</text>
-        <text>50.00</text>
+        <text>{{(produceInfo.salPrice*0.01+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
       </view>
     </view>
     <view class="btn" @tap="payMoney">
@@ -272,7 +288,10 @@ export default class Index extends wepy.page {
     userNumber:'',
     detailAddress:'',
     pay:{},
-    produceInfo:{}
+    produceInfo:{},
+    haveJoinActivity:false,
+    couponActivity:{},
+    channelInfo:{}
   };
   methods = {};  
   // 获取用户的地址
@@ -310,6 +329,13 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data
+        if(res.data.data.couponActivity){
+          that.couponActivity = res.data.data.couponActivity
+          that.haveJoinActivity = true
+        }
+        if(res.data.data.channelInfo){
+          that.channelInfo = res.data.data.channelInfo
+        }
         that.$apply()
       },
       fail: () => {},
@@ -382,5 +408,6 @@ export default class Index extends wepy.page {
     });
     
   }
+
 }
 </script>

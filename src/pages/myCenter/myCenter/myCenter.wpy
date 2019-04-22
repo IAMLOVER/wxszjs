@@ -157,7 +157,7 @@
           </navigator>
           <navigator url="../myOrder/myOrder?type=0" class="detail">
             <view class="content-icon2">
-              <view class="remind" wx:if="{{orderForWait}}">{{orderForWait}}</view>
+              <view class="remind" wx:if="{{orderForWait>0}}">{{orderForWait}}</view>
             </view>
             <view class="content-text">
               待收货
@@ -199,12 +199,14 @@
         <view class="item-text">我的店铺</view>
       </navigator>
     </view>
+    <!-- <redPacket></redPacket> -->
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js'
+import redPacket from '../../../components/redPacket' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '店铺',
@@ -219,7 +221,10 @@ export default class Index extends wepy.page {
     orderForWait:0
   };
   methods={
-  }
+  };
+   components = {
+    redPacket
+  };
   onLoad() {
     this.identityType = this.$parent.globalData.identityType
     this.userName = this.$parent.globalData.userName

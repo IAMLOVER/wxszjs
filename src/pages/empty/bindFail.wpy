@@ -1,0 +1,53 @@
+
+<style lang='less'>
+page{
+  background-color: #f2f2f2;
+  text-align: center;
+  padding-top: 220rpx;
+  image{
+    width: 390rpx;
+    height: 280rpx;
+  }
+  .tip{
+    font-size: 28rpx;
+    color: #959595;
+  }
+  button{
+    background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
+    border-radius: 22px;
+    width: 530rpx;
+    height: 88rpx;
+    color: #fff;
+    font-size: 32rpx;
+    border: none;
+    margin-top: 60rpx;
+  }
+}
+</style>
+
+<template>
+   <view class='page'>
+    <image src="{{imagePath+'failed03.png'}}" wx:if="{{imagePath}}"/>
+    <view class="tip">对不起，您的微信已绑定其他店铺</view>
+    <button @tap="goIndex">前往首页</button>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "绑定失败",
+    };
+
+    data = {};
+
+    methods = {
+      goIndex(){
+        this.$switch('../index/index')
+      }
+    };
+
+    onLoad() { };
+  }
+</script>

@@ -53,6 +53,12 @@ export default class extends wepy.app {
       'pages/myCenter/myShop/myShopManagement',
       'pages/myCenter/myTask/myTask',
       'pages/myCenter/myTask/myTaskDetail',
+
+      // 微信扫进入
+      'pages/empty/empty',
+      'pages/empty/bindFail',
+      'pages/empty/bindSuccess',
+      'pages/empty/loginSuccess'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -125,6 +131,7 @@ export default class extends wepy.app {
                                     that.globalData.userId = res.data.data.userid
                                     that.globalData.userName = res.data.data.username
                                     that.globalData.identityType = res.data.data.identityType
+                                    that.globalData.key = res.data.data.sessionkey
                                     // that.$apply()
                                   },
                                   fail: () => {
@@ -151,6 +158,7 @@ export default class extends wepy.app {
     userId:'',
     userName:'',
     identityType:'',
+    key:''
   }
 }
 </script>

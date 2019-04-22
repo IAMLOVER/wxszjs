@@ -82,6 +82,9 @@ page{
   color: #fff;
   font-size: 32rpx;
 }
+.active{
+  background-color: #f25664 !important;
+}
 .label-2__icon {
   position: relative;
   display: inline-block;
@@ -118,6 +121,7 @@ page{
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 9999;
   .content{
     width: 610rpx;
     height: 608rpx;
@@ -204,7 +208,7 @@ page{
         可提现金额
       </view>
       <view class="you-can-number">
-        2527.46元
+        {{m1.filter(myInCome*0.01)}}元
       </view>
     </view>
 
@@ -214,12 +218,13 @@ page{
         提现金额
       </view>
       <view class="input-wrapper">
-          <text>￥</text><input type="number" name="" id=""/>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'close02@2x.png'}}"/>
+          <text>￥</text><input type="number" value="{{value}}" name="" id="" bindinput="getMoney"/>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'close02@2x.png'}}" @tap="clear"/>
       </view>
       <view class="input-tip-wrapper">
-        <view class="tip">提现金额为整数，本次可提现¥2527</view>
-        <view class="all">全部提现</view>
+        <view class="tip" wx:if="{{!error}}">提现金额为整数，本次可提现¥{{m1.filterDown(myInCome*0.01)}}</view>
+        <view class="tip" wx:if="{{error}}" style="color:{{error?'#F25664':'#666666'}}">本次最多提现¥{{m1.filterDown(myInCome*0.01)}}</view>
+        <view class="all" @tap="getAll" wx:if="{{showAll}}">全部提现</view>
       </view>
     </view>
 
@@ -232,7 +237,7 @@ page{
     </view>
 
     <!-- 提现到微信的按钮 -->
-    <view class="btn">
+    <view class="btn {{value<=myInCome*0.01?'active':''}}" @tap="getBegin">
       提现至微信
     </view>
 
@@ -253,17 +258,17 @@ page{
           <view>请输入你的手机号码和验证码</view>
         </view>
         <view class="phone">
-          <input type="tel" name="" id="" placeholder="输入手机号码" />
+          <input type="tel" name="" id="" value="{{phone}}" bindinput="phoneInput" placeholder="输入手机号码" />
         </view>
         <view class="code-wrapper">
           <input type="number" name="" id="" placeholder="输入验证码" />
           <button @tap="getCode" disabled="{{disabledCodeBtn}}" class="{{disabledCodeBtn?'disabled':''}}">{{btnText}}</button>
         </view>
-        <view class="sure-btn">确认</view>
+        <view class="sure-btn active" @tap="last">确认</view>
       </view>
 
       <!-- 关闭shadow按钮 -->
-      <image wx:if="{{imagePath}}" src="{{imagePath+'close.png'}}" class="close-shadow"/>
+      <image wx:if="{{imagePath}}" src="{{imagePath+'close.png'}}" class="close-shadow" @tap="closeShadow"/>
     </view>
   </view>
 </template>
@@ -271,38 +276,214 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import mywxs from '../../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '提现'
   };
   onLoad() {
+    this.getMyIncome()
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
     btnText:'获取验证码',
     number:60,
     disabledCodeBtn:false,
     showShadow:false,
+    showAll:true,
+    myInCome:0,
+    value:'',
+    phone:'',
+    error:false,
+    code:4312
   };
   methods = {
+    closeShadow(){
+      this.showShadow = false
+    },
     // 验证码的点击事件
     getCode() {
-      this.disabledCodeBtn = true;
-      let interval = setInterval(() => {
-        if(this.number>0){
-          this.number = this.number - 1;    
-          this.btnText = this.number + 's';
-          this.$apply();      
+      if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))){
+         wx.showToast({
+           title: '请输入正确手机号', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+         return
+      }else{
+        wx.request({
+          url: this.apiPath + '/sbchcommon/util/getphonecode', 
+          data:{
+            phone:this.phone
+          }, 
+          method: 'GET',
+          dataType: 'json', 
+          success: res => {
+            console.log(res)
+            if(res.data.code == 200){
+                this.disabledCodeBtn = true;
+                let interval = setInterval(() => {
+                   if(this.number>0){
+                   this.number = this.number - 1;    
+                   this.btnText = this.number + 's';
+                  this.$apply();      
+           }
+           else{
+             this.number = 60;
+             this.disabledCodeBtn = false;
+             this.btnText = '获取验证码'
+             clearInterval(interval);
+            this.$apply();      
+          }
+           }, 1000);
         }
-        else{
-          this.number = 60;
-          this.disabledCodeBtn = false;
-          this.btnText = '获取验证码'
-          clearInterval(interval);
-          this.$apply();      
-        }
-      }, 1000);
+    },
+    fail: () => {},
+    complete: () => {}
+  });    
+  }
+},
+    getAll(){
+      this.value = Math.floor(this.myInCome*0.01)
+    },
+    getMoney(e){
+      this.value = e.detail.value
+      if(this.myInCome*0.01>this.value){
+        this.error = false
+        this.showAll = true
+      }else{
+        this.error = true
+        this.showAll = false
+      }
+    },
+    clear(){
+       this.value = 0
+    },
+    //提现开始
+    getBegin(){
+      if(this.value<=0){
+         wx.showToast({
+           title: '请输入金额', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+         return
+      }
+       if(this.value<=this.myInCome){
+         this.showShadow = true
+       }else{
+         wx.showToast({
+           title: '提现金额不足', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+       }
+    },
+    phoneInput(e){
+      this.phone = e.detail.value
+    },
+    last(){
+      if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))){
+           wx.showToast({
+           title: '请输入正确手机号', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+         return
+      }if(!this.code){
+           wx.showToast({
+           title: '请输入验证码', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+         return
+      }
+      wx.request({
+        url: this.apiPath + '/szmktuser/balance/createcashorder',
+        data: {
+          sessionkey:this.$parent.globalData.key,
+          amount:this.value*100
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          if(res.data.code == 1000){
+             console.log(res)
+             wx.request({
+               url: this.apiPath + '/szmktuser/balance/withdrawCash', 
+               data: {
+                 phone:this.phone,
+                 code:this.code,
+                 sessionkey:this.$parent.globalData.key,
+                 orderno:res.data.data.orderNo
+               },
+               method: 'GET',
+               dataType: 'json', 
+               success: res => {
+                 console.log(res.data.code)
+                 if(res.data.code == 1000){
+                   wx.showToast({
+                     title: '提现成功', 
+                     icon: 'success', 
+                     duration: 2000,
+                     mask: true, 
+                     success: res => {}
+                   }); 
+                   this.$navigate('./drawSuccess')
+                 }else{
+                    wx.showToast({
+                     title: '提现失败', 
+                     duration: 2000,
+                     mask: true, 
+                     success: res => {}
+                   });
+                 }
+               },
+               fail: () => {},
+               complete: () => {}
+             });
+             
+          }
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+      
     }
-  };  
+  }; 
+  wxs = {
+      m1: mywxs
+  } 
+  // 我的收入接口
+  getMyIncome(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/balance/queryuserbalance', 
+      data: {
+        'userid':that.$parent.globalData.userId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        that.myInCome = res.data.data.balance
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
 }
 </script>

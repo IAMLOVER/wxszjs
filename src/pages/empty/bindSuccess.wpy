@@ -1,0 +1,57 @@
+
+<style lang='less'>
+page{
+  background-color: #f2f2f2;
+  text-align: center;
+  padding-top: 220rpx;
+  image{
+    width: 390rpx;
+    height: 280rpx;
+  }
+  .tip{
+    font-size: 28rpx;
+    color: #959595;
+  }
+  button{
+    background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
+    border-radius: 22px;
+    width: 530rpx;
+    height: 88rpx;
+    color: #fff;
+    font-size: 32rpx;
+    border: none;
+    margin-top: 60rpx;
+  }
+}
+</style>
+
+<template>
+  <view class='page'>
+    <image src="{{imagePath+'sucess03.png'}}" wx:if="{{imagePath}}"/>
+    <view class="tip">绑定微信成功</view>
+    <button @tap="goIndex">前往首页</button>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "绑定成功",
+    };
+
+    data = {
+      imagePath:path.path.imagePath,
+      apiPath:path.path.apiPath
+    };
+
+    methods = {
+      goIndex(){
+        this.$switch('../index/index')
+      }
+    };
+
+    onLoad() { };
+  }
+</script>

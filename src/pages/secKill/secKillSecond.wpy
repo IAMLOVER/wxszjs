@@ -332,12 +332,16 @@ page{
         height: 24rpx;
         padding: 30rpx;
       }
-      input{
-        width: 90rpx;
-        height: 54rpx;
-        background: #EDEDED;
-        text-align: center;
-      }
+      .number{
+          width: 90rpx;
+          height: 54rpx;
+          background-color: #ededed;
+          font-size: 30rpx;
+          text-align: center;
+          display: inline-block;
+          margin: 0rpx 4rpx;
+          line-height: 54rpx;
+        }
       .controal{
         display: flex;
         align-items: center;
@@ -381,8 +385,8 @@ page{
         </view>
         <view class="produce-price">
           <text class="new">￥{{produceInfo.chaPrice*0.01}}</text>
-          <text class="old">{{produceInfo.mktPrice*0.01}}</text>
-          <text class="older">￥{{produceInfo.purPrice*0.01}}</text>
+          <text class="old">{{produceInfo.titPrice*0.01}}</text>
+          <text class="older">￥{{produceInfo.mktPrice*0.01}}</text>
         </view>
       </view>
     </view>
@@ -405,10 +409,10 @@ page{
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-price">
-            <view class="new">￥100</view>
-            <view class="old">¥245</view>
+            <view class="new">￥{{produceInfo.chaPrice*0.01 + item.minPrice*0.01}}</view>
+            <view class="old">¥{{item.minMktPrice*0.01+produceInfo.chaPrice*0.01}}</view>
           </view>
-          <view class="right-now" @tap="rightNow" data-id="{{item.id}}">
+          <view class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
             马上抢
           </view>
         </view>
@@ -440,21 +444,19 @@ page{
           </view>
            <view class="produce-two">
             <view class="two-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{rightProduceInfo.cover}}" mode="aspectFill"/>
             </view>
             <view class="two-right">
-              <view class="two-name">新庄新小莓红颜奶油草莓新鲜草莓新庄新小莓红颜奶油草莓新鲜草莓</view>
-              <view class="two-type" @tap="showTwoType">规格：20kg<image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}"/></view>
+              <view class="two-name">{{rightProduceInfo.title}}</view>
+              <view class="two-type" @tap="showTwoType">规格：{{goodsClassList[activeIndex].className}}<image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}"/></view>
               <view class="two-text">
-                <view class="price">￥2.99</view>
+                <view class="price">￥{{goodsClassList[activeIndex].salPrice*0.01}}</view>
                 <view class="count">数量：1</view>
               </view>
             </view>
             <!-- 商家商品的规格选取，根据定位到对应的位置 -->
             <view class="type-position" wx:if="{{showPosition}}">
-              <text>50ml</text>
-              <text>150ml</text>
-              <text>500ml</text>
+              <text wx:for="{{goodsClassList}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" @tap="changeIndex">{{item.className}}</text>
             </view>
           </view>
         </view>
@@ -463,19 +465,18 @@ page{
         <view class="counts">
           <view>组合数量：</view>
           <view class="controal">
-            <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="reduce"/>
-            <input type="text"/>
-            <image src="{{imagePath+'add02@2x.png'}}" wx:if="{{imagePath}}" class="add"/>
+            <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" @tap="reduceAccount" class="reduce"/>
+            <text class="number">{{account}}</text>
+            <image src="{{imagePath+'add02@2x.png'}}" wx:if="{{imagePath}}" @tap="addAccount" class="add"/>
           </view>
         </view>
 
         <!-- 确定按钮 -->
         <view class="btn-box">
-          <view class="btn">
-            确定(共￥23.98)
+          <view class="btn" @tap="payMoney">
+            确定(共￥{{m1.filter((produceInfo.chaPrice*0.01+goodsClassList[activeIndex].salPrice*0.01)*account)}})
           </view>
         </view>
-
       </view>
     </view>
   </view>
@@ -484,6 +485,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '秒杀详情'
@@ -501,19 +503,99 @@ export default class Index extends wepy.page {
     showShadow:false,
     produceId:'',
     produceInfo:{},
-    produceItem:{}
+    produceItem:{},
+    rightProduceId:'',
+    rightProduceInfo:{},
+    goodsClassList:{},
+    channelCollocation:{},
+    activeIndex:0,
+    account:0,
+    collocationId:''
   };
   methods = {
-    rightNow(){
-      this.showShadow = true;
+    rightNow(e){
+      this.showShadow = true
+      this.rightProduceId = e.currentTarget.dataset.id
+      this.collocationId = e.currentTarget.dataset.collocationid
+      this.getRightProduceClass()
     },
     closeShadow(){
-      this.showShadow = false;
+      this.showShadow = false
     },
     showTwoType(){
-      this.showPosition = !this.showPosition;
+      this.showPosition = !this.showPosition
+    },
+    changeIndex(e){
+      this.activeIndex = e.currentTarget.dataset.index
+      this.typeId = e.currentTarget.dataset.id
+    },
+     // 加
+    addAccount(){
+      if(this.account>= this.goodsClassList[this.activeIndex].stock){
+        wx.showToast({
+          title: '库存不足', 
+          icon: 'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        })
+      }else{
+        this.account++
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }
+    },
+    //减
+    reduceAccount(){
+      if(this.account>0){
+        this.account--
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }else{
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+    },
+      //购买数量的确定按钮
+    payMoney(){
+      if(this.account<=0){
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+      else{
+        var pay = {}
+        // 商品id 
+        pay.id = this.produceInfo.id
+        // 商品规格id
+        pay.classid = this.typeId
+        // 商品数量
+        pay.count = this.account
+        // 商品活动类型
+        pay.type = 3
+        // 商品活动
+        pay.activityId = this.collocationId
+        // 商品的价钱
+        pay.money = ((this.produceInfo.chaPrice*0.01+this.goodsClassList[this.activeIndex].salPrice*0.01)*this.account).toFixed(2)
+        wx.setStorage({
+          key: 'pay',
+          data: pay
+        })
+        this.getUserAddress()
+      }
     }
   }; 
+  wxs = {
+      m1: mywxs
+  }
+
   // 获取引流商品详情
   getProduceInfo(){
     var that = this
@@ -546,13 +628,64 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         console.log(res)
-        that.produceItem = res.data.data
+        that.produceItem = res.data.data.content
         that.$apply()
       },
       fail: () => {},
       complete: () => {}
     });
     
+  }
+
+  //获取马上抢点击后的商品规格
+  getRightProduceClass(){
+    var that = this
+     wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/' + that.rightProduceId,
+      method: 'get',
+      data:{
+        userid:that.$parent.globalData.userId,
+        channelId:that.produceId
+      },
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.rightProduceInfo = res.data.data.goods
+        that.goodsClassList = res.data.data.goods.goodsClassList
+        that.typeId = that.goodsClassList[this.activeIndex].id
+        // that.channelCollocation = res.data.data.goods.channelCollocation
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
+   // 获取用户的地址
+  getUserAddress(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/user/getaddress', 
+      data: {
+        userid:that.$parent.globalData.userId,
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        if(res.data.data){
+           wx.setStorage({
+            key: 'addressId',
+            data: res.data.data.id
+          });
+          that.$navigate({url:'../order/order'})
+        }else{
+          that.$navigate({url:'../address/address'})
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
   }
 }
 </script>

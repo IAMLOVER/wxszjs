@@ -1,0 +1,22 @@
+
+<style lang='less'>
+</style>
+
+<template>
+  <view class='page'></view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "空",
+    };
+
+    data = {};
+
+    methods = {};
+
+    onLoad() { };
+  }
+</script>

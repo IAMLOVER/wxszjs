@@ -5,6 +5,18 @@ page{
 }
 .image{
   position: relative;
+  swiper{
+    width: 100%;
+    height: 650rpx;
+    swiper-item{
+      width: 100%;
+      height: 650rpx;
+      image{
+        width: 100%;
+        height: 650rpx;
+      }
+    }
+  }
   image{
     width: 100%;
     height: 650rpx;
@@ -80,7 +92,7 @@ page{
 }
 .main{
   width: 100%;
-  height: 184rpx;
+  height: 164rpx;
   background-color: #fff;
   padding: 24rpx 30rpx;
   box-sizing: border-box;
@@ -90,6 +102,8 @@ page{
     font-size: 32rpx;
     color: #222;
     padding-bottom: 10rpx;
+    font-weight: 600;
+    height: 80rpx;
   }
   .produce-tip{
       display: flex;
@@ -103,7 +117,7 @@ page{
     color: #F25664;
     font-size: 28rpx;
     position: absolute;
-    bottom: 40rpx;
+    bottom: 45rpx;
     right: 30rpx;
     image{
       width: 30rpx;
@@ -313,17 +327,30 @@ page{
     }
   }
 }
+button[plain]{
+  border-color: #fff !important;  
+  line-height: 1 !important;
+  font-size: 24rpx !important;
+  padding: 0 !important;
+  color: #959595
+}
 </style>
 <template>
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <image src="../../images/index/bg_02.png"/>
+      <swiper autoplay circular>
+        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+            <image src="{{item}}"/>
+        </swiper-item>
+     </swiper>
       <view class="tip">
-        <image src="../../images/index/laba.png"/>
+        <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
           <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**7626也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**6201也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
     </view>
@@ -331,30 +358,31 @@ page{
     <view class="reduce">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">9.99-1200</text>
+        <text class="now">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
       </view>
       <view class="range">
-        满199元可用20元券
+        满{{activityInfo.standard*0.01}}元可用{{activityInfo.privilege*0.01}}元券
       </view>
     </view>
 
     <!-- 商品名称以及限购 -->
     <view class="main">
       <view class="produce-name">
-        新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
-        礼盒装 顺丰空运
+         {{produceInfo.title}}
       </view>
       <view class="produce-tip">
         <view class="limit">
           邮费：包邮
         </view>
         <view class="limit" style="flex:3;">
-            2678人购买
+             {{produceInfo.buyNum}}人购买
         </view>
       </view>
       <view class="share">
-        <image src="../../images/index/share02.png"/>
-        <text>分享</text>
+        <button open-type="share" plain="true">
+          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+          <text>分享</text>
+        </button>
       </view>
     </view>
 
@@ -373,13 +401,13 @@ page{
     <!-- 客服，立即购买 -->
     <view class="dosome">
       <view class="kefu">
-        <image src="../../images/index/kefu.png"/>
+        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
-       <view class="kefu">
-        <image src="../../images/index/store02.png"/>
+       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
+        <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
         <view>店铺</view>
-      </view>
+      </navigator>
       <view class="reduce-btn"  @tap="openShadow">
         <text>立即购买</text>
       </view>
@@ -390,14 +418,14 @@ page{
      <view class="content">
        <view class="info">
          <view class="info-left">
-           <image src ="../../images/index/timg.png"/>
+           <image src ="{{produceInfo.cover}}" mode="aspectFill"/>
          </view>
          <view class="info-right">
            <view class="price">
-             ￥150
+             ￥{{goodsClassList[activeIndex].salPrice*0.01}}
            </view>
            <view class="kuncun">
-             库存：100
+             库存：{{goodsClassList[activeIndex].stock}}
            </view>
          </view>
        </view>
@@ -408,9 +436,7 @@ page{
            规格：
          </view>
          <view class="type-item">
-           <view class="active">1kg</view>
-           <view>1kg</view>
-           <view>1kg</view>
+          <view wx:for="{{goodsClassList}}" @tap="changeIndex" class="{{index==activeIndex?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{index}}" wx:for-item="item">{{item.className}}</view>
          </view>
        </view>
 
@@ -420,14 +446,15 @@ page{
           数量
         </view>
         <view class="control">
-          <image src="../../images/index/reduce@2x.png" class="reduce-img"/>
-          <text class="number">150</text>
-          <image src="../../images/index/add@2x.png" class="add-img"/>
+          <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="reduce-img" @tap="reduceAccount"/>
+          <text class="number">{{account}}</text>
+          <image src="{{imagePath+'add@2x.png'}}" wx:if="{{imagePath}}" class="add-img" @tap="addAccount"/>
         </view>
       </view>
       <!-- 用户操作提示是否符合满减要求 -->
       <view class="tip">
-          还差49元可减20元（满199减20）
+          <text wx:if="{{haveCoupon}}">还差{{activityInfo.standard*0.01-money>0?activityInfo.standard*0.01-money:0}}可减{{activityInfo.privilege*0.01}}元（ 满{{activityInfo.standard*0.01}}减{{activityInfo.privilege*0.01}}）</text>
+          <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
       </view>
 
       <view class="line">
@@ -435,13 +462,13 @@ page{
       </view>
      <!-- 确定按钮 -->
       <view class="btn-box">
-          <view class="btn">
-            确定(共￥23.98)
+          <view class="btn" @tap="payMoney">
+            确定(共￥{{activityInfo.standard*0.01-money>0?money:money-activityInfo.privilege*0.01}})
           </view>
       </view>
 
       <!-- 关闭按钮 -->
-      <image src="../../images/index/close02@2x.png" class="close-shadow" @tap="closeShadow"/>
+      <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" class="close-shadow" @tap="closeShadow"/>
      </view>
    </view>
   </view>
@@ -449,14 +476,32 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '商品详情'
   };
-  onLoad() {
+  onLoad(options) {
+    this.produceId = options.id
+    this.getProduceInfo()
   }
   data = {
-    showShadow: false
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    showShadow: false,
+    produceId:'',
+    produceInfo:{},
+    haveCoupon:false,
+    couponId:'',
+    activityInfo:{},
+    goodsClassList:{},
+    maxPrice:'',
+    minPrice:'',
+    storeId:'',
+    activeIndex:0,
+    typeId:'',
+    account:0,
+    money:0
   };
   methods = {
     openShadow() {
@@ -464,7 +509,168 @@ export default class Index extends wepy.page {
     },
     closeShadow() {
       this.showShadow = false;
+    },
+   // 加
+    addAccount(){
+      if(this.account>= this.goodsClassList[this.activeIndex].stock){
+        wx.showToast({
+          title: '库存不足', 
+          icon: 'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        })
+      }else{
+        this.account++
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }
+    },
+    //减
+    reduceAccount(){
+      if(this.account>0){
+        this.account--
+        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      }else{
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+    },
+    //选规格
+    changeIndex(e){
+      console.log(e)
+      this.activeIndex = e.currentTarget.dataset.index
+      this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+      this.typeId = e.currentTarget.dataset.id
+    },
+      //购买数量的确定按钮
+    payMoney(){
+      if(this.account<=0){
+        wx.showToast({
+          title: '请选择最少数量',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      }
+      else{
+        var pay = {}
+        //捋一捋，如果有优惠券可以使用，即存一下
+       if(this.couponId!=''){
+          pay.have = true
+       } else{
+          pay.have = false
+       }
+
+        // 商品id 
+        pay.id = this.produceInfo.id
+        // 商品规格id
+        pay.classid = this.typeId
+        // 商品数量
+        pay.count = this.account
+        // 商品活动类型
+        pay.type = this.couponId != '' && this.activityInfo.standard*0.01-this.money <= 0?2:0
+        // 商品活动id
+        pay.activityId = this.couponId!='' && this.activityInfo.standard*0.01-this.money <= 0 ?this.couponId:0
+        // 商品的价钱
+        pay.money = this.activityInfo.standard*0.01-this.money>0?this.money:this.money-this.activityInfo.privilege*0.01
+        wx.setStorage({
+          key: 'pay',
+          data: pay
+        })
+        this.getUserAddress()
+      }
     }
   };  
+  // 获取商品详情
+  getProduceInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
+      method: 'get',
+      data:{
+        userid:that.$parent.globalData.userId
+      },
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data.goods
+        that.activityInfo = res.data.data.activity
+        that.goodsClassList = res.data.data.goods.goodsClassList
+        that.typeId = that.goodsClassList[this.activeIndex].id
+        for(var item in that.taskItems){
+          that.taskItems[item].checked = false
+        }
+        // 店铺id
+        that.storeId = res.data.data.goods.storeId
+        that.$apply()
+        that.getCoupon()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  };
+
+  // 获取用户是否有这个商品的满减活动所需要的优惠券
+  getCoupon(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/user/queryusercouponexistent', 
+      data: {
+        userid:that.$parent.globalData.userId,
+        couponid:that.activityInfo.id
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        if(res.data.data){
+          that.haveCoupon = true
+          that.couponId = res.data.data.id
+      }else{
+        that.haveCoupon = false
+        that.couponId = 0 
+      }
+      console.log(that.haveCoupon)
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+    // 获取用户的地址
+  getUserAddress(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/user/getaddress', 
+      data: {
+        userid:that.$parent.globalData.userId,
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        if(res.data.data){
+           wx.setStorage({
+            key: 'addressId',
+            data: res.data.data.id
+          });
+          that.$navigate({url:'../order/order'})
+        }else{
+          that.$navigate({url:'../address/address'})
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
 }
 </script>

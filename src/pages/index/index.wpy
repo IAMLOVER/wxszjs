@@ -198,8 +198,8 @@ page {
         margin-top: 44rpx;
         .produce-images {
           image {
-            width: 170rpx;
-            height: 170rpx;
+            width: 170rpx !important;
+            height: 170rpx !important;
             float: left;
             margin-right: 24rpx;
           }
@@ -464,7 +464,7 @@ page {
     <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
   </view>
 
-    <!-- <redPacket wx:if="{{}}"></redPacket> -->
+    <!-- <redPacket></redPacket> -->
   </view>
 </template>
 
@@ -525,7 +525,11 @@ export default class Index extends wepy.page {
         this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
       }
     }
-};
+  };
+
+  components = {
+    redPacket
+  }
 
   getRecommend(){
     var that =  this

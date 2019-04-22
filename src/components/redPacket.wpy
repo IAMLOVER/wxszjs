@@ -1,7 +1,7 @@
 <!--  -->
 <template>
-  <view class='container'>
-    <view class="main">
+  <view class='container' wx:if="{{show}}">
+    <view class="main-red">
       <image src="{{imagePath+'bg_02.png'}}" wx:if="{{imagePath}}" class="bg-top"/>
       <view class="tip">恭喜你获得一张优惠券</view>
       <view class="red">
@@ -17,7 +17,7 @@
       <!-- 倒数3秒的效果 -->
       <view style="text-align:center;font-size:28rpx;color:#fff;padding-top:80rpx;">知道了（{{secend}}s）</view>
     </view>
-    <image src="{{imagePath+'close.png'}}" wx:if="{{imagePath}}" class="close"/>
+    <image src="{{imagePath+'close.png'}}" wx:if="{{imagePath}}" @tap="closeShadow" class="close"/>
   </view>
 </template>
 
@@ -29,21 +29,28 @@
 
     data = {
       imagePath:path.path.imagePath,
-      secend:3
+      secend:3,
+      show:true
     };
 
-    methods = {};
+    methods = {
+      closeShadow(){
+        this.show = false
+      }
+    };
 
     computed = {};
 
     onLoad() { 
        let interval = setInterval(() => {
         if(this.secend >0){
-           this.secend = this.secend - 1;
-           this.$apply();
+           this.secend = this.secend - 1
+           this.$apply()
         }
         else{
-          clearInterval(interval);
+          this.show = false
+           this.$apply()
+          clearInterval(interval)
         }
       }, 1000);
     };
@@ -59,7 +66,7 @@
   left: 0;
   top: 0;
   background-color: rgba(0,0,0,0.3);
-  .main{
+  .main-red{
     width: 556rpx;
     height: 630rpx;
     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_03.png');

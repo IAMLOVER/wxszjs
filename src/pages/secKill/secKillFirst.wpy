@@ -196,10 +196,10 @@ page{
     <!-- 商品大图和滚动文字 -->
     <view class="image">
       <swiper autoplay circular>
-              <swiper-item>
-                  <image mode="aspectFill" src="{{produceInfo.cover}}" />
-              </swiper-item>
-      </swiper>
+       <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+          <image src="{{item}}"/>
+       </swiper-item>
+     </swiper>
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
@@ -232,7 +232,7 @@ page{
           每人限购1份
         </view>
       </view>
-      <view class="share">
+      <view class="share" @tap="shareSecKill">
         <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
         <text>分享有奖</text>
       </view>
@@ -280,7 +280,11 @@ export default class Index extends wepy.page {
     produceId:'',
     produceInfo:{}
   };
-  methods = {};  
+  methods = {
+    shareSecKill(){
+      this.$navigate('./choseGroup',{id:this.produceId})
+    }
+  };  
   // 获取商品详情
   getProduceInfo(){
     var that = this

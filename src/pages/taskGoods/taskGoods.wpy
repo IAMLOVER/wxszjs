@@ -687,7 +687,7 @@ button[plain]{
       <view class="content">
         <view class="title">
           <view>选择任务</view>
-          <view><image src="../../images/index/close02@2x.png" @tap="closeTaskChoseShadow"/></view>
+          <view><image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow"/></view>
         </view>
         <view class="chose-task-items">
             <radio-group class="group" bindchange="radioChange">
@@ -838,6 +838,9 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
       method: 'get',
+      data:{
+        userid:that.$parent.globalData.userId
+      },
       dataType: 'json', 
       success: res => {
         console.log(res)

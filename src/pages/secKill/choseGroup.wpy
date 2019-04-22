@@ -5,6 +5,14 @@ page{
 }
 .image{
   position: relative;
+  swiper{
+    height: 650rpx;
+    width: 100%;
+  image{
+       height: 650rpx;
+       width: 100%;
+    }
+  }
   image{
     width: 100%;
     height: 650rpx;
@@ -112,6 +120,8 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        font-weight: 600;
+        height: 100rpx;
       }
       .hot-wrapper{
         display: flex;
@@ -338,27 +348,30 @@ page{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <image src="../../images/index/bg_02.png"/>
+       <swiper autoplay circular>
+       <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+          <image src="{{item}}"/>
+       </swiper-item>
+     </swiper>
     </view>
     <!-- 秒杀价和热度 -->
     <view class="skill">
       <view class="price">
         <text>秒杀价:</text>
         <text class="type">￥</text>
-        <text class="now">9.99</text>
-        <text class="old">￥120</text>
+        <text class="now">{{produceInfo.chaPrice*0.01}}</text>
+        <text class="old">￥{{produceInfo.mktPrice*0.01}}</text>
       </view>
       <view class="hot">
-        <image src="../../images/index/hot02.png"/>
-        <text>热度2880</text>
+        <image src="{{imagePath+'hot02.png'}}" wx:if="{{imagePath}}"/>
+        <text>热度{{produceInfo.visitNum}}</text>
       </view>
     </view>
 
     <!-- 商品名称以及限购 -->
     <view class="main">
       <view class="produce-name">
-        新庄新小莓红颜奶油草莓新鲜草莓现摘发货 水果
-        礼盒装 顺丰空运
+       {{produceInfo.title}}
       </view>
     </view>
 
@@ -375,38 +388,30 @@ page{
       </view>
       <view class="new-task">
           <view class="task-produces">
-              <view  wx:for="{{arr}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" class="item">
+              <view  wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" class="item">
                   <view class="item-left">
-                      <image src="../../images/index/timg.png"/>
+                      <image src="{{item.cover}}" mode="aspectFill" lazy-load/>
                   </view>
                   <view class="item-right">
-                      <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+                      <view class="item-title">{{item.title}}</view>
                        <view class="commision">
-                            佣金：1%-5%
+                            佣金：{{item.minPercent}}%-{{item.maxPercent}}%
                         </view>
                         <view class="hot-wrapper">
                           <view class="hot">
-                            <image src="../../images/index/hot01.png"/>              
+                            <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>              
                             <text>热度964</text>
                           </view>
-                          <view class="tip" @tap="showTaskDetail" data-index="{{index}}">
-                            任务详情<image src="../../images/index/more copy@3x.png" class="{{item.hide?'active':''}}"/>
+                          <view class="tip" @tap="showTaskDetail" data-id="{{item.id}}" data-index="{{index}}">
+                            任务详情<image src="{{imagePath+'more copy@3x.png'}}" wx:if="{{imagePath}}"/>
                           </view>
                         </view>
                   </view>
-                  <view class="item-bottom" wx:if="{{item.hide}}" data-index="{{index}}">
-                    <view class="time-range">在4个小时内成功推荐者，可获得相应佣金</view>
-                    <view class="task-item">
-                      <view class="task-item-left">任务1：</view>
-                      <view class="task-item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
-                    </view>
-                    <view class="task-item">
-                      <view class="task-item-left">任务1：</view>
-                      <view class="task-item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
-                    </view>
-                    <view class="task-item">
-                      <view class="task-item-left">任务1：</view>
-                      <view class="task-item-right">推荐<text>10</text>人购，成功推荐可获佣金：总成交额<text>1</text>%</view>
+                  <view class="item-bottom">
+                    <view class="time-range">在{{targetGoodsDetails[0].duration}}个小时内成功推荐者，可获得相应佣金</view>
+                    <view class="task-item" wx:for="{{targetGoodsDetails}}" wx:key="{{index}}" wx:for-item="item">
+                      <view class="task-item-left">任务{{index+1}}：</view>
+                      <view class="task-item-right">推荐<text>{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text>{{item.percent}}</text>%</view>
                     </view>
                   </view>
               </view>
@@ -429,22 +434,22 @@ page{
     </view>
 
     <!-- 选择任务弹出框 -->
-    <view class="chose-task-shadow">
+    <view class="chose-task-shadow" wx:if="{{showChoseTask}}">
       <view class="content">
         <view class="title">
           <view>选择任务</view>
-          <view><image src="../../images/index/close02@2x.png"/></view>
+          <view><image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow"/></view>
         </view>
         <view class="chose-task-items">
             <radio-group class="group" bindchange="radioChange">
-              <view class="label-2" wx:for="{{radioItems}}">
-                 <label class="label-2__text" for="{{item.name}}">
-                  <text>{{item.name}}</text>
+              <view class="label-2" wx:for="{{targetGoodsDetails}}" wx:for-item="item" wx:key="{{index}}">
+                 <label class="label-2__text" for="{{item.id}}">
+                  <text>推荐<text style="color:#F25664">{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
                   <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
                      <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
                  </view>
                  </label>
-               <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}"></radio>
+               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
               </view>
            </radio-group>
         </view>
@@ -459,19 +464,28 @@ page{
 
 <script>
 import wepy from 'wepy';
+import path from '../../common/path.js';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '选择组合商品'
   };
-  onLoad() {
+  onLoad(options) {
+    // 引流品的id
+    this.channelId = options.id
+    this.getProduceInfo()
+    this.getTargetGoods()
   }
   data = {
-   arr:[
-    { 1:'A',hide:false},
-    { 2:'B',hide:false},
-    { 3:'C',hide:false},
-   ],
+   imagePath:path.path.imagePath,
+   apiPath:path.path.apiPath,
+   channelId:'',
+   produceInfo:{},
+   targetGoods:{},
+   targetGoodsId:{},
+   targetGoodsDetails:{},
+   choseTaskId:'',
    showRule:false,
+   showChoseTask:false,
    radioItems: [
       {name: '推荐10人购，成功推荐可获佣金：总成交额1%', value: '1'},
       {name: '推荐10人购，成功推荐可获佣金：总成交额100%', value: '2'},
@@ -480,10 +494,8 @@ export default class Index extends wepy.page {
   };
   methods = {
     showTaskDetail(e){
-      var that = this;
-      let idx = e.currentTarget.dataset.index;
-      let hide = that.arr[idx].hide;
-      that.arr[idx].hide = !hide;
+       this.targetGoodsId = e.currentTarget.dataset.id;
+       this.getTargetDetail()
     },
     showRule() {
       this.showRule = true;
@@ -491,18 +503,83 @@ export default class Index extends wepy.page {
     closeRule(){
       this.showRule = false;
     },
-      radioChange(e) {
-    const checked = e.detail.value
-    const changed = {}
-    for (let i = 0; i < this.data.radioItems.length; i++) {
-      if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
-        changed['radioItems[' + i + '].checked'] = true
-      } else {
-        changed['radioItems[' + i + '].checked'] = false
+     openTaskChoseShadow(){
+      this.showChoseTask = true
+    },
+    closeTaskChoseShadow(){
+      this.showChoseTask = false
+    },
+    radioChange(e) {
+      const checked = e.detail.value
+      const changed = {}
+       for (let i = 0; i < this.data.taskItems.length; i++) {
+        if (checked.indexOf(this.data.taskItems[i].id) !== -1) {
+          changed['taskItems[' + i + '].checked'] = true
+         } else {
+          changed['taskItems[' + i + '].checked'] = false
+        }
       }
-    }
-    this.setData(changed)
+      this.setData(changed)
+      this.choseTaskId = e.detail.value
+     }
+   }
+  //先获取引流品
+  //获取商品详情
+  getProduceInfo(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktbackstage/channel/info',
+      method: 'get',
+      data:{
+        'channelInfoId':that.channelId
+      },
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.produceInfo = res.data.data.channel
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
   }
-  };  
+
+  //  引流品对应的任务商品
+  getTargetGoods(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsInfo/collocation/targetGoods',
+      data: {
+        channelId:that.channelId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.targetGoods = res.data.data.content
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+  }
+  // 根据任务商品id获取任务详情列表
+  getTargetDetail(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/goodsTarget/list/' + this.targetGoodsId,
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.targetGoodsDetails = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>
