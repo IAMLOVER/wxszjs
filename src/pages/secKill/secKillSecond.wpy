@@ -377,7 +377,7 @@ page{
     <!-- 商品 -->
     <view class="produce">
       <view class="produce-left">
-        <image src="{{produceInfo.cover}}" mode="aspectFill"/>
+        <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
       </view>
       <view class="produce-right">
         <view class="produce-title">
@@ -402,7 +402,7 @@ page{
             <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="{{item.cover}}" lazyload mode="aspectFill"/>
+            <image src="{{item.picUrl1}}" lazyload mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
@@ -432,7 +432,7 @@ page{
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="{{produceInfo.cover}}" mode="aspectFill"/>
+              <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="one-right">
               <view class="one-name">{{produceInfo.title}}</view>
@@ -444,7 +444,7 @@ page{
           </view>
            <view class="produce-two">
             <view class="two-left">
-              <image src="{{rightProduceInfo.cover}}" mode="aspectFill"/>
+              <image src="{{rightProduceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="two-right">
               <view class="two-name">{{rightProduceInfo.title}}</view>

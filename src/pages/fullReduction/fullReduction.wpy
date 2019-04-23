@@ -155,9 +155,9 @@ page{
 
      <!-- 商品列表 -->
     <view class="items">
-        <navigator url="./fullProduceDetail?id={{item.id}}" class="item" wx:for="{{productItem}}" wx:key="{{index}}" data-id="{{item.id}}">
+        <navigator url="./fullProduceDetail?id={{item.id}}" wx:for-item="item" class="item" wx:for="{{productItem}}" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.cover}}" mode="aspectFill" lazyload/>
+              <image src="{{item.picUrl1}}" mode="aspectFill" lazyload/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>

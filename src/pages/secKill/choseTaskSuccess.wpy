@@ -197,7 +197,7 @@ button[plain]{
     <view class="task-produces">
          <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
           <view class="item-left">
-              <image src="{{item.cover}}" mode="aspectFill"/>
+              <image src="{{item.picUrl1}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>

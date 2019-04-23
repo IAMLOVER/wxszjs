@@ -240,7 +240,7 @@ page{
   <view class="produce-items" wx:if="{{showProduce}}">
     <view class="item" wx:for="{{produceArr}}" wx:key="index"  wx:for-item="item" data-index="{{item.id}}" data-type="{{item.activityType}}" @tap="goDetails">
       <view class="item-left">
-        <image src="{{item.cover}}" lazyload mode="aspectFill"/>
+        <image src="{{item.picUrl1}}" lazyload mode="aspectFill"/>
       </view>
       <view class="item-right">
         <view class="item-name">{{item.title}}</view>
@@ -248,8 +248,8 @@ page{
            <view class="item-detail">
             <view class="item-money">
             <text class="mt">￥</text>
-            <text class="mc">{{item.minPrice}}</text>
-            <i class="mi">{{item.maxPrice}}</i>
+            <text class="mc">{{item.minPrice*0.01}}</text>
+            <i class="mi">{{item.maxPrice*0.01}}</i>
            </view>
            <view data-store="{{item.storeId}}">
             <text class="item-store">{{item.storeName}}</text>
@@ -270,7 +270,7 @@ page{
     <navigator url="../shop/shopDetail?id={{item.id}}" class="item" wx:for="{{storeArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
     <view class="item-title">
       <view class="item-detail">
-        <image src="../../images/index/timg.png" class="logo"/>
+        <image src="{{item.logo?logo:'../../images/index/timg.png'}}" class="logo"/>
         <text>{{item.name}}</text>
       </view>
       <view class="button-wrapper">
@@ -279,7 +279,7 @@ page{
        </view>
       </view>
     <view class="item-images">
-      <image wx:for="{{item.goods}}" wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.cover}}"/>
+      <image wx:for="{{item.goods}}" wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.picUrl1}}"/>
     </view>
     </navigator>
   </view>
@@ -347,11 +347,6 @@ export default class Index extends wepy.page {
   // 获取商品搜索结果
   getProdece(){
     var that = this;
-    wepy.showLoading({
-      title: '加载中...', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search',
       data: 'data', //请求的参数",
@@ -374,16 +369,8 @@ export default class Index extends wepy.page {
         that.$apply()
       },
       fail: () => {
-        wepy.showToast({
-          title: '加载失败', //提示的内容,
-          icon: 'false', //图标,
-          duration: 2000, //延迟时间,
-          mask: true, //显示透明蒙层，防止触摸穿透,
-          success: res => {}
-        });
       },
       complete: () => {
-        wepy.hideLoading();
       }
     });
     
@@ -391,11 +378,6 @@ export default class Index extends wepy.page {
   // 获取商店搜索结果
   getStore(){
      var that = this
-     wepy.showLoading({
-      title: '加载中...', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
      wx.request({
       url: that.apiPath + '/szmktstore/storeInfo/search',
       data: 'data', //请求的参数",
@@ -425,7 +407,6 @@ export default class Index extends wepy.page {
         });
       },
       complete: () => {
-        wepy.hideLoading();
       }
     });
   }

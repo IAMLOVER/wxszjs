@@ -405,7 +405,7 @@ page {
             </view>
           <view class="images">
             <view class="produce-images">
-            <image src="{{goods.cover}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
+            <image src="{{goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
           </view>
           <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
           </view>
@@ -422,7 +422,7 @@ page {
        <text class="bar"></text>
         最新单品
         </view>
-      <view>
+      <view @tap="goNew">
         <text class="more">更多</text>
         <image src="../../images/index/more02.png"/>
       </view>
@@ -431,7 +431,7 @@ page {
        <view class="produce-item"  @tap="goDetails" wx:for="{{newProduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}"  data-type="{{item.activityType}}">
          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{item.cover}}" mode="aspectFill" lazy-load/>
+              <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load='{{true}}'/>
          </view>
          <view class="produce-name">
           {{item.title}}
@@ -524,6 +524,9 @@ export default class Index extends wepy.page {
       }else if(e.currentTarget.dataset.type == 2){
         this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
       }
+    },
+    goNew(){
+      this.$switch('../classification/classification')
     }
   };
 

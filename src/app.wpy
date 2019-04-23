@@ -107,15 +107,17 @@ export default class extends wepy.app {
           wx.getSetting({
             success: function (res) {
                 if (res.authSetting['scope.userInfo']) {
-                    wx.getUserInfo({
-                        success: function (res) {
-                            var encryptedData = res.encryptedData;
-                            var iv = res.iv;
-                           wx.login({
+                   wx.login({
                                 success: res => {
                                      // 获取到用户的 code 之后：res.code
                                 that.code = res.code 
-                                wx.request({
+                                  wx.getUserInfo({
+                                    success: function (res) {
+                                    var encryptedData = res.encryptedData;
+                                    var iv = res.iv; 
+                                    console.log(res)
+                                    that.globalData.avatarUrl = res.userInfo.avatarUrl
+                                             wx.request({
                                   url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
                                   header: {
                                   'content-type': 'application/x-www-form-urlencoded'
@@ -138,14 +140,14 @@ export default class extends wepy.app {
                                   fail: () => {
                                    },
                                   complete: () => {}
-                                  });
-                                }
-                            });                  
-                        }
-                    });
-                    // wx.switchTab({
-                    //   url:'/pages/index/index'
-                    // })
+                                  });               
+                                  }
+                                });
+                              }
+                            });
+                    wx.switchTab({
+                      url:'/pages/index/index'
+                    })
                 }
                 else{
                    wx.redirectTo({
@@ -158,6 +160,7 @@ export default class extends wepy.app {
   globalData = {
     userId:'',
     userName:'',
+    avatarUrl:'',
     identityType:'',
     key:''
   }

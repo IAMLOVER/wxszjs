@@ -343,7 +343,7 @@ button[plain]{
     <view class="general">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
+        <text class="now">{{produceInfo.minPrice*0.01}}</text>
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
@@ -377,7 +377,7 @@ button[plain]{
         <view class="line"></view>
       </view>
       <view class="detail">
-        <image src="../../images/index/timg.png"/>
+       <rich-text nodes="{{produceInfo.description}}"></rich-text>
       </view>
     </view>
 
@@ -401,7 +401,7 @@ button[plain]{
      <view class="content">
        <view class="info">
          <view class="info-left">
-           <image src ="{{produceInfo.cover}}" mode="aspectFill"/>
+           <image src ="{{produceInfo.picUrl1}}" mode="aspectFill"/>
          </view>
          <view class="info-right">
            <view class="price">

@@ -105,16 +105,17 @@ export default class Index extends wepy.page {
   }
   queryUserInfo(e){
     var that = this;
-      wx.getUserInfo({
-          success: function (res) {
-          var encryptedData = res.encryptedData
-          console.log(encryptedData)
-          var iv = res.iv
-           wx.login({
+              wx.login({
             success: res => {
             // 获取到用户的 code 之后：res.code
                that.code = res.code 
                console.log(res.code)
+                 wx.getUserInfo({
+          success: function (res) {
+          var encryptedData = res.encryptedData
+          console.log(encryptedData)
+          var iv = res.iv      
+             that.globalData.avatarUrl = res.userInfo.avatarUrl
                 wx.request({
                 url: that.apiPath + '/szmktuser/user/authorize',
                 header: {
@@ -143,11 +144,11 @@ export default class Index extends wepy.page {
                 fail: () => {
                 },
                 complete: () => {}
-            });
-             }
-            });                  
+            });            
         }
     });
+             }
+            });
   }
 }
 </script>

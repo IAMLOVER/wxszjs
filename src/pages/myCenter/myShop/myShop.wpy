@@ -359,7 +359,7 @@
         <view class="top">成交量Top3</view>
         <view class="top-wrapper">
             <view class="top-list" wx:for="{{topGoods.saleTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
-                <image src="{{item.cover}}" mode="aspectFill"/>
+                <image src="{{item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
                 <text class="purchases">345人购买</text> -->
@@ -368,7 +368,7 @@
         <view class="top">浏览量Top3</view>
         <view class="top-wrapper">
             <view class="top-list" wx:for="{{topGoods.visitTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
-                <image src="{{item.cover}}" mode="aspectFill"/>
+                <image src="{{item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
                 <text class="purchases">345人购买</text> -->
@@ -387,7 +387,7 @@
         </view>
         <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==0&&reduceArr.length>0}}">
             <navigator url="../../fullReduction/fullProduceDetail?id={{item.id}}" class="goods-list" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-                <image src="{{item.cover}}" mode="aspectFill" lazyload class="goods-pic"/>
+                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload class="goods-pic"/>
                 <text class="name">{{item.title}}</text>
                 <text class="price">￥{{item.minPrice}}</text>
                 <view class="active">满{{item.standard}}减{{item.privilege}}</view>
@@ -395,7 +395,7 @@
         </view>
         <view class="mission-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==1&&taskArr.length>0}}">
             <navigator url="../../taskGoods/taskGoods?id={{item.id}}" class="mission-list" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-                <image src="{{item.cover}}" mode="aspectFill" lazyload class="image"/>
+                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload class="image"/>
                 <view class="text">
                     <view class="name">{{item.title}}</view>
                     <view class="commission"> 佣金：{{item.minPercent}}%-{{item.maxPercent}}%</view>
@@ -412,7 +412,7 @@
             <view class="goods-list" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
                 <view class="active-ar" wx:if="{{item.activityType == 2}}">满减</view>
                 <view class="active-mission" wx:if="{{item.activityType == 1}}">任务</view>
-                <image src="{{item.cover}}" mode="aspectFill" lazy-load class="goods-pic"/>
+                <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load class="goods-pic"/>
                 <text class="name">{{item.title}}</text>
                 <text class="price">￥{{item.minPrice}}</text>
                 <view class="active">{{item.buyNum}}人购买</view>

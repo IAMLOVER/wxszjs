@@ -136,7 +136,7 @@
   <view class="container">
     <view class="header">
       <view class="avatar">
-        <image src="{{imagePath+'default@3x.png'}}" wx:if="{{imagePath}}"/>
+        <image src="{{avatarUrl}}" wx:if="{{avatarUrl}}"/>
       </view>
       <text class="name" style="color:#fff">{{userName}}</text>
       <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==1}}" class="head-type"/>
@@ -192,7 +192,7 @@
         </view>
         <view class="item-text">我的优惠券</view>
       </navigator>
-       <navigator url="../myShop/myShop" class="item">
+       <navigator url="../myShop/myShop" class="item" wx:if="{{identityType>=1}}">
         <view class="item-icon">
           <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
         </view>
@@ -218,7 +218,8 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     identityType:'',
     userName:'',
-    orderForWait:0
+    orderForWait:0,
+    avatarUrl:''
   };
   methods={
   };
@@ -228,6 +229,8 @@ export default class Index extends wepy.page {
   onLoad() {
     this.identityType = this.$parent.globalData.identityType
     this.userName = this.$parent.globalData.userName
+    this.avatarUrl = this.$parent.globalData.avatarUrl
+    console.log(this.avatarUrl)
   }
    getOrderList(){
         var that = this 

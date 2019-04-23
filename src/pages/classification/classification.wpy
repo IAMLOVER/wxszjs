@@ -178,9 +178,9 @@ page{
         </veiw>
         <view class="main-right">
           <scroll-view class="items" scroll-y scroll-with-animation>
-            <view class="item" @tap="goDetails" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
+            <view class="item" @tap="goDetails" data-id="{{item.id}}" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
               <view class="item-left">
-                <image src="{{item.cover}}" mode="aspectFill" lazyload/>
+                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload/>
               </view>
               <view class="item-right">
                 <view class="item-title">
@@ -189,7 +189,7 @@ page{
                 <view class="item-info">
                   <view class="price">
                     <text>￥</text>
-                    <text>{{item.minPrice}}</text>
+                    <text>{{item.minPrice*0.01}}</text>
                   </view>
                   <view class="how-many">
                     {{item.buyNum}}人购买

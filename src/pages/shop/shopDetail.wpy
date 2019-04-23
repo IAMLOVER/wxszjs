@@ -317,7 +317,7 @@ page{
       </view>
     </view>
     <!-- 最新满减 -->
-  <view class="new-reduction">
+  <view class="new-reduction" wx:if="{{reduceArr.length>0}}">
     <view class="title">
       <view class="tip">
        <text class="bar"></text>
@@ -333,7 +333,7 @@ page{
     <view class="reduce-produces">
        <navigator url='../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.cover}}"  mode="aspectFill"/>
+              <image src="{{item.picUrl1}}"  mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -344,19 +344,19 @@ page{
             <view class="item-price">
               <view class="price">
                 <text>￥</text>
-                <text class="really">{{item.minPrice}}</text>
+                <text class="really">{{item.minPrice*0.01}}</text>
               </view>
             </view>
           </view>
           <view class="tip">
-            满{{item.standard}}减{{item.privilege}}
+            满{{item.standard*0.01}}减{{item.privilege*0.01}}
           </view>
         </navigator>
     </view>
   </view>
 
   <!-- 最新任务 -->
-  <view class="new-task">
+  <view class="new-task" wx:if="{{taskArr.length>0}}">
     <view class="title">
       <view class="tip">
        <text class="bar"></text>
@@ -372,7 +372,7 @@ page{
     <view class="task-produces">
        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.cover}}" mode="aspectFill"/>
+              <image src="{{item.picUrl1}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -392,7 +392,7 @@ page{
   </view>
 
   <!-- 最新单品 -->
-  <view class="new-produce">
+  <view class="new-produce" wx:if="{{newArr.length>0}}">
      <view class="title">
       <view class="tip">
        <text class="bar"></text>
@@ -403,14 +403,14 @@ page{
        <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{item.cover}}" mode="aspectFill"/>
+              <image src="{{item.picUrl1}}" mode="aspectFill"/>
          </view>
          <view class="produce-name">
           <text>{{item.title}}</text>
           </view>
         <view class="produce-money">
             <text class="money-type">￥</text>
-            <text class="number">{{item.minPrice}}</text>
+            <text class="number">{{item.minPrice*0.01}}</text>
           </view>
         </view>
         <!-- 商品销售类型(满减，任务) -->

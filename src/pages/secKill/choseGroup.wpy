@@ -390,7 +390,7 @@ page{
           <view class="task-produces">
               <view @tap="openTaskChoseShadow" wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" class="item">
                   <view class="item-left">
-                      <image src="{{item.cover}}" mode="aspectFill" lazy-load/>
+                      <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load/>
                   </view>
                   <view class="item-right">
                       <view class="item-title">{{item.title}}</view>
