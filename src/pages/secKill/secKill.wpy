@@ -196,6 +196,11 @@ export default class Index extends wepy.page {
     },
   };
   getSeckills(){
+    wx.showLoading({
+      title: '加载中',
+      mask: true, 
+      success: res => {}
+    });
     wx.request({
       url: this.apiPath + '/szmktbackstage/channel/secKill/search',
       data: {keyWord:this.searchValue},
@@ -206,11 +211,12 @@ export default class Index extends wepy.page {
         this.produceItems = data
         console.log(data);
         this.$apply();
+        wx.hideLoading();
       },
       fail: () => {
-         wepy.showToast({
+         wx.showToast({
           title: '加载失败', 
-          icon: 'fail', 
+          icon: 'none', 
           duration: 2000, 
           mask: true, 
           success: res => {}

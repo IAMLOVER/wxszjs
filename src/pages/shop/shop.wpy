@@ -206,6 +206,7 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     classArr: [],
     idx:-1,
+    sortType:2,
     newSelect:true,
     classifyId:'',
     shopArr:{}
@@ -220,6 +221,9 @@ export default class Index extends wepy.page {
     choseNew(){
       this.newSelect = true
       this.idx = -1
+      this.sortType = 2
+       this.classifyId =''
+      this.getShop()
     },
     navSearch() {
       this.$navigate({url: '../search/search'})
@@ -254,9 +258,10 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/storeInfo/search',
       data: {
-        'classifyId': that.classifyId
+        'classifyId': that.classifyId,
+        'sortType':that.sortType
       },
-      method: 'post',
+      method: 'get',
       dataType: 'json',
       success: res => {
         console.log(res)

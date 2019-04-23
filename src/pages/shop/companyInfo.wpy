@@ -58,7 +58,7 @@ page{
     <view class="company-info">
       <view class="info">
         <view class="info-name">
-          深圳市荟友网络科技有限公司
+          {{companyInfo.name}}
         </view>
         <view class="input">
           <view>法人代表</view>

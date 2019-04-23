@@ -1,4 +1,4 @@
-<style lang="css" src="./style/weui.css">
+<style src="./style/weui.wxss">
 </style>
 
 <script>
@@ -31,6 +31,7 @@ export default class extends wepy.app {
       'pages/fullReduction/fullReduction',
       'pages/fullReduction/fullProduceDetail',
       'pages/generalGoods/generalGoods',
+      'pages/generalGoods/taskGenralGoods',
       'pages/taskGoods/taskGoods',
       'pages/classification/classification',
       'pages/shop/shop',

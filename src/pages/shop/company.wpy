@@ -151,7 +151,7 @@ button[plain]{
            wx:if="{{!showEmpty}}">
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
-          <image src="{{item.item}}" class="slide-image"/>
+          <image src="{{item}}" class="slide-image"/>
         </swiper-item>
       </repeat>
    </swiper>
@@ -165,7 +165,7 @@ button[plain]{
          {{companyInfo.companyName}}
        </view>
        <view class="info-type">
-         {{companyInfo.description}}
+        欢迎大家联系我们
        </view>
      </view>
    </view>
@@ -196,6 +196,7 @@ button[plain]{
      <view class="title">
        企业介绍
      </view>
+     <rich-text nodes="{{companyInfo.description}}"></rich-text>
    </view>
 
 
@@ -223,17 +224,7 @@ export default class Index extends wepy.page {
   data = {
      imagePath:path.path.imagePath,
      apiPath:path.path.apiPath,
-     swiperimgUrls: [
-      {
-        item: '../../images/index/timg.png'
-      },
-      {
-        item: '../../images/index/timg.png'
-      },
-      {
-        item: '../../images/index/timg.png'
-      }
-    ],
+     swiperimgUrls: [],
     indicatorDots: false,
     autoplay: true,
     interval: 3000,
@@ -261,6 +252,7 @@ export default class Index extends wepy.page {
           that.$apply()
         }else{
           that.companyInfo = res.data.data
+          that.swiperimgUrls = res.data.data.imageLlist
           that.companyInfo.updateTime = time.formatTime(that.companyInfo.updateTime,'Y年M月D日')
           that.$apply()
           wx.setStorage({

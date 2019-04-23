@@ -535,6 +535,7 @@ export default class Index extends wepy.page {
       }
       else{
         var pay = {}
+        pay.collocationId = ''
         // 商品id 
         pay.id = this.produceInfo.id
         // 商品规格id
@@ -561,6 +562,9 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
       method: 'get',
+      data:{
+        'userid':that.$parent.globalData.userId
+      },
       dataType: 'json', 
       success: res => {
         console.log(res)

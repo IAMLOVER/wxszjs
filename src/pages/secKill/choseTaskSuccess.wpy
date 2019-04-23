@@ -163,6 +163,9 @@ page{
     }
   }
 }
+button[plain]{
+  border-color: transparent !important;  
+}
 </style>
 <template>
   <view class="page">
@@ -171,15 +174,17 @@ page{
           <view>你成功领取了任务</view>
           <view>为了奖金快去完成任务吧！</view>
           <view class="time-range">
-            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：4小时
+            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：{{taskForShare.duration}}小时
           </view>
           <view class="count">
-            <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}"/>任务数量：100
+            <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}"/>任务数量：{{taskForShare.target}}
           </view>
           <view class="sanjiao">
           </view>
           <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:84rpx;"/>
-          <view class="send">立即转发拼团</view>
+          <button open-type="share" plain="true">
+            <view class="send">立即转发拼团</view>
+          </button>
       </view>
     </view>
 
@@ -190,40 +195,22 @@ page{
       </view>
        <view class="new-task">
     <view class="task-produces">
-       <view class="item">
+         <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
           <view class="item-left">
-              <image src="../../images/index/timg.png"/>
+              <image src="{{item.cover}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
+            <view class="item-title">{{item.title}}</view>
             <view class="commision">
-              佣金：1%-5%
+              佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-              <image src="../../images/index/hot01.png"/>              
-              <text>拼团总数：1.8w</text>
+              <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>              
+              <text>拼团总数：{{item.visitNum}}</text>
             </view>
           </view>
           <view class="tip">
-            已经有20人领取
-          </view>
-        </view>
-         <view class="item">
-          <view class="item-left">
-              <image src="../../images/index/timg.png"/>
-          </view>
-          <view class="item-right">
-            <view class="item-title">新庄新小莓红颜奶油草莓新鲜草莓现摘发货</view>
-            <view class="commision">
-              佣金：1%-5%
-            </view>
-            <view class="hot">
-              <image src="../../images/index/hot01.png"/>              
-              <text>拼团总数：1.8w</text>
-            </view>
-          </view>
-          <view class="tip">
-            已经有20人领取
+            已经有{{item.count}}人领取
           </view>
         </view>
     </view>
@@ -240,10 +227,55 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '任务领取成功'
   };
   onLoad() {
+    this.taskForShare = wx.getStorageSync('taskForShare')
+    this.getTaskDetail()
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    produceId:'',
+    otherArr:{},
+    taskForShare:{}
   };
-  methods = {};  
+  methods = {
+     onShareAppMessage: function (ops) {
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: '神州集市小程序',
+       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid,
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+ }
+  };  
+  // 获取并展示两个随机任务
+  getTaskDetail(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/randomtarget',
+      data: {
+        targetid:that.taskForShare.targetid
+      },
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.otherArr = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

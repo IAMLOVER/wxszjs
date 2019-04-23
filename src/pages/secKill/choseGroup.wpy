@@ -388,7 +388,7 @@ page{
       </view>
       <view class="new-task">
           <view class="task-produces">
-              <view  wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" class="item">
+              <view @tap="openTaskChoseShadow" wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" class="item">
                   <view class="item-left">
                       <image src="{{item.cover}}" mode="aspectFill" lazy-load/>
                   </view>
@@ -402,12 +402,12 @@ page{
                             <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>              
                             <text>热度964</text>
                           </view>
-                          <view class="tip" @tap="showTaskDetail" data-id="{{item.id}}" data-index="{{index}}">
-                            任务详情<image src="{{imagePath+'more copy@3x.png'}}" wx:if="{{imagePath}}"/>
+                          <view class="tip" catchtap="showTaskDetail" data-id="{{item.id}}" data-index="{{index}}">
+                            任务详情<image src="{{imagePath+'more copy@3x.png'}}" wx:if="{{imagePath}}" class="{{item.hide?'active':''}}"/>
                           </view>
                         </view>
                   </view>
-                  <view class="item-bottom">
+                  <view class="item-bottom" wx:if="{{item.hide}}">
                     <view class="time-range">在{{targetGoodsDetails[0].duration}}个小时内成功推荐者，可获得相应佣金</view>
                     <view class="task-item" wx:for="{{targetGoodsDetails}}" wx:key="{{index}}" wx:for-item="item">
                       <view class="task-item-left">任务{{index+1}}：</view>
@@ -440,7 +440,7 @@ page{
           <view>选择任务</view>
           <view><image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow"/></view>
         </view>
-        <view class="chose-task-items">
+        <view class="chose-task-items" style="height:256rpx">
             <radio-group class="group" bindchange="radioChange">
               <view class="label-2" wx:for="{{targetGoodsDetails}}" wx:for-item="item" wx:key="{{index}}">
                  <label class="label-2__text" for="{{item.id}}">
@@ -454,7 +454,7 @@ page{
            </radio-group>
         </view>
         <!-- 领取任务按钮 -->
-        <view class="btn">
+        <view class="btn" @tap="receiveTask">
           <text>领取任务</text>
         </view>
       </view>
@@ -494,7 +494,9 @@ export default class Index extends wepy.page {
   };
   methods = {
     showTaskDetail(e){
-       this.targetGoodsId = e.currentTarget.dataset.id;
+       this.targetGoodsId = e.currentTarget.dataset.id
+       var index = e.currentTarget.dataset.index
+       this.targetGoods[index].hide = !this.targetGoods[index].hide
        this.getTargetDetail()
     },
     showRule() {
@@ -509,19 +511,6 @@ export default class Index extends wepy.page {
     closeTaskChoseShadow(){
       this.showChoseTask = false
     },
-    radioChange(e) {
-      const checked = e.detail.value
-      const changed = {}
-       for (let i = 0; i < this.data.taskItems.length; i++) {
-        if (checked.indexOf(this.data.taskItems[i].id) !== -1) {
-          changed['taskItems[' + i + '].checked'] = true
-         } else {
-          changed['taskItems[' + i + '].checked'] = false
-        }
-      }
-      this.setData(changed)
-      this.choseTaskId = e.detail.value
-     }
    }
   //先获取引流品
   //获取商品详情
@@ -531,7 +520,8 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktbackstage/channel/info',
       method: 'get',
       data:{
-        'channelInfoId':that.channelId
+        'channelInfoId':that.channelId,
+        'userid':that.$parent.globalData.userId
       },
       dataType: 'json', 
       success: res => {
@@ -556,8 +546,12 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json', 
       success: res => {
-        console.log(res)
         that.targetGoods = res.data.data.content
+        for(var item of that.targetGoods){
+          item.hide = false
+        }
+        that.targetGoodsId = that.targetGoods[0].id
+        that.getTargetDetail()
         that.$apply()
       },
       fail: () => {},
@@ -581,5 +575,63 @@ export default class Index extends wepy.page {
     });
     
   }
+
+  radioChange(e) {
+      const checked = e.detail.value
+      const changed = {}
+       for (let i = 0; i < this.data.targetGoodsDetails.length; i++) {
+        if (checked.indexOf(this.data.targetGoodsDetails[i].id) !== -1) {
+          changed['targetGoodsDetails[' + i + '].checked'] = true
+         } else {
+          changed['targetGoodsDetails[' + i + '].checked'] = false
+        }
+      }
+      this.setData(changed)
+      this.choseTaskId = e.detail.value
+  }
+
+
+   // 领取任务
+  receiveTask(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/usergettarget', 
+      data: {
+        'userid':that.$parent.globalData.userId,
+        'targetid':that.choseTaskId
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+       if(res.data.code==1000){
+        wx.setStorageSync('taskForShare',res.data.data)
+        wx.showToast({
+          title: '领取成功', 
+          icon: 'success', 
+          duration: 2000, 
+          mask: true, 
+          success: res => {
+            that.$navigate({url:'../secKill/choseTaskSuccess'})
+          }
+        });
+        that.showChoseTask = false
+        that.$apply()
+       }else{
+          wx.showToast({
+          title: '领取失败', 
+          icon: 'none', 
+          duration: 2000, 
+          mask: true,
+          success: res => {}
+        });
+       }
+      },
+      fail: () => {
+      },
+      complete: () => {}
+    });
+    
+  }
+
 }
 </script>

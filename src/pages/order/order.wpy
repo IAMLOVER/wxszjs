@@ -255,7 +255,9 @@ page{
       </view>
       <view class="youhui">
         <text>优惠金额：</text>
-        <text>{{(produceInfo.salPrice*0.01+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
+        <text wx:if="{{channelInfo != null}}">{{(produceInfo.salPrice*0.01+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
+        <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
+        <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
       </view>
     </view>
     <view class="btn" @tap="payMoney">
@@ -323,6 +325,7 @@ export default class Index extends wepy.page {
       url: that.apiPath +  '/szmktstore/goodsInfo/classType',
       data: {
         'classId': this.pay.classid,
+        'collocationId':this.pay.collocationId
       }, 
       method: 'GET',
       dataType: 'json', 
@@ -333,9 +336,7 @@ export default class Index extends wepy.page {
           that.couponActivity = res.data.data.couponActivity
           that.haveJoinActivity = true
         }
-        if(res.data.data.channelInfo){
-          that.channelInfo = res.data.data.channelInfo
-        }
+        that.channelInfo = res.data.data.channelInfo
         that.$apply()
       },
       fail: () => {},

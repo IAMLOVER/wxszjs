@@ -572,6 +572,8 @@ export default class Index extends wepy.page {
       }
       else{
         var pay = {}
+        //
+        pay.collocationId = this.collocationId
         // 商品id 
         pay.id = this.produceInfo.id
         // 商品规格id

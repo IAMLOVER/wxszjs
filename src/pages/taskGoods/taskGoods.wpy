@@ -595,7 +595,7 @@ button[plain]{
         <view class="line"></view>
       </view>
       <view class="detail">
-        <image src="../../images/index/timg.png"/>
+        <rich-text nodes="{{produceInfo.description}}"></rich-text>
       </view>
     </view>
 
@@ -812,6 +812,8 @@ export default class Index extends wepy.page {
       }
       else{
         var pay = {}
+        //商品的搭配id
+        pay.collocationId = ''
         // 商品id 
         pay.id = this.produceInfo.id
         // 商品规格id
@@ -885,8 +887,7 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
        if(res.data.code==1000){
-        wx.setStorageSync('activityId',res.data.data.id)
-        wx.setStorageSync('targetId',res.data.data.targetId)
+       wx.setStorageSync('taskForShare',res.data.data)
         wx.showToast({
           title: '领取成功', 
           icon: 'success', 
