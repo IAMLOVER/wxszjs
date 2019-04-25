@@ -27,7 +27,7 @@ page{
    <image wx:if="{{imagePath}}" src="{{imagePath+'internet@2x.png'}}"/>
    <view>多店铺管理，尽在网页版哦</view>
    <view>www.baidu.com</view>
-   <view class="touch">联系客服</view>
+   <view class="touch" @tap="call">联系客服</view>
   </view>
 </template>
 
@@ -40,11 +40,41 @@ export default class Index extends wepy.page {
     navigationBarBackgroundColor:'#F25664',
     navigationBarTextStyle:'white'
   };
-  onLoad() {
+  onLoad(options) {
+    this.storeId = options.id
+    this.getStorePhone()
   }
   data = {
     imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    storePhoneNum:'',
+    storeId:''
   };
-  methods = {};  
+  methods = {
+    call(){
+      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+    }
+  };
+  
+   //获取商店的服务电话
+  getStorePhone(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
+      data: {
+        storeId:that.storeId
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.storePhoneNum = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
 }
 </script>

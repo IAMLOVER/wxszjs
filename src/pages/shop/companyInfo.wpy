@@ -35,11 +35,13 @@ page{
         flex: 4;
         text-align: right;
         padding: 0rpx 20rpx;
+        padding-left: 0rpx;
       }
       view:nth-child(1){
         flex: 2;
         text-align: left;
         margin-left: 0rpx;
+        padding-right: 0rpx;
       }
     }
      .input:last-child{

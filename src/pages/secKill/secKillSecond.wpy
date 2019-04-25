@@ -402,15 +402,15 @@ page{
             <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="{{item.picUrl1}}" lazyload mode="aspectFill"/>
+            <image src="{{item.picUrl1}}" lazy-load mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-price">
-            <view class="new">￥{{produceInfo.chaPrice*0.01 + item.minPrice*0.01}}</view>
-            <view class="old">¥{{item.minMktPrice*0.01+produceInfo.chaPrice*0.01}}</view>
+            <view class="new">￥{{m1.filter(produceInfo.chaPrice*0.01 + item.minPrice*0.01)}}</view>
+            <view class="old">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.chaPrice*0.01)}}</view>
           </view>
           <view class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
             马上抢
@@ -450,7 +450,7 @@ page{
               <view class="two-name">{{rightProduceInfo.title}}</view>
               <view class="two-type" @tap="showTwoType">规格：{{goodsClassList[activeIndex].className}}<image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}"/></view>
               <view class="two-text">
-                <view class="price">￥{{goodsClassList[activeIndex].salPrice*0.01}}</view>
+                <view class="price">￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}</view>
                 <view class="count">数量：1</view>
               </view>
             </view>
@@ -509,8 +509,8 @@ export default class Index extends wepy.page {
     goodsClassList:{},
     channelCollocation:{},
     activeIndex:0,
-    account:0,
-    collocationId:''
+    account:1,
+    collocationId:'',
   };
   methods = {
     rightNow(e){
@@ -528,6 +528,7 @@ export default class Index extends wepy.page {
     changeIndex(e){
       this.activeIndex = e.currentTarget.dataset.index
       this.typeId = e.currentTarget.dataset.id
+      this.showPosition = !this.showPosition
     },
      // 加
     addAccount(){
@@ -689,5 +690,6 @@ export default class Index extends wepy.page {
       complete: () => {}
     });
   }
+
 }
 </script>

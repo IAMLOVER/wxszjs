@@ -124,7 +124,7 @@ page{
               <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
-              <view class="list-name">{{produceInfo.goodsName}}{{produceInfo.goodsName}}{{produceInfo.goodsName}}</view>
+              <view class="list-name">{{produceInfo.goodsName}}</view>
               <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
                 <view class="price">￥{{produceInfo.salPrice*0.01}}</view>
@@ -134,12 +134,16 @@ page{
       </view>
     </view>
   </view>
+
+
+    <redPacket :msg="couponNum"></redPacket>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js'
+import redPacket from '../../components/redPacket'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '',
@@ -150,13 +154,15 @@ export default class Index extends wepy.page {
     this.pay = wx.getStorageSync('pay')
     this.getOrderInfo()
     this.orderNo = wx.getStorageSync('orderNo')
+    this.getCoupon()
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     pay:{},
     produceInfo:{},
-    orderNo:''
+    orderNo:'',
+    couponNum:{standard:'',privilege:'',show:false},
   };
   methods = {
      // 返回首页
@@ -168,6 +174,9 @@ export default class Index extends wepy.page {
       this.$navigate('../myCenter/myOrder/orderDetail',{id:this.orderNo})
     }
   };  
+  components = {
+    redPacket
+  };
    // 根据商品的规格id筛选出来订单里的商品
   getOrderInfo(){
     var that = this
@@ -188,5 +197,28 @@ export default class Index extends wepy.page {
     });
     
   }
+
+  //赠送优惠券
+  getCoupon(){
+    var that = this
+    wx.request({
+      url: that.apiPath +  '/szmktuser/user/queryusernewcoupon', 
+      data: {
+        userid: that.$parent.globalData.userId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+         this.couponNum.standard = res.data.data.standard
+         this.couponNum.privilege = res.data.data.privilege
+         this.couponNum.show = true
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
 }
 </script>

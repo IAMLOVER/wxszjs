@@ -156,7 +156,7 @@ page{
             <view class="item-price">
               <view class="price">
                 <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}"/>
-                <text class="really">￥{{item.chaPrice*0.01}}</text>
+                <text class="really">￥{{item.titPrice*0.01}}</text>
               </view>
                 <text class="old">￥{{item.mktPrice*0.01}}</text>
             </view>

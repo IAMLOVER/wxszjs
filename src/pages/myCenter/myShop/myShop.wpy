@@ -340,7 +340,7 @@
 <template>
     <view class="container">
         <navigator url="../../shop/company?storeId={{storeId}}" class="header">
-            <image src="{{storeLogo?storeLogo:'../../../images/index/timg.png'}}" class="header-icon"/>
+            <image src="{{storeLogo?storeLogo:'../../../images/index/store_logomin.png'}}" class="header-icon"/>
             <view class="header-text">
                 <view class="shop-name">
                     <text>{{storeName}}</text>
@@ -478,7 +478,7 @@ export default class Index extends wepy.page {
         }
     },
     moreManagement(){
-      this.$navigate({url:'./myShopManagement'})
+      this.$navigate('./myShopManagement',{id:this.storeId})
     },
     goDetails(e){
       if(e.currentTarget.dataset.type == 0){

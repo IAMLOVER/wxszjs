@@ -12,3 +12,6 @@ rich-text{
     padding-bottom: 30rpx;
     text-align: center;
 }
+.produce-detail img{
+    width:300rpx !important;
+}

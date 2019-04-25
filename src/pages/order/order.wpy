@@ -366,6 +366,7 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json', 
       success: res => {
+        wx.hideLoading()
         if(res.data.code == 1000){
           wx.hideLoading()
           wx.setStorageSync('orderNo', res.data.data.orderNo)

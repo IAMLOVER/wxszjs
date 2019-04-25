@@ -1,17 +1,17 @@
 <!--  -->
 <template>
-  <view class='container' wx:if="{{show}}">
+  <view class='container' wx:if="{{msg.show}}">
     <view class="main-red">
       <image src="{{imagePath+'bg_02.png'}}" wx:if="{{imagePath}}" class="bg-top"/>
       <view class="tip">恭喜你获得一张优惠券</view>
       <view class="red">
         <view class="left">
-          <view><text style="font-size:50rpx;">80</text><text>满300可使用</text></view>
+          <view><text style="font-size:50rpx;">{{msg.privilege*0.01}}</text><text>满{{msg.standard*0.01}}可使用</text></view>
           <view style="font-size:24rpx;">(用于购买"大满减"商品)</view>
         </view>
-        <view class="right">
+        <navigator url="../fullReduction/fullReduction" class="right">
           <view>去使用</view>
-        </view>
+        </navigator>
       </view>
       <view class="msg">已存入“我的-我的优惠券”中</view>
       <!-- 倒数3秒的效果 -->
@@ -25,30 +25,32 @@
   import wepy from 'wepy';
   import path from '../common/path.js';
   export default class redPacket extends wepy.component {
-    props = {};
+    props = {
+      msg:Object
+    };
 
     data = {
       imagePath:path.path.imagePath,
       secend:3,
-      show:true
     };
 
     methods = {
       closeShadow(){
-        this.show = false
+        this.msg.show = false
       }
     };
 
     computed = {};
 
     onLoad() { 
+      console.log(this.msg)
        let interval = setInterval(() => {
         if(this.secend >0){
            this.secend = this.secend - 1
            this.$apply()
         }
         else{
-          this.show = false
+          this.msg.show = false
            this.$apply()
           clearInterval(interval)
         }

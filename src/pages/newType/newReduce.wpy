@@ -107,12 +107,12 @@ page{
             <view class="item-price">
               <view class="price">
                 <text>￥</text>
-                <text class="really">{{item.minPrice}}</text>
+                <text class="really">{{m1.filter(item.minPrice*0.01)}}</text>
               </view>
             </view>
           </view>
           <view class="tip">
-            满{{item.standard}}减{{item.privilege}}
+            满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}
           </view>
         </navigator>
     </view>
@@ -126,6 +126,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js'
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '最新满减'
@@ -139,6 +140,9 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     storeId:'',
     reduceArr:{},
+  };
+  wxs = {
+      m1: mywxs
   };
   methods = {};  
   // 店铺内的满减商品

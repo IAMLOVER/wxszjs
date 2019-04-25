@@ -105,7 +105,7 @@ page{
   width: 100%;
   background-color: #fff;
   margin-top: 16rpx;
-  padding: 0rpx 30rpx;
+  // padding: 0rpx 30rpx;
   .title{
     font-size: 32rpx;
     color: #444444;
@@ -137,6 +137,11 @@ page{
 button[plain]{
   border-color: #fff !important;  
 }
+.img{
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
 </style>
 <template>
   <view class="page">
@@ -158,14 +163,14 @@ button[plain]{
    <!-- 企业基本信息 -->
    <view class="company-info" wx:if="{{!showEmpty}}">
      <view class="info-logo">
-       <image src="../../images/index/timg.png"/>
+       <image src="{{companyInfo.logo?companyInfo.logo:'../../images/index/store_logomin.png'}}"/>
      </view>
      <view class="info-right">
        <view class="info-name">
          {{companyInfo.companyName}}
        </view>
        <view class="info-type">
-        欢迎大家联系我们
+        {{companyInfoTip}}
        </view>
      </view>
    </view>
@@ -182,7 +187,7 @@ button[plain]{
        <image wx:if="{{imagePath}}"  src="{{imagePath+'location@2x.png'}}"/>
       <text>{{companyInfo.address}}</text>
      </view>
-     <view>
+     <view @tap="call">
        <image wx:if="{{imagePath}}" src="{{imagePath+'call@2x.png'}}"/>
      </view>
       <view>
@@ -220,19 +225,25 @@ export default class Index extends wepy.page {
   onLoad(options) {
     this.storeId = options.storeId
     this.getInfo()
+    this.getStorePhone()
   }
   data = {
      imagePath:path.path.imagePath,
      apiPath:path.path.apiPath,
      swiperimgUrls: [],
-    indicatorDots: false,
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
-    showEmpty:false,
-    companyInfo:{}
+     indicatorDots: false,
+     autoplay: true,
+     interval: 3000,
+     duration: 1000,
+     showEmpty:false,
+     companyInfo:{},
+     storePhoneNum:'',
+     companyInfoTip:''
   };
   methods = {
+     call(){
+      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+    },
    onShareAppMessage(){
    }
   };  
@@ -253,17 +264,70 @@ export default class Index extends wepy.page {
         }else{
           that.companyInfo = res.data.data
           that.swiperimgUrls = res.data.data.imageLlist
-          that.companyInfo.updateTime = time.formatTime(that.companyInfo.updateTime,'Y年M月D日')
+          that.companyInfo.description = that.companyInfo.description.replace(/\<img/g,'<img class="img"');
           that.$apply()
           wx.setStorage({
             key: 'companyName',
             data: that.companyInfo.companyName,
           });
+          that.getCompanyInfo(that.companyInfo.companyName)
         }
       },
       fail: () => {},
       complete: () => {}
     });
   }
+
+   //获取商店的服务电话
+  getStorePhone(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
+      data: {
+        storeId:that.storeId
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.storePhoneNum = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+
+  //天眼查
+   getCompanyInfo(String){
+    wx.showLoading({
+      title: '加载中', 
+      mask: true,
+      success: res => {}
+    });
+    
+    var that = this
+    wx.request({
+      url: that.apiPath + '/sbchcompany/company/regcompany', 
+      data: {
+        company:String
+      }, 
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res.data)
+        that.companyInfoTip = res.data.data.industry
+        that.companyInfo.updateTime = time.formatTime(res.data.data.estiblishtime,'Y年M月D日')
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
+    
+  } 
 }
 </script>

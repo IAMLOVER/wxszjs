@@ -146,7 +146,7 @@
                     </view>
                 </view>
             </navigator>
-            <view class="list-footer">共两件商品，实付款：￥{{item.totalFee*0.01}}</view>
+            <view class="list-footer">共一件商品，实付款：￥{{item.totalFee*0.01}}</view>
         </view>
     </view>
   </view>

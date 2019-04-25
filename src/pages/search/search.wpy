@@ -84,6 +84,11 @@ page{
         line-height: 50rpx;
         height: 110rpx;
         font-weight: 600;
+         display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
       }
       .item-wrapper{
         display: flex;
@@ -248,8 +253,8 @@ page{
            <view class="item-detail">
             <view class="item-money">
             <text class="mt">￥</text>
-            <text class="mc">{{item.minPrice*0.01}}</text>
-            <i class="mi">{{item.maxPrice*0.01}}</i>
+            <text class="mc">{{m1.filter(item.minPrice*0.01)}}</text>
+            <i class="mi">{{m1.filter(item.maxPrice*0.01)}}</i>
            </view>
            <view data-store="{{item.storeId}}">
             <text class="item-store">{{item.storeName}}</text>
@@ -270,7 +275,7 @@ page{
     <navigator url="../shop/shopDetail?id={{item.id}}" class="item" wx:for="{{storeArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
     <view class="item-title">
       <view class="item-detail">
-        <image src="{{item.logo?logo:'../../images/index/timg.png'}}" class="logo"/>
+        <image src="{{item.logo?item.logo:'../../images/index/store_logomin.png'}}" class="logo"/>
         <text>{{item.name}}</text>
       </view>
       <view class="button-wrapper">
@@ -279,7 +284,7 @@ page{
        </view>
       </view>
     <view class="item-images">
-      <image wx:for="{{item.goods}}" wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.picUrl1}}"/>
+      <image wx:for="{{item.goods}}" lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.picUrl1}}"/>
     </view>
     </navigator>
   </view>
@@ -296,12 +301,13 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '搜索',
   };
   onLoad() {
-    this.getProdece();
+    // this.getProdece();
   }
   data = {
     imagePath:path.path.imagePath,
@@ -314,6 +320,9 @@ export default class Index extends wepy.page {
     seachValue:'',
     producePage:0
   };
+  wxs = {
+      m1: mywxs
+  };
   methods = {
     showProduce(){
       this.showProduce = true,
@@ -322,12 +331,14 @@ export default class Index extends wepy.page {
     showStore(){
       this.showProduce = false
       this.showStore = true
-      this.getStore()
+      // this.getStore()
     },
     searchResult(){
       if(this.showProduce){
+        this.empty = false
         this.getProdece()
       }else{
+        this.empty = false
         this.getStore()
       }
     },
@@ -355,8 +366,6 @@ export default class Index extends wepy.page {
       dataType: 'json',
       data:{
         keyWord:that.seachValue,
-        size:15,
-        page:that.producePage
       },
       success: res => {
         console.log(res)
@@ -385,7 +394,8 @@ export default class Index extends wepy.page {
       header: {'content-type': 'application/x-www-form-urlencoded'},// 默认值,
       dataType: 'json',
       data:{
-        keyWord:that.seachValue
+        keyWord:that.seachValue,
+        size:100
       },
       success: res => {
         console.log(res)
@@ -410,16 +420,5 @@ export default class Index extends wepy.page {
       }
     });
   }
-
-  // 上拉加载
-  // onReachBottom(){
-  //   var that = this
-  //   if(that.showProduce){
-  //     console.log('加载商品')
-  //   }
-  //   else{
-  //     console.log('加载店铺')
-  //   }
-  // }
 }
 </script>

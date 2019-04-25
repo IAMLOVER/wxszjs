@@ -161,6 +161,16 @@ export default class Index extends wepy.page {
            success: res => {}
          });
        }
+       if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.userNumber))){
+           wx.showToast({
+           title: '请输入正确手机号', 
+           icon: 'none', 
+           duration: 2000, 
+           mask: true,
+           success: res => {}
+         });
+         return
+       }
        if(this.warn){
          wx.request({
            url: this.apiPath + '/szmktuser/user/setaddress', 
@@ -222,12 +232,14 @@ export default class Index extends wepy.page {
       dataType: 'json',
       success: res => {
         console.log(res)
-        that.userName = res.data.data.name
-        that.userNumber = res.data.data.phone
-        that.detailAddress = res.data.data.address
-        that.region = [res.data.data.province,res.data.data.city,res.data.data.county]
-        that.warn = true
-        that.$apply()
+        if(res.data.data){
+          that.userName = res.data.data.name
+          that.userNumber = res.data.data.phone
+          that.detailAddress = res.data.data.address
+          that.region = [res.data.data.province,res.data.data.city,res.data.data.county]
+          that.warn = true
+          that.$apply()
+        }
       },
       fail: () => {},
       complete: () => {}

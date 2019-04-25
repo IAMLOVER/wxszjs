@@ -113,10 +113,10 @@
         <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
                 <view style="display:flex;align-items:center;padding-top:4rpx;">
-                    <view style="font-size:80rpx;">{{item.privilege}}</view>
+                    <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
                     <view style="margin-left:20rpx;">
                         <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard}}元可使用</view>
+                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard*0.01}}元可使用</view>
                     </view>
                 </view>
                 <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
@@ -126,10 +126,10 @@
         <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" style="background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/coupon04.png')" wx:if="{{couponStatus == 1 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
                 <view style="display:flex;align-items:center;padding-top:4rpx;">
-                    <view style="font-size:80rpx;">{{item.privilege}}</view>
+                    <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
                     <view style="margin-left:20rpx;">
                         <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard}}元可使用</view>
+                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard*0.01}}元可使用</view>
                     </view>
                 </view>
                 <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
@@ -203,7 +203,6 @@ export default class Index extends wepy.page {
         wx.hideLoading();
       }
     });
-    
   }
 
   // 通过优惠券，我已经省了多少钱

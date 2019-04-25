@@ -70,7 +70,7 @@ export default class extends wepy.app {
     },
     tabBar: {
       custom: false,
-      backgroundColor: '#fffff',
+      backgroundColor: '#FFFFFF',
        color: '#6A375F',
           selectedColor: '#F25664',
       list: [
@@ -117,7 +117,8 @@ export default class extends wepy.app {
                                     var iv = res.iv; 
                                     console.log(res)
                                     that.globalData.avatarUrl = res.userInfo.avatarUrl
-                                             wx.request({
+                                    that.globalData.userName = res.userInfo.nickName
+                                 wx.request({
                                   url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
                                   header: {
                                   'content-type': 'application/x-www-form-urlencoded'
@@ -132,10 +133,11 @@ export default class extends wepy.app {
                                   success: res => {
                                   console.log(res);
                                     that.globalData.userId = res.data.data.userid
-                                    that.globalData.userName = res.data.data.username
+                                    console.log(that.globalData.userId + '666')
                                     that.globalData.identityType = res.data.data.identityType
                                     that.globalData.key = res.data.data.sessionkey
-                                    // that.$apply()
+                                    wx.setStorageSync('userId', res.data.data.userid);
+                                    
                                   },
                                   fail: () => {
                                    },
@@ -162,7 +164,7 @@ export default class extends wepy.app {
     userName:'',
     avatarUrl:'',
     identityType:'',
-    key:''
+    key:'',
   }
 }
 </script>

@@ -139,10 +139,10 @@
         <image src="{{avatarUrl}}" wx:if="{{avatarUrl}}"/>
       </view>
       <text class="name" style="color:#fff">{{userName}}</text>
-      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==1}}" class="head-type"/>
-      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'diamonds.png'}}" wx:if="{{imagePath && identityType==2}}" class="head-type"/>
-      <image style="width:106rpx;height:44rpx;bottom:104rpx;right:320rpx" src="{{imagePath+'low.png'}}" wx:if="{{imagePath && identityType==0}}" class="head-type"/>
-      <image style="width:104rpx;height:46rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath && identityType==3}}" class="head-type"/>
+      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==2}}" class="head-type"/>
+      <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'diamonds.png'}}" wx:if="{{imagePath && identityType==3}}" class="head-type"/>
+      <image style="width:106rpx;height:44rpx;bottom:104rpx;right:320rpx" src="{{imagePath+'low.png'}}" wx:if="{{imagePath && identityType==1}}" class="head-type"/>
+      <image style="width:104rpx;height:46rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'zhizun.png'}}" wx:if="{{imagePath && identityType==4}}" class="head-type"/>
     </view>
     <view class="my-order">
       <view>
@@ -199,14 +199,12 @@
         <view class="item-text">我的店铺</view>
       </navigator>
     </view>
-    <!-- <redPacket></redPacket> -->
   </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-import path from '../../../common/path.js'
-import redPacket from '../../../components/redPacket' 
+import path from '../../../common/path.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '店铺',
@@ -222,9 +220,6 @@ export default class Index extends wepy.page {
     avatarUrl:''
   };
   methods={
-  };
-   components = {
-    redPacket
   };
   onLoad() {
     this.identityType = this.$parent.globalData.identityType

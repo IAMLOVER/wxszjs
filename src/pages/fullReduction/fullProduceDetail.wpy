@@ -347,9 +347,11 @@ button[plain]{
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**3431也正在浏览此商品</text></swiper-item>
           <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**7626也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**7646也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**2631也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
           <swiper-item><text>**6201也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
@@ -358,7 +360,8 @@ button[plain]{
     <view class="reduce">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
+         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}</text>
       </view>
       <view class="range">
         满{{activityInfo.standard*0.01}}元可用{{activityInfo.privilege*0.01}}元券
@@ -400,7 +403,7 @@ button[plain]{
 
     <!-- 客服，立即购买 -->
     <view class="dosome">
-      <view class="kefu">
+      <view class="kefu" @tap="call">
         <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
@@ -462,8 +465,11 @@ button[plain]{
       </view>
      <!-- 确定按钮 -->
       <view class="btn-box">
-          <view class="btn" @tap="payMoney">
+          <view class="btn" @tap="payMoney" wx:if="{{haveCoupon}}">
             确定(共￥{{activityInfo.standard*0.01-money>0?money:money-activityInfo.privilege*0.01}})
+          </view>
+          <view class="btn" @tap="payMoney" wx:if="{{!haveCoupon}}">
+            确定(共￥{{money}})
           </view>
       </view>
 
@@ -501,9 +507,13 @@ export default class Index extends wepy.page {
     activeIndex:0,
     typeId:'',
     account:0,
-    money:0
+    money:0,
+    storePhoneNum:''
   };
   methods = {
+    call(){
+      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+    },
     openShadow() {
       this.showShadow = true;
     },
@@ -602,6 +612,7 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.goods
+         that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.activityInfo = res.data.data.activity
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[this.activeIndex].id
@@ -612,6 +623,7 @@ export default class Index extends wepy.page {
         that.storeId = res.data.data.goods.storeId
         that.$apply()
         that.getCoupon()
+        that.getStorePhone()
       },
       fail: () => {},
       complete: () => {}
@@ -631,7 +643,7 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         console.log(res)
-        if(res.data.data.code == 1000){
+        if(res.data.code == 1000 && res.data.data != null){
           that.haveCoupon = true
           that.couponId = res.data.data.id
       }else{
@@ -673,6 +685,27 @@ export default class Index extends wepy.page {
       fail: () => {},
       complete: () => {}
     });
+  }
+
+   //获取商店的服务电话
+  getStorePhone(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
+      data: {
+        storeId:that.storeId
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.storePhoneNum = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
   }
 }
 </script>

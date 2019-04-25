@@ -203,8 +203,11 @@ page{
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**6431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**2491也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**6491也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**9991也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**7891也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
     </view>
@@ -213,7 +216,7 @@ page{
       <view class="price">
         <text>秒杀价:</text>
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.chaPrice*0.01}}</text>
+        <text class="now">{{produceInfo.titPrice*0.01}}</text>
         <text class="old">￥{{produceInfo.mktPrice*0.01}}</text>
       </view>
       <view class="hot">
@@ -299,12 +302,12 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.channel
+        that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.$apply()
       },
       fail: () => {},
       complete: () => {}
     });
-    
   }
 }
 </script>

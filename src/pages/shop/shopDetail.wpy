@@ -302,7 +302,7 @@ page{
     <view class="shop-info">
       <!-- <image src="{{imagePath+'storeBg.jpg'}}" style="width:100%;height:200rpx;position:absoulte"/> -->
       <view class="info-left">
-        <image src="{{storeLogo?storeLogo:'../../images/index/timg.png'}}"/>
+        <image src="{{storeLogo?storeLogo:'../../images/index/store_logobig.png'}}"/>
       </view>
       <view class="info-right">
         <view class="info-name">
@@ -410,7 +410,7 @@ page{
           </view>
         <view class="produce-money">
             <text class="money-type">￥</text>
-            <text class="number">{{item.minPrice*0.01}}</text>
+            <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
           </view>
         </view>
         <!-- 商品销售类型(满减，任务) -->
@@ -439,6 +439,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '店铺详情',
@@ -463,6 +464,9 @@ export default class Index extends wepy.page {
     taskArr:{},
     newArr:{}
   };
+  wxs = {
+      m1: mywxs
+  }
   methods = {
     goDetails(e){
       if(e.currentTarget.dataset.type == 0){

@@ -174,7 +174,7 @@ button[plain]{
           <view>你成功领取了任务</view>
           <view>为了奖金快去完成任务吧！</view>
           <view class="time-range">
-            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：{{taskForShare.duration}}小时
+            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：{{m1.filter(taskForShare.duration/3600000)}}小时
           </view>
           <view class="count">
             <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}"/>任务数量：{{taskForShare.target}}
@@ -197,7 +197,7 @@ button[plain]{
     <view class="task-produces">
          <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
           <view class="item-left">
-              <image src="{{item.picUrl1}}" mode="aspectFill"/>
+              <image src="{{item.pirUrl}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -222,12 +222,14 @@ button[plain]{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '任务领取成功'
   };
   onLoad() {
     this.taskForShare = wx.getStorageSync('taskForShare')
+    console.log(this.taskForShare)
     this.getTaskDetail()
   }
   data = {
@@ -236,6 +238,9 @@ export default class Index extends wepy.page {
     produceId:'',
     otherArr:{},
     taskForShare:{}
+  };
+  wxs = {
+      m1: mywxs
   };
   methods = {
      onShareAppMessage: function (ops) {

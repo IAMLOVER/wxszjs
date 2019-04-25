@@ -226,7 +226,7 @@ export default class Index extends wepy.page {
       let index = e.currentTarget.dataset.index
       console.log(taskId)
       console.log(this.taskArr[index])
-      wx.setStorageSync('myTaskArr',this.taskArr[index]);
+      wx.setStorageSync('taskForShare',this.taskArr[index]);
       this.$navigate('./myTaskDetail',{id:taskId})
     }
   };
@@ -275,6 +275,7 @@ export default class Index extends wepy.page {
         console.log(res)
         that.taskOverMoney = res.data.data.targetTotal
         that.targetNum = res.data.data.targetNum
+        that.$apply()
       },
       fail: () => {},
       complete: () => {}

@@ -334,8 +334,12 @@ button[plain]{
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**2431也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**8931也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**2631也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**5331也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**7531也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**6631也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**2931也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
     </view>
@@ -343,7 +347,8 @@ button[plain]{
     <view class="general">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.minPrice*0.01}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
@@ -383,7 +388,7 @@ button[plain]{
 
     <!-- 客服，立即购买 -->
     <view class="dosome">
-      <view class="kefu">
+      <view class="kefu" @tap="call">
         <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
@@ -405,7 +410,7 @@ button[plain]{
          </view>
          <view class="info-right">
            <view class="price">
-             ￥{{goodsClassList[activeIndex].salPrice*0.01}}
+             ￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}
            </view>
            <view class="kuncun">
              库存：{{goodsClassList[activeIndex].stock}}
@@ -454,6 +459,7 @@ button[plain]{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js'
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '商品详情'
@@ -476,9 +482,16 @@ export default class Index extends wepy.page {
     activeIndex:0,
     typeId:'',
     account:0,
-    money:0
+    money:0,
+    storePhoneNum:''
+  };
+    wxs = {
+      m1: mywxs
   };
   methods = {
+    call(){
+      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+    },
     openShadow() {
       this.showShadow = true;
     },
@@ -569,11 +582,13 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.goods
+        that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[0].id
         // 店铺id
         that.storeId = res.data.data.goods.storeId
         that.$apply()
+        that.getStorePhone()
       },
       fail: () => {},
       complete: () => {}
@@ -605,6 +620,27 @@ export default class Index extends wepy.page {
       fail: () => {},
       complete: () => {}
     });
+  }
+
+  //获取商店的服务电话
+  getStorePhone(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
+      data: {
+        storeId:that.storeId
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.storePhoneNum = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
   }
 }
 </script>

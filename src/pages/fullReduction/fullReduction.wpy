@@ -42,7 +42,7 @@ page{
   }
   .view-box{
     padding-left: 44rpx;
-    min-width: 160rpx;
+    min-width: 200rpx;
   }
 .view {
     text-align: center;
@@ -88,6 +88,11 @@ page{
         color: #222222;
         height: 100rpx;
         font-weight: 600;
+          display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
       }
       .quan{
         display: inline-block;
@@ -138,7 +143,7 @@ page{
       <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" placeholder="搜你想要" placeholder-style="color:#959595"/>
+            <input type="text" placeholder="搜你想要" placeholder-style="color:#959595" @tap="navSearch"/>
             <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
@@ -195,6 +200,9 @@ export default class Index extends wepy.page {
     productItem:{}
   };
   methods = {
+    navSearch() {
+      this.$navigate({url: '../search/search'})
+    },
     goIndex(e){
       this.idx = e.currentTarget.dataset.index
       this.activityId = e.currentTarget.dataset.id

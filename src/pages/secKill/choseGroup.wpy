@@ -532,7 +532,6 @@ export default class Index extends wepy.page {
       fail: () => {},
       complete: () => {}
     });
-    
   }
 
   //  引流品对应的任务商品

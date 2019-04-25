@@ -50,6 +50,7 @@ page {
   top: 0;
   position: fixed;
   z-index: 1;
+  padding: 12rpx 0rpx;
   .search {
     input {
       color: #959595;
@@ -181,6 +182,8 @@ page {
         position: relative;
         float: right;
         margin-top: 12rpx;
+        top: 2rpx;
+        right: -70rpx;
         .rightNow {
           color: #ffffff;
           font-size: 24rpx;
@@ -195,20 +198,26 @@ page {
         }
       }
       .images {
-        margin-top: 44rpx;
+        margin-top: 24rpx;
         .produce-images {
+          display: flex;
+          justify-content: flex-start;
           image {
             width: 170rpx !important;
             height: 170rpx !important;
-            float: left;
+            // float: left;
             margin-right: 24rpx;
+            border-radius: 12rpx
+          }
+          image:last-child{
+            margin-right: 0rpx;
           }
         }
         .more {
           width: 50rpx;
           height: 14rpx;
           float: right;
-          margin-top: 50rpx;
+          margin-top: -115rpx;
         }
       }
     }
@@ -318,9 +327,20 @@ page {
       font-size: 24rpx;
       position: absolute;
       top: 3rpx;
-      left: 8rpx;
+      left: 10rpx;
     }
   }
+}
+.fix-iphonex-button {
+    bottom:68rpx!important;
+}
+.fix-iphonex-button::after {
+    content: ' ';
+    position: fixed;
+    bottom: 0!important;
+    height: 68rpx!important;
+    width: 100%;
+    background: #fff;
 }
 </style>
 <template>
@@ -359,7 +379,7 @@ page {
           <text>快秒杀</text>
         </view>
         <view class="tip">
-          每日限量抢，先到先得
+          天天限时限量抢好货
         </view>
         <view class="button-wrapper">
           <view class="rightNow">立即抢购</view>
@@ -372,7 +392,7 @@ page {
           <text>大满减</text>
         </view>
         <view class="tip">
-          满199立减20，超优惠
+          用券专区，好价享不停
         </view>
          <view class="button-wrapper">
           <view class="rightNow">立即抢购</view>
@@ -397,17 +417,19 @@ page {
   <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
       <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
            <view class="store" data-id="{{item.id}}" @tap="goShop">
-             <image class="logo" src="{{item.logo?item.logo:'../../images/index/timg.png'}}"/>
-              <text>{{item.name}}</text>
-             <view class="button-wrapper">
-             <view class="rightNow">进店逛逛</view>
-            <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
-            </view>
+               <view style="display:flex">
+                 <image class="logo" src="{{item.logo?item.logo:'../../images/index/store_logomin.png'}}"/>
+                <text>{{item.name}}</text>
+               <view class="button-wrapper">
+                 <view class="rightNow">进店逛逛</view>
+                 <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
+              </view>
+               </view>
           <view class="images">
-            <view class="produce-images">
-            <image src="{{goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
-          </view>
-          <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
+             <view class="produce-images">
+              <image src="{{goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
+            </view>
+             <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
           </view>
     </view>
     </swiper-item>
@@ -438,7 +460,7 @@ page {
           </view>
         <view class="produce-money">
             <text class="money-type">￥</text>
-            <text class="number">{{item.minPrice*0.01}}</text>
+            <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
           </view>
         </view>
         <!-- 商品销售类型(满减，任务) -->
@@ -458,13 +480,11 @@ page {
     </view>
   </view>
 
-
   <!-- 回到顶部 -->
   <view class="go-top">
     <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
   </view>
-
-    <!-- <redPacket></redPacket> -->
+    <redPacket :msg="couponNum"></redPacket>
   </view>
 </template>
 
@@ -472,17 +492,25 @@ page {
 import wepy from 'wepy'
 import path from '../../common/path.js'
 import redPacket from '../../components/redPacket'
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '神州集市'
+    navigationBarTitleText: '神州集市',
+    enablePullDownRefresh: true,
+    backgroundTextStyle:'dark'
   };
   onLoad() {
+    this.newcoupon = wx.getStorageSync('newcoupon')
+    if(this.newcoupon){
+      this.checkFirseLoad()
+      wx.removeStorageSync('newcoupon')
+    }
     // 新店推荐
     this.getRecommend()
     //轮播图
     this.getSwiper()
     this.getNewProduce()
-  }
+  };
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
@@ -493,8 +521,14 @@ export default class Index extends wepy.page {
     autoplay: true,
     interval: 3000,
     duration: 1000,
-    scrollTop: 0
+    scrollTop: 0,
+    userId:'',
+    newcoupon:{},
+    couponNum:{standard:'',privilege:'',show:false},
   };
+  wxs = {
+      m1: mywxs
+  }
   methods = {
     goTop() {
       wx.pageScrollTo({
@@ -534,6 +568,23 @@ export default class Index extends wepy.page {
     redPacket
   }
 
+       //下拉刷新
+  onPullDownRefresh()
+  {
+    wx.showNavigationBarLoading()
+ // 新店推荐
+    this.getRecommend()
+    //轮播图
+    this.getSwiper()
+    this.getNewProduce()
+    //模拟加载
+    setTimeout(function()
+    {
+      wx.hideNavigationBarLoading() 
+      wx.stopPullDownRefresh()
+    },1500);
+  }
+
   getRecommend(){
     var that =  this
     wx.request({
@@ -558,7 +609,6 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json', 
       success: res => {
-        console.log(res)
         that.swiperArr = res.data.data
         that.$apply()
       },
@@ -575,14 +625,19 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json',
       success: res => {
-        console.log(res)
         that.newProduceArr = res.data.data.content
         that.$apply()
       },
       fail: () => {},
       complete: () => {}
     });
-    
+  }
+
+  checkFirseLoad(){
+    this.newcoupon = JSON.parse(wx.getStorageSync('newcoupon')) 
+    this.couponNum.standard = this.newcoupon.standard
+    this.couponNum.privilege = this.newcoupon.privilege
+    this.couponNum.show = true
   }
 }
 </script>

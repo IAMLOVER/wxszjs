@@ -207,13 +207,17 @@ page{
     height: 84rpx;
     line-height: 84rpx;
     background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 20%);
-    border-radius: 42rpx 0rpx 0rpx 42rpx;
+    border-radius: 42rpx;
     margin-right: 1rpx;
   }
   view:last-child{
-    border-radius: 0rpx 42rpx 42rpx 0rpx;
-    background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
+    // border-radius: 0rpx 42rpx 42rpx 0rpx;
+    // background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
   }
+}
+button[plain]{
+  border-color: transparent !important; 
+  width: 600rpx; 
 }
 </style>
 <template>
@@ -230,26 +234,26 @@ page{
         {{tip}}
       </view>
       <view class="main-count">
-        任务数{{taskInfo.targetNum}}，已完成{{taskInfo.inviteNum}}
+        任务数{{taskForShare.targetNum}}，已完成{{taskForShare.inviteNum}}
       </view>
       <view class="progress-wrapper">
-        <view class="progress" style="width:{{taskInfo.inviteNum/taskInfo.targetNum*100}}%"></view>
+        <view class="progress" style="width:{{taskForShare.inviteNum/taskForShare.targetNum*100}}%"></view>
         <text style="left:15rpx">已完成</text>
-        <text style="color:#F25664">{{taskInfo.inviteNum/taskInfo.targetNum*100}}%</text>
+        <text style="color:#F25664">{{taskForShare.inviteNum/taskForShare.targetNum*100}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">
-          <image src="{{taskInfo.picUrl}}" mode="aspectFill"/>
+          <image src="{{taskForShare.picUrl}}" mode="aspectFill"/>
         </view>
         <view class="produce-right">
           <view class="produce-title">
-            {{taskInfo.title}}
+            {{taskForShare.title}}
           </view>
           <view class="produce-bottom">
-            <view class="money-precent">佣金：{{taskInfo.percent}}%</view>
+            <view class="money-precent">佣金：{{taskForShare.percent}}%</view>
             <view class="hot">
               <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
-              <text style="color:#f25664">热度{{taskInfo.visitNum}}</text>
+              <text style="color:#f25664">热度{{taskForShare.visitNum}}</text>
             </view>
           </view>
         </view>
@@ -280,8 +284,10 @@ page{
 
     <!-- 底部按钮 -->
     <view class="footer">
-      <view class="poster">生成助力海报</view>
-      <view class="poster">转发给好友</view>
+      <!-- <view class="poster">生成助力海报</view> -->
+       <button open-type="share" plain="true">
+         <view class="poster">转发给好友</view>
+      </button>
     </view>
   </view>
 </template>
@@ -292,11 +298,12 @@ import path from '../../../common/path.js';
 import time from '../../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '我的任务'
+    navigationBarTitleText: '任务速报'
   };
   onLoad(options) {
     this.taskId = options.id
     console.log(options)
+    this.taskForShare = wx.getStorageSync('taskForShare')
     this.getTaskDetails()
     this.getGrounp()
   }
@@ -307,10 +314,11 @@ export default class Index extends wepy.page {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     taskId:'',
-    taskInfo:'',
+    taskForShare:{},
     overTime:'00:00:00',
     interval:'',
     tip:'',
+    
     groupContent:[{
       "id": 1,
       "userId": 1000000021,
@@ -318,20 +326,41 @@ export default class Index extends wepy.page {
       "buyNum":100
     }],
   };
-  methods = {};  
+  methods = {
+    onShareAppMessage: function (ops) {
+      console.log(this.taskForShare);
+      console.log(123)
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: '神州集市小程序',
+       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsId,
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+ }
+  };  
   // 获取任务详情
   getTaskDetails(){
      var that = this
-     that.taskInfo = wx.getStorageSync('myTaskArr')
-     console.log(that.taskInfo)
-    if(that.taskInfo.inviteNum/that.taskInfo.targetNum*100<50){
+    //  that.taskForShare = wx.getStorageSync('taskForShare')
+     console.log(that.taskForShare)
+    if(that.taskForShare.inviteNum/that.taskForShare.targetNum*100<50){
       that.tip = '您已开团，快分享给好友!'
-    }else if(50<that.taskInfo.inviteNum/that.taskInfo.targetNum*100<100){
+    }else if(50<that.taskForShare.inviteNum/that.taskForShare.targetNum*100<100){
       that.tip = '已经完成一半啦，继续加油!'
-    }else if( that.taskInfo.inviteNum/that.taskInfo.targetNum*100 == 100 ){
+    }else if( that.taskForShare.inviteNum/that.taskForShare.targetNum*100 == 100 ){
       that.tip = '恭喜您！拼团成功，佣金将在24小时内发至您的账户!'
     }
-     var blockingTime = (new Date(that.taskInfo.blockingTime).getTime())/1000
+     var blockingTime = (new Date(that.taskForShare.blockingTime).getTime())/1000
      that.interval = setInterval(() => {
         var currentTime = parseInt((new Date().getTime())/1000)
         var Mytime = blockingTime - currentTime
@@ -345,12 +374,12 @@ export default class Index extends wepy.page {
   }
 
   formatDuring(mss) {
-       var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+       var hours = parseInt((mss / (1000 * 60 * 60)));
        var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
        var seconds = (mss % (1000 * 60)) / 1000;
        hours = hours < 10 ? ('0' + hours) : hours;
        minutes = minutes < 10 ? ('0' + minutes) : minutes;
-       seconds = seconds < 10 && seconds >= 1 ? ('0' + seconds) : seconds;
+       seconds = seconds < 10 && seconds >=0 ? ('0' + seconds) : seconds;
        return  hours + " :" + minutes + " :" + seconds;
  }
   // 获取任务完成情况
@@ -366,6 +395,7 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.groupContent = res.data.data
+        that.$apply()
       },
       fail: () => {},
       complete: () => {}

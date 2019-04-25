@@ -1,22 +1,166 @@
-
-<style lang='less'>
+<style lang="less">
+page{
+  position: fixed;
+  width: 100%;
+  height:100%;
+  background-color:rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  z-index: 999;
+  .give-me{
+    background-color: #fff;
+    position: absolute;
+    width: 630rpx;
+    height: 550rpx;
+    left: 50%;
+    top: 40%;
+    margin-left: -315rpx;
+    margin-top: -275rpx;
+    border-radius: 20rpx;
+    text-align: center;
+    .logo{
+      height: 220rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_01.png');
+      background-repeat: no-repeat;
+      background-size: 630rpx 220rpx;
+      image{
+        width: 170rpx;
+        height: 170rpx;
+        padding-top: 50rpx;
+      }
+    }
+    .title{
+      font-size: 32rpx;
+      color: #666;
+      margin-top: 40rpx;
+    }
+    .title:last-child{
+      margin-top: 10rpx;
+    }
+    .btn{
+      width: 510rpx;
+      height: 84rpx;
+      line-height: 84rpx;
+      text-align: center;
+      background-color: #EB4D4E;
+      border-radius: 42rpx;
+      margin: 0 auto;
+      margin-top: 30rpx;
+      font-size: 32rpx;
+      color: #fff;
+    }
+  }
+}
 </style>
-
 <template>
-  <view class='page'></view>
+  <view class="page">
+    <view class="give-me">
+      <view class="logo">
+        <image lazy-load src="{{imagePath+'logo.png'}}" wx:if="{{imagePath}}"/> 
+      </view>
+
+      <view class="title">很高兴与你相遇</view>
+      <view class="title">点击授权即可加入</view>
+      <!-- 确定按钮 -->
+      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo" class="btn">确定</button>
+    </view>
+  </view>
 </template>
 
 <script>
-  import wepy from 'wepy';
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: "空",
-    };
-
-    data = {};
-
-    methods = {};
-
-    onLoad() { };
+import wepy from 'wepy';
+import path from '../../common/path.js';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '神州集市'
+  };
+  onLoad(options) {
+    if(options.scene){
+        // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
+       const sence = decodeURIComponent(options.scene)
+       this.userPhone = scene
+    }
   }
+  data = {
+    imagePath:path.path.imagePath,
+    apiPath:path.path.apiPath,
+    code:'',
+    userPhone:''
+  };
+  methods = {}; 
+  bindGetUserInfo(e) {
+        if (e.detail.userInfo) {
+            //用户按了允许授权按钮
+            var that = this;
+            //插入登录的用户的相关信息到数据库
+            that.queryUserInfo(e);
+        } else {
+            //用户按了拒绝按钮
+            wx.showModal({
+                title:'警告',
+                content:'您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+                showCancel:false,
+                confirmText:'返回授权',
+                success:function(res){
+                    if (res.confirm) {
+                        console.log('用户点击了“返回授权”')
+                    } 
+                }
+            })
+        }
+  }
+  queryUserInfo(e){
+    var that = this;
+            wx.login({
+               success: res => {
+               that.code = res.code 
+               wx.getUserInfo({
+                  success: function (res) { 
+                  var encryptedData = res.encryptedData
+                  console.log(res)
+                  var iv = res.iv      
+                    wx.request({
+                      url: that.apiPath + '/szmktuser/user/authorize',
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      data: {
+                        'encryptedData':encryptedData,
+                        'code':that.code,
+                        'iv':iv,
+                      }, 
+                     method: 'post',
+                     dataType: 'json',
+                     success: res => {
+                       // 此处会返回我userId
+                    },
+                    fail: () => {
+                    },
+                    complete: () => {}
+                  });            
+                }
+              });
+             }
+      });
+  }
+
+
+  //调注册绑定的接口
+  getRegister(){
+    var that = this 
+    wepy.request({
+      url: '', //开发者服务器接口地址",
+      data: {
+        userid: that.userId,
+        phone: '13800000001'
+      }, //请求的参数",
+      method: 'GET',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {},
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+}
 </script>

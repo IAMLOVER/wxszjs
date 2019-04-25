@@ -43,7 +43,8 @@ page{
       position: fixed;
       left: 0;
       top: 84rpx;
-      height: 1028rpx;
+      height: 1048rpx;
+      padding-bottom: 25rpx;
       view{
         height: 88rpx;
         line-height: 88rpx;
@@ -105,6 +106,11 @@ page{
             color: #222;
             font-weight: 600;
             height: 96rpx;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
           }
           .item-info{
             display: flex;
@@ -165,13 +171,13 @@ page{
       <!-- 中心两块区域 -->
       <view class="main">
         <veiw class="main-left">
-          <scroll-view scroll-y scroll-with-animation>
+          <scroll-view scroll-y="true" scroll-with-animation>
             <!-- 最新 -->
             <view class="new {{newSelect?'active':''}}" @tap="choseNew">
               最新<image src="{{imagePath+'new.png'}}" wx:if="{{imagePath}}"/>
             </view>
             <!-- 后台获取的items -->
-            <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">
+            <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:for-item="item" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">
                 {{item.title}}
             </view>
           </scroll-view>
@@ -180,7 +186,7 @@ page{
           <scroll-view class="items" scroll-y scroll-with-animation>
             <view class="item" @tap="goDetails" data-id="{{item.id}}" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
               <view class="item-left">
-                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload/>
+                <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load/>
               </view>
               <view class="item-right">
                 <view class="item-title">
@@ -189,7 +195,7 @@ page{
                 <view class="item-info">
                   <view class="price">
                     <text>￥</text>
-                    <text>{{item.minPrice*0.01}}</text>
+                    <text>{{m1.filter(item.minPrice*0.01)}}</text>
                   </view>
                   <view class="how-many">
                     {{item.buyNum}}人购买
@@ -219,6 +225,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '分类'
@@ -261,6 +268,9 @@ export default class Index extends wepy.page {
     navSearch() {
     this.$navigate({url: '../search/search'})
     }
+  };
+  wxs = {
+      m1: mywxs
   };
   // 获取分类列表
   getClass(){

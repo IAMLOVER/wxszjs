@@ -542,7 +542,8 @@ button[plain]{
     <view class="task">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}</text>
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
@@ -601,7 +602,7 @@ button[plain]{
 
     <!-- 客服，立即购买 -->
     <view class="dosome">
-      <view class="kefu">
+      <view class="kefu" @tap="call">
         <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
       </view>
@@ -611,7 +612,8 @@ button[plain]{
       </navigator>
       <view class="task-btn">
         <view @tap="openShadow">立即购买</view>
-        <view @tap="openTaskChoseShadow">领取任务</view>
+        <view wx:if="{{haveThisGoodsTasks != null}}" @tap = "taskReport">任务速报</view>
+        <view @tap="openTaskChoseShadow" wx:if="{{haveThisGoodsTasks == null}}">领取任务</view>
       </view>
     </view>
 
@@ -723,6 +725,7 @@ export default class Index extends wepy.page {
   onLoad(options) {
     this.produceId = options.id
     this.getProduceInfo()
+    this.checkedIsHave()
   }
   data = {
     imagePath:path.path.imagePath,
@@ -741,9 +744,14 @@ export default class Index extends wepy.page {
     activeIndex:0,
     typeId:'',
     account:0,
-    money:0
+    money:0,
+    storePhoneNum:'',
+    haveThisGoodsTasks:''
   };
   methods = {
+    call(){
+      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+    },
     openShadow() {
       this.showShadow = true;
     },
@@ -847,6 +855,7 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.goods
+        that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.taskItems = res.data.data.targetList
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[this.activeIndex].id
@@ -856,6 +865,7 @@ export default class Index extends wepy.page {
         // 店铺id
         that.storeId = res.data.data.goods.storeId
         that.$apply()
+        this.getStorePhone()
       },
       fail: () => {},
       complete: () => {}
@@ -888,6 +898,7 @@ export default class Index extends wepy.page {
       success: res => {
        if(res.data.code==1000){
        wx.setStorageSync('taskForShare',res.data.data)
+       that.haveThisGoodsTasks = 2
         wx.showToast({
           title: '领取成功', 
           icon: 'success', 
@@ -916,7 +927,6 @@ export default class Index extends wepy.page {
     
   }
 
-
     // 获取用户的地址
   getUserAddress(){
     var that = this 
@@ -943,6 +953,55 @@ export default class Index extends wepy.page {
       fail: () => {},
       complete: () => {}
     });
+  }
+
+  //获取商店的服务电话
+  getStorePhone(){
+    var that = this
+    wx.request({
+      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
+      data: {
+        storeId:that.storeId
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.storePhoneNum = res.data.data
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  //判断是否已经领取过这个任务
+  checkedIsHave(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/target/usergettargetcount', 
+      data: {
+        userid:that.$parent.globalData.userId,
+        goodsid:that.produceId
+      }, 
+      method: 'GET',
+      dataType: 'json',
+      success: res => {
+        console.log(res)
+        that.haveThisGoodsTasks = res.data.data
+        wx.setStorageSync('taskForShare',that.haveThisGoodsTasks)
+        console.log(that.haveThisGoodsTasks)
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }
+
+  taskReport(){
+    this.$navigate('../myCenter/myTask/myTaskDetail',{id:this.haveThisGoodsTasks.targetId})
   }
 }
 </script>
