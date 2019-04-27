@@ -96,6 +96,13 @@
         bottom: 0;
         right: 0;
       }
+      view{
+          display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+      }
     }
   }
   .tab-is-top {
@@ -189,7 +196,7 @@
       }
       .name {
         color: #222222;
-        font-size: 32rpx;
+        font-size: 24rpx;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -339,27 +346,28 @@
 </style>
 <template>
     <view class="container">
-        <navigator url="../../shop/company?storeId={{storeId}}" class="header">
-            <image src="{{storeLogo?storeLogo:'../../../images/index/store_logomin.png'}}" class="header-icon"/>
+      <!-- url="../../shop/company?storeId={{storeId}}" -->
+        <view class="header">
+            <image src="{{storeLogo?preImagePath+storeLogo:'../../../images/index/store_logomin.png'}}" class="header-icon"/>
             <view class="header-text">
                 <view class="shop-name">
                     <text>{{storeName}}</text>
-                        <image src="{{imagePath+'storeD.png'}}" wx:if="{{imagePath}}" style="width:32rpx;height:32rpx;margin-left:20rpx;"/>
+                        <!-- <image src="{{imagePath+'storeD.png'}}" wx:if="{{imagePath}}" style="width:32rpx;height:32rpx;margin-left:20rpx;"/> -->
                 </view>
                 <view style="font-size:24rpx;color:#F25664;margin-top:16rpx">
                     <text>总浏览量：{{storePromote}}</text>
                     <text>总成交额：{{storeTurnover}}</text>
                 </view>
             </view>
-        </navigator>
+        </view>
         <view class="hot">
-            **5349查看了你的店铺
+            **5349查看了你的专区
             <text class="more">更多</text>
         </view>
         <view class="top">成交量Top3</view>
         <view class="top-wrapper">
             <view class="top-list" wx:for="{{topGoods.saleTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
-                <image src="{{item.picUrl1}}" mode="aspectFill"/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
                 <text class="purchases">345人购买</text> -->
@@ -368,7 +376,7 @@
         <view class="top">浏览量Top3</view>
         <view class="top-wrapper">
             <view class="top-list" wx:for="{{topGoods.visitTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
-                <image src="{{item.picUrl1}}" mode="aspectFill"/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
                 <text class="purchases">345人购买</text> -->
@@ -387,15 +395,15 @@
         </view>
         <view class="goods-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==0&&reduceArr.length>0}}">
             <navigator url="../../fullReduction/fullProduceDetail?id={{item.id}}" class="goods-list" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload class="goods-pic"/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load class="goods-pic"/>
                 <text class="name">{{item.title}}</text>
-                <text class="price">￥{{item.minPrice}}</text>
-                <view class="active">满{{item.standard}}减{{item.privilege}}</view>
+                <text class="price">￥{{m1.filter(item.minPrice*0.01)}}</text>
+                <view class="active">满{{item.standard*0.01}}减{{item.privilege*0.01}}</view>
             </navigator>
         </view>
         <view class="mission-wrapper {{isTop?'is-top':''}}" wx:if="{{nowIndex==1&&taskArr.length>0}}">
             <navigator url="../../taskGoods/taskGoods?id={{item.id}}" class="mission-list" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-                <image src="{{item.picUrl1}}" mode="aspectFill" lazyload class="image"/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load class="image"/>
                 <view class="text">
                     <view class="name">{{item.title}}</view>
                     <view class="commission"> 佣金：{{item.minPercent}}%-{{item.maxPercent}}%</view>
@@ -412,9 +420,9 @@
             <view class="goods-list" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
                 <view class="active-ar" wx:if="{{item.activityType == 2}}">满减</view>
                 <view class="active-mission" wx:if="{{item.activityType == 1}}">任务</view>
-                <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load class="goods-pic"/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load class="goods-pic"/>
                 <text class="name">{{item.title}}</text>
-                <text class="price">￥{{item.minPrice}}</text>
+                <text class="price">￥{{m1.filter(item.minPrice*0.01)}}</text>
                 <view class="active">{{item.buyNum}}人购买</view>
             </view>
         </view>
@@ -422,10 +430,10 @@
         <view class="empty-wrapper" wx:if="{{empty}}">
             <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
             <view>暂无好物</view>
-            <view>点击更多店铺管理上传好物吧</view>
+            <view>点击更多专区管理上传好物吧</view>
         </view>
         <view class="footer">
-            <view class="more" @tap="moreManagement">更多店铺管理</view>
+            <view class="more" @tap="moreManagement">更多专区管理</view>
         </view>
     </view>
 </template>
@@ -433,15 +441,17 @@
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import mywxs from '../../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '我的店铺',
+    navigationBarTitleText: '我的专区',
     navigationBarBackgroundColor: '#EB4D4E',
     navigationBarTextStyle: 'white'
   };
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     empty:false,
     storeId:'',
     storeName:'',
@@ -458,6 +468,10 @@ export default class Index extends wepy.page {
     count:0,
     userId:''
   };
+  wxs = {
+      m1: mywxs
+  };
+
   methods = {
     chooseTab(index) {
       this.nowIndex = index;
@@ -494,7 +508,7 @@ export default class Index extends wepy.page {
     this.userId = this.$parent.globalData.userId
     this.getStoreInfo()
   }
-  // 获取我的店铺的简要信息
+  // 获取我的专区的简要信息
    getStoreInfo(){
     var that = this
     wx.request({
@@ -541,7 +555,7 @@ export default class Index extends wepy.page {
     
   }
 
-   // 店铺内的满减商品
+   // 专区内的满减商品
   getReduceProduce(){
     var that = this
      wx.showLoading({

@@ -153,7 +153,9 @@ button[plain]{
             autoplay="{{autoplay}}"
             interval="{{interval}}"
            duration="{{duration}}"
-           wx:if="{{!showEmpty}}">
+           wx:if="{{!showEmpty && swiperimgUrls.length>1}}"
+           
+           >
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
           <image src="{{item}}" class="slide-image"/>
@@ -209,7 +211,7 @@ button[plain]{
    <view class="empty" wx:if="{{showEmpty}}">
      <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
      <view class="tip">掌柜太懒了，啥也没留下</view>
-     <view class="tip">还是去看看他的店铺好货吧</view>
+     <view class="tip">还是去看看他的专区好货吧</view>
    </view>
   </view>
 </template>

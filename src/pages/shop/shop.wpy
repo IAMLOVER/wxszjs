@@ -166,7 +166,7 @@ page{
         </scroll-view>
       </view>
 
-      <!-- 店铺列表 -->
+      <!-- 专区列表 -->
   <view class="store-items">
     <navigator url="./shopDetail?id={{item.id}}" class="item" wx:for="{{shopArr}}" wx:for-item="item" wx:key="{{index}}">
     <view class="item-title">
@@ -180,7 +180,7 @@ page{
        </view>
       </view>
     <view class="item-images">
-      <image src="{{goods.picUrl1}}" mode="aspectFill" lazyload wx:for="{{item.goods}}" wx:key="{{index}}" wx:for-item="goods"/>
+      <image src="{{goods.picUrl1}}" mode="aspectFill" lazy-load wx:for="{{item.goods}}" wx:key="{{index}}" wx:for-item="goods"/>
     </view>
     </navigator>
   </view>
@@ -193,7 +193,7 @@ import wepy from 'wepy';
 import path from '../../common/path.js'; 
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '店铺',
+    navigationBarTitleText: '专区',
     navigationBarBackgroundColor: '#EB4D4E',
     navigationBarTextStyle: 'white'
   };
@@ -229,7 +229,7 @@ export default class Index extends wepy.page {
       this.$navigate({url: '../search/search'})
     },
   };
-  // 获取店铺的类别
+  // 获取专区的类别
   getShopClassfiy(){
     var that = this
     wx.request({
@@ -247,7 +247,7 @@ export default class Index extends wepy.page {
     
   }
 
-  // 根据类别id获取店铺
+  // 根据类别id获取专区
   getShop(){
     wx.showLoading({
       title: '加载中', //提示的内容,

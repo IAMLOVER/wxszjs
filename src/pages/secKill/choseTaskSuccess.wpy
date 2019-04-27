@@ -197,7 +197,7 @@ button[plain]{
     <view class="task-produces">
          <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
           <view class="item-left">
-              <image src="{{item.pirUrl}}" mode="aspectFill"/>
+              <image src="{{preImagePath+item.pirUrl}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -235,6 +235,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     produceId:'',
     otherArr:{},
     taskForShare:{}
@@ -250,7 +251,7 @@ export default class Index extends wepy.page {
      }
      return {
        title: '神州集市小程序',
-       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid,
+       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid  + '&userTargetId=' +  this.taskForShare.id,
        success: function (res) {
        // 转发成功
         console.log("转发成功:" + JSON.stringify(res));

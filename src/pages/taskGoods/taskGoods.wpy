@@ -525,7 +525,7 @@ button[plain]{
     <view class="image">
      <swiper autoplay circular>
        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
-          <image src="{{item}}"/>
+          <image src="{{preImagePath+item}}"/>
        </swiper-item>
      </swiper>
       <view class="tip">
@@ -542,8 +542,8 @@ button[plain]{
     <view class="task">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
-        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
@@ -608,7 +608,7 @@ button[plain]{
       </view>
        <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
-        <view>店铺</view>
+        <view>专区</view>
       </navigator>
       <view class="task-btn">
         <view @tap="openShadow">立即购买</view>
@@ -622,11 +622,11 @@ button[plain]{
      <view class="content">
        <view class="info">
          <view class="info-left">
-           <image src ="{{produceInfo.picUrl1}}" mode="aspectFill"/>
+           <image src ="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
          </view>
          <view class="info-right">
            <view class="price">
-             ￥{{goodsClassList[activeIndex].salPrice*0.01}}
+             ￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}
            </view>
            <view class="kuncun">
              库存：{{goodsClassList[activeIndex].stock}}
@@ -661,7 +661,7 @@ button[plain]{
      <!-- 确定按钮 -->
       <view class="btn-box">
           <view class="btn" @tap="payMoney">
-            确定(共￥{{money}})
+            确定(共￥{{m1.filter(money)}})
           </view>
       </view>
       <!-- 关闭按钮 -->
@@ -718,18 +718,37 @@ button[plain]{
 import wepy from 'wepy';
 import path from '../../common/path.js'
 import time from '../../common/time.js' 
+import mywxs from '../../wxs/mywxs.wxs';
+
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '商品详情'
   };
   onLoad(options) {
+       var that = this;
+     // 查看是否授权
+          wx.getSetting({
+            success: function (res) {
+                if (res.authSetting['scope.userInfo']) {
+                }
+                else{
+                   wx.redirectTo({
+                      url:'/pages/authorize/authorize'
+                    })
+                }
+            }
+        })
     this.produceId = options.id
     this.getProduceInfo()
+    this.checkedIsHave()
+  }
+  onHide(){
     this.checkedIsHave()
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     showShadow: false,
     produceId:'',
     produceInfo:{},
@@ -743,10 +762,10 @@ export default class Index extends wepy.page {
     showRule:false,
     activeIndex:0,
     typeId:'',
-    account:0,
+    account:1,
     money:0,
     storePhoneNum:'',
-    haveThisGoodsTasks:''
+    haveThisGoodsTasks:null
   };
   methods = {
     call(){
@@ -794,7 +813,7 @@ export default class Index extends wepy.page {
     },
     //减
     reduceAccount(){
-      if(this.account>0){
+      if(this.account>1){
         this.account--
         this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
       }else{
@@ -842,6 +861,9 @@ export default class Index extends wepy.page {
       }
     }
   }; 
+    wxs = {
+      m1: mywxs
+  };
   // 获取商品详情
   getProduceInfo(){
     var that = this
@@ -853,16 +875,16 @@ export default class Index extends wepy.page {
       },
       dataType: 'json', 
       success: res => {
-        console.log(res)
         that.produceInfo = res.data.data.goods
         that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.taskItems = res.data.data.targetList
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[this.activeIndex].id
+        that.money = that.account * that.goodsClassList[0].salPrice*0.01
         for(var item in that.taskItems){
           that.taskItems[item].checked = false
         }
-        // 店铺id
+        // 专区id
         that.storeId = res.data.data.goods.storeId
         that.$apply()
         this.getStorePhone()
@@ -938,7 +960,6 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json',
       success: res => {
-        console.log(res)
         if(res.data.data){
            wx.setStorage({
             key: 'addressId',
@@ -989,7 +1010,11 @@ export default class Index extends wepy.page {
       dataType: 'json',
       success: res => {
         console.log(res)
+        if(res.data.data == null){
+          return;
+        }
         that.haveThisGoodsTasks = res.data.data
+        that.haveThisGoodsTasks.blockingTime = time.formatTime(that.haveThisGoodsTasks.blockingTime,'Y-M-D h:m:s')
         wx.setStorageSync('taskForShare',that.haveThisGoodsTasks)
         console.log(that.haveThisGoodsTasks)
         that.$apply()

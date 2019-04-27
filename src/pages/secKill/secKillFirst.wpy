@@ -197,7 +197,7 @@ page{
     <view class="image">
       <swiper autoplay circular>
        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
-          <image src="{{item}}"/>
+          <image src="{{preImagePath+item}}"/>
        </swiper-item>
      </swiper>
       <view class="tip">
@@ -280,6 +280,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     produceId:'',
     produceInfo:{}
   };

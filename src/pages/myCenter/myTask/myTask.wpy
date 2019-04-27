@@ -154,7 +154,7 @@ page{
     <!-- 累计记录，领取的任务的总数，累计佣金 -->
     <view class="main">
       <view class="title">累计佣金(元)</view>
-      <view class="money">{{taskOverMoney}}</view>
+      <view class="money">{{taskOverMoney*0.01}}</view>
       <view class="total-task">我一共领取了<text style="color:#5f3118;font-weight:600">{{targetNum}}</text>次拼团任务</view>
     </view>
 
@@ -165,7 +165,7 @@ page{
     <!-- 任务列表 -->
     <view class="task-lists">
         <view class="list" @tap="goTaskDetail" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.targetId}}">
-          <view class="list-left"><image src="{{item.picUrl}}" mode="aspectFill"/></view>
+          <view class="list-left"><image src="{{preImagePath+item.picUrl}}" mode="aspectFill"/></view>
           <view class="list-right">
             <view class="list-title">{{item.title}}</view>
             <view class="time-money">
@@ -207,6 +207,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     status: 0,
     taskOverMoney:'',
     targetNum:'',

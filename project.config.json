@@ -40,7 +40,7 @@
 				},
 				{
 					"id": 1,
-					"name": "店铺",
+					"name": "专区",
 					"pathName": "pages/shop/shop",
 					"query": "",
 					"scene": null
@@ -82,7 +82,7 @@
 				},
 				{
 					"id": -1,
-					"name": "我的店铺",
+					"name": "我的专区",
 					"pathName": "pages/myCenter/myShop/myShop",
 					"query": "",
 					"scene": null

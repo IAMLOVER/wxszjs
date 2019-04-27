@@ -196,7 +196,7 @@
         <view class="item-icon">
           <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
         </view>
-        <view class="item-text">我的店铺</view>
+        <view class="item-text">我的专区</view>
       </navigator>
     </view>
   </view>
@@ -207,7 +207,7 @@ import wepy from 'wepy';
 import path from '../../../common/path.js' 
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '店铺',
+    navigationBarTitleText: '我的',
     navigationBarBackgroundColor: '#EB4D4E',
     navigationBarTextStyle: 'white'
   };
@@ -222,10 +222,18 @@ export default class Index extends wepy.page {
   methods={
   };
   onLoad() {
+    // this.identityType = this.$parent.globalData.identityType
+    // this.userName = this.$parent.globalData.userName
+    // this.avatarUrl = this.$parent.globalData.avatarUrl
+    // console.log(this.avatarUrl)
+    // this.getOrderList()
+  }
+  onShow(){
     this.identityType = this.$parent.globalData.identityType
     this.userName = this.$parent.globalData.userName
     this.avatarUrl = this.$parent.globalData.avatarUrl
     console.log(this.avatarUrl)
+    this.getOrderList()
   }
    getOrderList(){
         var that = this 

@@ -199,7 +199,7 @@ page{
     <view class="content-lists" wx:if="{{channelInfo != null}}">
       <view class="list">
             <view class="list-left">
-              <image src="{{channelInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{channelInfo.title}}</view>
@@ -214,7 +214,7 @@ page{
      <view class="content-lists">
       <view class="list">
             <view class="list-left">
-              <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{produceInfo.goodsName}}</view>
@@ -284,6 +284,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     userId:'',
     addressId:'',
     userName:'',

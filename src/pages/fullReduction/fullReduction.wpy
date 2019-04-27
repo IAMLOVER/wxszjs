@@ -162,7 +162,7 @@ page{
     <view class="items">
         <navigator url="./fullProduceDetail?id={{item.id}}" wx:for-item="item" class="item" wx:for="{{productItem}}" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.picUrl1}}" mode="aspectFill" lazyload/>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -194,6 +194,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     typeArr:[],
     idx:0,
     activityId:'',

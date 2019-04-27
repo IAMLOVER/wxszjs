@@ -42,7 +42,7 @@ page{
   padding:  40rpx 20rpx ;
   box-sizing: border-box;
   .main-title{
-    font-size: 32rpx;
+    font-size: 28rpx;
     color:#5f3118;
     font-weight: 600;
   }
@@ -230,7 +230,7 @@ button[plain]{
     </view>
     <!-- 任务进度 -->
     <view class="main">
-      <view class="main-title">
+      <view class="main-title" wx:if="{{tip}}">
         {{tip}}
       </view>
       <view class="main-count">
@@ -238,12 +238,12 @@ button[plain]{
       </view>
       <view class="progress-wrapper">
         <view class="progress" style="width:{{taskForShare.inviteNum/taskForShare.targetNum*100}}%"></view>
-        <text style="left:15rpx">已完成</text>
+        <text style="left:15rpx;font-size:28rpx;">进度</text>
         <text style="color:#F25664">{{taskForShare.inviteNum/taskForShare.targetNum*100}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">
-          <image src="{{taskForShare.picUrl}}" mode="aspectFill"/>
+          <image src="{{preImagePath+taskForShare.picUrl}}" mode="aspectFill"/>
         </view>
         <view class="produce-right">
           <view class="produce-title">
@@ -261,7 +261,7 @@ button[plain]{
     </view>
 
     <!-- 任务情况 -->
-    <view class="task-situation">
+    <view class="task-situation" wx:if="{{showSituation}}">
       <view class="situation-title">
         任务情况
       </view>
@@ -269,10 +269,10 @@ button[plain]{
         <view class="item" wx:for="{{groupContent}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
           <view class="item-left">
               <view class="item-number">{{index+1}}.</view>
-              <view class="item-image"><image wx:if="{{imagePath}}" src="{{imagePath+'default@3x.png'}}"/></view>
+              <view class="item-image"><image wx:if="{{imagePath}}" src="{{'https://pictest.sqplus.cn/szmkt/userpic/'+item.heading}}"/></view>
               <view class="item-info">
-                <view class="item-name">李瑞活</view>
-                <view class="item-time">2019-04-06 18:34</view>
+                <view class="item-name">{{item.name}}</view>
+                <!-- <view class="item-time">2019-04-06 18:34</view> -->
               </view>
           </view>
           <view class="item-counts">
@@ -313,12 +313,13 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     taskId:'',
     taskForShare:{},
     overTime:'00:00:00',
     interval:'',
     tip:'',
-    
+    showSituation:false,
     groupContent:[{
       "id": 1,
       "userId": 1000000021,
@@ -335,8 +336,9 @@ export default class Index extends wepy.page {
        console.log(ops.target)
      }
      return {
-       title: '神州集市小程序',
-       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsId,
+       title: '我发现了一个超值好物，快来看看啊',
+       imageUrl:this.preImagePath + this.taskForShare.picUrl,
+       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsId + '&userTargetId=' +  this.taskForShare.id,
        success: function (res) {
        // 转发成功
         console.log("转发成功:" + JSON.stringify(res));
@@ -350,18 +352,20 @@ export default class Index extends wepy.page {
   };  
   // 获取任务详情
   getTaskDetails(){
-     var that = this
-    //  that.taskForShare = wx.getStorageSync('taskForShare')
+    var that = this
+     var inviteNum = Number(that.taskForShare.inviteNum)
+     var targetNum = Number(that.taskForShare.targetNum)
+    console.log(inviteNum/targetNum*100)
      console.log(that.taskForShare)
-    if(that.taskForShare.inviteNum/that.taskForShare.targetNum*100<50){
+    if(inviteNum*100/targetNum<50){
       that.tip = '您已开团，快分享给好友!'
-    }else if(50<that.taskForShare.inviteNum/that.taskForShare.targetNum*100<100){
+    }else if(50<=inviteNum*100/targetNum && inviteNum*100/targetNum<100){
       that.tip = '已经完成一半啦，继续加油!'
-    }else if( that.taskForShare.inviteNum/that.taskForShare.targetNum*100 == 100 ){
+    }else if(inviteNum*100/targetNum == 100){
       that.tip = '恭喜您！拼团成功，佣金将在24小时内发至您的账户!'
     }
-     var blockingTime = (new Date(that.taskForShare.blockingTime).getTime())/1000
      that.interval = setInterval(() => {
+        var blockingTime = (new Date(that.taskForShare.blockingTime).getTime())/1000
         var currentTime = parseInt((new Date().getTime())/1000)
         var Mytime = blockingTime - currentTime
        if(Mytime>=1){
@@ -388,14 +392,17 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktuser/target/groupcontent', 
       data: {
-        targetid: that.taskId
+        targetid: that.taskForShare.id
       }, 
       method: 'GET',
       dataType: 'json', 
       success: res => {
         console.log(res)
-        that.groupContent = res.data.data
-        that.$apply()
+        if(res.data.data.length){
+          that.showSituation = true
+          that.groupContent = res.data.data
+          that.$apply()
+        }
       },
       fail: () => {},
       complete: () => {}

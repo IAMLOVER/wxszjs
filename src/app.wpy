@@ -34,7 +34,7 @@ export default class extends wepy.app {
       'pages/generalGoods/taskGenralGoods',
       'pages/taskGoods/taskGoods',
       'pages/classification/classification',
-      'pages/shop/shop',
+      // 'pages/shop/shop',
       'pages/shop/shopDetail',
       'pages/shop/company',
       'pages/shop/companyInfo',
@@ -86,12 +86,12 @@ export default class extends wepy.app {
           iconPath: './images/tabbar/type_un.png',
           selectedIconPath: './images/tabbar/type.png'
         },
-        {
-          pagePath: 'pages/shop/shop',
-          text: '店铺',
-          iconPath: './images/tabbar/store_un.png',
-          selectedIconPath: './images/tabbar/store.png'
-        },
+        // {
+        //   pagePath: 'pages/shop/shop',
+        //   text: '专区',
+        //   iconPath: './images/tabbar/store_un.png',
+        //   selectedIconPath: './images/tabbar/store.png'
+        // },
         {
           pagePath: 'pages/myCenter/myCenter/myCenter',
           text: '我的',
@@ -108,19 +108,19 @@ export default class extends wepy.app {
             success: function (res) {
                 if (res.authSetting['scope.userInfo']) {
                    wx.login({
-                                success: res => {
-                                     // 获取到用户的 code 之后：res.code
-                                that.code = res.code 
-                                  wx.getUserInfo({
-                                    success: function (res) {
-                                    var encryptedData = res.encryptedData;
-                                    var iv = res.iv; 
-                                    console.log(res)
-                                    that.globalData.avatarUrl = res.userInfo.avatarUrl
-                                    that.globalData.userName = res.userInfo.nickName
-                                 wx.request({
-                                  url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
-                                  header: {
+                        success: res => {
+                        // 获取到用户的 code 之后：res.code
+                        that.code = res.code 
+                        wx.getUserInfo({
+                            success: function (res) {
+                            var encryptedData = res.encryptedData;
+                            var iv = res.iv; 
+                            console.log(res)
+                            that.globalData.avatarUrl = res.userInfo.avatarUrl
+                            that.globalData.userName = res.userInfo.nickName
+                              wx.request({
+                                 url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
+                                 header: {
                                   'content-type': 'application/x-www-form-urlencoded'
                                   },// 默认值,
                                   data: {
@@ -136,20 +136,17 @@ export default class extends wepy.app {
                                     console.log(that.globalData.userId + '666')
                                     that.globalData.identityType = res.data.data.identityType
                                     that.globalData.key = res.data.data.sessionkey
-                                    wx.setStorageSync('userId', res.data.data.userid);
-                                    
+                                    wx.setStorageSync('userId', res.data.data.userid); 
+                                       wx.switchTab({
+                                         url:'/pages/index/index'
+                                      })
                                   },
-                                  fail: () => {
-                                   },
                                   complete: () => {}
                                   });               
                                   }
                                 });
                               }
                             });
-                    wx.switchTab({
-                      url:'/pages/index/index'
-                    })
                 }
                 else{
                    wx.redirectTo({

@@ -341,7 +341,7 @@ button[plain]{
     <view class="image">
       <swiper autoplay circular>
         <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
-            <image src="{{item}}"/>
+            <image src="{{preImagePath+item}}"/>
         </swiper-item>
      </swiper>
       <view class="tip">
@@ -409,7 +409,7 @@ button[plain]{
       </view>
        <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
-        <view>店铺</view>
+        <view>专区</view>
       </navigator>
       <view class="reduce-btn"  @tap="openShadow">
         <text>立即购买</text>
@@ -421,7 +421,7 @@ button[plain]{
      <view class="content">
        <view class="info">
          <view class="info-left">
-           <image src ="{{produceInfo.picUrl1}}" mode="aspectFill"/>
+           <image src ="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
          </view>
          <view class="info-right">
            <view class="price">
@@ -488,12 +488,26 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '商品详情'
   };
   onLoad(options) {
+       var that = this;
+     // 查看是否授权
+          wx.getSetting({
+            success: function (res) {
+                if (res.authSetting['scope.userInfo']) {
+                }
+                else{
+                   wx.redirectTo({
+                      url:'/pages/authorize/authorize'
+                    })
+                }
+            }
+        })
     this.produceId = options.id
     this.getProduceInfo()
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     showShadow: false,
     produceId:'',
     produceInfo:{},
@@ -506,11 +520,32 @@ export default class Index extends wepy.page {
     storeId:'',
     activeIndex:0,
     typeId:'',
-    account:0,
+    account:1,
     money:0,
     storePhoneNum:''
   };
   methods = {
+    onShareAppMessage: function (ops) {
+      console.log(this.taskForShare);
+      console.log(123)
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: '神州集市小程序',
+      //  imageUrl:this.produceInfo.cover,
+       path: 'pages/fullReduction/fullProduceDetail?id='+this.produceId, 
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+ },
     call(){
       wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
     },
@@ -537,7 +572,7 @@ export default class Index extends wepy.page {
     },
     //减
     reduceAccount(){
-      if(this.account>0){
+      if(this.account>1){
         this.account--
         this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
       }else{
@@ -590,7 +625,11 @@ export default class Index extends wepy.page {
         // 商品活动id
         pay.activityId = this.couponId!='' && this.activityInfo.standard*0.01-this.money <= 0 ?this.couponId:0
         // 商品的价钱
-        pay.money = this.activityInfo.standard*0.01-this.money>0?this.money:this.money-this.activityInfo.privilege*0.01
+        if(this.haveCoupon){
+           pay.money = this.activityInfo.standard*0.01-this.money>0?this.money:this.money-this.activityInfo.privilege*0.01
+        }else{
+           pay.money = this.money
+        }
         wx.setStorage({
           key: 'pay',
           data: pay
@@ -616,10 +655,11 @@ export default class Index extends wepy.page {
         that.activityInfo = res.data.data.activity
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[this.activeIndex].id
+        that.money = that.account * that.goodsClassList[0].salPrice*0.01
         for(var item in that.taskItems){
           that.taskItems[item].checked = false
         }
-        // 店铺id
+        // 专区id
         that.storeId = res.data.data.goods.storeId
         that.$apply()
         that.getCoupon()

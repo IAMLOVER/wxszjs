@@ -377,16 +377,16 @@ page{
     <!-- 商品 -->
     <view class="produce">
       <view class="produce-left">
-        <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
+        <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
       </view>
       <view class="produce-right">
         <view class="produce-title">
         {{produceInfo.title}}
         </view>
         <view class="produce-price">
-          <text class="new">￥{{produceInfo.chaPrice*0.01}}</text>
-          <text class="old">{{produceInfo.titPrice*0.01}}</text>
-          <text class="older">￥{{produceInfo.mktPrice*0.01}}</text>
+          <text class="new">￥{{m1.filter(produceInfo.chaPrice*0.01)}}</text>
+          <text class="old">{{m1.filter(produceInfo.titPrice*0.01)}}</text>
+          <text class="older">￥{{m1.filter(produceInfo.mktPrice*0.01)}}</text>
         </view>
       </view>
     </view>
@@ -402,7 +402,7 @@ page{
             <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="{{item.picUrl1}}" lazy-load mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" lazy-load mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
@@ -410,7 +410,7 @@ page{
           </view>
           <view class="item-price">
             <view class="new">￥{{m1.filter(produceInfo.chaPrice*0.01 + item.minPrice*0.01)}}</view>
-            <view class="old">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.chaPrice*0.01)}}</view>
+            <view class="old">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
           </view>
           <view class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
             马上抢
@@ -432,19 +432,19 @@ page{
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="{{produceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="one-right">
               <view class="one-name">{{produceInfo.title}}</view>
               <view class="one-text">
-                <view class="price">￥{{produceInfo.chaPrice*0.01}}</view>
+                <view class="price">￥{{m1.filter(produceInfo.chaPrice*0.01)}}</view>
                 <view class="count">数量：1</view>
               </view>
             </view>
           </view>
            <view class="produce-two">
             <view class="two-left">
-              <image src="{{rightProduceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="two-right">
               <view class="two-name">{{rightProduceInfo.title}}</view>
@@ -499,6 +499,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     showPosition:false,
     showShadow:false,
     produceId:'',

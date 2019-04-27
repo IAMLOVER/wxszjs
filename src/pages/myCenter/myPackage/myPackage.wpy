@@ -120,7 +120,7 @@ page{
     <view class="income">
       <view class="tip">我的收入(元)</view>
       <view class="my-money">{{m1.filter(myInCome*0.01)}}</view>
-      <navigator url="./packWithDraw" class="btn">提现</navigator>
+      <view class="btn" @tap="draw">提现</view>
     </view>
 
     <!-- 交易记录 -->
@@ -194,7 +194,21 @@ export default class Index extends wepy.page {
       "type":0
     }]
   };
-  methods = {};  
+  methods = {
+    draw(){
+      if(this.myInCome*0.01<5){
+        wx.showToast({
+          title: '对不起，您的收入低于5元，不可提现', 
+          icon: 'none', 
+          duration: 2000,
+          mask: true,
+          success: res => {}
+        });
+      }else{
+        this.$navigate('./packWithDraw')
+      }
+    }
+  };  
   wxs = {
       m1: mywxs
   }
@@ -210,6 +224,7 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         that.myInCome = res.data.data.balance
+
         that.$apply()
       },
       fail: () => {},

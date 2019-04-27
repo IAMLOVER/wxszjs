@@ -302,14 +302,15 @@ page{
     <view class="shop-info">
       <!-- <image src="{{imagePath+'storeBg.jpg'}}" style="width:100%;height:200rpx;position:absoulte"/> -->
       <view class="info-left">
-        <image src="{{storeLogo?storeLogo:'../../images/index/store_logobig.png'}}"/>
+        <image src="{{storeLogo?preImagePath+storeLogo:'../../images/index/store_logobig.png'}}"/>
       </view>
       <view class="info-right">
         <view class="info-name">
-          <navigator url="./company?storeId={{storeId}}">
+          <!-- url="./company?storeId={{storeId}}" -->
+          <view>
             <text>{{storeName}}</text>
-            <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" />
-          </navigator>
+            <!-- <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" /> -->
+          </view>
         </view>
         <view class="how-many">
           共{{storePromote}}人逛过
@@ -333,7 +334,7 @@ page{
     <view class="reduce-produces">
        <navigator url='../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.picUrl1}}"  mode="aspectFill"/>
+              <image src="{{preImagePath+item.picUrl1}}"  mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -372,7 +373,7 @@ page{
     <view class="task-produces">
        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{item.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -403,7 +404,7 @@ page{
        <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{item.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
          </view>
          <view class="produce-name">
           <text>{{item.title}}</text>
@@ -442,7 +443,7 @@ import path from '../../common/path.js';
 import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '店铺详情',
+    navigationBarTitleText: '专区详情',
     navigationBarBackgroundColor: '#EB4D4E',
     navigationBarTextStyle: 'white'
   };
@@ -456,6 +457,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     storeId:'',
     storeName:'',
     storeLogo:'',
@@ -484,7 +486,7 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/storeInfo/simpleInfo', 
       data: {
-        'storeId':that.storeId
+        'storeId':that.storeId,
       }, //请求的参数",
       method: 'GET',
       dataType: 'json', 

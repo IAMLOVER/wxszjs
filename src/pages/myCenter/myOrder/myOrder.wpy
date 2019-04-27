@@ -99,7 +99,7 @@
                             }
                             .count{
                                 font-size:24rpx;
-                                margin-left:220rpx;
+                                margin-left:200rpx;
                             }
                         }
                     }
@@ -136,7 +136,7 @@
                 </view>
             </view>
             <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                <image class="goods-pic" src="{{item.goodsPic}}" />
+                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" />
                 <view class="goods-text">
                     <view class="goods-name">{{item.goodsName}}</view>
                     <view class="goods-style">规格：{{item.className}}</view>
@@ -164,6 +164,7 @@ export default class Index extends wepy.page {
   data = {
       imagePath:path.path.imagePath,
       apiPath:path.path.apiPath,
+      preImagePath:path.path.preImagePath,      
       tabLists:['全部','待收货','已完成'],
       nowIndex:0,
       orderList:{},

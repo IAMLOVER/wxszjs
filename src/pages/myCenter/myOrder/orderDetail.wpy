@@ -130,7 +130,7 @@
             height:180rpx;
             width:100%;
             padding-bottom:30rpx;
-            margin-top: 30rpx;
+            // margin-top: 30rpx;
             display: flex;
             .goods-pic{
                 height:180rpx;
@@ -246,7 +246,7 @@
       <view class="order-wrapper">
           <text style="">订单内容</text>
           <view class="order-detail"> 
-                <image class="goods-pic" src="{{orderInfo.goodsPic}}" />
+                <image class="goods-pic" src="{{preImagePath+orderInfo.goodsPic}}" />
                 <view class="goods-text">
                     <view class="goods-name">{{orderInfo.goodsName}}</view>
                     <view class="goods-style">规格：{{orderInfo.className}}</view>
@@ -288,6 +288,7 @@ export default class Index extends wepy.page {
   data = {
       imagePath:path.path.imagePath,
       apiPath:path.path.apiPath,
+      preImagePath:path.path.preImagePath,
       isConfirm:false,
       orderNo:'',
       orderInfo:{}
@@ -348,6 +349,7 @@ export default class Index extends wepy.page {
               success: res => {}
             })
             that.isConfirm = false
+            that.$switch('../myCenter/myCenter')
             that.$apply()
         },
         fail: () => {},

@@ -186,7 +186,7 @@ page{
           <scroll-view class="items" scroll-y scroll-with-animation>
             <view class="item" @tap="goDetails" data-id="{{item.id}}" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
               <view class="item-left">
-                <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load/>
+                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load/>
               </view>
               <view class="item-right">
                 <view class="item-title">
@@ -237,6 +237,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     classArr:{},
     idx:-1,
     newSelect:true,

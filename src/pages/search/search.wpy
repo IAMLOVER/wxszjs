@@ -202,7 +202,7 @@ page{
       }
       .button{
         z-index: 1000;
-        width: 122rpx;
+        width: 98rpx;
         height: 48rpx;
       }
       }
@@ -238,14 +238,14 @@ page{
     <view class="produce {{showProduce?'active':''}}" @tap="showProduce">
       <text>商品</text>
     </view>
-    <view class="store {{showStore?'active':''}}" @tap="showStore"><text>店铺</text></view>
+    <view class="store {{showStore?'active':''}}" @tap="showStore"><text>专区</text></view>
   </view>
 
   <!-- 商品列表 -->
   <view class="produce-items" wx:if="{{showProduce}}">
     <view class="item" wx:for="{{produceArr}}" wx:key="index"  wx:for-item="item" data-index="{{item.id}}" data-type="{{item.activityType}}" @tap="goDetails">
       <view class="item-left">
-        <image src="{{item.picUrl1}}" lazyload mode="aspectFill"/>
+        <image src="{{preImagePath+item.picUrl1}}" lazy-load mode="aspectFill"/>
       </view>
       <view class="item-right">
         <view class="item-name">{{item.title}}</view>
@@ -275,16 +275,16 @@ page{
     <navigator url="../shop/shopDetail?id={{item.id}}" class="item" wx:for="{{storeArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
     <view class="item-title">
       <view class="item-detail">
-        <image src="{{item.logo?item.logo:'../../images/index/store_logomin.png'}}" class="logo"/>
+        <image src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}" class="logo"/>
         <text>{{item.name}}</text>
       </view>
       <view class="button-wrapper">
-        <view class="rightNow">进店逛逛</view>
+        <view class="rightNow">看一看</view>
           <image class="button" src="../../images/index/button.png"/>
        </view>
       </view>
     <view class="item-images">
-      <image wx:for="{{item.goods}}" lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{good.picUrl1}}"/>
+      <image wx:for="{{item.goods}}" lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{preImagePath+good.picUrl1}}"/>
     </view>
     </navigator>
   </view>
@@ -312,6 +312,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     showProduce:true,
     showStore:false,
     empty:false,

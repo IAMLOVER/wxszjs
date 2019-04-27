@@ -193,7 +193,7 @@ page {
         }
         .button {
           z-index: 1000;
-          width: 122rpx;
+          width: 98rpx;
           height: 48rpx;
         }
       }
@@ -364,7 +364,7 @@ page {
   <repeat for="{{swiperArr}}">
   <navigator url="">
    <swiper-item>
-      <image src="{{item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+      <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
     </swiper-item>
   </navigator>
   </repeat>
@@ -406,28 +406,28 @@ page {
     <view class="title">
       <view class="tip">
        <text class="bar"></text>
-        新店推荐
+        热门专区
         </view>
-      <view>
+      <!-- <view>
         <text class="more" @tap="moreShop">更多</text>
         <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-      </view>
+      </view> -->
     </view>
     <view class="content-wrapper">
   <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
       <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
            <view class="store" data-id="{{item.id}}" @tap="goShop">
                <view style="display:flex">
-                 <image class="logo" src="{{item.logo?item.logo:'../../images/index/store_logomin.png'}}"/>
+                 <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}"/>
                 <text>{{item.name}}</text>
                <view class="button-wrapper">
-                 <view class="rightNow">进店逛逛</view>
+                 <view class="rightNow">看一看</view>
                  <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
               </view>
                </view>
           <view class="images">
              <view class="produce-images">
-              <image src="{{goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
+              <image src="{{preImagePath+goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
             </view>
              <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
           </view>
@@ -453,7 +453,7 @@ page {
        <view class="produce-item"  @tap="goDetails" wx:for="{{newProduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}"  data-type="{{item.activityType}}">
          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{item.picUrl1}}" mode="aspectFill" lazy-load='{{true}}'/>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load='{{true}}'/>
          </view>
          <view class="produce-name">
           {{item.title}}
@@ -492,7 +492,7 @@ page {
 import wepy from 'wepy'
 import path from '../../common/path.js'
 import redPacket from '../../components/redPacket'
-import mywxs from '../../wxs/mywxs.wxs';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市',
@@ -514,6 +514,7 @@ export default class Index extends wepy.page {
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
+    preImagePath:path.path.preImagePath,
     swiperArr:{},
     recommendArr:{},
     newProduceArr:{},
