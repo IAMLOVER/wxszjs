@@ -305,13 +305,13 @@ page{
         <image src="{{storeLogo?preImagePath+storeLogo:'../../images/index/store_logobig.png'}}"/>
       </view>
       <view class="info-right">
-        <view class="info-name">
+        <navigator url="./company?storeId={{storeId}}" class="info-name">
           <!-- url="./company?storeId={{storeId}}" -->
           <view>
             <text>{{storeName}}</text>
-            <!-- <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" /> -->
+            <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" />
           </view>
-        </view>
+        </navigator>
         <view class="how-many">
           共{{storePromote}}人逛过
         </view>

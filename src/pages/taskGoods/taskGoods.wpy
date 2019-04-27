@@ -768,6 +768,37 @@ export default class Index extends wepy.page {
     haveThisGoodsTasks:null
   };
   methods = {
+      onShareAppMessage: function (ops) {
+      var userTargetId = ''
+      if(this.haveThisGoodsTasks){
+         var userTargetId = this.haveThisGoodsTasks.id
+      }
+      var getPath = ''
+      if(userTargetId == ''){
+        getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
+      }else{
+        getPath = 'pages/generalGoods/taskGenralGoods?id='+ this.produceId + '&userTargetId=' + userTargetId
+      }
+      console.log(userTargetId)
+      console.log(getPath)
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: '我发现了一个超值好物，快来看看啊',
+       imageUrl:this.preImagePath + this.produceInfo.picUrl1,
+       path: getPath,
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+ },
     call(){
       wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
     },

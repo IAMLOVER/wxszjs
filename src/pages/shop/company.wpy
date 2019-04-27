@@ -153,19 +153,19 @@ button[plain]{
             autoplay="{{autoplay}}"
             interval="{{interval}}"
            duration="{{duration}}"
-           wx:if="{{!showEmpty && swiperimgUrls.length>1}}"
+           wx:if="{{!showEmpty && swiperimgUrls.length>0}}"
            
            >
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
-          <image src="{{item}}" class="slide-image"/>
+          <image src="{{preImagePath+item}}" class="slide-image"/>
         </swiper-item>
       </repeat>
    </swiper>
    <!-- 企业基本信息 -->
    <view class="company-info" wx:if="{{!showEmpty}}">
      <view class="info-logo">
-       <image src="{{companyInfo.logo?companyInfo.logo:'../../images/index/store_logomin.png'}}"/>
+       <image src="{{companyInfo.logo?preImagePath+companyInfo.logo:'../../images/index/store_logomin.png'}}"/>
      </view>
      <view class="info-right">
        <view class="info-name">
@@ -232,6 +232,7 @@ export default class Index extends wepy.page {
   data = {
      imagePath:path.path.imagePath,
      apiPath:path.path.apiPath,
+     preImagePath:path.path.preImagePath,
      swiperimgUrls: [],
      indicatorDots: false,
      autoplay: true,

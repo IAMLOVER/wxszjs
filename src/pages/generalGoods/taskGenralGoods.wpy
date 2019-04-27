@@ -492,7 +492,7 @@ export default class Index extends wepy.page {
     showShadow: false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
-    preImagePath:paht.path.preImagePath,
+    preImagePath:path.path.preImagePath,
     produceId:'',
     produceInfo:{},
     goodsClassList:{},
