@@ -76,7 +76,7 @@ page{
         </view>
         <view class="input">
           <view>企业类型</view>
-        <view class="value">{{companyInfo.companyorgtype}}</view>
+        <view class="value" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{companyInfo.companyorgtype}}</view>
         </view>
         <view class="input">
           <view>行业</view>
