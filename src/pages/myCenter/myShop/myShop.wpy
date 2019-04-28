@@ -48,6 +48,7 @@
     color: #f25664;
     line-height: 76rpx;
     padding-left: 44rpx;
+    box-sizing: border-box;
     .more {
       margin-left: 274rpx;
       border-bottom: 2rpx solid #f25664;
@@ -355,7 +356,7 @@
                         <!-- <image src="{{imagePath+'storeD.png'}}" wx:if="{{imagePath}}" style="width:32rpx;height:32rpx;margin-left:20rpx;"/> -->
                 </view>
                 <view style="font-size:24rpx;color:#F25664;margin-top:16rpx">
-                    <text>总浏览量：{{storePromote}}</text>
+                    <text style="display:inline-block;margin-right:60rpx;">总浏览量：{{storePromote}}</text>
                     <text>总成交额：{{storeTurnover}}</text>
                 </view>
             </view>
