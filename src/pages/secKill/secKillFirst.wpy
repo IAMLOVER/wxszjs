@@ -216,8 +216,8 @@ page{
       <view class="price">
         <text>秒杀价:</text>
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.titPrice*0.01}}</text>
-        <text class="old">￥{{produceInfo.mktPrice*0.01}}</text>
+        <text class="now">{{m1.filter(produceInfo.titPrice*0.01)}}</text>
+        <text class="old">￥{{m1.filter(produceInfo.mktPrice*0.01)}}</text>
       </view>
       <view class="hot">
         <image src="{{imagePath+'hot02.png'}}" wx:if="{{imagePath}}"/>
@@ -269,6 +269,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '秒杀详情'
@@ -283,6 +284,9 @@ export default class Index extends wepy.page {
     preImagePath:path.path.preImagePath,
     produceId:'',
     produceInfo:{}
+  };
+   wxs = {
+      m1: mywxs
   };
   methods = {
     shareSecKill(){

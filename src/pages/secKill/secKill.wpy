@@ -161,9 +161,9 @@ page{
             <view class="item-price">
               <view class="price">
                 <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}"/>
-                <text class="really">￥{{item.titPrice*0.01}}</text>
+                <text class="really">￥{{m1.filter(item.titPrice*0.01)}}</text>
               </view>
-                <text class="old">￥{{item.mktPrice*0.01}}</text>
+                <text class="old">￥{{m1.filter(item.mktPrice*0.01)}}</text>
             </view>
           </view>
           <!-- 可以抢还是不可以抢 -->
@@ -182,6 +182,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '快秒杀'
@@ -195,6 +196,9 @@ export default class Index extends wepy.page {
     preImagePath:path.path.preImagePath,
     searchValue:'',
     produceItems:{}
+  };
+   wxs = {
+      m1: mywxs
   };
   methods = {
     navSearch() {

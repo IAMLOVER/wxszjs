@@ -118,6 +118,21 @@ page{
     </view>
      <!-- 订单内容 -->
   <view class="order-content">
+     <view class="content-lists" wx:if="{{channelInfo != null}}">
+        <view class="list">
+            <view class="list-left">
+              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill"/>
+            </view>
+            <view class="list-right">
+              <view class="list-name">{{channelInfo.title}}</view>
+              <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
+              <view class="list-text">
+                <view class="price">￥{{channelInfo.chaPrice*0.01}}</view>
+                <view class="count">数量：{{pay.count}}</view>
+              </view>
+            </view>
+        </view>
+     </view>
     <view class="content-lists">
       <view class="list">
             <view class="list-left">
@@ -132,6 +147,7 @@ page{
               </view>
             </view>
       </view>
+
     </view>
   </view>
 
@@ -161,7 +177,9 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,
     pay:{},
+    channelInfo:{},
     produceInfo:{},
+    haveJoinActivity:false,
     orderNo:'',
     couponNum:{standard:'',privilege:'',show:false},
   };
@@ -184,13 +202,19 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath +  '/szmktstore/goodsInfo/classType',
       data: {
-        'classId': that.pay.classid,
+        'classId': this.pay.classid,
+        'collocationId':this.pay.collocationId
       }, 
       method: 'GET',
       dataType: 'json', 
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data
+        if(res.data.data.couponActivity){
+          that.couponActivity = res.data.data.couponActivity
+          that.haveJoinActivity = true
+        }
+        that.channelInfo = res.data.data.channelInfo
         that.$apply()
       },
       fail: () => {},
@@ -198,6 +222,7 @@ export default class Index extends wepy.page {
     });
     
   }
+
 
   //赠送优惠券
   getCoupon(){
