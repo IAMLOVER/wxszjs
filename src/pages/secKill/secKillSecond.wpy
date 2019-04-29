@@ -377,7 +377,7 @@ page{
     <!-- 商品 -->
     <view class="produce">
       <view class="produce-left">
-        <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
+        <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
       </view>
       <view class="produce-right">
         <view class="produce-title">
@@ -402,7 +402,7 @@ page{
             <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="{{preImagePath+item.picUrl1}}" lazy-load mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" wx:if="{{preImagePath}}" lazy-load mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
@@ -432,7 +432,7 @@ page{
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
             </view>
             <view class="one-right">
               <view class="one-name">{{produceInfo.title}}</view>
@@ -444,14 +444,14 @@ page{
           </view>
            <view class="produce-two">
             <view class="two-left">
-              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
             </view>
             <view class="two-right">
               <view class="two-name">{{rightProduceInfo.title}}</view>
               <view class="two-type" @tap="showTwoType">规格：{{goodsClassList[activeIndex].className}}<image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}"/></view>
               <view class="two-text">
                 <view class="price">￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}</view>
-                <view class="count">数量：1</view>
+                <view class="count">数量：{{collocation.count}}</view>
               </view>
             </view>
             <!-- 商家商品的规格选取，根据定位到对应的位置 -->
@@ -474,7 +474,7 @@ page{
         <!-- 确定按钮 -->
         <view class="btn-box">
           <view class="btn" @tap="payMoney">
-            确定(共￥{{m1.filter((produceInfo.chaPrice*0.01+goodsClassList[activeIndex].salPrice*0.01)*account)}})
+            确定(共￥{{m1.filter((produceInfo.chaPrice*0.01)*account + account*goodsClassList[activeIndex].salPrice*0.01*collocation.count)  }})
           </view>
         </view>
       </view>
@@ -509,6 +509,7 @@ export default class Index extends wepy.page {
     rightProduceInfo:{},
     goodsClassList:{},
     channelCollocation:{},
+    collocation:{},
     activeIndex:0,
     account:1,
     collocationId:'',
@@ -543,14 +544,14 @@ export default class Index extends wepy.page {
         })
       }else{
         this.account++
-        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+        // this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
       }
     },
     //减
     reduceAccount(){
-      if(this.account>0){
+      if(this.account>1){
         this.account--
-        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
+        // this.money = this.account*(this.goodsClassList[this.activeIndex].salPrice*0.01*this.collocation.count)
       }else{
         wx.showToast({
           title: '请选择最少数量',
@@ -581,13 +582,14 @@ export default class Index extends wepy.page {
         // 商品规格id
         pay.classid = this.typeId
         // 商品数量
-        pay.count = this.account
+        pay.count = this.account,
+        pay.scount = this.collocation.count
         // 商品活动类型
         pay.type = 3
         // 商品活动
         pay.activityId = this.collocationId
         // 商品的价钱
-        pay.money = ((this.produceInfo.chaPrice*0.01+this.goodsClassList[this.activeIndex].salPrice*0.01)*this.account).toFixed(2)
+        pay.money = ((this.produceInfo.chaPrice*0.01+this.goodsClassList[this.activeIndex].salPrice*0.01*this.collocation.count)*this.account).toFixed(2)
         wx.setStorage({
           key: 'pay',
           data: pay
@@ -649,7 +651,8 @@ export default class Index extends wepy.page {
       method: 'get',
       data:{
         userid:that.$parent.globalData.userId,
-        channelId:that.produceId
+        channelId:that.produceId,
+        collocationId: that.collocationId
       },
       dataType: 'json', 
       success: res => {
@@ -657,7 +660,7 @@ export default class Index extends wepy.page {
         that.rightProduceInfo = res.data.data.goods
         that.goodsClassList = res.data.data.goods.goodsClassList
         that.typeId = that.goodsClassList[this.activeIndex].id
-        // that.channelCollocation = res.data.data.goods.channelCollocation
+        that.collocation = res.data.data.collocation
         that.$apply()
       },
       fail: () => {},

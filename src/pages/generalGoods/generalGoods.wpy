@@ -445,7 +445,7 @@ button[plain]{
      <!-- 确定按钮 -->
       <view class="btn-box">
           <view class="btn" @tap="payMoney">
-            确定(共￥{{money}})
+            确定(共￥{{m1.filter(money)}})
           </view>
       </view>
 

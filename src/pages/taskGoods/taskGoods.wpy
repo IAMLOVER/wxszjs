@@ -580,7 +580,7 @@ button[plain]{
           <image src="{{imagePath+'more01.png'}}" wx:if="{{imagePath}}"/>
         </view>
       </view>
-      <view class="tip">在4个小时内成功推荐者，可获得相应佣金<image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}"/></view>
+      <view class="tip">在{{taskItems[0].duration/3600/1000}}个小时内成功推荐者，可获得相应佣金<image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}"/></view>
       <view class="task-items">
         <view class="item" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">任务{{index+1}}：</view>
@@ -906,6 +906,7 @@ export default class Index extends wepy.page {
       },
       dataType: 'json', 
       success: res => {
+        console.log(res)
         that.produceInfo = res.data.data.goods
         that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.taskItems = res.data.data.targetList
@@ -1018,7 +1019,6 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json',
       success: res => {
-        console.log(res)
         that.storePhoneNum = res.data.data
         that.$apply()
       },
@@ -1040,7 +1040,6 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json',
       success: res => {
-        console.log(res)
         if(res.data.data == null){
           return;
         }

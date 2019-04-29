@@ -363,11 +363,11 @@
         </view>
         <view class="hot">
             **5349查看了你的专区
-            <text class="more">更多</text>
+            <text class="more" @tap="more">更多</text>
         </view>
         <view class="top">成交量Top3</view>
         <view class="top-wrapper">
-            <view class="top-list" wx:for="{{topGoods.saleTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
+            <view class="top-list" wx:for="{{topGoods.saleTopList}}" @tap="goDetails" data-type="{{item.activityType}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
                 <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
@@ -376,7 +376,7 @@
         </view>
         <view class="top">浏览量Top3</view>
         <view class="top-wrapper">
-            <view class="top-list" wx:for="{{topGoods.visitTopList}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
+            <view class="top-list" wx:for="{{topGoods.visitTopList}}" @tap="goDetails" data-type="{{item.activityType}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
                 <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
                 <view style="">{{item.title}}</view>
                 <!-- <view style="color:#f25664">￥<text style="font-size:32rpx;">80</text></view>
@@ -494,6 +494,9 @@ export default class Index extends wepy.page {
     },
     moreManagement(){
       this.$navigate('./myShopManagement',{id:this.storeId})
+    },
+     more(){
+      this.$navigate('./myShopAtmosphere',{id:this.storeId})
     },
     goDetails(e){
       if(e.currentTarget.dataset.type == 0){

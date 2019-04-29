@@ -276,6 +276,7 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
     this.produceId = options.id
+    console.log(options)
     this.getProduceInfo()
   }
   data = {

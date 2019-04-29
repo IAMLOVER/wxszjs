@@ -40,6 +40,8 @@ export default class extends wepy.app {
       'pages/shop/companyInfo',
       'pages/newType/newReduce',
       'pages/newType/newTask',
+      // bannar图文
+      'pages/banner/banner',
       // 我的
       'pages/myCenter/myCenter/myCenter',
       'pages/myCenter/myOrder/myOrder',

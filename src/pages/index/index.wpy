@@ -331,6 +331,13 @@ page {
     }
   }
 }
+.footer{
+  padding: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  clear: both;
+  color: #959595;
+}
 .fix-iphonex-button {
     bottom:68rpx!important;
 }
@@ -350,7 +357,7 @@ page {
     <!--搜索框-->
     <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
     <view class="search">
-      <input type="text" placeholder="搜你想要" placeholder-style="color:#959595" @tap="navSearch"/>
+      <input type="text" placeholder="搜你想要" placeholder-style="color:#ffffff" @tap="navSearch"/>
      <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
     </view>
   </view>
@@ -361,12 +368,32 @@ page {
   autoplay="{{autoplay}}"
   interval="{{interval}}"
   duration="{{duration}}">
-  <repeat for="{{swiperArr}}">
-  <navigator url="">
-   <swiper-item>
-      <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+  <repeat for="{{swiperArr}}" >
+  <view>
+   <swiper-item  wx:if="{{item.type==1}}">
+     <navigator>
+       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+     </navigator>
     </swiper-item>
-  </navigator>
+    <!-- 普通商品 -->
+     <swiper-item wx:if="{{item.type==2}}">
+     <navigator  url = '../generalGoods/generalGoods?id={{item.subId}}'>
+       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+     </navigator>
+    </swiper-item>
+    <!-- 引流品 -->
+      <swiper-item wx:if="{{item.type==3}}">
+     <navigator url="../secKill/secKillFirst?id={{item.subId}}">
+       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+     </navigator>
+    </swiper-item>
+    <!-- 图文 -->
+     <swiper-item wx:if="{{item.type==6}}">
+     <navigator url="../banner/banner?id={{item.id}}">
+       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
+     </navigator>
+    </swiper-item>
+  </view>
   </repeat>
 </swiper>
 </view>
@@ -484,6 +511,8 @@ page {
   <view class="go-top">
     <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
   </view>
+
+  <view class="footer">已经到达底部了</view>
     <redPacket :msg="couponNum"></redPacket>
   </view>
 </template>

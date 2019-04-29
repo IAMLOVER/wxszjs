@@ -269,7 +269,7 @@ button[plain]{
         <view class="item" wx:for="{{groupContent}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
           <view class="item-left">
               <view class="item-number">{{index+1}}.</view>
-              <view class="item-image"><image wx:if="{{imagePath}}" src="{{'https://pictest.sqplus.cn/szmkt/userpic/'+item.heading}}"/></view>
+              <view class="item-image"><image wx:if="{{imagePath}}" src="{{'https://picop.sqplus.cn/szmkt/userpic/'+item.heading}}"/></view>
               <view class="item-info">
                 <view class="item-name">{{item.name}}</view>
                 <!-- <view class="item-time">2019-04-06 18:34</view> -->

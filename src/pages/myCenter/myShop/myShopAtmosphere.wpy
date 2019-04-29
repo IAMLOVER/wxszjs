@@ -1,6 +1,6 @@
 <style lang="less">
 page{
-  background-image: url('https://pictest.sqplus.cn/szjs/user/images/my/bg_store.png');
+  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_store.png');
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
@@ -14,6 +14,7 @@ page{
   margin-top: 120rpx;
   height: 954rpx;
   overflow: hidden;
+  position: relative;
   .item{
     display: flex;
     width: 690rpx;
@@ -40,14 +41,32 @@ page{
     margin-bottom: 0rpx;
   }
 }
+.renew{
+  position: absolute;
+  color: #ffffff;
+  font-size: 32rpx;
+  right: 40rpx;
+  top: 45rpx;
+  image{
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+    vertical-align: middle;
+    margin-top: -2rpx;
+  }
+}
 </style>
 <template>
   <view class="page">
+    <view class="renew" @tap="renew">
+     <image src= "https://pictest.sqplus.cn/szjs/user/images/index/renew.png"/> 刷新
+    </view>
     <!-- 氛围的item -->
     <view class="atmosphere-wrapper">
-      <view class="item" wx:for="{{arr}}" wx:key="{{index}}">
-        <view class="who">**5439浏览了你的商品</view>
-        <view class="time">2019-04-03  09:46:11</view>
+      <view class="item" wx:for="{{arr}}" wx:key="{{index}}" wx:for-item="item">
+        <view class="who" wx:if="{{item.type==2}}">**{{item.id}}浏览了你的商品</view>
+        <view class="who" wx:if="{{item.type==3}}">**{{item.id}}购买了你的商品</view>
+        <view class="time">{{item.createTime}}</view>
       </view>
     </view>
   </view>
@@ -56,18 +75,67 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js';
+import time from '../../../common/time.js' 
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的专区',
     navigationBarBackgroundColor:'#F25664',
     navigationBarTextStyle:'white'
   };
-  onLoad() {
+  onLoad(options) {
+    console.log(options)
+    this.storeId = options.id
+    this.getList()
   }
   data = {
     imagePath:path.path.imagePath,
-    arr:['1','2','3','4','5','6','7','8','9','10']
+    apiPath:path.path.apiPath,
+    arr:['1','2','3','4','5','6','7','8','9','10'],
+    storeId:''
   };
-  methods = {};  
+  methods = {
+    renew(){
+      console.log(typeof this.arr)
+      if(this.arr.length>10){
+      var newarr = this.arr.splice(0,10)
+      }else{
+          wx.showToast({
+          title: '暂无新的店铺动态哦~',
+          icon: 'none',
+          image: '',
+          duration: 1500,
+          mask: false,
+          success: (result)=>{
+            
+          },
+          fail: ()=>{},
+          complete: ()=>{}
+        });
+        return
+      }
+    }
+  };
+  getList(){
+    var that = this 
+    wx.request({
+      url: that.apiPath + '/szmktuser/store/querystoreview', //开发者服务器接口地址",
+      data: {
+        storeid:that.storeId,
+      }, //请求的参数",
+      method: 'GET',
+      dataType: 'json', 
+      success: res => {
+        console.log(res)
+        that.arr = res.data.data.list
+          for (var item of that.arr){
+          item.createTime = time.formatTime(item.createTime,'Y-M-D h:m:s')
+        }
+        that.$apply()
+      },
+      fail: () => {},
+      complete: () => {}
+    });
+    
+  }  
 }
 </script>

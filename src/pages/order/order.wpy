@@ -199,13 +199,13 @@ page{
     <view class="content-lists" wx:if="{{channelInfo != null}}">
       <view class="list">
             <view class="list-left">
-              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath}}"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{channelInfo.title}}</view>
               <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
               <view class="list-text">
-                <view class="price">￥{{channelInfo.chaPrice*0.01}}</view>
+                <view class="price">￥{{m1.filter(channelInfo.chaPrice*0.01)}}</view>
                 <view class="count">数量：{{pay.count}}</view>
               </view>
             </view>
@@ -214,14 +214,14 @@ page{
      <view class="content-lists">
       <view class="list">
             <view class="list-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath}}"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{produceInfo.goodsName}}</view>
               <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
-                <view class="price">￥{{produceInfo.salPrice*0.01}}</view>
-                <view class="count">数量：{{pay.count}}</view>
+                <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
+                <view class="count">数量：{{pay.scount}}</view>
               </view>
             </view>
       </view>
@@ -255,7 +255,7 @@ page{
       </view>
       <view class="youhui">
         <text>优惠金额：</text>
-        <text wx:if="{{channelInfo != null}}">{{(produceInfo.salPrice*0.01+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
+        <text wx:if="{{channelInfo != null}}">{{(produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
         <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
         <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
       </view>
@@ -270,6 +270,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js'
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '订单确认'
@@ -295,6 +296,9 @@ export default class Index extends wepy.page {
     haveJoinActivity:false,
     couponActivity:{},
     channelInfo:{}
+  };
+  wxs = {
+      m1: mywxs
   };
   methods = {};  
   // 获取用户的地址

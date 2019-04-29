@@ -360,8 +360,8 @@ button[plain]{
     <view class="reduce">
       <view class="price">
         <text class="type">￥</text>
-         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}-{{produceInfo.maxPrice*0.01}}</text>
-        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{produceInfo.minPrice*0.01}}</text>
+         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
+        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
       </view>
       <view class="range">
         满{{activityInfo.standard*0.01}}元可用{{activityInfo.privilege*0.01}}元券
@@ -425,7 +425,7 @@ button[plain]{
          </view>
          <view class="info-right">
            <view class="price">
-             ￥{{goodsClassList[activeIndex].salPrice*0.01}}
+             ￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}
            </view>
            <view class="kuncun">
              库存：{{goodsClassList[activeIndex].stock}}
@@ -456,7 +456,7 @@ button[plain]{
       </view>
       <!-- 用户操作提示是否符合满减要求 -->
       <view class="tip">
-          <text wx:if="{{haveCoupon}}">还差{{activityInfo.standard*0.01-money>0?activityInfo.standard*0.01-money:0}}可减{{activityInfo.privilege*0.01}}元（ 满{{activityInfo.standard*0.01}}减{{activityInfo.privilege*0.01}}）</text>
+          <text wx:if="{{haveCoupon}}">还差{{m1.filter(activityInfo.standard*0.01)-money>0?m1.filter(activityInfo.standard*0.01)-money:0}}可减{{activityInfo.privilege*0.01}}元（ 满{{activityInfo.standard*0.01}}减{{activityInfo.privilege*0.01}}）</text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
       </view>
 
@@ -466,10 +466,10 @@ button[plain]{
      <!-- 确定按钮 -->
       <view class="btn-box">
           <view class="btn" @tap="payMoney" wx:if="{{haveCoupon}}">
-            确定(共￥{{activityInfo.standard*0.01-money>0?money:money-activityInfo.privilege*0.01}})
+            确定(共￥{{m1.filter(activityInfo.standard*0.01)-money>0?money:money-m1.filter(activityInfo.privilege*0.01)}})
           </view>
           <view class="btn" @tap="payMoney" wx:if="{{!haveCoupon}}">
-            确定(共￥{{money}})
+            确定(共￥{{m1.filter(money)}})
           </view>
       </view>
 
@@ -483,6 +483,7 @@ button[plain]{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '商品详情'
@@ -504,6 +505,9 @@ export default class Index extends wepy.page {
     this.produceId = options.id
     this.getProduceInfo()
   }
+     wxs = {
+      m1: mywxs
+  };
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
