@@ -144,7 +144,7 @@ page{
               <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
                 <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-                <view class="count">数量：{{pay.scount}}</view>
+                <view class="count">数量：{{pay.scount?pay.scount:pay.count}}</view>
               </view>
             </view>
       </view>
