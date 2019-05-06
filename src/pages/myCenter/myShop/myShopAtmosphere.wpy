@@ -64,6 +64,7 @@ page{
     <!-- 氛围的item -->
     <view class="atmosphere-wrapper">
       <view class="item" wx:for="{{arr}}" wx:key="{{index}}" wx:for-item="item">
+        <view class="who" wx:if="{{item.type==1}}">**{{item.phone}}浏览了你的商品</view>
         <view class="who" wx:if="{{item.type==2}}">**{{item.phone}}浏览了你的商店</view>
         <view class="who" wx:if="{{item.type==3}}">**{{item.phone}}购买了你的商品</view>
         <view class="time">{{item.createTime}}</view>

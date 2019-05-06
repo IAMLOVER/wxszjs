@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -113,6 +113,12 @@
 					"name": "绑定",
 					"pathName": "pages/empty/bindSuccess",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "空页面",
+					"pathName": "pages/empty/empty",
 					"scene": null
 				}
 			]

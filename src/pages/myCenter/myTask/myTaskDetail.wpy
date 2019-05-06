@@ -365,7 +365,7 @@ export default class Index extends wepy.page {
       that.tip = '恭喜您！拼团成功，佣金将在24小时内发至您的账户!'
     }
      that.interval = setInterval(() => {
-        var blockingTime = (new Date(that.taskForShare.blockingTime).getTime())/1000
+        var blockingTime = (new Date(that.taskForShare.blockingTime.replace(/-/g,"/")).getTime())/1000
         var currentTime = parseInt((new Date().getTime())/1000)
         var Mytime = blockingTime - currentTime
        if(Mytime>=1){

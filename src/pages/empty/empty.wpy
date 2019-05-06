@@ -3,7 +3,7 @@ page{
   position: fixed;
   width: 100%;
   height:100%;
-  background-color:rgba(0, 0, 0, 0.5);
+  background-color:rgba(0, 0, 0, 0.3);
   left: 0;
   top: 0;
   z-index: 999;
@@ -54,7 +54,7 @@ page{
 </style>
 <template>
   <view class="page">
-    <view class="give-me">
+    <view class="give-me" wx:if="{{canIuse}}">
       <view class="logo">
         <image lazy-load src="{{imagePath+'logo.png'}}" wx:if="{{imagePath}}"/> 
       </view>
@@ -78,14 +78,67 @@ export default class Index extends wepy.page {
     if(options.scene){
         // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
        const sence = decodeURIComponent(options.scene)
-       this.userPhone = scene
+       that.userPhone = scene
     }
+    // 查看是否授权
+    var that = this
+    wx.getSetting({
+      success: function (res) {
+        if(res.authSetting['scope.userInfo']) {
+          that.canIuse = false
+              wx.login({
+                        success: res => {
+                        // 获取到用户的 code 之后：res.code
+                        that.code = res.code 
+                        wx.getUserInfo({
+                            success: function (res) {
+                            var encryptedData = res.encryptedData;
+                            var iv = res.iv; 
+                            console.log(res)
+                            that.$parent.globalData.avatarUrl = res.userInfo.avatarUrl
+                            that.$parent.globalData.userName = res.userInfo.nickName
+                              wx.request({
+                                 url: that.apiPath + '/szmktuser/user/authorize',
+                                 header: {
+                                  'content-type': 'application/x-www-form-urlencoded'
+                                  },// 默认值,
+                                  data: {
+                                  'encryptedData':encryptedData,
+                                  'code':that.code,
+                                  'iv':iv,
+                                  }, //请求的参数",
+                                  method: 'post',
+                                  dataType: 'json',
+                                  success: res => {
+                                  console.log(res);
+                                    that.$parent.globalData.userId = res.data.data.userid
+                                    that.userId = res.data.data.userid
+                        
+                                    that.$parent.globalData.identityType = res.data.data.identityType
+                                    that.$parent.globalData.key = res.data.data.sessionkey
+                                    wx.setStorageSync('userId', res.data.data.userid); 
+                                   that.getRegister()
+                                  },
+                                  complete: () => {}
+                                  });               
+                                  }
+                                });
+                              }
+                            });
+         }
+        else{
+          that.canIuse = true
+          }
+       }
+  })
   }
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     code:'',
-    userPhone:''
+    userPhone:'',
+    canIuse:false,
+    userId:''
   };
   methods = {}; 
   bindGetUserInfo(e) {
@@ -133,6 +186,15 @@ export default class Index extends wepy.page {
                      dataType: 'json',
                      success: res => {
                        // 此处会返回我userId
+                       that.canIuse = false
+                       that.$parent.globalData.userId = res.data.data.userid
+                       that.userId = res.data.data.userid
+                        
+                      that.$parent.globalData.identityType = res.data.data.identityType
+                      that.$parent.globalData.key = res.data.data.sessionkey
+                      wx.setStorageSync('userId', res.data.data.userid); 
+                       that.userId = res.data.data.userid
+                       that.getRegister()
                     },
                     fail: () => {
                     },
@@ -148,15 +210,21 @@ export default class Index extends wepy.page {
   //调注册绑定的接口
   getRegister(){
     var that = this 
-    wepy.request({
-      url: '', //开发者服务器接口地址",
+    wx.request({
+      url: that.apiPath + '/szmktstore/login/bind', //开发者服务器接口地址",
       data: {
         userid: that.userId,
-        phone: '13800000001'
+        phone: that.userPhone
       }, //请求的参数",
       method: 'GET',
-      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
-      success: res => {},
+      dataType: 'json', 
+      success: res => {
+       if(res.data.code == 1000){
+         this.$navigate('./bindSuccess')
+       }else{
+         this.$navigate('./bindFail')
+       }
+      },
       fail: () => {},
       complete: () => {}
     });

@@ -121,7 +121,7 @@ export default class extends wepy.app {
                             that.globalData.avatarUrl = res.userInfo.avatarUrl
                             that.globalData.userName = res.userInfo.nickName
                               wx.request({
-                                 url: 'https://optest.sqplus.cn/szmktuser/user/authorize',
+                                 url: that.globalData.apiPath + '/szmktuser/user/authorize',
                                  header: {
                                   'content-type': 'application/x-www-form-urlencoded'
                                   },// 默认值,
@@ -164,6 +164,7 @@ export default class extends wepy.app {
     avatarUrl:'',
     identityType:'',
     key:'',
+    apiPath:path.path.apiPath
   }
 }
 </script>
