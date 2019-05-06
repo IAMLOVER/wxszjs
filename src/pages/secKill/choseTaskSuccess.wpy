@@ -4,10 +4,10 @@ page{
 }
 .main{
   width: 100%;
-  height: 694rpx;
+  height: 661rpx;
   background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
   background-repeat: no-repeat;
-  background-size: 90% 100%;
+  background-size: 97% 100%;
   background-position:center;
   background-position-y: 30rpx;
   .content{
@@ -82,7 +82,7 @@ page{
     position: absolute;
     left: 50%;
     margin-left: -174rpx;
-    top: -30rpx;
+    top: -25rpx;
   }
 }
 .new-task{
@@ -181,7 +181,7 @@ button[plain]{
           </view>
           <view class="sanjiao">
           </view>
-          <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:84rpx;"/>
+          <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:73rpx;"/>
           <button open-type="share" plain="true">
             <view class="send">立即转发拼团</view>
           </button>
@@ -250,7 +250,8 @@ export default class Index extends wepy.page {
        console.log(ops.target)
      }
      return {
-       title: '神州集市小程序',
+       title: '我发现了一个超值好物，快来看看啊',
+       imageUrl:wx.getStorageSync('cover'),
        path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid  + '&userTargetId=' +  this.taskForShare.id,
        success: function (res) {
        // 转发成功

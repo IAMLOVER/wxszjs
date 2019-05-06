@@ -523,7 +523,7 @@ button[plain]{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-     <swiper autoplay circular>
+     <swiper autoplay circular indicatorDots indicator-active-color="#ffffff" >
        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
           <image src="{{preImagePath+item}}"/>
        </swiper-item>
@@ -718,7 +718,7 @@ button[plain]{
 import wepy from 'wepy';
 import path from '../../common/path.js'
 import time from '../../common/time.js' 
-import mywxs from '../../wxs/mywxs.wxs';
+import mywxs from '../../wxs/mywxs.wxs'
 
 export default class Index extends wepy.page {
   config = {
@@ -786,8 +786,8 @@ export default class Index extends wepy.page {
        console.log(ops.target)
      }
      return {
-       title: '我发现了一个超值好物，快来看看啊',
-       imageUrl:this.preImagePath + this.produceInfo.picUrl1,
+       title: this.produceInfo.relay?this.produceInfo.relay:'我发现了一个超值好物，快来看看啊',
+       imageUrl:this.produceInfo.cover?this.preImagePath + this.produceInfo.cover:this.preImagePath + this.produceInfo.picUrl1,
        path: getPath,
        success: function (res) {
        // 转发成功

@@ -84,7 +84,6 @@
           width:384rpx;
           margin-top:105rpx;
           margin-bottom:42rpx;
-
       }
   }
 }
@@ -93,7 +92,7 @@
     <view class="container">
         <view class="header">
             <view class="discount">
-                <view>折扣卷累计为你省下</view>
+                <view>优惠券累计为你省下</view>
                 <view>￥
                     <text style="font-size:50rpx;">{{mySave}}</text>
                 </view>

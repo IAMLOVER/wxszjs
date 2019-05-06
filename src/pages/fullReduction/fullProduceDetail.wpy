@@ -339,7 +339,7 @@ button[plain]{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <swiper autoplay circular>
+      <swiper autoplay circular  indicatorDots indicator-active-color="#ffffff" >
         <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
             <image src="{{preImagePath+item}}"/>
         </swiper-item>
@@ -377,7 +377,7 @@ button[plain]{
         <view class="limit">
           邮费：包邮
         </view>
-        <view class="limit" style="flex:3;">
+        <view class="limit" style="flex:2.5;">
              {{produceInfo.buyNum}}人购买
         </view>
       </view>
@@ -456,7 +456,7 @@ button[plain]{
       </view>
       <!-- 用户操作提示是否符合满减要求 -->
       <view class="tip">
-          <text wx:if="{{haveCoupon}}">还差{{m1.filter(activityInfo.standard*0.01)-money>0?m1.filter(activityInfo.standard*0.01)-money:0}}可减{{activityInfo.privilege*0.01}}元（ 满{{activityInfo.standard*0.01}}减{{activityInfo.privilege*0.01}}）</text>
+          <text wx:if="{{haveCoupon}}">还差{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(activityInfo.standard*0.01-money):0}}可减{{activityInfo.privilege*0.01}}元（ 满{{activityInfo.standard*0.01}}减{{activityInfo.privilege*0.01}}）</text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
       </view>
 
@@ -466,7 +466,7 @@ button[plain]{
      <!-- 确定按钮 -->
       <view class="btn-box">
           <view class="btn" @tap="payMoney" wx:if="{{haveCoupon}}">
-            确定(共￥{{m1.filter(activityInfo.standard*0.01)-money>0?money:money-m1.filter(activityInfo.privilege*0.01)}})
+            确定(共￥{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(money):m1.filter(money-activityInfo.privilege*0.01)}})
           </view>
           <view class="btn" @tap="payMoney" wx:if="{{!haveCoupon}}">
             确定(共￥{{m1.filter(money)}})
@@ -531,14 +531,13 @@ export default class Index extends wepy.page {
   methods = {
     onShareAppMessage: function (ops) {
       console.log(this.taskForShare);
-      console.log(123)
       if (ops.from === 'button') {
         // 来自页面内转发按钮
        console.log(ops.target)
      }
      return {
-       title: '神州集市小程序',
-      //  imageUrl:this.produceInfo.cover,
+       title: this.produceInfo.relay?this.produceInfo.relay:'我发现了一个超值好物，快来看看啊',
+       imageUrl:this.produceInfo.cover?this.preImagePath + this.produceInfo.cover:this.preImagePath + this.produceInfo.picUrl1,
        path: 'pages/fullReduction/fullProduceDetail?id='+this.produceId, 
        success: function (res) {
        // 转发成功

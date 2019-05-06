@@ -113,6 +113,34 @@
             }
         }
 }
+.empty{
+    text-align: center;
+    margin-top: 200rpx;
+    image{
+        width: 400rpx;
+        height: 250rpx;
+        display: inline-block;
+        margin-bottom: 40rpx;
+    }
+    view{
+        font-size: 28rpx;
+        color: #959595;
+    }
+    navigator{
+        color: #fff;
+        font-size: 32rpx;
+        background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
+        border-radius: 22px;
+        width: 530rpx;
+        height: 88rpx;
+        line-height: 88rpx;
+        display: inline-block;
+        border: none;
+        outline: none;
+        margin-top: 60rpx;
+        text-align: center;
+    }
+}
 </style>
 <template>
   <view class="container">
@@ -136,7 +164,7 @@
                 </view>
             </view>
             <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" />
+                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}"/>
                 <view class="goods-text">
                     <view class="goods-name">{{item.goodsName}}</view>
                     <view class="goods-style">规格：{{item.className}}</view>
@@ -148,6 +176,13 @@
             </navigator>
             <view class="list-footer">共一件商品，实付款：￥{{item.totalFee*0.01}}</view>
         </view>
+    </view>
+
+    <!-- 空空如也 -->
+    <view class="empty" wx:if="{{empty}}">
+        <image src="{{imagePath + 'null.png'}}"/>
+        <view>你的订单空空如也，还不快去收些好货</view>
+        <navigator url="../../index/index">发现好货</navigator>
     </view>
   </view>
 </template>
@@ -168,7 +203,8 @@ export default class Index extends wepy.page {
       tabLists:['全部','待收货','已完成'],
       nowIndex:0,
       orderList:{},
-      type:''
+      type:'',
+      empty:false
   };
   methods= {
       chooseTab(index){
@@ -219,6 +255,11 @@ export default class Index extends wepy.page {
           success: res => {
               console.log(res)
               that.orderList = res.data.data
+              if(that.orderList.length<1){
+                  that.empty = true
+              }else{
+                  that.empty = false
+              }
               that.$apply()
               wx.hideLoading();
           },

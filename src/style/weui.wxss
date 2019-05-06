@@ -10,7 +10,6 @@ rich-text{
     font-size: 24rpx;
     color: #959595;
     padding-bottom: 30rpx;
-    text-align: center;
 }
 .produce-detail img{
     width:300rpx !important;

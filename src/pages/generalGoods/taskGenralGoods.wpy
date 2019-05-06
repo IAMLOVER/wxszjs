@@ -326,7 +326,7 @@ button[plain]{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <swiper autoplay circular>
+      <swiper autoplay circular indicatorDots indicator-active-color="#ffffff" >
        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
           <image src="{{preImagePath+item}}"/>
        </swiper-item>

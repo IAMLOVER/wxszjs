@@ -510,8 +510,10 @@ export default class Index extends wepy.page {
     closeRule(){
       this.showRule = false;
     },
-     openTaskChoseShadow(){
+     openTaskChoseShadow(e){
       this.showChoseTask = true
+      var index = e.currentTarget.dataset.index
+      wx.setStorageSync('cover',this.preImagePath + this.targetGoods[index].picUrl1)
     },
     closeTaskChoseShadow(){
       this.showChoseTask = false

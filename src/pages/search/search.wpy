@@ -18,7 +18,7 @@ page{
       border-radius: 16px;
       font-size: 32rpx;
       padding-left: 78rpx;
-      color: #959595;
+      color: #222;
       box-sizing: border-box;
       margin-left: 30rpx;
     }

@@ -6,9 +6,9 @@ const path = {
     'apiPath':'https://op.sqplus.cn',
     'preImagePath':'https://picop.sqplus.cn/sqj/',
 
-    'imagePath':'https://pictest.sqplus.cn/szjs/user/images/index/',
-    'apiPath':'https://optest.sqplus.cn',
-    'preImagePath':'https://pictest.sqplus.cn/sqj/',
+    // 'imagePath':'https://pictest.sqplus.cn/szjs/user/images/index/',
+    // 'apiPath':'https://optest.sqplus.cn',
+    // 'preImagePath':'https://pictest.sqplus.cn/sqj/',
     // https://picop.sqplus.cn/sqj
     // testenvend
 

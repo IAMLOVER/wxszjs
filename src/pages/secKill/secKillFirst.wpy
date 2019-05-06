@@ -195,7 +195,7 @@ page{
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-      <swiper autoplay circular>
+      <swiper autoplay circular indicatorDots indicator-active-color="#ffffff" >
        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
           <image src="{{preImagePath+item}}"/>
        </swiper-item>
@@ -248,7 +248,7 @@ page{
         <view class="tip">商品详情</view>
         <view class="line"></view>
       </view>
-      <view class="detail" style="padding:30rpx;padding-top:0rpx">
+      <view class="detail" style="">
         <rich-text nodes="{{produceInfo.description}}"></rich-text>
       </view>
     </view>

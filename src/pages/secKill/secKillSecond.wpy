@@ -323,14 +323,12 @@ page{
         flex: 1;
       }
       .reduce{
-        width: 24rpx;
-        height: 4rpx;
-        padding: 30rpx;
+        width: 60rpx;
+        height: 54rpx;
       }
       .add{
-        width: 24rpx;
-        height: 24rpx;
-        padding: 30rpx;
+        width: 60rpx;
+        height: 54rpx;
       }
       .number{
           width: 90rpx;
@@ -377,7 +375,7 @@ page{
     <!-- 商品 -->
     <view class="produce">
       <view class="produce-left">
-        <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
+        <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill"/>
       </view>
       <view class="produce-right">
         <view class="produce-title">
@@ -402,7 +400,7 @@ page{
             <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-image">
-            <image src="{{preImagePath+item.picUrl1}}" wx:if="{{preImagePath}}" lazy-load mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" wx:if="{{preImagePath && item.picUrl1}}" lazy-load mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
           </view>
           <view class="equal">
@@ -432,7 +430,7 @@ page{
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="one-right">
               <view class="one-name">{{produceInfo.title}}</view>
@@ -444,7 +442,7 @@ page{
           </view>
            <view class="produce-two">
             <view class="two-left">
-              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" wx:if="{{preImagePath}}" mode="aspectFill"/>
+              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" wx:if="{{preImagePath && rightProduceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="two-right">
               <view class="two-name">{{rightProduceInfo.title}}</view>
@@ -467,7 +465,7 @@ page{
           <view class="controal">
             <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" @tap="reduceAccount" class="reduce"/>
             <text class="number">{{account}}</text>
-            <image src="{{imagePath+'add02@2x.png'}}" wx:if="{{imagePath}}" @tap="addAccount" class="add"/>
+            <image src="{{imagePath+'add@2x.png'}}" wx:if="{{imagePath}}" @tap="addAccount" class="add"/>
           </view>
         </view>
 

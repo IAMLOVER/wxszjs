@@ -6,4 +6,7 @@ module.exports = {
   filterDown:function(num){
     return Math.floor(num)
   }
+  filterPhone:function(phone){
+    return phone.substr(9,4)
+  }
 };

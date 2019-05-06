@@ -122,7 +122,7 @@ page{
       <view class="content-lists" wx:if="{{channelInfo != null}}">
         <view class="list">
             <view class="list-left">
-              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+channelInfo.picUrl1}}" wx:if="{{preImagePath && channelInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{channelInfo.title}}</view>
@@ -137,14 +137,14 @@ page{
     <view class="content-lists">
       <view class="list">
             <view class="list-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
+              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill"/>
             </view>
             <view class="list-right">
               <view class="list-name">{{produceInfo.goodsName}}</view>
               <view class="list-type">规格：{{produceInfo.className}}</view>
               <view class="list-text">
                 <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-                <view class="count">数量：{{pay.scount?pay.scount:pay.count}}</view>
+                <view class="count">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
               </view>
             </view>
       </view>

@@ -41,7 +41,6 @@ page{
     flex-direction: row;
   }
   .view-box{
-    padding-left: 44rpx;
     min-width: 200rpx;
   }
 .view {

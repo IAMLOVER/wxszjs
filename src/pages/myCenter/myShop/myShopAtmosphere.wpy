@@ -64,8 +64,8 @@ page{
     <!-- 氛围的item -->
     <view class="atmosphere-wrapper">
       <view class="item" wx:for="{{arr}}" wx:key="{{index}}" wx:for-item="item">
-        <view class="who" wx:if="{{item.type==2}}">**{{item.id}}浏览了你的商品</view>
-        <view class="who" wx:if="{{item.type==3}}">**{{item.id}}购买了你的商品</view>
+        <view class="who" wx:if="{{item.type==2}}">**{{item.phone}}浏览了你的商店</view>
+        <view class="who" wx:if="{{item.type==3}}">**{{item.phone}}购买了你的商品</view>
         <view class="time">{{item.createTime}}</view>
       </view>
     </view>
@@ -76,6 +76,7 @@ page{
 import wepy from 'wepy';
 import path from '../../../common/path.js';
 import time from '../../../common/time.js' 
+import mywxs from '../../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的专区',
@@ -91,7 +92,7 @@ export default class Index extends wepy.page {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     arr:['1','2','3','4','5','6','7','8','9','10'],
-    storeId:''
+    storeId:'',
   };
   methods = {
     renew(){
@@ -128,14 +129,19 @@ export default class Index extends wepy.page {
         console.log(res)
         that.arr = res.data.data.list
           for (var item of that.arr){
+          item.phone = item.createTime.toString().substr(9,4)
           item.createTime = time.formatTime(item.createTime,'Y-M-D h:m:s')
         }
+        console.log(that.arr)
         that.$apply()
       },
       fail: () => {},
       complete: () => {}
     });
     
-  }  
+  }
+    wxs = {
+      m1: mywxs
+  }; 
 }
 </script>
