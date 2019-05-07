@@ -157,13 +157,16 @@ button[plain]{
             interval="{{interval}}"
            duration="{{duration}}"
            wx:if="{{!showEmpty && swiperimgUrls.length>0}}"
-           
            >
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
           <image src="{{preImagePath+item}}" class="slide-image"/>
         </swiper-item>
       </repeat>
+      <swiper-item>
+        <!-- <video src="https://videotest.sqplus.cn/sqj/1557200687643_l50TbryjLo.mp4"></video> -->
+      </swiper-item>
+
    </swiper>
    <!-- 企业基本信息 -->
    <view class="company-info" wx:if="{{!showEmpty}}">

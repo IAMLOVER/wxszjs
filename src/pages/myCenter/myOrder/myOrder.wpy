@@ -126,7 +126,7 @@
         font-size: 28rpx;
         color: #959595;
     }
-    navigator{
+    button{
         color: #fff;
         font-size: 32rpx;
         background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
@@ -182,7 +182,7 @@
     <view class="empty" wx:if="{{empty}}">
         <image src="{{imagePath + 'null.png'}}"/>
         <view>你的订单空空如也，还不快去收些好货</view>
-        <navigator url="../../index/index">发现好货</navigator>
+        <button @tap="goIndex">发现好货</button>
     </view>
   </view>
 </template>
@@ -219,6 +219,9 @@ export default class Index extends wepy.page {
               this.getOrderList()
           }
       },
+      goIndex(){
+          this.$switch('../../index/index')
+      }
   };
   onLoad(options) {
       this.type = options.type

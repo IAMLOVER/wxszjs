@@ -6,11 +6,13 @@ const path = {
     'imagePath':'https://picop.sqplus.cn/szjs/user/images/index/',
     'apiPath':'https://op.sqplus.cn',
     'preImagePath':'https://picop.sqplus.cn/sqj/',
+    'userImagePath':'https://picop.sqplus.cn/szmkt/userpic/',
 
      //测试环境 
     'imagePath':'https://pictest.sqplus.cn/szjs/user/images/index/',
-    'apiPath':'https://optest.sqplus.cn',
-    'preImagePath':'https://pictest.sqplus.cn/sqj/',
+    // 'apiPath':'https://optest.sqplus.cn',
+    // 'preImagePath':'https://pictest.sqplus.cn/sqj/',
+    // 'userImagePath':'https://pictest.sqplus.cn/szmkt/userpic/'
     // testenvend
 
 };

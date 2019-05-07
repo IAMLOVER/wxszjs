@@ -28,7 +28,7 @@ page{
     left: 0;
     top:50rpx;
     color: #fff;
-    padding-left: 60rpx;
+    padding-left: 30rpx;
     line-height: 56rpx;
     image{
       width: 40rpx;
@@ -43,7 +43,7 @@ page{
       position: absolute;
       top: 0rpx;
       width: 420rpx;
-      left: 120rpx;
+      left: 86rpx;
       swiper-item{
         height: 56rpx;
       }

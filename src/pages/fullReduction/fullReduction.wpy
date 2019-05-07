@@ -41,7 +41,8 @@ page{
     flex-direction: row;
   }
   .view-box{
-    min-width: 200rpx;
+    // min-width: 200rpx;
+    padding: 0rpx 20rpx;
   }
 .view {
     text-align: center;

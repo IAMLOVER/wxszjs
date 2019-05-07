@@ -43,7 +43,6 @@
     computed = {};
 
     onLoad() { 
-      console.log(this.msg)
        let interval = setInterval(() => {
         if(this.secend >0){
            this.secend = this.secend - 1

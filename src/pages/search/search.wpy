@@ -326,10 +326,13 @@ export default class Index extends wepy.page {
   };
   methods = {
     showProduce(){
-      this.showProduce = true,
+          this.empty = false
+      this.showProduce = true
       this.showStore = false
+      // this.getProdece()
     },
     showStore(){
+      this.empty = false
       this.showProduce = false
       this.showStore = true
       // this.getStore()
@@ -371,7 +374,7 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceArr = res.data.data.content
-        if(that.produceArr.length == 0){
+        if(that.produceArr.length < 1){
           that.empty = true
         }else{
           that.empty = false

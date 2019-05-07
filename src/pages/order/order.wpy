@@ -255,7 +255,7 @@ page{
       </view>
       <view class="youhui">
         <text>优惠金额：</text>
-        <text wx:if="{{channelInfo != null}}">{{(produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money}}</text>
+        <text wx:if="{{channelInfo != null}}">{{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money)}}</text>
         <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
         <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
       </view>

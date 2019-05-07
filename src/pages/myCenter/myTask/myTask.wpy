@@ -107,7 +107,7 @@ page{
             position: absolute;
             left: 16rpx;
             display: inline-block;
-            top: -4rpx;
+            top: -3rpx;
           }
           .percent{
             color: #F25664;
@@ -115,7 +115,7 @@ page{
             position: absolute;
             right: 16rpx;
             display: inline-block;
-            top: -4rpx;
+            top: -3rpx;
           }
         }
       }

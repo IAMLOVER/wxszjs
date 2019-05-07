@@ -325,15 +325,17 @@ page{
   width: 32rpx;
   height: 32rpx;
   background:  #fff;
-  border-radius: 50px;
+  border-radius: 50%;
   border: 2rpx solid #B5b5b5;
   box-sizing: border-box;
 }
 
 .label-2__icon-checked {
   position: absolute;
-  left: 6rpx;
-  top: 6rpx;
+  left: 50%;
+  top: 50%;
+  margin-left: -8rpx;
+  margin-top: -8rpx;
   width: 16rpx;
   height: 16rpx;
   background: #F25664;;
@@ -377,7 +379,7 @@ page{
     </view>
 
     <!-- 选择组合商品 -->
-    <view class="group-wrapper">
+    <view class="group-wrapper" wx:if="{{empty}}">
        <view class="group-title">
         <view class="tip">
           选择组合商品
@@ -488,6 +490,7 @@ export default class Index extends wepy.page {
    choseTaskId:'',
    showRule:false,
    showChoseTask:false,
+   empty:true,
    radioItems: [
       {name: '推荐10人购，成功推荐可获佣金：总成交额1%', value: '1'},
       {name: '推荐10人购，成功推荐可获佣金：总成交额100%', value: '2'},
@@ -553,12 +556,24 @@ export default class Index extends wepy.page {
       dataType: 'json', 
       success: res => {
         that.targetGoods = res.data.data.content
-        for(var item of that.targetGoods){
+        if(that.targetGoods.length>0){
+          for(var item of that.targetGoods){
           item.hide = false
         }
         that.targetGoodsId = that.targetGoods[0].id
         that.getTargetDetail()
         that.$apply()
+        }else{
+          that.empty = false
+          wx.showToast({
+            title: '您好，此商品没有关联任务商品', //提示的内容,
+            icon: 'none', //图标,
+            duration: 3000, //延迟时间,
+            mask: true, //显示透明蒙层，防止触摸穿透,
+            success: res => {}
+          });
+          
+        }
       },
       fail: () => {},
       complete: () => {}
