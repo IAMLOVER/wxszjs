@@ -451,6 +451,9 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
     this.storeId = options.id
+    if(options.scene){
+      this.storeId = decodeURIComponent(options.scene)
+    }
     this.getStoreInfo()
     this.getReduceProduce()
     this.getTaskProduce()

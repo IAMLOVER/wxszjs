@@ -79,8 +79,7 @@ export default class Index extends wepy.page {
     if(options.scene){
         // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
        const scene = decodeURIComponent(options.scene)
-       console.log(scene)
-       that.userPhone = scene
+       that.webToken = scene
     }
   }
   onShow(){
@@ -91,7 +90,7 @@ export default class Index extends wepy.page {
         if(res.authSetting['scope.userInfo']) {
           that.canIuse = false
           setTimeout(() => {
-          that.getRegister()            
+          that.getLogin()            
           }, 3000);
          }
         else{
@@ -104,7 +103,7 @@ export default class Index extends wepy.page {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     code:'',
-    userPhone:'',
+    webToken:'',
     canIuse:false,
     userId:''
   };
@@ -175,8 +174,8 @@ export default class Index extends wepy.page {
   }
 
 
-  //调注册绑定的接口
-  getRegister(){
+  //调登陆的接口
+  getLogin(){
     var that = this 
     wepy.showLoading({
       title: '请求中....', //提示的内容,
@@ -185,27 +184,36 @@ export default class Index extends wepy.page {
     });
     
     wx.request({
-      url: that.apiPath + '/szmktstore/login/bind', //开发者服务器接口地址",
+      url: that.apiPath + '/szmktstore/login/WX/saveToken', //开发者服务器接口地址",
       data: {
         userid: that.$parent.globalData.userId,
-        phone: that.userPhone
+        webToken: that.webToken
       }, //请求的参数",
       method: 'GET',
       dataType: 'json', 
       success: res => {
        if(res.data.code == 1000){
-         this.$navigate('./bindSuccess')
+         this.$navigate('../empty/loginSuccess')
+         wepy.hideLoading();
+       }if(res.data.code == 3002){
+         wepy.hideLoading();
          wepy.showToast({
-           title: '绑定成功', //提示的内容,
+           title: '小程序码已过期', //提示的内容,
            icon: 'none', //图标,
            duration: 2000, //延迟时间,
            mask: true, //显示透明蒙层，防止触摸穿透,
            success: res => {}
          });
-         
+       }
+       if(res.data.code == 3006){
          wepy.hideLoading();
-       }else{
-         this.$navigate('./bindFail')
+           wepy.showToast({
+           title: '还未绑定店铺', //提示的内容,
+           icon: 'none', //图标,
+           duration: 2000, //延迟时间,
+           mask: true, //显示透明蒙层，防止触摸穿透,
+           success: res => {}
+         });
        }
       },
       fail: () => {},

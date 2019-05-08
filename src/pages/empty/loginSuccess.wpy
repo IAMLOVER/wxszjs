@@ -35,12 +35,16 @@ page{
 
 <script>
   import wepy from 'wepy';
+import path from '../../common/path.js';
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "登录成功",
     };
 
-    data = {};
+    data = {
+       imagePath:path.path.imagePath,
+       apiPath:path.path.apiPath,
+    };
 
     methods = {
       goIndex(){

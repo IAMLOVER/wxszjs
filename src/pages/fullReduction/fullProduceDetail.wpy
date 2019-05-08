@@ -502,6 +502,9 @@ export default class Index extends wepy.page {
                 }
             }
         })
+    if(options.scene){
+      this.produceId = decodeURIComponent(options.scene)
+    }
     this.produceId = options.id
     this.getProduceInfo()
   }

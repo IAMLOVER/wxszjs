@@ -357,7 +357,7 @@ page {
     <!--搜索框-->
     <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
     <view class="search">
-      <input type="text" placeholder="搜你想要" placeholder-style="color:{{scrollTop > 0?'#aaa':'#ffffff'}}" @tap="navSearch"/>
+      <input type="text" placeholder="搜你想要" placeholder-style="color:{{scrollTop > 0?'#aaaaaa':'#ffffff'}}" @tap="navSearch"/>
      <image src="{{scrollTop > 0 ? imagePath+'search02.png' : imagePath+'searchbai.png'}}" wx:if="{{imagePath}}"/>
     </view>
   </view>

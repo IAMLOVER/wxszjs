@@ -480,6 +480,9 @@ export default class Index extends wepy.page {
         })
     console.log(options)
     this.produceId = options.id
+    if(options.scene){
+      this.produceId = decodeURIComponent(options.scene)
+    }
     this.getProduceInfo()
   }
   data = {

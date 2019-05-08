@@ -59,6 +59,7 @@ export default class extends wepy.app {
 
       // 微信扫进入
       'pages/empty/empty',
+      'pages/login/login',
       'pages/empty/bindFail',
       'pages/empty/bindSuccess',
       'pages/empty/loginSuccess'
@@ -135,13 +136,13 @@ export default class extends wepy.app {
                                   success: res => {
                                   console.log(res);
                                     that.globalData.userId = res.data.data.userid
-                                    console.log(that.globalData.userId + '666')
+                                    console.log(that.globalData.userId)
                                     that.globalData.identityType = res.data.data.identityType
                                     that.globalData.key = res.data.data.sessionkey
                                     wx.setStorageSync('userId', res.data.data.userid); 
-                                       wx.switchTab({
-                                         url:'/pages/index/index'
-                                      })
+                                      //  wx.switchTab({
+                                      //    url:'/pages/index/index'
+                                      // })
                                   },
                                   complete: () => {}
                                   });               
@@ -151,7 +152,7 @@ export default class extends wepy.app {
                             });
                 }
                 else{
-                   wx.redirectTo({
+                   wx.navigateTo({
                       url:'/pages/authorize/authorize'
                     })
                 }
