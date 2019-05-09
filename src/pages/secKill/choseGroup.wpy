@@ -22,13 +22,13 @@ page{
   height: 100rpx;
   background-image: linear-gradient(-45deg, #E176FF 7%,#F25664 100%);
   width: 100%;
-  display: flex;
-  justify-content:space-around;
+  display:flex;display:-webkit-flex;
+  justify-content: space-around;-webkit-justify-content: space-around;
   padding: 20rpx 30rpx;
   box-sizing: border-box;
   color: #fff;
   .price{
-    flex: 2;
+    -webkit-flex: 2;-ms-flex: 2;flex: 2;
     text{
       font-size: 32rpx;
     }
@@ -48,7 +48,7 @@ page{
     }
   }
   .hot{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     text-align: right;
     image{
       width: 18rpx;
@@ -75,9 +75,10 @@ page{
 }
 .group-wrapper{
   .group-title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
+    align-items:center;
+-webkit-align-items: center;
     padding: 24rpx 30rpx;
     .tip{
       color: #222;
@@ -124,8 +125,8 @@ page{
         height: 100rpx;
       }
       .hot-wrapper{
-        display: flex;
-        justify-content: space-between;
+        display:flex;display:-webkit-flex;
+        justify-content: space-between;-webkit-justify-content: space-between;
       }
       .hot{
         font-size: 24rpx;
@@ -191,7 +192,7 @@ page{
         color: #666;
       }
       .task-item{
-        display: flex;
+        display:flex;display:-webkit-flex;
         padding: 10rpx 0rpx;
       .task-item-left{
         background: url('https://img-blog.csdnimg.cn/20190408171225857.png');
@@ -272,10 +273,10 @@ page{
     left: 0;
     border-radius: 20rpx 20rpx 0px 0px;
     .title{
-      display: flex;
+      display:flex;display:-webkit-flex;
       height: 94rpx;
       line-height: 94rpx;
-      justify-content: space-between;
+      justify-content: space-between;-webkit-justify-content: space-between;
       padding: 0rpx 30rpx;
       font-size: 28rpx;
       color: #222;
@@ -314,8 +315,8 @@ page{
   color: #959595;
 }
 .label-2__text {
-   display: flex;
-  justify-content: space-between;
+   display:flex;display:-webkit-flex;
+  justify-content: space-between;-webkit-justify-content: space-between;
 }
 
 .label-2__icon {

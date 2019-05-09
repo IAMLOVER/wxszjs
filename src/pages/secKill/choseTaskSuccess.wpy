@@ -112,6 +112,12 @@ page{
       .item-title{
         font-size: 32rpx;
         color: #222222;
+        height: 96rpx;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
       }
       .hot{
         font-size: 24rpx;

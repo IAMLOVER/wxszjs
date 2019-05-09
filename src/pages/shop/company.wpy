@@ -10,7 +10,7 @@ page{
     height: 400rpx;
     image {
       width: 100%;
-      height: 400rpx;
+      // height: 400rpx;
     }
   }
 }
@@ -40,11 +40,11 @@ page{
   }
 }
 .compant-detail{
-  display: flex;
+  display:flex;display:-webkit-flex;
   background-color: #fff;
   padding-bottom: 28rpx;
   view{
-    flex: 2;
+    -webkit-flex: 2;-ms-flex: 2;flex: 2;
     font-size: 24rpx;
     color: #666;
     text-align: center;
@@ -57,15 +57,15 @@ page{
     }
   }
   view:nth-child(2){
-    flex: 3;
+    -webkit-flex: 3;-ms-flex: 3;flex: 3;
     border-left: 1px solid #dcdcdc;
   }
   view:nth-child(3){
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
   }
 }
 .touch-info{
-  display: flex;
+  display:flex;display:-webkit-flex;
   height: 124rpx;
   box-sizing: border-box;
   background-color: #fff;
@@ -74,7 +74,7 @@ page{
   border-bottom:1px solid #dcdcdc;
   padding: 0rpx 30rpx;
   view{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     image{
       width: 44rpx;
       height: 44rpx;
@@ -82,7 +82,7 @@ page{
     }
   }
   .address{
-    flex: 6;
+    -webkit-flex: 6;-ms-flex:  6;flex:  6;
     color: #666;
     font-size: 28rpx;
     text-align: left;
@@ -158,15 +158,14 @@ button[plain]{
            duration="{{duration}}"
            wx:if="{{!showEmpty && swiperimgUrls.length>0}}"
            >
+      <swiper-item wx:if="{{video}}">
+        <video autoplay @pause="pause" @ended="ended"  @play="play" show-center-play-btn="{{true}}" src="https://videoop.sqplus.cn/sqj/{{video}}" style="width:100%;height:400rpx"></video>
+      </swiper-item>
       <repeat for="{{swiperimgUrls}}">
          <swiper-item>
           <image src="{{preImagePath+item}}" class="slide-image"/>
         </swiper-item>
       </repeat>
-      <swiper-item>
-        <!-- <video src="https://videotest.sqplus.cn/sqj/1557200687643_l50TbryjLo.mp4"></video> -->
-      </swiper-item>
-
    </swiper>
    <!-- 企业基本信息 -->
    <view class="company-info" wx:if="{{!showEmpty}}">
@@ -247,9 +246,19 @@ export default class Index extends wepy.page {
      showEmpty:false,
      companyInfo:{},
      storePhoneNum:'',
-     companyInfoTip:''
+     companyInfoTip:'',
+     video:''
   };
   methods = {
+    play(){
+      this.autoplay = false
+    },
+    pause(){
+      this.autoplay = true
+    },
+    ended() {
+      this.autoplay = true
+    },
      call(){
       wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
     },
@@ -273,6 +282,7 @@ export default class Index extends wepy.page {
         }else{
           that.companyInfo = res.data.data
           that.swiperimgUrls = res.data.data.imageLlist
+          that.video = res.data.data.video
           that.companyInfo.description = that.companyInfo.description.replace(/\<img/g,'<img class="img"');
           that.$apply()
           wx.setStorage({

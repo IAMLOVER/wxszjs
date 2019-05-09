@@ -29,9 +29,10 @@ page{
   }
 }
 .tab-area{
-  display: flex;
+  display:flex;display:-webkit-flex;
   margin-top: 40rpx;
   justify-content: center;
+-webkit-justify-content: center;
   .tab-item{
     width: 200rpx;
     height: 76rpx;
@@ -60,7 +61,7 @@ page{
     box-sizing: border-box;
     margin: 0 auto;
     .list{
-      display: flex;
+      display:flex;display:-webkit-flex;
       padding-top: 24rpx;
       .list-left{
         image{
@@ -78,8 +79,8 @@ page{
           font-weight: 600;
         }
         .time-money{
-          display: flex;
-          justify-content: space-between;
+          display:flex;display:-webkit-flex;
+          justify-content: space-between;-webkit-justify-content: space-between;
           margin-bottom: 12rpx;
           view{
             font-size: 24rpx;

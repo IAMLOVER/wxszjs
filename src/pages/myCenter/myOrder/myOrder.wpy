@@ -6,14 +6,17 @@
         height:88rpx;
         width:100%;
         background: white;
-        display: flex;
-        align-items: center;
+        display:flex;display:-webkit-flex;
+        align-items:center;
+-webkit-align-items: center;
         .tab-list{
-            flex:1;
+           -webkit-flex: 1;-ms-flex: 1;flex: 1;
             color:#959595;
-            display: flex;
+            display:flex;display:-webkit-flex;
             justify-content: center;
-            align-items: center;
+-webkit-justify-content: center;
+            align-items:center;
+-webkit-align-items: center;
             font-size: 28rpx;
             .tab-text{
                 height: 88rpx;
@@ -21,11 +24,13 @@
             }
         }
         .tab-list-active{
-            flex:1;
+           -webkit-flex: 1;-ms-flex: 1;flex: 1;
             color:#f25664;
-            display: flex;
+            display:flex;display:-webkit-flex;
             justify-content: center;
-            align-items: center;
+-webkit-justify-content: center;
+            align-items:center;
+-webkit-align-items: center;
             font-size: 28rpx;
             .tab-text{
                 height: 80rpx;
@@ -47,9 +52,10 @@
                 box-sizing: border-box;
                 .list-header{
                     height:42rpx;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
+                    display:flex;display:-webkit-flex;
+                    align-items:center;
+-webkit-align-items: center;
+                    justify-content: space-between;-webkit-justify-content: space-between;
                     .list-icon{
                         height:32rpx;
                         width:32rpx;
@@ -75,14 +81,14 @@
                     padding-bottom:30rpx;
                     margin-top: 30rpx;
                     border-bottom: 2rpx solid #F5F5F5; 
-                    display: flex;
+                    display:flex;display:-webkit-flex;
                     .goods-pic{
                         height:180rpx;
                         width:180rpx;
                     }
                     .goods-text{
                         margin-left:20rpx;
-                        flex:1;
+                       -webkit-flex: 1;-ms-flex: 1;flex: 1;
                         .goods-name{
                             font-size:28rpx;
                             color:#222222;

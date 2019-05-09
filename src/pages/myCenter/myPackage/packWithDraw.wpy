@@ -5,7 +5,7 @@ page{
 .you-can-with{
   width: 100%;
   height: 88rpx;
-  display: flex;
+  display:flex;display:-webkit-flex;
   margin-top: 24rpx;
   background-color: #fff;
   .title{
@@ -34,7 +34,7 @@ page{
     height: 90rpx;
     border-bottom: 2rpx solid #F5F5F5;
     line-height: 90rpx;
-    display: flex;
+    display:flex;display:-webkit-flex;
     text{
       font-size: 60rpx;
       color: #222;
@@ -53,8 +53,8 @@ page{
   .input-tip-wrapper{
     color: #959595;
     font-size: 24rpx;
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding-top: 23rpx;
     .all{
       color: #f25664;
@@ -109,7 +109,7 @@ page{
   border-radius: 50%;
 }
 .agree{
-  display: flex;
+  display:flex;display:-webkit-flex;
   font-size: 24rpx;
   margin-top: 40rpx;
   margin-left: 130rpx;
@@ -153,9 +153,9 @@ page{
       }
     }
     .code-wrapper{
-      display: flex;
+      display:flex;display:-webkit-flex;
       input{
-        flex: 3;
+        -webkit-flex: 3;-ms-flex: 3;flex: 3;
         height: 76rpx;
         font-size: 32rpx;
         color: #999;
@@ -164,7 +164,7 @@ page{
         border-radius: 4rpx 0rpx 0rpx 4rpx;
       }
       button{
-        flex: 2;
+        -webkit-flex: 2;-ms-flex: 2;flex: 2;
         height: 76rpx;
         background: #F25664;
         color: #fff;
@@ -324,6 +324,7 @@ export default class Index extends wepy.page {
           success: res => {
             console.log(res)
             if(res.data.code == 200){
+                this.code = res.data.data
                 this.disabledCodeBtn = true;
                 let interval = setInterval(() => {
                    if(this.number>0){

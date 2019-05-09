@@ -52,8 +52,8 @@ page{
 }
 .new-reduction {
   .title {
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding: 0rpx 30rpx 18rpx 40rpx;
     view {
       image {
@@ -110,6 +110,11 @@ page{
         color: #222222;
         height: 100rpx;
         font-weight: 600;
+       display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
       }
       .hot{
         font-size: 24rpx;
@@ -164,8 +169,8 @@ page{
 }
 .new-task{
   .title {
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding: 0rpx 30rpx 18rpx 40rpx;
     view {
       image {
@@ -198,8 +203,8 @@ page{
 }
 .new-produce{
   .title {
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding: 0rpx 30rpx 18rpx 40rpx;
     .tip {
       font-size: 32rpx;

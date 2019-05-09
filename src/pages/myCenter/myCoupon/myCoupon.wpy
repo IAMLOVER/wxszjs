@@ -14,11 +14,12 @@
       width: 100%;
       background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/discountbg.png');
       background-size: 100% 100%;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
+-webkit-justify-content: center;
       font-size: 32rpx;
       color: white;
-      flex-direction: column;
+      flex-direction: column;-webkit-flex-direction: column;
       padding-left: 42vw;
       box-sizing: border-box;
     }
@@ -27,17 +28,20 @@
     height: 68rpx;
     width: 100%;
     background: #f0f0f0;
-    display: flex;
-    align-items: center;
+    display:flex;display:-webkit-flex;
+    align-items:center;
+-webkit-align-items: center;
     margin-top: 38rpx;
     margin-bottom: 35rpx;
     .tab-list {
       height: 68rpx;
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       color: #666666;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
-      align-items: center;
+-webkit-justify-content: center;
+      align-items:center;
+-webkit-align-items: center;
       font-size: 28rpx;
       .tab-text {
         height: 88rpx;
@@ -46,11 +50,13 @@
     }
     .tab-list-active {
       height: 68rpx;
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       color: #ffffff;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
-      align-items: center;
+-webkit-justify-content: center;
+      align-items:center;
+-webkit-align-items: center;
       font-size: 28rpx;
       background: #f25664;
     }
@@ -76,9 +82,10 @@
   .empty{
       font-size:28rpx;
       color:#959595;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display:flex;display:-webkit-flex;
+      flex-direction: column;-webkit-flex-direction: column;
+      align-items:center;
+-webkit-align-items: center;
       image{
           height:276rpx;
           width:384rpx;
@@ -111,11 +118,11 @@
         </view>
         <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
-                <view style="display:flex;align-items:center;padding-top:4rpx;">
+                <view style="display:flex;display:-webkit-flex;-webkit-align-items:center;align-items:center;padding-top:4rpx;">
                     <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
                     <view style="margin-left:20rpx;">
                         <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard*0.01}}元可使用</view>
+                        <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
                     </view>
                 </view>
                 <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
@@ -124,11 +131,11 @@
         </navigator>
         <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" style="background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/coupon04.png')" wx:if="{{couponStatus == 1 && canArr.length>0}}">
             <view style="margin-left:50rpx;">
-                <view style="display:flex;align-items:center;padding-top:4rpx;">
-                    <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
+                <view style="display:flex;display:-webkit-flex;-webkit-align-items:centeralign-items:center;;padding-top:4rpx;">
+                    <view style="font-size:80rpx;">{{m1.filter(item.privilege*0.01)}}</view>
                     <view style="margin-left:20rpx;">
                         <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{item.standard*0.01}}元可使用</view>
+                        <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
                     </view>
                 </view>
                 <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
@@ -146,6 +153,7 @@
 import wepy from 'wepy'
 import path from '../../../common/path.js'
 import time from '../../../common/time.js' 
+import mywxs from '../../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的优惠券',
@@ -203,7 +211,9 @@ export default class Index extends wepy.page {
       }
     });
   }
-
+  wxs = {
+      m1: mywxs
+  };
   // 通过优惠券，我已经省了多少钱
   getMySave(){
     var that = this 

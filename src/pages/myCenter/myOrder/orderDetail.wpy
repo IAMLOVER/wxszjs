@@ -2,9 +2,10 @@
 .container{
     min-height: 100vh;
     background: #f2f2f2;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    display:flex;display:-webkit-flex;
+    align-items:center;
+-webkit-align-items: center;
+    flex-direction: column;-webkit-flex-direction: column;
     .confirm-wrapper{
         position: absolute;
         height:100vh;
@@ -13,9 +14,11 @@
         bottom:0;
         background: rgba(0, 0, 0, 0.5);
         z-index: 10;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
-        align-items: center;
+-webkit-justify-content: center;
+        align-items:center;
+-webkit-align-items: center;
         .confirm-window{
             height:292rpx;
             width:540rpx;
@@ -24,9 +27,11 @@
             .question{
                 height:203rpx;
                 width: 100%;
-                display: flex;
+                display:flex;display:-webkit-flex;
                 justify-content: center;
-                align-items: center;
+-webkit-justify-content: center;
+                align-items:center;
+-webkit-align-items: center;
                 font-size:32rpx;
             }
             .button-wrapper{
@@ -34,18 +39,19 @@
                 width:100%;
                 border:1rpx solid rgba(77,77,77,0.1);
                 font-size:32rpx;
-                display: flex;
-                align-items: center;
+                display:flex;display:-webkit-flex;
+                align-items:center;
+-webkit-align-items: center;
                 .cancel{
                     color:#3C96FF;
-                    flex:1;
+                   -webkit-flex: 1;-ms-flex: 1;flex: 1;
                     border-right:1rpx solid rgba(77,77,77,0.1);
                     text-align: center;
                 }
                 .confirm{
                     color:#267FFE;
                     font-weight: bold;
-                    flex:1;
+                   -webkit-flex: 1;-ms-flex: 1;flex: 1;
                     text-align: center;
                 }
             }
@@ -56,9 +62,11 @@
         background-image: linear-gradient(0deg, #F78486 0%, #EB4D4E 82%);
         color:white;
         font-size:32rpx;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
-        align-items: center;
+-webkit-justify-content: center;
+        align-items:center;
+-webkit-align-items: center;
         width:100vw;
         position: fixed;
         top:0;
@@ -131,14 +139,14 @@
             width:100%;
             padding-bottom:30rpx;
             // margin-top: 30rpx;
-            display: flex;
+            display:flex;display:-webkit-flex;
             .goods-pic{
                 height:180rpx;
                 width:180rpx;
             }
             .goods-text{
                 margin-left:20rpx;
-                flex:1;
+               -webkit-flex: 1;-ms-flex: 1;flex: 1;
                 .goods-name{
                     font-size:28rpx;
                     color:#222222;
@@ -173,8 +181,8 @@
         border-radius: 8rpx;
         view{
             margin-top:10rpx;
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
         }
     }
     .logistics-wrapper{
@@ -196,8 +204,9 @@
         height:108rpx;
         width:100%;
         background: white;
-        display: flex;
-        align-items: center;
+        display:flex;display:-webkit-flex;
+        align-items:center;
+-webkit-align-items: center;
         justify-content: flex-end;
         font-size:32rpx;
         position: fixed;
@@ -210,9 +219,11 @@
             height:84rpx;
             color:white;
             font-size:36rpx;
-            display: flex;
-            align-items: center;
+            display:flex;display:-webkit-flex;
+            align-items:center;
+-webkit-align-items: center;
             justify-content: center;
+-webkit-justify-content: center;
         }
     }
 }

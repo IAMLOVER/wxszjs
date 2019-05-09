@@ -58,12 +58,13 @@ page {
   }
 }
 .main {
-  display: flex;
+  display:flex;display:-webkit-flex;
+  display: -webkit-flex; 
   margin-top: 24rpx;
   padding: 0rpx 30rpx;
   .skil,
   .reduce {
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/kuaimiaosha.png');  
     background-repeat: no-repeat;
     background-size: 100%;  
@@ -117,8 +118,8 @@ page {
 }
 .new-store {
   .title {
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding: 40rpx 30rpx 24rpx 40rpx;
     view {
       image {
@@ -200,7 +201,7 @@ page {
       .images {
         margin-top: 24rpx;
         .produce-images {
-          display: flex;
+          display:flex;display:-webkit-flex;
           justify-content: flex-start;
           image {
             width: 170rpx !important;
@@ -225,8 +226,8 @@ page {
 }
 .new-produce {
   .title {
-    display: flex;
-    justify-content: space-between;
+    display:flex;display:-webkit-flex;
+    justify-content: space-between;-webkit-justify-content: space-between;
     padding: 40rpx 30rpx 24rpx 40rpx;
     view {
       image {
@@ -444,7 +445,7 @@ page {
   <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
       <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
            <view class="store" data-id="{{item.id}}" @tap="goShop">
-               <view style="display:flex">
+               <view style="display:flex;display:-webkit-flex;">
                  <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}"/>
                 <text>{{item.name}}</text>
                <view class="button-wrapper">

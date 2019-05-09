@@ -16,7 +16,7 @@ page{
   overflow: hidden;
   position: relative;
   .item{
-    display: flex;
+    display:flex;display:-webkit-flex;
     width: 690rpx;
     height: 80rpx;
     line-height: 80rpx;
@@ -27,12 +27,12 @@ page{
     box-sizing: border-box;
     margin-bottom: 16rpx;
     .who{
-      flex: 3;
+      -webkit-flex: 3;-ms-flex: 3;flex: 3;
       font-size: 30rpx;
       color: #f25564;
     }
     .time{
-      flex: 2;
+      -webkit-flex: 2;-ms-flex: 2;flex: 2;
       font-size: 24rpx;
       color: #f25564;
     }

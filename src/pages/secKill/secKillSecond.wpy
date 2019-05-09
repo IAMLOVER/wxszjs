@@ -85,14 +85,15 @@ page{
   }
   .suit-items{
     .item{
-      display: flex;
+      display:flex;display:-webkit-flex;
       height: 208rpx;
-      align-items: center;
+      align-items:center;
+-webkit-align-items: center;
       margin-top: 30rpx;
       text-align: center;
     }
     .add{
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       margin-top: -26rpx;
       image{
         width: 40rpx;
@@ -100,7 +101,7 @@ page{
       }
     }
     .item-image{
-      flex: 3;
+      -webkit-flex: 3;-ms-flex: 3;flex: 3;
       image{
         width: 162rpx;
         height: 162rpx;
@@ -116,7 +117,7 @@ page{
       }
     }
     .equal{
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       margin-top: -26rpx;
       image{
         width: 40rpx;
@@ -125,7 +126,7 @@ page{
       }
     }
     .item-price{
-      flex: 3;
+      -webkit-flex: 3;-ms-flex: 3;flex: 3;
       text-align: center;
       line-height: 30rpx;
       .new{
@@ -140,7 +141,7 @@ page{
       }
     }
     .right-now{
-      flex: 3;
+      -webkit-flex: 3;-ms-flex: 3;flex: 3;
       background: #F25664;
       border-radius: 32rpx;
       height: 64rpx;
@@ -171,10 +172,10 @@ page{
     padding: 34rpx 30rpx 0rpx 30rpx;
     box-sizing: border-box;
     .title{
-      display: flex;
+      display:flex;display:-webkit-flex;
       color: #222;
       font-size: 28rpx;
-      justify-content: space-between;
+      justify-content: space-between;-webkit-justify-content: space-between;
       image{
         width: 36rpx;
         height: 36rpx;
@@ -217,10 +218,10 @@ page{
             font-size: 24rpx;
           }
           .one-text{
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
             view{
-              flex: 1;
+              -webkit-flex: 1;-ms-flex: 1;flex: 1;
               font-size: 32rpx;
               color: #F25664;
             }
@@ -266,10 +267,10 @@ page{
             }
           }
           .two-text{
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
             view{
-              flex: 1;
+              -webkit-flex: 1;-ms-flex: 1;flex: 1;
               font-size: 32rpx;
               color: #F25664;
             }
@@ -313,14 +314,14 @@ page{
       line-height: 120rpx;
       font-size: 28rpx;
       color: #222;
-      display: flex;
+      display:flex;display:-webkit-flex;
       view{
-        flex: 2;
-        justify-content: space-between;
+        -webkit-flex: 2;-ms-flex: 2;flex: 2;
+        justify-content: space-between;-webkit-justify-content: space-between;
         text-align: right;
       }
       view:last-child{
-        flex: 1;
+        -webkit-flex: 1;-ms-flex: 1;flex: 1;
       }
       .reduce{
         width: 60rpx;
@@ -341,9 +342,11 @@ page{
           line-height: 54rpx;
         }
       .controal{
-        display: flex;
-        align-items: center;
+        display:flex;display:-webkit-flex;
+        align-items:center;
+-webkit-align-items: center;
         justify-content: center;
+-webkit-justify-content: center;
       }
     }
     .btn-box{

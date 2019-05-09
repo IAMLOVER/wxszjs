@@ -13,7 +13,7 @@ page{
      height: 96rpx;
    }
    .btns{
-     display: flex;
+     display:flex;display:-webkit-flex;
      margin-top: 40rpx;
      navigator,view{
        width: 176rpx;
@@ -79,10 +79,10 @@ page{
             font-size: 24rpx;
           }
           .list-text{
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
             view{
-              flex: 1;
+              -webkit-flex: 1;-ms-flex: 1;flex: 1;
               font-size: 32rpx;
               color: #F25664;
             }

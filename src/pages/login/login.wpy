@@ -202,8 +202,10 @@ export default class Index extends wepy.page {
            icon: 'none', //图标,
            duration: 2000, //延迟时间,
            mask: true, //显示透明蒙层，防止触摸穿透,
-           success: res => {}
+           success: res => {
+           }
          });
+         this.$navigate('../empty/loginFail')
        }
        if(res.data.code == 3006){
          wepy.hideLoading();
@@ -214,6 +216,7 @@ export default class Index extends wepy.page {
            mask: true, //显示透明蒙层，防止触摸穿透,
            success: res => {}
          });
+         this.$navigate('../empty/loginFail')
        }
       },
       fail: () => {},

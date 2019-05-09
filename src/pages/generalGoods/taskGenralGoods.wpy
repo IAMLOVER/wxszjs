@@ -58,14 +58,14 @@ page{
 .general{
   height: 88rpx;
   width: 100%;
-  display: flex;
-  justify-content:space-around;
+  display:flex;display:-webkit-flex;
+  justify-content: space-around;-webkit-justify-content: space-around;
   padding: 24rpx 30rpx;
   box-sizing: border-box;
   color:#F25664;
   background-color: #fff;
   .price{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     text{
       font-size: 32rpx;
     }
@@ -101,12 +101,12 @@ page{
     font-weight: 600;
   }
   .produce-tip{
-      display: flex;
+      display:flex;display:-webkit-flex;
   }
   .limit{
     color: #959595;
     font-size: 24rpx;
-    flex: 2;
+    -webkit-flex: 2;-ms-flex: 2;flex: 2;
   }
   .share{
     color: #F25664;
@@ -126,8 +126,9 @@ page{
 }
 .produce-detail{
   .title{
-    display: flex;
+    display:flex;display:-webkit-flex;
     justify-content: center;
+-webkit-justify-content: center;
     text-align: center;
     font-size: 24rpx;
     color: #959595;
@@ -156,10 +157,10 @@ page{
   background-color: #fff;
   padding: 8rpx 30rpx;
   box-sizing: border-box;
-  display: flex;
+  display:flex;display:-webkit-flex;
   box-shadow: 0 -2px 3px -1px #959595;
   .kefu{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     text-align: center;
     line-height: 30rpx;
     image{
@@ -173,7 +174,7 @@ page{
     }
   }
   .general-btn{
-    flex: 4;
+    -webkit-flex: 4;-ms-flex: 4;flex: 4;
     text{
       display: inline-block;
       width: 508rpx;
@@ -203,11 +204,11 @@ page{
     left: 0;
     border-radius: 20rpx 20rpx 0px 0px;
     .info{
-      display: flex;
+      display:flex;display:-webkit-flex;
       padding: 30rpx;
       border-bottom: 2rpx solid #F5F5F5;
       .info-left{
-        flex: 1;
+        -webkit-flex: 1;-ms-flex: 1;flex: 1;
         margin-right: 24rpx;
         image{
            width: 180rpx;
@@ -216,7 +217,7 @@ page{
         }
       }
       .info-right{
-        flex: 3;
+        -webkit-flex: 3;-ms-flex: 3;flex: 3;
         padding-top: 80rpx;
         .price{
           font-size: 36rpx;
@@ -259,15 +260,15 @@ page{
       padding: 30rpx;
       height: 122rpx;
       box-sizing: border-box;
-      display: flex;      
+      display:flex;display:-webkit-flex;      
        .title{
         color: #222;
         font-size: 28rpx;
-        flex: 1;
+        -webkit-flex: 1;-ms-flex: 1;flex: 1;
       }
       .control{
-        display: flex;
-        flex: 3;
+        display:flex;display:-webkit-flex;
+        -webkit-flex: 3;-ms-flex: 3;flex: 3;
         justify-content: flex-end;
         image{
            width: 60rpx;
@@ -362,7 +363,7 @@ button[plain]{
         <view class="limit">
           邮费：包邮
         </view>
-        <view class="limit" style="flex:2.5;">
+        <view class="limit" style="-webkit-flex: 2.5;-ms-flex: 2.5;flex: 2.5;">
             {{produceInfo.buyNum}}人购买
         </view>
       </view>

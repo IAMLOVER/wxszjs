@@ -9,7 +9,7 @@ page{
     margin: 0 auto;
     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_page.png');
     background-repeat: no-repeat;
-    border-radius: 16rpx;
+    border-radius: 50rpx;
     box-sizing: border-box;
     padding: 30rpx 0rpx;
    view{
@@ -36,10 +36,11 @@ page{
    }
   }
   .record-title{
-    display: flex;
+    display:flex;display:-webkit-flex;
     justify-content:space-evenly;
     font-size: 28rpx;
-    align-items: center;
+    align-items:center;
+-webkit-align-items: center;
     color: #222;
     margin-top: 22rpx;
     .line{
@@ -66,8 +67,8 @@ page{
     .item{
       height: 124rpx;
       background-color: #fff;
-      display: flex;
-      justify-content: space-between;
+      display:flex;display:-webkit-flex;
+      justify-content: space-between;-webkit-justify-content: space-between;
       padding: 30rpx 0rpx;
       box-sizing: border-box;
       border-bottom: 2rpx solid #E6E6E6;

@@ -84,10 +84,10 @@ page{
             font-size: 24rpx;
           }
           .list-text{
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
             view{
-              flex: 1;
+              -webkit-flex: 1;-ms-flex: 1;flex: 1;
               font-size: 32rpx;
               color: #F25664;
             }
@@ -114,12 +114,12 @@ page{
   padding: 20rpx 40rpx;
   box-sizing: border-box;
   .view{
-    display: flex;
+    display:flex;display:-webkit-flex;
     justify-content: space-around;
     color: #666666;
     font-size: 24rpx;
     view{
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       line-height: 40rpx;
     }
     view:last-child{
@@ -131,7 +131,7 @@ page{
   }
 }
 .footer{
-  display: flex;
+  display:flex;display:-webkit-flex;
   height: 108rpx;
   background-color: #fff;
   position: fixed;
@@ -141,11 +141,11 @@ page{
   padding: 0rpx 30rpx;
   box-sizing: border-box;
   view{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     text-align: center;
   }
   .number{
-    flex: 4;
+    -webkit-flex: 4;-ms-flex: 4;flex: 4;
     margin-right: 20rpx;
     margin-top: 10rpx;
     .total{
@@ -166,7 +166,8 @@ page{
     color: #fff;
     font-size: 36rpx;
     margin-top: 12rpx;
-    flex: 3
+    flex: 3;
+    -webkit-flex:3;
   }
 }
 </style>

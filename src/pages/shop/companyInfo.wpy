@@ -24,7 +24,7 @@ page{
     text-overflow: ellipsis;
    }
     .input{
-      display: flex;
+      display:flex;display:-webkit-flex;
       width: 596rpx;
       margin: 0 auto;
       color: #222222;
@@ -32,13 +32,13 @@ page{
       height: 98rpx;
       line-height: 98rpx;
       view{
-        flex: 4;
+        -webkit-flex: 4;-ms-flex: 4;flex: 4;
         text-align: right;
         padding: 0rpx 20rpx;
         padding-left: 0rpx;
       }
       view:nth-child(1){
-        flex: 2;
+        -webkit-flex: 2;-ms-flex: 2;flex: 2;
         text-align: left;
         margin-left: 15rpx;
         padding-right: 0rpx;

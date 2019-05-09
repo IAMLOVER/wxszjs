@@ -77,10 +77,10 @@ page{
     }
   }
   .main-produce{
-    display: flex;
+    display:flex;display:-webkit-flex;
     margin-top: 60rpx;
     .produce-left{
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       image{
         width: 180rpx;
         height: 180rpx;
@@ -89,7 +89,7 @@ page{
       }
     }
     .produce-right{
-      flex: 2;
+      -webkit-flex: 2;-ms-flex: 2;flex: 2;
       .produce-title{
         font-size: 32rpx;
         color: #222;
@@ -97,8 +97,8 @@ page{
         height: 90rpx;
       }
       .produce-bottom{
-        display: flex;
-        justify-content: space-between;
+        display:flex;display:-webkit-flex;
+        justify-content: space-between;-webkit-justify-content: space-between;
         margin-top: 40rpx;
         .money-precent{
           font-size: 24rpx;
@@ -152,13 +152,15 @@ page{
   }
   .situation-items{
     .item{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display:flex;display:-webkit-flex;
+      justify-content: space-between;-webkit-justify-content: space-between;
+      align-items:center;
+-webkit-align-items: center;
       margin-top: 20rpx;
       .item-left{
-        display: flex;
-        align-items: center;
+        display:flex;display:-webkit-flex;
+        align-items:center;
+-webkit-align-items: center;
         .item-number{
         font-size: 32rpx;
         color: #222;
@@ -191,7 +193,7 @@ page{
   }
 }
 .footer{
-  display: flex;
+  display:flex;display:-webkit-flex;
   background-color: #fff;
   position: fixed;
   bottom: 0;
@@ -199,9 +201,10 @@ page{
   padding: 8rpx 30rpx;
   box-sizing: border-box;
   justify-content: center;
+-webkit-justify-content: center;
   width: 100%;
   view{
-    flex: 1;
+    -webkit-flex: 1;-ms-flex: 1;flex: 1;
     color: #fff;
     font-size: 28rpx;
     text-align: center;

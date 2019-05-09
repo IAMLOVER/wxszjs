@@ -32,7 +32,7 @@ page{
   }
 }
 .main{
-  display: flex;
+  display:flex;display:-webkit-flex;
   margin-top: 84rpx;
   .main-left{
     width: 160rpx;
@@ -85,14 +85,14 @@ page{
         height: 210rpx;
         background-color: #fff;
         border-radius: 16px;
-        display: flex;
+        display:flex;display:-webkit-flex;
         padding: 20rpx;
         box-sizing: border-box;
         margin-bottom: 24rpx;
         position: relative;
         .item-left{
           margin-right: 16rpx;
-          flex: 1;
+          -webkit-flex: 1;-ms-flex: 1;flex: 1;
           image{
             width: 170rpx;
             height: 170rpx;
@@ -100,7 +100,7 @@ page{
           }
         }
         .item-right{
-          flex: 2;
+          -webkit-flex: 2;-ms-flex: 2;flex: 2;
           .item-title{
             font-size: 32rpx;
             color: #222;
@@ -113,8 +113,8 @@ page{
             -webkit-line-clamp: 2;
           }
           .item-info{
-            display: flex;
-            justify-content: space-between;
+            display:flex;display:-webkit-flex;
+            justify-content: space-between;-webkit-justify-content: space-between;
             .price{
               font-size: 32rpx;
               color: #F25664;

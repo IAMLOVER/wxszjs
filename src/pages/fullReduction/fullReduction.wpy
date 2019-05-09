@@ -37,12 +37,12 @@ page{
   border-top: 2rpx solid #d5d5d5;
 }
 .scroll-x {
-    display: flex;
+    display:flex;display:-webkit-flex;
     flex-direction: row;
   }
   .view-box{
-    // min-width: 200rpx;
-    padding: 0rpx 20rpx;
+    min-width: 200rpx;
+    // padding: 0rpx 20rpx;
   }
 .view {
     text-align: center;
@@ -152,7 +152,7 @@ page{
         <scroll-view scroll-x="true">
           <view class="scroll-x">
              <view wx:for="{{typeArr}}" wx:for-item="item" data-id = "{{item.id}}" wx:key="{{index}}" class="view-box">
-                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" data-id = "{{item.id}}"  @tap='goIndex'>满{{item.standard*0.01}}减{{item.privilege*0.01}}</view>
+                <view class="view {{index==idx?'active':''}}" data-index="{{index}}" data-id = "{{item.id}}"  @tap='goIndex'>满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}</view>
               </view>
            </view>
         </scroll-view>
@@ -167,10 +167,10 @@ page{
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <!-- <view class="quan">券</view> -->
-            <view class="tip">满{{item.standard*0.01}}减{{item.privilege*0.01}}</view>
+            <view class="tip">满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}</view>
             <view class="price-box">
               <text class="price-type">￥</text>
-              <text class="price">{{item.minPrice*0.01}}</text>
+              <text class="price">{{m1.filter(item.minPrice*0.01)}}</text>
             </view>
             <view class="how-many">
               {{item.saleNum}}人购买
@@ -184,6 +184,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+import mywxs from '../../wxs/mywxs.wxs';
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '大满减'
@@ -191,6 +192,9 @@ export default class Index extends wepy.page {
   onLoad() {
     this.getType()
   }
+      wxs = {
+      m1: mywxs
+  };
   data = {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,

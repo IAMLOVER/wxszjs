@@ -7,7 +7,7 @@
     width: 100%;
     background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg');
     background-size: 750rpx 200rpx;
-    display: flex;
+    display:flex;display:-webkit-flex;
     padding: 42rpx 0 0 40rpx;
     box-sizing: border-box;
     .header-icon {
@@ -21,16 +21,19 @@
         font-size: 32rpx;
         color: white;
         margin-top: 11rpx;
-        display: flex;
-        align-items: center;
+        display:flex;display:-webkit-flex;
+        align-items:center;
+-webkit-align-items: center;
         .more {
           height: 32rpx;
           width: 32rpx;
           border: 2rpx solid white;
           border-radius: 50%;
-          display: flex;
+          display:flex;display:-webkit-flex;
           justify-content: center;
-          align-items: center;
+-webkit-justify-content: center;
+          align-items:center;
+-webkit-align-items: center;
           margin-left: 20rpx;
           image {
             height: 16rpx;
@@ -78,7 +81,7 @@
     margin: 24rpx auto auto auto;
     background: white;
     border-radius: 20rpx;
-    display: flex;
+    display:flex;display:-webkit-flex;
     padding: 24rpx 0;
     box-sizing: border-box;
     .top-list {
@@ -114,37 +117,46 @@
     height: 88rpx;
     width: 100%;
     // background: white;
-    display: flex;
-    align-items: center;
+    display:flex;display:-webkit-flex;
+    align-items:center;
+-webkit-align-items: center;
     // position: fixed;
     top: 0;
     z-index: 10;
     .tab-list {
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       color: #222222;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
-      align-items: center;
+-webkit-justify-content: center;
+      align-items:center;
+-webkit-align-items: center;
       font-size: 28rpx;
       .tab-text {
         height: 55rpx;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
-        align-items: center;
+-webkit-justify-content: center;
+        align-items:center;
+-webkit-align-items: center;
       }
     }
     .tab-list-active {
-      flex: 1;
+      -webkit-flex: 1;-ms-flex: 1;flex: 1;
       color: #f25664;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
-      align-items: center;
+-webkit-justify-content: center;
+      align-items:center;
+-webkit-align-items: center;
       font-size: 32rpx;
       .tab-text {
         height: 55rpx;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
-        align-items: center;
+-webkit-justify-content: center;
+        align-items:center;
+-webkit-align-items: center;
         border-bottom: 4rpx solid #f25664;
       }
     }
@@ -175,8 +187,9 @@
         background-size: 100% 100%;
         color: white;
         font-size: 24rpx;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
+-webkit-justify-content: center;
       }
       .active-mission {
         height: 44rpx;
@@ -188,8 +201,9 @@
         background-size: 100% 100%;
         color: white;
         font-size: 24rpx;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
+-webkit-justify-content: center;
       }
       .goods-pic {
         height: 336rpx;
@@ -222,9 +236,11 @@
         border: 2rpx solid #f25664;
         border-radius: 4rpx;
         box-sizing: border-box;
-        display: flex;
+        display:flex;display:-webkit-flex;
         justify-content: center;
-        align-items: center;
+-webkit-justify-content: center;
+        align-items:center;
+-webkit-align-items: center;
       }
     }
   }
@@ -232,16 +248,17 @@
     min-height:100vh;
     padding-bottom: 100rpx;
     width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    display:flex;display:-webkit-flex;
+    align-items:center;
+-webkit-align-items: center;
+    flex-direction: column;-webkit-flex-direction: column;
     box-sizing: border-box;
     .mission-list {
       height: 228rpx;
       width: 690rpx;
       padding: 24rpx;
       box-sizing: border-box;
-      display: flex;
+      display:flex;display:-webkit-flex;
       background: white;
       margin-top: 20rpx;
       border-radius: 16rpx;
@@ -295,9 +312,10 @@
       padding-bottom: 100rpx;
       width: 100%;
       border-radius: 16rpx;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
+      display:flex;display:-webkit-flex;
+      align-items:center;
+-webkit-align-items: center;
+      flex-direction: column;-webkit-flex-direction: column;
       color:#959595;
       font-size:28rpx;
       min-height:100vh;
@@ -319,9 +337,11 @@
     bottom: 0;
     left: 0;
     background: white;
-    display: flex;
+    display:flex;display:-webkit-flex;
     justify-content: center;
-    align-items: center;
+-webkit-justify-content: center;
+    align-items:center;
+-webkit-align-items: center;
     .more {
       height: 84rpx;
       width: 690rpx;
@@ -329,9 +349,11 @@
       border-radius: 42rpx;
       color: white;
       font-size: 28rpx;
-      display: flex;
+      display:flex;display:-webkit-flex;
       justify-content: center;
-      align-items: center;
+-webkit-justify-content: center;
+      align-items:center;
+-webkit-align-items: center;
     }
   }
 }

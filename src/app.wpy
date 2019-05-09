@@ -60,6 +60,7 @@ export default class extends wepy.app {
       // 微信扫进入
       'pages/empty/empty',
       'pages/login/login',
+      'pages/empty/loginFail',
       'pages/empty/bindFail',
       'pages/empty/bindSuccess',
       'pages/empty/loginSuccess'
