@@ -26,7 +26,7 @@ page{
   <view class="page">
    <image wx:if="{{imagePath}}" src="{{imagePath+'internet@2x.png'}}"/>
    <view>多专区管理，尽在网页版哦</view>
-   <view>www.baidu.com</view>
+   <view>www.qmbuy.com</view>
    <view class="touch" @tap="call">联系客服</view>
   </view>
 </template>

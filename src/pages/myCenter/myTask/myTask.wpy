@@ -77,6 +77,11 @@ page{
           color: #222;
           height:100rpx;
           font-weight: 600;
+           display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
         }
         .time-money{
           display:flex;display:-webkit-flex;

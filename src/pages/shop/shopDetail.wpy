@@ -47,6 +47,7 @@ page{
       display: inline-block;
       padding: 0rpx 10rpx;
       border-radius: 8rpx;
+      margin-top: 10rpx;
     }
   }
 }

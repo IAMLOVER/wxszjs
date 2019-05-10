@@ -95,6 +95,11 @@ page{
         color: #222;
         font-weight: 600;
         height: 90rpx;
+          display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
       }
       .produce-bottom{
         display:flex;display:-webkit-flex;

@@ -89,9 +89,12 @@ export default class Index extends wepy.page {
       success: function (res) {
         if(res.authSetting['scope.userInfo']) {
           that.canIuse = false
-          setTimeout(() => {
-          that.getLogin()            
-          }, 3000);
+           var interval = setInterval(() => {
+            if(that.$parent.globalData.userId){
+              that.getLogin()               
+              clearInterval(interval)        
+            }
+          }, 1000);
          }
         else{
           that.canIuse = true
@@ -108,72 +111,6 @@ export default class Index extends wepy.page {
     userId:''
   };
   methods = {}; 
-  bindGetUserInfo(e) {
-        if (e.detail.userInfo) {
-            //用户按了允许授权按钮
-            var that = this;
-            //插入登录的用户的相关信息到数据库
-            that.queryUserInfo(e);
-        } else {
-            //用户按了拒绝按钮
-            wx.showModal({
-                title:'警告',
-                content:'您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-                showCancel:false,
-                confirmText:'返回授权',
-                success:function(res){
-                    if (res.confirm) {
-                        console.log('用户点击了“返回授权”')
-                    } 
-                }
-            })
-        }
-  }
-  queryUserInfo(e){
-    var that = this;
-            wx.login({
-               success: res => {
-               that.code = res.code 
-               wx.getUserInfo({
-                  success: function (res) { 
-                  var encryptedData = res.encryptedData
-                  console.log(res)
-                  var iv = res.iv      
-                    wx.request({
-                      url: that.apiPath + '/szmktuser/user/authorize',
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                      },
-                      data: {
-                        'encryptedData':encryptedData,
-                        'code':that.code,
-                        'iv':iv,
-                      }, 
-                     method: 'post',
-                     dataType: 'json',
-                     success: res => {
-                       // 此处会返回我userId
-                       that.canIuse = false
-                       that.$parent.globalData.userId = res.data.data.userid
-                       that.userId = res.data.data.userid
-                        
-                      that.$parent.globalData.identityType = res.data.data.identityType
-                      that.$parent.globalData.key = res.data.data.sessionkey
-                      wx.setStorageSync('userId', res.data.data.userid); 
-                       that.userId = res.data.data.userid
-                       that.getRegister()
-                    },
-                    fail: () => {
-                    },
-                    complete: () => {}
-                  });            
-                }
-              });
-             }
-      });
-  }
-
-
   //调登陆的接口
   getLogin(){
     var that = this 
@@ -192,9 +129,9 @@ export default class Index extends wepy.page {
       method: 'GET',
       dataType: 'json', 
       success: res => {
+         wepy.hideLoading();
        if(res.data.code == 1000){
          this.$navigate('../empty/loginSuccess')
-         wepy.hideLoading();
        }if(res.data.code == 3002){
          wepy.hideLoading();
          wepy.showToast({

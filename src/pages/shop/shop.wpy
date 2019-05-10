@@ -53,6 +53,7 @@ page{
 .scroll-x {
     display:flex;display:-webkit-flex;
     flex-direction: row;
+      -webkit-flex-direction: row;
   }
   .view {
     text-align: center;
@@ -83,6 +84,7 @@ page{
   .item-title{
     display:flex;display:-webkit-flex;
     justify-content: space-around;
+    -webkit-justify-content: space-around;
     .item-detail{
       -webkit-flex: 5;-ms-flex: 5;flex: 5;
       .logo{

@@ -7,19 +7,19 @@ page{
   position: relative;
   swiper{
     width: 100%;
-    height: 650rpx;
+    height: 750rpx;
     swiper-item{
       width: 100%;
-      height: 650rpx;
+      height: 750rpx;
       image{
         width: 100%;
-        height: 650rpx;
+        height: 750rpx;
       }
     }
   }
   image{
     width: 100%;
-    height: 650rpx;
+    height: 750rpx;
   }
   .tip{
     width: 446rpx;
@@ -497,12 +497,19 @@ page{
   border-radius: 50%;
   border: 2rpx solid #B5b5b5;
   box-sizing: border-box;
+       display: flex;
+      display:  -webkit-flex;
+
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content:center;
+  -webkit-justify-content: center;
 }
 
 .label-2__icon-checked {
   position: absolute;
-  left: 6rpx;
-  top: 6rpx;
+  // left: 6rpx;
+  // top: 6rpx;
   width: 16rpx;
   height: 16rpx;
   background: #F25664;;

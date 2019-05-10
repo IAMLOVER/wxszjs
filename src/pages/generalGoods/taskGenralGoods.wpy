@@ -7,19 +7,19 @@ page{
   position: relative;
   swiper{
     width: 100%;
-    height: 650rpx;
+    height: 750rpx;
     swiper-item{
       width: 100%;
-      height: 650rpx;
+      height: 750rpx;
       image{
         width: 100%;
-        height: 650rpx;
+        height: 750rpx;
       }
     }
   }
   image{
     width: 100%;
-    height: 650rpx;
+    height: 750rpx;
   }
   .tip{
     width: 446rpx;

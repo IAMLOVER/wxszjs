@@ -39,6 +39,8 @@ page{
 .scroll-x {
     display:flex;display:-webkit-flex;
     flex-direction: row;
+      -webkit-flex-direction: row;
+    
   }
   .view-box{
     min-width: 200rpx;

@@ -246,7 +246,7 @@ button[plain]{
       </view>
       <view class="share" @tap="shareSecKill">
         <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-        <text>分享有奖</text>
+        <text>助力有奖</text>
       </view>
     </view>
 
@@ -299,14 +299,27 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,
     produceId:'',
-    produceInfo:{}
+    produceInfo:{},
+    taskGoodsCount:0,
   };
    wxs = {
       m1: mywxs
   };
   methods = {
+
     shareSecKill(){
-      this.$navigate('./choseGroup',{id:this.produceId})
+      if(this.taskGoodsCount>0){
+         this.$navigate('./choseGroup',{id:this.produceId})
+      }else{
+        wepy.showToast({
+          title: '您好，此商品暂无关联任务商品', //提示的内容,
+          icon: 'none', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+        
+      }
     }
   };  
   // 获取商品详情
@@ -323,6 +336,8 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.produceInfo = res.data.data.channel
+        that.taskGoodsCount = that.produceInfo.taskGoodsCount
+        console.log(that.taskGoodsCount)
         that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.$apply()
       },
