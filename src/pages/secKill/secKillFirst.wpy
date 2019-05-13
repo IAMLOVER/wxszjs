@@ -271,9 +271,14 @@ button[plain]{
       </view>
       </button>
       
-      <navigator url="./secKillSecond?id={{produceId}}" class="skill-btn">
+      <navigator url="./secKillSecond?id={{produceId}}" class="skill-btn" wx:if="{{produceInfo.stock>0}}">
         <text>立即秒杀</text>
       </navigator>
+
+      <view class="skill-btn" wx:if="{{produceInfo.stock<=0}}">
+        <text>暂无库存</text>
+      </view>
+
     </view>
   </view>
 </template>

@@ -573,8 +573,20 @@ export default class Index extends wepy.page {
           mask: true, 
           success: res => {}
         });
+        return
       }
-      else{
+      console.log(this.account * this.collocation.count + '-' + this.goodsClassList[this.activeIndex].stock)
+      if(this.account > this.produceInfo.stock || this.account * this.collocation.count > this.goodsClassList[this.activeIndex].stock){
+        wx.showToast({
+          title: '不好意思,商品库存不足',
+          icon:'none',
+          duration: 2000, 
+          mask: true, 
+          success: res => {}
+        });
+      console.log( this.account + '-' + this.produceInfo.stock)
+        return
+      }
         var pay = {}
         //
         pay.collocationId = this.collocationId
@@ -597,7 +609,7 @@ export default class Index extends wepy.page {
         })
         this.getUserAddress()
       }
-    }
+    
   }; 
   wxs = {
       m1: mywxs
@@ -659,7 +671,7 @@ export default class Index extends wepy.page {
       success: res => {
         console.log(res)
         that.rightProduceInfo = res.data.data.goods
-        that.goodsClassList = res.data.data.goods.goodsClassList
+        that.goodsClassList = res.data.data.goods.goodsClass
         that.typeId = that.goodsClassList[this.activeIndex].id
         that.collocation = res.data.data.collocation
         that.$apply()

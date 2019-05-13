@@ -177,23 +177,7 @@ export default class Index extends wepy.page {
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     myInCome:'',
-    records:[{
-      "id":1,
-      "userId":1000000021,
-      "orderNo":"DD20190401104936XY7E",
-      "amount":100,
-      "createtime":1555225415011,
-      "status":1,
-      "type":1
-    },{
-      "id":1,
-      "userId":1000000021,
-      "orderNo":"DD20190401104936XY7E",
-      "amount":100,
-      "createtime":1555225415011,
-      "status":1,
-      "type":0
-    }]
+    records:[]
   };
   methods = {
     draw(){

@@ -233,7 +233,7 @@ page{
   <view class="action">
     <view class="view" wx:if="{{haveJoinActivity}}">
       <view>优惠活动：</view>
-      <view class="tip">满{{couponActivity.standard*0.01}}减{{couponActivity.privilege*0.01}}</view>
+      <view class="tip">满{{m1.filter(couponActivity.standard*0.01)}}减{{m1.filter(couponActivity.privilege*0.01)}}</view>
     </view>
     <view class="view">
       <view>有无优惠券：</view>

@@ -669,8 +669,11 @@ button[plain]{
       </view>
      <!-- 确定按钮 -->
       <view class="btn-box">
-          <view class="btn" @tap="payMoney">
+          <view class="btn" @tap="payMoney" wx:if="{{goodsClassList[activeIndex].stock > 0}}">
             确定(共￥{{m1.filter(money)}})
+          </view>
+          <view class="btn" wx:if="{{goodsClassList[activeIndex].stock <= 0}}">
+            暂无库存 
           </view>
       </view>
       <!-- 关闭按钮 -->
@@ -922,7 +925,7 @@ export default class Index extends wepy.page {
         that.produceInfo = res.data.data.goods
         that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
         that.taskItems = res.data.data.targetList
-        that.goodsClassList = res.data.data.goods.goodsClassList
+        that.goodsClassList = res.data.data.goods.goodsClass
         that.typeId = that.goodsClassList[this.activeIndex].id
         that.money = that.account * that.goodsClassList[0].salPrice*0.01
         for(var item in that.taskItems){

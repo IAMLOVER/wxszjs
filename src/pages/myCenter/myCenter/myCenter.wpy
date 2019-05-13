@@ -114,11 +114,14 @@
     .item {
       height: 102rpx;
       width: 690rpx;
-      border: 2rpx solid #f5f5f5;
+      border-bottom: 2rpx solid #f5f5f5;
       font-size: 32rpx;
       display:flex;display:-webkit-flex;
       align-items:center;
 -webkit-align-items: center;
+      &:last-child{
+        border-bottom:  none;
+      }
       .item-icon{
         width:102rpx;
         display:flex;display:-webkit-flex;

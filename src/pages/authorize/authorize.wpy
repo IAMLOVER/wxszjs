@@ -111,24 +111,22 @@ export default class Index extends wepy.page {
                that.code = res.code 
                console.log(res.code)
                  wx.getUserInfo({
-          success: function (res) {
-          var encryptedData = res.encryptedData
-          console.log(res)
-          var iv = res.iv      
-          // wx.setStorageSync('avatarUrl',res.userInfo.avatarUrl);
-          
-             that.$parent.globalData.avatarUrl = res.userInfo.avatarUrl
-             that.$parent.globalData.userName = res.userInfo.nickName
-                wx.request({
-                url: that.apiPath + '/szmktuser/user/authorize',
-                header: {
-                  'content-type': 'application/x-www-form-urlencoded'
-                  },// 默认值,
-                data: {
+                  success: function (res) {
+                  var encryptedData = res.encryptedData
+                  console.log(res)
+                  var iv = res.iv
+                  that.$parent.globalData.avatarUrl = res.userInfo.avatarUrl
+                  that.$parent.globalData.userName = res.userInfo.nickName
+                  wx.request({
+                   url: that.apiPath + '/szmktuser/user/authorize',
+                  header: {
+                     'content-type': 'application/x-www-form-urlencoded'
+                   },// 默认值,
+                  data: {
                   'encryptedData':encryptedData,
                   'code':that.code,
                   'iv':iv,
-                }, //请求的参数",
+                 }, //请求的参数",
                 method: 'post',
                 dataType: 'json',
                 success: res => {

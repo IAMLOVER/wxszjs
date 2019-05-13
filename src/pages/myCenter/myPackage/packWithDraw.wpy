@@ -261,7 +261,7 @@ page{
           <input type="tel" name="" id="" value="{{phone}}" bindinput="phoneInput" placeholder="输入手机号码" />
         </view>
         <view class="code-wrapper">
-          <input type="number" name="" id="" placeholder="输入验证码" />
+          <input type="number" value="{{code}}" bindinput="codeInput" id="" placeholder="输入验证码" />
           <button @tap="getCode" disabled="{{disabledCodeBtn}}" class="{{disabledCodeBtn?'disabled':''}}">{{btnText}}</button>
         </view>
         <view class="sure-btn active" @tap="last">确认</view>
@@ -296,7 +296,7 @@ export default class Index extends wepy.page {
     value:'',
     phone:'',
     error:false,
-    code:4312
+    code:''
   };
   methods = {
     closeShadow(){
@@ -324,7 +324,7 @@ export default class Index extends wepy.page {
           success: res => {
             console.log(res)
             if(res.data.code == 200){
-                this.code = res.data.data
+                // this.code = res.data.data
                 this.disabledCodeBtn = true;
                 let interval = setInterval(() => {
                    if(this.number>0){
@@ -365,9 +365,9 @@ export default class Index extends wepy.page {
     },
     //提现开始
     getBegin(){
-      if(this.value<=0){
+      if(this.value<5){
          wx.showToast({
-           title: '请输入金额', 
+           title: '最低提现金额不得少于5元', 
            icon: 'none', 
            duration: 2000, 
            mask: true,
@@ -389,6 +389,9 @@ export default class Index extends wepy.page {
     },
     phoneInput(e){
       this.phone = e.detail.value
+    },
+    codeInput(e){
+      this.code = e.detail.value
     },
     last(){
       if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))){
@@ -444,8 +447,9 @@ export default class Index extends wepy.page {
                    this.$navigate('./drawSuccess')
                  }else{
                     wx.showToast({
-                     title: '提现失败', 
+                     title: res.data.message, 
                      duration: 2000,
+                     icon:'none',
                      mask: true, 
                      success: res => {}
                    });
