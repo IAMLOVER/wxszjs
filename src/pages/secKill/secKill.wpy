@@ -206,32 +206,48 @@ export default class Index extends wepy.page {
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,
     searchValue:'',
-    produceItems:{}
+    produceItems:{},
+    page:0,
+    totalPage:0,
+    arr:[]
   };
    wxs = {
       m1: mywxs
   };
   methods = {
     navSearch() {
-    this.$navigate({url: '../search/search'})
+    this.$navigate({url: '../search/secKillSearch'})
     },
   };
+   //上拉加载更多
+  onReachBottom(){
+    if(this.page<this.totalPage-1){
+      this.page++
+      this.arr = this.produceItems
+      this.getSeckills()
+    }
+  }
   getSeckills(){
+    var that = this
     wx.showLoading({
       title: '加载中',
       mask: true, 
       success: res => {}
     });
     wx.request({
-      url: this.apiPath + '/szmktbackstage/channel/secKill/search',
-      data: {keyWord:this.searchValue},
-      method: 'post',
+      url: that.apiPath + '/szmktbackstage/channel/secKill/search',
+      method: 'get',
       dataType: 'json',
+      data:{
+        page:that.page,
+        size:15
+      },
       success: res => {
-        let data = res.data.data.content
-        this.produceItems = data
+        let data = that.arr.concat(res.data.data.content)
+        that.produceItems = data
+        that.totalPage = res.data.data.totalPages
         console.log(data);
-        this.$apply();
+        that.$apply();
         wx.hideLoading();
       },
       fail: () => {

@@ -527,7 +527,7 @@ export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市',
     enablePullDownRefresh: true,
-    backgroundTextStyle:'dark'
+    backgroundTextStyle:'dark',
   };
   onLoad() {
     this.newcoupon = wx.getStorageSync('newcoupon')
@@ -556,6 +556,9 @@ export default class Index extends wepy.page {
     userId:'',
     newcoupon:{},
     couponNum:{standard:'',privilege:'',show:false},
+    page:0,
+    totalPage:0,
+    arr:[]
   };
   wxs = {
       m1: mywxs
@@ -599,11 +602,10 @@ export default class Index extends wepy.page {
     redPacket
   }
 
-       //下拉刷新
-  onPullDownRefresh()
-  {
+  //下拉刷新
+  onPullDownRefresh(){
     wx.showNavigationBarLoading()
- // 新店推荐
+   // 新店推荐
     this.getRecommend()
     //轮播图
     this.getSwiper()
@@ -614,6 +616,15 @@ export default class Index extends wepy.page {
       wx.hideNavigationBarLoading() 
       wx.stopPullDownRefresh()
     },1500);
+  }
+
+  //上拉加载更多
+  onReachBottom(){
+    if(this.page<this.totalPage-1){
+      this.page++
+      this.arr = this.newProduceArr
+      this.getNewProduce()
+    }
   }
 
   getRecommend(){
@@ -650,16 +661,30 @@ export default class Index extends wepy.page {
   }
   // 获取最新单品
   getNewProduce(){
-    var that = this 
+    var that = this
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search', 
       method: 'GET',
+      data:{
+        page:that.page,
+        size:15
+      },
       dataType: 'json',
       success: res => {
-        that.newProduceArr = res.data.data.content
+        that.newProduceArr = that.arr.concat(res.data.data.content),
+        that.totalPage = res.data.data.totalPages
         that.$apply()
       },
-      fail: () => {},
+      fail: () => {
+        wepy.showToast({
+          title: '网络异常', //提示的内容,
+          icon: 'none', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+        
+      },
       complete: () => {}
     });
   }

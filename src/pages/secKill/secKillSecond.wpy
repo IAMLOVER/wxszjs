@@ -411,10 +411,14 @@ page{
           </view>
           <view class="item-price">
             <view class="new">￥{{m1.filter(produceInfo.chaPrice*0.01 + item.minPrice*0.01)}}</view>
-            <view class="old">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
+            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
+            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)<=0}}">¥{{m1.filter(item.minPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
           </view>
-          <view class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
+          <view wx:if="{{item.totalStock>0}}" class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
             马上抢
+          </view>
+           <view wx:if="{{item.totalStock<=0}}" @tap="empty" class="right-now"  style="background:#ddd">
+            已抢光
           </view>
         </view>
       </view>
@@ -516,6 +520,16 @@ export default class Index extends wepy.page {
     collocationId:'',
   };
   methods = {
+    empty(){
+      wepy.showToast({
+        title: '商品已抢光', //提示的内容,
+        icon: 'none', //图标,
+        duration: 2000, //延迟时间,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      
+    },
     rightNow(e){
       this.showShadow = true
       this.rightProduceId = e.currentTarget.dataset.id

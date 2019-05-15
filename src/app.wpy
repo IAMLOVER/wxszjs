@@ -18,6 +18,7 @@ export default class extends wepy.app {
       'pages/index/index',
       'pages/authorize/authorize',
       'pages/search/search',
+      'pages/search/secKillSearch',
       'pages/address/address',
       'pages/secKill/secKill',
       'pages/secKill/secKillFirst',

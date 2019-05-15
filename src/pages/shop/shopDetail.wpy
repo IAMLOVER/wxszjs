@@ -353,12 +353,12 @@ page{
             <view class="item-price">
               <view class="price">
                 <text>￥</text>
-                <text class="really">{{item.minPrice*0.01}}</text>
+                <text class="really">{{m1.filter(item.minPrice*0.01)}}</text>
               </view>
             </view>
           </view>
           <view class="tip">
-            满{{item.standard*0.01}}减{{item.privilege*0.01}}
+            满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}
           </view>
         </navigator>
     </view>

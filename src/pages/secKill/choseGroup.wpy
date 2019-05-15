@@ -509,11 +509,11 @@ export default class Index extends wepy.page {
     showTaskDetail(e){
        this.targetGoodsId = e.currentTarget.dataset.id
        var index = e.currentTarget.dataset.index
+       this.getTargetDetail()
         for(var item of this.targetGoods){
           item.hide = false
         }
        this.targetGoods[index].hide = !this.targetGoods[index].hide
-       this.getTargetDetail()
     },
     showRule() {
       this.showRule = true;
@@ -524,6 +524,11 @@ export default class Index extends wepy.page {
      openTaskChoseShadow(e){
       this.showChoseTask = true
       var index = e.currentTarget.dataset.index
+      this.targetGoodsId = e.currentTarget.dataset.id
+       for(var item of this.targetGoods){
+          item.hide = false
+        }
+      this.getTargetDetail()
       wx.setStorageSync('cover',this.preImagePath + this.targetGoods[index].picUrl1)
     },
     closeTaskChoseShadow(){

@@ -365,7 +365,7 @@ button[plain]{
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
       </view>
       <view class="range">
-        满{{activityInfo.standard*0.01}}元可用{{activityInfo.privilege*0.01}}元券
+        满{{m1.filter(activityInfo.standard*0.01)}}元可用{{m1.filter(activityInfo.privilege*0.01)}}元券
       </view>
     </view>
 

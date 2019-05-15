@@ -144,7 +144,7 @@
         </view>
         <view class="empty" wx:if="{{canArr.length<=0}}">
             <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
-            <view>你的卷包空空如也呢</view>
+            <view>你的券包空空如也呢</view>
         </view>
     </view>
 </template>

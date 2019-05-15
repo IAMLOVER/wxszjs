@@ -242,13 +242,20 @@ export default class Index extends wepy.page {
     idx:-1,
     newSelect:true,
     classifyId:'',
-    classifyProduce:{}
+    classifyProduce:{},
+    page:0,
+    totalPages:0,
+    arr:[]
   };
   methods = {
     getProduce(e){
       this.idx = e.currentTarget.dataset.index
       this.newSelect = false
       this.classifyId = e.currentTarget.dataset.id
+      this.classifyProduce = []
+      this.arr = []
+      this.page = 0
+      this.totalPages = 0
       this.getClassfiyProduce()
     },
     choseNew(){
@@ -273,6 +280,14 @@ export default class Index extends wepy.page {
   wxs = {
       m1: mywxs
   };
+   //上拉加载更多
+  onReachBottom(){
+    if(this.page<this.totalPage-1){
+      this.page++
+      this.arr = this.classifyProduce
+      this.getClassfiyProduce()
+    }
+  }
   // 获取分类列表
   getClass(){
     var that = this    
@@ -308,13 +323,16 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
       data: {
-        'classify': that.classifyId
+        'classify': that.classifyId,
+        page:that.page,
+        size:15
       }, //请求的参数",
       method: 'get',
       dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
       success: res => {
         console.log(res)
-        that.classifyProduce = res.data.data.content
+        that.classifyProduce =  that.arr.concat(res.data.data.content)
+        that.totalPage = res.data.data.totalPages
         that.$apply()
       },
       fail: () => {},

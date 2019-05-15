@@ -313,6 +313,7 @@ export default class Index extends wepy.page {
   methods = {
 
     shareSecKill(){
+      console.log(this.taskGoodsCount)
       if(this.taskGoodsCount>0){
          this.$navigate('./choseGroup',{id:this.produceId})
       }else{
