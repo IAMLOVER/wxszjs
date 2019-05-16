@@ -9,9 +9,10 @@ page{
     margin: 0 auto;
     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_page.png');
     background-repeat: no-repeat;
-    border-radius: 50rpx;
+    border-radius: 20rpx;
     box-sizing: border-box;
     padding: 30rpx 0rpx;
+    background-size: 100%;
    view{
      text-align: center;
      color: #fff;
@@ -33,6 +34,8 @@ page{
      margin: 0 auto;
      margin-top: 40rpx;
      text-align: center;
+     font-size: 32rpx;
+     letter-spacing: 2
    }
   }
   .record-title{
@@ -60,7 +63,7 @@ page{
     width: 690rpx;
     margin: 0 auto;
     margin-top: 22rpx;
-    border-radius: 16px;
+    border-radius: 20rpx;
     padding: 0rpx 30rpx;
     box-sizing: border-box;
     background-color: #fff;
@@ -144,7 +147,7 @@ page{
         <view class="item-number">
           <view class="number {{item.type == 1 ?'red':''}} ">
             <text wx:if="{{item.type == 1 }}">+</text>
-            <text wx:if="{{item.type == 0 }}">-</text>{{item.amount*0.01}}
+            <text wx:if="{{item.type == 0 }}">-</text>{{m1.filterMoney(item.amount*0.01)}}
           </view>
         </view>
       </view>

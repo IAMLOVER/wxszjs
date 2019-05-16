@@ -340,6 +340,14 @@ export default class Index extends wepy.page {
             this.$apply();      
           }
            }, 1000);
+        }else{
+           wx.showToast({
+             title: res.data.message, 
+             duration: 2000,
+             icon:'none',
+             mask: true, 
+             success: res => {}
+          });
         }
     },
     fail: () => {},
@@ -417,7 +425,9 @@ export default class Index extends wepy.page {
         url: this.apiPath + '/szmktuser/balance/createcashorder',
         data: {
           sessionkey:this.$parent.globalData.key,
-          amount:this.value*100
+          amount:this.value*100,
+          phone:this.phone,
+          code:this.code,
         },
         method: 'GET',
         dataType: 'json',
@@ -427,8 +437,6 @@ export default class Index extends wepy.page {
              wx.request({
                url: this.apiPath + '/szmktuser/balance/withdrawCash', 
                data: {
-                 phone:this.phone,
-                 code:this.code,
                  sessionkey:this.$parent.globalData.key,
                  orderno:res.data.data.orderNo
                },
@@ -459,6 +467,14 @@ export default class Index extends wepy.page {
                complete: () => {}
              });
              
+          }else{
+            wx.showToast({
+            title: res.data.message, 
+            duration: 2000,
+            icon:'none',
+            mask: true, 
+            success: res => {}
+           });
           }
         },
         fail: () => {},

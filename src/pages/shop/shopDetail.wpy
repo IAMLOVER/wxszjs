@@ -516,6 +516,11 @@ export default class Index extends wepy.page {
   // 店铺内的满减商品
   getReduceProduce(){
     var that = this
+    wepy.showLoading({
+      title: '加载中', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/store/coupons', 
       data: {
@@ -527,6 +532,7 @@ export default class Index extends wepy.page {
       success: res => {
         that.reduceArr = res.data.data.content
         that.$apply()
+        wepy.hideLoading();
       },
       fail: () => {},
       complete: () => {}

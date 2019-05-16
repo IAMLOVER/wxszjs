@@ -194,7 +194,7 @@ export default class Index extends wepy.page {
   onLoad() {
     this.getType()
   }
-      wxs = {
+  wxs = {
       m1: mywxs
   };
   data = {
@@ -237,6 +237,12 @@ export default class Index extends wepy.page {
   //获取满减商品列表
   getReduceProduct(){
     var that = this
+    wepy.showLoading({
+      title: '加载中', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
+    
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search', 
       data: {
@@ -249,6 +255,7 @@ export default class Index extends wepy.page {
         console.log(res)
         that.productItem = res.data.data.content
         that.$apply()
+        wepy.hideLoading();
       },
       fail: () => {},
       complete: () => {}

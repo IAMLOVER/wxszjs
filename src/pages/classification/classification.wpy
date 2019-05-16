@@ -320,6 +320,11 @@ export default class Index extends wepy.page {
   // 根据分类选择中的id筛选出对应的商品
   getClassfiyProduce(){
     var that = this
+     wepy.showLoading({
+      title: '加载中', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
       data: {
@@ -334,6 +339,7 @@ export default class Index extends wepy.page {
         that.classifyProduce =  that.arr.concat(res.data.data.content)
         that.totalPage = res.data.data.totalPages
         that.$apply()
+        wepy.hideLoading();
       },
       fail: () => {},
       complete: () => {}

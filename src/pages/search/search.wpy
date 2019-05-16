@@ -228,7 +228,7 @@ page{
     <!--搜索框-->
   <view class="search-wrapper">
     <view class="search">
-      <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595" bindfocus="navSearch"/>
+      <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595"/>
      <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
     </view>
     <view class="search-btn" @tap="searchResult">搜索</view>
@@ -318,16 +318,19 @@ export default class Index extends wepy.page {
     showStore:false,
     empty:false,
     produceArr:{},
+    arrForProduce:[],
     storeArr:{},
+    arrForStore:[],
+    page:0,
+    totalPage:0,
     seachValue:'',
-    producePage:0
   };
   wxs = {
       m1: mywxs
   };
   methods = {
     showProduce(){
-          this.empty = false
+      this.empty = false
       this.showProduce = true
       this.showStore = false
       // this.getProdece()
@@ -341,9 +344,15 @@ export default class Index extends wepy.page {
     searchResult(){
       if(this.showProduce){
         this.empty = false
+        this.page = 0
+        this.produceArr = {}
+        this.arrForProduce = []
         this.getProdece()
       }else{
         this.empty = false
+        this.page = 0
+        this.storeArr = {}
+        this.arrForStore = []
         this.getStore()
       }
     },
@@ -363,24 +372,34 @@ export default class Index extends wepy.page {
   // 获取商品搜索结果
   getProdece(){
     var that = this;
+    wepy.showLoading({
+      title: '加载中', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+      success: res => {}
+    });
+    
     wx.request({
       url: that.apiPath + '/szmktstore/goodsInfo/search',
       data: 'data', //请求的参数",
-      method: 'post',
+      method: 'get',
       header: {'content-type': 'application/x-www-form-urlencoded'},// 默认值,
       dataType: 'json',
       data:{
         keyWord:that.seachValue,
+        page:that.page,
+        size:15
       },
       success: res => {
         console.log(res)
-        that.produceArr = res.data.data.content
+        that.produceArr = that.arrForProduce.concat(res.data.data.content)
+        that.totalPage = res.data.data.totalPages
         if(that.produceArr.length < 1){
           that.empty = true
         }else{
           that.empty = false
         }
         that.$apply()
+        wepy.hideLoading()
       },
       fail: () => {
       },
@@ -392,25 +411,34 @@ export default class Index extends wepy.page {
   // 获取商店搜索结果
   getStore(){
      var that = this
+     wepy.showLoading({
+       title: '加载中', //提示的内容,
+       mask: true, //显示透明蒙层，防止触摸穿透,
+       success: res => {}
+     });
+     
      wx.request({
       url: that.apiPath + '/szmktstore/storeInfo/search',
       data: 'data', //请求的参数",
-      method: 'post',
+      method: 'get',
       header: {'content-type': 'application/x-www-form-urlencoded'},// 默认值,
       dataType: 'json',
       data:{
         keyWord:that.seachValue,
-        size:100
+        size:15,
+        page:that.page
       },
       success: res => {
         console.log(res)
-        that.storeArr = res.data.data.content
+        that.storeArr = that.arrForStore.concat(res.data.data.content)
+        that.totalPage = res.data.data.totalPages
         if(that.storeArr.length == 0){
           that.empty = true
         }else{
           that.empty = false
         }
         that.$apply()
+        wepy.hideLoading()
       },
       fail: () => {
         wepy.showToast({
@@ -424,6 +452,19 @@ export default class Index extends wepy.page {
       complete: () => {
       }
     });
+  }
+
+    //上拉加载更多
+  onReachBottom(){
+    if(this.page<this.totalPage-1 && this.showStore){
+      this.page++
+      this.arrForStore = this.storeArr
+      this.getStore()
+    }if(this.page<this.totalPage-1 && this.showProduce){
+      this.page++
+      this.arrForProduce = this.produceArr
+      this.getProdece()
+    }
   }
 }
 </script>

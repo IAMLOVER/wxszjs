@@ -175,12 +175,12 @@
                     <view class="goods-name">{{item.goodsName}}</view>
                     <view class="goods-style">规格：{{item.className}}</view>
                     <view class="goods-price">
-                        <text class="price">￥{{item.goodsPrice*0.01}}</text>
+                        <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
                         <text class="count">数量：{{item.goodsCount}}</text>
                     </view>
                 </view>
             </navigator>
-            <view class="list-footer">共一件商品，实付款：￥{{item.totalFee*0.01}}</view>
+            <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，实付款：￥{{m1.filter(item.totalFee*0.01)}}</view>
         </view>
     </view>
 
@@ -196,6 +196,7 @@
 <script>
 import wepy from 'wepy';
 import path from '../../../common/path.js'
+import mywxs from '../../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '我的订单',
@@ -210,7 +211,13 @@ export default class Index extends wepy.page {
       nowIndex:0,
       orderList:{},
       type:'',
-      empty:false
+      empty:false,
+      page:1,
+      totalPage:0,
+      arr:[]
+  };
+  wxs = {
+      m1: mywxs
   };
   methods= {
       chooseTab(index){
@@ -255,7 +262,7 @@ export default class Index extends wepy.page {
           url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
           data: {
               userid:that.$parent.globalData.userId,
-              page:1,
+              page:that.page,
               rows:100,
               type:that.type
           }, 
@@ -264,6 +271,7 @@ export default class Index extends wepy.page {
           success: res => {
               console.log(res)
               that.orderList = res.data.data
+              console.log(that.orderList.length)
               if(that.orderList.length<1){
                   that.empty = true
               }else{
@@ -291,7 +299,7 @@ export default class Index extends wepy.page {
           url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
           data: {
               userid:that.$parent.globalData.userId,
-              page:1,
+              page:that.page,
               rows:100,
           }, 
           method: 'GET',
@@ -299,6 +307,11 @@ export default class Index extends wepy.page {
           success: res => {
               console.log(res)
               that.orderList = res.data.data
+             if(that.orderList.length<1){
+                  that.empty = true
+              }else{
+                  that.empty = false
+              }
               that.$apply()
               wx.hideLoading();
           },

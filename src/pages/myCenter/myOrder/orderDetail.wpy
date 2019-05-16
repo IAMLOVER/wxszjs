@@ -126,7 +126,7 @@
         }
     }
     .order-wrapper{
-        height:300rpx;
+        min-height:300rpx;
         width:690rpx;
         background: white;
         margin-top:10rpx;
@@ -262,8 +262,18 @@
                     <view class="goods-name">{{orderInfo.goodsName}}</view>
                     <view class="goods-style">规格：{{orderInfo.className}}</view>
                     <view class="goods-price">
-                        <text class="price">￥{{orderInfo.goodsPrice*0.01}}</text>
+                        <text class="price">￥{{m1.filter(orderInfo.goodsPrice*0.01)}}</text>
                         <text class="count">数量：{{orderInfo.goodsCount}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="order-detail" wx:if="{{orderInfo.channelName}}"> 
+                <image class="goods-pic" src="{{preImagePath+orderInfo.channelPic}}" wx:if="{{preImagePath && orderInfo.channelPic}}"/>
+                <view class="goods-text">
+                    <view class="goods-name">{{orderInfo.channelName}}</view>
+                    <view class="goods-price">
+                        <text class="price">￥{{m1.filter(orderInfo.channelPrice*0.01)}}</text>
+                        <text class="count">数量：{{orderInfo.channelCount}}</text>
                     </view>
                 </view>
             </view>
@@ -290,6 +300,8 @@
 import wepy from 'wepy';
 import path from '../../../common/path.js'
 import time from '../../../common/time.js'
+import mywxs from '../../../wxs/mywxs.wxs'
+
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '订单详情',
@@ -303,6 +315,9 @@ export default class Index extends wepy.page {
       isConfirm:false,
       orderNo:'',
       orderInfo:{}
+  };
+  wxs = {
+      m1: mywxs
   };
   methods= {
       confirm(){
