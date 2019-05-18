@@ -419,10 +419,10 @@ page{
                         </view>
                   </view>
                   <view class="item-bottom" wx:if="{{item.hide}}">
-                    <view class="time-range">在{{targetGoodsDetails[0].duration/3600/1000}}个小时内成功推荐者，可获得相应佣金</view>
+                    <view class="time-range">在{{targetGoodsDetails[0].duration/3600/1000}}个小时内成功助力者，可获得相应佣金</view>
                     <view class="task-item" wx:for="{{targetGoodsDetails}}" wx:key="{{index}}" wx:for-item="item">
                       <view class="task-item-left">任务{{index+1}}：</view>
-                      <view class="task-item-right">推荐<text>{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text>{{item.percent}}</text>%</view>
+                      <view class="task-item-right">助力<text>{{item.target}}</text>单，成功助力可获佣金：总成交额<text>{{item.percent}}</text>%</view>
                     </view>
                   </view>
               </view>
@@ -437,7 +437,7 @@ page{
         <view>1、选择并领取任务；</view>
         <view>2、将商品链接分享给好友，邀请好友购买链接商品；</view>
         <view>3、好友提交订单并成功支付，即视为参团成功；</view>
-        <view>4、在任务有效时间内成功推荐购买的人数达到任务中要求的人数，即视为任务成功；</view>
+        <view>4、在任务有效时间内成功助力购买的人数达到任务中要求的人数，即视为任务成功；</view>
         <view>5、任务完成后，您获得的佣金将发至您的钱包，可实时提现（未完成任务则无法获得相应佣金奖励）；</view>
         <view>6、用户可在“神州集市小程序”-“我的”，查看自己的任务。</view>
       </view>
@@ -455,7 +455,7 @@ page{
             <radio-group class="group" bindchange="radioChange">
               <view class="label-2" wx:for="{{targetGoodsDetails}}" wx:for-item="item" wx:key="{{index}}">
                  <label class="label-2__text" for="{{item.id}}">
-                  <text>推荐<text style="color:#F25664">{{item.target}}</text>人购，成功推荐可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                  <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
                   <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
                      <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
                  </view>
@@ -499,11 +499,7 @@ export default class Index extends wepy.page {
    showRule:false,
    showChoseTask:false,
    empty:true,
-   radioItems: [
-      {name: '推荐10人购，成功推荐可获佣金：总成交额1%', value: '1'},
-      {name: '推荐10人购，成功推荐可获佣金：总成交额100%', value: '2'},
-      {name: '推荐10人购，成功推荐可获佣金：总成交额1000%', value: '3'},
-    ],
+   radioItems: [],
   };
   methods = {
     showTaskDetail(e){

@@ -239,6 +239,9 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktbackstage/storeClassify/list',
       method: 'post',
       dataType: 'json',
+      data:{
+         userid:that.$parent.globalData.userId
+      },
       success: res => {
         console.log(res)
         that.classArr = res.data.data

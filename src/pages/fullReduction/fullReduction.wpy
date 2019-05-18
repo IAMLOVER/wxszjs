@@ -222,6 +222,9 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktbackstage/couponActivity/list', 
       method: 'GET',
+      data:{
+         userid:that.$parent.globalData.userId
+      },
       dataType: 'json',
       success: res => {
         console.log(res)

@@ -636,7 +636,8 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktbackstage/channel/info',
       method: 'get',
       data:{
-        'channelInfoId':that.produceId
+        'channelInfoId':that.produceId,
+         userid:that.$parent.globalData.userId
       },
       dataType: 'json', 
       success: res => {

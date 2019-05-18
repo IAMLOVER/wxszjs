@@ -538,7 +538,12 @@ export default class Index extends wepy.page {
     // 新店推荐
     this.getRecommend()
     //轮播图
-    this.getSwiper()
+    var interval = setInterval(() => {
+      if(this.$parent.globalData.userId){
+         this.getSwiper()
+         clearInterval(interval)
+      }
+    }, 200);
     this.getNewProduce()
   };
   data = {
@@ -649,6 +654,9 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktbackstage/banner/home/list', 
       method: 'GET',
+      data:{
+         userid:that.$parent.globalData.userId
+      },
       dataType: 'json', 
       success: res => {
         that.swiperArr = res.data.data

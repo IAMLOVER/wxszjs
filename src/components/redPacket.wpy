@@ -6,7 +6,7 @@
       <view class="tip">恭喜你获得一张优惠券</view>
       <view class="red">
         <view class="left">
-          <view><text style="font-size:50rpx;">{{msg.privilege*0.01}}</text><text>满{{msg.standard*0.01}}可使用</text></view>
+          <view><text style="font-size:50rpx;">{{m1.filter(msg.privilege*0.01)}}</text><text>满{{m1.filter(msg.standard*0.01)}}可使用</text></view>
           <view style="font-size:24rpx;">(用于购买"大满减"商品)</view>
         </view>
         <navigator url="../fullReduction/fullReduction" class="right">
@@ -23,7 +23,8 @@
 
 <script>
   import wepy from 'wepy';
-  import path from '../common/path.js';
+  import path from '../common/path.js'
+  import mywxs from '../wxs/mywxs.wxs'
   export default class redPacket extends wepy.component {
     props = {
       msg:Object
@@ -34,6 +35,9 @@
       secend:3,
     };
 
+    wxs = {
+      m1: mywxs
+   };
     methods = {
       closeShadow(){
         this.msg.show = false

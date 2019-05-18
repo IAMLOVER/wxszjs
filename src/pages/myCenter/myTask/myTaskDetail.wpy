@@ -330,20 +330,13 @@ export default class Index extends wepy.page {
     interval:'',
     tip:'',
     showSituation:false,
-    groupContent:[{
-      "id": 1,
-      "userId": 1000000021,
-      "heading": "1000000026_15552896899726SJHF.jpg",
-      "buyNum":100
-    }],
+    groupContent:[],
   };
   methods = {
     onShareAppMessage: function (ops) {
       console.log(this.taskForShare);
-      console.log(123)
       if (ops.from === 'button') {
         // 来自页面内转发按钮
-       console.log(ops.target)
      }
      return {
        title: '我发现了一个超值好物，快来看看啊',
@@ -365,14 +358,14 @@ export default class Index extends wepy.page {
     var that = this
      var inviteNum = Number(that.taskForShare.inviteNum)
      var targetNum = Number(that.taskForShare.targetNum)
-    console.log(inviteNum/targetNum*100)
+    console.log(inviteNum/targetNum)
      console.log(that.taskForShare)
     if(inviteNum*100/targetNum<50){
-      that.tip = '您已开团，快分享给好友!'
+      that.tip = '您已发起助力，快邀请好友参与吧!'
     }else if(50<=inviteNum*100/targetNum && inviteNum*100/targetNum<100){
       that.tip = '已经完成一半啦，继续加油!'
     }else if(inviteNum*100/targetNum == 100){
-      that.tip = '恭喜您！拼团成功，佣金将在24小时内发至您的账户!'
+      that.tip = '恭喜您！任务成功，佣金将在24小时内发至您的账户!'
     }
      that.interval = setInterval(() => {
         var blockingTime = (new Date(that.taskForShare.blockingTime.replace(/-/g,"/")).getTime())/1000

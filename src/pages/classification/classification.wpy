@@ -294,6 +294,9 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktbackstage/goodsClassify/children', 
       method: 'post',
+      data:{
+         userid:that.$parent.globalData.userId
+      },
       dataType: 'json', 
       success: res => {
         let data = res.data.data

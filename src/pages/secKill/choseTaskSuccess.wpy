@@ -4,7 +4,7 @@ page{
 }
 .main{
   width: 100%;
-  height: 661rpx;
+  height: 610rpx;
   background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
   background-repeat: no-repeat;
   background-size: 97% 100%;
@@ -16,7 +16,7 @@ page{
     border-radius: 12rpx;
     background-color: #fff;
     width: 560rpx;
-    height: 290rpx;
+    height: 244rpx;
     margin: 0 auto;
     padding: 56rpx 48rpx;
     box-sizing: border-box;
@@ -177,8 +177,7 @@ button[plain]{
   <view class="page">
     <view class="main">
       <view class="content">
-          <view>你成功领取了任务</view>
-          <view>为了奖金快去完成任务吧！</view>
+          <view>快发起助力，完成任务吧！</view>
           <view class="time-range">
             <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：{{m1.filter(taskForShare.duration/3600000)}}小时
           </view>
@@ -189,7 +188,7 @@ button[plain]{
           </view>
           <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:73rpx;"/>
           <button open-type="share" plain="true">
-            <view class="send">立即转发拼团</view>
+            <view class="send">立即转发助力</view>
           </button>
       </view>
     </view>
