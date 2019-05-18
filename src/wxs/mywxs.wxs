@@ -3,13 +3,13 @@ module.exports = {
   filter: function (num) {
     return parseFloat(num.toFixed(2));
   }
-  filterDown:function(num){
+  filterDown: function(num){
     return Math.floor(num)
   }
-  filterMoney:function(num){
+  filterMoney: function(num){
     return num.toFixed(2)
   }
-  filterPhone:function(phone){
+  filterPhone: function(phone){
     return phone.substr(9,4)
   }
 };
