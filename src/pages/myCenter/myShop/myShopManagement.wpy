@@ -52,7 +52,7 @@ export default class Index extends wepy.page {
   };
   methods = {
     call(){
-      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
+      wx.makePhoneCall({ phoneNumber: '0755-88600299' });
     }
   };
   

@@ -509,8 +509,8 @@ page {
   </view>
 
   <!-- 回到顶部 -->
-  <view class="go-top">
-    <image src="{{imagePath+'top.png'}}"  @tap="goTop" wx:if="{{imagePath && scrollTop>0?true:false}}"/> 
+  <view class="go-top" wx:if="{{imagePath && scrollTop>0?true:false}}" data-number="{{scrollTop}}">
+    <image src="{{imagePath+'top.png'}}"  @tap="goTop"/> 
   </view>
 
   <view class="footer">集好货，市不可挡</view>
@@ -570,14 +570,17 @@ export default class Index extends wepy.page {
   }
   methods = {
     goTop() {
+      this.scrollTop = 0  
       wx.pageScrollTo({
         scrollTop: 0
       });
-      this.scrollTop = 0;
+      this.scrollTop = 0  
+      this.$apply()
     },
     onPageScroll(e) {
       // 获取滚动条当前位置
-      this.scrollTop = e.scrollTop;
+      this.scrollTop = e.scrollTop>100?100:0
+      this.$apply()
     },
     navSearch() {
     this.$navigate({url: '../search/search'})

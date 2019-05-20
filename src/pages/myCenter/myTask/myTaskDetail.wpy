@@ -78,7 +78,7 @@ page{
   }
   .main-produce{
     display:flex;display:-webkit-flex;
-    margin-top: 60rpx;
+    margin-top: 30rpx;
     .produce-left{
       -webkit-flex: 1;-ms-flex: 1;flex: 1;
       image{

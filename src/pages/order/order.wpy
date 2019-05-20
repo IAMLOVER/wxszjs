@@ -280,6 +280,7 @@ export default class Index extends wepy.page {
     this.userId = this.$parent.globalData.userId
     this.getUserAddress()
     this.pay = wx.getStorageSync('pay')
+    this.pay.money = Number(this.pay.money)
     this.addressId = wx.getStorageSync('addressId')
     this.getOrderInfo()
   }

@@ -410,9 +410,9 @@ page{
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}"/>
           </view>
           <view class="item-price">
-            <view class="new">￥{{m1.filter(produceInfo.chaPrice*0.01 + item.minPrice*0.01)}}</view>
-            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">¥{{m1.filter(item.minMktPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
-            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)<=0}}">¥{{m1.filter(item.minPrice*0.01+produceInfo.mktPrice*0.01)}}</view>
+            <view class="new">￥{{m1.filter(produceInfo.chaPrice*0.01 + item.minPrice*0.01*item.count)}}</view>
+            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">¥{{m1.filter(item.minMktPrice*0.01*item.count+produceInfo.mktPrice*0.01)}}</view>
+            <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)<=0}}">¥{{m1.filter(item.minPrice*0.01*item.count+produceInfo.mktPrice*0.01)}}</view>
           </view>
           <view wx:if="{{item.totalStock>0}}" class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
             马上抢

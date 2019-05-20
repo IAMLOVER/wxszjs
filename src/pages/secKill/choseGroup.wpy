@@ -370,8 +370,8 @@ page{
       <view class="price">
         <text>秒杀价:</text>
         <text class="type">￥</text>
-        <text class="now">{{produceInfo.chaPrice*0.01}}</text>
-        <text class="old">￥{{produceInfo.mktPrice*0.01}}</text>
+        <text class="now">{{m1.filter(produceInfo.chaPrice*0.01)}}</text>
+        <text class="old">￥{{m1.filter(produceInfo.mktPrice*0.01)}}</text>
       </view>
       <view class="hot">
         <image src="{{imagePath+'hot02.png'}}" wx:if="{{imagePath}}"/>
@@ -476,6 +476,7 @@ page{
 <script>
 import wepy from 'wepy';
 import path from '../../common/path.js';
+  import mywxs from '../../wxs/mywxs.wxs'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '选择组合商品'
@@ -501,6 +502,9 @@ export default class Index extends wepy.page {
    empty:true,
    radioItems: [],
   };
+   wxs = {
+      m1: mywxs
+    };
   methods = {
     showTaskDetail(e){
        this.targetGoodsId = e.currentTarget.dataset.id

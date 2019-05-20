@@ -289,7 +289,7 @@
           <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}}</view>
       </view>
       <view class="footer">
-          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥{{orderInfo.totalFee*0.01}}</text></text>
+          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
           <view class="confirm" @tap="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">确认收货</view>
           <!-- <view class="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</view> -->
       </view>
