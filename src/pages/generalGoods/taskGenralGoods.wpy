@@ -510,10 +510,28 @@ export default class Index extends wepy.page {
     money:0,
     storePhoneNum:''
   };
-    wxs = {
-      m1: mywxs
+  wxs = {
+    m1: mywxs
   };
   methods = {
+    onShareAppMessage: function (ops) {
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: this.produceInfo.relay?this.produceInfo.relay:'我发现了一个超值好物，快来看看啊',
+       imageUrl:this.produceInfo.cover?this.preImagePath + this.produceInfo.cover:this.preImagePath + this.produceInfo.picUrl1,
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+ },
     call(){
       wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
     },

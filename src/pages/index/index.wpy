@@ -580,7 +580,7 @@ export default class Index extends wepy.page {
     onPageScroll(e) {
       // 获取滚动条当前位置
       this.scrollTop = e.scrollTop>100?100:0
-      this.$apply()
+      // this.$apply()
     },
     navSearch() {
     this.$navigate({url: '../search/search'})
@@ -688,7 +688,7 @@ export default class Index extends wepy.page {
       },
       dataType: 'json',
       success: res => {
-        that.newProduceArr = that.arr.concat(res.data.data.content),
+        that.newProduceArr = that.arr.concat(res.data.data.content)
         that.totalPage = res.data.data.totalPages
         that.$apply()
         wepy.hideLoading()

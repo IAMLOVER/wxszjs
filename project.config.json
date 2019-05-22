@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 13,
 			"list": [
 				{
 					"id": 0,
@@ -120,6 +120,13 @@
 					"name": "空页面",
 					"pathName": "pages/empty/empty",
 					"query": "scene=17328350602",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "web登录",
+					"pathName": "pages/ediLogin/ediLogin",
+					"query": "scene=123456",
 					"scene": null
 				}
 			]

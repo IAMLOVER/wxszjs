@@ -756,7 +756,7 @@ export default class Index extends wepy.page {
       this.produceId = decodeURIComponent(options.scene)
     }
     this.getProduceInfo()
-    this.checkedIsHave()
+    // this.checkedIsHave()
   }
   onHide(){
     this.checkedIsHave()
@@ -787,7 +787,7 @@ export default class Index extends wepy.page {
     haveThisGoodsTasks:null
   };
   methods = {
-      onShareAppMessage: function (ops) {
+    onShareAppMessage: function (ops) {
       var userTargetId = ''
       if(this.haveThisGoodsTasks){
          var userTargetId = this.haveThisGoodsTasks.id
@@ -985,7 +985,14 @@ export default class Index extends wepy.page {
           mask: true, 
           success: res => {
             that.$navigate({url:'../secKill/choseTaskSuccess'})
-            wx.setStorageSync('cover',that.preImagePath + that.produceInfo.picUrl1)
+            if(that.produceInfo.cover){
+              wx.setStorageSync('cover',that.preImagePath + that.produceInfo.cover)
+            }else{
+              wx.setStorageSync('cover',that.preImagePath + that.produceInfo.picUrl1)
+            }
+            if(that.produceInfo.relay){
+              wx.setStorageSync('relay',that.produceInfo.relay)
+            }
           }
         });
         that.showChoseTask = false

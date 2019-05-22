@@ -64,7 +64,10 @@ export default class extends wepy.app {
       'pages/empty/loginFail',
       'pages/empty/bindFail',
       'pages/empty/bindSuccess',
-      'pages/empty/loginSuccess'
+      'pages/empty/loginSuccess',
+
+      //edi登陆
+      'pages/ediLogin/ediLogin'
     ],
     window: {
       backgroundTextStyle: 'light',

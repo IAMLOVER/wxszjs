@@ -255,7 +255,7 @@ export default class Index extends wepy.page {
        console.log(ops.target)
      }
      return {
-       title: '我发现了一个超值好物，快来看看啊',
+       title:wx.getStorageSync('relay') ,
        imageUrl:wx.getStorageSync('cover'),
        path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid  + '&userTargetId=' +  this.taskForShare.id,
        success: function (res) {

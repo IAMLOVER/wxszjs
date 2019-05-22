@@ -204,7 +204,10 @@ export default class Index extends wepy.page {
     typeArr:[],
     idx:0,
     activityId:'',
-    productItem:{}
+    productItem:{},
+    totalPages:0,
+    page:0,
+    arr:[],
   };
   methods = {
     navSearch() {
@@ -213,9 +216,20 @@ export default class Index extends wepy.page {
     goIndex(e){
       this.idx = e.currentTarget.dataset.index
       this.activityId = e.currentTarget.dataset.id
+      this.page = 0
+      this.arr = []
       this.getReduceProduct()
     },
   };  
+
+   //上拉加载更多
+  onReachBottom(){
+    if(this.page<this.totalPages-1){
+      this.page++
+      this.arr = this.productItem
+      this.getReduceProduct()
+    }
+  }
   // 获取满减类别
   getType() {
     var that = this
@@ -223,7 +237,7 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktbackstage/couponActivity/list', 
       method: 'GET',
       data:{
-         userid:that.$parent.globalData.userId
+         userid:that.$parent.globalData.userId,
       },
       dataType: 'json',
       success: res => {
@@ -250,13 +264,16 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktstore/goodsInfo/search', 
       data: {
         activityId:that.activityId,
-        activityType:2
+        activityType:2,
+        page:that.page,
+        size:15,
       },
       method: 'GET',
       dataType: 'json', 
       success: res => {
         console.log(res)
-        that.productItem = res.data.data.content
+        that.productItem = that.arr.concat(res.data.data.content)
+        that.totalPages = res.data.data.totalPages
         that.$apply()
         wepy.hideLoading();
       },

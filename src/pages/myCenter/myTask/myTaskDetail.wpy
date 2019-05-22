@@ -339,8 +339,8 @@ export default class Index extends wepy.page {
         // 来自页面内转发按钮
      }
      return {
-       title: '我发现了一个超值好物，快来看看啊',
-       imageUrl:this.preImagePath + this.taskForShare.picUrl,
+       title: this.taskForShare.relay,
+       imageUrl:this.taskForShare.cover?this.preImagePath+this.taskForShare.cover:this.preImagePath + this.taskForShare.picUrl,
        path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsId + '&userTargetId=' +  this.taskForShare.id,
        success: function (res) {
        // 转发成功

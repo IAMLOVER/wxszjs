@@ -399,7 +399,7 @@ button[plain]{
         <view class="line"></view>
       </view>
       <view class="detail">
-        <rich-text nodes="{{produceInfo.description}}"></rich-text>
+        <rich-text nodes="{{produceInfo.description}}" class="rich"></rich-text>
       </view>
     </view>
 
@@ -541,7 +541,6 @@ export default class Index extends wepy.page {
   };
   methods = {
     onShareAppMessage: function (ops) {
-      console.log(this.taskForShare);
       if (ops.from === 'button') {
         // 来自页面内转发按钮
        console.log(ops.target)

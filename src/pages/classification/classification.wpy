@@ -174,7 +174,7 @@ page{
           <scroll-view scroll-y="true" scroll-with-animation>
             <!-- 最新 -->
             <view class="new {{newSelect?'active':''}}" @tap="choseNew">
-              最新<image src="{{imagePath+'new.png'}}" wx:if="{{imagePath}}"/>
+              最新<image src="{{imagePath+'ming.png'}}" wx:if="{{imagePath}}"/>
             </view>
             <!-- 后台获取的items -->
             <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:for-item="item" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">

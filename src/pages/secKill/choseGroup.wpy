@@ -529,7 +529,16 @@ export default class Index extends wepy.page {
           item.hide = false
         }
       this.getTargetDetail()
-      wx.setStorageSync('cover',this.preImagePath + this.targetGoods[index].picUrl1)
+      if(this.targetGoods[index].cover){
+        wx.setStorageSync('cover',this.preImagePath + this.targetGoods[index].cover)
+      }else{
+       wx.setStorageSync('cover',this.preImagePath + this.targetGoods[index].picUrl1)
+      }
+      if(this.targetGoods[index].relay){
+        wx.setStorageSync('relay',this.targetGoods[index].relay)
+      }else{
+        wx.setStorageSync('relay','我发现了一个超值好物，快来看看啊')
+      }
     },
     closeTaskChoseShadow(){
       this.showChoseTask = false

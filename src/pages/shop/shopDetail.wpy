@@ -71,7 +71,7 @@ page{
     }
     .tip {
       font-size: 32rpx;
-      color: #0473f1;
+      color: #F25664;
       line-height: 64rpx;
       font-weight: 600;
     }
@@ -79,7 +79,7 @@ page{
       display: inline-block;
       width: 8rpx;
       height: 28rpx;
-      background-color: #0473f1;
+      background-color:#F25664;
       margin-right: 12rpx;
       border-radius: 4rpx;
     }
@@ -335,7 +335,7 @@ page{
       <view>
         <navigator url="../newType/newReduce?storeId={{storeId}}">
           <text class="more">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more02.png'}}"/>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
         </navigator>
       </view>
     </view>

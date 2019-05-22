@@ -151,6 +151,17 @@ page{
       line-height: 64rpx;
       margin-top: -26rpx;
     }
+    .gift{
+      font-size: 32rpx;
+      color: #F25664;
+      image{
+        width: 36rpx;
+        height: 36rpx;
+        vertical-align: middle;
+        margin-top: -10rpx;
+        margin-right: 6rpx;
+      }
+    }
   }
 }
 .right-now-shadow{
@@ -414,12 +425,18 @@ page{
             <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">¥{{m1.filter(item.minMktPrice*0.01*item.count+produceInfo.mktPrice*0.01)}}</view>
             <view class="old" wx:if="{{m1.filter(item.minMktPrice*0.01)<=0}}">¥{{m1.filter(item.minPrice*0.01*item.count+produceInfo.mktPrice*0.01)}}</view>
           </view>
-          <view wx:if="{{item.totalStock>0}}" class="right-now" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
-            马上抢
+          <view class="btns" style="-webkit-flex:3;-ms-flex:3;flex:3;">
+            <view wx:if="{{item.totalStock>0}}" class="right-now" style="margin-top:-18rpx" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
+              马上抢
+            </view>
+           <view class="gift" @tap="goTaskDetail" data-id="{{item.id}}" wx:if="{{item.activityType == 1}}" style="margin-top:20rpx;font-size:28rpx;padding:0rpx 10rpx;">
+              <image src="{{imagePath + 'gift.png'}}" wx:if="{{imagePath}}"/>助力有奖
+            </view>
+            <view wx:if="{{item.totalStock<=0}}" @tap="empty" class="right-now"  style="background:#ddd">
+             已抢光
+            </view>
           </view>
-           <view wx:if="{{item.totalStock<=0}}" @tap="empty" class="right-now"  style="background:#ddd">
-            已抢光
-          </view>
+        
         </view>
       </view>
     </view>
@@ -520,6 +537,9 @@ export default class Index extends wepy.page {
     collocationId:'',
   };
   methods = {
+    goTaskDetail(e) {
+      this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+    },
     empty(){
       wepy.showToast({
         title: '商品已抢光', //提示的内容,

@@ -306,7 +306,7 @@ export default class Index extends wepy.page {
           dataType: 'json',
           success: res => {
               console.log(res)
-              that.orderList = res.data.data
+              that.orderList = res.data.data.reverse()
              if(that.orderList.length<1){
                   that.empty = true
               }else{
