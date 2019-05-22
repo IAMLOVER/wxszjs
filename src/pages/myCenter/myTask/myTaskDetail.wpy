@@ -292,12 +292,13 @@ button[plain]{
     </view>
 
     <!-- 底部按钮 -->
-    <view class="footer">
+    <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <!-- <view class="poster">生成助力海报</view> -->
        <button open-type="share" plain="true">
          <view class="poster">转发给好友</view>
       </button>
     </view>
+   <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -311,6 +312,7 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
     this.taskId = options.id
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     console.log(options)
     this.taskForShare = wx.getStorageSync('taskForShare')
     this.getTaskDetails()
@@ -320,6 +322,7 @@ export default class Index extends wepy.page {
     clearInterval(this.interval)
   }
   data = {
+    isIphoneX:false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,

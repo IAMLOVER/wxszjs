@@ -446,7 +446,7 @@ page{
 
     <!-- 选择任务弹出框 -->
     <view class="chose-task-shadow" wx:if="{{showChoseTask}}">
-      <view class="content">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
         <view class="title">
           <view>选择任务</view>
           <view><image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow"/></view>
@@ -470,6 +470,7 @@ page{
         </view>
       </view>
     </view>
+  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -484,10 +485,12 @@ export default class Index extends wepy.page {
   onLoad(options) {
     // 引流品的id
     this.channelId = options.id
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     this.getProduceInfo()
     this.getTargetGoods()
   }
   data = {
+   isIphoneX:false,
    imagePath:path.path.imagePath,
    apiPath:path.path.apiPath,
    preImagePath:path.path.preImagePath,

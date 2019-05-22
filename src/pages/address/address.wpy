@@ -95,10 +95,11 @@ width: 100%;
     </view>
 
     <!-- 确定按钮 -->
-    <view class="btn-box">
+    <view class="btn-box" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <view class="btn {{warn?'active':''}}" @tap="saveAddress">
         确定
       </view>
+     <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
     </view>
   </view>
 </template>
@@ -111,11 +112,13 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '收货地址'
   };
   onLoad() {
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     this.userId = this.$parent.globalData.userId
     console.log(this.$parent.globalData.userId)
     this.getUserAddress()
   }
   data = {
+    isIphoneX:false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     userId:'',

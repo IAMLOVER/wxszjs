@@ -263,7 +263,7 @@ button[plain]{
     </view>
 
     <!-- 客服，立即秒杀 -->
-    <view class="dosome">
+    <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact'  plain="true">
           <view class="kefu">
         <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
@@ -280,6 +280,8 @@ button[plain]{
       </view>
 
     </view>
+  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+
   </view>
 </template>
 
@@ -292,6 +294,7 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '秒杀详情'
   };
   onLoad(options) {
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     this.produceId = options.id
     if(options.scene){
       this.produceId = decodeURIComponent(options.scene)
@@ -300,6 +303,7 @@ export default class Index extends wepy.page {
     this.getProduceInfo()
   }
   data = {
+    isIphoneX:false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,

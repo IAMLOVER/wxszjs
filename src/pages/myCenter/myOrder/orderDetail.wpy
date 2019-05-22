@@ -288,11 +288,12 @@
           <view>订单时间：{{orderInfo.payTime}}</view>
           <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}}</view>
       </view>
-      <view class="footer">
+      <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
           <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
           <view class="confirm" @tap="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">确认收货</view>
           <!-- <view class="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</view> -->
       </view>
+  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -309,6 +310,7 @@ export default class Index extends wepy.page {
     navigationBarTextStyle: 'white'
   };
   data = {
+      isIphoneX:false,
       imagePath:path.path.imagePath,
       apiPath:path.path.apiPath,
       preImagePath:path.path.preImagePath,
@@ -332,6 +334,7 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
    console.log(options)
+   this.isIphoneX = this.$parent.globalData.isIphoneX
    this.orderNo = options.id
    this.getOrderDetail()
   }

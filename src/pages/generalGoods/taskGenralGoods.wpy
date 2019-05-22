@@ -388,7 +388,7 @@ button[plain]{
     </view>
 
     <!-- 客服，立即购买 -->
-    <view class="dosome">
+    <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <view class="kefu" @tap="call">
         <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
         <view>客服</view>
@@ -404,7 +404,7 @@ button[plain]{
 
    <!-- 普通商品购买时出现的弹出框 -->
    <view class="shadow" wx:if="{{showShadow}}">
-     <view class="content">
+     <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
        <view class="info">
          <view class="info-left">
            <image src ="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
@@ -457,6 +457,8 @@ button[plain]{
       <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" class="close-shadow" @tap="closeShadow"/>
      </view>
    </view>
+  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+
   </view>
 </template>
 
@@ -471,6 +473,7 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
        var that = this;
+      that.isIphoneX = that.$parent.globalData.isIphoneX
      // 查看是否授权
           wx.getSetting({
             success: function (res) {
@@ -493,6 +496,7 @@ export default class Index extends wepy.page {
     this.getProduceInfo()
   }
   data = {
+    isIphoneX:false,
     showShadow: false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,

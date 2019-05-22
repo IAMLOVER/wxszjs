@@ -11,3 +11,16 @@ rich-text{
 .produce-detail img{
     width:300rpx !important;
 }
+
+.fix-iphonex-button {
+    bottom:68rpx!important;
+    width:100vw;
+}
+.fix-iphonex-button::after {
+    content: ' ';
+    position: fixed;
+    bottom: 0!important;
+    height: 68rpx!important;
+    width: 100%;
+    background: #fff;
+}

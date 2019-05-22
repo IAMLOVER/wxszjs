@@ -443,7 +443,7 @@ page{
 
     <!-- 点击马上抢出现的弹出框 -->
     <view class="right-now-shadow" wx:if="{{showShadow}}">
-      <view class="content">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
          <view class="title">
             <view>选择数量</view>
             <view @tap="closeShadow">
@@ -501,6 +501,7 @@ page{
         </view>
       </view>
     </view>
+  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -514,11 +515,13 @@ export default class Index extends wepy.page {
   };
   onLoad(options) {
     console.log(options)
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     this.produceId = options.id
     this.getProduceInfo()
     this.getProduceItems()
   }
   data = {
+    isIphoneX:false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,

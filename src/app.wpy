@@ -160,6 +160,17 @@ export default class extends wepy.app {
                 }
             }
         })
+
+        //查看手机是否是IphoneX
+        wx.getSystemInfo({
+           success: function (res) {
+             console.log(res)
+            let model = res.model.substring(0, res.model.indexOf("X")) + "X"
+           if (model == 'iPhone X') {
+                that.globalData.isIphoneX = true
+           }
+      }
+})　
   }
   globalData = {
     userId:'',
@@ -167,7 +178,8 @@ export default class extends wepy.app {
     avatarUrl:'',
     identityType:'',
     key:'',
-    apiPath:path.path.apiPath
+    apiPath:path.path.apiPath,
+    isIphoneX:false,
   }
 }
 </script>

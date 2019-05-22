@@ -247,7 +247,7 @@ page{
   </view>
 
   <!-- 底部 立即支付按钮区域 -->
-  <view class="footer">
+  <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
     <view></view>
     <view class="number">
       <view class="total">
@@ -265,6 +265,7 @@ page{
       立即支付
     </view>
   </view>
+   <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -277,6 +278,7 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '订单确认'
   };
   onLoad() {
+    this.isIphoneX = this.$parent.globalData.isIphoneX
     this.userId = this.$parent.globalData.userId
     this.getUserAddress()
     this.pay = wx.getStorageSync('pay')
@@ -285,6 +287,7 @@ export default class Index extends wepy.page {
     this.getOrderInfo()
   }
   data = {
+    isIphoneX:false,
     imagePath:path.path.imagePath,
     apiPath:path.path.apiPath,
     preImagePath:path.path.preImagePath,
