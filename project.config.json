@@ -118,15 +118,15 @@
 				{
 					"id": 12,
 					"name": "空页面",
-					"pathName": "pages/empty/empty",
-					"query": "scene=17328350602",
+					"pathName": "pages/ediPay/ediPay",
+					"query": "scene=DD20190524144633BYFL",
 					"scene": null
 				},
 				{
 					"id": 13,
 					"name": "web登录",
 					"pathName": "pages/ediLogin/ediLogin",
-					"query": "scene=123456",
+					"query": "scene=3UXX8E1Z",
 					"scene": null
 				}
 			]

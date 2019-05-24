@@ -19,7 +19,7 @@ page{
     height: 88rpx;
     color: #fff;
     font-size: 32rpx;
-    border: none; 
+    border: none;
     margin-top: 60rpx;
   }
 }
@@ -27,23 +27,23 @@ page{
 
 <template>
   <view class='page'>
-    <image src="{{imagePath+'failed03.png'}}" wx:if="{{imagePath}}"/>
-    <view class="tip">登录失败</view>
+    <image src="{{imagePath+'sucess03.png'}}" wx:if="{{imagePath}}"/>
+    <view class="tip">支付成功</view>
     <button @tap="goIndex">前往首页</button>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy';
-import path from '../../common/path.js';
+  import path from '../../common/path.js'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: "登录失败",
+      navigationBarTitleText: "支付成功",
     };
 
     data = {
-       imagePath:path.path.imagePath,
-       apiPath:path.path.apiPath,
+      imagePath:path.path.imagePath,
+      apiPath:path.path.apiPath
     };
 
     methods = {

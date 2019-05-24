@@ -11,5 +11,8 @@ module.exports = {
   }
   filterPhone: function(phone){
     return phone.substr(9,4)
+  },
+  filterRandom: function(num){
+    return num + parseInt(Math.random()*1000)
   }
 };

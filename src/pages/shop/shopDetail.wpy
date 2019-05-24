@@ -498,6 +498,7 @@ export default class Index extends wepy.page {
       url: that.apiPath + '/szmktstore/storeInfo/simpleInfo', 
       data: {
         'storeId':that.storeId,
+        'userid':that.$parent.globalData.userId,
       }, //请求的参数",
       method: 'GET',
       dataType: 'json', 

@@ -79,7 +79,7 @@ export default class Index extends wepy.page {
     if(options.scene){
         // scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
        const scene = decodeURIComponent(options.scene)
-       that.webToken = scene
+       that.orderno = scene
     }
   }
   onShow(){
@@ -108,47 +108,53 @@ export default class Index extends wepy.page {
     code:'',
     webToken:'',
     canIuse:false,
-    userId:''
+    userId:'',
+    orderno:''
   };
   methods = {}; 
-  //调登陆的接口
+  //调支付的接口
   getLogin(){
     var that = this 
     wepy.showLoading({
-      title: '登录中...', //提示的内容,
+      title: '唤起支付中...', //提示的内容,
       mask: true, //显示透明蒙层，防止触摸穿透,
       success: res => {}
     });
-    
     wx.request({
-      url: that.apiPath + '/szmktuser/external/authorizeForWeb', //开发者服务器接口地址",
+      url: that.apiPath + '/szmktuser/pay/awakenpay', //开发者服务器接口地址",
       data: {
         userid: that.$parent.globalData.userId,
-        code: that.webToken
+        orderno: that.orderno
       }, //请求的参数",
       method: 'GET',
       dataType: 'json', 
       success: res => {
-         wepy.hideLoading();
-       if(res.data.code == 1000){
-         this.$navigate('../empty/loginSuccess')
-       }else{
-         wepy.hideLoading();
-         wepy.showToast({
-           title: '小程序码已过期', //提示的内容,
-           icon: 'none', //图标,
-           duration: 2000, //延迟时间,
-           mask: true, //显示透明蒙层，防止触摸穿透,
-           success: res => {
-           }
-         });
-             setTimeout(() => {
-                 this.$navigate('../empty/loginFail')
-             }, 2000);
-       }
+          wepy.hideLoading();
+          if(res.data.code == 200){
+                wx.requestPayment({
+                  appId:res.data.data.appId,
+                  timeStamp: res.data.data.timeStamp,
+                  nonceStr: res.data.data.nonceStr,
+                  package: res.data.data.package,
+                  signType: 'MD5',
+                  paySign: res.data.data.paySign,
+                  success(res) {  
+                    console.log(res)
+                    that.$navigate({url:'./ediPaySuccess'})
+                  },
+                  fail(res) { 
+                    console.log(res)
+                    that.$navigate({url:'./ediPayFail'})
+            }
+          })
+        }
       },
-      fail: () => {},
-      complete: () => {}
+      fail: () => {
+          wepy.hideLoading();
+      },
+      complete: () => {
+          wepy.hideLoading();
+      }
     });
     
   }

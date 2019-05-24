@@ -19,16 +19,16 @@ page{
     height: 88rpx;
     color: #fff;
     font-size: 32rpx;
-    border: none; 
+    border: none;
     margin-top: 60rpx;
   }
 }
 </style>
 
 <template>
-  <view class='page'>
+   <view class='page'>
     <image src="{{imagePath+'failed03.png'}}" wx:if="{{imagePath}}"/>
-    <view class="tip">登录失败</view>
+    <view class="tip">支付失败</view>
     <button @tap="goIndex">前往首页</button>
   </view>
 </template>
@@ -38,12 +38,12 @@ page{
 import path from '../../common/path.js';
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: "登录失败",
+      navigationBarTitleText: "支付失败",
     };
 
     data = {
        imagePath:path.path.imagePath,
-       apiPath:path.path.apiPath,
+      apiPath:path.path.apiPath
     };
 
     methods = {

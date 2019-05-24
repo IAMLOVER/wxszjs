@@ -152,7 +152,7 @@ page{
       margin-top: -26rpx;
     }
     .gift{
-      font-size: 32rpx;
+      font-size: 24rpx;
       color: #F25664;
       image{
         width: 36rpx;
@@ -429,7 +429,7 @@ page{
             <view wx:if="{{item.totalStock>0}}" class="right-now" style="margin-top:-18rpx" @tap="rightNow" data-id="{{item.id}}" data-collocationid="{{item.couponCollocationId}}">
               马上抢
             </view>
-           <view class="gift" @tap="goTaskDetail" data-id="{{item.id}}" wx:if="{{item.activityType == 1}}" style="margin-top:20rpx;font-size:28rpx;padding:0rpx 10rpx;">
+           <view class="gift" @tap="goTaskDetail" data-id="{{item.id}}" wx:if="{{item.activityType == 1 && item.totalStock>0}}" style="margin-top:20rpx;font-size:24rpx;padding:0rpx 10rpx;">
               <image src="{{imagePath + 'gift.png'}}" wx:if="{{imagePath}}"/>助力有奖
             </view>
             <view wx:if="{{item.totalStock<=0}}" @tap="empty" class="right-now"  style="background:#ddd">

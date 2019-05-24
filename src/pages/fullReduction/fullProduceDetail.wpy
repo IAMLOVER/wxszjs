@@ -349,12 +349,10 @@ button[plain]{
       <view class="tip">
         <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-          <swiper-item><text>**3431也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**7646也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**2631也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**5560也正在浏览此商品</text></swiper-item>
-          <swiper-item><text>**6201也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**{{m1.filterRandom(2431)}}也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**{{m1.filterRandom(5531)}}也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**{{m1.filterRandom(6631)}}也正在浏览此商品</text></swiper-item>
+          <swiper-item><text>**{{m1.filterRandom(3231)}}也正在浏览此商品</text></swiper-item>
         </swiper>
       </view>
     </view>
