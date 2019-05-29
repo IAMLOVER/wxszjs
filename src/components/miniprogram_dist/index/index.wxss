@@ -1,0 +1,14 @@
+.canvas {
+    width: 750rpx;
+    height: 350rpx;
+}
+.canvas.pro {
+    position: absolute;
+    left: 0;
+    z-index:999
+}
+.canvas.debug {
+    position: absolute;
+    left: 0;
+    border: 1rpx solid #ccc;
+}

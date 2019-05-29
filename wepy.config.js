@@ -14,12 +14,13 @@ module.exports = {
     babel: {
       sourceMap: true,
       presets: [
-        'env'
+        'env',
       ],
       plugins: [
         'babel-plugin-transform-class-properties',
         'transform-export-extensions',
-        'syntax-export-extensions'
+        'syntax-export-extensions',
+        'transform-object-rest-spread'
       ]
     }
   },

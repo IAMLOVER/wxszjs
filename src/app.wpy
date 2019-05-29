@@ -70,7 +70,10 @@ export default class extends wepy.app {
       'pages/ediLogin/ediLogin',
       'pages/ediPay/ediPay',
       'pages/ediPay/ediPaySuccess',
-      'pages/ediPay/ediPayFail'
+      'pages/ediPay/ediPayFail',
+
+      //测试页面
+      'pages/test/test'
     ],
     window: {
       backgroundTextStyle: 'light',
