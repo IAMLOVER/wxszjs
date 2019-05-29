@@ -2,7 +2,7 @@
 <template>
   <view>
     <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
-      <button @tap="onCreatePoster">助力海报</button>
+      <button @tap="onCreatePoster">海报</button>
   </poster>
   </view>
 </template>
