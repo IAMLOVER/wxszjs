@@ -29,26 +29,26 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
-					"name": "分类",
-					"pathName": "pages/classification/classification",
+					"name": "组合商品",
+					"pathName": "pages/collocation/collocationDetails",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 1,
 					"name": "专区",
-					"pathName": "pages/shop/shop",
+					"pathName": "pages/myCenter/myShop/myShop",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 2,
 					"name": "大满减",
-					"pathName": "pages/fullReduction/fullReduction",
+					"pathName": "pages/secKill/choseTaskSuccess",
 					"query": "",
 					"scene": null
 				},
@@ -74,10 +74,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "我的优惠券",
-					"pathName": "pages/myCenter/myShop/myShopAtmosphere",
-					"query": "",
+					"id": 6,
+					"name": "任务商品详情",
+					"pathName": "pages/taskGoods/taskGoods",
+					"query": "goodsid=37",
 					"scene": null
 				},
 				{
@@ -88,9 +88,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "收获地址",
-					"pathName": "pages/address/address",
+					"pathName": "pages/test/test",
 					"query": "",
 					"scene": null
 				},

@@ -8,15 +8,15 @@
         background: white;
         display:flex;display:-webkit-flex;
         align-items:center;
--webkit-align-items: center;
+        -webkit-align-items: center;
         .tab-list{
            -webkit-flex: 1;-ms-flex: 1;flex: 1;
             color:#959595;
             display:flex;display:-webkit-flex;
             justify-content: center;
--webkit-justify-content: center;
+            -webkit-justify-content: center;
             align-items:center;
--webkit-align-items: center;
+            -webkit-align-items: center;
             font-size: 28rpx;
             .tab-text{
                 height: 88rpx;
@@ -28,9 +28,9 @@
             color:#f25664;
             display:flex;display:-webkit-flex;
             justify-content: center;
--webkit-justify-content: center;
+            -webkit-justify-content: center;
             align-items:center;
--webkit-align-items: center;
+            -webkit-align-items: center;
             font-size: 28rpx;
             .tab-text{
                 height: 80rpx;
@@ -54,7 +54,7 @@
                     height:42rpx;
                     display:flex;display:-webkit-flex;
                     align-items:center;
--webkit-align-items: center;
+                    -webkit-align-items: center;
                     justify-content: space-between;-webkit-justify-content: space-between;
                     .list-icon{
                         height:32rpx;
@@ -116,6 +116,32 @@
                     text-align: right;
                     margin-top:30rpx;
                 }
+                .wait-btn{
+                    display: flex;
+                    display: -webkit-flex;
+                    -webkit-justify-content:flex-end;
+                    margin-top: 24rpx;
+                    -webkit-align-content: center;
+                    view{
+                        width: 132rpx;
+                        height: 40rpx;
+                        background-color:  #F25664;
+                        color: #fff;
+                        font-size: 24rpx;
+                        text-align: center;
+                        // line-height: 30rpx;
+                        border-radius: 20rpx;
+                        &:first-child{
+                            margin-right: 24rpx;
+                        }
+                        &:last-child{
+                            background-color: #fff;
+                            color: #959595;
+                            border: 2rpx solid #B5B5B5;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
             }
         }
 }
@@ -145,6 +171,63 @@
         outline: none;
         margin-top: 60rpx;
         text-align: center;
+    }
+}
+
+// 取消订单的弹出框
+.cancleShadow{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    .content{
+        width: 620rpx;
+        height: 576rpx;
+        background-color: #fff;
+        border-radius: 20rpx;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -310rpx;
+        margin-top: -288rpx;
+        text-align: center;
+        image{
+            width: 288rpx;
+            height: 150rpx;
+            margin-top: 100rpx;
+        }
+        .tip{
+            font-size: 14px;
+            color: #666666;
+            width: 448rpx;
+            text-align: left;
+            margin: 30rpx auto;
+        }
+        .btns{
+            display: flex;
+            display: -webkit-flex;
+            align-content: center;
+            -webkit-align-content: center;
+            justify-content: space-between;
+            padding: 20rpx 40rpx;
+            view{
+                border: 2rpx solid #F25664;
+                border-radius: 42rpx;
+                width: 250rpx;
+                height: 84rpx;
+                line-height: 84rpx;
+                text-align: center;
+                font-size: 32rpx;
+                color: #f25664;
+                &:last-child{
+                    background-color: #f25664;
+                    color: #fff;
+                }
+            }
+        }
     }
 }
 </style>
@@ -180,7 +263,22 @@
                     </view>
                 </view>
             </navigator>
-            <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，实付款：￥{{m1.filter(item.totalFee*0.01)}}</view>
+            <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
+                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}"/>
+                <view class="goods-text">
+                    <view class="goods-name">{{item.goodsName}}</view>
+                    <view class="goods-style">规格：{{item.className}}</view>
+                    <view class="goods-price">
+                        <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
+                        <text class="count">数量：{{item.goodsCount}}</text>
+                    </view>
+                </view>
+            </navigator>
+            <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
+            <view class="wait-btn">
+                <view class="right-now">立即支付</view>
+                <view class="cancle">取消订单</view>
+            </view>
         </view>
     </view>
 
@@ -189,6 +287,20 @@
         <image src="{{imagePath + 'null.png'}}"/>
         <view>你的订单空空如也，还不快去收些好货</view>
         <button @tap="goIndex">发现好货</button>
+    </view>
+
+    <!-- 取消订单弹出框 -->
+    <view class="cancleShadow">
+        <view class="content">
+            <image src="{{imagePath + 'popup_retain_sz.png'}}" wx:if="{{imagePath}}"/>
+            <view class="tip">
+                主人，你真的忍心取消订单吗，还差一点我就是你的人了。
+            </view>
+            <view class="btns">
+                <view class="shadow-canle">忍心拒绝</view>
+                <view class="shadow-right">立即支付</view>
+            </view>
+        </view>
     </view>
   </view>
 </template>
@@ -207,7 +319,7 @@ export default class Index extends wepy.page {
       imagePath:path.path.imagePath,
       apiPath:path.path.apiPath,
       preImagePath:path.path.preImagePath,      
-      tabLists:['全部','待收货','已完成'],
+      tabLists:['全部','待支付','待发货','待收货','已完成','已取消'],
       nowIndex:0,
       orderList:{},
       type:'',

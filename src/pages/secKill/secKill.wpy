@@ -216,7 +216,7 @@ export default class Index extends wepy.page {
   };
   methods = {
     navSearch() {
-    this.$navigate({url: '../search/secKillSearch'})
+     this.$navigate({url: '../search/secKillSearch'})
     },
   };
    //上拉加载更多

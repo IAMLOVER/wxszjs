@@ -163,25 +163,30 @@ page{
     }
   }
   .task-items{
-    .item{
       display:flex;display:-webkit-flex;
-      padding: 10rpx 0rpx;
-      .item-left{
-        background: url('https://img-blog.csdnimg.cn/20190408171225857.png');
-        background-repeat: no-repeat;
-        color: #fff;
-        font-size: 24rpx;
-        background-size: 96rpx 40rpx;
-        text-align: center;
-        width: 96rpx;
-        height: 40rpx;
+      margin-top: 24rpx;
+    .item{
+      height: 154rpx;
+      width: 214rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index//bg_task02_sz.png');
+      background-size: 214rpx 154rpx;
+      text-align: center;
+      background-repeat: no-repeat;
+      margin-right: 24rpx;
+      &:last-child{
+        margin-right: 0rpx;
       }
-      .item-right{
-        font-size: 26rpx;
-        color: #959595;
-        text{
-          color: #F25664;
-        }
+      .count,.percent{
+        font-size: 28rpx;
+        color: #fff;
+        display:flex;display:-webkit-flex;
+        margin-left:34rpx;
+      }
+      .item-tip{
+        font-size: 32rpx;
+        color: #5F3118;
+        font-weight: 600;
+        padding-top: 10rpx;
       }
     }
   }
@@ -593,8 +598,13 @@ button[plain]{
       <view class="tip">在{{taskItems[0].duration/3600/1000}}个小时内成功助力者，可获得相应佣金<image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}"/></view>
       <view class="task-items">
         <view class="item" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-          <view class="item-left">任务{{index+1}}：</view>
-          <view class="item-right">助力<text>{{item.target}}</text>单，成功助力可获佣金：总成交额<text>{{item.percent}}</text>%</view>
+          <view class="item-tip" wx:if="{{index == 0}}">任务一</view>
+          <view class="item-tip" wx:if="{{index == 1}}">任务二</view>
+          <view class="item-tip" wx:if="{{index == 2}}">任务三</view>
+
+          <!-- <view class="item-right">助力<text>{{item.target}}</text>单，成功助力可获佣金：总成交额<text>{{item.percent}}</text>%</view> -->
+          <view class="count"><text style="display:inline-block;margin-right:20rpx">数量:</text>{{item.target}}人</view>
+          <view class="percent"><text style="display:inline-block;margin-right:20rpx">佣金:</text>{{item.percent}}%</view>
         </view>
       </view>
     </view>

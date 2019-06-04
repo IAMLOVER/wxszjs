@@ -102,6 +102,7 @@ page{
     }
     .item-image{
       -webkit-flex: 3;-ms-flex: 3;flex: 3;
+      position: relative;
       image{
         width: 162rpx;
         height: 162rpx;
@@ -114,6 +115,32 @@ page{
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+      .item-price{
+        font-size: 24rpx;
+        color: #fff;
+        width: 168rpx;
+        height: 32rpx;
+        background-color: rgba(0, 0, 0, 0.35);
+        position: absolute;
+        bottom: 59rpx;
+        border-radius:0 0 8rpx 8rpx;
+        text-align: left; 
+      }
+      .item-count{
+        border-radius:8rpx 4rpx 4rpx 0rpx;
+        padding: 0rpx 4rpx;
+        box-sizing:border-box;
+        min-width:56rpx;
+        height:32rpx;
+        text-align:center;
+        background:#f25664;
+        font-size:24rpx;
+        color:#fff;
+        display:inline-block;
+        position:absolute;
+        top:0;
+        left:0
       }
     }
     .equal{
@@ -355,9 +382,9 @@ page{
       .controal{
         display:flex;display:-webkit-flex;
         align-items:center;
--webkit-align-items: center;
+        -webkit-align-items: center;
         justify-content: center;
--webkit-justify-content: center;
+        -webkit-justify-content: center;
       }
     }
     .btn-box{
@@ -416,6 +443,8 @@ page{
           <view class="item-image">
             <image src="{{preImagePath+item.picUrl1}}" wx:if="{{preImagePath && item.picUrl1}}" lazy-load mode="aspectFill"/>
             <view class="item-name">{{item.title}}</view>
+            <view class="item-price">￥{{m1.filter(item.minPrice*0.01)}}</view>
+            <view class="item-count">{{item.count}}件</view>
           </view>
           <view class="equal">
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}"/>

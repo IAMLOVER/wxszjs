@@ -5,7 +5,8 @@
 .canvas.pro {
     position: absolute;
     left: 0;
-    z-index:999
+    z-index:999;
+    bottom:999999rpx;
 }
 .canvas.debug {
     position: absolute;

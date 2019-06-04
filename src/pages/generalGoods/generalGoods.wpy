@@ -512,7 +512,7 @@ export default class Index extends wepy.page {
       m1: mywxs
   };
   methods = {
-      onShareAppMessage: function (ops) {
+    onShareAppMessage: function (ops) {
       console.log(this.taskForShare);
       console.log(123)
       if (ops.from === 'button') {

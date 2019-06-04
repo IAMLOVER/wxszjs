@@ -49,6 +49,18 @@ page{
       border-radius: 8rpx;
       margin-top: 10rpx;
     }
+    .share{
+      font-size: 28rpx;
+      color: #f25664;
+      float: right;
+      margin-top: 20rpx;
+      image{
+        width: 30rpx;
+        height: 27rpx;
+        vertical-align: middle;
+        margin-right: 12rpx;
+      }
+    }
   }
 }
 .new-reduction {
@@ -302,6 +314,84 @@ page{
   height: 120rpx;
   line-height: 120rpx;
 }
+.share-shadow{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  .content{
+    width: 100%;
+    height: 346rpx;
+    background-color:#F5F5F5;
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    .tip{
+      text-align: center;
+      font-size: 28rpx;
+      color: #666;
+      margin-top: 30rpx;
+    }
+    .share-way{
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 24rpx;
+      color: #222;
+      margin-top: 12rpx;
+      margin-bottom: 22rpx;
+      image{
+        width: 92rpx;
+        height: 92rpx;
+      }
+      button{
+        width: 100rpx;
+        height: 140rpx;
+        padding: 0;
+        line-height: 35rpx;
+        color: #222;
+        font-size: 24rpx;
+        margin: 0;
+      }
+    }
+    .cancle-share{
+      height: 96rpx;
+      background-color: #fff;
+      text-align: center;
+      font-size: 32rpx;
+      color: #666;
+      line-height: 96rpx;
+      z-index: 9999;
+    }
+  }
+}
+button[plain]{
+  border-color: #f5f5f5 !important;  
+}
+
+//生成海报的弹出框
+.poster-shadow{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  .save-ablum{
+    background: #EB4D4E;
+    border-radius: 42rpx;
+    width: 250rpx;
+    height: 84rpx;
+    color: #fff;
+    font-size: 32rpx;
+    line-height: 84rpx;
+    margin: 50rpx auto 200rpx;
+    text-align: center;
+  }
+}
 </style>
 <template>
   <view class="page">
@@ -322,6 +412,10 @@ page{
         </navigator>
         <view class="how-many">
           共{{storePromote}}人逛过
+        </view>
+        <view class="share" @tap="openShareShadow">
+          <image src="{{imagePath+'share@2x.png'}}" wx:if="{{imagePath}}"/>
+          分享
         </view>
       </view>
     </view>
@@ -442,6 +536,32 @@ page{
   <view class="footer">
     已经到底部了
   </view>
+
+  <!-- 转发分享弹出框 -->
+  <div class="share-shadow" wx:if="{{showShareShadow}}">
+    <div class="content">
+      <view class="tip">请选择转发方式</view>
+      <view class="share-way">
+        <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+          <image src = "{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}"/>
+          <view @tap="onCreatePoster">生成海报</view>
+        </poster>
+        <button open-type="share" class="poster" plain="true">
+          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+          <view>微信好友</view>
+        </button>
+      </view>
+      <view class="cancle-share" @tap="cancleShare">
+        取消
+      </view>
+    </div>
+  </div>
+
+  <!-- 点击生成海报的出现的弹出框 -->
+  <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx"/>
+     <view class="save-ablum" @tap="saveAblum">保存到相册</view>
+  </view>
   </view>
 </template>
 
@@ -449,14 +569,21 @@ page{
 import wepy from 'wepy';
 import path from '../../common/path.js';
 import mywxs from '../../wxs/mywxs.wxs';
+import poster from '../../components/miniprogram_dist/poster/poster'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '专区详情',
     navigationBarBackgroundColor: '#EB4D4E',
-    navigationBarTextStyle: 'white'
+    navigationBarTextStyle: 'white',
+    usingComponents: {
+        "poster": "../../components/miniprogram_dist/poster/index",
+    }
   };
+
   onLoad(options) {
-    this.storeId = options.id
+    if(options.id){
+       this.storeId = options.id
+    }
     if(options.scene){
       this.storeId = decodeURIComponent(options.scene)
     }
@@ -475,12 +602,173 @@ export default class Index extends wepy.page {
     storePromote:'',
     reduceArr:{},
     taskArr:{},
-    newArr:{}
+    newArr:{},
+    showShareShadow:false,
+    showPoster:false,
+    posterConfig:{
+      width: 570,
+      height: 920,
+      debug: false,
+      texts: [
+            {
+                x:162.6,
+                y:42.8,
+                zIndex:2,
+                text:[
+                    {
+                        text: '李瑞活',
+                        fontSize: 24,
+                        color: '#FFD2D6',
+                        marginLeft: 0,
+                    }
+                ]
+            },
+            {
+                x: 162.6,
+                y: 82.4,
+                zIndex:2,
+                text: [
+                    {
+                        text: '我在神州集市发现了热门专区，快来看看吧!',
+                        fontSize: 27,
+                        color: '#fff',
+                        opacity: 1,
+                        lineHeight:40,
+                        lineNum:2,
+                        width:360,
+                    },
+                ],
+                baseLine: 'middle',
+            },
+            {
+              x:76,
+              y:664.4,
+              zIndex:2,
+              text:[
+                {
+                  text:'全棉时代神州自营专区',
+                  fontSize:26,
+                  color:'#222',
+                  opacity:1
+                }
+              ]
+            },
+           {
+              x:280,
+              y:760,
+              zIndex:3,
+              text:[
+                {
+                  text:'长按图片识别二维码查看专区详情',
+                  fontSize:20,
+                  color:'#666',
+                  opacity:1,
+                  lineNum:2,
+                  lineHeight:32,
+                  width:180,
+                }
+              ]
+            }
+        ],
+      images:[
+        //背景图
+        {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+          width: 570,
+          height: 920,
+          zIndex:1,
+        },
+        //人物头像
+        {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+          width: 100,
+          height: 100,
+          zIndex:2,
+          x:55.6,
+          y:27.6
+        },
+        //背景图
+       {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+          width: 480,
+          height: 532,
+          zIndex:2,
+          x:45.6,
+          y:164.4,
+        },
+        //商店的logo
+        {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+          width:418,
+          height:418,
+          zIndex:3,
+          x:76,
+          y:210
+        },
+        //神州集市logo
+        {
+          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+          width:84,
+          height:84,
+          x:76,
+          y:740,
+        },
+        //二维码
+        {
+          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+          width:84,
+          height:84,
+          x:178,
+          y:740,
+        },
+      ],
+      blocks: [
+        {
+         width:478,
+         height:126,
+         opacity:1,
+         backgroundColor:'#FDE5ED',
+         borderRadius:9,
+         x:45.6,
+         y:716,
+         zIndex:2,
+       },
+       {
+         width:214,
+         height:6,
+         borderRadius:3,
+         backgroundColor:'#F25664',
+         zIndex:3,
+         x:278,
+         y:810,
+       }
+      ],
+    },
+    posterDetail:''
   };
   wxs = {
       m1: mywxs
   }
   methods = {
+    //打开，关闭分享弹出框
+    openShareShadow(){
+      this.showShareShadow = true
+    },
+    cancleShare(){
+      this.showShareShadow = false
+    },
+    onCreatePoster() {
+    },
+    onPosterFail(err) {
+     console.error(err);
+    },
+    onPosterSuccess(e){
+      this.showShareShadow = false
+      this.showPoster = true
+      const { detail } = e;
+      console.log(detail)
+      this.posterDetail = detail
+     },
     goDetails(e){
       if(e.currentTarget.dataset.type == 0){
         this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
@@ -489,7 +777,26 @@ export default class Index extends wepy.page {
       }else if(e.currentTarget.dataset.type == 2){
         this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
       }
-    }
+    },
+    onShareAppMessage: function (ops) {
+      if (ops.from === 'button') {
+        // 来自页面内转发按钮
+       console.log(ops.target)
+     }
+     return {
+       title: '我在神州集市发现了热门专区，快来看看吧!',
+       imageUrl:this.storeLogo?this.preImagePath + this.storeLogo:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+       path: 'pages/shop/shopDetail?id='+this.storeId, 
+       success: function (res) {
+       // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+      },
+      fail: function (res) {
+       // 转发失败
+       console.log("转发失败:" + JSON.stringify(res));
+     }
+   }
+   },
   };  
   // 获取店铺的基本信息
   getStoreInfo(){
@@ -506,12 +813,199 @@ export default class Index extends wepy.page {
         that.storeName = res.data.data.name
         that.storeLogo = res.data.data.logo
         that.storePromote = res.data.data.promote
+        that.posterConfig = {
+        width: 570,
+        height: 920,
+        debug: false,
+        texts: [
+            {
+                x:162.6,
+                y:45.8,
+                zIndex:2,
+                text:[
+                    {
+                        text: that.$parent.globalData.userName,
+                        fontSize: 24,
+                        color: '#FFD2D6',
+                        marginLeft: 0,
+                    }
+                ]
+            },
+            {
+                x: 162.6,
+                y: 82.4,
+                zIndex:2,
+                text: [
+                    {
+                        text: '我在神州集市发现了热门专区，快来看看吧!',
+                        fontSize: 27,
+                        color: '#fff',
+                        opacity: 1,
+                        lineHeight:40,
+                        lineNum:2,
+                        width:360,
+                    },
+                ],
+                baseLine: 'middle',
+            },
+            {
+              x:76,
+              y:664.4,
+              zIndex:3,
+              text:[
+                {
+                  text: that.storeName,
+                  fontSize:26,
+                  color:'#000',
+                }
+              ]
+            },
+           {
+              x:280,
+              y:760,
+              zIndex:3,
+              text:[
+                {
+                  text:'长按图片识别二维码查看专区详情',
+                  fontSize:20,
+                  color:'#666',
+                  opacity:1,
+                  lineNum:2,
+                  lineHeight:32,
+                  width:180,
+                }
+              ]
+            }
+        ],
+        images:[
+         //背景图
+         {
+           url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+           width: 570,
+           height: 920,
+           zIndex:1,
+         },
+         //人物头像
+        {
+           url: that.$parent.globalData.avatarUrl,
+           width: 100,
+           height: 100,
+           zIndex:2,
+           x:50.6,
+           y:27.6,
+           borderRadius:100,
+        },
+          //背景图
+         {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+          width: 480,
+          height: 532,
+          zIndex:2,
+          x:45.6,
+          y:164.4,
+          borderRadius:30,
+        },
+        //商店的logo
+        {
+          url: that.storeLogo?that.preImagePath + that.storeLogo:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+          width:418,
+          height:418,
+          zIndex:3,
+          x:76,
+          y:210
+        },
+        //神州集市logo
+        {
+          url:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+          width:84,
+          height:84,
+          x:76,
+          y:740,
+        },
+        //二维码
+        {
+          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+          width:84,
+          height:84,
+          x:178,
+          y:740,
+        },
+      ],
+      blocks: [
+        {
+         width:478,
+         height:126,
+         opacity:1,
+         backgroundColor:'#FDE5ED',
+         borderRadius:9,
+         x:45.6,
+         y:716,
+         zIndex:2,
+       },
+       {
+         width:214,
+         height:6,
+         borderRadius:6,
+         backgroundColor:'#F25664',
+         zIndex:3,
+         x:278,
+         y:810,
+       }
+      ],
+    }
         that.$apply()
       },
       fail: () => {},
       complete: () => {}
     });
-    
+  }
+
+  //保存海报到相册
+  saveAblum(){
+    var that = this
+    wx.saveImageToPhotosAlbum({
+            filePath:that.posterDetail,
+            success(res) { 
+                that.showPoster = false
+                that.$apply()
+            },
+            fail(err){
+                if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+                    // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+                    wx.showModal({
+                      title: '提示',
+                      content: '需要您授权保存相册',
+                      showCancel: false,
+                      success:res=>{
+                        wx.openSetting({
+                          success(settingdata) {
+                            console.log("settingdata", settingdata)
+                            if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                              wx.showModal({
+                                title: '提示',
+                                content: '获取权限成功,再次点击图片即可保存',
+                                showCancel: false,
+                              })
+                            } else {
+                              wx.showModal({
+                                title: '提示',
+                                content: '获取权限失败，将无法保存到相册哦~',
+                                showCancel: false,
+                              })
+                            }
+                          },
+                          fail(failData) {
+                            console.log("failData",failData)
+                          },
+                          complete(finishData) {
+                            console.log("finishData", finishData)
+                          }
+                        })
+                      }
+                    })
+                  }
+                },
+        })
   }
 
   // 店铺内的满减商品

@@ -5,15 +5,20 @@ page {
 }
 .swiper-wrapper {
   position: relative;
+  z-index: 1;
   .swiper {
     width: 100%;
     height: 374rpx;
+  z-index: 1;
     swiper-item {
       width: 100%;
       height: 374rpx;
+  z-index: 1;
       image {
         width: 100%;
         height: 374rpx;
+  z-index: 1;
+
       }
     }
   }
@@ -21,7 +26,7 @@ page {
 .search-wrapper {
   position: fixed;
   top: 30rpx;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   .search {
     position: relative;
@@ -60,67 +65,39 @@ page {
 .main {
   display:flex;display:-webkit-flex;
   display: -webkit-flex; 
-  margin-top: 24rpx;
-  padding: 0rpx 30rpx;
-  .skil,
-  .reduce {
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/kuaimiaosha.png');  
-    background-repeat: no-repeat;
-    background-size: 100%;  
-    border-radius: 10px 0px 0px 10px;
-    padding: 12rpx 24rpx;
-    height: 178rpx;
-    box-sizing: border-box;
-    .title {
-      image {
-        width: 36rpx;
-        height: 36rpx;
-        vertical-align: sub;
-        margin-right: 12rpx;
-        margin-top: -1px;
-      }
-      text {
-        font-size: 36rpx;
-        color: #f25664;
-      }
+  width: 690rpx;
+  height: 180rpx;
+  background-color: #fff;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4rpx 24rpx 0 rgba(153,153,153,0.20);
+  border-radius: 12rpx;
+  z-index: 999;
+  position: relative;
+  top: -14rpx;
+  .item{
+    flex: 1;
+    -webkit-flex:1;
+    -ms-flex:1;
+    padding-top: 24rpx;
+    z-index: 999999999;
+    image{
+      width: 90rpx;
+      height: 90rpx;
+      border-radius: 50%;
     }
-    .tip {
-      color: #f25664;
-      font-size: 28rpx;
+    .text{
+      color: #222222;
+      font-size: 24rpx;
     }
-    .button-wrapper {
-      position: relative;
-      .rightNow {
-        color: #ffffff;
-        font-size: 24rpx;
-        position: absolute;
-        top: 6rpx;
-        left: 12rpx;
-      }
-      .button {
-        z-index: 1000;
-        width: 120rpx;
-        height: 40rpx;
-      }
-    }
-  }
-  .skil {
-    margin-right: 3rpx;
-  }
-  .reduce {
-    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/damanjian.png');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border-radius: 0px 10px 10px 0px;
-    margin-left: 3rpx;
   }
 }
 .new-store {
   .title {
     display:flex;display:-webkit-flex;
     justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 40rpx 30rpx 24rpx 40rpx;
+    padding: 10rpx 30rpx 24rpx 40rpx;
     view {
       image {
         width: 24rpx;
@@ -228,7 +205,7 @@ page {
   .title {
     display:flex;display:-webkit-flex;
     justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 40rpx 30rpx 24rpx 40rpx;
+    padding: 20rpx 30rpx 24rpx 40rpx;
     view {
       image {
         width: 24rpx;
@@ -399,34 +376,40 @@ page {
 </swiper>
 </view>
 
-  <!--快秒杀,大满减-->
+  <!--快秒杀,大满减,助力团,搭配购-->
   <view class="main">
-        <navigator url="../secKill/secKill" class="skil">
-        <view class="title">
-          <image wx:if="{{imagePath}}" src="{{imagePath+'miaosha.png'}}"/>
-          <text>快秒杀</text>
-        </view>
-        <view class="tip">
-          天天限时限量抢好货
-        </view>
-        <view class="button-wrapper">
-          <view class="rightNow">立即抢购</view>
-        <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
-        </view>
-    </navigator>
-       <navigator url="../fullReduction/fullReduction" class="reduce">
-        <view class="title">
-          <image wx:if="{{imagePath}}" src="{{imagePath+'discount.png'}}"/>
-          <text>大满减</text>
-        </view>
-        <view class="tip">
-          用券专区，好价享不停
-        </view>
-         <view class="button-wrapper">
-          <view class="rightNow">立即抢购</view>
-          <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
+       <navigator url="../secKill/secKill" class="item">
+         <view class="icon">
+           <image src="{{imagePath + 'type1_sz.png'}}" wx:if="{{imagePath}}"/>
          </view>
-    </navigator>
+         <view class="text">
+           快秒杀
+         </view>
+       </navigator>
+        <navigator url="../fullReduction/fullReduction" class="item">
+         <view class="icon">
+           <image src="{{imagePath + 'type2_sz.png'}}" wx:if="{{imagePath}}"/>
+         </view>
+         <view class="text">
+           大满减
+         </view>
+       </navigator>
+        <navigator url="../assist/assist" class="item">
+         <view class="icon">
+           <image src="{{imagePath + 'type3_sz.png'}}" wx:if="{{imagePath}}"/>
+         </view>
+         <view class="text">
+           助力团
+         </view>
+       </navigator>
+        <navigator url="../collocation/collocation" class="item">
+         <view class="icon">
+           <image src="{{imagePath + 'type4_sz.png'}}" wx:if="{{imagePath}}"/>
+         </view>
+         <view class="text">
+           搭配购
+         </view>
+       </navigator>
   </view>
 
   <!--新品推荐-->
@@ -579,7 +562,7 @@ export default class Index extends wepy.page {
     },
     onPageScroll(e) {
       // 获取滚动条当前位置
-      this.scrollTop = e.scrollTop>100?100:0
+      this.scrollTop = e.scrollTop>10?10:0
       // this.$apply()
     },
     navSearch() {

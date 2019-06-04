@@ -20,8 +20,8 @@
 
     data = {
       posterConfig:{
-          width: 750,
-          height: 1200,
+          width: 570,
+          height: 920,
           backgroundColor: '#F59562',
           debug: false,
            blocks: [
@@ -107,7 +107,7 @@
 
     methods = {
     };  
-        onPosterSuccess(e) {
+     onPosterSuccess(e) {
         const { detail } = e;
         console.log(detail)
         wx.saveImageToPhotosAlbum({
