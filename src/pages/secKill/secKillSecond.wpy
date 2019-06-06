@@ -618,7 +618,6 @@ export default class Index extends wepy.page {
     reduceAccount(){
       if(this.account>1){
         this.account--
-        // this.money = this.account*(this.goodsClassList[this.activeIndex].salPrice*0.01*this.collocation.count)
       }else{
         wx.showToast({
           title: '请选择最少数量',
@@ -630,7 +629,7 @@ export default class Index extends wepy.page {
       }
     },
       //购买数量的确定按钮
-    payMoney(){
+   payMoney(){
       if(this.account<=0){
         wx.showToast({
           title: '请选择最少数量',
@@ -641,7 +640,6 @@ export default class Index extends wepy.page {
         });
         return
       }
-      console.log(this.account * this.collocation.count + '-' + this.goodsClassList[this.activeIndex].stock)
       if(this.account > this.produceInfo.stock || this.account * this.collocation.count > this.goodsClassList[this.activeIndex].stock){
         wx.showToast({
           title: '不好意思,商品库存不足',
@@ -650,7 +648,6 @@ export default class Index extends wepy.page {
           mask: true, 
           success: res => {}
         });
-      console.log( this.account + '-' + this.produceInfo.stock)
         return
       }
         var pay = {}

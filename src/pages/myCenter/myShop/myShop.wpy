@@ -1,327 +1,332 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.shop-info{
-  background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg');
-  // background-image: linear-gradient(-180deg, #EB4D4E 4%, rgba(240,88,109,0.50) 47%, rgba(255,255,255,0.00) 86%);
-  background-size: 750rpx 200rpx;
-  padding: 40rpx;
-  padding-bottom: 0;
-  height: 200rpx;
-  box-sizing: border-box;
-  .info-left{
-    image{
-      width: 120rpx;
-      height: 120rpx;
-      border-radius: 8rpx;
-      float: left;
-      margin-right: 24rpx;
-    }
+  page {
+    background-color: #f5f5f5;
   }
-  .info-right{
-    .info-name{
-      color: #fff;
-      font-size: 32rpx;
-      text{
-        max-width: 388rpx;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: inline-block;
-     }
-      image{
-        width: 32rpx;
-        height: 32rpx;
-        margin-left: 20rpx;
-        vertical-align:top;
-        margin-top:12rpx;
-      }
-    }
-    .how-many{
-      height: 40rpx;
-      color: #fff;
-      font-size: 24rpx;
-      background-color: #F25664;
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border-radius: 8rpx;
-      margin-top: 10rpx;
-    }
-    .share{
-      font-size: 28rpx;
-      color: #f25664;
-      float: right;
-      margin-top: 20rpx;
-      image{
-        width: 30rpx;
-        height: 27rpx;
-        vertical-align: middle;
-        margin-right: 12rpx;
-      }
-    }
-  }
-}
-.more-number{
-  height: 76rpx;
-  width: 100%;
-  line-height: 76rpx;
-  background: #FFE3E7;
-  font-size: 14px;
-color: #F25664;
-padding: 0rpx 40rpx;
-box-sizing: border-box;
-  image{
-    width: 40rpx;
-    height: 36rpx;
-    vertical-align: middle;
-    margin-top: -7rpx;
-    margin-right: 20rpx;
-  }
-}
-.new-reduction {
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
-      }
-      .more {
-        font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
-      }
-    }
-    .tip {
-      font-size: 32rpx;
-      color: #F25664;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color:#F25664;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-}
-.reduce-produces,.task-produces{
-  padding: 0rpx 30rpx;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
+  .shop-info {
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg'); // background-image: linear-gradient(-180deg, #EB4D4E 4%, rgba(240,88,109,0.50) 47%, rgba(255,255,255,0.00) 86%);
+    background-size: 750rpx 200rpx;
+    padding: 40rpx;
+    padding-bottom: 0;
+    height: 200rpx;
     box-sizing: border-box;
-    width: 690rpx;
-    height: 268rpx;
-    position: relative;
-    margin-bottom: 24rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
-        width: 220rpx;
-        height: 220rpx;
-        border-radius: 16rpx;
+    .info-left {
+      image {
+        width: 120rpx;
+        height: 120rpx;
+        border-radius: 8rpx;
+        float: left;
+        margin-right: 24rpx;
       }
     }
-    .item-right{
-      .item-title{
+    .info-right {
+      .info-name {
+        color: #fff;
         font-size: 32rpx;
-        color: #222222;
-        height: 100rpx;
-        font-weight: 600;
-       display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 10rpx;
-        margin-top: 18rpx;
-        image{
-          width: 18rpx;
-          height: 20rpx;
-          margin-right: 8rpx;
+        text {
+          max-width: 388rpx;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: inline-block;
+        }
+        image {
+          width: 32rpx;
+          height: 32rpx;
+          margin-left: 20rpx;
+          vertical-align: top;
+          margin-top: 12rpx;
         }
       }
-      .commision{
+      .how-many {
+        height: 40rpx;
+        color: #fff;
         font-size: 24rpx;
-        color: #959595;
-        margin-top: 16rpx;
+        background-color: #F25664;
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border-radius: 8rpx;
+        margin-top: 10rpx;
       }
-      .item-price{
+      .share {
+        font-size: 28rpx;
+        color: #f25664;
+        float: right;
+        margin-top: 20rpx;
+        image {
+          width: 30rpx;
+          height: 27rpx;
+          vertical-align: middle;
+          margin-right: 12rpx;
+        }
+      }
+    }
+  }
+  .more-number {
+    height: 76rpx;
+    width: 100%;
+    line-height: 76rpx;
+    background: #FFE3E7;
+    font-size: 14px;
+    color: #F25664;
+    padding: 0rpx 40rpx;
+    box-sizing: border-box;
+    image {
+      width: 40rpx;
+      height: 36rpx;
+      vertical-align: middle;
+      margin-top: -7rpx;
+      margin-right: 20rpx;
+    }
+  }
+  .new-reduction {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      view {
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
+        }
+        .more {
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
+        }
+      }
+      .tip {
+        font-size: 32rpx;
+        color: #F25664;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #F25664;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+    }
+  }
+  .reduce-produces,
+  .task-produces {
+    padding: 0rpx 30rpx;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      width: 690rpx;
+      height: 268rpx;
+      position: relative;
+      margin-bottom: 24rpx;
+      .item-left {
         float: left;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
+        margin-right: 16rpx;
+        image {
+          width: 220rpx;
+          height: 220rpx;
+          border-radius: 16rpx;
+        }
+      }
+      .item-right {
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          height: 100rpx;
+          font-weight: 600;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
           font-size: 24rpx;
           color: #F25664;
-          font-weight: 600;
-          .really{
-            font-size: 36rpx;
+          margin-bottom: 10rpx;
+          margin-top: 18rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .commision {
+          font-size: 24rpx;
+          color: #959595;
+          margin-top: 16rpx;
+        }
+        .item-price {
+          float: left;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            font-size: 24rpx;
             color: #F25664;
+            font-weight: 600;
+            .really {
+              font-size: 36rpx;
+              color: #F25664;
+            }
           }
         }
       }
-    }
-    .tip{
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border:1px solid #F25664;
-      color: #F25664;
-      background-color: #fff;
-      border-radius: 8rpx;
-      font-size: 24rpx;
-      height: 36rpx;
-      position: absolute;
-      right: 24rpx;
-      bottom: 24rpx;
-    }
-  }
-}
-.new-task{
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
-      }
-      .more {
+      .tip {
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border: 1px solid #F25664;
+        color: #F25664;
+        background-color: #fff;
+        border-radius: 8rpx;
         font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
       }
     }
-    .tip {
-      font-size: 32rpx;
-      color: #FF6130;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #FF6130;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
   }
-}
-.new-produce{
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    .tip {
-      font-size: 32rpx;
-      color: #D334FF;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #D334FF;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-.produce-items {
-  padding: 0px 30rpx;
-  .produce-item {
-    width: 336rpx;
-    height: 492rpx;
-    background-color: #fff;
-    border-radius: 8rpx;
-    float: left;
-    margin-right: 18rpx;
-    margin-bottom: 18rpx;
-    position: relative;
-    .produce-info {
-      .produce-img {
+  .new-task {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      view {
         image {
-          width: 336rpx;
-          height: 336rpx;
-          border-radius: 8rpx;
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
         }
-    }
-    .produce-name {
-        text{
-          width: 288rpx;
-          color: #222222;
-          font-size: 32rpx;
-          padding-left: 24rpx;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-         -webkit-line-clamp: 2;
-          overflow: hidden;
-          line-height: 36rpx;
-          font-weight: 600;
-     }
-    }
-    .produce-money {
-      .number {
-        font-size: 40rpx;
-        color: #f25664;
+        .more {
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
+        }
       }
-      .money-type {
-        font-size: 26rpx;
-        color: #f25664;
-        padding-left: 24rpx;
+      .tip {
+        font-size: 32rpx;
+        color: #FF6130;
+        line-height: 64rpx;
+        font-weight: 600;
       }
-}
-  }
-}
-.produce-item:nth-child(2n + 2) {
-      margin-right: 0rpx;
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #FF6130;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
     }
   }
-}
-.produce-skill {
-  position: absolute;
-  top: 0px;
-  left: 32rpx;
-  .tip {
-    position: relative;
-    image {
-      z-index: 1000;
-      width: 64rpx;
-      height: 44rpx;
+  .new-produce {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      .tip {
+        font-size: 32rpx;
+        color: #D334FF;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #D334FF;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
     }
-    view {
-      color: #ffffff;
-      font-size: 24rpx;
-      position: absolute;
-      top: 3rpx;
-      left: 8rpx;
+    .produce-items {
+      padding: 0px 30rpx;
+      .produce-item {
+        width: 336rpx;
+        height: 492rpx;
+        background-color: #fff;
+        border-radius: 8rpx;
+        float: left;
+        margin-right: 18rpx;
+        margin-bottom: 18rpx;
+        position: relative;
+        .produce-info {
+          .produce-img {
+            image {
+              width: 336rpx;
+              height: 336rpx;
+              border-radius: 8rpx;
+            }
+          }
+          .produce-name {
+            text {
+              width: 288rpx;
+              color: #222222;
+              font-size: 32rpx;
+              padding-left: 24rpx;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              line-height: 36rpx;
+              font-weight: 600;
+            }
+          }
+          .produce-money {
+            .number {
+              font-size: 40rpx;
+              color: #f25664;
+            }
+            .money-type {
+              font-size: 26rpx;
+              color: #f25664;
+              padding-left: 24rpx;
+            }
+          }
+        }
+      }
+      .produce-item:nth-child(2n+2) {
+        margin-right: 0rpx;
+      }
     }
   }
-}
-
+  .produce-skill {
+    position: absolute;
+    top: 0px;
+    left: 32rpx;
+    .tip {
+      position: relative;
+      image {
+        z-index: 1000;
+        width: 64rpx;
+        height: 44rpx;
+      }
+      view {
+        color: #ffffff;
+        font-size: 24rpx;
+        position: absolute;
+        top: 3rpx;
+        left: 8rpx;
+      }
+    }
+  }
   .footer {
     height: 100rpx;
     width: 100%;
@@ -329,10 +334,11 @@ box-sizing: border-box;
     bottom: 0;
     left: 0;
     background: white;
-    display:flex;display:-webkit-flex;
+    display: flex;
+    display: -webkit-flex;
     justify-content: center;
     -webkit-justify-content: center;
-    align-items:center;
+    align-items: center;
     -webkit-align-items: center;
     .more {
       height: 84rpx;
@@ -341,21 +347,21 @@ box-sizing: border-box;
       border-radius: 42rpx;
       color: white;
       font-size: 28rpx;
-      display:flex;display:-webkit-flex;
+      display: flex;
+      display: -webkit-flex;
       justify-content: center;
-     -webkit-justify-content: center;
-      align-items:center;
-    -webkit-align-items: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
     }
   }
 </style>
 <template>
   <view class="page">
     <!-- 店铺信息 -->
-    
     <view class="shop-info">
       <view class="info-left">
-        <image src="{{storeLogo?preImagePath+storeLogo:'../../../images/index/store_logobig.png'}}"/>
+        <image src="{{storeLogo?preImagePath+storeLogo:'../../../images/index/store_logobig.png'}}" />
       </view>
       <view class="info-right">
         <navigator url="../../shop/company?storeId={{storeId}}" class="info-name">
@@ -369,41 +375,38 @@ box-sizing: border-box;
           共{{storePromote}}人逛过
         </view>
         <view class="share">
-          <image src="{{imagePath+'share@2x.png'}}" wx:if="{{imagePath}}"/>
-          分享
+          <image src="{{imagePath+'share@2x.png'}}" wx:if="{{imagePath}}" /> 分享
         </view>
       </view>
     </view>
-
     <!-- 更多数据 -->
     <view class="more-number">
-      <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}"/>
+      <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
       <text>**5439查看了你的店铺</text>
-      <text style="float:right; text-decoration: underline">更多数据</text>
+      <text style="float:right; text-decoration: underline" @tap="moreNumber">更多数据</text>
     </view>
     <!-- 最新满减 -->
-  <view class="new-reduction" wx:if="{{reduceArr.length>0}}">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新满减
+    <view class="new-reduction" wx:if="{{reduceArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新满减
         </view>
-      <view>
-        <navigator url="../../newType/newReduce?storeId={{storeId}}">
-          <text class="more">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-        </navigator>
+        <view>
+          <navigator url="../../newType/newReduce?storeId={{storeId}}">
+            <text class="more">更多</text>
+            <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}" />
+          </navigator>
+        </view>
       </view>
-    </view>
-    <view class="reduce-produces">
-       <navigator url='../../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+      <view class="reduce-produces">
+        <navigator url='../../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}"  mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <view class="hot">
-              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>              
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
             <view class="item-price">
@@ -417,27 +420,25 @@ box-sizing: border-box;
             满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}
           </view>
         </navigator>
-    </view>
-  </view>
-
-  <!-- 最新任务 -->
-  <view class="new-task" wx:if="{{taskArr.length>0}}">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新任务
-        </view>
-      <view>
-        <navigator url="../../newType/newTask?storeId={{storeId}}">
-          <text class="more">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more05.png'}}"/>
-        </navigator>
       </view>
     </view>
-    <view class="task-produces">
-       <navigator url="../../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+    <!-- 最新任务 -->
+    <view class="new-task" wx:if="{{taskArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新任务
+        </view>
+        <view>
+          <navigator url="../../newType/newTask?storeId={{storeId}}">
+            <text class="more">更多</text>
+            <image wx:if="{{imagePath}}" src="{{imagePath+'more05.png'}}" />
+          </navigator>
+        </view>
+      </view>
+      <view class="task-produces">
+        <navigator url="../../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -445,7 +446,7 @@ box-sizing: border-box;
               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>              
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
           </view>
@@ -453,191 +454,196 @@ box-sizing: border-box;
             已经有{{item.receivedNum}}人领取
           </view>
         </navigator>
+      </view>
     </view>
-  </view>
-
-  <!-- 最新单品 -->
-  <view class="new-produce" wx:if="{{newArr.length>0}}">
-     <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新单品
+    <!-- 最新单品 -->
+    <view class="new-produce" wx:if="{{newArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新单品
         </view>
-    </view>
-     <view class="produce-items">
-       <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
-         <view class="produce-info">
+      </view>
+      <view class="produce-items">
+        <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
+          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
-         </view>
-         <view class="produce-name">
-          <text>{{item.title}}</text>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
+            </view>
+            <view class="produce-name">
+              <text>{{item.title}}</text>
+            </view>
+            <view class="produce-money">
+              <text class="money-type">￥</text>
+              <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+            </view>
           </view>
-        <view class="produce-money">
-            <text class="money-type">￥</text>
-            <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+          <!-- 商品销售类型(满减，任务) -->
+          <view class="produce-skill" wx:if="{{item.activityType == 2}}">
+            <view class="tip">
+              <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
+              <view>满减</view>
+            </view>
           </view>
-        </view>
-        <!-- 商品销售类型(满减，任务) -->
-        <view class="produce-skill" wx:if="{{item.activityType == 2}}">
-           <view class="tip">
-             <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
-             <view>满减</view>
-           </view>
-        </view>
           <view class="produce-skill" wx:if="{{item.activityType == 1}}">
-           <view class="tip">
-             <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
-             <view>任务</view>
-           </view>
+            <view class="tip">
+              <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
+              <view>任务</view>
+            </view>
+          </view>
         </view>
-       </view>
+      </view>
     </view>
-  </view>
     <view style="height:200rpx;text-align:center;clear:both; font-size: 12px;color: #B5B5B5;line-height:100rpx">
-    已经到底部了
-   </view>
-        <view class="footer">
-            <view class="more" @tap="moreManagement">联系客服</view>
-        </view>
+      已经到底部了
+    </view>
+    <view class="footer">
+      <view class="more" @tap="moreManagement">联系客服</view>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import mywxs from '../../../wxs/mywxs.wxs';
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的专区',
-    navigationBarBackgroundColor: '#EB4D4E',
-    navigationBarTextStyle: 'white'
-  };
-  onLoad() {
-    this.getStoreInfo()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    storeId:'',
-    storeName:'',
-    storeLogo:'',
-    storePromote:'',
-    reduceArr:{},
-    taskArr:{},
-    newArr:{}
-  };
-  wxs = {
+  import wepy from 'wepy';
+  import path from '../../../common/path.js';
+  import mywxs from '../../../wxs/mywxs.wxs';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的专区',
+      navigationBarBackgroundColor: '#EB4D4E',
+      navigationBarTextStyle: 'white'
+    };
+    onLoad() {
+      this.getStoreInfo()
+    }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      storeId: '',
+      storeName: '',
+      storeLogo: '',
+      storePromote: '',
+      reduceArr: {},
+      taskArr: {},
+      newArr: {}
+    };
+    wxs = {
       m1: mywxs
-  }
-  methods = {
-    goDetails(e){
-      if(e.currentTarget.dataset.type == 0){
-        this.$navigate('../../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 1){
-        this.$navigate('../../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 2){
-        this.$navigate('../../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
+    }
+    methods = {
+      goDetails(e) {
+        if (e.currentTarget.dataset.type == 0) {
+          this.$navigate('../../generalGoods/generalGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 1) {
+          this.$navigate('../../taskGoods/taskGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 2) {
+          this.$navigate('../../fullReduction/fullProduceDetail', {
+            id: e.currentTarget.dataset.id
+          })
+        }
+      },
+      moreManagement() {
+        wx.makePhoneCall({
+          phoneNumber: '0755-88600299'
+        });
+      },
+      moreNumber(){
+        this.$navigate('./myShopAtmosphere')
       }
-    },
-    moreManagement(){
-      wx.makePhoneCall({ phoneNumber: '0755-88600299' });
-    },
-  };  
-
-// 获取我的专区的简要信息
-   getStoreInfo(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/myStore', 
-      data: {
-        'userid':that.$parent.globalData.userId
-      },
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        // console.log(res)
-        that.storeId = res.data.data.id
-        that.storeName = res.data.data.name
-        that.storeLogo = res.data.data.logo
-        that.storePromote = res.data.data.promote
-        that.storeTurnover = res.data.data.turnover
-        that.$apply()
-        that.getReduceProduce()
-       that.getTaskProduce()
-       that.getNewProduce()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
+    };
+    // 获取我的专区的简要信息
+    getStoreInfo() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/myStore',
+        data: {
+          'userid': that.$parent.globalData.userId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          // console.log(res)
+          that.storeId = res.data.data.id
+          that.storeName = res.data.data.name
+          that.storeLogo = res.data.data.logo
+          that.storePromote = res.data.data.promote
+          that.storeTurnover = res.data.data.turnover
+          that.$apply()
+          that.getReduceProduce()
+          that.getTaskProduce()
+          that.getNewProduce()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的满减商品
+    getReduceProduce() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/coupons',
+        data: {
+          'storeId': that.storeId,
+          'size': 1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.reduceArr = res.data.data.content
+          that.$apply()
+          wepy.hideLoading();
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新任务
+    getTaskProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.taskArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新单品
+    getNewProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/all',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'get',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.newArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-  // 店铺内的满减商品
-  getReduceProduce(){
-    var that = this
-    wepy.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/coupons', 
-      data: {
-        'storeId':that.storeId,
-        'size':1
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.reduceArr = res.data.data.content
-        that.$apply()
-        wepy.hideLoading();
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  // 店铺内的最新任务
-  getTaskProduce(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/targets', 
-      data: {
-        'storeId':that.storeId,
-        // 'size':1
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.taskArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-
-  // 店铺内的最新单品
-  getNewProduce(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/all', 
-      data: {
-        'storeId':that.storeId,
-        // 'size':1
-      }, //请求的参数",
-      method: 'get',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.newArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-}
 </script>

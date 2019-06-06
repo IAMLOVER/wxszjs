@@ -1,7 +1,7 @@
 {
 	"description": "A WePY project",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 17,
 			"list": [
 				{
 					"id": 0,
@@ -133,6 +133,27 @@
 					"id": -1,
 					"name": "test",
 					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "单品的页面",
+					"pathName": "pages/collocation/collocationSingle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组合商品",
+					"pathName": "pages/collocation/collocationGroup",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "数据中心",
+					"pathName": "pages/myCenter/myShop/myShopAtmosphere",
 					"query": "",
 					"scene": null
 				}

@@ -1,406 +1,408 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.shop-info{
-  background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg');
-  // background-image: linear-gradient(-180deg, #EB4D4E 4%, rgba(240,88,109,0.50) 47%, rgba(255,255,255,0.00) 86%);
-  background-size: 750rpx 200rpx;
-  padding: 40rpx;
-  padding-bottom: 0;
-  margin-bottom: 20rpx;
-  height: 200rpx;
-  box-sizing: border-box;
-  .info-left{
-    image{
-      width: 120rpx;
-      height: 120rpx;
-      border-radius: 8rpx;
-      float: left;
-      margin-right: 24rpx;
-    }
+  page {
+    background-color: #f5f5f5;
   }
-  .info-right{
-    .info-name{
-      color: #fff;
-      font-size: 32rpx;
-      text{
-        max-width: 388rpx;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: inline-block;
-     }
-      image{
-        width: 32rpx;
-        height: 32rpx;
-        margin-left: 20rpx;
-        vertical-align:top;
-        margin-top:12rpx;
-      }
-    }
-    .how-many{
-      height: 40rpx;
-      color: #fff;
-      font-size: 24rpx;
-      background-color: #F25664;
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border-radius: 8rpx;
-      margin-top: 10rpx;
-    }
-    .share{
-      font-size: 28rpx;
-      color: #f25664;
-      float: right;
-      margin-top: 20rpx;
-      image{
-        width: 30rpx;
-        height: 27rpx;
-        vertical-align: middle;
-        margin-right: 12rpx;
-      }
-    }
-  }
-}
-.new-reduction {
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
-      }
-      .more {
-        font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
-      }
-    }
-    .tip {
-      font-size: 32rpx;
-      color: #F25664;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color:#F25664;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-}
-.reduce-produces,.task-produces{
-  padding: 0rpx 30rpx;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
+  .shop-info {
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/storeBg.jpg'); // background-image: linear-gradient(-180deg, #EB4D4E 4%, rgba(240,88,109,0.50) 47%, rgba(255,255,255,0.00) 86%);
+    background-size: 750rpx 200rpx;
+    padding: 40rpx;
+    padding-bottom: 0;
+    margin-bottom: 20rpx;
+    height: 200rpx;
     box-sizing: border-box;
-    width: 690rpx;
-    height: 268rpx;
-    position: relative;
-    margin-bottom: 24rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
-        width: 220rpx;
-        height: 220rpx;
-        border-radius: 16rpx;
+    .info-left {
+      image {
+        width: 120rpx;
+        height: 120rpx;
+        border-radius: 8rpx;
+        float: left;
+        margin-right: 24rpx;
       }
     }
-    .item-right{
-      .item-title{
+    .info-right {
+      .info-name {
+        color: #fff;
         font-size: 32rpx;
-        color: #222222;
-        height: 100rpx;
-        font-weight: 600;
-       display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 10rpx;
-        margin-top: 18rpx;
-        image{
-          width: 18rpx;
-          height: 20rpx;
-          margin-right: 8rpx;
+        text {
+          max-width: 388rpx;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: inline-block;
+        }
+        image {
+          width: 32rpx;
+          height: 32rpx;
+          margin-left: 20rpx;
+          vertical-align: top;
+          margin-top: 12rpx;
         }
       }
-      .commision{
+      .how-many {
+        height: 40rpx;
+        color: #fff;
         font-size: 24rpx;
-        color: #959595;
-        margin-top: 16rpx;
+        background-color: #F25664;
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border-radius: 8rpx;
+        margin-top: 10rpx;
       }
-      .item-price{
+      .share {
+        font-size: 28rpx;
+        color: #f25664;
+        float: right;
+        margin-top: 20rpx;
+        image {
+          width: 30rpx;
+          height: 27rpx;
+          vertical-align: middle;
+          margin-right: 12rpx;
+        }
+      }
+    }
+  }
+  .new-reduction {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      view {
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
+        }
+        .more {
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
+        }
+      }
+      .tip {
+        font-size: 32rpx;
+        color: #F25664;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #F25664;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+    }
+  }
+  .reduce-produces,
+  .task-produces {
+    padding: 0rpx 30rpx;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      width: 690rpx;
+      height: 268rpx;
+      position: relative;
+      margin-bottom: 24rpx;
+      .item-left {
         float: left;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
+        margin-right: 16rpx;
+        image {
+          width: 220rpx;
+          height: 220rpx;
+          border-radius: 16rpx;
+        }
+      }
+      .item-right {
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          height: 100rpx;
+          font-weight: 600;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
           font-size: 24rpx;
           color: #F25664;
-          font-weight: 600;
-          .really{
-            font-size: 36rpx;
+          margin-bottom: 10rpx;
+          margin-top: 18rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .commision {
+          font-size: 24rpx;
+          color: #959595;
+          margin-top: 16rpx;
+        }
+        .item-price {
+          float: left;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            font-size: 24rpx;
             color: #F25664;
+            font-weight: 600;
+            .really {
+              font-size: 36rpx;
+              color: #F25664;
+            }
           }
         }
       }
-    }
-    .tip{
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border:1px solid #F25664;
-      color: #F25664;
-      background-color: #fff;
-      border-radius: 8rpx;
-      font-size: 24rpx;
-      height: 36rpx;
-      position: absolute;
-      right: 24rpx;
-      bottom: 24rpx;
-    }
-  }
-}
-.new-task{
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
-      }
-      .more {
+      .tip {
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border: 1px solid #F25664;
+        color: #F25664;
+        background-color: #fff;
+        border-radius: 8rpx;
         font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
       }
     }
-    .tip {
-      font-size: 32rpx;
-      color: #FF6130;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #FF6130;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
   }
-}
-.new-produce{
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 0rpx 30rpx 18rpx 40rpx;
-    .tip {
-      font-size: 32rpx;
-      color: #D334FF;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #D334FF;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-.produce-items {
-  padding: 0px 30rpx;
-  .produce-item {
-    width: 336rpx;
-    height: 492rpx;
-    background-color: #fff;
-    border-radius: 8rpx;
-    float: left;
-    margin-right: 18rpx;
-    margin-bottom: 18rpx;
-    position: relative;
-    .produce-info {
-      .produce-img {
-        image {
-          width: 336rpx;
-          height: 336rpx;
-          border-radius: 8rpx;
-        }
-    }
-    .produce-name {
-        text{
-          width: 288rpx;
-          color: #222222;
-          font-size: 32rpx;
-          padding-left: 24rpx;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-         -webkit-line-clamp: 2;
-          overflow: hidden;
-          line-height: 36rpx;
-          font-weight: 600;
-     }
-    }
-    .produce-money {
-      .number {
-        font-size: 40rpx;
-        color: #f25664;
-      }
-      .money-type {
-        font-size: 26rpx;
-        color: #f25664;
-        padding-left: 24rpx;
-      }
-}
-  }
-}
-.produce-item:nth-child(2n + 2) {
-      margin-right: 0rpx;
-    }
-  }
-}
-.produce-skill {
-  position: absolute;
-  top: 0px;
-  left: 32rpx;
-  .tip {
-    position: relative;
-    image {
-      z-index: 1000;
-      width: 64rpx;
-      height: 44rpx;
-    }
-    view {
-      color: #ffffff;
-      font-size: 24rpx;
-      position: absolute;
-      top: 3rpx;
-      left: 8rpx;
-    }
-  }
-}
-
-.footer{
-  clear: both;
-  text-align: center;
-  font-size: 12px;
-  color: #B5B5B5;
-  height: 120rpx;
-  line-height: 120rpx;
-}
-.share-shadow{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  .content{
-    width: 100%;
-    height: 346rpx;
-    background-color:#F5F5F5;
-    position: absolute;
-    bottom: 0;
-    box-sizing: border-box;
-    .tip{
-      text-align: center;
-      font-size: 28rpx;
-      color: #666;
-      margin-top: 30rpx;
-    }
-    .share-way{
+  .new-task {
+    .title {
       display: flex;
       display: -webkit-flex;
-      justify-content: space-around;
-      align-items: center;
-      font-size: 24rpx;
-      color: #222;
-      margin-top: 12rpx;
-      margin-bottom: 22rpx;
-      image{
-        width: 92rpx;
-        height: 92rpx;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      view {
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
+        }
+        .more {
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
+        }
       }
-      button{
-        width: 100rpx;
-        height: 140rpx;
-        padding: 0;
-        line-height: 35rpx;
-        color: #222;
+      .tip {
+        font-size: 32rpx;
+        color: #FF6130;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #FF6130;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+    }
+  }
+  .new-produce {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 0rpx 30rpx 18rpx 40rpx;
+      .tip {
+        font-size: 32rpx;
+        color: #D334FF;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #D334FF;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+    }
+    .produce-items {
+      padding: 0px 30rpx;
+      .produce-item {
+        width: 336rpx;
+        height: 492rpx;
+        background-color: #fff;
+        border-radius: 8rpx;
+        float: left;
+        margin-right: 18rpx;
+        margin-bottom: 18rpx;
+        position: relative;
+        .produce-info {
+          .produce-img {
+            image {
+              width: 336rpx;
+              height: 336rpx;
+              border-radius: 8rpx;
+            }
+          }
+          .produce-name {
+            text {
+              width: 288rpx;
+              color: #222222;
+              font-size: 32rpx;
+              padding-left: 24rpx;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              line-height: 36rpx;
+              font-weight: 600;
+            }
+          }
+          .produce-money {
+            .number {
+              font-size: 40rpx;
+              color: #f25664;
+            }
+            .money-type {
+              font-size: 26rpx;
+              color: #f25664;
+              padding-left: 24rpx;
+            }
+          }
+        }
+      }
+      .produce-item:nth-child(2n+2) {
+        margin-right: 0rpx;
+      }
+    }
+  }
+  .produce-skill {
+    position: absolute;
+    top: 0px;
+    left: 32rpx;
+    .tip {
+      position: relative;
+      image {
+        z-index: 1000;
+        width: 64rpx;
+        height: 44rpx;
+      }
+      view {
+        color: #ffffff;
         font-size: 24rpx;
-        margin: 0;
+        position: absolute;
+        top: 3rpx;
+        left: 8rpx;
       }
     }
-    .cancle-share{
-      height: 96rpx;
-      background-color: #fff;
-      text-align: center;
-      font-size: 32rpx;
-      color: #666;
-      line-height: 96rpx;
-      z-index: 9999;
+  }
+  .footer {
+    clear: both;
+    text-align: center;
+    font-size: 12px;
+    color: #B5B5B5;
+    height: 120rpx;
+    line-height: 120rpx;
+  }
+  .share-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 346rpx;
+      background-color: #F5F5F5;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      .tip {
+        text-align: center;
+        font-size: 28rpx;
+        color: #666;
+        margin-top: 30rpx;
+      }
+      .share-way {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 20rpx;
+        color: #222;
+        margin-top: 12rpx;
+        margin-bottom: 22rpx;
+        image {
+          width: 92rpx;
+          height: 92rpx;
+        }
+        button {
+          width: 100rpx;
+          height: 140rpx;
+          padding: 0;
+          line-height: 35rpx;
+          color: #222;
+          font-size: 20rpx;
+          margin: 0;
+        }
+      }
+      .cancle-share {
+        height: 96rpx;
+        background-color: #fff;
+        text-align: center;
+        font-size: 32rpx;
+        color: #666;
+        line-height: 96rpx;
+        z-index: 9999;
+      }
     }
   }
-}
-button[plain]{
-  border-color: #f5f5f5 !important;  
-}
-
-//生成海报的弹出框
-.poster-shadow{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  .save-ablum{
-    background: #EB4D4E;
-    border-radius: 42rpx;
-    width: 250rpx;
-    height: 84rpx;
-    color: #fff;
-    font-size: 32rpx;
-    line-height: 84rpx;
-    margin: 50rpx auto 200rpx;
-    text-align: center;
+  button[plain] {
+    border-color: #f5f5f5 !important;
+  } //生成海报的弹出框
+  .poster-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .save-ablum {
+      background: #EB4D4E;
+      border-radius: 42rpx;
+      width: 250rpx;
+      height: 84rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      margin: 50rpx auto 200rpx;
+      text-align: center;
+    }
   }
-}
 </style>
 <template>
   <view class="page">
     <!-- 店铺信息 -->
-    
     <view class="shop-info">
       <!-- <image src="{{imagePath+'storeBg.jpg'}}" style="width:100%;height:200rpx;position:absoulte"/> -->
       <view class="info-left">
-        <image src="{{storeLogo?preImagePath+storeLogo:'../../images/index/store_logobig.png'}}"/>
+        <image src="{{storeLogo?preImagePath+storeLogo:'../../images/index/store_logobig.png'}}" />
       </view>
       <view class="info-right">
         <navigator url="./company?storeId={{storeId}}" class="info-name">
@@ -414,34 +416,32 @@ button[plain]{
           共{{storePromote}}人逛过
         </view>
         <view class="share" @tap="openShareShadow">
-          <image src="{{imagePath+'share@2x.png'}}" wx:if="{{imagePath}}"/>
-          分享
+          <image src="{{imagePath+'share@2x.png'}}" wx:if="{{imagePath}}" /> 分享
         </view>
       </view>
     </view>
     <!-- 最新满减 -->
-  <view class="new-reduction" wx:if="{{reduceArr.length>0}}">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新满减
+    <view class="new-reduction" wx:if="{{reduceArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新满减
         </view>
-      <view>
-        <navigator url="../newType/newReduce?storeId={{storeId}}">
-          <text class="more">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-        </navigator>
+        <view>
+          <navigator url="../newType/newReduce?storeId={{storeId}}">
+            <text class="more">更多</text>
+            <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}" />
+          </navigator>
+        </view>
       </view>
-    </view>
-    <view class="reduce-produces">
-       <navigator url='../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+      <view class="reduce-produces">
+        <navigator url='../fullReduction/fullProduceDetail?id={{item.id}}' class="item" wx:for="{{reduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}"  mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <view class="hot">
-              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>              
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
             <view class="item-price">
@@ -455,27 +455,25 @@ button[plain]{
             满{{m1.filter(item.standard*0.01)}}减{{m1.filter(item.privilege*0.01)}}
           </view>
         </navigator>
-    </view>
-  </view>
-
-  <!-- 最新任务 -->
-  <view class="new-task" wx:if="{{taskArr.length>0}}">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新任务
-        </view>
-      <view>
-        <navigator url="../newType/newTask?storeId={{storeId}}">
-          <text class="more">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more05.png'}}"/>
-        </navigator>
       </view>
     </view>
-    <view class="task-produces">
-       <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+    <!-- 最新任务 -->
+    <view class="new-task" wx:if="{{taskArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新任务
+        </view>
+        <view>
+          <navigator url="../newType/newTask?storeId={{storeId}}">
+            <text class="more">更多</text>
+            <image wx:if="{{imagePath}}" src="{{imagePath+'more05.png'}}" />
+          </navigator>
+        </view>
+      </view>
+      <view class="task-produces">
+        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
@@ -483,7 +481,7 @@ button[plain]{
               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>              
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
           </view>
@@ -491,589 +489,437 @@ button[plain]{
             已经有{{item.receivedNum}}人领取
           </view>
         </navigator>
+      </view>
     </view>
-  </view>
-
-  <!-- 最新单品 -->
-  <view class="new-produce" wx:if="{{newArr.length>0}}">
-     <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新单品
+    <!-- 最新单品 -->
+    <view class="new-produce" wx:if="{{newArr.length>0}}">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新单品
         </view>
-    </view>
-     <view class="produce-items">
-       <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
-         <view class="produce-info">
+      </view>
+      <view class="produce-items">
+        <view class="produce-item" @tap="goDetails" wx:for="{{newArr}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}" data-id="{{item.id}}">
+          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
-         </view>
-         <view class="produce-name">
-          <text>{{item.title}}</text>
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
+            </view>
+            <view class="produce-name">
+              <text>{{item.title}}</text>
+            </view>
+            <view class="produce-money">
+              <text class="money-type">￥</text>
+              <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+            </view>
           </view>
-        <view class="produce-money">
-            <text class="money-type">￥</text>
-            <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+          <!-- 商品销售类型(满减，任务) -->
+          <view class="produce-skill" wx:if="{{item.activityType == 2}}">
+            <view class="tip">
+              <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
+              <view>满减</view>
+            </view>
           </view>
-        </view>
-        <!-- 商品销售类型(满减，任务) -->
-        <view class="produce-skill" wx:if="{{item.activityType == 2}}">
-           <view class="tip">
-             <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
-             <view>满减</view>
-           </view>
-        </view>
           <view class="produce-skill" wx:if="{{item.activityType == 1}}">
-           <view class="tip">
-             <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
-             <view>任务</view>
-           </view>
+            <view class="tip">
+              <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
+              <view>任务</view>
+            </view>
+          </view>
         </view>
-       </view>
+      </view>
     </view>
-  </view>
-
-  <view class="footer">
-    已经到底部了
-  </view>
-
-  <!-- 转发分享弹出框 -->
-  <div class="share-shadow" wx:if="{{showShareShadow}}">
-    <div class="content">
-      <view class="tip">请选择转发方式</view>
-      <view class="share-way">
-        <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
-          <image src = "{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}"/>
-          <view @tap="onCreatePoster">生成海报</view>
-        </poster>
-        <button open-type="share" class="poster" plain="true">
-          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-          <view>微信好友</view>
-        </button>
+    <view class="footer">
+      已经到底部了
+    </view>
+    <!-- 转发分享弹出框 -->
+    <view class="share-shadow" wx:if="{{showShareShadow}}">
+      <view class="content">
+        <view class="tip">请选择转发方式</view>
+        <view class="share-way">
+          <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+            <image src="{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}" />
+            <view @tap="onCreatePoster">生成海报</view>
+          </poster>
+          <button open-type="share" class="poster" plain="true">
+                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                <view>微信好友</view>
+              </button>
+        </view>
+        <view class="cancle-share" @tap="cancleShare">
+          取消
+        </view>
       </view>
-      <view class="cancle-share" @tap="cancleShare">
-        取消
-      </view>
-    </div>
-  </div>
-
-  <!-- 点击生成海报的出现的弹出框 -->
-  <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
-      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx"/>
-     <view class="save-ablum" @tap="saveAblum">保存到相册</view>
-  </view>
+    </view>
+    <!-- 点击生成海报的出现的弹出框 -->
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
+      <view class="save-ablum" @tap="saveAblum">保存到相册</view>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js';
-import mywxs from '../../wxs/mywxs.wxs';
-import poster from '../../components/miniprogram_dist/poster/poster'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '专区详情',
-    navigationBarBackgroundColor: '#EB4D4E',
-    navigationBarTextStyle: 'white',
-    usingComponents: {
+  import wepy from 'wepy';
+  import path from '../../common/path.js';
+  import mywxs from '../../wxs/mywxs.wxs';
+  import poster from '../../components/miniprogram_dist/poster/poster'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '专区详情',
+      navigationBarBackgroundColor: '#EB4D4E',
+      navigationBarTextStyle: 'white',
+      usingComponents: {
         "poster": "../../components/miniprogram_dist/poster/index",
-    }
-  };
-
-  onLoad(options) {
-    if(options.id){
-       this.storeId = options.id
-    }
-    if(options.scene){
-      this.storeId = decodeURIComponent(options.scene)
-    }
-    this.getStoreInfo()
-    this.getReduceProduce()
-    this.getTaskProduce()
-    this.getNewProduce()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    storeId:'',
-    storeName:'',
-    storeLogo:'',
-    storePromote:'',
-    reduceArr:{},
-    taskArr:{},
-    newArr:{},
-    showShareShadow:false,
-    showPoster:false,
-    posterConfig:{
-      width: 570,
-      height: 920,
-      debug: false,
-      texts: [
-            {
-                x:162.6,
-                y:42.8,
-                zIndex:2,
-                text:[
-                    {
-                        text: '李瑞活',
-                        fontSize: 24,
-                        color: '#FFD2D6',
-                        marginLeft: 0,
-                    }
-                ]
-            },
-            {
-                x: 162.6,
-                y: 82.4,
-                zIndex:2,
-                text: [
-                    {
-                        text: '我在神州集市发现了热门专区，快来看看吧!',
-                        fontSize: 27,
-                        color: '#fff',
-                        opacity: 1,
-                        lineHeight:40,
-                        lineNum:2,
-                        width:360,
-                    },
-                ],
-                baseLine: 'middle',
-            },
-            {
-              x:76,
-              y:664.4,
-              zIndex:2,
-              text:[
-                {
-                  text:'全棉时代神州自营专区',
-                  fontSize:26,
-                  color:'#222',
-                  opacity:1
-                }
-              ]
-            },
-           {
-              x:280,
-              y:760,
-              zIndex:3,
-              text:[
-                {
-                  text:'长按图片识别二维码查看专区详情',
-                  fontSize:20,
-                  color:'#666',
-                  opacity:1,
-                  lineNum:2,
-                  lineHeight:32,
-                  width:180,
-                }
-              ]
-            }
-        ],
-      images:[
-        //背景图
-        {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-          width: 570,
-          height: 920,
-          zIndex:1,
-        },
-        //人物头像
-        {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-          width: 100,
-          height: 100,
-          zIndex:2,
-          x:55.6,
-          y:27.6
-        },
-        //背景图
-       {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
-          width: 480,
-          height: 532,
-          zIndex:2,
-          x:45.6,
-          y:164.4,
-        },
-        //商店的logo
-        {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-          width:418,
-          height:418,
-          zIndex:3,
-          x:76,
-          y:210
-        },
-        //神州集市logo
-        {
-          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
-          width:84,
-          height:84,
-          x:76,
-          y:740,
-        },
-        //二维码
-        {
-          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
-          width:84,
-          height:84,
-          x:178,
-          y:740,
-        },
-      ],
-      blocks: [
-        {
-         width:478,
-         height:126,
-         opacity:1,
-         backgroundColor:'#FDE5ED',
-         borderRadius:9,
-         x:45.6,
-         y:716,
-         zIndex:2,
-       },
-       {
-         width:214,
-         height:6,
-         borderRadius:3,
-         backgroundColor:'#F25664',
-         zIndex:3,
-         x:278,
-         y:810,
-       }
-      ],
-    },
-    posterDetail:''
-  };
-  wxs = {
-      m1: mywxs
-  }
-  methods = {
-    //打开，关闭分享弹出框
-    openShareShadow(){
-      this.showShareShadow = true
-    },
-    cancleShare(){
-      this.showShareShadow = false
-    },
-    onCreatePoster() {
-    },
-    onPosterFail(err) {
-     console.error(err);
-    },
-    onPosterSuccess(e){
-      this.showShareShadow = false
-      this.showPoster = true
-      const { detail } = e;
-      console.log(detail)
-      this.posterDetail = detail
-     },
-    goDetails(e){
-      if(e.currentTarget.dataset.type == 0){
-        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 1){
-        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 2){
-        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
       }
-    },
-    onShareAppMessage: function (ops) {
-      if (ops.from === 'button') {
-        // 来自页面内转发按钮
-       console.log(ops.target)
-     }
-     return {
-       title: '我在神州集市发现了热门专区，快来看看吧!',
-       imageUrl:this.storeLogo?this.preImagePath + this.storeLogo:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
-       path: 'pages/shop/shopDetail?id='+this.storeId, 
-       success: function (res) {
-       // 转发成功
-        console.log("转发成功:" + JSON.stringify(res));
+    };
+    onLoad(options) {
+      if (options.id) {
+        this.storeId = options.id
+      }
+      if (options.scene) {
+        this.storeId = decodeURIComponent(options.scene)
+      }
+      this.getStoreInfo()
+      this.getReduceProduce()
+      this.getTaskProduce()
+      this.getNewProduce()
+    }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      storeId: '',
+      storeName: '',
+      storeLogo: '',
+      storePromote: '',
+      reduceArr: {},
+      taskArr: {},
+      newArr: {},
+      showShareShadow: false,
+      showPoster: false,
+      posterConfig: {},
+      posterDetail: ''
+    };
+    wxs = {
+      m1: mywxs
+    }
+    methods = {
+      //打开，关闭分享弹出框
+      openShareShadow() {
+        this.showShareShadow = true
       },
-      fail: function (res) {
-       // 转发失败
-       console.log("转发失败:" + JSON.stringify(res));
-     }
-   }
-   },
-  };  
-  // 获取店铺的基本信息
-  getStoreInfo(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/simpleInfo', 
-      data: {
-        'storeId':that.storeId,
-        'userid':that.$parent.globalData.userId,
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        that.storeName = res.data.data.name
-        that.storeLogo = res.data.data.logo
-        that.storePromote = res.data.data.promote
-        that.posterConfig = {
-        width: 570,
-        height: 920,
-        debug: false,
-        texts: [
-            {
-                x:162.6,
-                y:45.8,
-                zIndex:2,
-                text:[
-                    {
-                        text: that.$parent.globalData.userName,
-                        fontSize: 24,
-                        color: '#FFD2D6',
-                        marginLeft: 0,
-                    }
-                ]
-            },
-            {
+      cancleShare() {
+        this.showShareShadow = false
+      },
+      onCreatePoster() {},
+      onPosterFail(err) {
+        console.error(err);
+      },
+      onPosterSuccess(e) {
+        this.showShareShadow = false
+        this.showPoster = true
+        const {
+          detail
+        } = e;
+        console.log(detail)
+        this.posterDetail = detail
+      },
+      goDetails(e) {
+        if (e.currentTarget.dataset.type == 0) {
+          this.$navigate('../generalGoods/generalGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 1) {
+          this.$navigate('../taskGoods/taskGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 2) {
+          this.$navigate('../fullReduction/fullProduceDetail', {
+            id: e.currentTarget.dataset.id
+          })
+        }
+      },
+      onShareAppMessage: function(ops) {
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(ops.target)
+        }
+        return {
+          title: '我在神州集市发现了热门专区，快来看看吧!',
+          imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+          path: 'pages/shop/shopDetail?id=' + this.storeId,
+          success: function(res) {
+            // 转发成功
+            console.log("转发成功:" + JSON.stringify(res));
+          },
+          fail: function(res) {
+            // 转发失败
+            console.log("转发失败:" + JSON.stringify(res));
+          }
+        }
+      },
+    };
+    // 获取店铺的基本信息
+    getStoreInfo() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/simpleInfo',
+        data: {
+          'storeId': that.storeId,
+          'userid': that.$parent.globalData.userId,
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.storeName = res.data.data.name
+          that.storeLogo = res.data.data.logo
+          that.storePromote = res.data.data.promote
+          that.posterConfig = {
+            width: 570,
+            height: 920,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
                 x: 162.6,
                 y: 82.4,
-                zIndex:2,
-                text: [
-                    {
-                        text: '我在神州集市发现了热门专区，快来看看吧!',
-                        fontSize: 27,
-                        color: '#fff',
-                        opacity: 1,
-                        lineHeight:40,
-                        lineNum:2,
-                        width:360,
-                    },
-                ],
+                zIndex: 2,
+                text: [{
+                  text: '我在神州集市发现了热门专区，快来看看吧!',
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
                 baseLine: 'middle',
-            },
-            {
-              x:76,
-              y:664.4,
-              zIndex:3,
-              text:[
-                {
+              },
+              {
+                x: 76,
+                y: 664.4,
+                zIndex: 3,
+                text: [{
                   text: that.storeName,
-                  fontSize:26,
-                  color:'#000',
-                }
-              ]
-            },
-           {
-              x:280,
-              y:760,
-              zIndex:3,
-              text:[
-                {
-                  text:'长按图片识别二维码查看专区详情',
-                  fontSize:20,
-                  color:'#666',
-                  opacity:1,
-                  lineNum:2,
-                  lineHeight:32,
-                  width:180,
-                }
-              ]
-            }
-        ],
-        images:[
-         //背景图
-         {
-           url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-           width: 570,
-           height: 920,
-           zIndex:1,
-         },
-         //人物头像
-        {
-           url: that.$parent.globalData.avatarUrl,
-           width: 100,
-           height: 100,
-           zIndex:2,
-           x:50.6,
-           y:27.6,
-           borderRadius:100,
+                  fontSize: 26,
+                  color: '#000',
+                }]
+              },
+              {
+                x: 280,
+                y: 760,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看专区详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 920,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 532,
+                zIndex: 2,
+                x: 45.6,
+                y: 164.4,
+                borderRadius: 16,
+              },
+              //商店的logo
+              {
+                url: that.storeLogo ? that.preImagePath + that.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 418,
+                height: 418,
+                zIndex: 3,
+                x: 76,
+                y: 210
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 740,
+              },
+              //二维码
+              {
+                url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 740,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 716,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 810,
+              }
+            ],
+          }
+          that.$apply()
         },
-          //背景图
-         {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
-          width: 480,
-          height: 532,
-          zIndex:2,
-          x:45.6,
-          y:164.4,
-          borderRadius:30,
-        },
-        //商店的logo
-        {
-          url: that.storeLogo?that.preImagePath + that.storeLogo:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
-          width:418,
-          height:418,
-          zIndex:3,
-          x:76,
-          y:210
-        },
-        //神州集市logo
-        {
-          url:'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
-          width:84,
-          height:84,
-          x:76,
-          y:740,
-        },
-        //二维码
-        {
-          url:'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
-          width:84,
-          height:84,
-          x:178,
-          y:740,
-        },
-      ],
-      blocks: [
-        {
-         width:478,
-         height:126,
-         opacity:1,
-         backgroundColor:'#FDE5ED',
-         borderRadius:9,
-         x:45.6,
-         y:716,
-         zIndex:2,
-       },
-       {
-         width:214,
-         height:6,
-         borderRadius:6,
-         backgroundColor:'#F25664',
-         zIndex:3,
-         x:278,
-         y:810,
-       }
-      ],
+        fail: () => {},
+        complete: () => {}
+      });
     }
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-
-  //保存海报到相册
-  saveAblum(){
-    var that = this
-    wx.saveImageToPhotosAlbum({
-            filePath:that.posterDetail,
-            success(res) { 
-                that.showPoster = false
-                that.$apply()
-            },
-            fail(err){
-                if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
-                    // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
-                    wx.showModal({
-                      title: '提示',
-                      content: '需要您授权保存相册',
-                      showCancel: false,
-                      success:res=>{
-                        wx.openSetting({
-                          success(settingdata) {
-                            console.log("settingdata", settingdata)
-                            if (settingdata.authSetting['scope.writePhotosAlbum']) {
-                              wx.showModal({
-                                title: '提示',
-                                content: '获取权限成功,再次点击图片即可保存',
-                                showCancel: false,
-                              })
-                            } else {
-                              wx.showModal({
-                                title: '提示',
-                                content: '获取权限失败，将无法保存到相册哦~',
-                                showCancel: false,
-                              })
-                            }
-                          },
-                          fail(failData) {
-                            console.log("failData",failData)
-                          },
-                          complete(finishData) {
-                            console.log("finishData", finishData)
-                          }
-                        })
-                      }
-                    })
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
                   }
-                },
-        })
+                })
+              }
+            })
+          }
+        },
+      })
+    }
+    // 店铺内的满减商品
+    getReduceProduce() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/coupons',
+        data: {
+          'storeId': that.storeId,
+          'size': 1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.reduceArr = res.data.data.content
+          that.$apply()
+          wepy.hideLoading();
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新任务
+    getTaskProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.taskArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新单品
+    getNewProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/all',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'get',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.newArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-
-  // 店铺内的满减商品
-  getReduceProduce(){
-    var that = this
-    wepy.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/coupons', 
-      data: {
-        'storeId':that.storeId,
-        'size':1
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.reduceArr = res.data.data.content
-        that.$apply()
-        wepy.hideLoading();
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  // 店铺内的最新任务
-  getTaskProduce(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/targets', 
-      data: {
-        'storeId':that.storeId,
-        // 'size':1
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.taskArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-
-  // 店铺内的最新单品
-  getNewProduce(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/all', 
-      data: {
-        'storeId':that.storeId,
-        // 'size':1
-      }, //请求的参数",
-      method: 'get',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.newArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-}
 </script>

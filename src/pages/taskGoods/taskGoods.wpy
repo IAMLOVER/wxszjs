@@ -696,7 +696,7 @@ button[plain]{
     <!-- 规则的弹出框 -->
     <view class="rule-shadow" wx:if="{{showRule}}">
       <view class="content">
-        <view class="title">拼团任务规则</view>
+        <view class="title">助力拼团任务规则</view>
         <view>1、选择并领取任务；</view>
         <view>2、将商品链接分享给好友，邀请好友购买链接商品；</view>
         <view>3、好友提交订单并成功支付，即视为参团成功；</view>

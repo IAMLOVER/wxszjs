@@ -35,6 +35,8 @@ export default class extends wepy.app {
       'pages/assist/assist',
       'pages/collocation/collocation',
       'pages/collocation/collocationDetails',
+      'pages/collocation/collocationSingle',
+      'pages/collocation/collocationGroup',
       'pages/generalGoods/generalGoods',
       'pages/generalGoods/taskGenralGoods',
       'pages/taskGoods/taskGoods',
@@ -58,7 +60,6 @@ export default class extends wepy.app {
       'pages/myCenter/myPackage/drawFail',
       'pages/myCenter/myShop/myShop',
       'pages/myCenter/myShop/myShopAtmosphere',
-      'pages/myCenter/myShop/myShopManagement',
       'pages/myCenter/myTask/myTask',
       'pages/myCenter/myTask/myTaskDetail',
 
@@ -77,7 +78,7 @@ export default class extends wepy.app {
       'pages/ediPay/ediPayFail',
 
       //测试页面
-      'pages/test/test'
+      // 'pages/test/test'
     ],
     window: {
       backgroundTextStyle: 'light',

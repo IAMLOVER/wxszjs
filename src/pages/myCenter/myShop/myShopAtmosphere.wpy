@@ -1,148 +1,360 @@
 <style lang="less">
-page{
-  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_store.png');
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 0 -30rpx;
-  overflow: hidden;
-}
-.atmosphere-wrapper{
-  width: 690rpx;
-  margin: 0 auto;
-  margin-top: 120rpx;
-  height: 954rpx;
-  overflow: hidden;
-  position: relative;
-  .item{
-    display:flex;display:-webkit-flex;
-    width: 690rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    background: rgba(255,255,255,0.60);
-    border: 2rpx solid #FFEAEA;
-    border-radius: 49rpx;
-    padding: 0rpx 15rpx;
+  page {
+    background-color: #f5f5f5;
+  }
+  .more-number {
+    height: 76rpx;
+    width: 100%;
+    line-height: 76rpx;
+    background: #FFE3E7;
+    font-size: 14px;
+    color: #F25664;
+    padding: 0rpx 40rpx;
     box-sizing: border-box;
-    margin-bottom: 16rpx;
-    .who{
-      -webkit-flex: 3;-ms-flex: 3;flex: 3;
-      font-size: 30rpx;
-      color: #f25564;
-    }
-    .time{
-      -webkit-flex: 2;-ms-flex: 2;flex: 2;
-      font-size: 24rpx;
-      color: #f25564;
+    margin-top: 24rpx;
+    image {
+      width: 40rpx;
+      height: 36rpx;
+      vertical-align: middle;
+      margin-top: -7rpx;
+      margin-right: 20rpx;
     }
   }
-  .item:last-child{
-    margin-bottom: 0rpx;
+  .statistics {
+    .title .tip {
+      font-size: 32rpx;
+      color: #222;
+      line-height: 64rpx;
+      font-weight: 600;
+      padding: 10rpx 30rpx 10rpx 30rpx;
+    }
+    .bar {
+      display: inline-block;
+      width: 8rpx;
+      height: 28rpx;
+      background-color: #f25664;
+      margin-right: 12rpx;
+      border-radius: 4rpx;
+    }
+    .statistic-items {
+      display: flex;
+      display: -webkit-flex;
+      padding: 0rpx 30rpx;
+      .item {
+        flex: 1;
+        -webkit-flex: 1;
+        background-color: #fff;
+        text-align: center;
+        margin-right: 20rpx;
+        border-radius: 8rpx;
+        height: 120rpx;
+        padding-top: 12rpx;
+        box-sizing: border-box;
+        &:last-child {
+          margin-right: 0rpx;
+        }
+        .item-title {
+          font-size: 24rpx;
+          color: #959595;
+        }
+        .item-number {
+          font-size: 40rpx;
+          color: #F25664;
+        }
+      }
+    }
   }
-}
-.renew{
-  position: absolute;
-  color: #ffffff;
-  font-size: 32rpx;
-  right: 40rpx;
-  top: 45rpx;
-  image{
-    width: 40rpx;
-    height: 40rpx;
-    margin-right: 10rpx;
-    vertical-align: middle;
-    margin-top: -2rpx;
+  .trend {
+    .title .tip {
+      font-size: 32rpx;
+      color: #222;
+      line-height: 64rpx;
+      font-weight: 600;
+      padding: 10rpx 30rpx 10rpx 30rpx;
+    }
+    .bar {
+      display: inline-block;
+      width: 8rpx;
+      height: 28rpx;
+      background-color: #f25664;
+      margin-right: 12rpx;
+      border-radius: 4rpx;
+    }
+    .myCanvas {
+      background-color: #f4f4f4;
+    }
+    .downloadChart {
+      font-size: 16px;
+      background: #699fed;
+      border-radius: 6px;
+      color: white;
+      width: 70%;
+      margin-top: 32px;
+    }
   }
-}
+  .ranking {
+    .title .tip {
+      font-size: 32rpx;
+      color: #222;
+      line-height: 64rpx;
+      font-weight: 600;
+      padding: 10rpx 30rpx 10rpx 30rpx;
+    }
+    .bar {
+      display: inline-block;
+      width: 8rpx;
+      height: 28rpx;
+      background-color: #f25664;
+      margin-right: 12rpx;
+      border-radius: 4rpx;
+    }
+    .items {
+      .item {
+        width: 688rpx;
+        height: 220rpx;
+        background-color: #fff;
+        border-radius: 8rpx;
+        padding: 20rpx;
+        box-sizing: border-box;
+        margin: 0 auto;
+        display: flex;
+        display: -webkit-flex;
+        position: relative;
+        margin-bottom: 16rpx;
+        .item-number {
+          text-align: center;
+          width: 80rpx;
+          line-height: 220rpx;
+          image {
+            width: 48rpx;
+            height: 84rpx;
+          }
+        }
+        .item-image {
+          margin: 0rpx 14rpx;
+          image {
+            width: 180rpx;
+            height: 180rpx;
+            border-radius: 8rpx;
+          }
+        }
+        .item-detail {
+          .item-name {
+            font-size: 30rpx;
+            color: #222;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            height: 126rpx;
+          }
+          .item-price {
+            font-size: 28rpx;
+            color: #f25664;
+            text {
+              font-size: 24rpx;
+              color: #b5b5b5;
+              text-decoration: line-through;
+            }
+          }
+        }
+        .item-hot {
+          font-size: 24rpx;
+          color: #f25664;
+          position: absolute;
+          bottom: 30rpx;
+          right: 24rpx;
+          image {
+            width: 18rpx;
+            height: 22rpx;
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
   <view class="page">
-    <view class="renew" @tap="renew">
-     <image src= "https://pictest.sqplus.cn/szjs/user/images/index/renew.png"/> 刷新
+    <!-- 更多数据 -->
+    <view class="more-number">
+      <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
+      <text>**5439查看了你的店铺</text>
+      <text style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
     </view>
-    <!-- 氛围的item -->
-    <view class="atmosphere-wrapper">
-      <view class="item" wx:for="{{arr}}" wx:key="{{index}}" wx:for-item="item">
-        <view class="who" wx:if="{{item.type==1}}">**{{item.phone}}浏览了你的商品</view>
-        <view class="who" wx:if="{{item.type==2}}">**{{item.phone}}浏览了你的商店</view>
-        <view class="who" wx:if="{{item.type==3}}">**{{item.phone}}购买了你的商品</view>
-        <view class="time">{{item.createTime}}</view>
+    <!-- 数据统计 -->
+    <view class="statistics">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 数据统计
+        </view>
+      </view>
+      <view class="statistic-items">
+        <view class="item">
+          <view class="item-title">
+            总商品量
+          </view>
+          <view class="item-number">
+            {{dataNumber.goods}}
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-title">
+            总浏览量
+          </view>
+          <view class="item-number">
+            {{dataNumber.visit}}
+          </view>
+        </view>
+        <view class="item">
+          <view class="item-title">
+            总成交量
+          </view>
+          <view class="item-number">
+            {{dataNumber.sale}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 走势分析 -->
+    <view class="trend">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 走势分析
+        </view>
+      </view>
+      <canvas canvas-id="canvas1" class="myCanvas" style="width:{{chartWidth}}px;height:{{chartHeight}}px;" />
+    </view>
+    <!-- 热度排行榜 -->
+    <view class="ranking">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 热度排行榜
+        </view>
+      </view>
+      <view class="items">
+        <view class="item" wx:for="{{hotItem}}" wx:for-item="item" wx:key="{{index}}">
+          <view class="item-number" wx:if="{{index == 0}}">
+            <image src="{{imagePath + 'top1_sz.png'}}" wx:if="{{imagePath}}" />
+          </view>
+          <view class="item-number" wx:if="{{index == 1}}">
+            <image src="{{imagePath + 'top2_sz.png'}}" wx:if="{{imagePath}}" />
+          </view>
+          <view class="item-number" wx:if="{{index == 2}}">
+            <image src="{{imagePath + 'top3_sz.png'}}" wx:if="{{imagePath}}" />
+          </view>
+          <view class="item-number" wx:if="{{index > 2}}">
+            <text style="font-size:28rpx;color:#f25664;line-height:180rpx;">NO.{{index+1}}</text>
+          </view>
+          <view class="item-image">
+            <image src="{{preImagePath + item.picUrl1}}" lazy-load wx:if="{{preImagePath}}" />
+          </view>
+          <view class="item-detail">
+            <view class="item-name">
+              {{item.title}}
+            </view>
+            <view class="item-price">
+              ￥{{m1.filter(item.minPrice*0.01)}}
+              <text>{{m1.filter(item.minMktPrice*0.01)}}</text>
+            </view>
+          </view>
+          <view class="item-hot">
+            <image src="{{imagePath + 'hot01.png'}}" wx:if="{{imagePath}}" /> 热度：{{item.visitNum}}
+          </view>
+        </view>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import time from '../../../common/time.js' 
-import mywxs from '../../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的专区',
-    navigationBarBackgroundColor:'#F25664',
-    navigationBarTextStyle:'white'
-  };
-  onLoad(options) {
-    console.log(options)
-    this.storeId = options.id
-    this.getList()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    arr:['1','2','3','4','5','6','7','8','9','10'],
-    storeId:'',
-  };
-  methods = {
-    renew(){
-      console.log(typeof this.arr)
-      if(this.arr.length>10){
-      var newarr = this.arr.splice(0,10)
-      }else{
-          wx.showToast({
-          title: '暂无新的店铺动态哦~',
-          icon: 'none',
-          image: '',
-          duration: 1500,
-          mask: false,
-          success: (result)=>{
-            
-          },
-          fail: ()=>{},
-          complete: ()=>{}
-        });
-        return
-      }
+  import wepy from 'wepy';
+  import path from '../../../common/path.js'
+  import time from '../../../common/time.js'
+  import mywxs from '../../../wxs/mywxs.wxs'
+  import chart from '../../../common/chart'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '数据中心',
+      navigationBarBackgroundColor: '#F25664',
+      navigationBarTextStyle: 'white'
+    };
+    onLoad(options) {
+      console.log(options)
+      this.storeId = options.id
+      this.getNumber()
+      this.getHotItems()
     }
-  };
-  getList(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/store/querystoreview', //开发者服务器接口地址",
-      data: {
-        storeid:that.storeId,
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.arr = res.data.data.list
-          for (var item of that.arr){
-          item.phone = item.createTime.toString().substr(9,4)
-          item.createTime = time.formatTime(item.createTime,'Y-M-D h:m:s')
-        }
-        console.log(that.arr)
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath:path.path.preImagePath,
+      storeId: '',
+      dataNumber: {},
+      hotItem: {}
+    };
+    methods = {}
     wxs = {
       m1: mywxs
-  }; 
-}
+    };
+    //获取店铺数据
+    getNumber() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/statistics', //开发者服务器接口地址",
+        data: {
+          userid: that.$parent.globalData.userId
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res)
+          that.dataNumber = res.data.data
+          console.log(that.dataNumber.x)
+          chart.chart.draw(this, 'canvas1', {
+            title: {
+              text: "近7日走势分析",
+              color: "#959595"
+            },
+            xAxis: {
+              data: that.dataNumber.x
+            },
+            series: [{
+                name: "成交量",
+                category: "bar",
+                data: [that.dataNumber.y[0].sale, that.dataNumber.y[1].sale, that.dataNumber.y[2].sale, that.dataNumber.y[3].sale, that.dataNumber.y[4].sale, that.dataNumber.y[5].sale, that.dataNumber.y[6].sale],
+              },
+              {
+                name: "浏览量",
+                category: "bar",
+                data: [that.dataNumber.y[0].visit, that.dataNumber.y[1].visit, that.dataNumber.y[2].visit, that.dataNumber.y[3].visit, that.dataNumber.y[4].visit, that.dataNumber.y[5].visit, that.dataNumber.y[6].visit]
+              },
+            ]
+          });
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //热度排行榜
+    getHotItems() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/myStore/hot', //开发者服务器接口地址",
+        data: {
+          userid: that.$parent.globalData.userId
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res)
+          that.hotItem = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+  }
 </script>

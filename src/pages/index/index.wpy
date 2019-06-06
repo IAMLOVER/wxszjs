@@ -1,700 +1,694 @@
 <style lang="less">
-page {
-  height: auto;
-  background-color: #f5f5f5;
-}
-.swiper-wrapper {
-  position: relative;
-  z-index: 1;
-  .swiper {
-    width: 100%;
-    height: 374rpx;
-  z-index: 1;
-    swiper-item {
+  page {
+    height: auto;
+    background-color: #f5f5f5;
+  }
+  .swiper-wrapper {
+    position: relative;
+    z-index: 1;
+    .swiper {
       width: 100%;
       height: 374rpx;
-  z-index: 1;
-      image {
+      z-index: 1;
+      swiper-item {
         width: 100%;
         height: 374rpx;
-  z-index: 1;
-
+        z-index: 1;
+        image {
+          width: 100%;
+          height: 374rpx;
+          z-index: 1;
+        }
       }
     }
   }
-}
-.search-wrapper {
-  position: fixed;
-  top: 30rpx;
-  z-index: 3;
-  width: 100%;
-  .search {
-    position: relative;
-    input {
-      width: 670rpx;
-      height: 64rpx;
-      background: rgba(225, 225, 225, 0.5);
-      border-radius: 16px;
-      font-size: 32rpx;
-      padding-left: 78rpx;
-      color: #959595;
-      box-sizing: border-box;
-      margin: 0 auto;
-    }
-    image {
-      width: 36rpx;
-      height: 36rpx;
-      position: absolute;
-      left: 60rpx;
-      top: 14rpx;
-    }
-  }
-}
-.scroll-active {
-  background-color: #fff;
-  top: 0;
-  position: fixed;
-  z-index: 1;
-  padding: 12rpx 0rpx;
-  .search {
-    input {
-      color: #959595;
-    }
-  }
-}
-.main {
-  display:flex;display:-webkit-flex;
-  display: -webkit-flex; 
-  width: 690rpx;
-  height: 180rpx;
-  background-color: #fff;
-  margin: 0 auto;
-  box-sizing: border-box;
-  text-align: center;
-  box-shadow: 0 4rpx 24rpx 0 rgba(153,153,153,0.20);
-  border-radius: 12rpx;
-  z-index: 999;
-  position: relative;
-  top: -14rpx;
-  .item{
-    flex: 1;
-    -webkit-flex:1;
-    -ms-flex:1;
-    padding-top: 24rpx;
-    z-index: 999999999;
-    image{
-      width: 90rpx;
-      height: 90rpx;
-      border-radius: 50%;
-    }
-    .text{
-      color: #222222;
-      font-size: 24rpx;
-    }
-  }
-}
-.new-store {
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 10rpx 30rpx 24rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
-      }
-      .more {
-        font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
-      }
-    }
-    .tip {
-      font-size: 32rpx;
-      color: #f25664;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #f25664;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-  .content-wrapper {
-    .swiper {
-      height: 326rpx !important;
+  .search-wrapper {
+    position: fixed;
+    top: 30rpx;
+    z-index: 3;
+    width: 100%;
+    .search {
       position: relative;
+      input {
+        width: 670rpx;
+        height: 64rpx;
+        background: rgba(225, 225, 225, 0.5);
+        border-radius: 16px;
+        font-size: 32rpx;
+        padding-left: 78rpx;
+        color: #959595;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 60rpx;
+        top: 14rpx;
+      }
     }
-    .store {
-      width: 98%;
-      height: 326rpx !important;
-      background-color: #fff;
-      margin: 0 auto;
-      border-radius: 12rpx;
-      padding: 24rpx;
-      box-sizing: border-box;
-      overflow: hidden;
-      .logo {
-        width: 80rpx;
-        height: 80rpx;
-        border-radius: 8rpx;
-        vertical-align: middle;
-        margin-right: 16rpx;
+  }
+  .scroll-active {
+    background-color: #fff;
+    top: 0;
+    position: fixed;
+    z-index: 1;
+    padding: 12rpx 0rpx;
+    .search {
+      input {
+        color: #959595;
       }
-      text {
-        width: 360rpx;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 28rpx;
+    }
+  }
+  .main {
+    display: flex;
+    display: -webkit-flex;
+    display: -webkit-flex;
+    width: 690rpx;
+    height: 180rpx;
+    background-color: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 4rpx 24rpx 0 rgba(153, 153, 153, 0.20);
+    border-radius: 12rpx;
+    z-index: 999;
+    position: relative;
+    top: -14rpx;
+    .item {
+      flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      padding-top: 24rpx;
+      z-index: 999999999;
+      image {
+        width: 90rpx;
+        height: 90rpx;
+        border-radius: 50%;
+      }
+      .text {
         color: #222222;
-        line-height: 28rpx;
+        font-size: 24rpx;
       }
-      .button-wrapper {
-        position: relative;
-        float: right;
-        margin-top: 12rpx;
-        top: 2rpx;
-        right: -70rpx;
-        .rightNow {
-          color: #ffffff;
-          font-size: 24rpx;
-          position: absolute;
-          top: 6rpx;
-          left: 12rpx;
-        }
-        .button {
-          z-index: 1000;
-          width: 98rpx;
-          height: 48rpx;
-        }
-      }
-      .images {
-        margin-top: 24rpx;
-        .produce-images {
-          display:flex;display:-webkit-flex;
-          justify-content: flex-start;
-          image {
-            width: 170rpx !important;
-            height: 170rpx !important;
-            // float: left;
-            margin-right: 24rpx;
-            border-radius: 12rpx
-          }
-          image:last-child{
-            margin-right: 0rpx;
-          }
+    }
+  }
+  .new-store {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 10rpx 30rpx 24rpx 40rpx;
+      view {
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
         }
         .more {
-          width: 50rpx;
-          height: 14rpx;
-          float: right;
-          margin-top: -115rpx;
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
         }
       }
-    }
-  }
-}
-.new-produce {
-  .title {
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding: 20rpx 30rpx 24rpx 40rpx;
-    view {
-      image {
-        width: 24rpx;
-        height: 24rpx;
-        margin-left: 12rpx;
-        vertical-align: middle;
+      .tip {
+        font-size: 32rpx;
+        color: #f25664;
+        line-height: 64rpx;
+        font-weight: 600;
       }
-      .more {
-        font-size: 24rpx;
-        color: #959595;
-        line-height: 24rpx;
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #f25664;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
       }
     }
-    .tip {
-      font-size: 32rpx;
-      color: #0473f1;
-      line-height: 64rpx;
-      font-weight: 600;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #0473f1;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-  }
-  .produce-items {
-    padding: 0px 30rpx;
-    .produce-item {
-      width: 336rpx;
-      height: 464rpx;
-      background-color: #fff;
-      border-radius: 8rpx;
-      float: left;
-      margin-right: 18rpx;
-      margin-bottom: 18rpx;
-      position: relative;
-      .produce-info {
-        .produce-img {
-          image {
-            width: 336rpx;
-            height: 336rpx;
-            border-radius: 8rpx;
-          }
+    .content-wrapper {
+      .swiper {
+        height: 326rpx !important;
+        position: relative;
+      }
+      .store {
+        width: 98%;
+        height: 326rpx !important;
+        background-color: #fff;
+        margin: 0 auto;
+        border-radius: 12rpx;
+        padding: 24rpx;
+        box-sizing: border-box;
+        overflow: hidden;
+        .logo {
+          width: 80rpx;
+          height: 80rpx;
+          border-radius: 8rpx;
+          vertical-align: middle;
+          margin-right: 16rpx;
         }
-        .produce-name {
-          width: 288rpx;
+        text {
+          width: 360rpx;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          font-size: 28rpx;
           color: #222222;
-          font-size: 32rpx;
-          padding-left: 24rpx;
+          line-height: 28rpx;
         }
-        .produce-money {
-          .number {
-            font-size: 40rpx;
-            color: #f25664;
+        .button-wrapper {
+          position: relative;
+          float: right;
+          margin-top: 12rpx;
+          top: 2rpx;
+          right: -70rpx;
+          .rightNow {
+            color: #ffffff;
+            font-size: 24rpx;
+            position: absolute;
+            top: 6rpx;
+            left: 12rpx;
           }
-          .money-type {
-            font-size: 26rpx;
-            color: #f25664;
-            padding-left: 24rpx;
+          .button {
+            z-index: 1000;
+            width: 98rpx;
+            height: 48rpx;
+          }
+        }
+        .images {
+          margin-top: 24rpx;
+          .produce-images {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: flex-start;
+            image {
+              width: 170rpx !important;
+              height: 170rpx !important; // float: left;
+              margin-right: 24rpx;
+              border-radius: 12rpx
+            }
+            image:last-child {
+              margin-right: 0rpx;
+            }
+          }
+          .more {
+            width: 50rpx;
+            height: 14rpx;
+            float: right;
+            margin-top: -115rpx;
           }
         }
       }
     }
-    .produce-item:nth-child(2n + 2) {
-      margin-right: 0rpx;
+  }
+  .new-produce {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding: 20rpx 30rpx 24rpx 40rpx;
+      view {
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          margin-left: 12rpx;
+          vertical-align: middle;
+        }
+        .more {
+          font-size: 24rpx;
+          color: #959595;
+          line-height: 24rpx;
+        }
+      }
+      .tip {
+        font-size: 32rpx;
+        color: #0473f1;
+        line-height: 64rpx;
+        font-weight: 600;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #0473f1;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
+      }
+    }
+    .produce-items {
+      padding: 0px 30rpx;
+      .produce-item {
+        width: 336rpx;
+        height: 464rpx;
+        background-color: #fff;
+        border-radius: 8rpx;
+        float: left;
+        margin-right: 18rpx;
+        margin-bottom: 18rpx;
+        position: relative;
+        .produce-info {
+          .produce-img {
+            image {
+              width: 336rpx;
+              height: 336rpx;
+              border-radius: 8rpx;
+            }
+          }
+          .produce-name {
+            width: 288rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #222222;
+            font-size: 32rpx;
+            padding-left: 24rpx;
+          }
+          .produce-money {
+            .number {
+              font-size: 40rpx;
+              color: #f25664;
+            }
+            .money-type {
+              font-size: 26rpx;
+              color: #f25664;
+              padding-left: 24rpx;
+            }
+          }
+        }
+      }
+      .produce-item:nth-child(2n + 2) {
+        margin-right: 0rpx;
+      }
     }
   }
-}
-.go-top {
-  position: fixed;
-  bottom: 74rpx;
-  right: 30rpx;
-  image {
-    width: 80rpx;
-    height: 80rpx;
-  }
-}
-.produce-skill {
-  position: absolute;
-  top: 0px;
-  left: 32rpx;
-  .tip {
-    position: relative;
+  .go-top {
+    position: fixed;
+    bottom: 74rpx;
+    right: 30rpx;
     image {
-      z-index: 1000;
-      width: 64rpx;
-      height: 44rpx;
-    }
-    view {
-      color: #ffffff;
-      font-size: 24rpx;
-      position: absolute;
-      top: 3rpx;
-      left: 10rpx;
+      width: 80rpx;
+      height: 80rpx;
     }
   }
-}
-.footer{
-  padding: 20rpx;
-  text-align: center;
-  font-size: 24rpx;
-  clear: both;
-  color: #959595;
-}
-.fix-iphonex-button {
-    bottom:68rpx!important;
-}
-.fix-iphonex-button::after {
+  .produce-skill {
+    position: absolute;
+    top: 0px;
+    left: 32rpx;
+    .tip {
+      position: relative;
+      image {
+        z-index: 1000;
+        width: 64rpx;
+        height: 44rpx;
+      }
+      view {
+        color: #ffffff;
+        font-size: 24rpx;
+        position: absolute;
+        top: 3rpx;
+        left: 10rpx;
+      }
+    }
+  }
+  .footer {
+    padding: 20rpx;
+    text-align: center;
+    font-size: 24rpx;
+    clear: both;
+    color: #959595;
+  }
+  .fix-iphonex-button {
+    bottom: 68rpx!important;
+  }
+  .fix-iphonex-button::after {
     content: ' ';
     position: fixed;
     bottom: 0!important;
     height: 68rpx!important;
     width: 100%;
     background: #fff;
-}
+  }
 </style>
 <template>
   <view class="page">
-  <!--轮播图-->
-  <view class="swiper-wrapper">
-    <!--搜索框-->
-    <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
-    <view class="search">
-      <input type="text" placeholder="搜你想要" placeholder-style="color:{{scrollTop > 0?'#aaaaaa':'#ffffff'}}" @tap="navSearch"/>
-     <image src="{{scrollTop > 0 ? imagePath+'search02.png' : imagePath+'searchbai.png'}}" wx:if="{{imagePath}}"/>
-    </view>
-  </view>
-    <swiper class="swiper"
-    circular="true" 
-    indicator-active-color="#ffffff" 
-    indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}"
-  interval="{{interval}}"
-  duration="{{duration}}">
-  <repeat for="{{swiperArr}}" >
-  <view>
-   <swiper-item  wx:if="{{item.type==1}}">
-     <navigator>
-       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
-     </navigator>
-    </swiper-item>
-    <!-- 普通商品 -->
-     <swiper-item wx:if="{{item.type==2}}">
-     <navigator  url = '../generalGoods/generalGoods?id={{item.subId}}'>
-       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
-     </navigator>
-    </swiper-item>
-    <!-- 引流品 -->
-      <swiper-item wx:if="{{item.type==3}}">
-     <navigator url="../secKill/secKillFirst?id={{item.subId}}">
-       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
-     </navigator>
-    </swiper-item>
-    <!-- 图文 -->
-     <swiper-item wx:if="{{item.type==6}}">
-     <navigator url="../banner/banner?id={{item.id}}">
-       <image src="{{preImagePath+item.picUrl}}" class="slide-image"  mode="aspectFill"/>
-     </navigator>
-    </swiper-item>
-  </view>
-  </repeat>
-</swiper>
-</view>
-
-  <!--快秒杀,大满减,助力团,搭配购-->
-  <view class="main">
-       <navigator url="../secKill/secKill" class="item">
-         <view class="icon">
-           <image src="{{imagePath + 'type1_sz.png'}}" wx:if="{{imagePath}}"/>
-         </view>
-         <view class="text">
-           快秒杀
-         </view>
-       </navigator>
-        <navigator url="../fullReduction/fullReduction" class="item">
-         <view class="icon">
-           <image src="{{imagePath + 'type2_sz.png'}}" wx:if="{{imagePath}}"/>
-         </view>
-         <view class="text">
-           大满减
-         </view>
-       </navigator>
-        <navigator url="../assist/assist" class="item">
-         <view class="icon">
-           <image src="{{imagePath + 'type3_sz.png'}}" wx:if="{{imagePath}}"/>
-         </view>
-         <view class="text">
-           助力团
-         </view>
-       </navigator>
-        <navigator url="../collocation/collocation" class="item">
-         <view class="icon">
-           <image src="{{imagePath + 'type4_sz.png'}}" wx:if="{{imagePath}}"/>
-         </view>
-         <view class="text">
-           搭配购
-         </view>
-       </navigator>
-  </view>
-
-  <!--新品推荐-->
-  <view class="new-store">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        热门专区
+    <!--轮播图-->
+    <view class="swiper-wrapper">
+      <!--搜索框-->
+      <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
+        <view class="search">
+          <input type="text" placeholder="搜你想要" placeholder-style="color:{{scrollTop > 0?'#aaaaaa':'#ffffff'}}" @tap="navSearch" />
+          <image src="{{scrollTop > 0 ? imagePath+'search02.png' : imagePath+'searchbai.png'}}" wx:if="{{imagePath}}" />
         </view>
-      <!-- <view>
-        <text class="more" @tap="moreShop">更多</text>
-        <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-      </view> -->
-    </view>
-    <view class="content-wrapper">
-  <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
-      <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
-           <view class="store" data-id="{{item.id}}" @tap="goShop">
-               <view style="display:flex;display:-webkit-flex;">
-                 <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}"/>
-                <text>{{item.name}}</text>
-               <view class="button-wrapper">
-                 <view class="rightNow">看一看</view>
-                 <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}"/>
-              </view>
-               </view>
-          <view class="images">
-             <view class="produce-images">
-              <image src="{{preImagePath+goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}"/>
-            </view>
-             <image  wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more"/>     
+      </view>
+      <swiper class="swiper" circular="true" indicator-active-color="#ffffff" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <repeat for="{{swiperArr}}">
+          <view>
+            <swiper-item wx:if="{{item.type==1}}">
+              <navigator>
+                <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
+              </navigator>
+            </swiper-item>
+            <!-- 普通商品 -->
+            <swiper-item wx:if="{{item.type==2}}">
+              <navigator url='../generalGoods/generalGoods?id={{item.subId}}'>
+                <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
+              </navigator>
+            </swiper-item>
+            <!-- 引流品 -->
+            <swiper-item wx:if="{{item.type==3}}">
+              <navigator url="../secKill/secKillFirst?id={{item.subId}}">
+                <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
+              </navigator>
+            </swiper-item>
+            <!-- 图文 -->
+            <swiper-item wx:if="{{item.type==6}}">
+              <navigator url="../banner/banner?id={{item.id}}">
+                <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
+              </navigator>
+            </swiper-item>
           </view>
+        </repeat>
+      </swiper>
     </view>
-    </swiper-item>
-  </swiper>
-  </view>
-  </view>
-
- <!--最新单品-->
-  <view class="new-produce">
-    <view class="title">
-      <view class="tip">
-       <text class="bar"></text>
-        最新单品
+    <!--快秒杀,大满减,助力团,搭配购-->
+    <view class="main">
+      <navigator url="../secKill/secKill" class="item">
+        <view class="icon">
+          <image src="{{imagePath + 'type1_sz.png'}}" wx:if="{{imagePath}}" />
         </view>
-      <view @tap="goNew">
-        <text class="more">更多</text>
-        <image src="../../images/index/more02.png"/>
+        <view class="text">
+          快秒杀
+        </view>
+      </navigator>
+      <navigator url="../fullReduction/fullReduction" class="item">
+        <view class="icon">
+          <image src="{{imagePath + 'type2_sz.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="text">
+          大满减
+        </view>
+      </navigator>
+      <navigator url="../assist/assist" class="item">
+        <view class="icon">
+          <image src="{{imagePath + 'type3_sz.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="text">
+          助力团
+        </view>
+      </navigator>
+      <navigator url="../collocation/collocation" class="item">
+        <view class="icon">
+          <image src="{{imagePath + 'type4_sz.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="text">
+          搭配购
+        </view>
+      </navigator>
+    </view>
+    <!--新品推荐-->
+    <view class="new-store">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 热门专区
+        </view>
+        <!-- <view>
+            <text class="more" @tap="moreShop">更多</text>
+            <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
+          </view> -->
+      </view>
+      <view class="content-wrapper">
+        <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
+          <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
+            <view class="store" data-id="{{item.id}}" @tap="goShop">
+              <view style="display:flex;display:-webkit-flex;">
+                <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}" />
+                <text>{{item.name}}</text>
+                <view class="button-wrapper">
+                  <view class="rightNow">看一看</view>
+                  <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}" />
+                </view>
+              </view>
+              <view class="images">
+                <view class="produce-images">
+                  <image src="{{preImagePath+goods.picUrl1}}" mode="widthFix" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="{{index}}" data-goodid="{{goods.id}}" />
+                </view>
+                <image wx:if="{{imagePath}}" src="{{imagePath+'more03.png'}}" class="more" />
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
       </view>
     </view>
-    <view class="produce-items">
-       <view class="produce-item"  @tap="goDetails" wx:for="{{newProduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}"  data-type="{{item.activityType}}">
-         <view class="produce-info">
+    <!--最新单品-->
+    <view class="new-produce">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新单品
+        </view>
+        <view @tap="goNew">
+          <text class="more">更多</text>
+          <image src="../../images/index/more02.png" />
+        </view>
+      </view>
+      <view class="produce-items">
+        <view class="produce-item" @tap="goDetails" wx:for="{{newProduceArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" data-type="{{item.activityType}}">
+          <view class="produce-info">
             <view class="produce-img">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load='{{true}}'/>
-         </view>
-         <view class="produce-name">
-          {{item.title}}
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load='{{true}}' />
+            </view>
+            <view class="produce-name">
+              {{item.title}}
+            </view>
+            <view class="produce-money">
+              <text class="money-type">￥</text>
+              <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+            </view>
           </view>
-        <view class="produce-money">
-            <text class="money-type">￥</text>
-            <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+          <!-- 商品销售类型(满减，任务) -->
+          <view class="produce-skill" wx:if="{{item.activityType == 2}}">
+            <view class="tip">
+              <image src="../../images/index/type01.png" />
+              <view>满减</view>
+            </view>
           </view>
-        </view>
-        <!-- 商品销售类型(满减，任务) -->
-        <view class="produce-skill" wx:if="{{item.activityType == 2}}">
-           <view class="tip">
-             <image src="../../images/index/type01.png" />
-             <view>满减</view>
-           </view>
-        </view>
           <view class="produce-skill" wx:if="{{item.activityType == 1}}">
-           <view class="tip">
-             <image src="../../images/index/type02.png" />
-             <view>任务</view>
-           </view>
+            <view class="tip">
+              <image src="../../images/index/type02.png" />
+              <view>任务</view>
+            </view>
+          </view>
         </view>
-       </view>
+      </view>
     </view>
-  </view>
-
-  <!-- 回到顶部 -->
-  <view class="go-top" wx:if="{{imagePath && scrollTop>0?true:false}}" data-number="{{scrollTop}}">
-    <image src="{{imagePath+'top.png'}}"  @tap="goTop"/> 
-  </view>
-
-  <view class="footer">集好货，市不可挡</view>
+    <!-- 回到顶部 -->
+    <view class="go-top" wx:if="{{imagePath && scrollTop>0?true:false}}" data-number="{{scrollTop}}">
+      <image src="{{imagePath+'top.png'}}" @tap="goTop" />
+    </view>
+    <view class="footer">集好货，市不可挡</view>
     <redPacket :msg="couponNum"></redPacket>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy'
-import path from '../../common/path.js'
-import redPacket from '../../components/redPacket'
-import mywxs from '../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '神州集市',
-    enablePullDownRefresh: true,
-    backgroundTextStyle:'dark',
-  };
-  onLoad() {
-    this.newcoupon = wx.getStorageSync('newcoupon')
-    if(this.newcoupon){
-      this.checkFirseLoad()
-      wx.removeStorageSync('newcoupon')
-    }
-    // 新店推荐
-    this.getRecommend()
-    //轮播图
-    var interval = setInterval(() => {
-      if(this.$parent.globalData.userId){
-         this.getSwiper()
-         clearInterval(interval)
+  import wepy from 'wepy'
+  import path from '../../common/path.js'
+  import redPacket from '../../components/redPacket'
+  import mywxs from '../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '神州集市',
+      enablePullDownRefresh: true,
+      backgroundTextStyle: 'dark',
+    };
+    onLoad() {
+      this.newcoupon = wx.getStorageSync('newcoupon')
+      if (this.newcoupon) {
+        this.checkFirseLoad()
+        wx.removeStorageSync('newcoupon')
       }
-    }, 200);
-    this.getNewProduce()
-  };
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    swiperArr:{},
-    recommendArr:{},
-    newProduceArr:{},
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
-    scrollTop: 0,
-    userId:'',
-    newcoupon:{},
-    couponNum:{standard:'',privilege:'',show:false},
-    page:0,
-    totalPage:0,
-    arr:[]
-  };
-  wxs = {
-      m1: mywxs
-  }
-  methods = {
-    goTop() {
-      this.scrollTop = 0  
-      wx.pageScrollTo({
-        scrollTop: 0
-      });
-      this.scrollTop = 0  
-      this.$apply()
-    },
-    onPageScroll(e) {
-      // 获取滚动条当前位置
-      this.scrollTop = e.scrollTop>10?10:0
-      // this.$apply()
-    },
-    navSearch() {
-    this.$navigate({url: '../search/search'})
-    },
-    goShop(e) {
-      console.log(e.currentTarget.dataset.id)
-      this.$navigate('../shop/shopDetail',{id:e.currentTarget.dataset.id})
-    },
-    moreShop(){
-      this.$switch('../shop/shop')
-    },
-    goDetails(e){
-      if(e.currentTarget.dataset.type == 0){
-        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 1){
-        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 2){
-        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
-      }
-    },
-    goNew(){
-      this.$switch('../classification/classification')
-    }
-  };
-
-  components = {
-    redPacket
-  }
-
-  //下拉刷新
-  onPullDownRefresh(){
-    wx.showNavigationBarLoading()
-   // 新店推荐
-    this.getRecommend()
-    //轮播图
-    this.getSwiper()
-    this.getNewProduce()
-    //模拟加载
-    setTimeout(function()
-    {
-      wx.hideNavigationBarLoading() 
-      wx.stopPullDownRefresh()
-    },1500);
-  }
-
-  //上拉加载更多
-  onReachBottom(){
-    if(this.page<this.totalPage-1){
-      this.page++
-      this.arr = this.newProduceArr
+      // 新店推荐
+      this.getRecommend()
+      //轮播图
+      var interval = setInterval(() => {
+        if (this.$parent.globalData.userId) {
+          this.getSwiper()
+          clearInterval(interval)
+        }
+      }, 200);
       this.getNewProduce()
+    };
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      swiperArr: {},
+      recommendArr: {},
+      newProduceArr: {},
+      indicatorDots: true,
+      autoplay: true,
+      interval: 3000,
+      duration: 1000,
+      scrollTop: 0,
+      userId: '',
+      newcoupon: {},
+      couponNum: {
+        standard: '',
+        privilege: '',
+        show: false
+      },
+      page: 0,
+      totalPage: 0,
+      arr: []
+    };
+    wxs = {
+      m1: mywxs
+    }
+    methods = {
+      goTop() {
+        this.scrollTop = 0
+        wx.pageScrollTo({
+          scrollTop: 0
+        });
+        this.scrollTop = 0
+        this.$apply()
+      },
+      onPageScroll(e) {
+        // 获取滚动条当前位置
+        this.scrollTop = e.scrollTop > 10 ? 10 : 0
+        // this.$apply()
+      },
+      navSearch() {
+        this.$navigate({
+          url: '../search/search'
+        })
+      },
+      goShop(e) {
+        console.log(e.currentTarget.dataset.id)
+        this.$navigate('../shop/shopDetail', {
+          id: e.currentTarget.dataset.id
+        })
+      },
+      moreShop() {
+        this.$switch('../shop/shop')
+      },
+      goDetails(e) {
+        if (e.currentTarget.dataset.type == 0) {
+          this.$navigate('../generalGoods/generalGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 1) {
+          this.$navigate('../taskGoods/taskGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 2) {
+          this.$navigate('../fullReduction/fullProduceDetail', {
+            id: e.currentTarget.dataset.id
+          })
+        }
+      },
+      goNew() {
+        this.$switch('../classification/classification')
+      }
+    };
+    components = {
+      redPacket
+    }
+    //下拉刷新
+    onPullDownRefresh() {
+      wx.showNavigationBarLoading()
+      // 新店推荐
+      this.getRecommend()
+      //轮播图
+      this.getSwiper()
+      this.getNewProduce()
+      //模拟加载
+      setTimeout(function() {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+      }, 1500);
+    }
+    //上拉加载更多
+    onReachBottom() {
+      if (this.page < this.totalPage - 1) {
+        this.page++
+          this.arr = this.newProduceArr
+        this.getNewProduce()
+      }
+    }
+    getRecommend() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/recommend',
+        method: 'post',
+        dataType: 'json',
+        success: res => {
+          that.recommendArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //首页轮播的商品图
+    getSwiper() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktbackstage/banner/home/list',
+        method: 'GET',
+        data: {
+          userid: that.$parent.globalData.userId
+        },
+        dataType: 'json',
+        success: res => {
+          that.swiperArr = res.data.data
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 获取最新单品
+    getNewProduce() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/search',
+        method: 'GET',
+        data: {
+          page: that.page,
+          size: 15
+        },
+        dataType: 'json',
+        success: res => {
+          that.newProduceArr = that.arr.concat(res.data.data.content)
+          that.totalPage = res.data.data.totalPages
+          that.$apply()
+          wepy.hideLoading()
+        },
+        fail: () => {
+          wepy.showToast({
+            title: '网络异常', //提示的内容,
+            icon: 'none', //图标,
+            duration: 2000, //延迟时间,
+            mask: true, //显示透明蒙层，防止触摸穿透,
+            success: res => {}
+          });
+        },
+        complete: () => {}
+      });
+    }
+    checkFirseLoad() {
+      this.newcoupon = JSON.parse(wx.getStorageSync('newcoupon'))
+      this.couponNum.standard = this.newcoupon.standard
+      this.couponNum.privilege = this.newcoupon.privilege
+      this.couponNum.show = true
     }
   }
-
-  getRecommend(){
-    var that =  this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/recommend', 
-      method: 'post',
-      dataType: 'json', 
-      success: res => {
-        that.recommendArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  //首页轮播的商品图
-  getSwiper(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktbackstage/banner/home/list', 
-      method: 'GET',
-      data:{
-         userid:that.$parent.globalData.userId
-      },
-      dataType: 'json', 
-      success: res => {
-        that.swiperArr = res.data.data
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-  // 获取最新单品
-  getNewProduce(){
-    var that = this
-    wepy.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/search', 
-      method: 'GET',
-      data:{
-        page:that.page,
-        size:15
-      },
-      dataType: 'json',
-      success: res => {
-        that.newProduceArr = that.arr.concat(res.data.data.content)
-        that.totalPage = res.data.data.totalPages
-        that.$apply()
-        wepy.hideLoading()
-      },
-      fail: () => {
-        wepy.showToast({
-          title: '网络异常', //提示的内容,
-          icon: 'none', //图标,
-          duration: 2000, //延迟时间,
-          mask: true, //显示透明蒙层，防止触摸穿透,
-          success: res => {}
-        });
-        
-      },
-      complete: () => {}
-    });
-  }
-
-  checkFirseLoad(){
-    this.newcoupon = JSON.parse(wx.getStorageSync('newcoupon')) 
-    this.couponNum.standard = this.newcoupon.standard
-    this.couponNum.privilege = this.newcoupon.privilege
-    this.couponNum.show = true
-  }
-}
 </script>
