@@ -470,13 +470,13 @@
           <!-- 商品销售类型(满减，任务) -->
           <view class="produce-skill" wx:if="{{item.activityType == 2}}">
             <view class="tip">
-              <image src="../../images/index/type01.png" />
+              <image src="{{imagePath + 'type01.png'}}" wx:if="{{imagePath}}"/>
               <view>满减</view>
             </view>
           </view>
           <view class="produce-skill" wx:if="{{item.activityType == 1}}">
             <view class="tip">
-              <image src="../../images/index/type02.png" />
+              <image src="{{imagePath + 'type02.png'}}" wx:if="{{imagePath}}"/>
               <view>任务</view>
             </view>
           </view>

@@ -281,7 +281,7 @@ page{
       </view>
       <view class="button-wrapper">
         <view class="rightNow">看一看</view>
-          <image class="button" src="../../images/index/button.png"/>
+          <image class="button" src="{{imagePath + 'button.png'}}" wx:if="{{imagePath}}"/>
        </view>
       </view>
     <view class="item-images">

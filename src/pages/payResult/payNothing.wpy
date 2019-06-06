@@ -99,7 +99,7 @@ page{
   <view class="page">
     <!-- 支付成功 -->
     <view class="success">
-      <image src="../../images/index/close.png"/>
+      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}"/>
       <view>被抢光了</view>
       <view style="font-size:24rpx">宝贝太抢手，被抢光啦！</view>
       <view class="btns">

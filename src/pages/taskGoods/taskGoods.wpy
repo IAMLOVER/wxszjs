@@ -704,7 +704,7 @@ button[plain]{
         <view>5、任务完成后，您获得的佣金将发至您的钱包，可实时提现（未完成任务则无法获得相应佣金奖励）；</view>
         <view>6、用户可在“神州集市小程序”-“我的”，查看自己的任务。</view>
       </view>
-      <image src="../../images/index/close.png" @tap="closeRule"/>
+      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeRule"/>
     </view>
 
     <!-- 选择任务弹出框 -->

@@ -433,7 +433,7 @@ page{
     <!-- 规则的弹出框 -->
     <view class="rule-shadow" wx:if="{{showRule}}">
       <view class="content">
-        <view class="title">拼团任务规则</view>
+        <view class="title">助力拼团任务规则</view>
         <view>1、选择并领取任务；</view>
         <view>2、将商品链接分享给好友，邀请好友购买链接商品；</view>
         <view>3、好友提交订单并成功支付，即视为参团成功；</view>
@@ -441,7 +441,7 @@ page{
         <view>5、任务完成后，您获得的佣金将发至您的钱包，可实时提现（未完成任务则无法获得相应佣金奖励）；</view>
         <view>6、用户可在“神州集市小程序”-“我的”，查看自己的任务。</view>
       </view>
-      <image src="../../images/index/close.png" @tap="closeRule"/>
+      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeRule"/>
     </view>
 
     <!-- 选择任务弹出框 -->
