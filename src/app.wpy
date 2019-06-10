@@ -39,7 +39,7 @@
         'pages/generalGoods/taskGenralGoods',
         'pages/taskGoods/taskGoods',
         'pages/classification/classification',
-        // 'pages/shop/shop',
+        'pages/shop/shop',
         'pages/shop/shopDetail',
         'pages/shop/company',
         'pages/shop/companyInfo',
@@ -99,12 +99,12 @@
             iconPath: './images/tabbar/type_un.png',
             selectedIconPath: './images/tabbar/type.png'
           },
-          // {
-          //   pagePath: 'pages/shop/shop',
-          //   text: '专区',
-          //   iconPath: './images/tabbar/store_un.png',
-          //   selectedIconPath: './images/tabbar/store.png'
-          // },
+          {
+            pagePath: 'pages/shop/shop',
+            text: '店铺',
+            iconPath: './images/tabbar/store_un.png',
+            selectedIconPath: './images/tabbar/store.png'
+          },
           {
             pagePath: 'pages/myCenter/myCenter/myCenter',
             text: '我的',
@@ -144,7 +144,6 @@
                       method: 'post',
                       dataType: 'json',
                       success: res => {
-                        console.log(res);
                         that.globalData.userId = res.data.data.userid
                         console.log(that.globalData.userId)
                         that.globalData.identityType = res.data.data.identityType
@@ -167,7 +166,6 @@
       //查看手机是否是IphoneX
       wx.getSystemInfo({
         success: function(res) {
-          console.log(res)
           let model = res.model.substring(0, res.model.indexOf("X")) + "X"
           if (model == 'iPhone X') {
             that.globalData.isIphoneX = true

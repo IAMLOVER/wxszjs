@@ -1,550 +1,578 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-  padding-bottom: 100rpx;
-}
-.image{
-  position: relative;
-  swiper{
-    width: 100%;
-    height: 750rpx;
-    swiper-item{
+  page {
+    background-color: #f5f5f5;
+    padding-bottom: 100rpx;
+  }
+  .image {
+    position: relative;
+    swiper {
       width: 100%;
       height: 750rpx;
-      image{
+      swiper-item {
         width: 100%;
         height: 750rpx;
+        image {
+          width: 100%;
+          height: 750rpx;
+        }
       }
     }
-  }
-  image{
-    width: 100%;
-    height: 750rpx;
-  }
-  .tip{
-    width: 446rpx;
-    height: 56rpx;
-    color: #fff;
-    font-size: 28rpx;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 0px 16px 16px 0px; 
-    position: absolute;
-    left: 0;
-    top:50rpx;
-    color: #fff;
-    padding-left: 30rpx;
-    line-height: 56rpx;
-    image{
-      width: 40rpx;
-      height: 40rpx;
-      margin-right: 20rpx;
-      vertical-align: top;
-      display: inline-block;
-      margin-top: 6rpx;
-    }
-    .swiper{
-      height: 56rpx;
-      position: absolute;
-      top: 0rpx;
-      width: 420rpx;
-      left: 86rpx;
-      swiper-item{
-        height: 56rpx;
-      }
-    }
-  }
-}
-
-.task{
-  height: 88rpx;
-  width: 100%;
-  display:flex;display:-webkit-flex;
-  justify-content: space-around;-webkit-justify-content: space-around;
-  padding: 24rpx 30rpx;
-  box-sizing: border-box;
-  color:#F25664;
-  background-color: #fff;
-  .price{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    text{
-      font-size: 32rpx;
-    }
-    .type{
-      font-size: 24rpx;
-      padding-left:10rpx;
-    }
-    .now{
-      font-size: 36rpx;
-      display: inline-block;
-      padding-right:10rpx;
-    }
-    .old{
-      color: #b5b5b5;
-      text-decoration: line-through;
-      font-size: 24rpx;
-    }
-  }
-}
-.main{
-  width: 100%;
-  height: 184rpx;
-  background-color: #fff;
-  padding: 24rpx 30rpx;
-  box-sizing: border-box;
-  position: relative;
-  padding-top: 0rpx;
-  .produce-name{
-    font-size: 32rpx;
-    color: #222;
-    padding-bottom: 10rpx;
-    height: 100rpx;
-    font-weight: 600;
-  }
-  .produce-tip{
-      display:flex;display:-webkit-flex;
-  }
-  .limit{
-    color: #959595;
-    font-size: 24rpx;
-    -webkit-flex: 2;-ms-flex: 2;flex: 2;
-  }
-  .share{
-    color: #F25664;
-    font-size: 28rpx;
-    position: absolute;
-    bottom: 40rpx;
-    right: 30rpx;
-    image{
-      width: 30rpx;
-      height: 26rpx;
-      display: inline-block;
-      vertical-align: middle;
-      margin-top: -4rpx;
-      margin-right: 10rpx;
-    }
-  }
-}
-.task-wrapper{
-  padding: 24rpx 30rpx;
-  background-color: #fff;
-  border-top: 1px solid #f5f5f5;
-  .task-title{
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    align-items:center;
--webkit-align-items: center;
-    .tip{
-      color: #F25664;
-      font-size: 32rpx;
-    }
-    .rule{
-      color: #959595;
-      font-size: 24rpx;
-      image{
-        width: 24rpx;
-        height: 24rpx;
-        vertical-align:middle;
-        margin-left: 8rpx;
-        display: inline-block;
-        margin-top: -4rpx;
-      }
-    }
-  }
-  .tip{
-    font-size: 28rpx;
-    color: #666666;
-    image{
-      width: 36rpx;
-      height: 36rpx;
-      display: inline-block;
-      margin-top: -4rpx;
-      vertical-align: middle;
-      margin-left: 16rpx;
-    }
-  }
-  .task-items{
-      display:flex;display:-webkit-flex;
-      margin-top: 24rpx;
-    .item{
-      height: 154rpx;
-      width: 214rpx;
-      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index//bg_task02_sz.png');
-      background-size: 214rpx 154rpx;
-      text-align: center;
-      background-repeat: no-repeat;
-      margin-right: 24rpx;
-      &:last-child{
-        margin-right: 0rpx;
-      }
-      .count,.percent{
-        font-size: 28rpx;
-        color: #fff;
-        display:flex;display:-webkit-flex;
-        margin-left:34rpx;
-      }
-      .item-tip{
-        font-size: 32rpx;
-        color: #5F3118;
-        font-weight: 600;
-        padding-top: 10rpx;
-      }
-    }
-  }
-}
-.produce-detail{
-  .title{
-    display:flex;display:-webkit-flex;
-    justify-content: center;
--webkit-justify-content: center;
-    text-align: center;
-    font-size: 24rpx;
-    color: #959595;
-    .line{
-      width: 28rpx;
-      height: 4rpx;
-      background-color: #959595;
-      margin: 30rpx 20rpx;
-      box-sizing: border-box;
-    }
-    .tip{
-      padding-top: 14rpx;
-    }
-  }
-  .detail{
-    image{
+    image {
       width: 100%;
+      height: 750rpx;
     }
-  }
-}
-.dosome{
-  width: 100%;
-  height: 100rpx;
-  position: fixed;
-  bottom: 0;
-  background-color: #fff;
-  padding: 8rpx 30rpx;
-  box-sizing: border-box;
-  display:flex;display:-webkit-flex;
-  box-shadow: 0 -2px 3px -1px #959595;
-  .kefu{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    text-align: center;
-    line-height: 30rpx;
-    image{
-      width: 32rpx;
-      height: 32rpx;
-      margin-top: 14rpx;
-    }
-    view{
-      font-size: 24rpx;
-      color: #666;
-    }
-  }
-  .task-btn{
-    -webkit-flex: 4;-ms-flex: 4;flex: 4;
-    display:flex;display:-webkit-flex;
-    view{
-      display: inline-block;
-      width: 253rpx;
-      height: 84rpx;
-      border-radius: 42rpx 0rpx 0rpx 42rpx;
-      background-image: linear-gradient(-43deg, #F25664 68%, #D577EF 100%);
-      text-align: center;
+    .tip {
+      width: 446rpx;
+      height: 56rpx;
       color: #fff;
       font-size: 28rpx;
-      line-height: 84rpx;
-    }
-    view:last-child{
-      border-radius: 0rpx 42rpx 42rpx 0rpx;
-      background-image: linear-gradient(143deg, #D577EF 50%,#F25664  100%);
-      margin-left: 5rpx;
-    }
-  }
-}
-.shadow{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  position: fixed;
-  left: 0;
-  top: 0;
-  .content{
-    width: 100%;
-    height: 650rpx;
-    background-color: #fff;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 20rpx 20rpx 0px 0px;
-    .info{
-      display:flex;display:-webkit-flex;
-      padding: 30rpx;
-      border-bottom: 2rpx solid #F5F5F5;
-      .info-left{
-        -webkit-flex: 1;-ms-flex: 1;flex: 1;
-        margin-right: 24rpx;
-        image{
-           width: 180rpx;
-           height: 180rpx;
-           border-radius: 16rpx;
-        }
-      }
-      .info-right{
-        -webkit-flex: 3;-ms-flex: 3;flex: 3;
-        padding-top: 80rpx;
-        .price{
-          font-size: 36rpx;
-          color: #F25664;
-        }
-        .kuncun{
-          color: #959595;
-          font-size: 28rpx;
-        }
-      }
-    }
-    .type{
-      padding: 30rpx;
-      height: 162rpx;
-      box-sizing: border-box;
-      border-bottom: 2rpx solid #F5F5F5;
-      .title{
-        color: #222;
-        font-size: 28rpx;
-      }
-      .type-item{
-         view{
-          display: inline-block;
-          padding: 8rpx 26rpx;
-          border-radius: 22rpx;
-          background-color: #ededed;
-          font-size: 28rpx;
-          height: 44rpx;
-          box-sizing: border-box;
-          line-height: 28rpx;
-          margin-right: 24rpx;
-        }
-        .active{
-          background: #F25664;
-          color: #fff;
-        }
-      }
-    }
-    .counts{
-      padding: 30rpx;
-      height: 122rpx;
-      box-sizing: border-box;
-      display:flex;display:-webkit-flex;      
-       .title{
-        color: #222;
-        font-size: 28rpx;
-        -webkit-flex: 1;-ms-flex: 1;flex: 1;
-      }
-      .control{
-        display:flex;display:-webkit-flex;
-        -webkit-flex: 3;-ms-flex: 3;flex: 3;
-        justify-content: flex-end;
-        image{
-           width: 60rpx;
-           height: 54rpx;
-        }
-        .number{
-          width: 90rpx;
-          height: 54rpx;
-          background-color: #ededed;
-          font-size: 30rpx;
-          text-align: center;
-          display: inline-block;
-          margin: 0rpx 4rpx;
-        }
-      }
-      
-    }
-    .line{
-      width: 100%;
-      height: 4rpx;
-      background-image: linear-gradient(-180deg, #FFFFFF 0%, #E6E6E6 100%);
-    }
-    .btn-box{
-      padding-top: 8rpx;
-      width: 100%;
-      margin-left: 30rpx;
-      .btn{
-        width: 690rpx;
-        height: 84rpx;
-        border-radius: 21px;
-        font-size: 32rpx;
-        color: #fff;
-        text-align: center;
-        line-height: 84rpx;
-        background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
-      }
-    }
-    .close-shadow{
-      width: 36rpx;
-      height: 36rpx;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0px 16px 16px 0px;
       position: absolute;
-      right: 30rpx;
-      top:30rpx;
+      left: 0;
+      top: 50rpx;
+      color: #fff;
+      padding-left: 30rpx;
+      line-height: 56rpx;
+      image {
+        width: 40rpx;
+        height: 40rpx;
+        margin-right: 20rpx;
+        vertical-align: top;
+        display: inline-block;
+        margin-top: 6rpx;
+      }
+      .swiper {
+        height: 56rpx;
+        position: absolute;
+        top: 0rpx;
+        width: 420rpx;
+        left: 86rpx;
+        swiper-item {
+          height: 56rpx;
+        }
+      }
     }
   }
-}
-.rule-shadow{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.3);
-  .content{
-    width: 656rpx;
-    height: 732rpx;
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    margin-left: -328rpx;
-    background-image: url('https://img-blog.csdnimg.cn/20190409112030922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 40rpx;
-    box-sizing: border-box;
-  }
-  view{
-    font-size: 28rpx;
-    color: #666;
-    line-height: 50rpx;
-  }
-  .title{
-    font-size: 32rpx;
-    color: #222;
-    text-align: center;
-  }
-  image{
-    width: 56rpx;
-    height: 56rpx;
-    position: absolute;
-    left: 50%;
-    margin-left: -28rpx;
-    bottom: 20%;
-  }
-}
-.chose-task-shadow{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.3);
-  .content{
+  .task {
+    height: 88rpx;
     width: 100%;
-    height: 474rpx;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    padding: 24rpx 30rpx;
+    box-sizing: border-box;
+    color: #F25664;
     background-color: #fff;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 20rpx 20rpx 0px 0px;
-    .title{
-      display:flex;display:-webkit-flex;
-      height: 94rpx;
-      line-height: 94rpx;
-      justify-content: space-between;-webkit-justify-content: space-between;
-      padding: 0rpx 30rpx;
-      font-size: 28rpx;
+    .price {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      text {
+        font-size: 32rpx;
+      }
+      .type {
+        font-size: 24rpx;
+        padding-left: 10rpx;
+      }
+      .now {
+        font-size: 36rpx;
+        display: inline-block;
+        padding-right: 10rpx;
+      }
+      .old {
+        color: #b5b5b5;
+        text-decoration: line-through;
+        font-size: 24rpx;
+      }
+    }
+  }
+  .main {
+    width: 100%;
+    height: 184rpx;
+    background-color: #fff;
+    padding: 24rpx 30rpx;
+    box-sizing: border-box;
+    position: relative;
+    padding-top: 0rpx;
+    .produce-name {
+      font-size: 32rpx;
       color: #222;
-      border-bottom: 2rpx solid #F5F5F5;
-      image{
+      padding-bottom: 10rpx;
+      height: 100rpx;
+      font-weight: 600;
+    }
+    .produce-tip {
+      display: flex;
+      display: -webkit-flex;
+    }
+    .limit {
+      color: #959595;
+      font-size: 24rpx;
+      -webkit-flex: 2;
+      -ms-flex: 2;
+      flex: 2;
+    }
+    .share {
+      color: #F25664;
+      font-size: 28rpx;
+      position: absolute;
+      bottom: 40rpx;
+      right: 30rpx;
+      image {
+        width: 30rpx;
+        height: 26rpx;
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -4rpx;
+        margin-right: 10rpx;
+      }
+    }
+  }
+  .task-wrapper {
+    padding: 24rpx 30rpx;
+    background-color: #fff;
+    border-top: 1px solid #f5f5f5;
+    .task-title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      align-items: center;
+      -webkit-align-items: center;
+      .tip {
+        color: #F25664;
+        font-size: 32rpx;
+      }
+      .rule {
+        color: #959595;
+        font-size: 24rpx;
+        image {
+          width: 24rpx;
+          height: 24rpx;
+          vertical-align: middle;
+          margin-left: 8rpx;
+          display: inline-block;
+          margin-top: -4rpx;
+        }
+      }
+    }
+    .tip {
+      font-size: 28rpx;
+      color: #666666;
+      image {
         width: 36rpx;
         height: 36rpx;
+        display: inline-block;
+        margin-top: -4rpx;
         vertical-align: middle;
+        margin-left: 16rpx;
       }
     }
-    .btn{
-      width: 100%;
-      height: 100rpx;
-      text-align: center;
-      margin-top: 30rpx;
-      border-top:2rpx solid #F5F5F5;
-      padding-top: 4rpx;
-      position: absolute;
-      bottom: -10rpx;
-      text{
-       width: 690rpx;
-       height: 84rpx;
-       line-height: 84rpx;
-       text-align: center;
-       font-size: 32rpx;
-       color: #fff;
-       background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
-       border-radius: 42rpx;
-       margin: 0 auto;
-       display: inline-block;
+    .task-items {
+      display: flex;
+      display: -webkit-flex;
+      margin-top: 24rpx;
+      .item {
+        height: 154rpx;
+        width: 214rpx;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task02_sz.png');
+        background-size: 214rpx 154rpx;
+        text-align: center;
+        background-repeat: no-repeat;
+        margin-right: 24rpx;
+        &:last-child {
+          margin-right: 0rpx;
+        }
+        .count,
+        .percent {
+          font-size: 28rpx;
+          color: #fff;
+          display: flex;
+          display: -webkit-flex;
+          margin-left: 34rpx;
+        }
+        .item-tip {
+          font-size: 32rpx;
+          color: #5F3118;
+          font-weight: 600;
+          padding-top: 10rpx;
+        }
       }
     }
   }
-}
-.label-2 {
-  padding: 20rpx 30rpx;
-  font-size: 28rpx;
-  color: #959595;
-}
-.label-2__text {
-   display:flex;display:-webkit-flex;
-  justify-content: space-between;-webkit-justify-content: space-between;
-}
-
-.label-2__icon {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 32rpx;
-  height: 32rpx;
-  background:  #fff;
-  border-radius: 50%;
-  border: 2rpx solid #B5b5b5;
-  box-sizing: border-box;
-       display: flex;
-      display:  -webkit-flex;
-
-  align-items: center;
-  -webkit-align-items: center;
-  justify-content:center;
-  -webkit-justify-content: center;
-}
-
-.label-2__icon-checked {
-  position: absolute;
-  // left: 6rpx;
-  // top: 6rpx;
-  width: 16rpx;
-  height: 16rpx;
-  background: #F25664;;
-  border-radius: 50%;
-}
-
-.label-4_text {
-  text-align: center;
-  margin-top: 30rpx;
-}
-button[plain]{
-  border-color: #fff !important;  
-  line-height: 1 !important;
-  font-size: 24rpx !important;
-  padding: 0 !important;
-  color: #959595
-}
+  .produce-detail {
+    .title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      -webkit-justify-content: center;
+      text-align: center;
+      font-size: 24rpx;
+      color: #959595;
+      .line {
+        width: 28rpx;
+        height: 4rpx;
+        background-color: #959595;
+        margin: 30rpx 20rpx;
+        box-sizing: border-box;
+      }
+      .tip {
+        padding-top: 14rpx;
+      }
+    }
+    .detail {
+      image {
+        width: 100%;
+      }
+    }
+  }
+  .dosome {
+    width: 100%;
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    padding: 8rpx 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    display: -webkit-flex;
+    box-shadow: 0 -2px 3px -1px #959595;
+    .kefu {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      text-align: center;
+      line-height: 30rpx;
+      image {
+        width: 32rpx;
+        height: 32rpx;
+        margin-top: 14rpx;
+      }
+      view {
+        font-size: 24rpx;
+        color: #666;
+      }
+    }
+    .task-btn {
+      -webkit-flex: 4;
+      -ms-flex: 4;
+      flex: 4;
+      display: flex;
+      display: -webkit-flex;
+      view {
+        display: inline-block;
+        width: 253rpx;
+        height: 84rpx;
+        border-radius: 42rpx 0rpx 0rpx 42rpx;
+        background-image: linear-gradient(-43deg, #F25664 68%, #D577EF 100%);
+        text-align: center;
+        color: #fff;
+        font-size: 28rpx;
+        line-height: 84rpx;
+      }
+      view:last-child {
+        border-radius: 0rpx 42rpx 42rpx 0rpx;
+        background-image: linear-gradient(143deg, #D577EF 50%, #F25664 100%);
+        margin-left: 5rpx;
+      }
+    }
+  }
+  .shadow {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    .content {
+      width: 100%;
+      height: 650rpx;
+      background-color: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-radius: 20rpx 20rpx 0px 0px;
+      .info {
+        display: flex;
+        display: -webkit-flex;
+        padding: 30rpx;
+        border-bottom: 2rpx solid #F5F5F5;
+        .info-left {
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          margin-right: 24rpx;
+          image {
+            width: 180rpx;
+            height: 180rpx;
+            border-radius: 16rpx;
+          }
+        }
+        .info-right {
+          -webkit-flex: 3;
+          -ms-flex: 3;
+          flex: 3;
+          padding-top: 80rpx;
+          .price {
+            font-size: 36rpx;
+            color: #F25664;
+          }
+          .kuncun {
+            color: #959595;
+            font-size: 28rpx;
+          }
+        }
+      }
+      .type {
+        padding: 30rpx;
+        height: 162rpx;
+        box-sizing: border-box;
+        border-bottom: 2rpx solid #F5F5F5;
+        .title {
+          color: #222;
+          font-size: 28rpx;
+        }
+        .type-item {
+          view {
+            display: inline-block;
+            padding: 8rpx 26rpx;
+            border-radius: 22rpx;
+            background-color: #ededed;
+            font-size: 28rpx;
+            height: 44rpx;
+            box-sizing: border-box;
+            line-height: 28rpx;
+            margin-right: 24rpx;
+          }
+          .active {
+            background: #F25664;
+            color: #fff;
+          }
+        }
+      }
+      .counts {
+        padding: 30rpx;
+        height: 122rpx;
+        box-sizing: border-box;
+        display: flex;
+        display: -webkit-flex;
+        .title {
+          color: #222;
+          font-size: 28rpx;
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+        }
+        .control {
+          display: flex;
+          display: -webkit-flex;
+          -webkit-flex: 3;
+          -ms-flex: 3;
+          flex: 3;
+          justify-content: flex-end;
+          image {
+            width: 60rpx;
+            height: 54rpx;
+          }
+          .number {
+            width: 90rpx;
+            height: 54rpx;
+            background-color: #ededed;
+            font-size: 30rpx;
+            text-align: center;
+            display: inline-block;
+            margin: 0rpx 4rpx;
+          }
+        }
+      }
+      .line {
+        width: 100%;
+        height: 4rpx;
+        background-image: linear-gradient(-180deg, #FFFFFF 0%, #E6E6E6 100%);
+      }
+      .btn-box {
+        padding-top: 8rpx;
+        width: 100%;
+        margin-left: 30rpx;
+        .btn {
+          width: 690rpx;
+          height: 84rpx;
+          border-radius: 21px;
+          font-size: 32rpx;
+          color: #fff;
+          text-align: center;
+          line-height: 84rpx;
+          background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
+        }
+      }
+      .close-shadow {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 30rpx;
+        top: 30rpx;
+      }
+    }
+  }
+  .rule-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 656rpx;
+      height: 732rpx;
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      margin-left: -328rpx;
+      background-image: url('https://img-blog.csdnimg.cn/20190409112030922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      padding: 40rpx;
+      box-sizing: border-box;
+    }
+    view {
+      font-size: 28rpx;
+      color: #666;
+      line-height: 50rpx;
+    }
+    .title {
+      font-size: 32rpx;
+      color: #222;
+      text-align: center;
+    }
+    image {
+      width: 56rpx;
+      height: 56rpx;
+      position: absolute;
+      left: 50%;
+      margin-left: -28rpx;
+      bottom: 20%;
+    }
+  }
+  .chose-task-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 474rpx;
+      background-color: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-radius: 20rpx 20rpx 0px 0px;
+      .title {
+        display: flex;
+        display: -webkit-flex;
+        height: 94rpx;
+        line-height: 94rpx;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        padding: 0rpx 30rpx;
+        font-size: 28rpx;
+        color: #222;
+        border-bottom: 2rpx solid #F5F5F5;
+        image {
+          width: 36rpx;
+          height: 36rpx;
+          vertical-align: middle;
+        }
+      }
+      .btn {
+        width: 100%;
+        height: 100rpx;
+        text-align: center;
+        margin-top: 30rpx;
+        border-top: 2rpx solid #F5F5F5;
+        padding-top: 4rpx;
+        position: absolute;
+        bottom: -10rpx;
+        text {
+          width: 690rpx;
+          height: 84rpx;
+          line-height: 84rpx;
+          text-align: center;
+          font-size: 32rpx;
+          color: #fff;
+          background-image: linear-gradient(-23deg, #F25664 0%, #D577EF 100%);
+          border-radius: 42rpx;
+          margin: 0 auto;
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .label-2 {
+    padding: 20rpx 30rpx;
+    font-size: 28rpx;
+    color: #959595;
+  }
+  .label-2__text {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+  }
+  .label-2__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 32rpx;
+    height: 32rpx;
+    background: #fff;
+    border-radius: 50%;
+    border: 2rpx solid #B5b5b5;
+    box-sizing: border-box;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+  }
+  .label-2__icon-checked {
+    position: absolute; // left: 6rpx;
+    // top: 6rpx;
+    width: 16rpx;
+    height: 16rpx;
+    background: #F25664;
+    ;
+    border-radius: 50%;
+  }
+  .label-4_text {
+    text-align: center;
+    margin-top: 30rpx;
+  }
+  button[plain] {
+    border-color: #fff !important;
+    line-height: 1 !important;
+    font-size: 24rpx !important;
+    padding: 0 !important;
+    color: #959595
+  }
 </style>
 <template>
   <view class="page">
     <!-- 商品大图和滚动文字 -->
     <view class="image">
-     <swiper autoplay circular indicatorDots indicator-active-color="#ffffff" >
-       <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
-          <image src="{{preImagePath+item}}"/>
-       </swiper-item>
-     </swiper>
+      <swiper autoplay circular indicatorDots indicator-active-color="#ffffff">
+        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+          <image src="{{preImagePath+item}}" />
+        </swiper-item>
+      </swiper>
       <view class="tip">
-        <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}"/>
+        <image src="{{imagePath+'laba.png'}}" wx:if="{{imagePath}}" />
         <swiper autoplay="true" vertical="true" circular="true" class="swiper">
           <swiper-item><text>**{{m1.filterRandom(2431)}}也正在浏览此商品</text></swiper-item>
           <swiper-item><text>**{{m1.filterRandom(5531)}}也正在浏览此商品</text></swiper-item>
@@ -562,7 +590,6 @@ button[plain]{
         <!-- <text class="old">9.99</text> -->
       </view>
     </view>
-
     <!-- 商品名称 -->
     <view class="main">
       <view class="produce-name">
@@ -573,17 +600,16 @@ button[plain]{
           邮费：包邮
         </view>
         <view class="limit" style="-webkit-flex: 2.5;-ms-flex: 2.5;flex: 2.5;">
-            {{produceInfo.buyNum}}人购买
+          {{produceInfo.buyNum}}人购买
         </view>
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-          <text>分享</text>
-        </button>
+            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+            <text>分享</text>
+          </button>
       </view>
     </view>
-
     <!-- 任务榜 -->
     <view class="task-wrapper">
       <view class="task-title">
@@ -592,16 +618,17 @@ button[plain]{
         </view>
         <view class="rule" @tap="showRule">
           规则
-          <image src="{{imagePath+'more01.png'}}" wx:if="{{imagePath}}"/>
+          <image src="{{imagePath+'more01.png'}}" wx:if="{{imagePath}}" />
         </view>
       </view>
-      <view class="tip">在{{taskItems[0].duration/3600/1000}}个小时内成功助力者，可获得相应佣金<image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}"/></view>
+      <view class="tip">在{{taskItems[0].duration/3600/1000}}个小时内成功助力者，可获得相应佣金
+        <image src="{{imagePath+'gold.png'}}" wx:if="{{imagePath}}" />
+      </view>
       <view class="task-items">
         <view class="item" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-tip" wx:if="{{index == 0}}">任务一</view>
           <view class="item-tip" wx:if="{{index == 1}}">任务二</view>
           <view class="item-tip" wx:if="{{index == 2}}">任务三</view>
-
           <!-- <view class="item-right">助力<text>{{item.target}}</text>单，成功助力可获佣金：总成交额<text>{{item.percent}}</text>%</view> -->
           <view class="count"><text style="display:inline-block;margin-right:20rpx">数量:</text>{{item.target}}人</view>
           <view class="percent"><text style="display:inline-block;margin-right:20rpx">佣金:</text>{{item.percent}}%</view>
@@ -619,80 +646,73 @@ button[plain]{
         <rich-text nodes="{{produceInfo.description}}"></rich-text>
       </view>
     </view>
-
     <!-- 客服，立即购买 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <view class="kefu" @tap="call">
-        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}" />
         <view>客服</view>
       </view>
-       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
-        <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
-        <view>专区</view>
+      <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
+        <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}" />
+        <view>店铺</view>
       </navigator>
       <view class="task-btn">
         <view @tap="openShadow">立即购买</view>
-        <view wx:if="{{haveThisGoodsTasks != null}}" @tap = "taskReport">任务速报</view>
+        <view wx:if="{{haveThisGoodsTasks != null}}" @tap="taskReport">任务速报</view>
         <view @tap="openTaskChoseShadow" wx:if="{{haveThisGoodsTasks == null}}">领取任务</view>
       </view>
     </view>
-
-   <!-- 任务商品购买时出现的弹出框 -->
-   <view class="shadow" wx:if="{{showShadow}}">
-     <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-       <view class="info">
-         <view class="info-left">
-           <image src ="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill"/>
-         </view>
-         <view class="info-right">
-           <view class="price">
-             ￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}
-           </view>
-           <view class="kuncun">
-             库存：{{goodsClassList[activeIndex].stock}}
-           </view>
-         </view>
-       </view>
-
-       <!-- 规格选取 -->
-       <view class="type">
-         <view class="title">
-           规格：
-         </view>
-         <view class="type-item">
-           <view wx:for="{{goodsClassList}}" @tap="changeIndex" class="{{index==activeIndex?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{index}}" wx:for-item="item">{{item.className}}</view>
-         </view>
-       </view>
-
-      <!-- 购买数量 -->
-      <view class="counts">
-        <view class="title">
-          数量
+    <!-- 任务商品购买时出现的弹出框 -->
+    <view class="shadow" wx:if="{{showShadow}}">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+        <view class="info">
+          <view class="info-left">
+            <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill" />
+          </view>
+          <view class="info-right">
+            <view class="price">
+              ￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}
+            </view>
+            <view class="kuncun">
+              库存：{{goodsClassList[activeIndex].stock}}
+            </view>
+          </view>
         </view>
-        <view class="control">
-          <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="task-img" @tap="reduceAccount"/>
-          <text class="number">{{account}}</text>
-          <image src="{{imagePath+'add@2x.png'}}" wx:if="{{imagePath}}"  class="add-img" @tap="addAccount"/>
+        <!-- 规格选取 -->
+        <view class="type">
+          <view class="title">
+            规格：
+          </view>
+          <view class="type-item">
+            <view wx:for="{{goodsClassList}}" @tap="changeIndex" class="{{index==activeIndex?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{index}}" wx:for-item="item">{{item.className}}</view>
+          </view>
         </view>
-      </view>
-      <view class="line">
-
-      </view>
-     <!-- 确定按钮 -->
-      <view class="btn-box">
+        <!-- 购买数量 -->
+        <view class="counts">
+          <view class="title">
+            数量
+          </view>
+          <view class="control">
+            <image src="{{imagePath+'reduce@2x.png'}}" wx:if="{{imagePath}}" class="task-img" @tap="reduceAccount" />
+            <text class="number">{{account}}</text>
+            <image src="{{imagePath+'add@2x.png'}}" wx:if="{{imagePath}}" class="add-img" @tap="addAccount" />
+          </view>
+        </view>
+        <view class="line">
+        </view>
+        <!-- 确定按钮 -->
+        <view class="btn-box">
           <view class="btn" @tap="payMoney" wx:if="{{goodsClassList[activeIndex].stock > 0}}">
             确定(共￥{{m1.filter(money)}})
           </view>
           <view class="btn" wx:if="{{goodsClassList[activeIndex].stock <= 0}}">
-            暂无库存 
+            暂无库存
           </view>
+        </view>
+        <!-- 关闭按钮 -->
+        <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" class="close-shadow" @tap="closeShadow" />
       </view>
-      <!-- 关闭按钮 -->
-      <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" class="close-shadow" @tap="closeShadow"/>
-     </view>
-   </view>
-
-
+    </view>
     <!-- 规则的弹出框 -->
     <view class="rule-shadow" wx:if="{{showRule}}">
       <view class="content">
@@ -704,28 +724,29 @@ button[plain]{
         <view>5、任务完成后，您获得的佣金将发至您的钱包，可实时提现（未完成任务则无法获得相应佣金奖励）；</view>
         <view>6、用户可在“神州集市小程序”-“我的”，查看自己的任务。</view>
       </view>
-      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeRule"/>
+      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeRule" />
     </view>
-
     <!-- 选择任务弹出框 -->
     <view class="chose-task-shadow" wx:if="{{showChoseTask}}">
       <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
         <view class="title">
           <view>选择任务</view>
-          <view><image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow"/></view>
+          <view>
+            <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" @tap="closeTaskChoseShadow" />
+          </view>
         </view>
         <view class="chose-task-items">
-            <radio-group class="group" bindchange="radioChange">
-              <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
-                 <label class="label-2__text" for="{{item.id}}">
-                  <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                  <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                     <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                 </view>
-                 </label>
-               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
-              </view>
-           </radio-group>
+          <radio-group class="group" bindchange="radioChange">
+            <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
+              <label class="label-2__text" for="{{item.id}}">
+                    <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                    <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                       <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                   </view>
+                   </label>
+              <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
+            </view>
+          </radio-group>
         </view>
         <!-- 领取任务按钮 -->
         <view class="btn" @tap="receiveTask">
@@ -733,376 +754,373 @@ button[plain]{
         </view>
       </view>
     </view>
-
-  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js'
-import time from '../../common/time.js' 
-import mywxs from '../../wxs/mywxs.wxs'
-
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '商品详情'
-  };
-  onLoad(options) {
-       var that = this;
-        that.isIphoneX = that.$parent.globalData.isIphoneX
-     // 查看是否授权
-          wx.getSetting({
-            success: function (res) {
-                if (res.authSetting['scope.userInfo']) {
-                }
-                else{
-                   wx.redirectTo({
-                      url:'/pages/authorize/authorize'
-                    })
-                }
-            }
-        })
-    this.produceId = options.id
-    if(options.scene){
-      this.produceId = decodeURIComponent(options.scene)
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  import time from '../../common/time.js'
+  import mywxs from '../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '商品详情'
+    };
+    onLoad(options) {
+      var that = this;
+      that.isIphoneX = that.$parent.globalData.isIphoneX
+      // 查看是否授权
+      wx.getSetting({
+        success: function(res) {
+          if (res.authSetting['scope.userInfo']) {} else {
+            wx.redirectTo({
+              url: '/pages/authorize/authorize'
+            })
+          }
+        }
+      })
+      this.produceId = options.id
+      if (options.scene) {
+        this.produceId = decodeURIComponent(options.scene)
+      }
+      this.getProduceInfo()
+      // this.checkedIsHave()
     }
-    this.getProduceInfo()
-    // this.checkedIsHave()
-  }
-  onHide(){
-    this.checkedIsHave()
-  }
-  onShow(){
-    this.checkedIsHave()
-  }
-  data = {
-    isIphoneX:false,
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    showShadow: false,
-    produceId:'',
-    produceInfo:{},
-    goodsClassList:{},
-    maxPrice:'',
-    minPrice:'',
-    taskItems:{},
-    storeId:'',
-    choseTaskId:'',
-    showChoseTask:false,
-    showRule:false,
-    activeIndex:0,
-    typeId:'',
-    account:1,
-    money:0,
-    storePhoneNum:'',
-    haveThisGoodsTasks:null
-  };
-  methods = {
-    onShareAppMessage: function (ops) {
-      var userTargetId = ''
-      if(this.haveThisGoodsTasks){
-         var userTargetId = this.haveThisGoodsTasks.id
-      }
-      var getPath = ''
-      if(userTargetId == ''){
-        getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
-      }else{
-        getPath = 'pages/generalGoods/taskGenralGoods?id='+ this.produceId + '&userTargetId=' + userTargetId
-      }
-      console.log(userTargetId)
-      console.log(getPath)
-      if (ops.from === 'button') {
-        // 来自页面内转发按钮
-       console.log(ops.target)
-     }
-     return {
-       title: this.produceInfo.relay?this.produceInfo.relay:'我发现了一个超值好物，快来看看啊',
-       imageUrl:this.produceInfo.cover?this.preImagePath + this.produceInfo.cover:this.preImagePath + this.produceInfo.picUrl1,
-       path: getPath,
-       success: function (res) {
-       // 转发成功
-        console.log("转发成功:" + JSON.stringify(res));
+    onHide() {
+      this.checkedIsHave()
+    }
+    onShow() {
+      this.checkedIsHave()
+    }
+    data = {
+      isIphoneX: false,
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      showShadow: false,
+      produceId: '',
+      produceInfo: {},
+      goodsClassList: {},
+      maxPrice: '',
+      minPrice: '',
+      taskItems: {},
+      storeId: '',
+      choseTaskId: '',
+      showChoseTask: false,
+      showRule: false,
+      activeIndex: 0,
+      typeId: '',
+      account: 1,
+      money: 0,
+      storePhoneNum: '',
+      haveThisGoodsTasks: null
+    };
+    methods = {
+      onShareAppMessage: function(ops) {
+        var userTargetId = ''
+        if (this.haveThisGoodsTasks) {
+          var userTargetId = this.haveThisGoodsTasks.id
+        }
+        var getPath = ''
+        if (userTargetId == '') {
+          getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
+        } else {
+          getPath = 'pages/generalGoods/taskGenralGoods?id=' + this.produceId + '&userTargetId=' + userTargetId
+        }
+        console.log(userTargetId)
+        console.log(getPath)
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(ops.target)
+        }
+        return {
+          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+          imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
+          path: getPath,
+          success: function(res) {
+            // 转发成功
+            console.log("转发成功:" + JSON.stringify(res));
+          },
+          fail: function(res) {
+            // 转发失败
+            console.log("转发失败:" + JSON.stringify(res));
+          }
+        }
       },
-      fail: function (res) {
-       // 转发失败
-       console.log("转发失败:" + JSON.stringify(res));
-     }
-   }
- },
-    call(){
-      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
-    },
-    openShadow() {
-      this.showShadow = true;
-    },
-    closeShadow() {
-      this.showShadow = false;
-    },
-    openTaskChoseShadow(){
-      this.showChoseTask = true
-    },
-    closeTaskChoseShadow(){
-      this.showChoseTask = false
-    },
-    showRule(){
-      this.showRule = true
-    },
-    closeRule(){
-      this.showRule = false
-    },
-    //选规格
-    changeIndex(e){
-      console.log(e)
-      this.activeIndex = e.currentTarget.dataset.index
-      this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
-      this.typeId = e.currentTarget.dataset.id
-    },
-    // 加
-    addAccount(){
-      if(this.account>= this.goodsClassList[this.activeIndex].stock){
-        wx.showToast({
-          title: '库存不足', 
-          icon: 'none',
-          duration: 2000, 
-          mask: true, 
-          success: res => {}
-        })
-      }else{
-        this.account++
-        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
-      }
-    },
-    //减
-    reduceAccount(){
-      if(this.account>1){
-        this.account--
-        this.money = this.account*this.goodsClassList[this.activeIndex].salPrice*0.01
-      }else{
-        wx.showToast({
-          title: '请选择最少数量',
-          icon:'none',
-          duration: 2000, 
-          mask: true, 
-          success: res => {}
+      call() {
+        wx.makePhoneCall({
+          phoneNumber: this.storePhoneNum
         });
+      },
+      openShadow() {
+        this.showShadow = true;
+      },
+      closeShadow() {
+        this.showShadow = false;
+      },
+      openTaskChoseShadow() {
+        this.showChoseTask = true
+      },
+      closeTaskChoseShadow() {
+        this.showChoseTask = false
+      },
+      showRule() {
+        this.showRule = true
+      },
+      closeRule() {
+        this.showRule = false
+      },
+      //选规格
+      changeIndex(e) {
+        console.log(e)
+        this.activeIndex = e.currentTarget.dataset.index
+        this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
+        this.typeId = e.currentTarget.dataset.id
+      },
+      // 加
+      addAccount() {
+        if (this.account >= this.goodsClassList[this.activeIndex].stock) {
+          wx.showToast({
+            title: '库存不足',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          })
+        } else {
+          this.account++
+            this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
+        }
+      },
+      //减
+      reduceAccount() {
+        if (this.account > 1) {
+          this.account--
+            this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
+        } else {
+          wx.showToast({
+            title: '请选择最少数量',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        }
+      },
+      //购买数量的确定按钮
+      payMoney() {
+        if (this.account <= 0) {
+          wx.showToast({
+            title: '请选择最少数量',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        } else {
+          var pay = {}
+          //商品的搭配id
+          pay.collocationId = ''
+          // 商品id 
+          pay.id = this.produceInfo.id
+          // 商品规格id
+          pay.classid = this.typeId
+          // 商品数量
+          pay.count = this.account
+          // 商品活动类型
+          pay.type = 0
+          // 商品活动id
+          pay.activityId = 0
+          // 商品的价钱
+          pay.money = this.money
+          wx.setStorage({
+            key: 'pay',
+            data: pay
+          })
+          this.getUserAddress()
+        }
       }
-    },
-    //购买数量的确定按钮
-    payMoney(){
-      if(this.account<=0){
-        wx.showToast({
-          title: '请选择最少数量',
-          icon:'none',
-          duration: 2000, 
-          mask: true, 
-          success: res => {}
-        });
-      }
-      else{
-        var pay = {}
-        //商品的搭配id
-        pay.collocationId = ''
-        // 商品id 
-        pay.id = this.produceInfo.id
-        // 商品规格id
-        pay.classid = this.typeId
-        // 商品数量
-        pay.count = this.account
-        // 商品活动类型
-        pay.type = 0
-        // 商品活动id
-        pay.activityId = 0
-        // 商品的价钱
-        pay.money = this.money
-        wx.setStorage({
-          key: 'pay',
-          data: pay
-        })
-        this.getUserAddress()
-      }
-    }
-  }; 
+    };
     wxs = {
       m1: mywxs
-  };
-  // 获取商品详情
-  getProduceInfo(){
-    var that = this
-    wepy.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
-      method: 'get',
-      data:{
-        userid:that.$parent.globalData.userId
-      },
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.produceInfo = res.data.data.goods
-        that.produceInfo.description = that.produceInfo.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
-        that.taskItems = res.data.data.targetList
-        that.goodsClassList = res.data.data.goods.goodsClass
-        that.typeId = that.goodsClassList[this.activeIndex].id
-        that.money = that.account * that.goodsClassList[0].salPrice*0.01
-        for(var item in that.taskItems){
-          that.taskItems[item].checked = false
-        }
-        // 专区id
-        that.storeId = res.data.data.goods.storeId
-        that.$apply()
-        this.getStorePhone()
-        wepy.hideLoading()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  };
-   radioChange(e) {
-     const checked = e.detail.value
-     const changed = {}
-      for (let i = 0; i < this.data.taskItems.length; i++) {
-       if (checked.indexOf(this.data.taskItems[i].id) !== -1) {
-         changed['taskItems[' + i + '].checked'] = true
-        } else {
-         changed['taskItems[' + i + '].checked'] = false
-       }
-     }
-     this.setData(changed)
-     this.choseTaskId = e.detail.value
-  }
-  // 领取任务
-  receiveTask(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/usergettarget', 
-      data: {
-        'userid':that.$parent.globalData.userId,
-        'targetid':that.choseTaskId
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-       if(res.data.code==1000){
-       wx.setStorageSync('taskForShare',res.data.data)
-       that.haveThisGoodsTasks = 2
-        wx.showToast({
-          title: '领取成功', 
-          icon: 'success', 
-          duration: 2000, 
-          mask: true, 
-          success: res => {
-            that.$navigate({url:'../secKill/choseTaskSuccess'})
-            if(that.produceInfo.cover){
-              wx.setStorageSync('cover',that.preImagePath + that.produceInfo.cover)
-            }else{
-              wx.setStorageSync('cover',that.preImagePath + that.produceInfo.picUrl1)
-            }
-            if(that.produceInfo.relay){
-              wx.setStorageSync('relay',that.produceInfo.relay)
-            }
+    };
+    // 获取商品详情
+    getProduceInfo() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/' + that.produceId,
+        method: 'get',
+        data: {
+          userid: that.$parent.globalData.userId
+        },
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.produceInfo = res.data.data.goods
+          that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"');
+          that.taskItems = res.data.data.targetList
+          that.goodsClassList = res.data.data.goods.goodsClass
+          that.typeId = that.goodsClassList[this.activeIndex].id
+          that.money = that.account * that.goodsClassList[0].salPrice * 0.01
+          for (var item in that.taskItems) {
+            that.taskItems[item].checked = false
           }
-        });
-        that.showChoseTask = false
-        that.$apply()
-       }else{
-          wx.showToast({
-          title: '领取失败', 
-          icon: 'none', 
-          duration: 2000, 
-          mask: true,
-          success: res => {}
-        });
-       }
-      },
-      fail: () => {
-      },
-      complete: () => {}
-    });
-    
-  }
-
+          // 店铺id
+          that.storeId = res.data.data.goods.storeId
+          that.$apply()
+          this.getStorePhone()
+          wepy.hideLoading()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    };
+    radioChange(e) {
+      const checked = e.detail.value
+      const changed = {}
+      for (let i = 0; i < this.data.taskItems.length; i++) {
+        if (checked.indexOf(this.data.taskItems[i].id) !== -1) {
+          changed['taskItems[' + i + '].checked'] = true
+        } else {
+          changed['taskItems[' + i + '].checked'] = false
+        }
+      }
+      this.setData(changed)
+      this.choseTaskId = e.detail.value
+    }
+    // 领取任务
+    receiveTask() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/usergettarget',
+        data: {
+          'userid': that.$parent.globalData.userId,
+          'targetid': that.choseTaskId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          if (res.data.code == 1000) {
+            wx.setStorageSync('taskForShare', res.data.data)
+            that.haveThisGoodsTasks = 2
+            wx.showToast({
+              title: '领取成功',
+              icon: 'success',
+              duration: 2000,
+              mask: true,
+              success: res => {
+                that.$navigate({
+                  url: '../secKill/choseTaskSuccess'
+                })
+                if (that.produceInfo.cover) {
+                  wx.setStorageSync('cover', that.preImagePath + that.produceInfo.cover)
+                } else {
+                  wx.setStorageSync('cover', that.preImagePath + that.produceInfo.picUrl1)
+                }
+                if (that.produceInfo.relay) {
+                  wx.setStorageSync('relay', that.produceInfo.relay)
+                }
+              }
+            });
+            that.showChoseTask = false
+            that.$apply()
+          } else {
+            wx.showToast({
+              title: '领取失败',
+              icon: 'none',
+              duration: 2000,
+              mask: true,
+              success: res => {}
+            });
+          }
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
     // 获取用户的地址
-  getUserAddress(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/user/getaddress', 
-      data: {
-        userid:that.$parent.globalData.userId,
-      }, 
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        if(res.data.data){
-           wx.setStorage({
-            key: 'addressId',
-            data: res.data.data.id
-          });
-          that.$navigate({url:'../order/order'})
-        }else{
-          that.$navigate({url:'../address/address'})
-        }
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
+    getUserAddress() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/getaddress',
+        data: {
+          userid: that.$parent.globalData.userId,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          if (res.data.data) {
+            wx.setStorage({
+              key: 'addressId',
+              data: res.data.data.id
+            });
+            that.$navigate({
+              url: '../order/order'
+            })
+          } else {
+            that.$navigate({
+              url: '../address/address'
+            })
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //获取商店的服务电话
+    getStorePhone() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/serviceTel',
+        data: {
+          storeId: that.storeId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.storePhoneNum = res.data.data
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //判断是否已经领取过这个任务
+    checkedIsHave() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/usergettargetcount',
+        data: {
+          userid: that.$parent.globalData.userId,
+          goodsid: that.produceId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          if (res.data.data == null) {
+            return;
+          }
+          that.haveThisGoodsTasks = res.data.data
+          that.haveThisGoodsTasks.blockingTime = time.formatTime(that.haveThisGoodsTasks.blockingTime, 'Y-M-D h:m:s')
+          wx.setStorageSync('taskForShare', that.haveThisGoodsTasks)
+          console.log(that.haveThisGoodsTasks)
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    taskReport() {
+      this.$navigate('../myCenter/myTask/myTaskDetail', {
+        id: this.haveThisGoodsTasks.targetId
+      })
+    }
   }
-
-  //获取商店的服务电话
-  getStorePhone(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
-      data: {
-        storeId:that.storeId
-      },
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.storePhoneNum = res.data.data
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  //判断是否已经领取过这个任务
-  checkedIsHave(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/usergettargetcount', 
-      data: {
-        userid:that.$parent.globalData.userId,
-        goodsid:that.produceId
-      }, 
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        if(res.data.data == null){
-          return;
-        }
-        that.haveThisGoodsTasks = res.data.data
-        that.haveThisGoodsTasks.blockingTime = time.formatTime(that.haveThisGoodsTasks.blockingTime,'Y-M-D h:m:s')
-        wx.setStorageSync('taskForShare',that.haveThisGoodsTasks)
-        console.log(that.haveThisGoodsTasks)
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  taskReport(){
-    this.$navigate('../myCenter/myTask/myTaskDetail',{id:this.haveThisGoodsTasks.targetId})
-  }
-}
 </script>

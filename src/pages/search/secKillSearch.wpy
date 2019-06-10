@@ -1,47 +1,47 @@
 <!--  -->
 <template>
   <view class='page'>
-     <!--搜索框-->
-  <view class="search-wrapper">
-    <view class="search">
-      <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595"/>
-     <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
-    </view>
-    <view class="search-btn" @tap="searchResult">搜索</view>
-  </view>
-    <!-- 商品列表 -->
-      <view class="items">
-        <navigator url="../secKill/secKillFirst?id={{item.id}}" wx:for="{{produceItems}}" wx:for-item="item" wx:key="{{index}}" class="item">
-          <view class="item-left">
-              <image lazy-load mode="aspectFill" src="{{preImagePath+item.picUrl1}}"/>
-          </view>
-          <view class="item-right">
-            <view class="item-title">{{item.title}}</view>
-            <view class="hot">热度{{item.visitNum}}</view>
-            <view class="item-price">
-              <view class="price">
-                <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}"/>
-                <text class="really">￥{{m1.filter(item.titPrice*0.01)}}</text>
-              </view>
-                <text class="old">￥{{m1.filter(item.mktPrice*0.01)}}</text>
-            </view>
-          </view>
-          <!-- 可以抢还是不可以抢 -->
-          <text class="can">
-              抢
-          </text>
-          <!-- 不可以抢的遮罩 -->
-          <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
-            <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}"/>
-          </view>
-        </navigator>
+    <!--搜索框-->
+    <view class="search-wrapper">
+      <view class="search">
+        <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595" />
+        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
       </view>
-      <!-- 空内容 -->
-  <view class="empty" wx:if="{{empty}}">
-    <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}"/>
-    <view>找不到你想查找的内容呢</view>
-    <view>换个关键词试试吧</view>
-  </view>
+      <view class="search-btn" @tap="searchResult">搜索</view>
+    </view>
+    <!-- 商品列表 -->
+    <view class="items">
+      <navigator url="../secKill/secKillFirst?id={{item.id}}" wx:for="{{produceItems}}" wx:for-item="item" wx:key="{{index}}" class="item">
+        <view class="item-left">
+          <image lazy-load mode="aspectFill" src="{{preImagePath+item.picUrl1}}" />
+        </view>
+        <view class="item-right">
+          <view class="item-title">{{item.title}}</view>
+          <view class="hot">热度{{item.visitNum}}</view>
+          <view class="item-price">
+            <view class="price">
+              <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}" />
+              <text class="really">￥{{m1.filter(item.titPrice*0.01)}}</text>
+            </view>
+            <text class="old">￥{{m1.filter(item.mktPrice*0.01)}}</text>
+          </view>
+        </view>
+        <!-- 可以抢还是不可以抢 -->
+        <text class="can">
+                抢
+            </text>
+        <!-- 不可以抢的遮罩 -->
+        <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
+          <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}" />
+        </view>
+      </navigator>
+    </view>
+    <!-- 空内容 -->
+    <view class="empty" wx:if="{{empty}}">
+      <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" />
+      <view>找不到你想查找的内容呢</view>
+      <view>换个关键词试试吧</view>
+    </view>
   </view>
 </template>
 
@@ -53,98 +53,92 @@
     config = {
       navigationBarTitleText: "秒杀品搜索",
     };
-
     data = {
-      imagePath:path.path.imagePath,
-      apiPath:path.path.apiPath,
-      preImagePath:path.path.preImagePath,
-      searchValue:'',
-      produceItems:{},
-      empty:false,
-      page:0,
-      totalPage:0,
-      arr:[]
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      searchValue: '',
+      produceItems: {},
+      empty: false,
+      page: 0,
+      totalPage: 0,
+      arr: []
     };
     wxs = {
       m1: mywxs
     };
     methods = {
-     getValue(e){
-        this.searchValue  = e.detail.value;
-     },
-     searchResult(){
-       this.page = 0
-       this.arr = []
-       this.produceItems = {}
-       this.getSeckills()
-     },
+      getValue(e) {
+        this.searchValue = e.detail.value;
+      },
+      searchResult() {
+        this.page = 0
+        this.arr = []
+        this.produceItems = {}
+        this.getSeckills()
+      },
     };
-
-    onLoad() { 
-    };
-
- //上拉加载更多
-  onReachBottom(){
-    if(this.page<this.totalPage-1){
-      this.page++
-      this.arr = this.produceItems
-      this.getSeckills()
+    onLoad() {};
+    //上拉加载更多
+    onReachBottom() {
+      if (this.page < this.totalPage - 1) {
+        this.page++
+          this.arr = this.produceItems
+        this.getSeckills()
+      }
     }
-  }
-
-  getSeckills(){
-    var that = this
-    wx.showLoading({
-      title: '加载中',
-      mask: true, 
-      success: res => {}
-    });
-    wx.request({
-      url: that.apiPath + '/szmktbackstage/channel/secKill/search',
-      method: 'get',
-      dataType: 'json',
-      data:{
-        keyWord:that.searchValue,
-        page:that.page,
-        size:15,
-        userid:that.$parent.globalData.userId
-      },
-      success: res => {
-         let data = that.arr.concat(res.data.data.content)
-        that.produceItems = data
-        that.totalPage = res.data.data.totalPages
-        if(data.length<=0){
-          that.empty = true
-        }else{
-          that.empty = false
-        }
-        that.produceItems = data
-        console.log(data);
-        that.$apply();
-        wx.hideLoading();
-      },
-      fail: () => {
-         wx.showToast({
-          title: '加载失败', 
-          icon: 'none', 
-          duration: 2000, 
-          mask: true, 
-          success: res => {}
-        });
-      },
-      complete: () => {}
-    });
-    
-  }
+    getSeckills() {
+      var that = this
+      wx.showLoading({
+        title: '加载中',
+        mask: true,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktbackstage/channel/secKill/search',
+        method: 'get',
+        dataType: 'json',
+        data: {
+          keyWord: that.searchValue,
+          page: that.page,
+          size: 15,
+          userid: that.$parent.globalData.userId
+        },
+        success: res => {
+          let data = that.arr.concat(res.data.data.content)
+          that.produceItems = data
+          that.totalPage = res.data.data.totalPages
+          if (data.length <= 0) {
+            that.empty = true
+          } else {
+            that.empty = false
+          }
+          that.produceItems = data
+          that.$apply();
+          wx.hideLoading();
+        },
+        fail: () => {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        },
+        complete: () => {}
+      });
+    }
   }
 </script>
 
 <style lang='less'>
-page{
-  background-color: #FFe1eb;
-}
-.search-wrapper {
-    display:flex;display:-webkit-flex;
+  page {
+    background-color: #FFe1eb;
+  }
+  .search-wrapper {
+    display: flex;
+    display: -webkit-flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -152,161 +146,162 @@ page{
     background-color: #ffffff;
     height: 80rpx;
     z-index: 9999;
-  .search {
-    position: relative;
-    -webkit-flex: 5;-ms-flex: 5;flex: 5;
-    input {
-      height: 64rpx;
-      background: rgba(237,237,237,0.5);
-      border-radius: 16px;
+    .search {
+      position: relative;
+      -webkit-flex: 5;
+      -ms-flex: 5;
+      flex: 5;
+      input {
+        height: 64rpx;
+        background: rgba(237, 237, 237, 0.5);
+        border-radius: 16px;
+        font-size: 32rpx;
+        padding-left: 78rpx;
+        color: #222;
+        box-sizing: border-box;
+        margin-left: 30rpx;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 60rpx;
+        top: 14rpx;
+      }
+    }
+    .search-btn {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
       font-size: 32rpx;
-      padding-left: 78rpx;
-      color: #222;
+      color: #F25664;
+      text-align: center;
+      line-height: 64rpx;
+    }
+  }
+  .items {
+    padding: 24rpx 30rpx;
+    margin-top: 78rpx;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
       box-sizing: border-box;
-      margin-left: 30rpx;
-    }
-    image {
-      width: 36rpx;
-      height: 36rpx;
-      position: absolute;
-      left: 60rpx;
-      top: 14rpx;
-    }
-  }
-  .search-btn{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    font-size: 32rpx;
-    color: #F25664;
-    text-align: center;
-    line-height: 64rpx;
-  }
-}
-.items{
-  padding: 24rpx 30rpx;
-  margin-top: 78rpx;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
-    box-sizing: border-box;
-    width: 690rpx;
-    height: 268rpx;
-    position: relative;
-    margin-bottom: 24rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
+      width: 690rpx;
+      height: 268rpx;
+      position: relative;
+      margin-bottom: 24rpx;
+      .item-left {
+        float: left;
+        margin-right: 16rpx;
+        image {
+          width: 220rpx;
+          height: 220rpx;
+          border-radius: 16rpx;
+        }
+      }
+      .item-right {
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          font-weight: 600;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
+          font-size: 24rpx;
+          color: #F25664;
+          margin-bottom: 24rpx;
+          margin-top: 8rpx;
+        }
+        .item-price {
+          float: left;
+          position: absolute;
+          bottom: 30rpx;
+          left: 260rpx;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            background-color: #F25664;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            image {
+              width: 36rpx;
+              height: 36rpx;
+              vertical-align: middle;
+              margin-top: -4px;
+              margin-right: 12rpx;
+            }
+            .really {
+              font-size: 36rpx;
+              color: #fff;
+            }
+          }
+          .old {
+            font-size: 24rpx;
+            color: #959595;
+            text-decoration: line-through;
+          }
+        }
+      }
+      .can {
+        width: 84rpx;
+        height: 84rpx;
+        border-radius: 50%;
+        border: 6rpx solid #F25664;
+        box-sizing: border-box;
+        line-height: 0rpx;
+        color: #F25664;
+        display: inline-block; // text-align: center;
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        font-size: 36rpx;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        -webkit-align-items: center;
+        justify-content: center;
+        -webkit-justify-content: center;
+      }
+      .nocan {
+        border-color: #959595;
+        color: #959595;
+      }
+      .nocan-shadow {
         width: 220rpx;
         height: 220rpx;
-        border-radius: 16rpx;
-      }
-    }
-    .item-right{
-      .item-title{
-        font-size: 32rpx;
-        color: #222222;
-        font-weight: 600;
-          display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 24rpx;
-        margin-top: 8rpx;
-      }
-      .item-price{
-        float: left;
         position: absolute;
-        bottom: 30rpx;
-        left: 260rpx;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          background-color: #F25664;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
-          image{
-            width: 36rpx;
-            height: 36rpx;
-            vertical-align:middle;
-            margin-top: -4px;
-            margin-right: 12rpx;
-          }
-          .really{
-            font-size: 36rpx;
-            color: #fff;
-          }
-        }
-        .old{
-          font-size: 24rpx;
-          color: #959595;
-          text-decoration: line-through;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        left: 24rpx;
+        top: 24rpx;
+        border-radius: 16rpx;
+        image {
+          width: 108rpx;
+          height: 108rpx;
+          margin-top: 50rpx;
         }
       }
     }
-    .can{
-      width: 84rpx;
-      height: 84rpx;
-      border-radius: 50%;
-      border:6rpx solid #F25664;
-      box-sizing: border-box;
-      line-height: 0rpx;
-      color: #F25664;
-      display: inline-block;
-      // text-align: center;
-      position: absolute;
-      right: 24rpx;
-      bottom: 24rpx;
-      font-weight: bold;
-      padding: 0;
-      margin: 0;
-      font-size: 36rpx;
-       display: flex;
-      display:  -webkit-flex;
-
-  align-items: center;
-  -webkit-align-items: center;
-  justify-content:center;
-  -webkit-justify-content: center;
-
-    }
-    .nocan{
-      border-color: #959595;
-      color: #959595;
-    }
-    .nocan-shadow{
-      width: 220rpx;
-      height: 220rpx;
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.5);
-      text-align: center;
-      left: 24rpx;
-      top: 24rpx;
-      border-radius: 16rpx;
-      image{
-        width: 108rpx;
-        height: 108rpx;
-        margin-top: 50rpx;
-      }
+  }
+  .empty {
+    text-align: center;
+    color: #959595;
+    font-size: 28rpx;
+    margin-top: 120rpx;
+    image {
+      width: 420rpx;
+      height: 360rpx;
     }
   }
-}
-.empty{
-  text-align: center;
-  color: #959595;
-  font-size: 28rpx;
-  margin-top: 120rpx;
-  image{
-    width: 420rpx;  
-    height: 360rpx;
-  }
-}
 </style>

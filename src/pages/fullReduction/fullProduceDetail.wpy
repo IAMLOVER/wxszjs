@@ -409,7 +409,7 @@ button[plain]{
       </view>
        <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
-        <view>专区</view>
+        <view>店铺</view>
       </navigator>
       <view class="reduce-btn"  @tap="openShadow">
         <text>立即购买</text>
@@ -679,7 +679,7 @@ export default class Index extends wepy.page {
         for(var item in that.taskItems){
           that.taskItems[item].checked = false
         }
-        // 专区id
+        // 店铺id
         that.storeId = res.data.data.goods.storeId
         that.$apply()
         that.getCoupon()

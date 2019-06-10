@@ -553,7 +553,7 @@ button[plain]{
       </view>
       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}"/>
-        <view>专区</view>
+        <view>店铺</view>
       </navigator>
       <view class="general-btn" @tap="openShadow">
         <text>立即购买</text>

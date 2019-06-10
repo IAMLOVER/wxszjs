@@ -541,9 +541,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                <view>微信好友</view>
-              </button>
+                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                  <view>微信好友</view>
+                </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -565,7 +565,7 @@
   import poster from '../../components/miniprogram_dist/poster/poster'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '专区详情',
+      navigationBarTitleText: '店铺详情',
       navigationBarBackgroundColor: '#EB4D4E',
       navigationBarTextStyle: 'white',
       usingComponents: {
@@ -621,7 +621,6 @@
         const {
           detail
         } = e;
-        console.log(detail)
         this.posterDetail = detail
       },
       goDetails(e) {
@@ -645,16 +644,14 @@
           console.log(ops.target)
         }
         return {
-          title: '我在神州集市发现了热门专区，快来看看吧!',
+          title: '我在神州集市发现了热门店铺，快来看看吧!',
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
           success: function(res) {
             // 转发成功
-            console.log("转发成功:" + JSON.stringify(res));
           },
           fail: function(res) {
             // 转发失败
-            console.log("转发失败:" + JSON.stringify(res));
           }
         }
       },
@@ -694,7 +691,7 @@
                 y: 82.4,
                 zIndex: 2,
                 text: [{
-                  text: '我在神州集市发现了热门专区，快来看看吧!',
+                  text: '我在神州集市发现了热门店铺，快来看看吧!',
                   fontSize: 27,
                   color: '#fff',
                   opacity: 1,
@@ -719,7 +716,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看店铺详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,
@@ -817,6 +814,13 @@
         filePath: that.posterDetail,
         success(res) {
           that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
           that.$apply()
         },
         fail(err) {
@@ -829,7 +833,6 @@
               success: res => {
                 wx.openSetting({
                   success(settingdata) {
-                    console.log("settingdata", settingdata)
                     if (settingdata.authSetting['scope.writePhotosAlbum']) {
                       wx.showModal({
                         title: '提示',
@@ -913,7 +916,6 @@
         method: 'get',
         dataType: 'json',
         success: res => {
-          console.log(res)
           that.newArr = res.data.data.content
           that.$apply()
         },

@@ -572,12 +572,12 @@
     <view style="height:200rpx;text-align:center;clear:both; font-size: 12px;color: #B5B5B5;line-height:100rpx">
       已经到底部了
     </view>
-    <view class="footer">
+    <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <view class="more" @tap="moreManagement">联系客服</view>
     </view>
     <!-- 转发分享弹出框 -->
     <view class="share-shadow" wx:if="{{showShareShadow}}">
-      <view class="content">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
         <view class="tip">请选择转发方式</view>
         <view class="share-way">
           <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
@@ -599,6 +599,7 @@
       <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
       <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
+    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -608,7 +609,7 @@
   import mywxs from '../../../wxs/mywxs.wxs';
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '我的专区',
+      navigationBarTitleText: '我的店铺',
       navigationBarBackgroundColor: '#EB4D4E',
       navigationBarTextStyle: 'white',
       usingComponents: {
@@ -617,8 +618,10 @@
     };
     onLoad() {
       this.getStoreInfo()
+      this.isIphoneX = this.$parent.globalData.isIphoneX
     }
     data = {
+      isIphoneX:false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
@@ -665,6 +668,14 @@
           filePath: that.posterDetail,
           success(res) {
             that.showPoster = false
+            wepy.showToast({
+              title: '保存成功', 
+              icon: 'success', 
+              duration: 2000,
+              mask: true, 
+              success: res => {}
+            });
+            
             that.$apply()
           },
           fail(err) {
@@ -734,7 +745,7 @@
           console.log(ops.target)
         }
         return {
-          title: '我在神州集市发现了热门专区，快来看看吧!',
+          title: '我在神州集市发现了热门店铺，快来看看吧!',
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
           success: function(res) {
@@ -748,7 +759,7 @@
         }
       },
     };
-    // 获取我的专区的简要信息
+    // 获取我的店铺的简要信息
     getStoreInfo() {
       var that = this
       wx.request({
@@ -785,7 +796,7 @@
                   y: 82.4,
                   zIndex: 2,
                   text: [{
-                    text: '我在神州集市发现了热门专区，快来看看吧!',
+                    text: '我在神州集市发现了热门店铺，快来看看吧!',
                     fontSize: 27,
                     color: '#fff',
                     opacity: 1,
@@ -810,7 +821,7 @@
                   y: 760,
                   zIndex: 3,
                   text: [{
-                    text: '长按图片识别二维码查看专区详情',
+                    text: '长按图片识别二维码查看店铺详情',
                     fontSize: 20,
                     color: '#666',
                     opacity: 1,

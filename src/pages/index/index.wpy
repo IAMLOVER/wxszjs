@@ -173,7 +173,7 @@
           }
           .button {
             z-index: 1000;
-            width: 98rpx;
+            width: 120rpx;
             height: 48rpx;
           }
         }
@@ -412,7 +412,7 @@
     <view class="new-store">
       <view class="title">
         <view class="tip">
-          <text class="bar"></text> 热门专区
+          <text class="bar"></text> 热门店铺
         </view>
         <!-- <view>
             <text class="more" @tap="moreShop">更多</text>
@@ -427,7 +427,7 @@
                 <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}" />
                 <text>{{item.name}}</text>
                 <view class="button-wrapper">
-                  <view class="rightNow">看一看</view>
+                  <view class="rightNow">进店逛逛</view>
                   <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}" />
                 </view>
               </view>
@@ -566,7 +566,6 @@
         })
       },
       goShop(e) {
-        console.log(e.currentTarget.dataset.id)
         this.$navigate('../shop/shopDetail', {
           id: e.currentTarget.dataset.id
         })

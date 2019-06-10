@@ -1,425 +1,431 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.bar{
-  width: 720rpx;
-  background: #FCC5CA;
-  border-radius: 16rpx;
-  height: 44rpx;
-  margin: 0 auto;
-  margin-top: 30rpx;
-  z-index: 1;
-}
-.order-info{
-  width: 690rpx;
-  margin: 0 auto;
-  background-color: #fff;
-  height: 224rpx;
-  font-size: 28rpx;
-  border-top: 8rpx solid #EE4555;
-  border-radius: 8rpx 8rpx;
-  margin-top: -24rpx;
-  z-index: 999;
-  padding: 30rpx 40rpx;
-  box-sizing: border-box;
-  position: relative;
-  .order-accept{
-    text{
-      font-weight: 600;
-    }
+  page {
+    background-color: #f5f5f5;
   }
-  .jiantou{
-    width: 10rpx;
-    height: 16rpx;
-    position: absolute;
-    right: 50rpx;
-    top: 80rpx;
+  .bar {
+    width: 720rpx;
+    background: #FCC5CA;
+    border-radius: 16rpx;
+    height: 44rpx;
+    margin: 0 auto;
+    margin-top: 30rpx;
+    z-index: 1;
   }
-}
-.order-content{
-  width: 690rpx;
-  background-color: #fff;
-  margin: 0 auto;
-  box-sizing: border-box;
-  margin-top: 20rpx;
-  padding: 24rpx 30rpx;
-  .title{
-    font-size: 24rpx;
-  }
-}
-.content-lists{
-  border-radius: 16rpx;
-      .list{
-        border-bottom: 1px solid #F5F5F5;
-        box-sizing: border-box;
-        padding-top: 28rpx;
-        height: 250rpx;
-        clear: both;
-        .list-left{
-          float: left;
-          image{
-            width: 180rpx;
-            height: 180rpx;
-            border-radius: 16rpx;
-            margin-right: 20rpx;
-          }
-        }
-        .list-right{
-          float: left;
-          width: 400rpx;
-          .list-name{
-            color: #222222;
-            font-size: 28rpx;
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            height: 100rpx;
-            font-weight: 600;
-          }
-          .list-type{
-            color: #959595;
-            font-size: 24rpx;
-          }
-          .list-text{
-            display:flex;display:-webkit-flex;
-            justify-content: space-between;-webkit-justify-content: space-between;
-            view{
-              -webkit-flex: 1;-ms-flex: 1;flex: 1;
-              font-size: 32rpx;
-              color: #F25664;
-            }
-            view:last-child{
-              text-align: right;
-              color: #F25664;
-              font-size: 24rpx;
-              padding-top: 10rpx;
-            }
-          }
-        }
+  .order-info {
+    width: 690rpx;
+    margin: 0 auto;
+    background-color: #fff;
+    height: 224rpx;
+    font-size: 28rpx;
+    border-top: 8rpx solid #EE4555;
+    border-radius: 8rpx 8rpx;
+    margin-top: -24rpx;
+    z-index: 999;
+    padding: 30rpx 40rpx;
+    box-sizing: border-box;
+    position: relative;
+    .order-accept {
+      text {
+        font-weight: 600;
       }
-      .list:last-child{
-        border-bottom: none;
-      }
-}
-.action{
-  width: 690rpx;
-  height: 164rpx;
-  background-color: #fff;
-  border-radius: 8rpx;
-  margin: 0 auto;
-  margin-top: 10rpx;
-  padding: 20rpx 40rpx;
-  box-sizing: border-box;
-  .view{
-    display:flex;display:-webkit-flex;
-    justify-content: space-around;
-    color: #666666;
-    font-size: 24rpx;
-    view{
-      -webkit-flex: 1;-ms-flex: 1;flex: 1;
-      line-height: 40rpx;
     }
-    view:last-child{
-      text-align: right;
-    }
-    .tip{
-      color: #F25664;
+    .jiantou {
+      width: 10rpx;
+      height: 16rpx;
+      position: absolute;
+      right: 50rpx;
+      top: 80rpx;
     }
   }
-}
-.footer{
-  display:flex;display:-webkit-flex;
-  height: 108rpx;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0rpx 30rpx;
-  box-sizing: border-box;
-  view{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    text-align: center;
-  }
-  .number{
-    -webkit-flex: 4;-ms-flex: 4;flex: 4;
-    margin-right: 20rpx;
-    margin-top: 10rpx;
-    .total{
-      font-size: 32rpx;
-      text-align: right;
-    }
-    .youhui{
+  .order-content {
+    width: 690rpx;
+    background-color: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+    margin-top: 20rpx;
+    padding: 24rpx 30rpx;
+    .title {
       font-size: 24rpx;
-      text-align: right;
     }
   }
-  .btn{
-    background-image: linear-gradient(-51deg, #F25664 0%, #E176FF 100%);
-    border-radius: 44rpx;
-    height: 84rpx;
-    width: 216rpx;
-    line-height: 84rpx;
-    color: #fff;
-    font-size: 36rpx;
-    margin-top: 12rpx;
-    flex: 3;
-    -webkit-flex:3;
+  .content-lists {
+    border-radius: 16rpx;
+    .list {
+      border-bottom: 1px solid #F5F5F5;
+      box-sizing: border-box;
+      padding-top: 28rpx;
+      height: 250rpx;
+      clear: both;
+      .list-left {
+        float: left;
+        image {
+          width: 180rpx;
+          height: 180rpx;
+          border-radius: 16rpx;
+          margin-right: 20rpx;
+        }
+      }
+      .list-right {
+        float: left;
+        width: 400rpx;
+        .list-name {
+          color: #222222;
+          font-size: 28rpx;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          height: 100rpx;
+          font-weight: 600;
+        }
+        .list-type {
+          color: #959595;
+          font-size: 24rpx;
+        }
+        .list-text {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: space-between;
+          -webkit-justify-content: space-between;
+          view {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            font-size: 32rpx;
+            color: #F25664;
+          }
+          view:last-child {
+            text-align: right;
+            color: #F25664;
+            font-size: 24rpx;
+            padding-top: 10rpx;
+          }
+        }
+      }
+    }
+    .list:last-child {
+      border-bottom: none;
+    }
   }
-}
+  .action {
+    width: 690rpx;
+    height: 164rpx;
+    background-color: #fff;
+    border-radius: 8rpx;
+    margin: 0 auto;
+    margin-top: 10rpx;
+    padding: 20rpx 40rpx;
+    box-sizing: border-box;
+    .view {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-around;
+      color: #666666;
+      font-size: 24rpx;
+      view {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        line-height: 40rpx;
+      }
+      view:last-child {
+        text-align: right;
+      }
+      .tip {
+        color: #F25664;
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    display: -webkit-flex;
+    height: 108rpx;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0rpx 30rpx;
+    box-sizing: border-box;
+    view {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      text-align: center;
+    }
+    .number {
+      -webkit-flex: 4;
+      -ms-flex: 4;
+      flex: 4;
+      margin-right: 20rpx;
+      margin-top: 10rpx;
+      .total {
+        font-size: 32rpx;
+        text-align: right;
+      }
+      .youhui {
+        font-size: 24rpx;
+        text-align: right;
+      }
+    }
+    .btn {
+      background-image: linear-gradient(-51deg, #F25664 0%, #E176FF 100%);
+      border-radius: 44rpx;
+      height: 84rpx;
+      width: 216rpx;
+      line-height: 84rpx;
+      color: #fff;
+      font-size: 36rpx;
+      margin-top: 12rpx;
+      flex: 3;
+      -webkit-flex: 3;
+    }
+  }
 </style>
 <template>
   <view class="page">
     <!-- 一个背景长条 -->
     <view class="bar">
     </view>
-
-  <!-- 收货详情 -->
-  <navigator url="../address/address" class="order-info">
-    <view class="order-accept">
-      收件人：<text>{{userName}}</text>
-    </view>
-    <view class="order-phone">
-     {{userNumber}}
-    </view>
-    <view class="order-address">
-      收货地址：{{detailAddress}}
-    </view>
-    <!-- 小箭头 -->
-    <image src = "https://pictest.sqplus.cn/szjs/user/images/index/more07.png" class="jiantou" wx:if="{{imagePath}}"/>
-  </navigator>
-
-  <!-- 订单内容 -->
-  <view class="order-content">
-    <view class="title">
-      订单内容
-    </view>
-    <view class="content-lists" wx:if="{{channelInfo != null}}">
-      <view class="list">
-            <view class="list-left">
-              <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath && produceInfo.picUrl1}}"/>
+    <!-- 收货详情 -->
+    <navigator url="../address/address" class="order-info">
+      <view class="order-accept">
+        收件人：<text>{{userName}}</text>
+      </view>
+      <view class="order-phone">
+        {{userNumber}}
+      </view>
+      <view class="order-address">
+        收货地址：{{detailAddress}}
+      </view>
+      <!-- 小箭头 -->
+      <image src="https://pictest.sqplus.cn/szjs/user/images/index/more07.png" class="jiantou" wx:if="{{imagePath}}" />
+    </navigator>
+    <!-- 订单内容 -->
+    <view class="order-content">
+      <view class="title">
+        订单内容
+      </view>
+      <view class="content-lists" wx:if="{{channelInfo != null}}">
+        <view class="list">
+          <view class="list-left">
+            <image src="{{preImagePath+channelInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath && produceInfo.picUrl1}}" />
+          </view>
+          <view class="list-right">
+            <view class="list-name">{{channelInfo.title}}</view>
+            <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
+            <view class="list-text">
+              <view class="price">￥{{m1.filter(channelInfo.chaPrice*0.01)}}</view>
+              <view class="count">数量：{{pay.count}}</view>
             </view>
-            <view class="list-right">
-              <view class="list-name">{{channelInfo.title}}</view>
-              <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
-              <view class="list-text">
-                <view class="price">￥{{m1.filter(channelInfo.chaPrice*0.01)}}</view>
-                <view class="count">数量：{{pay.count}}</view>
-              </view>
+          </view>
+        </view>
+      </view>
+      <view class="content-lists">
+        <view class="list">
+          <view class="list-left">
+            <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath && produceInfo.picUrl1}}" />
+          </view>
+          <view class="list-right">
+            <view class="list-name">{{produceInfo.goodsName}}</view>
+            <view class="list-type">规格：{{produceInfo.className}}</view>
+            <view class="list-text">
+              <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
+              <view class="count">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
             </view>
+          </view>
+        </view>
       </view>
     </view>
-     <view class="content-lists">
-      <view class="list">
-            <view class="list-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" mode="aspectFill" wx:if="{{preImagePath && produceInfo.picUrl1}}"/>
-            </view>
-            <view class="list-right">
-              <view class="list-name">{{produceInfo.goodsName}}</view>
-              <view class="list-type">规格：{{produceInfo.className}}</view>
-              <view class="list-text">
-                <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-                <view class="count">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
-              </view>
-            </view>
+    <!-- 优惠活动 -->
+    <view class="action">
+      <view class="view" wx:if="{{haveJoinActivity}}">
+        <view>优惠活动：</view>
+        <view class="tip">满{{m1.filter(couponActivity.standard*0.01)}}减{{m1.filter(couponActivity.privilege*0.01)}}</view>
+      </view>
+      <view class="view">
+        <view>有无优惠券：</view>
+        <view wx:if="{{pay.have}}">有</view>
+        <view wx:if="{{!pay.have}}">无</view>
+      </view>
+      <view class="view">
+        <view>运费：</view>
+        <view>包邮</view>
       </view>
     </view>
-  </view>
-
-  <!-- 优惠活动 -->
-  <view class="action">
-    <view class="view" wx:if="{{haveJoinActivity}}">
-      <view>优惠活动：</view>
-      <view class="tip">满{{m1.filter(couponActivity.standard*0.01)}}减{{m1.filter(couponActivity.privilege*0.01)}}</view>
-    </view>
-    <view class="view">
-      <view>有无优惠券：</view>
-      <view wx:if="{{pay.have}}">有</view>
-      <view wx:if="{{!pay.have}}">无</view>
-    </view>
-    <view class="view">
-      <view>运费：</view>
-      <view>包邮</view>
-    </view>
-  </view>
-
-  <!-- 底部 立即支付按钮区域 -->
-  <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-    <view></view>
-    <view class="number">
-      <view class="total">
-        <text>合计：</text>
-        <text style="color: #F25664;">￥{{m1.filter(pay.money)}}</text>
+    <!-- 底部 立即支付按钮区域 -->
+    <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+      <view></view>
+      <view class="number">
+        <view class="total">
+          <text>合计：</text>
+          <text style="color: #F25664;">￥{{m1.filter(pay.money)}}</text>
+        </view>
+        <view class="youhui">
+          <text>优惠金额：</text>
+          <text wx:if="{{channelInfo != null}}">{{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money)}}</text>
+          <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
+          <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
+        </view>
       </view>
-      <view class="youhui">
-        <text>优惠金额：</text>
-        <text wx:if="{{channelInfo != null}}">{{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money)}}</text>
-        <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
-        <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
+      <view class="btn" @tap="payMoney">
+        立即支付
       </view>
     </view>
-    <view class="btn" @tap="payMoney">
-      立即支付
-    </view>
-  </view>
-   <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js'
-import mywxs from '../../wxs/mywxs.wxs';
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '订单确认'
-  };
-  onLoad() {
-    this.isIphoneX = this.$parent.globalData.isIphoneX
-    this.userId = this.$parent.globalData.userId
-    this.getUserAddress()
-    this.pay = wx.getStorageSync('pay')
-    this.pay.money = Number(this.pay.money)
-    this.addressId = wx.getStorageSync('addressId')
-    this.getOrderInfo()
-  }
-  data = {
-    isIphoneX:false,
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    userId:'',
-    addressId:'',
-    userName:'',
-    userNumber:'',
-    detailAddress:'',
-    pay:{},
-    produceInfo:{},
-    haveJoinActivity:false,
-    couponActivity:{},
-    channelInfo:{}
-  };
-  wxs = {
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  import mywxs from '../../wxs/mywxs.wxs';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '订单确认'
+    };
+    onLoad() {
+      this.isIphoneX = this.$parent.globalData.isIphoneX
+      this.userId = this.$parent.globalData.userId
+      this.getUserAddress()
+      this.pay = wx.getStorageSync('pay')
+      this.pay.money = Number(this.pay.money)
+      this.addressId = wx.getStorageSync('addressId')
+      this.getOrderInfo()
+    }
+    data = {
+      isIphoneX: false,
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      userId: '',
+      addressId: '',
+      userName: '',
+      userNumber: '',
+      detailAddress: '',
+      pay: {},
+      produceInfo: {},
+      haveJoinActivity: false,
+      couponActivity: {},
+      channelInfo: {}
+    };
+    wxs = {
       m1: mywxs
-  };
-  methods = {};  
-  // 获取用户的地址
-  getUserAddress(){
-    var that = this 
-    wx.request({
-      url: this.apiPath + '/szmktuser/user/getaddress', 
-      data: {
-        userid:that.userId
-      }, 
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.userName = res.data.data.name
-        that.userNumber = res.data.data.phone
-        that.detailAddress = res.data.data.province + res.data.data.city  + res.data.data.county +  res.data.data.address
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-
-  // 根据商品的规格id筛选出来订单里的商品
-  getOrderInfo(){
-    var that = this
-    wx.request({
-      url: that.apiPath +  '/szmktstore/goodsInfo/classType',
-      data: {
-        'classId': this.pay.classid,
-        'collocationId':this.pay.collocationId
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.produceInfo = res.data.data
-        if(res.data.data.couponActivity){
-          that.couponActivity = res.data.data.couponActivity
-          that.haveJoinActivity = true
-        }
-        that.channelInfo = res.data.data.channelInfo
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  // 点击立即支付
-  payMoney(){
-    var that = this
-    wx.showLoading({
-      title: '生成订单中',
-      mask: true, 
-      success: res => {}
-    }); 
-    wx.request({
-      url: that.apiPath + '/szmktuser/pay/createordergoods', 
-      data: {
-        'userid':that.userId,
-        'classid': that.pay.classid,
-        'count':that.pay.count,
-        'type': that.pay.type,
-        'activityid':that.pay.activityId,
-        'addressid':that.addressId
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        wx.hideLoading()
-        if(res.data.code == 1000){
+    };
+    methods = {};
+    // 获取用户的地址
+    getUserAddress() {
+      var that = this
+      wx.request({
+        url: this.apiPath + '/szmktuser/user/getaddress',
+        data: {
+          userid: that.userId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.userName = res.data.data.name
+          that.userNumber = res.data.data.phone
+          that.detailAddress = res.data.data.province + res.data.data.city + res.data.data.county + res.data.data.address
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 根据商品的规格id筛选出来订单里的商品
+    getOrderInfo() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/classType',
+        data: {
+          'classId': this.pay.classid,
+          'collocationId': this.pay.collocationId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.produceInfo = res.data.data
+          if (res.data.data.couponActivity) {
+            that.couponActivity = res.data.data.couponActivity
+            that.haveJoinActivity = true
+          }
+          that.channelInfo = res.data.data.channelInfo
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 点击立即支付
+    payMoney() {
+      var that = this
+      wx.showLoading({
+        title: '生成订单中',
+        mask: true,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktuser/pay/createordergoods',
+        data: {
+          'userid': that.userId,
+          'classid': that.pay.classid,
+          'count': that.pay.count,
+          'type': that.pay.type,
+          'activityid': that.pay.activityId,
+          'addressid': that.addressId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
           wx.hideLoading()
-          wx.setStorageSync('orderNo', res.data.data.orderNo)
-          wx.request({
-            url: that.apiPath + '/szmktuser/pay/awakenpay', 
-            data: {
-              userid:that.userId,
-              orderno:res.data.data.orderNo
-            }, 
-            method: 'GET',
-            dataType: 'json', 
-            success: res => {
-              console.log(res)
-              if(res.data.code == 200){
-                wx.requestPayment({
-                  appId:res.data.data.appId,
-                  timeStamp: res.data.data.timeStamp,
-                  nonceStr: res.data.data.nonceStr,
-                  package: res.data.data.package,
-                  signType: 'MD5',
-                  paySign: res.data.data.paySign,
-                  success(res) {  
-                    console.log(res)
-                    that.$navigate({url:'../payResult/paySuccess'})
-                  },
-                  fail(res) { 
-                    console.log(res)
-                    that.$navigate({url:'../payResult/payFail'})
-                  }
-                })
-              }
-            },
-            fail: () => {},
-            complete: () => {}
-          });
-          
-        }
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+          if (res.data.code == 1000) {
+            wx.hideLoading()
+            wx.setStorageSync('orderNo', res.data.data.orderNo)
+            wx.request({
+              url: that.apiPath + '/szmktuser/pay/awakenpay',
+              data: {
+                userid: that.userId,
+                orderno: res.data.data.orderNo
+              },
+              method: 'GET',
+              dataType: 'json',
+              success: res => {
+                console.log(res)
+                if (res.data.code == 200) {
+                  wx.requestPayment({
+                    appId: res.data.data.appId,
+                    timeStamp: res.data.data.timeStamp,
+                    nonceStr: res.data.data.nonceStr,
+                    package: res.data.data.package,
+                    signType: 'MD5',
+                    paySign: res.data.data.paySign,
+                    success(res) {
+                      console.log(res)
+                      that.$navigate({
+                        url: '../payResult/paySuccess'
+                      })
+                    },
+                    fail(res) {
+                      console.log(res)
+                      that.$navigate({
+                        url: '../payResult/payFail'
+                      })
+                    }
+                  })
+                }
+              },
+              fail: () => {},
+              complete: () => {}
+            });
+          }
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-
-}
 </script>

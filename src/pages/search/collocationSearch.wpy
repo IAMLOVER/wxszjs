@@ -1,9 +1,10 @@
 <style lang='less'>
-page{
-  background-color: #FFE6F5;
-}
-.search-wrapper {
-    display:flex;display:-webkit-flex;
+  page {
+    background-color: #FFE6F5;
+  }
+  .search-wrapper {
+    display: flex;
+    display: -webkit-flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,253 +12,256 @@ page{
     background-color: #ffffff;
     height: 80rpx;
     z-index: 9999;
-  .search {
-    position: relative;
-    -webkit-flex: 5;-ms-flex: 5;flex: 5;
-    input {
-      height: 64rpx;
-      background: rgba(237,237,237,0.5);
-      border-radius: 16px;
-      font-size: 32rpx;
-      padding-left: 78rpx;
-      color: #222;
-      box-sizing: border-box;
-      margin-left: 30rpx;
-    }
-    image {
-      width: 36rpx;
-      height: 36rpx;
-      position: absolute;
-      left: 60rpx;
-      top: 14rpx;
-    }
-  }
-  .search-btn{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    font-size: 32rpx;
-    color: #F25664;
-    text-align: center;
-    line-height: 64rpx;
-  }
-}
-.items{
-  padding: 0 30rpx;
-  margin-top: 100rpx;
-  .item{
-    display: flex;
-    display: -webkit-flex;
-    width: 690rpx;
-    height: 256rpx;
-    background-color: #fff;
-    align-items: center;
-    align-content:center;
-    -webkit-align-items: center;
-    -webkit-align-content:center;
-    padding: 24rpx;
-    box-sizing: border-box;
-    position: relative;
-    border-radius: 16rpx;
-    margin-bottom: 20rpx;
-    .item-left{
-      flex: 2;
-      -webkit-flex: 2;
-      image{
-        width:170rpx;
-        height:170rpx;
-        border-radius: 8rpx;
-        vertical-align: middle;
-      }
-      .left-title{
-        font-size: 28rpx;
-        color: #5F3118;
-        margin-top: 4rpx;
-      }
-      .left-price{
-        background-color: rgba(0, 0, 0, 0.3);
-        font-size: 24rpx;
-        color: #fff;
-        position: absolute;
-        width: 170rpx;
-        border-radius: 0rpx 0rpx 8rpx 8rpx;
-        bottom: 64rpx;
-      }
-    }
-    .add-img{
-      flex: 0.5;
-      -webkit-flex: 0.5;
-      margin-top: -24rpx;
-      image{
-        width: 32rpx;
-        height: 32rpx;
-        vertical-align: middle;
-      }
-    }
-    .item-center{
-      flex: 2;
-      -webkit-flex: 2;
-      image{
-        width:170rpx;
-        height:170rpx;
-        border-radius: 8rpx;
-        vertical-align: middle;
-      }
-      .center-title{
-        font-size: 28rpx;
-        color: #5F3118;
-        margin-top: 4rpx;
-      }
-      .center-price{
-        background-color: rgba(0, 0, 0, 0.3);
-        font-size: 24rpx;
-        color: #fff;
-        position: absolute;
-        width: 170rpx;
-        border-radius: 0rpx 0rpx 8rpx 8rpx;
-        bottom: 64rpx;
-      }
-    }
-    .equal-img{
-      flex: 0.5;
-      -webkit-flex: 0.5;
-      margin-top: -24rpx;
-      image{
-        width: 36rpx;
-        height: 24rpx;
-        vertical-align: middle;
-      }
-    }
-    .item-right{
-      flex: 2;
-      -webkit-flex: 2;
-      .price{
-        width: 170rpx;
-        height: 170rpx;
-        border-radius: 8rpx;
-        border:2rpx solid #F25664;
+    .search {
+      position: relative;
+      -webkit-flex: 5;
+      -ms-flex: 5;
+      flex: 5;
+      input {
+        height: 64rpx;
+        background: rgba(237, 237, 237, 0.5);
+        border-radius: 16px;
+        font-size: 32rpx;
+        padding-left: 78rpx;
+        color: #222;
         box-sizing: border-box;
-        text-align: center;
-        padding-top: 24rpx;
-        .price-top{
-          font-size: 28rpx;
-          color: #f25664;
-        }
-        .price-bottom{
-          font-size: 20rpx;
-          color: #ccc;
-          text-decoration: line-through;
-        }
-        .right-now{
-          width: 168rpx;
-          height: 60rpx;
-          background-image: linear-gradient(90deg, #FD5B86 0%, #F81E1F 100%); 
-          color: #fff;
-          font-size: 28rpx;
-          text-align: center;
-          line-height: 60rpx;
-          position: absolute;
-          bottom: 64rpx;
+        margin-left: 30rpx;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 60rpx;
+        top: 14rpx;
+      }
+    }
+    .search-btn {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      font-size: 32rpx;
+      color: #F25664;
+      text-align: center;
+      line-height: 64rpx;
+    }
+  }
+  .items {
+    padding: 0 30rpx;
+    margin-top: 100rpx;
+    .item {
+      display: flex;
+      display: -webkit-flex;
+      width: 690rpx;
+      height: 256rpx;
+      background-color: #fff;
+      align-items: center;
+      align-content: center;
+      -webkit-align-items: center;
+      -webkit-align-content: center;
+      padding: 24rpx;
+      box-sizing: border-box;
+      position: relative;
+      border-radius: 16rpx;
+      margin-bottom: 20rpx;
+      .item-left {
+        flex: 2;
+        -webkit-flex: 2;
+        image {
+          width: 170rpx;
+          height: 170rpx;
           border-radius: 8rpx;
+          vertical-align: middle;
+        }
+        .left-title {
+          font-size: 28rpx;
+          color: #5F3118;
+          margin-top: 4rpx;
+        }
+        .left-price {
+          background-color: rgba(0, 0, 0, 0.3);
+          font-size: 24rpx;
+          color: #fff;
+          position: absolute;
+          width: 170rpx;
+          border-radius: 0rpx 0rpx 8rpx 8rpx;
+          bottom: 64rpx;
         }
       }
-      .hot{
-        line-height: 0;
-        height: 48rpx;
-        line-height: 36rpx;
-        image{
-          width: 18rpx;
-          height: 22rpx;
+      .add-img {
+        flex: 0.5;
+        -webkit-flex: 0.5;
+        margin-top: -24rpx;
+        image {
+          width: 32rpx;
+          height: 32rpx;
           vertical-align: middle;
-          margin-right: 8rpx;
-          display: inline-block;
         }
-        text{
+      }
+      .item-center {
+        flex: 2;
+        -webkit-flex: 2;
+        image {
+          width: 170rpx;
+          height: 170rpx;
+          border-radius: 8rpx;
+          vertical-align: middle;
+        }
+        .center-title {
+          font-size: 28rpx;
+          color: #5F3118;
+          margin-top: 4rpx;
+        }
+        .center-price {
+          background-color: rgba(0, 0, 0, 0.3);
           font-size: 24rpx;
-          color: #f25664;
+          color: #fff;
+          position: absolute;
+          width: 170rpx;
+          border-radius: 0rpx 0rpx 8rpx 8rpx;
+          bottom: 64rpx;
+        }
+      }
+      .equal-img {
+        flex: 0.5;
+        -webkit-flex: 0.5;
+        margin-top: -24rpx;
+        image {
+          width: 36rpx;
+          height: 24rpx;
+          vertical-align: middle;
+        }
+      }
+      .item-right {
+        flex: 2;
+        -webkit-flex: 2;
+        .price {
+          width: 170rpx;
+          height: 170rpx;
+          border-radius: 8rpx;
+          border: 2rpx solid #F25664;
+          box-sizing: border-box;
+          text-align: center;
+          padding-top: 24rpx;
+          .price-top {
+            font-size: 28rpx;
+            color: #f25664;
+          }
+          .price-bottom {
+            font-size: 20rpx;
+            color: #ccc;
+            text-decoration: line-through;
+          }
+          .right-now {
+            width: 168rpx;
+            height: 60rpx;
+            background-image: linear-gradient(90deg, #FD5B86 0%, #F81E1F 100%);
+            color: #fff;
+            font-size: 28rpx;
+            text-align: center;
+            line-height: 60rpx;
+            position: absolute;
+            bottom: 64rpx;
+            border-radius: 8rpx;
+          }
+        }
+        .hot {
+          line-height: 0;
+          height: 48rpx;
+          line-height: 36rpx;
+          image {
+            width: 18rpx;
+            height: 22rpx;
+            vertical-align: middle;
+            margin-right: 8rpx;
+            display: inline-block;
+          }
+          text {
+            font-size: 24rpx;
+            color: #f25664;
+          }
         }
       }
     }
   }
-}
-.empty{
-  text-align: center;
-  color: #959595;
-  font-size: 28rpx;
-  margin-top: 120rpx;
-  image{
-    width: 420rpx;  
-    height: 360rpx;
+  .empty {
+    text-align: center;
+    color: #959595;
+    font-size: 28rpx;
+    margin-top: 120rpx;
+    image {
+      width: 420rpx;
+      height: 360rpx;
+    }
   }
-}
 </style>
 <template>
   <view class='page'>
-     <!--搜索框-->
-  <view class="search-wrapper">
-    <view class="search">
-      <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595"/>
-     <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
+    <!--搜索框-->
+    <view class="search-wrapper">
+      <view class="search">
+        <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595" />
+        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
+      </view>
+      <view class="search-btn" @tap="searchResult">搜索</view>
     </view>
-    <view class="search-btn" @tap="searchResult">搜索</view>
-  </view>
-
-         <view class="items">
-         <view class="item" wx:for="{{newCollocationArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
-           <view class="item-left">
-             <view class="left-img" style="position:relative">
-               <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}"/>
-               <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.promotionCount}}件</text>
-             </view>
-             <view class="left-title">
-               {{item.promotionShortTitle}}
-             </view>
-             <view class="left-price">
-               ￥{{m1.filter(item.promotionPrice*0.01)}}
-             </view>
-           </view>
-           <view class="add-img">
-            <image src="{{imagePath+'add.png'}}"  wx:if="{{imagePath}}"/>             
-           </view>
-           <view class="item-center">
-             <view class="center-img" style="position:relative">
-               <image src="{{preImagePath + item.goodsPicUrl1}}" wx:if="{{preImagePath && item.goodsPicUrl1}}"/>
-               <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.goodsCount}}件</text>
-             </view>
-             <view class="center-title">
-               {{item.goodsShortTitle}}
-             </view>
-             <view class="center-price">
-               ￥{{m1.filter(item.goodsMinSalPrice*0.01)}}
-               <text style="font-size:20rpx;text-decoration: line-through">￥{{m1.filter(item.goodsMinMktPrice*0.01)}}</text>
-             </view>    
-           </view>
-           <view class="equal-img">
-            <image src="{{imagePath+'equal.png'}}"  wx:if="{{imagePath}}"/>             
-           </view>
-           <view class="item-right">
-             <view class="price">
-               <view class="price-top">
-                 ￥{{m1.filter(item.promotionPrice*0.01*item.promotionCount+item.goodsMinSalPrice*0.01*item.goodsCount)}}
-               </view>
-                <view class="price-bottom">
-                 ￥{{m1.filter(item.promotionMktPrice*0.01*item.promotionCount+item.goodsMinMktPrice*0.01*item.goodsCount)}}
-               </view>
-               <view class="right-now" @tap="rightNow" data-id="{{item.id}}">
-                 马上抢
-               </view>
-             </view>
-              <view class="hot">
-                <image src="{{imagePath + 'hot01.png'}}" wx:if="{{imagePath}}"/>
-                <text>热度{{item.visitNum}}</text>
-              </view>
-           </view>
-         </view>
-       </view>
-      <!-- 空内容 -->
-  <view class="empty" wx:if="{{empty}}">
-    <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}"/>
-    <view>找不到你想查找的内容呢</view>
-    <view>换个关键词试试吧</view>
-  </view>
+    <view class="items">
+      <view class="item" wx:for="{{newCollocationArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+        <view class="item-left">
+          <view class="left-img" style="position:relative">
+            <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}" />
+            <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.promotionCount}}件</text>
+          </view>
+          <view class="left-title">
+            {{item.promotionShortTitle}}
+          </view>
+          <view class="left-price">
+            ￥{{m1.filter(item.promotionPrice*0.01)}}
+          </view>
+        </view>
+        <view class="add-img">
+          <image src="{{imagePath+'add.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="item-center">
+          <view class="center-img" style="position:relative">
+            <image src="{{preImagePath + item.goodsPicUrl1}}" wx:if="{{preImagePath && item.goodsPicUrl1}}" />
+            <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.goodsCount}}件</text>
+          </view>
+          <view class="center-title">
+            {{item.goodsShortTitle}}
+          </view>
+          <view class="center-price">
+            ￥{{m1.filter(item.goodsMinSalPrice*0.01)}}
+            <text style="font-size:20rpx;text-decoration: line-through">￥{{m1.filter(item.goodsMinMktPrice*0.01)}}</text>
+          </view>
+        </view>
+        <view class="equal-img">
+          <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="item-right">
+          <view class="price">
+            <view class="price-top">
+              ￥{{m1.filter(item.promotionPrice*0.01*item.promotionCount+item.goodsMinSalPrice*0.01*item.goodsCount)}}
+            </view>
+            <view class="price-bottom">
+              ￥{{m1.filter(item.promotionMktPrice*0.01*item.promotionCount+item.goodsMinMktPrice*0.01*item.goodsCount)}}
+            </view>
+            <view class="right-now" @tap="rightNow" data-id="{{item.id}}">
+              马上抢
+            </view>
+          </view>
+          <view class="hot">
+            <image src="{{imagePath + 'hot01.png'}}" wx:if="{{imagePath}}" />
+            <text>热度{{item.visitNum}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 空内容 -->
+    <view class="empty" wx:if="{{empty}}">
+      <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" />
+      <view>找不到你想查找的内容呢</view>
+      <view>换个关键词试试吧</view>
+    </view>
   </view>
 </template>
 
@@ -269,66 +273,59 @@ page{
     config = {
       navigationBarTitleText: "搭配购搜索",
     };
-
     data = {
-      imagePath:path.path.imagePath,
-      apiPath:path.path.apiPath,
-      preImagePath:path.path.preImagePath,
-      searchValue:'',
-      empty:false,
-      page:0,
-      totalPage:0,
-      arr:[],
-      newCollocationArr:{}
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      searchValue: '',
+      empty: false,
+      page: 0,
+      totalPage: 0,
+      arr: [],
+      newCollocationArr: {}
     };
     wxs = {
       m1: mywxs
     };
-
     methods = {
-     getValue(e){
-        this.searchValue  = e.detail.value;
-     },
-     searchResult(){
-       this.page = 0
-       this.arr = []
-       this.newCollocationArr = {}
-       this.getNewCollocation()
-     },
+      getValue(e) {
+        this.searchValue = e.detail.value;
+      },
+      searchResult() {
+        this.page = 0
+        this.arr = []
+        this.newCollocationArr = {}
+        this.getNewCollocation()
+      },
     };
-
-    onLoad() { 
-    };
-
-    onShow() { };
+    onLoad() {};
+    onShow() {};
     //最新搭配
-    getNewCollocation(){
+    getNewCollocation() {
       var that = this
       wx.request({
         url: that.apiPath + '/szmktstore/pmtCollocation/search', //开发者服务器接口地址",
         data: {
-          sortType:1,
-          keyWords:that.searchValue,
-          page:that.page
+          sortType: 1,
+          keyWords: that.searchValue,
+          page: that.page
         }, //请求的参数",
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
           console.log(res)
           that.newCollocationArr = res.data.data.content
-        if(that.newCollocationArr.length<=0){
-          that.empty = true
-        }else{
-          that.empty = false
-        }
+          if (that.newCollocationArr.length <= 0) {
+            that.empty = true
+          } else {
+            that.empty = false
+          }
           that.$apply()
         },
         fail: () => {},
         complete: () => {}
       });
-      
     }
-
   }
 </script>
 

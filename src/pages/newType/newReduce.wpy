@@ -146,7 +146,7 @@ export default class Index extends wepy.page {
       m1: mywxs
   };
   methods = {};  
-  // 专区内的满减商品
+  // 店铺内的满减商品
   getReduceProduce(){
     var that = this
     wx.request({

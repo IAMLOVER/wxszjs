@@ -6,58 +6,52 @@
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js'
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "图文详情",
     };
-
     data = {
-        imagePath:path.path.imagePath,
-        apiPath:path.path.apiPath,
-        bannerId:'',
-        content:''
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      bannerId: '',
+      content: ''
     };
-
-    methods = {
-    };
-
-    onLoad(options) { 
+    methods = {};
+    onLoad(options) {
       this.bannerId = options.id
-       this.getContent()
+      this.getContent()
     };
-
-    onShow() { };
-    getContent(){
-      var that = this 
+    onShow() {};
+    getContent() {
+      var that = this
       wx.request({
         url: that.apiPath + '/szmktbackstage/banner/content', //开发者服务器接口地址",
         data: {
-          bannerId:that.bannerId,
-          userid:that.$parent.globalData.userId
+          bannerId: that.bannerId,
+          userid: that.$parent.globalData.userId
         }, //请求的参数",
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
           console.log(res)
           that.content = res.data.data
-           that.content.description = that.content.description.replace(/\<img/g,'<img style="width:100%;height:auto;display:block"');
+          that.content.description = that.content.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"');
           that.$apply()
-       },
+        },
         fail: () => {},
         complete: () => {}
       });
-      
     }
   }
 </script>
 
 <style lang='less'>
-.page{
-  font-size: 32rpx;
-  padding: 30rpx;
-  box-sizing: border-box;
-  word-break: break-all;
-}
+  .page {
+    font-size: 32rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+    word-break: break-all;
+  }
 </style>

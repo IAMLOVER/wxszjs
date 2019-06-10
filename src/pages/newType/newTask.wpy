@@ -139,7 +139,7 @@ export default class Index extends wepy.page {
     taskArr:{},
   };
   methods = {};  
-  // 专区内的最新任务
+  // 店铺内的最新任务
   getTaskProduce(){
     var that = this
     wx.request({
