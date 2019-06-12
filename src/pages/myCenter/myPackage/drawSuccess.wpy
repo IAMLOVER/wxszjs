@@ -1,50 +1,49 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-  padding-top: 220rpx;
-  text-align: center;
-  image{
-    width: 390rpx;
-    height: 278rpx;
+  page {
+    background-color: #f5f5f5;
+    padding-top: 220rpx;
+    text-align: center;
+    image {
+      width: 390rpx;
+      height: 278rpx;
+    }
+    view {
+      font-size: 28rpx;
+      color: #959595;
+      margin-top: 20rpx;
+    }
+    .btn {
+      width: 530rpx;
+      height: 88rpx;
+      background-image: linear-gradient(-27deg, #E176FF 0%, #F25664 100%);
+      border-radius: 44rpx;
+      line-height: 88rpx;
+      color: #fff;
+      font-size: 32rpx;
+      margin: 0 auto;
+      margin-top: 88rpx;
+    }
   }
-  view{
-    font-size: 28rpx;
-    color: #959595;
-    margin-top: 20rpx;
-  }
-  .btn{
-    width: 530rpx;
-    height: 88rpx;
-    background-image: linear-gradient(-27deg,#E176FF  0%, #F25664 100%);
-    border-radius: 44rpx;
-    line-height: 88rpx;
-    color: #fff;
-    font-size: 32rpx;
-    margin: 0 auto;
-    margin-top: 88rpx;
-  }
-}
 </style>
 <template>
   <view class="page">
-    <image src="{{imagePath+'sucess03.png'}}" wx:if="{{imagePath}}"/>
+    <image src="{{imagePath+'null_success@2x.png'}}" wx:if="{{imagePath}}" />
     <view class="tip">提现成功，请留意账户金额</view>
     <navigator url='./myPackage' class="btn">返回我的钱包</navigator>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '提现成功'
-  };
-  onLoad() {
+  import wepy from 'wepy';
+  import path from '../../../common/path.js';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '提现成功'
+    };
+    onLoad() {}
+    data = {
+      imagePath: path.path.imagePath,
+    };
+    methods = {};
   }
-  data = {
-    imagePath:path.path.imagePath,
-  };
-  methods = {};  
-}
 </script>

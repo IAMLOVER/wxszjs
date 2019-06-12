@@ -1,238 +1,241 @@
 <style lang="less">
-.container {
-  min-height: 100vh;
-  background: #ffffff;
-  padding: 0 30rpx;
-  .header {
-    height: 300rpx;
-    width: 100%;
-    box-sizing: border-box;
-    border-bottom: 2rpx solid #e6e6e6;
-    padding: 30rpx 0;
-    .discount {
-      height: 240rpx;
+  .container {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 0 30rpx;
+    .header {
+      height: 300rpx;
       width: 100%;
-      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/discountbg.png');
-      background-size: 100% 100%;
-      display:flex;display:-webkit-flex;
-      justify-content: center;
--webkit-justify-content: center;
-      font-size: 32rpx;
-      color: white;
-      flex-direction: column;-webkit-flex-direction: column;
-      padding-left: 42vw;
       box-sizing: border-box;
-    }
-  }
-  .tab {
-    height: 68rpx;
-    width: 100%;
-    background: #f0f0f0;
-    display:flex;display:-webkit-flex;
-    align-items:center;
--webkit-align-items: center;
-    margin-top: 38rpx;
-    margin-bottom: 35rpx;
-    .tab-list {
-      height: 68rpx;
-      -webkit-flex: 1;-ms-flex: 1;flex: 1;
-      color: #666666;
-      display:flex;display:-webkit-flex;
-      justify-content: center;
--webkit-justify-content: center;
-      align-items:center;
--webkit-align-items: center;
-      font-size: 28rpx;
-      .tab-text {
-        height: 88rpx;
-        line-height: 88rpx;
+      border-bottom: 2rpx solid #e6e6e6;
+      padding: 30rpx 0;
+      .discount {
+        height: 240rpx;
+        width: 100%;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/discountbg.png');
+        background-size: 100% 100%;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+        font-size: 32rpx;
+        color: white;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        padding-left: 42vw;
+        box-sizing: border-box;
       }
     }
-    .tab-list-active {
+    .tab {
       height: 68rpx;
-      -webkit-flex: 1;-ms-flex: 1;flex: 1;
-      color: #ffffff;
-      display:flex;display:-webkit-flex;
-      justify-content: center;
--webkit-justify-content: center;
-      align-items:center;
--webkit-align-items: center;
-      font-size: 28rpx;
-      background: #f25664;
+      width: 100%;
+      background: #f0f0f0;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      margin-top: 38rpx;
+      margin-bottom: 35rpx;
+      .tab-list {
+        height: 68rpx;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        color: #666666;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+        align-items: center;
+        -webkit-align-items: center;
+        font-size: 28rpx;
+        .tab-text {
+          height: 88rpx;
+          line-height: 88rpx;
+        }
+      }
+      .tab-list-active {
+        height: 68rpx;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        color: #ffffff;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+        align-items: center;
+        -webkit-align-items: center;
+        font-size: 28rpx;
+        background: #f25664;
+      }
     }
-  }
-  .discount-list {
-    height: 200rpx;
-    width: 100%;
-    margin-top: 5rpx;
-    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/coupon03.png');
-    background-size: 100% 100%;
-    color: white;
-    position: relative;
-    .use{
+    .discount-list {
+      height: 200rpx;
+      width: 100%;
+      margin-top: 5rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/coupon03.png');
+      background-size: 100% 100%;
+      color: white;
+      position: relative;
+      .use {
         position: absolute;
-        font-size:28rpx;
-        right:60rpx;
-        top:60rpx;
+        font-size: 28rpx;
+        right: 60rpx;
+        top: 60rpx;
         border-radius: 10rpx;
-        border:2px solid white;
+        border: 2px solid white;
         padding: 12rpx 20rpx;
+      }
+    }
+    .empty {
+      font-size: 28rpx;
+      color: #959595;
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      align-items: center;
+      -webkit-align-items: center;
+      image {
+        height: 276rpx;
+        width: 384rpx;
+        margin-top: 105rpx;
+        margin-bottom: 42rpx;
+      }
     }
   }
-  .empty{
-      font-size:28rpx;
-      color:#959595;
-      display:flex;display:-webkit-flex;
-      flex-direction: column;-webkit-flex-direction: column;
-      align-items:center;
--webkit-align-items: center;
-      image{
-          height:276rpx;
-          width:384rpx;
-          margin-top:105rpx;
-          margin-bottom:42rpx;
-      }
-  }
-}
 </style>
 <template>
-    <view class="container">
-        <view class="header">
-            <view class="discount">
-                <view>优惠券累计为你省下</view>
-                <view>￥
-                    <text style="font-size:50rpx;">{{mySave}}</text>
-                </view>
-            </view>
+  <view class="container">
+    <view class="header">
+      <view class="discount">
+        <view>优惠券累计为你省下</view>
+        <view>￥
+          <text style="font-size:50rpx;">{{mySave}}</text>
         </view>
-        <view class="tab">
-             <view
-                class="{{index==nowIndex?'tab-list-active':'tab-list'}}"
-                wx:for="{{tabLists}}"
-                wx:key="{{item.index}}"
-                data-id="{{index}}"
-                @tap="chooseTab"
-            >
-                <view class="tab-text">{{item}}</view>
-            </view>
-        </view>
-        <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
-            <view style="margin-left:50rpx;">
-                <view style="display:flex;display:-webkit-flex;-webkit-align-items:center;align-items:center;padding-top:4rpx;">
-                    <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
-                    <view style="margin-left:20rpx;">
-                        <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
-                    </view>
-                </view>
-                <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
-            </view>
-            <view class="use">去使用</view>
-        </navigator>
-        <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" style="background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/coupon04.png')" wx:if="{{couponStatus == 1 && canArr.length>0}}">
-            <view style="margin-left:50rpx;">
-                <view style="display:flex;display:-webkit-flex;-webkit-align-items:centeralign-items:center;;padding-top:4rpx;">
-                    <view style="font-size:80rpx;">{{m1.filter(item.privilege*0.01)}}</view>
-                    <view style="margin-left:20rpx;">
-                        <view style="font-size:20rpx;">“满减”专享</view>
-                        <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
-                    </view>
-                </view>
-                <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
-            </view>
-            <view class="use">已失效</view>
-        </view>
-        <view class="empty" wx:if="{{canArr.length<=0}}">
-            <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
-            <view>你的券包空空如也呢</view>
-        </view>
+      </view>
     </view>
+    <view class="tab">
+      <view class="{{index==nowIndex?'tab-list-active':'tab-list'}}" wx:for="{{tabLists}}" wx:key="{{item.index}}" data-id="{{index}}" @tap="chooseTab">
+        <view class="tab-text">{{item}}</view>
+      </view>
+    </view>
+    <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
+      <view style="margin-left:50rpx;">
+        <view style="display:flex;display:-webkit-flex;-webkit-align-items:center;align-items:center;padding-top:4rpx;">
+          <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
+          <view style="margin-left:20rpx;">
+            <view style="font-size:20rpx;">“满减”专享</view>
+            <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
+          </view>
+        </view>
+        <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
+      </view>
+      <view class="use">去使用</view>
+    </navigator>
+    <view class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" style="background-image:url('https://pictest.sqplus.cn/szjs/user/images/index/coupon04.png')" wx:if="{{couponStatus == 1 && canArr.length>0}}">
+      <view style="margin-left:50rpx;">
+        <view style="display:flex;display:-webkit-flex;-webkit-align-items:centeralign-items:center;;padding-top:4rpx;">
+          <view style="font-size:80rpx;">{{m1.filter(item.privilege*0.01)}}</view>
+          <view style="margin-left:20rpx;">
+            <view style="font-size:20rpx;">“满减”专享</view>
+            <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>
+          </view>
+        </view>
+        <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
+      </view>
+      <view class="use">已失效</view>
+    </view>
+    <view class="empty" wx:if="{{canArr.length<=0}}">
+      <image src="{{imagePath+'null_wallet@2x.png'}}" wx:if="{{imagePath}}" />
+      <view>你的券包空空如也呢</view>
+    </view>
+  </view>
 </template>
 
 <script>
-import wepy from 'wepy'
-import path from '../../../common/path.js'
-import time from '../../../common/time.js' 
-import mywxs from '../../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的优惠券',
-    navigationBarBackgroundColor: 'white',
-    navigationBarTextStyle: 'black'
-  };
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    tabLists: ['可使用', '已失效'],
-    nowIndex: 0,
-    couponStatus:0,
-    canArr:{},
-    mySave:''
-  };
-  methods = {
-    chooseTab(e){
-      this.nowIndex = e.currentTarget.dataset.id
-      this.couponStatus = e.currentTarget.dataset.id
-      this.getMyCoupon()
-    }
-  };
-  onLoad() {
-    this.getMyCoupon()
-    this.getMySave()
-  }
-  // 查看我的优惠劵
-  getMyCoupon(){
-    wx.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/user/querycouponlist', 
-      data: {
-        userid:that.$parent.globalData.userId,
-        status:that.couponStatus,
-      },
-      method: 'get',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.canArr = res.data.data
-        for (var item of that.canArr){
-          item.blockingTime = time.formatTime(item.blockingTime,'Y-M-D h:m:s')
-        }
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {
-        wx.hideLoading();
+  import wepy from 'wepy'
+  import path from '../../../common/path.js'
+  import time from '../../../common/time.js'
+  import mywxs from '../../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的优惠券',
+      navigationBarBackgroundColor: 'white',
+      navigationBarTextStyle: 'black'
+    };
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      tabLists: ['可使用', '已失效'],
+      nowIndex: 0,
+      couponStatus: 0,
+      canArr: {},
+      mySave: ''
+    };
+    methods = {
+      chooseTab(e) {
+        this.nowIndex = e.currentTarget.dataset.id
+        this.couponStatus = e.currentTarget.dataset.id
+        this.getMyCoupon()
       }
-    });
-  }
-  wxs = {
+    };
+    onLoad() {
+      this.getMyCoupon()
+      this.getMySave()
+    }
+    // 查看我的优惠劵
+    getMyCoupon() {
+      wx.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/querycouponlist',
+        data: {
+          userid: that.$parent.globalData.userId,
+          status: that.couponStatus,
+        },
+        method: 'get',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.canArr = res.data.data
+          for (var item of that.canArr) {
+            item.blockingTime = time.formatTime(item.blockingTime, 'Y-M-D h:m:s')
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {
+          wx.hideLoading();
+        }
+      });
+    }
+    wxs = {
       m1: mywxs
-  };
-  // 通过优惠券，我已经省了多少钱
-  getMySave(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/user/queryusercoupontotal', 
-      data: {
-        userid:that.$parent.globalData.userId,
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.mySave = res.data.data
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+    };
+    // 通过优惠券，我已经省了多少钱
+    getMySave() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/queryusercoupontotal',
+        data: {
+          userid: that.$parent.globalData.userId,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.mySave = res.data.data
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-}
 </script>

@@ -143,6 +143,16 @@
       height: 48rpx;
     }
   }
+  .empty{
+    margin-top: 100rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #959595;
+    image{
+      width: 400rpx;
+      height: 300rpx;
+    }
+  }
 </style>
 <template>
   <view class="page">
@@ -187,6 +197,12 @@
         </view>
       </navigator>
     </view>
+
+    <!-- 数据为空的时候 -->
+    <view class="empty" wx:if="{{empty}}">
+        <image src="{{imagePath+'null_shop@2x.png'}}" wx:if="{{imagePath}}" />
+        <view>店铺正在火热筹备中哦</view>
+    </view>
   </view>
 </template>
 
@@ -216,6 +232,7 @@
       arr: [],
       page: 0,
       totalPage: 0,
+      empty:false,
     };
     methods = {
       getShopById(e) {
@@ -287,6 +304,11 @@
         dataType: 'json',
         success: res => {
           console.log(res)
+          if(res.data.data.content.length <= 0){
+            that.empty = true
+          }else{
+            that.empty = false
+          }
           that.shopArr = that.arr.concat(res.data.data.content)
           that.totalPage = res.data.data.totalPages
           that.$apply()

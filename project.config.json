@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 13,
 			"list": [
 				{
 					"id": 0,
@@ -48,7 +48,7 @@
 				{
 					"id": 2,
 					"name": "大满减",
-					"pathName": "pages/empty/loginSuccess",
+					"pathName": "pages/myCenter/myPackage/drawSuccess",
 					"query": "",
 					"scene": null
 				},
@@ -126,7 +126,7 @@
 					"id": 13,
 					"name": "web登录",
 					"pathName": "pages/ediLogin/ediLogin",
-					"query": "scene=3UXX8E1Z",
+					"query": "scene=AL2ETEGV",
 					"scene": null
 				},
 				{
@@ -155,6 +155,13 @@
 					"name": "数据中心",
 					"pathName": "pages/myCenter/myShop/myShopAtmosphere",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "大满减",
+					"pathName": "pages/login/login",
+					"query": "sence=KMF0CSI2",
 					"scene": null
 				}
 			]

@@ -28,8 +28,8 @@
         </view>
         <!-- 可以抢还是不可以抢 -->
         <text class="can">
-                抢
-            </text>
+                  抢
+              </text>
         <!-- 不可以抢的遮罩 -->
         <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
           <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}" />
@@ -38,7 +38,7 @@
     </view>
     <!-- 空内容 -->
     <view class="empty" wx:if="{{empty}}">
-      <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" />
+      <image wx:if="{{imagePath}}" src="{{imagePath+'null_search@2x.png'}}" />
       <view>找不到你想查找的内容呢</view>
       <view>换个关键词试试吧</view>
     </view>
@@ -300,8 +300,8 @@
     font-size: 28rpx;
     margin-top: 120rpx;
     image {
-      width: 420rpx;
-      height: 360rpx;
+      width: 400rpx;
+      height: 300rpx;
     }
   }
 </style>

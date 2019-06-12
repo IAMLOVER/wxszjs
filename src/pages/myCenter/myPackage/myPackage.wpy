@@ -1,122 +1,125 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-  box-sizing: border-box;
-  padding: 30rpx;
-  .income{
-    width: 690rpx;
-    height: 348rpx;
-    margin: 0 auto;
-    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_page.png');
-    background-repeat: no-repeat;
-    border-radius: 20rpx;
+  page {
+    background-color: #f5f5f5;
     box-sizing: border-box;
-    padding: 30rpx 0rpx;
-    background-size: 100%;
-   view{
-     text-align: center;
-     color: #fff;
-   }
-   .tip{
-     font-size: 32rpx;
-     padding-top: 20rpx;
-   }
-   .my-money{
-     font-size: 60rpx;
-   }
-   .btn{
-     width: 200rpx;
-     height: 72rpx;
-     line-height: 72rpx;
-     border-radius: 16rpx;
-     background-color: #fff;
-     color: #F25664; 
-     margin: 0 auto;
-     margin-top: 40rpx;
-     text-align: center;
-     font-size: 32rpx;
-     letter-spacing: 2
-   }
-  }
-  .record-title{
-    display:flex;display:-webkit-flex;
-    justify-content:space-evenly;
-    font-size: 28rpx;
-    align-items:center;
--webkit-align-items: center;
-    color: #222;
-    margin-top: 22rpx;
-    .line{
-      width: 60rpx;
-      height: 4rpx;
-      background-color: #F25664;
-      opacity: 0.3;
-      margin-left: 150rpx;
+    padding: 30rpx;
+    .income {
+      width: 690rpx;
+      height: 348rpx;
+      margin: 0 auto;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_page.png');
+      background-repeat: no-repeat;
+      border-radius: 20rpx;
       box-sizing: border-box;
-    }
-    .line:last-child{
-      margin-right: 150rpx;
-      margin-left: 0rpx;
-    }
-  }
-  .record-items{
-    width: 690rpx;
-    margin: 0 auto;
-    margin-top: 22rpx;
-    border-radius: 20rpx;
-    padding: 0rpx 30rpx;
-    box-sizing: border-box;
-    background-color: #fff;
-    .item{
-      height: 124rpx;
-      background-color: #fff;
-      display:flex;display:-webkit-flex;
-      justify-content: space-between;-webkit-justify-content: space-between;
       padding: 30rpx 0rpx;
+      background-size: 100%;
+      view {
+        text-align: center;
+        color: #fff;
+      }
+      .tip {
+        font-size: 32rpx;
+        padding-top: 20rpx;
+      }
+      .my-money {
+        font-size: 60rpx;
+      }
+      .btn {
+        width: 200rpx;
+        height: 72rpx;
+        line-height: 72rpx;
+        border-radius: 16rpx;
+        background-color: #fff;
+        color: #F25664;
+        margin: 0 auto;
+        margin-top: 40rpx;
+        text-align: center;
+        font-size: 32rpx;
+        letter-spacing: 2
+      }
+    }
+    .record-title {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-evenly;
+      font-size: 28rpx;
+      align-items: center;
+      -webkit-align-items: center;
+      color: #222;
+      margin-top: 22rpx;
+      .line {
+        width: 60rpx;
+        height: 4rpx;
+        background-color: #F25664;
+        opacity: 0.3;
+        margin-left: 150rpx;
+        box-sizing: border-box;
+      }
+      .line:last-child {
+        margin-right: 150rpx;
+        margin-left: 0rpx;
+      }
+    }
+    .record-items {
+      width: 690rpx;
+      margin: 0 auto;
+      margin-top: 22rpx;
+      border-radius: 20rpx;
+      padding: 0rpx 30rpx;
       box-sizing: border-box;
-      border-bottom: 2rpx solid #E6E6E6;
-      .item-info{
-        .name{
+      background-color: #fff;
+      .item {
+        height: 124rpx;
+        background-color: #fff;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        padding: 30rpx 0rpx;
+        box-sizing: border-box;
+        border-bottom: 2rpx solid #E6E6E6;
+        .item-info {
+          .name {
             font-size: 28rpx;
             color: #222;
-        }
-        .time{
+          }
+          .time {
             font-size: 24rpx;
             color: #959595;
+          }
+        }
+        .item-number {
+          font-size: 32rpx;
+          color: #000;
+          padding-top: 10rpx;
+          image {
+            width: 12rpx;
+            height: 20rpx;
+            margin-left: 15rpx;
+          }
         }
       }
-      .item-number{
-        font-size: 32rpx;
-        color: #000;
-        padding-top: 10rpx;
-        image{
-          width: 12rpx;
-          height: 20rpx;
-          margin-left: 15rpx;
-        }
+      .item:last-child {
+        border-bottom: 0rpx;
       }
     }
-    .item:last-child{
-      border-bottom: 0rpx;
+    .empty {
+      text-align: center;
+      font-size: 28rpx;
+      color: #959595;
+      margin-top: 120rpx;
+      .empty-img {
+        width: 350rpx;
+        height: 260rpx;
+      }
     }
   }
-  .empty{
-    text-align: center;
-    font-size: 28rpx;
-    color: #959595;
-    margin-top: 120rpx;
-    .empty-img{
-      width: 350rpx;
-      height: 260rpx;
-    }
-  }
-}
-.red{
-  color: red;
-  text{
+  .red {
     color: red;
+    text {
+      color: red;
+    }
   }
-}
 </style>
 <template>
   <view class="page">
@@ -126,14 +129,12 @@ page{
       <view class="my-money">{{m1.filter(myInCome*0.01)}}</view>
       <view class="btn" @tap="draw">提现</view>
     </view>
-
     <!-- 交易记录 -->
     <view class="record-title">
       <view class="line"></view>
       <view>交易记录</view>
       <view class="line"></view>
     </view>
-
     <view class="record-items">
       <view class="item" wx:for="{{records}}" wx:for-item="item" wx:key="{{index}}">
         <view class="item-info">
@@ -152,10 +153,9 @@ page{
         </view>
       </view>
     </view>
-
     <!-- 交易记录为空 -->
     <view class="empty" wx:if="{{records.length<=0}}">
-      <image wx:if="{{imagePath}}" src="{{imagePath+'null.png'}}" class="empty-img"/>
+      <image wx:if="{{imagePath}}" src="{{imagePath+'null_wallet@2x.png'}}" class="empty-img" />
       <view class="tip">
         暂无交易记录
       </view>
@@ -164,85 +164,81 @@ page{
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import time from '../../../common/time.js'
-import mywxs from '../../../wxs/mywxs.wxs';
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的钱包'
-  };
-  onLoad() {
-    this.getMyIncome()
-    this.getMyRecords()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    myInCome:'',
-    records:[]
-  };
-  methods = {
-    draw(){
-      if(this.myInCome*0.01<5){
-        wx.showToast({
-          title: '对不起，您的收入低于5元，不可提现', 
-          icon: 'none', 
-          duration: 2000,
-          mask: true,
-          success: res => {}
-        });
-      }else{
-        this.$navigate('./packWithDraw')
-      }
+  import wepy from 'wepy';
+  import path from '../../../common/path.js';
+  import time from '../../../common/time.js'
+  import mywxs from '../../../wxs/mywxs.wxs';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的钱包'
+    };
+    onLoad() {
+      this.getMyIncome()
+      this.getMyRecords()
     }
-  };  
-  wxs = {
-      m1: mywxs
-  }
-  // 我的收入接口
-  getMyIncome(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/balance/queryuserbalance', 
-      data: {
-        'userid':that.$parent.globalData.userId
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        that.myInCome = res.data.data.balance
-
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-  // 我的交易记录
-  getMyRecords(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/balance/usercashlog',
-      data: {
-        'userid':that.$parent.globalData.userId
-      }, 
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.records = res.data.data
-         for (var item of that.records){
-          item.createTime = time.formatTime(item.createTime,'Y-M-D h:m:s')
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      myInCome: '',
+      records: []
+    };
+    methods = {
+      draw() {
+        if (this.myInCome * 0.01 < 5) {
+          wx.showToast({
+            title: '对不起，您的收入低于5元，不可提现',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        } else {
+          this.$navigate('./packWithDraw')
         }
-         that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+      }
+    };
+    wxs = {
+      m1: mywxs
+    }
+    // 我的收入接口
+    getMyIncome() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/balance/queryuserbalance',
+        data: {
+          'userid': that.$parent.globalData.userId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.myInCome = res.data.data.balance
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 我的交易记录
+    getMyRecords() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/balance/usercashlog',
+        data: {
+          'userid': that.$parent.globalData.userId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.records = res.data.data
+          for (var item of that.records) {
+            item.createTime = time.formatTime(item.createTime, 'Y-M-D h:m:s')
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-}
 </script>

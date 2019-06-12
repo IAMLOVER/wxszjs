@@ -1,352 +1,349 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.swiper {
-  width: 750rpx;
-  height: 400rpx;
-  swiper-item {
-    width: 100%;
+  page {
+    background-color: #f5f5f5;
+  }
+  .swiper {
+    width: 750rpx;
     height: 400rpx;
-    image {
+    swiper-item {
       width: 100%;
-      // height: 400rpx;
+      height: 400rpx;
+      image {
+        width: 100%; // height: 400rpx;
+      }
     }
   }
-}
-.company-info{
-  background-color: #fff;
-  padding: 30rpx;
-  .info-logo{
-    float: left;
-    image{
-      width: 112rpx;
-      height: 112rpx;
-      border-radius: 8rpx;
-      margin-right: 24rpx;
+  .company-info {
+    background-color: #fff;
+    padding: 30rpx;
+    .info-logo {
+      float: left;
+      image {
+        width: 112rpx;
+        height: 112rpx;
+        border-radius: 8rpx;
+        margin-right: 24rpx;
+      }
+    }
+    .info-right {
+      .info-name {
+        font-size: 32rpx;
+        color: #222222;
+        font-weight: 600;
+        padding-bottom: 16rpx;
+      }
+      .info-type {
+        font-size: 28rpx;
+        color: #959595;
+      }
     }
   }
-  .info-right{
-    .info-name{
+  .compant-detail {
+    display: flex;
+    display: -webkit-flex;
+    background-color: #fff;
+    padding-bottom: 28rpx;
+    view {
+      -webkit-flex: 2;
+      -ms-flex: 2;
+      flex: 2;
+      font-size: 24rpx;
+      color: #666;
+      text-align: center;
+      image {
+        width: 24rpx;
+        height: 24rpx;
+        margin-left: 10rpx;
+        vertical-align: text-top;
+        margin-top: 6rpx;
+      }
+    }
+    view:nth-child(2) {
+      -webkit-flex: 3;
+      -ms-flex: 3;
+      flex: 3;
+      border-left: 1px solid #dcdcdc;
+    }
+    view:nth-child(3) {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+  }
+  .touch-info {
+    display: flex;
+    display: -webkit-flex;
+    height: 124rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    text-align: center;
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0rpx 30rpx;
+    view {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      image {
+        width: 44rpx;
+        height: 44rpx;
+        margin-top: 40rpx;
+      }
+    }
+    .address {
+      -webkit-flex: 6;
+      -ms-flex: 6;
+      flex: 6;
+      color: #666;
+      font-size: 28rpx;
+      text-align: left;
+      border-right: 1px solid #dcdcdc;
+      image {
+        width: 24rpx;
+        height: 28rpx;
+        margin-top: 30rpx;
+        margin-right: 10rpx;
+      }
+    }
+    view:nth-child(2) {
+      text-align: right;
+    }
+    view:last-child {
+      text-align: right;
+    }
+  }
+  .company-introduce {
+    width: 100%;
+    background-color: #fff;
+    margin-top: 16rpx;
+    padding: 30rpx;
+    box-sizing: border-box; // padding: 0rpx 30rpx;
+    .title {
       font-size: 32rpx;
-      color: #222222;
-      font-weight: 600;
-      padding-bottom: 16rpx;
+      color: #444444;
+      height: 92rpx;
+      line-height: 92rpx;
     }
-    .info-type{
+  }
+  .empty {
+    text-align: center;
+    margin-top: 200rpx;
+    image {
+      width: 50%;
+      margin: 0 auto;
+      height: 250rpx;
+    }
+    view {
       font-size: 28rpx;
       color: #959595;
+      margin-top: 20rpx;
     }
   }
-}
-.compant-detail{
-  display:flex;display:-webkit-flex;
-  background-color: #fff;
-  padding-bottom: 28rpx;
-  view{
-    -webkit-flex: 2;-ms-flex: 2;flex: 2;
-    font-size: 24rpx;
-    color: #666;
-    text-align: center;
-    image{
-      width: 24rpx;
-      height: 24rpx;
-      margin-left: 10rpx;
-      vertical-align: text-top;
-      margin-top: 6rpx;
-    }
+  .share {
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    border-color: #fff;
   }
-  view:nth-child(2){
-    -webkit-flex: 3;-ms-flex: 3;flex: 3;
-    border-left: 1px solid #dcdcdc;
+  button[plain] {
+    border-color: #fff !important;
   }
-  view:nth-child(3){
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
+  .img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
   }
-}
-.touch-info{
-  display:flex;display:-webkit-flex;
-  height: 124rpx;
-  box-sizing: border-box;
-  background-color: #fff;
-  text-align: center;
-  border-top: 1px solid #dcdcdc;
-  border-bottom:1px solid #dcdcdc;
-  padding: 0rpx 30rpx;
-  view{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    image{
-      width: 44rpx;
-      height: 44rpx;
-      margin-top: 40rpx;
-    }
-  }
-  .address{
-    -webkit-flex: 6;-ms-flex:  6;flex:  6;
-    color: #666;
-    font-size: 28rpx;
-    text-align: left;
-    border-right:1px solid #dcdcdc;
-    image{
-      width: 24rpx;
-      height: 28rpx;
-      margin-top: 30rpx;
-      margin-right: 10rpx;
-    }
-  }
-  view:nth-child(2){
-    text-align: right;
-  }
-  view:last-child{
-    text-align: right;
-  }
-}
-.company-introduce{
-  width: 100%;
-  background-color: #fff;
-  margin-top: 16rpx;
-  padding:30rpx;
-box-sizing:border-box;
-
-  // padding: 0rpx 30rpx;
-  .title{
-    font-size: 32rpx;
-    color: #444444;
-    height: 92rpx;
-    line-height: 92rpx;
-  }
-}
-.empty{
-  text-align: center;
-  margin-top: 200rpx;
-  image{
-    width: 50%;
-    margin: 0 auto;
-    height: 250rpx;
-  }
-  view{
-    font-size: 28rpx;
-    color: #959595;
-    margin-top: 20rpx;
-  }
-}
-.share{
-  background-color: #fff;
-  padding: 0;
-  margin: 0;
-  display: inline;
-  border-color: #fff;
-}
-button[plain]{
-  border-color: #fff !important;  
-}
-.img{
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-}
 </style>
 <template>
   <view class="page">
     <!-- 企业图片 -->
-    <swiper class="swiper"
-            circular="true" 
-            indicator-active-color="#ffffff" 
-            indicator-dots="{{indicatorDots}}"
-            autoplay="{{autoplay}}"
-            interval="{{interval}}"
-           duration="{{duration}}"
-           wx:if="{{!showEmpty && swiperimgUrls.length>0}}"
-           >
+    <swiper class="swiper" circular="true" indicator-active-color="#ffffff" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" wx:if="{{!showEmpty && swiperimgUrls.length>0}}">
       <swiper-item wx:if="{{video}}">
-        <video autoplay @pause="pause" @ended="ended"  @play="play" show-center-play-btn="{{true}}" src="https://videoop.sqplus.cn/sqj/{{video}}" style="width:100%;height:400rpx"></video>
+        <video autoplay @pause="pause" @ended="ended" @play="play" show-center-play-btn="{{true}}" src="https://videoop.sqplus.cn/sqj/{{video}}" style="width:100%;height:400rpx"></video>
       </swiper-item>
       <repeat for="{{swiperimgUrls}}">
-         <swiper-item>
-          <image src="{{preImagePath+item}}" class="slide-image"/>
+        <swiper-item>
+          <image src="{{preImagePath+item}}" class="slide-image" />
         </swiper-item>
       </repeat>
-   </swiper>
-   <!-- 企业基本信息 -->
-   <view class="company-info" wx:if="{{!showEmpty}}">
-     <view class="info-logo">
-       <image src="{{companyInfo.logo?preImagePath+companyInfo.logo:'../../images/index/store_logomin.png'}}"/>
-     </view>
-     <view class="info-right">
-       <view class="info-name">
-         {{companyInfo.companyName}}
-       </view>
-       <view class="info-type">
-        {{companyInfoTip}}
-       </view>
-     </view>
-   </view>
-
-   <!-- 企业详细信息 -->
-   <view class="compant-detail" wx:if="{{!showEmpty}}">
-     <view>公司规模：{{companyInfo.employeeNum}}人</view>
-     <view>成立时间：{{companyInfo.updateTime}}</view>
-     <view><navigator url="./companyInfo"><text>更多</text><image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/></navigator></view>
-   </view>
-   <!-- 公司地址联系方式 -->
-   <view class="touch-info" wx:if="{{!showEmpty}}">
-     <view class="address">
-       <image wx:if="{{imagePath}}"  src="{{imagePath+'location@2x.png'}}"/>
-      <text>{{companyInfo.address}}</text>
-     </view>
-     <view @tap="call">
-       <image wx:if="{{imagePath}}" src="{{imagePath+'call@2x.png'}}"/>
-     </view>
+    </swiper>
+    <!-- 企业基本信息 -->
+    <view class="company-info" wx:if="{{!showEmpty}}">
+      <view class="info-logo">
+        <image src="{{companyInfo.logo?preImagePath+companyInfo.logo:'../../images/index/store_logomin.png'}}" />
+      </view>
+      <view class="info-right">
+        <view class="info-name">
+          {{companyInfo.companyName}}
+        </view>
+        <view class="info-type">
+          {{companyInfoTip}}
+        </view>
+      </view>
+    </view>
+    <!-- 企业详细信息 -->
+    <view class="compant-detail" wx:if="{{!showEmpty}}">
+      <view>公司规模：{{companyInfo.employeeNum}}人</view>
+      <view>成立时间：{{companyInfo.updateTime}}</view>
+      <view>
+        <navigator url="./companyInfo"><text>更多</text>
+          <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}" />
+        </navigator>
+      </view>
+    </view>
+    <!-- 公司地址联系方式 -->
+    <view class="touch-info" wx:if="{{!showEmpty}}">
+      <view class="address">
+        <image wx:if="{{imagePath}}" src="{{imagePath+'location@2x.png'}}" />
+        <text>{{companyInfo.address}}</text>
+      </view>
+      <view @tap="call">
+        <image wx:if="{{imagePath}}" src="{{imagePath+'call@2x.png'}}" />
+      </view>
       <view>
         <button open-type="share" class="share" plain="true">
-       <image wx:if="{{imagePath}}" src="{{imagePath+'share@2x.png'}}"/>
-        </button>
-     </view>
-   </view>
-   <!-- 企业介绍 -->
-   <view class="company-introduce" wx:if="{{!showEmpty}}">
-     <view class="title">
-       企业介绍
-     </view>
-     <rich-text nodes="{{companyInfo.description}}"></rich-text>
-   </view>
-
-
-   <!--  掌柜太懒了 -->
-   <view class="empty" wx:if="{{showEmpty}}">
-     <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
-     <view class="tip">掌柜太懒了，啥也没留下</view>
-     <view class="tip">还是去看看他的店铺好货吧</view>
-   </view>
+         <image wx:if="{{imagePath}}" src="{{imagePath+'share@2x.png'}}"/>
+          </button>
+      </view>
+    </view>
+    <!-- 企业介绍 -->
+    <view class="company-introduce" wx:if="{{!showEmpty}}">
+      <view class="title">
+        企业介绍
+      </view>
+      <rich-text nodes="{{companyInfo.description}}"></rich-text>
+    </view>
+    <!--  掌柜太懒了 -->
+    <view class="empty" wx:if="{{showEmpty}}">
+      <image src="{{imagePath+'null_decoration@2x.png'}}" wx:if="{{imagePath}}" />
+      <view class="tip">掌柜太懒了，啥也没留下</view>
+      <view class="tip">还是去看看他的店铺好货吧</view>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js'; 
-import time from '../../common/time.js' 
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '企业详情'
-  };
-  onLoad(options) {
-    this.storeId = options.storeId
-    this.getInfo()
-    this.getStorePhone()
-  }
-  data = {
-     imagePath:path.path.imagePath,
-     apiPath:path.path.apiPath,
-     preImagePath:path.path.preImagePath,
-     swiperimgUrls: [],
-     indicatorDots: false,
-     autoplay: true,
-     interval: 3000,
-     duration: 1000,
-     showEmpty:false,
-     companyInfo:{},
-     storePhoneNum:'',
-     companyInfoTip:'',
-     video:''
-  };
-  methods = {
-    play(){
-      this.autoplay = false
-    },
-    pause(){
-      this.autoplay = true
-    },
-    ended() {
-      this.autoplay = true
-    },
-     call(){
-      wx.makePhoneCall({ phoneNumber: this.storePhoneNum });
-    },
-   onShareAppMessage(){
-   }
-  };  
-  getInfo(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/brandInfo',
-      data: {
-        'storeId':that.storeId,
+  import wepy from 'wepy';
+  import path from '../../common/path.js';
+  import time from '../../common/time.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '企业详情'
+    };
+    onLoad(options) {
+      this.storeId = options.storeId
+      this.getInfo()
+      this.getStorePhone()
+    }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      swiperimgUrls: [],
+      indicatorDots: false,
+      autoplay: true,
+      interval: 3000,
+      duration: 1000,
+      showEmpty: false,
+      companyInfo: {},
+      storePhoneNum: '',
+      companyInfoTip: '',
+      video: ''
+    };
+    methods = {
+      play() {
+        this.autoplay = false
       },
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        if(res.data.data == null){
-          that.showEmpty = true
+      pause() {
+        this.autoplay = true
+      },
+      ended() {
+        this.autoplay = true
+      },
+      call() {
+        wx.makePhoneCall({
+          phoneNumber: this.storePhoneNum
+        });
+      },
+      onShareAppMessage() {}
+    };
+    getInfo() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/brandInfo',
+        data: {
+          'storeId': that.storeId,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          if (res.data.data == null) {
+            that.showEmpty = true
+            that.$apply()
+          } else {
+            that.companyInfo = res.data.data
+            that.swiperimgUrls = res.data.data.imageLlist
+            that.video = res.data.data.video
+            that.companyInfo.description = that.companyInfo.description.replace(/\<img/g, '<img class="img"');
+            that.$apply()
+            wx.setStorage({
+              key: 'companyName',
+              data: that.companyInfo.companyName,
+            });
+            that.getCompanyInfo(that.companyInfo.companyName)
+          }
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //获取商店的服务电话
+    getStorePhone() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/storeInfo/serviceTel',
+        data: {
+          storeId: that.storeId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.storePhoneNum = res.data.data
           that.$apply()
-        }else{
-          that.companyInfo = res.data.data
-          that.swiperimgUrls = res.data.data.imageLlist
-          that.video = res.data.data.video
-          that.companyInfo.description = that.companyInfo.description.replace(/\<img/g,'<img class="img"');
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //天眼查
+    getCompanyInfo(String) {
+      wx.showLoading({
+        title: '加载中',
+        mask: true,
+        success: res => {}
+      });
+      var that = this
+      wx.request({
+        url: that.apiPath + '/sbchcompany/company/regcompany',
+        data: {
+          company: String
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res.data)
+          that.companyInfoTip = res.data.data.industry
+          that.companyInfo.updateTime = time.formatTime(res.data.data.estiblishtime, 'Y年M月D日')
           that.$apply()
-          wx.setStorage({
-            key: 'companyName',
-            data: that.companyInfo.companyName,
-          });
-          that.getCompanyInfo(that.companyInfo.companyName)
+        },
+        fail: () => {},
+        complete: () => {
+          wx.hideLoading();
         }
-      },
-      fail: () => {},
-      complete: () => {}
-    });
+      });
+    }
   }
-
-   //获取商店的服务电话
-  getStorePhone(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/storeInfo/serviceTel', 
-      data: {
-        storeId:that.storeId
-      },
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.storePhoneNum = res.data.data
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-
-
-  //天眼查
-   getCompanyInfo(String){
-    wx.showLoading({
-      title: '加载中', 
-      mask: true,
-      success: res => {}
-    });
-    
-    var that = this
-    wx.request({
-      url: that.apiPath + '/sbchcompany/company/regcompany', 
-      data: {
-        company:String
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res.data)
-        that.companyInfoTip = res.data.data.industry
-        that.companyInfo.updateTime = time.formatTime(res.data.data.estiblishtime,'Y年M月D日')
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {
-        wx.hideLoading();
-      }
-    });
-    
-  } 
-}
 </script>

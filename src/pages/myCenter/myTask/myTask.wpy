@@ -1,104 +1,108 @@
 <style lang="less">
-page{
-  background-image: linear-gradient(0deg, #F59562 0%, #F26D49 100%);
-}
-.main{
-  width: 690rpx;
-  height: 328rpx;
-  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task02.png');
-  margin: 0 auto;
-  margin-top: 30rpx;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  text-align: center;
-  .title{
-    font-size: 32rpx;
-    color: #5F3118;
-    padding-top: 60rpx;
+  page {
+    background-image: linear-gradient(0deg, #F59562 0%, #F26D49 100%);
   }
-  .money{
-    font-size: 60rpx;
-    color: #5F3118;
-    font-weight: 600;
-  }
-  .total-task{
-    font-size: 32rpx;
-    color: #C0623C;
-    padding-top: 30rpx;
-    border-top: 2rpx solid rgba(251,212,196,0.5);
-  }
-}
-.tab-area{
-  display:flex;display:-webkit-flex;
-  margin-top: 40rpx;
-  justify-content: center;
--webkit-justify-content: center;
-  .tab-item{
-    width: 200rpx;
-    height: 76rpx;
-    border-radius: 12rpx 12rpx 0px 0px;
+  .main {
+    width: 690rpx;
+    height: 328rpx;
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task02.png');
+    margin: 0 auto;
+    margin-top: 30rpx;
+    background-repeat: no-repeat;
+    background-size: 100%;
     text-align: center;
-    line-height: 76rpx;
-    font-size: 32rpx;
-    color: #fff;
-    background: #C0623C; 
-    margin-right: 16rpx;
-    font-weight: 600;
+    .title {
+      font-size: 32rpx;
+      color: #5F3118;
+      padding-top: 60rpx;
+    }
+    .money {
+      font-size: 60rpx;
+      color: #5F3118;
+      font-weight: 600;
+    }
+    .total-task {
+      font-size: 32rpx;
+      color: #C0623C;
+      padding-top: 30rpx;
+      border-top: 2rpx solid rgba(251, 212, 196, 0.5);
+    }
   }
-  .tab-item:last-child{
-    margin-right: 0;
+  .tab-area {
+    display: flex;
+    display: -webkit-flex;
+    margin-top: 40rpx;
+    justify-content: center;
+    -webkit-justify-content: center;
+    .tab-item {
+      width: 200rpx;
+      height: 76rpx;
+      border-radius: 12rpx 12rpx 0px 0px;
+      text-align: center;
+      line-height: 76rpx;
+      font-size: 32rpx;
+      color: #fff;
+      background: #C0623C;
+      margin-right: 16rpx;
+      font-weight: 600;
+    }
+    .tab-item:last-child {
+      margin-right: 0;
+    }
+    .active {
+      background: #FFFBF5;
+      color: #5F3118;
+    }
   }
-  .active{
-    background: #FFFBF5;
-    color: #5F3118;
-  }
-}
- .task-lists{
+  .task-lists {
     padding: 0rpx 24rpx;
     background: #FFFBF5;
     border-radius: 12rpx;
     width: 690rpx;
     box-sizing: border-box;
     margin: 0 auto;
-    .list{
-      display:flex;display:-webkit-flex;
+    .list {
+      display: flex;
+      display: -webkit-flex;
       padding-top: 24rpx;
-      .list-left{
-        image{
+      .list-left {
+        image {
           width: 180rpx;
           height: 180rpx;
           border-radius: 16rpx;
           margin-right: 16rpx;
         }
       }
-      .list-right{
-        .list-title{
+      .list-right {
+        .list-title {
           font-size: 32rpx;
           color: #222;
-          height:100rpx;
+          height: 100rpx;
           font-weight: 600;
-           display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
         }
-        .time-money{
-          display:flex;display:-webkit-flex;
-          justify-content: space-between;-webkit-justify-content: space-between;
+        .time-money {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: space-between;
+          -webkit-justify-content: space-between;
           margin-bottom: 12rpx;
-          view{
+          view {
             font-size: 24rpx;
             color: #959595;
           }
         }
-        .progress-box{
+        .progress-box {
           background: #FFDCE1;
           border-radius: 12rpx;
           width: 446rpx;
           height: 24rpx;
           position: relative;
-          .progress{
+          .progress {
             background: #FFDCE1;
             border-radius: 12rpx;
             height: 24rpx;
@@ -107,7 +111,7 @@ page{
             left: 0;
             top: 0;
           }
-          .tip{
+          .tip {
             color: #fff;
             font-size: 20rpx;
             position: absolute;
@@ -115,7 +119,7 @@ page{
             display: inline-block;
             top: -3rpx;
           }
-          .percent{
+          .percent {
             color: #F25664;
             font-size: 20rpx;
             position: absolute;
@@ -127,33 +131,32 @@ page{
       }
     }
   }
-
-.empty{
-  width: 690rpx;
-  height: 486rpx;
-  background: #FFFBF5;
-  border-radius: 6px;
-  margin: 0 auto;
-  padding-top: 80rpx;
-  text-align: center;
-  image{
-    width: 400rpx;
-    height: 250rpx;
+  .empty {
+    width: 690rpx;
+    height: 486rpx;
+    background: #FFFBF5;
+    border-radius: 6px;
+    margin: 0 auto;
+    padding-top: 80rpx;
+    text-align: center;
+    image {
+      width: 400rpx;
+      height: 250rpx;
+    }
+    view {
+      font-size: 28rpx;
+      color: #959595;
+    }
   }
-  view{
-    font-size: 28rpx;
-    color: #959595;
+  .fail {
+    background-color: #B5B5B5 !important;
+    .progress {
+      background: #B5B5B5 !important;
+    }
+    .percent {
+      color: #fff !important;
+    }
   }
-}
-.fail{
-  background-color: #B5B5B5 !important;
-  .progress{
-   background: #B5B5B5 !important;
-  }
-  .percent{
-    color: #fff !important;
-  }
-}
 </style>
 <template>
   <view class="page">
@@ -163,131 +166,129 @@ page{
       <view class="money">{{taskOverMoney*0.01}}</view>
       <view class="total-task">我一共领取了<text style="color:#5f3118;font-weight:600">{{targetNum}}</text>次拼团任务</view>
     </view>
-
     <!-- tab栏的内容 -->
     <view class="tab-area">
-      <view class="tab-item {{index == activeIndex?'active':''}}" @tap="choseType" wx:for="{{type}}" wx:key="{{index}}" wx:for-item="item" data-index="{{index}}" >{{item}}</view>
+      <view class="tab-item {{index == activeIndex?'active':''}}" @tap="choseType" wx:for="{{type}}" wx:key="{{index}}" wx:for-item="item" data-index="{{index}}">{{item}}</view>
     </view>
     <!-- 任务列表 -->
     <view class="task-lists">
-        <view class="list" @tap="goTaskDetail" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.targetId}}">
-          <view class="list-left"><image src="{{preImagePath+item.picUrl}}" mode="aspectFill"/></view>
-          <view class="list-right">
-            <view class="list-title">{{item.title}}</view>
-            <view class="time-money">
-              <view class="time">{{item.blockingTime}}截止</view>
-              <view class="money">佣金：{{item.percent}}%</view>
-            </view>
-            <!-- 进度条 -->
-            <view class="progress-box {{status==2?'fail':''}}">
-              <view class="progress" style="width:{{(item.inviteNum/item.targetNum)*100}}%"></view>
-              <text class="tip" wx:if="{{status == 0}}">进行中</text>
-              <text class="tip" wx:if="{{status == 1}}">已成功</text>
-              <text class="tip" wx:if="{{status == 2}}">已失败</text>
-              <text class="percent">{{(item.inviteNum/item.targetNum)*100}}%</text>
-            </view>
+      <view class="list" @tap="goTaskDetail" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.targetId}}">
+        <view class="list-left">
+          <image src="{{preImagePath+item.picUrl}}" mode="aspectFill" />
+        </view>
+        <view class="list-right">
+          <view class="list-title">{{item.title}}</view>
+          <view class="time-money">
+            <view class="time">{{item.blockingTime}}截止</view>
+            <view class="money">佣金：{{item.percent}}%</view>
+          </view>
+          <!-- 进度条 -->
+          <view class="progress-box {{status==2?'fail':''}}">
+            <view class="progress" style="width:{{(item.inviteNum/item.targetNum)*100}}%"></view>
+            <text class="tip" wx:if="{{status == 0}}">进行中</text>
+            <text class="tip" wx:if="{{status == 1}}">已成功</text>
+            <text class="tip" wx:if="{{status == 2}}">已失败</text>
+            <text class="percent">{{(item.inviteNum/item.targetNum)*100}}%</text>
           </view>
         </view>
       </view>
-
+    </view>
     <view class="empty" wx:if="{{empty}}">
-      <image src="{{imagePath+'null.png'}}" wx:if="{{imagePath}}"/>
+      <image src="{{imagePath+'null_task@2x.png'}}" wx:if="{{imagePath}}" />
       <view>你与赏金擦肩而过，快去领任务吧</view>
     </view>
-  
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import time from '../../../common/time.js' 
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的任务'
-  };
-  onLoad() {
-    this.getMytask()
-    this.getTaskOverMoney()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    status: 0,
-    taskOverMoney:'',
-    targetNum:'',
-    activeIndex:0,
-    taskArr:{},
-    type:['进行中','已成功','已失败'],
-    empty:false
-  };
-  methods = {
-    choseType(e){
-      this.activeIndex = e.currentTarget.dataset.index
-      this.status = this.activeIndex
+  import wepy from 'wepy';
+  import path from '../../../common/path.js';
+  import time from '../../../common/time.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的任务'
+    };
+    onLoad() {
       this.getMytask()
-    },
-    goTaskDetail(e){
-      let taskId = e.currentTarget.dataset.id
-      let index = e.currentTarget.dataset.index
-      console.log(taskId)
-      console.log(this.taskArr[index])
-      wx.setStorageSync('taskForShare',this.taskArr[index]);
-      this.$navigate('./myTaskDetail',{id:taskId})
+      this.getTaskOverMoney()
     }
-  };
-  // 获取我的任务
-  getMytask(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/querytargetlist', 
-      data: {
-        userid:that.$parent.globalData.userId,
-        status:that.status
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.taskArr = res.data.data
-        console.log(that.taskArr)
-        for (var item of that.taskArr){
-          item.blockingTime = time.formatTime(item.blockingTime,'Y-M-D h:m:s')
-        }
-        if(that.taskArr.length<=0){
-          that.empty = true
-        }else{
-          that.empty = false
-        }
-        that.$apply()
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      status: 0,
+      taskOverMoney: '',
+      targetNum: '',
+      activeIndex: 0,
+      taskArr: {},
+      type: ['进行中', '已成功', '已失败'],
+      empty: false
+    };
+    methods = {
+      choseType(e) {
+        this.activeIndex = e.currentTarget.dataset.index
+        this.status = this.activeIndex
+        this.getMytask()
       },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }  
-
-  //我一共领取了多少个任务了,挣了多少钱
-  getTaskOverMoney(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/usertargetincome',
-      data: {
-        userid:that.$parent.globalData.userId
-      }, 
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        console.log(res)
-        that.taskOverMoney = res.data.data.targetTotal
-        that.targetNum = res.data.data.targetNum
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+      goTaskDetail(e) {
+        let taskId = e.currentTarget.dataset.id
+        let index = e.currentTarget.dataset.index
+        console.log(taskId)
+        console.log(this.taskArr[index])
+        wx.setStorageSync('taskForShare', this.taskArr[index]);
+        this.$navigate('./myTaskDetail', {
+          id: taskId
+        })
+      }
+    };
+    // 获取我的任务
+    getMytask() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/querytargetlist',
+        data: {
+          userid: that.$parent.globalData.userId,
+          status: that.status
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.taskArr = res.data.data
+          console.log(that.taskArr)
+          for (var item of that.taskArr) {
+            item.blockingTime = time.formatTime(item.blockingTime, 'Y-M-D h:m:s')
+          }
+          if (that.taskArr.length <= 0) {
+            that.empty = true
+          } else {
+            that.empty = false
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //我一共领取了多少个任务了,挣了多少钱
+    getTaskOverMoney() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/usertargetincome',
+        data: {
+          userid: that.$parent.globalData.userId
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.taskOverMoney = res.data.data.targetTotal
+          that.targetNum = res.data.data.targetNum
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-}
 </script>
