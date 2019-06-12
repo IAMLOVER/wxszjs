@@ -892,7 +892,7 @@
         url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
         data: {
           'storeId': that.storeId,
-          // 'size':1
+          'size':1
         }, //请求的参数",
         method: 'GET',
         dataType: 'json',

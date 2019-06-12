@@ -331,6 +331,12 @@
     width: 100%;
     background: #fff;
   }
+  .active-placeholder {
+    color: #aaa;
+  }
+  .placeholder {
+    color: #fff;
+  }
 </style>
 <template>
   <view class="page">
@@ -339,7 +345,7 @@
       <!--搜索框-->
       <view class="search-wrapper {{scrollTop > 0 ? 'scroll-active':' '}}">
         <view class="search">
-          <input type="text" placeholder="搜你想要" placeholder-style="color:{{scrollTop > 0?'#aaaaaa':'#ffffff'}}" @tap="navSearch" />
+          <input type="text" placeholder="搜你想要" placeholder-class="{{scrollTop > 0?'active-placeholder':'placeholder'}}" @tap="navSearch" />
           <image src="{{scrollTop > 0 ? imagePath+'search02.png' : imagePath+'searchbai.png'}}" wx:if="{{imagePath}}" />
         </view>
       </view>
@@ -415,9 +421,9 @@
           <text class="bar"></text> 热门店铺
         </view>
         <!-- <view>
-            <text class="more" @tap="moreShop">更多</text>
-            <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-          </view> -->
+                <text class="more" @tap="moreShop">更多</text>
+                <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
+              </view> -->
       </view>
       <view class="content-wrapper">
         <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
@@ -470,13 +476,13 @@
           <!-- 商品销售类型(满减，任务) -->
           <view class="produce-skill" wx:if="{{item.activityType == 2}}">
             <view class="tip">
-              <image src="{{imagePath + 'type01.png'}}" wx:if="{{imagePath}}"/>
+              <image src="{{imagePath + 'type01.png'}}" wx:if="{{imagePath}}" />
               <view>满减</view>
             </view>
           </view>
           <view class="produce-skill" wx:if="{{item.activityType == 1}}">
             <view class="tip">
-              <image src="{{imagePath + 'type02.png'}}" wx:if="{{imagePath}}"/>
+              <image src="{{imagePath + 'type02.png'}}" wx:if="{{imagePath}}" />
               <view>任务</view>
             </view>
           </view>
@@ -602,6 +608,8 @@
       this.getRecommend()
       //轮播图
       this.getSwiper()
+      this.page = 0
+      this.arr = []
       this.getNewProduce()
       //模拟加载
       setTimeout(function() {

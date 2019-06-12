@@ -1,110 +1,115 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.task-produces{
-  padding: 0rpx 30rpx;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
-    box-sizing: border-box;
-    width: 690rpx;
-    height: 268rpx;
-    position: relative;
-    margin-top: 24rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
-        width: 220rpx;
-        height: 220rpx;
-        border-radius: 16rpx;
-      }
-    }
-    .item-right{
-      .item-title{
-        font-size: 32rpx;
-        color: #222222;
-        height: 100rpx;
-        font-weight: 600;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 10rpx;
-        margin-top: 18rpx;
-        image{
-          width: 18rpx;
-          height: 20rpx;
-          margin-right: 8rpx;
+  page {
+    background-color: #f5f5f5;
+  }
+  .task-produces {
+    padding: 0rpx 30rpx;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      width: 690rpx;
+      height: 268rpx;
+      position: relative;
+      margin-top: 24rpx;
+      .item-left {
+        float: left;
+        margin-right: 16rpx;
+        image {
+          width: 220rpx;
+          height: 220rpx;
+          border-radius: 16rpx;
         }
       }
-      .commision{
-        font-size: 24rpx;
-        color: #959595;
-        margin-top: 16rpx;
-      }
-      .item-price{
-        float: left;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
+      .item-right {
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          height: 100rpx;
+          font-weight: 600;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
           font-size: 24rpx;
           color: #F25664;
-          font-weight: 600;
-          .really{
-            font-size: 36rpx;
+          margin-bottom: 10rpx;
+          margin-top: 18rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .commision {
+          font-size: 24rpx;
+          color: #959595;
+          margin-top: 16rpx;
+        }
+        .item-price {
+          float: left;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            font-size: 24rpx;
             color: #F25664;
+            font-weight: 600;
+            .really {
+              font-size: 36rpx;
+              color: #F25664;
+            }
           }
         }
       }
-    }
-    .tip{
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border:1px solid #F25664;
-      color: #F25664;
-      background-color: #fff;
-      border-radius: 8rpx;
-      font-size: 24rpx;
-      height: 36rpx;
-      position: absolute;
-      right: 24rpx;
-      bottom: 24rpx;
+      .tip {
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border: 1px solid #F25664;
+        color: #F25664;
+        background-color: #fff;
+        border-radius: 8rpx;
+        font-size: 24rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
+      }
     }
   }
-}
-.footer{
-  clear: both;
-  text-align: center;
-  font-size: 12px;
-  color: #B5B5B5;
-  height: 120rpx;
-  line-height: 120rpx;
-}
+  .footer {
+    clear: both;
+    text-align: center;
+    font-size: 12px;
+    color: #B5B5B5;
+    height: 120rpx;
+    line-height: 120rpx;
+  }
 </style>
 <template>
   <view class="page">
     <!-- 最新任务 -->
-  <view class="new-task">
-    <view class="task-produces">
-       <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+    <view class="new-task">
+      <view class="task-produces">
+        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <view class="commision">
-               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
+              佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-               <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>                
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
           </view>
@@ -112,51 +117,51 @@ page{
             已经有{{item.receivedNum}}人领取
           </view>
         </navigator>
+      </view>
     </view>
-  </view>
-  <view class="footer">
-    没有更多了
-  </view>
+    <view class="footer">
+      没有更多了
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '最新任务'
-  };
-  onLoad(options) {
-     this.storeId = options.storeId
-    this.getTaskProduce()
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '最新任务'
+    };
+    onLoad(options) {
+      this.storeId = options.storeId
+      this.getTaskProduce()
+    }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      storeId: '',
+      taskArr: {},
+    };
+    methods = {};
+    // 店铺内的最新任务
+    getTaskProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.taskArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    storeId:'',
-    taskArr:{},
-  };
-  methods = {};  
-  // 店铺内的最新任务
-  getTaskProduce(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/store/targets', 
-      data: {
-        'storeId':that.storeId,
-        // 'size':1
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json',
-      success: res => {
-        that.taskArr = res.data.data.content
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-  }
-}
 </script>

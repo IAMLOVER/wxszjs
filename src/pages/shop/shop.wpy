@@ -121,7 +121,7 @@
     }
   }
   /*隐藏滚动条*/
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 0;
     height: 0;
     color: transparent;
@@ -174,7 +174,7 @@
       <navigator url="./shopDetail?id={{item.id}}" class="item" wx:for="{{shopArr}}" wx:for-item="item" wx:key="{{index}}">
         <view class="item-title">
           <view class="item-detail">
-            <image src="{{item.logo?preImagePath + item.logo:'../../images/index/store_logomin.png'}}" class="logo" wx:if="{{preImagePath}}"/>
+            <image src="{{item.logo?preImagePath + item.logo:'../../images/index/store_logomin.png'}}" class="logo" wx:if="{{preImagePath}}" />
             <text>{{item.name}}</text>
           </view>
           <view class="button-wrapper">
@@ -201,7 +201,7 @@
     };
     onLoad() {
       this.getShopClassfiy()
-      this.getRecommend()
+      this.getShop()
     }
     data = {
       imagePath: path.path.imagePath,
@@ -212,21 +212,28 @@
       sortType: 2,
       newSelect: true,
       classifyId: '',
-      shopArr: {}
+      shopArr: {},
+      arr: [],
+      page: 0,
+      totalPage: 0,
     };
     methods = {
       getShopById(e) {
         this.idx = e.currentTarget.dataset.index
         this.newSelect = false
         this.classifyId = e.currentTarget.dataset.id
+        this.page = 0
+        this.arr = []
         this.getShop()
       },
       choseNew() {
         this.newSelect = true
         this.idx = -1
         this.sortType = 2
+        this.page = 0
+        this.arr = []
         this.classifyId = ''
-        this.getRecommend()
+        this.getShop()
       },
       navSearch() {
         this.$navigate({
@@ -234,6 +241,14 @@
         })
       },
     };
+    //上拉加载更多
+    onReachBottom() {
+      if (this.page < this.totalPage - 1) {
+        this.page++
+          this.arr = this.shopArr
+        this.getShop()
+      }
+    }
     // 获取店铺的类别
     getShopClassfiy() {
       var that = this
@@ -265,34 +280,21 @@
         url: that.apiPath + '/szmktstore/storeInfo/recommend',
         data: {
           'classifyId': that.classifyId,
-          'sortType': that.sortType
+          'sortType': that.sortType,
+          'page': that.page,
         },
         method: 'get',
         dataType: 'json',
         success: res => {
           console.log(res)
-          that.shopArr = res.data.data.content
+          that.shopArr = that.arr.concat(res.data.data.content)
+          that.totalPage = res.data.data.totalPages
           that.$apply()
         },
         fail: () => {},
         complete: () => {
           wx.hideLoading();
         }
-      });
-    }
-    // 获取最新单品
-    getRecommend() {
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktstore/storeInfo/recommend',
-        method: 'post',
-        dataType: 'json',
-        success: res => {
-          that.shopArr = res.data.data.content
-          that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
       });
     }
   }

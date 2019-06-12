@@ -1,353 +1,364 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.search-wrapper {
-  position: fixed;
-  top: 0rpx;
-  z-index: 1;
-  width: 100%;
-  background-color: #fff;
-  padding: 14rpx 0rpx;
-  .search {
-    position: relative;
-    input {
-      width: 670rpx;
-      height: 64rpx;
-      background: rgba(225, 225, 225, 0.5);
-      border-radius: 16px;
-      font-size: 32rpx;
-      padding-left: 78rpx;
-      color: #959595;
-      box-sizing: border-box;
-      margin: 0 auto;
-    }
-    image {
-      width: 36rpx;
-      height: 36rpx;
-      position: absolute;
-      left: 60rpx;
-      top: 14rpx;
+  page {
+    background-color: #f5f5f5;
+  }
+  .search-wrapper {
+    position: fixed;
+    top: 0rpx;
+    z-index: 1;
+    width: 100%;
+    background-color: #fff;
+    padding: 14rpx 0rpx;
+    .search {
+      position: relative;
+      input {
+        width: 670rpx;
+        height: 64rpx;
+        background: rgba(225, 225, 225, 0.5);
+        border-radius: 16px;
+        font-size: 32rpx;
+        padding-left: 78rpx;
+        color: #959595;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 60rpx;
+        top: 14rpx;
+      }
     }
   }
-}
-.main{
-  display:flex;display:-webkit-flex;
-  margin-top: 84rpx;
-  .main-left{
-    width: 160rpx;
-    scroll-view{
+  .main {
+    display: flex;
+    display: -webkit-flex;
+    margin-top: 84rpx;
+    .main-left {
       width: 160rpx;
-      background-color: #fff;
-      box-sizing: border-box;
-      position: fixed;
-      left: 0;
-      top: 84rpx;
-      height: 1048rpx;
-      padding-bottom: 25rpx;
-      view{
-        height: 88rpx;
-        line-height: 88rpx;
-        text-align: center;
-        font-size: 28rpx;
-        background: #fff;
-        color: #666666;
-        image{
-          width: 38rpx;
-          height: 20rpx;
+      scroll-view {
+        width: 160rpx;
+        background-color: #fff;
+        box-sizing: border-box;
+        position: fixed;
+        left: 0;
+        top: 84rpx;
+        height: 1048rpx;
+        padding-bottom: 25rpx;
+        view {
+          height: 88rpx;
+          line-height: 88rpx;
+          text-align: center;
+          font-size: 28rpx;
+          background: #fff;
+          color: #666666;
+          image {
+            width: 38rpx;
+            height: 20rpx;
+          }
         }
-      }
-      .new{
-        font-size: 28rpx;
-      }
-      .active{
+        .new {
+          font-size: 28rpx;
+        }
+        .active {
           position: relative;
           color: #F25664;
           background-color: #f5f5f5;
-          &::before{
-          content: ' ';
-          width: 8rpx;
-          height: 24rpx;
-          background-color: #F25664;
-          left: 0;
-          top: 30rpx;
-          position: absolute;
+          &::before {
+            content: ' ';
+            width: 8rpx;
+            height: 24rpx;
+            background-color: #F25664;
+            left: 0;
+            top: 30rpx;
+            position: absolute;
+          }
         }
       }
     }
-  }
-  .main-right{
-    margin-left: 20rpx;
-    margin-top: 24rpx;
-    .items{
-      .item{
-        width: 540rpx;
-        height: 210rpx;
-        background-color: #fff;
-        border-radius: 16px;
-        display:flex;display:-webkit-flex;
-        padding: 20rpx;
-        box-sizing: border-box;
-        margin-bottom: 24rpx;
-        position: relative;
-        .item-left{
-          margin-right: 16rpx;
-          -webkit-flex: 1;-ms-flex: 1;flex: 1;
-          image{
-            width: 170rpx;
-            height: 170rpx;
-            border-radius: 8px;
+    .main-right {
+      margin-left: 20rpx;
+      margin-top: 24rpx;
+      .items {
+        .item {
+          width: 540rpx;
+          height: 210rpx;
+          background-color: #fff;
+          border-radius: 16px;
+          display: flex;
+          display: -webkit-flex;
+          padding: 20rpx;
+          box-sizing: border-box;
+          margin-bottom: 24rpx;
+          position: relative;
+          .item-left {
+            margin-right: 16rpx;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            image {
+              width: 170rpx;
+              height: 170rpx;
+              border-radius: 8px;
+            }
           }
-        }
-        .item-right{
-          -webkit-flex: 2;-ms-flex: 2;flex: 2;
-          .item-title{
-            font-size: 32rpx;
-            color: #222;
-            font-weight: 600;
-            height: 96rpx;
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-          }
-          .item-info{
-            display:flex;display:-webkit-flex;
-            justify-content: space-between;-webkit-justify-content: space-between;
-            .price{
+          .item-right {
+            -webkit-flex: 2;
+            -ms-flex: 2;
+            flex: 2;
+            .item-title {
               font-size: 32rpx;
-              color: #F25664;
-              padding-top: 24rpx;
+              color: #222;
+              font-weight: 600;
+              height: 96rpx;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
-            .how-many{
-              font-size: 24rpx;
-              color: #B5B5B5;
-              padding-top: 34rpx;
+            .item-info {
+              display: flex;
+              display: -webkit-flex;
+              justify-content: space-between;
+              -webkit-justify-content: space-between;
+              .price {
+                font-size: 32rpx;
+                color: #F25664;
+                padding-top: 24rpx;
+              }
+              .how-many {
+                font-size: 24rpx;
+                color: #B5B5B5;
+                padding-top: 34rpx;
+              }
             }
           }
         }
       }
     }
   }
-}
-/*隐藏滚动条*/
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  color: transparent;
-}
-.produce-skill {
-  position: absolute;
-  top: 20rpx;
-  left: 32rpx;
-  .tip {
-    position: relative;
-    image {
-      z-index: 1000;
-      width: 64rpx;
-      height: 44rpx;
-    }
-    view {
-      color: #ffffff;
-      font-size: 24rpx;
-      position: absolute;
-      top: 3rpx;
-      left: 8rpx;
+  /*隐藏滚动条*/
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .produce-skill {
+    position: absolute;
+    top: 20rpx;
+    left: 32rpx;
+    .tip {
+      position: relative;
+      image {
+        z-index: 1000;
+        width: 64rpx;
+        height: 44rpx;
+      }
+      view {
+        color: #ffffff;
+        font-size: 24rpx;
+        position: absolute;
+        top: 3rpx;
+        left: 8rpx;
+      }
     }
   }
-}
 </style>
 <template>
   <view class="page">
-     <!-- 搜索框 -->
-     <view class="search-wrapper">
-        <view class="search">
-            <input type="text" placeholder="搜你想要" @tap="navSearch"/>
-            <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}"/>
-        </view>
+    <!-- 搜索框 -->
+    <view class="search-wrapper">
+      <view class="search">
+        <input type="text" placeholder="搜你想要" @tap="navSearch" />
+        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
       </view>
-
-      <!-- 中心两块区域 -->
-      <view class="main">
-        <veiw class="main-left">
-          <scroll-view scroll-y="true" scroll-with-animation>
-            <!-- 最新 -->
-            <view class="new {{newSelect?'active':''}}" @tap="choseNew">
-              最新<image src="{{imagePath+'ming.png'}}" wx:if="{{imagePath}}"/>
+    </view>
+    <!-- 中心两块区域 -->
+    <view class="main">
+      <veiw class="main-left">
+        <scroll-view scroll-y="true" scroll-with-animation>
+          <!-- 最新 -->
+          <view class="new {{newSelect?'active':''}}" @tap="choseNew">
+            最新
+            <image src="{{imagePath+'ming.png'}}" wx:if="{{imagePath}}" />
+          </view>
+          <!-- 后台获取的items -->
+          <view class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:for-item="item" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">
+            {{item.title}}
+          </view>
+        </scroll-view>
+      </veiw>
+      <view class="main-right">
+        <scroll-view class="items" scroll-y scroll-with-animation>
+          <view class="item" @tap="goDetails" data-id="{{item.id}}" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
+            <view class="item-left">
+              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load/>
             </view>
-            <!-- 后台获取的items -->
-            <view  class="{{index==idx?'active':''}}" wx:for="{{classArr}}" wx:for-item="item" wx:key="index" @tap="getProduce" data-id="{{item.id}}" data-index="{{index}}">
+            <view class="item-right">
+              <view class="item-title">
                 {{item.title}}
-            </view>
-          </scroll-view>
-        </veiw>
-        <view class="main-right">
-          <scroll-view class="items" scroll-y scroll-with-animation>
-            <view class="item" @tap="goDetails" data-id="{{item.id}}" wx:for="{{classifyProduce}}" wx:for-item="item" wx:key="{{index}}" data-type="{{item.activityType}}">
-              <view class="item-left">
-                <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load/>
               </view>
-              <view class="item-right">
-                <view class="item-title">
-                  {{item.title}}
+              <view class="item-info">
+                <view class="price">
+                  <text>￥</text>
+                  <text>{{m1.filter(item.minPrice*0.01)}}</text>
                 </view>
-                <view class="item-info">
-                  <view class="price">
-                    <text>￥</text>
-                    <text>{{m1.filter(item.minPrice*0.01)}}</text>
-                  </view>
-                  <view class="how-many">
-                    {{item.buyNum}}人购买
-                  </view>
-                </view>
-              </view>
-                <!-- 商品销售类型(满减，任务) -->
-              <view class="produce-skill" wx:if="{{item.activityType == 2}}">
-                <view class="tip">
-                  <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
-                  <view>满减</view>
-                </view>
-              </view>
-              <view class="produce-skill" wx:if="{{item.activityType == 1}}">
-                <view class="tip">
-                  <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
-                  <view>任务</view>
+                <view class="how-many">
+                  {{item.buyNum}}人购买
                 </view>
               </view>
             </view>
-          </scroll-view>
-        </view>
+            <!-- 商品销售类型(满减，任务) -->
+            <view class="produce-skill" wx:if="{{item.activityType == 2}}">
+              <view class="tip">
+                <image wx:if="{{imagePath}}" src="{{imagePath+'type01.png'}}" />
+                <view>满减</view>
+              </view>
+            </view>
+            <view class="produce-skill" wx:if="{{item.activityType == 1}}">
+              <view class="tip">
+                <image wx:if="{{imagePath}}" src="{{imagePath+'type02.png'}}" />
+                <view>任务</view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
       </view>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js';
-import mywxs from '../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '分类'
-  };
-  onLoad() {
-    this.getClass();
-    this.getClassfiyProduce();
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    classArr:{},
-    idx:-1,
-    newSelect:true,
-    classifyId:'',
-    classifyProduce:{},
-    page:0,
-    totalPages:0,
-    arr:[]
-  };
-  methods = {
-    getProduce(e){
-      this.idx = e.currentTarget.dataset.index
-      this.newSelect = false
-      this.classifyId = e.currentTarget.dataset.id
-      this.classifyProduce = []
-      this.arr = []
-      this.page = 0
-      this.totalPages = 0
-      this.getClassfiyProduce()
-    },
-    choseNew(){
-      this.newSelect = true
-      this.idx = -1
-      this.classifyId = ''
-      this.getClassfiyProduce()
-    },
-    goDetails(e){
-      if(e.currentTarget.dataset.type == 0){
-        this.$navigate('../generalGoods/generalGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 1){
-        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
-      }else if(e.currentTarget.dataset.type == 2){
-        this.$navigate('../fullReduction/fullProduceDetail',{id:e.currentTarget.dataset.id})
-      }
-    },
-    navSearch() {
-    this.$navigate({url: '../search/search'})
+  import wepy from 'wepy';
+  import path from '../../common/path.js';
+  import mywxs from '../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '分类'
+    };
+    onLoad() {
+      this.getClass();
+      this.getClassfiyProduce();
     }
-  };
-  wxs = {
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      classArr: {},
+      idx: -1,
+      newSelect: true,
+      classifyId: '',
+      classifyProduce: {},
+      page: 0,
+      totalPages: 0,
+      arr: []
+    };
+    methods = {
+      getProduce(e) {
+        this.idx = e.currentTarget.dataset.index
+        this.newSelect = false
+        this.classifyId = e.currentTarget.dataset.id
+        this.classifyProduce = []
+        this.arr = []
+        this.page = 0
+        this.totalPages = 0
+        this.getClassfiyProduce()
+      },
+      choseNew() {
+        this.newSelect = true
+        this.idx = -1
+        this.classifyId = ''
+        this.getClassfiyProduce()
+      },
+      goDetails(e) {
+        if (e.currentTarget.dataset.type == 0) {
+          this.$navigate('../generalGoods/generalGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 1) {
+          this.$navigate('../taskGoods/taskGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 2) {
+          this.$navigate('../fullReduction/fullProduceDetail', {
+            id: e.currentTarget.dataset.id
+          })
+        }
+      },
+      navSearch() {
+        this.$navigate({
+          url: '../search/search'
+        })
+      }
+    };
+    wxs = {
       m1: mywxs
-  };
-   //上拉加载更多
-  onReachBottom(){
-    if(this.page<this.totalPage-1){
-      this.page++
-      this.arr = this.classifyProduce
-      this.getClassfiyProduce()
+    };
+    //上拉加载更多
+    onReachBottom() {
+      if (this.page < this.totalPage - 1) {
+        this.page++
+          this.arr = this.classifyProduce
+        this.getClassfiyProduce()
+      }
+    }
+    // 获取分类列表
+    getClass() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktbackstage/goodsClassify/children',
+        method: 'post',
+        data: {
+          userid: that.$parent.globalData.userId
+        },
+        dataType: 'json',
+        success: res => {
+          let data = res.data.data
+          console.log(data)
+          that.classArr = data
+          that.$apply()
+        },
+        fail: () => {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'fail',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        },
+        complete: () => {}
+      });
+    }
+    // 根据分类选择中的id筛选出对应的商品
+    getClassfiyProduce() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
+        data: {
+          'classify': that.classifyId,
+          page: that.page,
+          size: 15
+        }, //请求的参数",
+        method: 'get',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res)
+          that.classifyProduce = that.arr.concat(res.data.data.content)
+          that.totalPage = res.data.data.totalPages
+          that.$apply()
+          wepy.hideLoading();
+        },
+        fail: () => {},
+        complete: () => {}
+      });
     }
   }
-  // 获取分类列表
-  getClass(){
-    var that = this    
-    wx.request({
-      url: that.apiPath + '/szmktbackstage/goodsClassify/children', 
-      method: 'post',
-      data:{
-         userid:that.$parent.globalData.userId
-      },
-      dataType: 'json', 
-      success: res => {
-        let data = res.data.data
-        console.log(data)
-        that.classArr = data
-        that.$apply()
-      },
-      fail: () => {
-          wx.showToast({
-          title: '加载失败', 
-          icon: 'fail', 
-          duration: 2000, 
-          mask: true,
-          success: res => {}
-        });
-        
-      },
-      complete: () => {
-      }
-    });
-      
-  }
-
-  // 根据分类选择中的id筛选出对应的商品
-  getClassfiyProduce(){
-    var that = this
-     wepy.showLoading({
-      title: '加载中', //提示的内容,
-      mask: true, //显示透明蒙层，防止触摸穿透,
-      success: res => {}
-    });
-    wx.request({
-      url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
-      data: {
-        'classify': that.classifyId,
-        page:that.page,
-        size:15
-      }, //请求的参数",
-      method: 'get',
-      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
-      success: res => {
-        console.log(res)
-        that.classifyProduce =  that.arr.concat(res.data.data.content)
-        that.totalPage = res.data.data.totalPages
-        that.$apply()
-        wepy.hideLoading();
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
-  }
-}
 </script>

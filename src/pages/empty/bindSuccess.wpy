@@ -27,7 +27,7 @@ page{
 
 <template>
   <view class='page'>
-    <image src="{{imagePath+'sucess03.png'}}" wx:if="{{imagePath}}"/>
+    <image src="{{imagePath+'null_success@2x.png.png'}}" wx:if="{{imagePath}}"/>
     <view class="tip">绑定微信成功</view>
     <button @tap="goIndex">前往首页</button>
   </view>
