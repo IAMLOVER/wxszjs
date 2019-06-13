@@ -70,12 +70,23 @@
     color: #F25664;
     padding: 0rpx 40rpx;
     box-sizing: border-box;
+    position: relative;
     image {
       width: 40rpx;
       height: 36rpx;
       vertical-align: middle;
       margin-top: -7rpx;
       margin-right: 20rpx;
+    }
+    .swiper {
+      height: 56rpx;
+      position: absolute;
+      top: 0rpx;
+      width: 420rpx;
+      left: 86rpx;
+      swiper-item {
+        height: 56rpx;
+      }
     }
   }
   .new-reduction {
@@ -458,7 +469,12 @@
     <!-- 更多数据 -->
     <view class="more-number">
       <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
-      <text>**5439查看了你的店铺</text>
+      <swiper autoplay="true" vertical="true" circular="true" class="swiper">
+        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的店铺</text></swiper-item>
+      </swiper>
       <text style="float:right; text-decoration: underline" @tap="moreNumber">更多数据</text>
     </view>
     <!-- 最新满减 -->
@@ -585,9 +601,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                  <view>微信好友</view>
-                </button>
+                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                    <view>微信好友</view>
+                  </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -621,7 +637,7 @@
       this.isIphoneX = this.$parent.globalData.isIphoneX
     }
     data = {
-      isIphoneX:false,
+      isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
@@ -669,13 +685,12 @@
           success(res) {
             that.showPoster = false
             wepy.showToast({
-              title: '保存成功', 
-              icon: 'success', 
+              title: '保存成功',
+              icon: 'success',
               duration: 2000,
-              mask: true, 
+              mask: true,
               success: res => {}
             });
-            
             that.$apply()
           },
           fail(err) {

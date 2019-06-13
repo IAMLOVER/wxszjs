@@ -280,7 +280,8 @@
 <script>
   import wepy from 'wepy';
   import path from '../../common/path.js'
-  import mywxs from '../../wxs/mywxs.wxs';
+  import mywxs from '../../wxs/mywxs.wxs'
+  import Base64 from '../../common/base64.js'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '订单确认'
@@ -341,8 +342,8 @@
       wx.request({
         url: that.apiPath + '/szmktstore/goodsInfo/classType',
         data: {
-          'classId': this.pay.classid,
-          'collocationId': this.pay.collocationId
+          'classId': this.pay.id,
+          'collocationId': this.pay.collocationId == null ? '' : this.pay.collocationId
         },
         method: 'GET',
         dataType: 'json',
@@ -363,20 +364,28 @@
     // 点击立即支付
     payMoney() {
       var that = this
+      var buyContent = {
+        "goodsList": [{
+          "type": that.pay.type,
+          "id": that.pay.id,
+          "count": that.pay.count,
+          "collocationId": that.pay.collocationId,
+          "targetId": that.pay.targetId
+        }],
+        "couponId": that.pay.couponId
+      }
+      console.log(Base64.encode(JSON.stringify(buyContent)))
       wx.showLoading({
         title: '生成订单中',
         mask: true,
         success: res => {}
       });
       wx.request({
-        url: that.apiPath + '/szmktuser/pay/createordergoods',
+        url: that.apiPath + '/szmktuser/pay/createGoodsOrder',
         data: {
-          'userid': that.userId,
-          'classid': that.pay.classid,
-          'count': that.pay.count,
-          'type': that.pay.type,
-          'activityid': that.pay.activityId,
-          'addressid': that.addressId
+          'userId': that.userId,
+          'buyContent': Base64.encode(JSON.stringify(buyContent)),
+          'addressId': that.addressId
         },
         method: 'GET',
         dataType: 'json',

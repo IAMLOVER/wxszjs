@@ -209,7 +209,7 @@
     top: 0;
     .content {
       width: 100%;
-      height: 650rpx;
+      min-height: 650rpx;
       background-color: #fff;
       position: absolute;
       bottom: 0;
@@ -248,7 +248,7 @@
       }
       .type {
         padding: 30rpx;
-        height: 162rpx;
+        min-height: 162rpx;
         box-sizing: border-box;
         border-bottom: 2rpx solid #F5F5F5;
         .title {
@@ -326,6 +326,7 @@
           color: #fff;
           text-align: center;
           line-height: 84rpx;
+          margin-bottom: 6rpx;
         }
       }
       .close-shadow {
@@ -548,9 +549,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-              <view>微信好友</view>
-            </button>
+                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                      <view>微信好友</view>
+                    </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -722,17 +723,18 @@
           });
         } else {
           var pay = {}
-          pay.collocationId = ''
-          // 商品id 
-          pay.id = this.produceInfo.id
-          // 商品规格id
-          pay.classid = this.typeId
-          // 商品数量
-          pay.count = this.account
           // 商品活动类型
           pay.type = 0
-          // 商品活动id
-          pay.activityId = 0
+          // 商品规格id
+          pay.id = this.typeId
+          // 商品数量
+          pay.count = this.account
+          //搭配组合id
+          pay.collocationId = null
+          //任务关联id
+          pay.targetId = null
+          //优惠券id
+          pay.couponId = null
           // 商品的价钱
           pay.money = this.money
           wx.setStorage({

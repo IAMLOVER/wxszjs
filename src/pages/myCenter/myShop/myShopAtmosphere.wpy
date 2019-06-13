@@ -12,12 +12,23 @@
     padding: 0rpx 40rpx;
     box-sizing: border-box;
     margin-top: 24rpx;
+    position: relative;
     image {
       width: 40rpx;
       height: 36rpx;
       vertical-align: middle;
       margin-top: -7rpx;
       margin-right: 20rpx;
+    }
+    .swiper {
+      height: 56rpx;
+      position: absolute;
+      top: 0rpx;
+      width: 420rpx;
+      left: 86rpx;
+      swiper-item {
+        height: 56rpx;
+      }
     }
   }
   .statistics {
@@ -179,8 +190,13 @@
     <!-- 更多数据 -->
     <view class="more-number">
       <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
-      <text>**5439查看了你的店铺</text>
-      <text style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
+            <swiper autoplay="true" vertical="true" circular="true" class="swiper">
+        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的店铺</text></swiper-item>
+      </swiper>
+      <text @tap="reset" style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
     </view>
     <!-- 数据统计 -->
     <view class="statistics">
@@ -293,13 +309,23 @@
       dataNumber: {},
       hotItem: {}
     };
-    methods = {}
+    methods = {
+      reset(){
+        this.getNumber()
+      }
+    }
     wxs = {
       m1: mywxs
     };
     //获取店铺数据
     getNumber() {
       var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      })
+      
       wx.request({
         url: that.apiPath + '/szmktstore/storeInfo/statistics', //开发者服务器接口地址",
         data: {
@@ -334,7 +360,9 @@
           that.$apply()
         },
         fail: () => {},
-        complete: () => {}
+        complete: () => {
+          wepy.hideLoading()
+        }
       });
     }
     //热度排行榜

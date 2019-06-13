@@ -693,17 +693,17 @@
         var pay = {}
         //
         pay.collocationId = this.collocationId
-        // 商品id 
-        pay.id = this.produceInfo.id
         // 商品规格id
-        pay.classid = this.typeId
+        pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-          pay.scount = this.collocation.count
+        pay.scount = this.collocation.count
         // 商品活动类型
-        pay.type = 3
-        // 商品活动
-        pay.activityId = this.collocationId
+        pay.type = 1
+        //任务关联id
+        pay.targetId = null
+        //优惠券id
+        pay.couponId = null
         // 商品的价钱
         pay.money = ((this.produceInfo.chaPrice * 0.01 + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.collocation.count) * this.account).toFixed(2)
         wx.setStorage({

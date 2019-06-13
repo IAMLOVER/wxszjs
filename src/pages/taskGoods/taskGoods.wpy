@@ -922,17 +922,17 @@
         } else {
           var pay = {}
           //商品的搭配id
-          pay.collocationId = ''
-          // 商品id 
-          pay.id = this.produceInfo.id
+          pay.collocationId = null
           // 商品规格id
-          pay.classid = this.typeId
+          pay.id = this.typeId
           // 商品数量
           pay.count = this.account
           // 商品活动类型
           pay.type = 0
-          // 商品活动id
-          pay.activityId = 0
+          //任务关联id
+          pay.targetId = null
+          //优惠券id
+          pay.couponId = null
           // 商品的价钱
           pay.money = this.money
           wx.setStorage({

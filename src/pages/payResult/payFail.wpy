@@ -192,8 +192,8 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath +  '/szmktstore/goodsInfo/classType',
       data: {
-        'classId': this.pay.classid,
-        'collocationId':this.pay.collocationId
+        'classId': this.pay.id,
+        'collocationId': this.pay.collocationId == null ? '' : this.pay.collocationId
       }, 
       method: 'GET',
       dataType: 'json', 
