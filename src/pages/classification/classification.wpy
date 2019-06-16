@@ -140,7 +140,7 @@
     }
   }
   /*隐藏滚动条*/
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 0;
     height: 0;
     color: transparent;
@@ -178,7 +178,7 @@
     <!-- 中心两块区域 -->
     <view class="main">
       <veiw class="main-left">
-        <scroll-view scroll-y="true" scroll-with-animation>
+        <scroll-view scroll-y scroll-with-animation>
           <!-- 最新 -->
           <view class="new {{newSelect?'active':''}}" @tap="choseNew">
             最新
@@ -253,7 +253,7 @@
       classifyProduce: {},
       page: 0,
       totalPages: 0,
-      arr: []
+      arr: [],
     };
     methods = {
       getProduce(e) {

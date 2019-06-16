@@ -146,9 +146,9 @@
             }
           }
           .hot {
-            -webkit-flex: 2;
-            -ms-flex: 2;
-            flex: 2;
+            // -webkit-flex: 2;
+            // -ms-flex: 2;
+            // flex: 2;
             image {
               width: 18rpx;
               height: 22rpx;
@@ -406,6 +406,7 @@
         data: {
           keyWord: that.seachValue,
           page: that.page,
+          sortType:'hot',
           size: 15
         },
         success: res => {
@@ -441,6 +442,7 @@
         dataType: 'json',
         data: {
           keyWord: that.seachValue,
+          sortType:'hot',
           size: 15,
           page: that.page
         },

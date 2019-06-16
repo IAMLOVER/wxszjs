@@ -815,7 +815,8 @@
       account: 1,
       money: 0,
       storePhoneNum: '',
-      haveThisGoodsTasks: null
+      haveThisGoodsTasks: null,
+      taskHaveCollocation:{}
     };
     methods = {
       onShareAppMessage: function(ops) {
@@ -974,6 +975,19 @@
           }
           // 店铺id
           that.storeId = res.data.data.goods.storeId
+          //判断任务商品是否有搭配商品
+          if(res.data.data.collocation){
+            that.taskHaveCollocation = res.data.data.collocation
+            wx.setStorageSync('taskHaveCollocation',that.taskHaveCollocation)
+          }
+          if(res.data.data.pmtCollocation){
+            that.taskHaveCollocation = res.data.data.pmtCollocation
+            wx.setStorageSync('taskHaveCollocation',that.taskHaveCollocation)
+          }
+          if(res.data.data.pmtCollocation == null && res.data.data.collocation == null){
+            wx.removeStorageSync('taskHaveCollocation')
+          }
+
           that.$apply()
           this.getStorePhone()
           wepy.hideLoading()
@@ -1027,6 +1041,7 @@
                 if (that.produceInfo.relay) {
                   wx.setStorageSync('relay', that.produceInfo.relay)
                 }
+                wx.setStorageSync('taskGoodsName',that.produceInfo.title)
               }
             });
             that.showChoseTask = false

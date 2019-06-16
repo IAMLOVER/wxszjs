@@ -848,7 +848,7 @@
                 y: 664.4,
                 zIndex: 3,
                 text: [{
-                  text: that.produceInfo.title,
+                  text: that.produceInfo.shortTitle,
                   fontSize: 26,
                   color: '#000',
                 }]

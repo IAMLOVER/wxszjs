@@ -805,9 +805,12 @@
                 y: 664.4,
                 zIndex: 3,
                 text: [{
-                  text: that.produceInfo.title,
+                  text: that.produceInfo.shortTitle,
                   fontSize: 26,
                   color: '#000',
+                  width:410,
+                lineHeight: 40,
+                lineNum: 2,
                 }]
               },
               {
@@ -853,7 +856,7 @@
                 y: 164.4,
                 borderRadius: 16,
               },
-              //商店的logo
+              //商店的图片
               {
                 url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
                 width: 418,

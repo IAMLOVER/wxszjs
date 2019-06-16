@@ -216,8 +216,9 @@
             <view class="list-name">{{channelInfo.title}}</view>
             <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
             <view class="list-text">
-              <view class="price">￥{{m1.filter(channelInfo.chaPrice*0.01)}}</view>
-              <view class="count">数量：{{pay.count}}</view>
+              <view class="price">￥{{m1.filter(channelInfo.salePrice*0.01)}}</view>
+              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.count}}</view>
+              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.count * pay.scount}}</view>
             </view>
           </view>
         </view>
@@ -232,7 +233,9 @@
             <view class="list-type">规格：{{produceInfo.className}}</view>
             <view class="list-text">
               <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-              <view class="count">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
+              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
+              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.goodNeedCount * pay.count}}</view>
+
             </view>
           </view>
         </view>
@@ -264,7 +267,8 @@
         </view>
         <view class="youhui">
           <text>优惠金额：</text>
-          <text wx:if="{{channelInfo != null}}">{{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.chaPrice*0.01)*pay.count-pay.money)}}</text>
+          <!-- {{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.salPrice*0.01)*pay.count-pay.money)}} -->
+          <text wx:if="{{channelInfo != null}}">0</text>
           <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
           <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
         </view>
@@ -336,14 +340,15 @@
         complete: () => {}
       });
     }
-    // 根据商品的规格id筛选出来订单里的商品
+    // 根据id查订单的商品及引流品，促销品。
     getOrderInfo() {
       var that = this
       wx.request({
         url: that.apiPath + '/szmktstore/goodsInfo/classType',
         data: {
           'classId': this.pay.id,
-          'collocationId': this.pay.collocationId == null ? '' : this.pay.collocationId
+          'collocationId': this.pay.collocationId == null ? '' : this.pay.collocationId,
+          'type': this.pay.type > 0 ? this.pay.type : 0
         },
         method: 'GET',
         dataType: 'json',
@@ -354,7 +359,7 @@
             that.couponActivity = res.data.data.couponActivity
             that.haveJoinActivity = true
           }
-          that.channelInfo = res.data.data.channelInfo
+          that.channelInfo = res.data.data.collocationInfo
           that.$apply()
         },
         fail: () => {},

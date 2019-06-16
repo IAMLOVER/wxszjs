@@ -1,140 +1,150 @@
 <style lang="less">
-.container{
-    min-height: 100vh;
-    background: #f2f2f2;
-    .tab{
-        height:88rpx;
-        width:100%;
-        background: white;
-        display:flex;display:-webkit-flex;
-        align-items:center;
-        -webkit-align-items: center;
-        .tab-list{
-           -webkit-flex: 1;-ms-flex: 1;flex: 1;
-            color:#959595;
-            display:flex;display:-webkit-flex;
-            justify-content: center;
-            -webkit-justify-content: center;
-            align-items:center;
+    .container {
+        min-height: 100vh;
+        background: #f2f2f2;
+        .tab {
+            height: 88rpx;
+            width: 100%;
+            background: white;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
             -webkit-align-items: center;
-            font-size: 28rpx;
-            .tab-text{
-                height: 88rpx;
-                line-height: 88rpx;
+            .tab-list {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                color: #959595;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: center;
+                -webkit-justify-content: center;
+                align-items: center;
+                -webkit-align-items: center;
+                font-size: 28rpx;
+                .tab-text {
+                    height: 88rpx;
+                    line-height: 88rpx;
+                }
+            }
+            .tab-list-active {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                color: #f25664;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: center;
+                -webkit-justify-content: center;
+                align-items: center;
+                -webkit-align-items: center;
+                font-size: 28rpx;
+                .tab-text {
+                    height: 80rpx;
+                    line-height: 80rpx;
+                    border-bottom: 4rpx solid #f25664;
+                    font-weight: bold
+                }
             }
         }
-        .tab-list-active{
-           -webkit-flex: 1;-ms-flex: 1;flex: 1;
-            color:#f25664;
-            display:flex;display:-webkit-flex;
-            justify-content: center;
-            -webkit-justify-content: center;
-            align-items:center;
-            -webkit-align-items: center;
-            font-size: 28rpx;
-            .tab-text{
-                height: 80rpx;
-                line-height: 80rpx;
-                border-bottom: 4rpx solid #f25664;
-                font-weight: bold
-            }
-        }
-        
-    }
-    .order-wrapper{
-            width:100vw;
-            .order-list{
-                width:690rpx;
+        .order-wrapper {
+            width: 100vw;
+            .order-list {
+                width: 690rpx;
                 background: white;
                 margin: 30rpx auto auto auto;
                 border-radius: 12rpx;
-                padding:30rpx 40rpx;
+                padding: 30rpx 40rpx;
                 box-sizing: border-box;
-                .list-header{
-                    height:42rpx;
-                    display:flex;display:-webkit-flex;
-                    align-items:center;
-                    -webkit-align-items: center;
-                    justify-content: space-between;-webkit-justify-content: space-between;
-                    .list-icon{
-                        height:32rpx;
-                        width:32rpx;
-                    }
-                    .list-store{
-                        font-size:32rpx;
-                        color:#222222;
-                        margin-left:16rpx
-                    }
-                    .list-type{
-                        font-size:28rpx;
-                        color:#f25664;
-                    }
-                    .arrow{
-                        height:16rpx;
-                        width:10rpx;
-                        margin-left:16rpx;
-                    }
-                }
-                .order-detail{
-                    height:180rpx;
-                    width:100%;
-                    padding-bottom:30rpx;
-                    margin-top: 30rpx;
-                    border-bottom: 2rpx solid #F5F5F5; 
-                    display:flex;display:-webkit-flex;
-                    .goods-pic{
-                        height:180rpx;
-                        width:180rpx;
-                    }
-                    .goods-text{
-                        margin-left:20rpx;
-                       -webkit-flex: 1;-ms-flex: 1;flex: 1;
-                        .goods-name{
-                            font-size:28rpx;
-                            color:#222222;
-                        }
-                        .goods-style{
-                            margin-top:16rpx;
-                            font-size:24rpx;
-                            color:#959595;
-                        }
-                        .goods-price{
-                            color:#f25664;
-                            .price{
-                                font-size:32rpx;
-                            }
-                            .count{
-                                font-size:24rpx;
-                                margin-left:200rpx;
-                            }
-                        }
-                    }
-                }
-                .list-footer{
-                    font-size:28rpx;
-                    color:#666666;
-                    text-align: right;
-                    margin-top:30rpx;
-                }
-                .wait-btn{
+                .list-header {
+                    height: 42rpx;
                     display: flex;
                     display: -webkit-flex;
-                    -webkit-justify-content:flex-end;
+                    align-items: center;
+                    -webkit-align-items: center;
+                    justify-content: space-between;
+                    -webkit-justify-content: space-between;
+                    .list-icon {
+                        height: 32rpx;
+                        width: 32rpx;
+                    }
+                    .list-store {
+                        font-size: 32rpx;
+                        color: #222222;
+                        margin-left: 16rpx
+                    }
+                    .list-type {
+                        font-size: 28rpx;
+                        color: #f25664;
+                    }
+                    .arrow {
+                        height: 16rpx;
+                        width: 10rpx;
+                        margin-left: 16rpx;
+                    }
+                }
+                .order-detail {
+                    height: 180rpx;
+                    width: 100%;
+                    padding-bottom: 30rpx;
+                    margin-top: 30rpx;
+                    border-bottom: 2rpx solid #F5F5F5;
+                    display: flex;
+                    display: -webkit-flex;
+                    .goods-pic {
+                        height: 180rpx;
+                        width: 180rpx;
+                    }
+                    .goods-text {
+                        margin-left: 20rpx;
+                        -webkit-flex: 1;
+                        -ms-flex: 1;
+                        flex: 1;
+                        .goods-name {
+                            font-size: 28rpx;
+                            color: #222222;
+                        }
+                        .goods-style {
+                            margin-top: 16rpx;
+                            font-size: 24rpx;
+                            color: #959595;
+                        }
+                        .goods-price {
+                            color: #f25664;
+                            .price {
+                                font-size: 32rpx;
+                            }
+                            .count {
+                                font-size: 24rpx;
+                                margin-left: 200rpx;
+                            }
+                        }
+                    }
+                }
+                .list-footer {
+                    font-size: 28rpx;
+                    color: #666666;
+                    text-align: right;
+                    margin-top: 30rpx;
+                }
+                .wait-btn {
+                    display: flex;
+                    display: -webkit-flex;
+                    -webkit-justify-content: flex-end;
                     margin-top: 24rpx;
                     -webkit-align-content: center;
-                    view{
+                    view {
                         width: 132rpx;
                         height: 40rpx;
-                        background-color:  #F25664;
+                        background-color: #F25664;
                         color: #fff;
                         font-size: 24rpx;
-                        text-align: center;
-                        // line-height: 30rpx;
+                        text-align: center; // line-height: 30rpx;
                         border-radius: 20rpx;
-                        &:first-child{
+                        &:first-child {
                             margin-right: 24rpx;
                         }
-                        &:last-child{
+                        &:last-child {
                             background-color: #fff;
                             color: #959595;
                             border: 2rpx solid #B5B5B5;
@@ -144,293 +154,288 @@
                 }
             }
         }
-}
-.empty{
-    text-align: center;
-    margin-top: 200rpx;
-    image{
-        width: 400rpx;
-        height: 250rpx;
-        display: inline-block;
-        margin-bottom: 40rpx;
     }
-    view{
-        font-size: 28rpx;
-        color: #959595;
-    }
-    button{
-        color: #fff;
-        font-size: 32rpx;
-        background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
-        border-radius: 22px;
-        width: 530rpx;
-        height: 88rpx;
-        line-height: 88rpx;
-        display: inline-block;
-        border: none;
-        outline: none;
-        margin-top: 60rpx;
+    .empty {
         text-align: center;
+        margin-top: 200rpx;
+        image {
+            width: 400rpx;
+            height: 250rpx;
+            display: inline-block;
+            margin-bottom: 40rpx;
+        }
+        view {
+            font-size: 28rpx;
+            color: #959595;
+        }
+        button {
+            color: #fff;
+            font-size: 32rpx;
+            background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
+            border-radius: 22px;
+            width: 530rpx;
+            height: 88rpx;
+            line-height: 88rpx;
+            display: inline-block;
+            border: none;
+            outline: none;
+            margin-top: 60rpx;
+            text-align: center;
+        }
     }
-}
-
-// 取消订单的弹出框
-.cancleShadow{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0,0.3);
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    .content{
-        width: 620rpx;
-        height: 576rpx;
-        background-color: #fff;
-        border-radius: 20rpx;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -310rpx;
-        margin-top: -288rpx;
-        text-align: center;
-        image{
-            width: 288rpx;
-            height: 150rpx;
-            margin-top: 100rpx;
-        }
-        .tip{
-            font-size: 14px;
-            color: #666666;
-            width: 448rpx;
-            text-align: left;
-            margin: 30rpx auto;
-        }
-        .btns{
-            display: flex;
-            display: -webkit-flex;
-            align-content: center;
-            -webkit-align-content: center;
-            justify-content: space-between;
-            padding: 20rpx 40rpx;
-            view{
-                border: 2rpx solid #F25664;
-                border-radius: 42rpx;
-                width: 250rpx;
-                height: 84rpx;
-                line-height: 84rpx;
-                text-align: center;
-                font-size: 32rpx;
-                color: #f25664;
-                &:last-child{
-                    background-color: #f25664;
-                    color: #fff;
+    // 取消订单的弹出框
+    .cancleShadow {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        .content {
+            width: 620rpx;
+            height: 576rpx;
+            background-color: #fff;
+            border-radius: 20rpx;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -310rpx;
+            margin-top: -288rpx;
+            text-align: center;
+            image {
+                width: 288rpx;
+                height: 150rpx;
+                margin-top: 100rpx;
+            }
+            .tip {
+                font-size: 14px;
+                color: #666666;
+                width: 448rpx;
+                text-align: left;
+                margin: 30rpx auto;
+            }
+            .btns {
+                display: flex;
+                display: -webkit-flex;
+                align-content: center;
+                -webkit-align-content: center;
+                justify-content: space-between;
+                padding: 20rpx 40rpx;
+                view {
+                    border: 2rpx solid #F25664;
+                    border-radius: 42rpx;
+                    width: 250rpx;
+                    height: 84rpx;
+                    line-height: 84rpx;
+                    text-align: center;
+                    font-size: 32rpx;
+                    color: #f25664;
+                    &:last-child {
+                        background-color: #f25664;
+                        color: #fff;
+                    }
                 }
             }
         }
     }
-}
 </style>
 <template>
-  <view class="container">
-    <view class="tab">
-        <view class="{{index==nowIndex?'tab-list-active':'tab-list'}}" wx:for="{{tabLists}}" wx:key="{{item.id}}" wx:for-index="index" bindtap="chooseTab({{index}})">
-            <view class="tab-text">{{item}}</view>
-        </view>
-    </view>
-    <view class="order-wrapper">
-        <view class="order-list" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
-            <view class="list-header">
-                <view class="header-left">
-                 <image src="{{imagePath+'store02.png'}}" style="vertical-align:middle" class="list-icon" wx:if="{{imagePath}}"/>
-                 <text class="list-store" style="font-size:28rpx">{{item.storeName}}</text>
-                 <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}"/>
-                </view>
-                <view class="header-right">
-                  <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 1}}">已完成</text>
-                  <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 0}}">待收货</text>
-                 <text class="list-type" wx:if="{{item.orderStatus == 0}}" style="color:#959595">已取消</text>
-                </view>
+    <view class="container">
+        <view class="tab">
+            <view class="{{index==nowIndex?'tab-list-active':'tab-list'}}" wx:for="{{tabLists}}" wx:key="{{item.id}}" wx:for-index="index" bindtap="chooseTab({{index}})">
+                <view class="tab-text">{{item}}</view>
             </view>
-            <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}"/>
-                <view class="goods-text">
-                    <view class="goods-name">{{item.goodsName}}</view>
-                    <view class="goods-style">规格：{{item.className}}</view>
-                    <view class="goods-price">
-                        <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
-                        <text class="count">数量：{{item.goodsCount}}</text>
+        </view>
+        <view class="order-wrapper">
+            <view class="order-list" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="list-header">
+                    <view class="header-left">
+                        <image src="{{imagePath+'store02.png'}}" style="vertical-align:middle" class="list-icon" wx:if="{{imagePath}}" />
+                        <text class="list-store" style="font-size:28rpx">{{item.storeName}}</text>
+                        <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}" />
+                    </view>
+                    <view class="header-right">
+                        <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 1}}">已完成</text>
+                        <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 0}}">待收货</text>
+                        <text class="list-type" wx:if="{{item.orderStatus == 0}}" style="color:#959595">已取消</text>
                     </view>
                 </view>
-            </navigator>
-            <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}"/>
-                <view class="goods-text">
-                    <view class="goods-name">{{item.goodsName}}</view>
-                    <view class="goods-style">规格：{{item.className}}</view>
-                    <view class="goods-price">
-                        <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
-                        <text class="count">数量：{{item.goodsCount}}</text>
+                <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
+                    <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}" />
+                    <view class="goods-text">
+                        <view class="goods-name">{{item.goodsName}}</view>
+                        <view class="goods-style">规格：{{item.className}}</view>
+                        <view class="goods-price">
+                            <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
+                            <text class="count">数量：{{item.goodsCount}}</text>
+                        </view>
                     </view>
+                </navigator>
+                <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
+                    <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}" />
+                    <view class="goods-text">
+                        <view class="goods-name">{{item.goodsName}}</view>
+                        <view class="goods-style">规格：{{item.className}}</view>
+                        <view class="goods-price">
+                            <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
+                            <text class="count">数量：{{item.goodsCount}}</text>
+                        </view>
+                    </view>
+                </navigator>
+                <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
+                <view class="wait-btn">
+                    <view class="right-now">立即支付</view>
+                    <view class="cancle">取消订单</view>
                 </view>
-            </navigator>
-            <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
-            <view class="wait-btn">
-                <view class="right-now">立即支付</view>
-                <view class="cancle">取消订单</view>
+            </view>
+        </view>
+        <!-- 空空如也 -->
+        <view class="empty" wx:if="{{empty}}">
+            <image src="{{imagePath + 'null_order@2x.png'}}" />
+            <view>你的订单空空如也，还不快去收些好货</view>
+            <button @tap="goIndex">发现好货</button>
+        </view>
+        <!-- 取消订单弹出框 -->
+        <view class="cancleShadow" wx:if="{{cancleShadow}}">
+            <view class="content">
+                <image src="{{imagePath + 'popup_retain_sz.png'}}" wx:if="{{imagePath}}" />
+                <view class="tip">
+                    主人，你真的忍心取消订单吗，还差一点我就是你的人了。
+                </view>
+                <view class="btns">
+                    <view class="shadow-canle">忍心拒绝</view>
+                    <view class="shadow-right">立即支付</view>
+                </view>
             </view>
         </view>
     </view>
-
-    <!-- 空空如也 -->
-    <view class="empty" wx:if="{{empty}}">
-        <image src="{{imagePath + 'null_order@2x.png'}}"/>
-        <view>你的订单空空如也，还不快去收些好货</view>
-        <button @tap="goIndex">发现好货</button>
-    </view>
-
-    <!-- 取消订单弹出框 -->
-    <view class="cancleShadow">
-        <view class="content">
-            <image src="{{imagePath + 'popup_retain_sz.png'}}" wx:if="{{imagePath}}"/>
-            <view class="tip">
-                主人，你真的忍心取消订单吗，还差一点我就是你的人了。
-            </view>
-            <view class="btns">
-                <view class="shadow-canle">忍心拒绝</view>
-                <view class="shadow-right">立即支付</view>
-            </view>
-        </view>
-    </view>
-  </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js'
-import mywxs from '../../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '我的订单',
-    navigationBarBackgroundColor: 'white',
-    navigationBarTextStyle: 'black'
-  };
-  data = {
-      imagePath:path.path.imagePath,
-      apiPath:path.path.apiPath,
-      preImagePath:path.path.preImagePath,      
-      tabLists:['全部','待支付','待发货','待收货','已完成','已取消'],
-      nowIndex:0,
-      orderList:{},
-      type:'',
-      empty:false,
-      page:1,
-      totalPage:0,
-      arr:[]
-  };
-  wxs = {
-      m1: mywxs
-  };
-  methods= {
-      chooseTab(index){
-          this.nowIndex = index
-          if(this.nowIndex == 0){
-              this.getOrderAllList()
-          }else if(this.nowIndex == 1){
-              this.type = 0
-              this.getOrderList()
-          }else{
-              this.type = 1
-              this.getOrderList()
-          }
-      },
-      goIndex(){
-          this.$switch('../../index/index')
-      }
-  };
-  onLoad(options) {
-      this.type = options.type
-      console.log(options)
-      if(this.type == '3'){
-          this.getOrderAllList()
-          this.nowIndex = 0
-      }else if(this.type == '0'){
-          this.nowIndex = 1
-          this.getOrderList()
-      }else{
-          this.nowIndex = 2
-          this.getOrderList()
-      }
-  }
-//   获取订单列表
-    getOrderList(){
-        var that = this 
-        wx.showLoading({
-          title: '加载中', 
-          mask: true, 
-          success: res => {}
-        });
-        wx.request({
-          url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
-          data: {
-              userid:that.$parent.globalData.userId,
-              page:that.page,
-              rows:100,
-              type:that.type
-          }, 
-          method: 'GET',
-          dataType: 'json',
-          success: res => {
-              console.log(res)
-              that.orderList = res.data.data
-              console.log(that.orderList.length)
-              if(that.orderList.length<1){
-                  that.empty = true
-              }else{
-                  that.empty = false
-              }
-              that.$apply()
-              wx.hideLoading();
-          },
-          fail: () => {},
-          complete: () => {}
-        });
-        
+    import wepy from 'wepy';
+    import path from '../../../common/path.js'
+    import mywxs from '../../../wxs/mywxs.wxs'
+    export default class Index extends wepy.page {
+        config = {
+            navigationBarTitleText: '我的订单',
+            navigationBarBackgroundColor: 'white',
+            navigationBarTextStyle: 'black'
+        };
+        data = {
+            imagePath: path.path.imagePath,
+            apiPath: path.path.apiPath,
+            preImagePath: path.path.preImagePath,
+            tabLists: ['全部', '待支付', '待发货', '待收货', '已完成', '已取消'],
+            nowIndex: 0,
+            orderList: {},
+            type: '',
+            empty: false,
+            page: 1,
+            totalPage: 0,
+            arr: [],
+            cancleShadow: false
+        };
+        wxs = {
+            m1: mywxs
+        };
+        methods = {
+            chooseTab(index) {
+                this.nowIndex = index
+                if (this.nowIndex == 0) {
+                    this.getOrderAllList()
+                } else if (this.nowIndex == 1) {
+                    this.type = 0
+                    this.getOrderList()
+                } else {
+                    this.type = 1
+                    this.getOrderList()
+                }
+            },
+            goIndex() {
+                this.$switch('../../index/index')
+            }
+        };
+        onLoad(options) {
+            this.type = options.type
+            console.log(options)
+            if (this.type == '3') {
+                this.getOrderAllList()
+                this.nowIndex = 0
+            } else if (this.type == '0') {
+                this.nowIndex = 1
+                this.getOrderList()
+            } else {
+                this.nowIndex = 2
+                this.getOrderList()
+            }
+        }
+        //   获取订单列表
+        getOrderList() {
+            var that = this
+            wx.showLoading({
+                title: '加载中',
+                mask: true,
+                success: res => {}
+            });
+            wx.request({
+                url: that.apiPath + '/szmktuser/order/queryuserorderlist',
+                data: {
+                    userid: that.$parent.globalData.userId,
+                    page: that.page,
+                    rows: 100,
+                    type: that.type
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: res => {
+                    console.log(res)
+                    that.orderList = res.data.data
+                    console.log(that.orderList.length)
+                    if (that.orderList.length < 1) {
+                        that.empty = true
+                    } else {
+                        that.empty = false
+                    }
+                    that.$apply()
+                    wx.hideLoading();
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+        //   获取订单列表
+        getOrderAllList() {
+            console.log('全部调用')
+            var that = this
+            wx.showLoading({
+                title: '加载中',
+                mask: true,
+                success: res => {}
+            });
+            wx.request({
+                url: that.apiPath + '/szmktuser/order/queryuserorderlist',
+                data: {
+                    userid: that.$parent.globalData.userId,
+                    page: that.page,
+                    rows: 100,
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: res => {
+                    console.log(res)
+                    that.orderList = res.data.data.reverse()
+                    if (that.orderList.length < 1) {
+                        that.empty = true
+                    } else {
+                        that.empty = false
+                    }
+                    that.$apply()
+                    wx.hideLoading();
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
     }
-
-    //   获取订单列表
-    getOrderAllList(){
-        console.log('全部调用')
-        var that = this 
-        wx.showLoading({
-          title: '加载中', 
-          mask: true, 
-          success: res => {}
-        });
-        wx.request({
-          url: that.apiPath + '/szmktuser/order/queryuserorderlist', 
-          data: {
-              userid:that.$parent.globalData.userId,
-              page:that.page,
-              rows:100,
-          }, 
-          method: 'GET',
-          dataType: 'json',
-          success: res => {
-              console.log(res)
-              that.orderList = res.data.data.reverse()
-             if(that.orderList.length<1){
-                  that.empty = true
-              }else{
-                  that.empty = false
-              }
-              that.$apply()
-              wx.hideLoading();
-          },
-          fail: () => {},
-          complete: () => {}
-        });
-        
-    }
-}
 </script>

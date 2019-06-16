@@ -604,11 +604,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-            <view class="kefu">
-          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-          <view>客服</view>
-        </view>
-        </button>
+              <view class="kefu">
+            <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+            <view>客服</view>
+          </view>
+          </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -694,12 +694,14 @@
       showShadow: false,
       collocationId: '',
       produceInfo: {},
+      wareHouseStock:0,
       promotion: {},
       pmtCollocation: {},
       goodsClassList: {},
       active: 1,
       activeIndex: 0,
       account: 1,
+      typeId:'',
     };
     wxs = {
       m1: mywxs
@@ -725,7 +727,7 @@
       },
       // 加
       addAccount() {
-        if (this.account >= this.goodsClassList[this.activeIndex].stock || this.account >= this.promotion.stock) {
+        if (this.account >= this.goodsClassList[this.activeIndex].stock || this.account >= this.wareHouseStock) {
           wx.showToast({
             title: '库存不足',
             icon: 'none',
@@ -753,17 +755,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.account <= 0) {
-          wx.showToast({
-            title: '请选择最少数量',
-            icon: 'none',
-            duration: 2000,
-            mask: true,
-            success: res => {}
-          });
-          return
-        }
-        if (this.account * this.pmtCollocation.promotionCount > this.promotion.stock || this.account * this.pmtCollocation.goodsCount > this.goodsClassList[this.activeIndex].stock) {
+        if (this.account * this.pmtCollocation.promotionCount > this.wareHouseStock || this.account * this.pmtCollocation.goodsCount > this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '不好意思,商品库存不足',
             icon: 'none',
@@ -775,21 +767,24 @@
           return
         }
         var pay = {}
-        //
-        pay.collocationId = this.collocationId
-        // 商品id 
-        pay.id = this.produceInfo.id
+        //商品的搭配Id
+        pay.collocationId = this.pmtCollocation.id
         // 商品规格id
-        pay.classid = this.typeId
+        pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-          pay.scount = this.collocation.count
+        //搭配的促销品需要的数量
+        pay.scount = this.pmtCollocation.promotionCount
+        //搭配的商品数量
+        pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
-        pay.type = 3
-        // 商品活动
-        pay.activityId = this.collocationId
+        pay.type = 2
+        //任务关联id
+        pay.targetId = null
+        //优惠券id
+        pay.couponId = null
         // 商品的价钱
-        pay.money = ((this.produceInfo.chaPrice * 0.01 + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.collocation.count) * this.account).toFixed(2)
+        pay.money = ((this.pmtCollocation.promotionPrice * 0.01 * this.pmtCollocation.promotionCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.pmtCollocation.goodsCount) * this.account).toFixed(2)
         wx.setStorage({
           key: 'pay',
           data: pay
@@ -824,6 +819,10 @@
           that.produceInfo = res.data.data.goodsInfo.goods
           that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
           that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
+          that.typeId = that.goodsClassList[this.activeIndex].id
+
+          //促销商品的数量
+          that.wareHouseStock = res.data.data.wareHouseStock
           that.$apply()
         },
         fail: () => {},

@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 19,
 			"list": [
 				{
 					"id": 0,
@@ -162,6 +162,13 @@
 					"name": "大满减",
 					"pathName": "pages/login/login",
 					"query": "sence=KMF0CSI2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "领取任务成功",
+					"pathName": "pages/secKill/choseTaskSuccess",
+					"query": "scene=AL2ETEGV",
 					"scene": null
 				}
 			]

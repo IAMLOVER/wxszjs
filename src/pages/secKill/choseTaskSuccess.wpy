@@ -1,284 +1,360 @@
 <style lang="less">
-page{
-  background-image: linear-gradient(-180deg, #F59562 0%, #F26D49 100%);
-}
-.main{
-  width: 100%;
-  height: 610rpx;
-  background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
-  background-repeat: no-repeat;
-  background-size: 97% 100%;
-  background-position:center;
-  background-position-y: 30rpx;
-  .content{
-    opacity: 0.8;
-    background: #FFFFFF;
-    border-radius: 12rpx;
-    background-color: #fff;
-    width: 560rpx;
-    height: 244rpx;
-    margin: 0 auto;
-    padding: 56rpx 48rpx;
-    box-sizing: border-box;
-    text-align: center;
-    color: #5F3118;
-    font-size: 34rpx;
-    font-weight: 600;
-    margin-top: 30rpx;
-    position: relative;
+  page {
+    background-image: linear-gradient(-180deg, #F59562 0%, #F26D49 100%);
   }
-  .time-range,.count{
-    font-size: 28rpx;
-    color: #666;
-    font-weight: normal;
-    text-align: left;
-    padding-left: 100rpx;
-    image{
-      width: 28rpx;
-      height: 34rpx;
-      margin-right: 16rpx;
-      vertical-align: middle;
-    }
-  }
-  .time-range{
-    margin-top: 10rpx;
-  }
-  .sanjiao{
-    width: 0;
-    height: 0;
-    border-width: 28rpx;
-    border-color:  transparent #fff transparent  transparent;
-    border-style:solid;
-    position: absolute;
-    border-radius: 20rpx;
-    left: 40%;
-    margin-left: 15rpx;
-  }
-  .send{
-    width: 320rpx;
-    height: 84rpx;
-    background-image: linear-gradient(-133deg, #F25664 13%, #D577EF 100%);
-    border-radius: 44rpx;
-    color: #fff;
-    font-size: 32rpx;
-    line-height: 84rpx;
-    font-weight: normal;
-    margin: 0 auto;
-  }
-}
-.other{
-  position: relative;
-  .title{
-    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/title_task.png');
-    width: 348rpx;
-    background-size: 100%;
-    height: 64rpx;
+  .main {
+    width: 100%;
+    height: 610rpx;
+    background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
     background-repeat: no-repeat;
-    color: #fff;
-    font-size: 32rpx;
-    text-align: center;
-    line-height: 64rpx;
-    z-index: 999;
-    position: absolute;
-    left: 50%;
-    margin-left: -174rpx;
-    top: -25rpx;
-  }
-}
-.new-task{
-  z-index: 1;
-}
-.task-produces{
-  padding: 20rpx 30rpx;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
-    box-sizing: border-box;
-    width: 690rpx;
-    height: 240rpx;
-    position: relative;
-    margin-top: -14rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
-        width: 180rpx;
-        height: 180rpx;
-        border-radius: 16rpx;
+    background-size: 97% 100%;
+    background-position: center;
+    background-position-y: 30rpx;
+    .content {
+      opacity: 0.8;
+      background: #FFFFFF;
+      border-radius: 12rpx;
+      background-color: #fff;
+      width: 560rpx;
+      height: 244rpx;
+      margin: 0 auto;
+      padding: 56rpx 48rpx;
+      box-sizing: border-box;
+      text-align: center;
+      color: #5F3118;
+      font-size: 34rpx;
+      font-weight: 600;
+      margin-top: 30rpx;
+      position: relative;
+    }
+    .time-range,
+    .count {
+      font-size: 28rpx;
+      color: #666;
+      font-weight: normal;
+      text-align: left;
+      padding-left: 100rpx;
+      image {
+        width: 28rpx;
+        height: 34rpx;
+        margin-right: 16rpx;
+        vertical-align: middle;
       }
     }
-    .item-right{
-      .item-title{
-        font-size: 32rpx;
-        color: #222222;
-        height: 96rpx;
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 10rpx;
-        margin-top: 10rpx;
-        image{
-          width: 18rpx;
-          height: 20rpx;
-          margin-right: 8rpx;
+    .time-range {
+      margin-top: 10rpx;
+    }
+    .sanjiao {
+      width: 0;
+      height: 0;
+      border-width: 28rpx;
+      border-color: transparent #fff transparent transparent;
+      border-style: solid;
+      position: absolute;
+      border-radius: 20rpx;
+      left: 40%;
+      margin-left: 15rpx;
+    }
+    .send {
+      width: 320rpx;
+      height: 84rpx;
+      background-image: linear-gradient(-133deg, #F25664 13%, #D577EF 100%);
+      border-radius: 44rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      font-weight: normal;
+      margin: 0 auto;
+    }
+  }
+  .other {
+    position: relative;
+    .title {
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/title_task.png');
+      width: 348rpx;
+      background-size: 100%;
+      height: 64rpx;
+      background-repeat: no-repeat;
+      color: #fff;
+      font-size: 32rpx;
+      text-align: center;
+      line-height: 64rpx;
+      z-index: 999;
+      position: absolute;
+      left: 50%;
+      margin-left: -174rpx;
+      top: -25rpx;
+    }
+  }
+  .new-task {
+    z-index: 1;
+  }
+  .task-produces {
+    padding: 20rpx 30rpx;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      width: 690rpx;
+      height: 240rpx;
+      position: relative;
+      margin-top: -14rpx;
+      .item-left {
+        float: left;
+        margin-right: 16rpx;
+        image {
+          width: 180rpx;
+          height: 180rpx;
+          border-radius: 16rpx;
         }
       }
-      .commision{
-        font-size: 24rpx;
-        color: #959595;
-      }
-      .item-price{
-        float: left;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
+      .item-right {
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          height: 96rpx;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
           font-size: 24rpx;
           color: #F25664;
-          font-weight: 600;
-          .really{
-            font-size: 36rpx;
+          margin-bottom: 10rpx;
+          margin-top: 10rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .commision {
+          font-size: 24rpx;
+          color: #959595;
+        }
+        .item-price {
+          float: left;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            font-size: 24rpx;
             color: #F25664;
+            font-weight: 600;
+            .really {
+              font-size: 36rpx;
+              color: #F25664;
+            }
           }
         }
       }
+      .tip {
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border: 1px solid #F25664;
+        color: #F25664;
+        background-color: #fff;
+        border-radius: 8rpx;
+        font-size: 24rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 24rpx;
+        bottom: 34rpx;
+      }
     }
-    .tip{
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border:1px solid #F25664;
-      color: #F25664;
+  }
+  button[plain] {
+    border-color: transparent !important;
+  }
+  .show-tip-shadow {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    .content {
+      width: 620rpx;
+      height: 444rpx;
       background-color: #fff;
-      border-radius: 8rpx;
-      font-size: 24rpx;
-      height: 36rpx;
       position: absolute;
-      right: 24rpx;
-      bottom: 34rpx;
-    }
-  }
-}
-button[plain]{
-  border-color: transparent !important;  
-}
-.show-tip-shadow{
-  width:100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 999999;
-  .content{
-    width: 620rpx;
-    height: 444rpx;
-    background-color: #fff;
-    position: absolute;
-    left: 50%;
-    margin-left: -310rpx;
-    top: 40%;
-    margin-top: -262rpx;
-    text-align: center;
-    padding: 0 30rpx;
-    box-sizing: border-box;
-   border-radius: 20rpx;
-    .title{
-      font-size: 32rpx;
-      color: #222;
-      height: 100rpx;
-      line-height: 100rpx;
-      border-bottom: 2rpx solid #f5f5f5;
-    }
-    .text{
-      width: 480rpx;
-      font-size: 28rpx;
-      color: #666;
-      margin: 40rpx auto;
-      text-align: left;
-    }
-    .know{
-      width: 248rpx;
-      height: 84rpx;
-      border-radius: 42rpx;
-      background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 93%);
+      left: 50%;
+      margin-left: -310rpx;
+      top: 40%;
+      margin-top: -262rpx;
       text-align: center;
-      line-height: 84rpx;
-      margin: 30rpx auto;
-      color: #fff;
-      font-size: 28rpx;
+      padding: 0 30rpx;
+      box-sizing: border-box;
+      border-radius: 20rpx;
+      .title {
+        font-size: 32rpx;
+        color: #222;
+        height: 100rpx;
+        line-height: 100rpx;
+        border-bottom: 2rpx solid #f5f5f5;
+      }
+      .text {
+        width: 480rpx;
+        font-size: 28rpx;
+        color: #666;
+        margin: 40rpx auto;
+        text-align: left;
+      }
+      .know {
+        width: 248rpx;
+        height: 84rpx;
+        border-radius: 42rpx;
+        background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 93%);
+        text-align: center;
+        line-height: 84rpx;
+        margin: 30rpx auto;
+        color: #fff;
+        font-size: 28rpx;
+      }
+    }
+    image {
+      width: 56rpx;
+      height: 56rpx;
+      position: absolute;
+      left: 50%;
+      margin-left: -28rpx;
+      bottom: 35%;
     }
   }
-  image{
-    width: 56rpx;
-    height: 56rpx;
-    position: absolute;
-    left: 50%;
-    margin-left: -28rpx;
-    bottom: 35%;
+  .share-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 346rpx;
+      background-color: #F5F5F5;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      .tip {
+        text-align: center;
+        font-size: 28rpx;
+        color: #666;
+        margin-top: 30rpx;
+      }
+      .share-way {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 20rpx;
+        color: #222;
+        margin-top: 12rpx;
+        margin-bottom: 22rpx;
+        image {
+          width: 92rpx;
+          height: 92rpx;
+        }
+        button {
+          width: 100rpx;
+          height: 140rpx;
+          padding: 0;
+          line-height: 35rpx;
+          color: #222;
+          font-size: 20rpx;
+          margin: 0;
+        }
+      }
+      .cancle-share {
+        height: 96rpx;
+        background-color: #fff;
+        text-align: center;
+        font-size: 32rpx;
+        color: #666;
+        line-height: 96rpx;
+        z-index: 9999;
+      }
+    }
   }
-}
+  button[plain] {
+    border-color: #f5f5f5 !important;
+  } //生成海报的弹出框
+  .poster-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 99999;
+    .save-ablum {
+      background: #EB4D4E;
+      border-radius: 42rpx;
+      width: 250rpx;
+      height: 84rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      margin: 50rpx auto 200rpx;
+      text-align: center;
+    }
+  }
 </style>
 <template>
   <view class="page">
     <view class="main">
       <view class="content">
-          <view>快发起助力，完成任务吧！</view>
-          <view class="time-range">
-            <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}"/>任务时间：{{m1.filter(taskForShare.duration/3600000)}}小时
-          </view>
-          <view class="count">
-            <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}"/>任务数量：{{taskForShare.target}}
-          </view>
-          <view class="sanjiao">
-          </view>
-          <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:73rpx;"/>
-          <button open-type="share" plain="true">
-            <view class="send">立即转发助力</view>
-          </button>
+        <view>快发起助力，完成任务吧！</view>
+        <view class="time-range">
+          <image wx:if="{{imagePath}}" src="{{imagePath + 'daojishi.png'}}" />任务时间：{{m1.filter(taskForShare.duration/3600000)}}小时
+        </view>
+        <view class="count">
+          <image wx:if="{{imagePath}}" src="{{imagePath +'count.png'}}" />任务数量：{{taskForShare.target}}
+        </view>
+        <view class="sanjiao">
+        </view>
+        <image src="https://img-blog.csdnimg.cn/20190409172312471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70" style="width:192rpx;height:164rpx;margin-top:73rpx;"
+        />
+        <view @tap="openShareShadow">
+          <view class="send">立即助力转发</view>
+        </view>
       </view>
     </view>
-
     <!-- 其他人气任务 -->
     <view class="other">
       <view class="title">
         其他人气任务
       </view>
-       <view class="new-task">
-    <view class="task-produces">
-         <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
-          <view class="item-left">
-              <image src="{{preImagePath+item.pirUrl}}" mode="aspectFill"/>
-          </view>
-          <view class="item-right">
-            <view class="item-title">{{item.title}}</view>
-            <view class="commision">
-              佣金：{{item.minPercent}}%-{{item.maxPercent}}%
+      <view class="new-task">
+        <view class="task-produces">
+          <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
+            <view class="item-left">
+              <image src="{{preImagePath+item.pirUrl}}" mode="aspectFill" />
             </view>
-            <view class="hot">
-              <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>              
-              <text>拼团总数：{{item.visitNum}}</text>
+            <view class="item-right">
+              <view class="item-title">{{item.title}}</view>
+              <view class="commision">
+                佣金：{{item.minPercent}}%-{{item.maxPercent}}%
+              </view>
+              <view class="hot">
+                <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}" />
+                <text>拼团总数：{{item.visitNum}}</text>
+              </view>
             </view>
-          </view>
-          <view class="tip">
-            已经有{{item.count}}人领取
+            <view class="tip">
+              已经有{{item.count}}人领取
+            </view>
           </view>
         </view>
+      </view>
     </view>
-     </view>
-    </view>
-
-
     <!-- 领取成功，进入页面弹出框 -->
     <view class="show-tip-shadow" wx:if="{{tipShadow}}">
       <view class="content">
@@ -292,79 +368,322 @@ button[plain]{
           知道了
         </view>
       </view>
-      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeTipShadow"/>
+      <image src="{{imagePath + 'close.png'}}" wx:if="{{imagePath}}" @tap="closeTipShadow" />
     </view>
+    <!-- 转发分享弹出框 -->
+    <view class="share-shadow" wx:if="{{showShareShadow}}">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+        <view class="tip">请选择转发方式</view>
+        <view class="share-way">
+          <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+            <image src="{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}" />
+            <view @tap="onCreatePoster">生成海报</view>
+          </poster>
+          <button open-type="share" class="poster" plain="true">
+                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                              <view>微信好友</view>
+                            </button>
+        </view>
+        <view class="cancle-share" @tap="cancleShare">
+          取消
+        </view>
+      </view>
+    </view>
+    <!-- 点击生成海报的出现的弹出框 -->
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
+      <view class="save-ablum" @tap="saveAblum">保存到相册</view>
+    </view>
+    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../common/path.js';
-import mywxs from '../../wxs/mywxs.wxs'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '任务领取成功'
-  };
-  onLoad() {
-    this.taskForShare = wx.getStorageSync('taskForShare')
-    console.log(this.taskForShare)
-    this.getTaskDetail()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    produceId:'',
-    otherArr:{},
-    taskForShare:{},
-    tipShadow:true,
-  };
-  wxs = {
+  import wepy from 'wepy';
+  import path from '../../common/path.js';
+  import mywxs from '../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '任务领取成功',
+      usingComponents: {
+        "poster": "../../components/miniprogram_dist/poster/index",
+      }
+    };
+    onLoad() {
+      this.isIphoneX = this.$parent.globalData.isIphoneX
+      this.taskForShare = wx.getStorageSync('taskForShare')
+      console.log(this.taskForShare)
+      this.taskHaveCollocation = wx.getStorageSync('taskHaveCollocation')
+      if (this.taskHaveCollocation) {
+        this.tipShadow = true
+      }
+      // 海报数据
+      this.posterConfig = {
+        width: 570,
+        height: 920,
+        debug: false,
+        texts: [{
+            x: 162.6,
+            y: 45.8,
+            zIndex: 2,
+            text: [{
+              text: this.$parent.globalData.userName,
+              fontSize: 24,
+              color: '#FFD2D6',
+              marginLeft: 0,
+            }]
+          },
+          {
+            x: 162.6,
+            y: 82.4,
+            zIndex: 2,
+            text: [{
+              text: wx.getStorageSync('relay'),
+              fontSize: 27,
+              color: '#fff',
+              opacity: 1,
+              lineHeight: 40,
+              lineNum: 2,
+              width: 360,
+            }, ],
+            baseLine: 'middle',
+          },
+          {
+            x: 76,
+            y: 664.4,
+            zIndex: 3,
+            text: [{
+              text: wx.getStorageSync('taskGoodsName'),
+              fontSize: 26,
+              color: '#000',
+            }]
+          },
+          {
+            x: 280,
+            y: 760,
+            zIndex: 3,
+            text: [{
+              text: '长按图片识别二维码查看店铺详情',
+              fontSize: 20,
+              color: '#666',
+              opacity: 1,
+              lineNum: 2,
+              lineHeight: 32,
+              width: 180,
+            }]
+          }
+        ],
+        images: [
+          //背景图
+          {
+            url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+            width: 570,
+            height: 920,
+            zIndex: 1,
+          },
+          //人物头像
+          {
+            url: this.$parent.globalData.avatarUrl,
+            width: 100,
+            height: 100,
+            zIndex: 2,
+            x: 50.6,
+            y: 27.6,
+            borderRadius: 100,
+          },
+          //背景图
+          {
+            url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+            width: 480,
+            height: 532,
+            zIndex: 2,
+            x: 45.6,
+            y: 164.4,
+            borderRadius: 16,
+          },
+          //商店的logo
+          {
+            url: wx.getStorageSync('cover'),
+            width: 418,
+            height: 418,
+            zIndex: 3,
+            x: 76,
+            y: 210
+          },
+          //神州集市logo
+          {
+            url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+            width: 84,
+            height: 84,
+            x: 76,
+            y: 740,
+          },
+          //二维码
+          {
+            url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+            width: 84,
+            height: 84,
+            x: 178,
+            y: 740,
+          },
+        ],
+        blocks: [{
+            width: 478,
+            height: 126,
+            opacity: 1,
+            backgroundColor: '#FDE5ED',
+            borderRadius: 9,
+            x: 45.6,
+            y: 716,
+            zIndex: 2,
+          },
+          {
+            width: 214,
+            height: 6,
+            borderRadius: 6,
+            backgroundColor: '#F25664',
+            zIndex: 3,
+            x: 278,
+            y: 810,
+          }
+        ],
+      }
+      console.log(this.posterConfig)
+      this.getTaskDetail()
+    }
+    data = {
+      isIphoneX: false,
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      produceId: '',
+      otherArr: {},
+      taskForShare: {},
+      tipShadow: false,
+      taskHaveCollocation: {},
+      showShareShadow: false,
+      showPoster: false,
+      posterConfig: {},
+      posterDetail: ''
+    };
+    wxs = {
       m1: mywxs
-  };
-  methods = {
-    closeTipShadow(){
-      this.tipShadow = false
-    },
-     onShareAppMessage: function (ops) {
-      if (ops.from === 'button') {
-        // 来自页面内转发按钮
-       console.log(ops.target)
-     }
-     return {
-       title:wx.getStorageSync('relay') ,
-       imageUrl:wx.getStorageSync('cover'),
-       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsid  + '&userTargetId=' +  this.taskForShare.id,
-       success: function (res) {
-       // 转发成功
-        console.log("转发成功:" + JSON.stringify(res));
+    };
+    methods = {
+      //打开，关闭分享弹出框
+      openShareShadow() {
+        this.showShareShadow = true
       },
-      fail: function (res) {
-       // 转发失败
-       console.log("转发失败:" + JSON.stringify(res));
-     }
-   }
- }
-  };  
-  // 获取并展示两个随机任务
-  getTaskDetail(){
-    var that = this 
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/randomtarget',
-      data: {
-        targetid:that.taskForShare.targetid
+      cancleShare() {
+        this.showShareShadow = false
       },
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        that.otherArr = res.data.data
-        that.$apply()
+      onCreatePoster() {},
+      onPosterFail(err) {
+        console.error(err);
       },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+      onPosterSuccess(e) {
+        this.showShareShadow = false
+        this.showPoster = true
+        const {
+          detail
+        } = e;
+        this.posterDetail = detail
+      },
+      closeTipShadow() {
+        this.tipShadow = false
+      },
+      onShareAppMessage: function(ops) {
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(ops.target)
+        }
+        return {
+          title: wx.getStorageSync('relay'),
+          imageUrl: wx.getStorageSync('cover'),
+          path: 'pages/generalGoods/taskGenralGoods?id=' + this.taskForShare.goodsid + '&userTargetId=' + this.taskForShare.id,
+          success: function(res) {
+            // 转发成功
+            console.log("转发成功:" + JSON.stringify(res));
+          },
+          fail: function(res) {
+            // 转发失败
+            console.log("转发失败:" + JSON.stringify(res));
+          }
+        }
+      }
+    };
+    // 获取并展示两个随机任务
+    getTaskDetail() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/randomtarget',
+        data: {
+          targetid: that.taskForShare.targetid
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          that.otherArr = res.data.data
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+        //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
+      })
+    }
   }
-}
 </script>
