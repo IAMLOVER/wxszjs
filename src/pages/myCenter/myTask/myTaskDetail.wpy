@@ -1,233 +1,246 @@
 <style lang="less">
-page{
-  background-color:#F59562;
-}
-.header{
-  height: 340rpx;
-  background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task01.png');
-  background-repeat: no-repeat;
-  background-size: 690rpx 660rpx;
-  background-position: center;
-  background-position-y: 36rpx;
- .tip{
-     text-align: center;
-     color: #fff;
-     font-size: 36rpx;
-     padding-top: 50rpx;
- }
- .time-wrapper{
-   width: 510rpx;
-   height: 252rpx;
-   margin: 0 auto;
-   .time{
-     width: 500rpx;
-     height: 336rpx;
-     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/time2.png');
-     background-repeat: no-repeat;
-     background-size: 100%;
+  page {
+    background-color: #F59562;
+  }
+  .header {
+    height: 340rpx;
+    background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task01.png');
+    background-repeat: no-repeat;
+    background-size: 690rpx 660rpx;
+    background-position: center;
+    background-position-y: 36rpx;
+    .tip {
+      text-align: center;
       color: #fff;
-     font-size: 48rpx;
-     text-align: center;
-     line-height: 326rpx;
-     margin: 0 auto;
-   }
- }
-}
-.main{
-  width: 690rpx;
-  height: 470rpx;
-  background-color: #fffbf5;
-  border-radius: 12rpx;
-  margin: 0 auto;
-  padding:  40rpx 20rpx ;
-  box-sizing: border-box;
-  .main-title{
-    font-size: 28rpx;
-    color:#5f3118;
-    font-weight: 600;
+      font-size: 36rpx;
+      padding-top: 50rpx;
+    }
+    .time-wrapper {
+      width: 510rpx;
+      height: 252rpx;
+      margin: 0 auto;
+      .time {
+        width: 500rpx;
+        height: 336rpx;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/time2.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        color: #fff;
+        font-size: 48rpx;
+        text-align: center;
+        line-height: 326rpx;
+        margin: 0 auto;
+      }
+    }
   }
-  .main-count{
-    font-size: 28rpx;
-    color: #666;
-  }
-  .progress-wrapper{
-    width: 610rpx;
-    height: 40rpx;
-    background-color: #ffdce1;
-    border-radius: 26rpx;
+  .main {
+    width: 690rpx;
+    height: 470rpx;
+    background-color: #fffbf5;
+    border-radius: 12rpx;
     margin: 0 auto;
-    position: relative;
-    margin-top: 30rpx;
-    .progress{
-      position: absolute;
-      left:0 ;
-      top: 0;
-      background-image: linear-gradient(-269deg, #FF9E51 0%, #FF624A 98%);
-      border-radius: 26rpx;
-      height: 40rpx;
-    }
-    text{
+    padding: 40rpx 20rpx;
+    box-sizing: border-box;
+    .main-title {
       font-size: 28rpx;
-      color: #fff;
-      position: absolute;
-      top: 0rpx;
+      color: #5f3118;
+      font-weight: 600;
     }
-    text:last-child{
-      right: 15rpx;
+    .main-count {
+      font-size: 28rpx;
+      color: #666;
     }
-  }
-  .main-produce{
-    display:flex;display:-webkit-flex;
-    margin-top: 30rpx;
-    .produce-left{
-      -webkit-flex: 1;-ms-flex: 1;flex: 1;
-      image{
-        width: 180rpx;
-        height: 180rpx;
-        border-radius: 8rpx;
-        margin-right: 16rpx;
+    .progress-wrapper {
+      width: 610rpx;
+      height: 40rpx;
+      background-color: #ffdce1;
+      border-radius: 26rpx;
+      margin: 0 auto;
+      position: relative;
+      margin-top: 30rpx;
+      .progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-image: linear-gradient(-269deg, #FF9E51 0%, #FF624A 98%);
+        border-radius: 26rpx;
+        height: 40rpx;
+      }
+      text {
+        font-size: 28rpx;
+        color: #fff;
+        position: absolute;
+        top: 0rpx;
+      }
+      text:last-child {
+        right: 15rpx;
       }
     }
-    .produce-right{
-      -webkit-flex: 2;-ms-flex: 2;flex: 2;
-      .produce-title{
-        font-size: 32rpx;
-        color: #222;
-        font-weight: 600;
-        height: 90rpx;
-          display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-      }
-      .produce-bottom{
-        display:flex;display:-webkit-flex;
-        justify-content: space-between;-webkit-justify-content: space-between;
-        margin-top: 40rpx;
-        .money-precent{
-          font-size: 24rpx;
-          color: #959595;
+    .main-produce {
+      display: flex;
+      display: -webkit-flex;
+      margin-top: 30rpx;
+      .produce-left {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        image {
+          width: 180rpx;
+          height: 180rpx;
+          border-radius: 8rpx;
+          margin-right: 16rpx;
         }
-        .hot{
+      }
+      .produce-right {
+        -webkit-flex: 2;
+        -ms-flex: 2;
+        flex: 2;
+        .produce-title {
+          font-size: 32rpx;
+          color: #222;
+          font-weight: 600;
+          height: 90rpx;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .produce-bottom {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: space-between;
+          -webkit-justify-content: space-between;
+          margin-top: 40rpx;
+          .money-precent {
             font-size: 24rpx;
-          image{
-            width: 18rpx;
-            height: 22rpx;
-            margin-right: 8rpx;
+            color: #959595;
+          }
+          .hot {
+            font-size: 24rpx;
+            image {
+              width: 18rpx;
+              height: 22rpx;
+              margin-right: 8rpx;
+            }
           }
         }
       }
     }
   }
-}
-.task-situation{
-  width: 690rpx;
-  background-color: #FCE3DB;
-  margin: 0 auto;
-  margin-top: 24rpx;
-  border-radius: 12rpx;
-  padding: 30rpx;
-  box-sizing: border-box;
-  margin-bottom: 200rpx;
-  .situation-title{
-    text-align: center;
-    color: #5F3118;
-    font-size: 32rpx;
-    font-weight: 600;
-    position: relative;
-    &:before{
-      content: ' ';
-      width: 220rpx;
-      height: 2rpx;
-      background-color: rgba(251,212,196,0.5);
-      position: absolute;
-      left: 0;
-      top:20rpx;
-    }
-    &:after{
-      content: ' ';
-      width: 220rpx;
-      height: 2rpx;
-      background-color: rgba(251,212,196,0.5);
-      position: absolute;
-      right: 0;
-      top:20rpx;
-    }
-  }
-  .situation-items{
-    .item{
-      display:flex;display:-webkit-flex;
-      justify-content: space-between;-webkit-justify-content: space-between;
-      align-items:center;
--webkit-align-items: center;
-      margin-top: 20rpx;
-      .item-left{
-        display:flex;display:-webkit-flex;
-        align-items:center;
--webkit-align-items: center;
-        .item-number{
-        font-size: 32rpx;
-        color: #222;
+  .task-situation {
+    width: 690rpx;
+    background-color: #FCE3DB;
+    margin: 0 auto;
+    margin-top: 24rpx;
+    border-radius: 12rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+    margin-bottom: 200rpx;
+    .situation-title {
+      text-align: center;
+      color: #5F3118;
+      font-size: 32rpx;
+      font-weight: 600;
+      position: relative;
+      &:before {
+        content: ' ';
+        width: 220rpx;
+        height: 2rpx;
+        background-color: rgba(251, 212, 196, 0.5);
+        position: absolute;
+        left: 0;
+        top: 20rpx;
       }
-      .item-image{
-        image{
-          width: 70rpx;
-          height: 70rpx;
-          margin-left: 16rpx;
-          margin-right: 16rpx;
-          vertical-align: bottom;
+      &:after {
+        content: ' ';
+        width: 220rpx;
+        height: 2rpx;
+        background-color: rgba(251, 212, 196, 0.5);
+        position: absolute;
+        right: 0;
+        top: 20rpx;
+      }
+    }
+    .situation-items {
+      .item {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        align-items: center;
+        -webkit-align-items: center;
+        margin-top: 20rpx;
+        .item-left {
+          display: flex;
+          display: -webkit-flex;
+          align-items: center;
+          -webkit-align-items: center;
+          .item-number {
+            font-size: 32rpx;
+            color: #222;
+          }
+          .item-image {
+            image {
+              width: 70rpx;
+              height: 70rpx;
+              margin-left: 16rpx;
+              margin-right: 16rpx;
+              vertical-align: bottom;
+            }
+          }
+          .item-info {
+            .item-name {
+              font-size: 28rpx;
+              color: #222;
+            }
+            .item-time {
+              font-size: 24rpx;
+              color: #959595;
+            }
+          }
         }
-      }
-      .item-info{
-        .item-name{
+        .item-counts {
           font-size: 28rpx;
-          color: #222;
+          color: #f25564;
         }
-        .item-time{
-          font-size: 24rpx;
-          color: #959595;
-        }
-      }
-      }
-      .item-counts{
-        font-size: 28rpx;
-        color: #f25564;
       }
     }
   }
-}
-.footer{
-  display:flex;display:-webkit-flex;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 8rpx 30rpx;
-  box-sizing: border-box;
-  justify-content: center;
--webkit-justify-content: center;
-  width: 100%;
-  view{
-    -webkit-flex: 1;-ms-flex: 1;flex: 1;
-    color: #fff;
-    font-size: 28rpx;
-    text-align: center;
-    height: 84rpx;
-    line-height: 84rpx;
-    background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 20%);
-    border-radius: 42rpx;
-    margin-right: 1rpx;
+  .footer {
+    display: flex;
+    display: -webkit-flex;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 8rpx 30rpx;
+    box-sizing: border-box;
+    justify-content: center;
+    -webkit-justify-content: center;
+    width: 100%;
+    view {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      color: #fff;
+      font-size: 28rpx;
+      text-align: center;
+      height: 84rpx;
+      line-height: 84rpx;
+      background-image: linear-gradient(58deg, #FF9E51 0%, #FF624A 20%);
+      border-radius: 42rpx;
+      margin-right: 1rpx;
+    }
+    view:last-child {
+      // border-radius: 0rpx 42rpx 42rpx 0rpx;
+      // background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
+    }
   }
-  view:last-child{
-    // border-radius: 0rpx 42rpx 42rpx 0rpx;
-    // background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
+  button[plain] {
+    border-color: transparent !important;
+    width: 600rpx;
   }
-}
-button[plain]{
-  border-color: transparent !important; 
-  width: 600rpx; 
-}
 </style>
 <template>
   <view class="page">
@@ -248,11 +261,11 @@ button[plain]{
       <view class="progress-wrapper">
         <view class="progress" style="width:{{taskForShare.inviteNum/taskForShare.targetNum*100}}%"></view>
         <text style="left:15rpx;font-size:28rpx;">进度</text>
-        <text style="color:#F25664">{{taskForShare.inviteNum/taskForShare.targetNum*100}}%</text>
+        <text style="color:#F25664">{{m1.filter(taskForShare.inviteNum/taskForShare.targetNum*100)}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">
-          <image src="{{preImagePath+taskForShare.picUrl}}" mode="aspectFill" wx:if="{{preImagePath && taskForShare.picUrl}}"/>
+          <image src="{{preImagePath+taskForShare.picUrl}}" mode="aspectFill" wx:if="{{preImagePath && taskForShare.picUrl}}" />
         </view>
         <view class="produce-right">
           <view class="produce-title">
@@ -261,14 +274,13 @@ button[plain]{
           <view class="produce-bottom">
             <view class="money-precent">佣金：{{taskForShare.percent}}%</view>
             <view class="hot">
-              <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}"/>
+              <image src="{{imagePath+'hot01.png'}}" wx:if="{{imagePath}}" />
               <text style="color:#f25664">热度{{taskForShare.visitNum}}</text>
             </view>
           </view>
         </view>
       </view>
     </view>
-
     <!-- 任务情况 -->
     <view class="task-situation" wx:if="{{showSituation}}">
       <view class="situation-title">
@@ -277,12 +289,14 @@ button[plain]{
       <view class="situation-items">
         <view class="item" wx:for="{{groupContent}}" wx:key="{{index}}" wx:for-item="item" data-id="{{item.id}}">
           <view class="item-left">
-              <view class="item-number">{{index+1}}.</view>
-              <view class="item-image"><image wx:if="{{userImagePath}}" src="{{userImagePath+item.heading}}"/></view>
-              <view class="item-info">
-                <view class="item-name">{{item.name}}</view>
-                <!-- <view class="item-time">2019-04-06 18:34</view> -->
-              </view>
+            <view class="item-number">{{index+1}}.</view>
+            <view class="item-image">
+              <image wx:if="{{userImagePath}}" src="{{userImagePath+item.heading}}" />
+            </view>
+            <view class="item-info">
+              <view class="item-name">{{item.name}}</view>
+              <!-- <view class="item-time">2019-04-06 18:34</view> -->
+            </view>
           </view>
           <view class="item-counts">
             购买数量：{{item.buyNum}}
@@ -290,135 +304,131 @@ button[plain]{
         </view>
       </view>
     </view>
-
     <!-- 底部按钮 -->
     <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <!-- <view class="poster">生成助力海报</view> -->
-       <button open-type="share" plain="true">
-         <view class="poster">转发给好友</view>
-      </button>
+      <button open-type="share" plain="true">
+             <view class="poster">转发给好友</view>
+          </button>
     </view>
-   <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import time from '../../../common/time.js' 
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '任务速报'
-  };
-  onLoad(options) {
-    this.taskId = options.id
-    this.isIphoneX = this.$parent.globalData.isIphoneX
-    console.log(options)
-    this.taskForShare = wx.getStorageSync('taskForShare')
-    this.getTaskDetails()
-    this.getGrounp()
-  }
-  onUnload(){
-    clearInterval(this.interval)
-  }
-  data = {
-    isIphoneX:false,
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    preImagePath:path.path.preImagePath,
-    userImagePath:path.path.userImagePath,
-    taskId:'',
-    taskForShare:{},
-    overTime:'00:00:00',
-    interval:'',
-    tip:'',
-    showSituation:false,
-    groupContent:[],
-  };
-  methods = {
-    onShareAppMessage: function (ops) {
-      console.log(this.taskForShare);
-      if (ops.from === 'button') {
-        // 来自页面内转发按钮
-     }
-     return {
-       title: this.taskForShare.relay,
-       imageUrl:this.taskForShare.cover?this.preImagePath+this.taskForShare.cover:this.preImagePath + this.taskForShare.picUrl,
-       path: 'pages/generalGoods/taskGenralGoods?id='+ this.taskForShare.goodsId + '&userTargetId=' +  this.taskForShare.id,
-       success: function (res) {
-       // 转发成功
-        console.log("转发成功:" + JSON.stringify(res));
-      },
-      fail: function (res) {
-       // 转发失败
-       console.log("转发失败:" + JSON.stringify(res));
-     }
-   }
- }
-  };  
-  // 获取任务详情
-  getTaskDetails(){
-    var that = this
-     var inviteNum = Number(that.taskForShare.inviteNum)
-     var targetNum = Number(that.taskForShare.targetNum)
-    console.log(inviteNum/targetNum)
-     console.log(that.taskForShare)
-    if(inviteNum*100/targetNum<50){
-      that.tip = '您已发起助力，快邀请好友参与吧!'
-    }else if(50<=inviteNum*100/targetNum && inviteNum*100/targetNum<100){
-      that.tip = '已经完成一半啦，继续加油!'
-    }else if(inviteNum*100/targetNum == 100){
-      that.tip = '恭喜您！任务成功，佣金将在24小时内发至您的账户!'
+  import wepy from 'wepy';
+  import path from '../../../common/path.js'
+  import mywxs from '../../../wxs/mywxs.wxs'
+  import time from '../../../common/time.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '任务速报'
+    };
+    onLoad(options) {
+      this.taskId = options.id
+      this.isIphoneX = this.$parent.globalData.isIphoneX
+      console.log(options)
+      this.taskForShare = wx.getStorageSync('taskForShare')
+      this.getTaskDetails()
+      this.getGrounp()
     }
-     that.interval = setInterval(() => {
-        var blockingTime = (new Date(that.taskForShare.blockingTime.replace(/-/g,"/")).getTime())/1000
-        var currentTime = parseInt((new Date().getTime())/1000)
-        var Mytime = blockingTime - currentTime
-       if(Mytime>=1){
-          that.overTime = that.formatDuring(Mytime*1000)
-          that.$apply()
-       }else{
-         clearInterval(that.interval)
-       }
-     }, 1000);
-  }
-
-  formatDuring(mss) {
-       var hours = parseInt((mss / (1000 * 60 * 60)));
-       var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
-       var seconds = (mss % (1000 * 60)) / 1000;
-       hours = hours < 10 ? ('0' + hours) : hours;
-       minutes = minutes < 10 ? ('0' + minutes) : minutes;
-       seconds = seconds < 10 && seconds >=0 ? ('0' + seconds) : seconds;
-       return  hours + " :" + minutes + " :" + seconds;
- }
-  // 获取任务完成情况
-  getGrounp(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/target/groupcontent', 
-      data: {
-        targetid: that.taskForShare.id
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        console.log(res)
-        if(res.data.data.length){
-          that.showSituation = true
-          that.groupContent = res.data.data
-          that.$apply()
+    onUnload() {
+      clearInterval(this.interval)
+    }
+    data = {
+      isIphoneX: false,
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      userImagePath: path.path.userImagePath,
+      taskId: '',
+      taskForShare: {},
+      overTime: '00:00:00',
+      interval: '',
+      tip: '',
+      showSituation: false,
+      groupContent: [],
+    };
+    wxs = {
+      m1: mywxs
+    };
+    methods = {
+      onShareAppMessage: function(ops) {
+        console.log(this.taskForShare);
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
         }
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
+        return {
+          title: this.taskForShare.relay,
+          imageUrl: this.taskForShare.cover ? this.preImagePath + this.taskForShare.cover : this.preImagePath + this.taskForShare.picUrl,
+          path: 'pages/generalGoods/taskGenralGoods?id=' + this.taskForShare.goodsId + '&userTargetId=' + this.taskForShare.id,
+          success: function(res) {
+            // 转发成功
+            console.log("转发成功:" + JSON.stringify(res));
+          },
+          fail: function(res) {
+            // 转发失败
+            console.log("转发失败:" + JSON.stringify(res));
+          }
+        }
+      }
+    };
+    // 获取任务详情
+    getTaskDetails() {
+      var that = this
+      var inviteNum = Number(that.taskForShare.inviteNum)
+      var targetNum = Number(that.taskForShare.targetNum)
+      console.log(inviteNum / targetNum)
+      console.log(that.taskForShare)
+      if (inviteNum * 100 / targetNum < 50) {
+        that.tip = '您已发起助力，快邀请好友参与吧!'
+      } else if (50 <= inviteNum * 100 / targetNum && inviteNum * 100 / targetNum < 100) {
+        that.tip = '已经完成一半啦，继续加油!'
+      } else if (inviteNum * 100 / targetNum == 100) {
+        that.tip = '恭喜您！任务成功，佣金将在24小时内发至您的账户!'
+      }
+      that.interval = setInterval(() => {
+        var blockingTime = (new Date(that.taskForShare.blockingTime.replace(/-/g, "/")).getTime()) / 1000
+        var currentTime = parseInt((new Date().getTime()) / 1000)
+        var Mytime = blockingTime - currentTime
+        if (Mytime >= 1) {
+          that.overTime = that.formatDuring(Mytime * 1000)
+          that.$apply()
+        } else {
+          clearInterval(that.interval)
+        }
+      }, 1000);
+    }
+    formatDuring(mss) {
+      var hours = parseInt((mss / (1000 * 60 * 60)));
+      var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = (mss % (1000 * 60)) / 1000;
+      hours = hours < 10 ? ('0' + hours) : hours;
+      minutes = minutes < 10 ? ('0' + minutes) : minutes;
+      seconds = seconds < 10 && seconds >= 0 ? ('0' + seconds) : seconds;
+      return hours + " :" + minutes + " :" + seconds;
+    }
+    // 获取任务完成情况
+    getGrounp() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/target/groupcontent',
+        data: {
+          targetid: that.taskForShare.id
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          if (res.data.data.length) {
+            that.showSituation = true
+            that.groupContent = res.data.data
+            that.$apply()
+          }
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
- 
-}
-
-
-
-
 </script>

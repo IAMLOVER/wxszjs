@@ -117,41 +117,24 @@
         <view class="go-index" @tap="goIndex">
           返回首页
         </view>
-        <navigator url="../order/order" class="order-detail">
+        <view class="order-detail" @tap="payAgain">
           重新支付
-        </navigator>
+        </view>
       </view>
     </view>
     <!-- 订单内容 -->
     <view class="order-content">
-      <view class="content-lists" wx:if="{{channelInfo != null}}">
+      <view class="content-lists" wx:for="{{orderInfo.contentList}}" wx:for-item="item" wx:index="{{index}}">
         <view class="list">
           <view class="list-left">
-            <image src="{{preImagePath+channelInfo.picUrl1}}" wx:if="{{preImagePath && channelInfo.picUrl1}}" mode="aspectFill" />
+            <image src="{{preImagePath+item.classPic}}" wx:if="{{preImagePath && item.classPic}}" mode="aspectFill" />
           </view>
           <view class="list-right">
-            <view class="list-name">{{channelInfo.title}}</view>
-            <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
+            <view class="list-name">{{item.goodsName}}</view>
+            <view class="list-type">规格：{{item.className}}</view>
             <view class="list-text">
-              <view class="price">￥{{m1.filter(channelInfo.salePrice*0.01)}}</view>
-              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.count}}</view>
-              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.count * pay.scount}}</view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="content-lists">
-        <view class="list">
-          <view class="list-left">
-            <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill" />
-          </view>
-          <view class="list-right">
-            <view class="list-name">{{produceInfo.goodsName}}</view>
-            <view class="list-type">规格：{{produceInfo.className}}</view>
-            <view class="list-text">
-              <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
-              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.goodNeedCount * pay.count}}</view>
+              <view class="price">￥{{m1.filter(item.price*0.01)}}</view>
+              <view class="count">数量：{{item.count}}</view>
             </view>
           </view>
         </view>
@@ -163,7 +146,7 @@
 <script>
   import wepy from 'wepy';
   import path from '../../common/path.js'
-  import mywxs from '../../wxs/mywxs.wxs';
+  import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '',
@@ -171,17 +154,15 @@
       navigationBarTextStyle: 'white'
     };
     onLoad() {
-      this.pay = wx.getStorageSync('pay')
+      this.orderNo = wx.getStorageSync('orderNo')
       this.getOrderInfo()
     }
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
-      pay: {},
-      channelInfo: {},
-      produceInfo: {},
-      haveJoinActivity: false,
+      orderNo: '',
+      orderInfo: {},
     };
     wxs = {
       m1: mywxs
@@ -190,29 +171,25 @@
       // 返回首页
       goIndex() {
         this.$switch('../index/index')
+      },
+      payAgain(){
+        this.$navigate('../myCenter/myOrder/orderDetail',{id:this.orderNo})
       }
     };
-    // 根据商品的规格id筛选出来订单里的商品
-    // 根据商品的规格id筛选出来订单里的商品
+    // 根据订单号查询订单的详情内容
     getOrderInfo() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktstore/goodsInfo/classType',
+        url: that.apiPath + '/szmktuser/order/queryOrderContent',
         data: {
-          'classId': this.pay.id,
-          'collocationId': this.pay.collocationId == null ? '' : this.pay.collocationId,
-          'type': this.pay.type > 0 ? this.pay.type : 0
+          orderno: that.orderNo
         },
         method: 'GET',
         dataType: 'json',
         success: res => {
           console.log(res)
-          that.produceInfo = res.data.data
-          if (res.data.data.couponActivity) {
-            // that.couponActivity = res.data.data.couponActivity
-            that.haveJoinActivity = true
-          }
-          that.channelInfo = res.data.data.collocationInfo
+          that.orderInfo = res.data.data
+          console.log(that.orderInfo)
           that.$apply()
         },
         fail: () => {},

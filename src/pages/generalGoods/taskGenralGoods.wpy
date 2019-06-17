@@ -475,9 +475,9 @@
 </template>
 
 <script>
-  import wepy from 'wepy';
+  import wepy from 'wepy'
   import path from '../../common/path.js'
-  import mywxs from '../../wxs/mywxs.wxs';
+  import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '商品详情'

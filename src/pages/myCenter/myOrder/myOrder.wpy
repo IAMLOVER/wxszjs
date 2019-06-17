@@ -103,6 +103,13 @@
                         .goods-name {
                             font-size: 28rpx;
                             color: #222222;
+                            height: 78rpx;
+                            width: 400rpx;
+                            display: -webkit-box;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
                         }
                         .goods-style {
                             margin-top: 16rpx;
@@ -116,7 +123,9 @@
                             }
                             .count {
                                 font-size: 24rpx;
-                                margin-left: 200rpx;
+                                float: right;
+                                margin-top: 15rpx;
+                                display: block;
                             }
                         }
                     }
@@ -182,8 +191,7 @@
             margin-top: 60rpx;
             text-align: center;
         }
-    }
-    // 取消订单的弹出框
+    } // 取消订单的弹出框
     .cancleShadow {
         width: 100%;
         height: 100%;
@@ -256,37 +264,30 @@
                         <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}" />
                     </view>
                     <view class="header-right">
-                        <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 1}}">已完成</text>
-                        <text class="list-type" wx:if="{{item.orderStatus == 1 && item.arrived == 0}}">待收货</text>
-                        <text class="list-type" wx:if="{{item.orderStatus == 0}}" style="color:#959595">已取消</text>
+                        <text class="list-type" wx:if="{{item.orderType == 1}}">待支付</text>
+                        <text class="list-type" wx:if="{{item.orderType == 2}}">待发货</text>
+                        <text class="list-type" wx:if="{{item.orderType == 3}}">待收货</text>
+                        <text class="list-type" wx:if="{{item.orderType == 4}}">已完成</text>
+                        <text class="list-type" wx:if="{{item.orderType == 5}}" style="color:#959595">已取消</text>
                     </view>
                 </view>
-                <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                    <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}" />
-                    <view class="goods-text">
-                        <view class="goods-name">{{item.goodsName}}</view>
-                        <view class="goods-style">规格：{{item.className}}</view>
-                        <view class="goods-price">
-                            <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
-                            <text class="count">数量：{{item.goodsCount}}</text>
+                <view @tap="goOrderDetail" data-id="{{item.orderNo}}" data-index="{{index}}">
+                    <view class="order-detail" wx:for="{{item.contentList}}" wx:for-item="itemList" wx:key="{{indexItem}}">
+                        <image class="goods-pic" src="{{preImagePath+itemList.classPic}}" lazy-load wx:if="{{preImagePath && itemList.classPic}}" />
+                        <view class="goods-text">
+                            <view class="goods-name">{{itemList.goodsName}}</view>
+                            <view class="goods-style" wx:if="{{itemList.className !== null}}">规格：{{itemList.className}}</view>
+                            <view class="goods-price">
+                                <text class="price">￥{{m1.filter(itemList.price*0.01)}}</text>
+                                <text class="count">数量：{{itemList.count}}</text>
+                            </view>
                         </view>
                     </view>
-                </navigator>
-                <navigator url="./orderDetail?id={{item.orderNo}}" class="order-detail">
-                    <image class="goods-pic" src="{{preImagePath+item.goodsPic}}" lazy-load wx:if="{{preImagePath && item.goodsPic}}" />
-                    <view class="goods-text">
-                        <view class="goods-name">{{item.goodsName}}</view>
-                        <view class="goods-style">规格：{{item.className}}</view>
-                        <view class="goods-price">
-                            <text class="price">￥{{m1.filter(item.goodsPrice*0.01)}}</text>
-                            <text class="count">数量：{{item.goodsCount}}</text>
-                        </view>
-                    </view>
-                </navigator>
-                <view class="list-footer">共{{item.goodsCount+item.channelCount}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
-                <view class="wait-btn">
-                    <view class="right-now">立即支付</view>
-                    <view class="cancle">取消订单</view>
+                </view>
+                <view class="list-footer">共{{item.count}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
+                <view class="wait-btn" wx:if="{{item.orderType == 1}}">
+                    <view class="right-now" @tap="payMoney" data-id="{{item.orderNo}}">立即支付</view>
+                    <view class="cancle" @tap="cancleOrder" data-id="{{item.orderNo}}">取消订单</view>
                 </view>
             </view>
         </view>
@@ -304,8 +305,8 @@
                     主人，你真的忍心取消订单吗，还差一点我就是你的人了。
                 </view>
                 <view class="btns">
-                    <view class="shadow-canle">忍心拒绝</view>
-                    <view class="shadow-right">立即支付</view>
+                    <view class="shadow-canle" @tap="strongRefuse">忍心拒绝</view>
+                    <view class="shadow-right" @tap="payMoney">立即支付</view>
                 </view>
             </view>
         </view>
@@ -331,10 +332,12 @@
             orderList: {},
             type: '',
             empty: false,
-            page: 1,
+            page: 0,
             totalPage: 0,
             arr: [],
-            cancleShadow: false
+            cancleShadow: false,
+            elementCount: 0,
+            orderNo: ''
         };
         wxs = {
             m1: mywxs
@@ -342,33 +345,38 @@
         methods = {
             chooseTab(index) {
                 this.nowIndex = index
-                if (this.nowIndex == 0) {
-                    this.getOrderAllList()
-                } else if (this.nowIndex == 1) {
-                    this.type = 0
-                    this.getOrderList()
-                } else {
-                    this.type = 1
-                    this.getOrderList()
-                }
+                this.type = this.nowIndex
+                this.getOrderList()
             },
             goIndex() {
                 this.$switch('../../index/index')
+            },
+            //去订单详情页
+            goOrderDetail(e) {
+                this.$navigate('./orderDetail', {
+                    id: e.currentTarget.dataset.id
+                })
+                // var index = e.currentTarget.dataset.index
+                // wx.setStorageSync('orderDetail', this.orderList[index])
             }
         };
         onLoad(options) {
             this.type = options.type
             console.log(options)
-            if (this.type == '3') {
-                this.getOrderAllList()
+            if (this.type == 0) {
                 this.nowIndex = 0
-            } else if (this.type == '0') {
+            } else if (this.type == 1) {
                 this.nowIndex = 1
-                this.getOrderList()
-            } else {
+            } else if (this.type == 2) {
                 this.nowIndex = 2
-                this.getOrderList()
+            } else if (this.type == 3) {
+                this.nowIndex = 3
+            } else if (this.type == 4) {
+                this.nowIndex = 4
+            } else if (this.type == 5) {
+                this.nowIndex = 5
             }
+            this.getOrderList()
         }
         //   获取订单列表
         getOrderList() {
@@ -383,7 +391,7 @@
                 data: {
                     userid: that.$parent.globalData.userId,
                     page: that.page,
-                    rows: 100,
+                    rows: 15,
                     type: that.type
                 },
                 method: 'GET',
@@ -391,7 +399,14 @@
                 success: res => {
                     console.log(res)
                     that.orderList = res.data.data
-                    console.log(that.orderList.length)
+                    that.orderList.forEach(element => {
+                        that.elementCount = 0
+                        element.contentList.forEach(ele => {
+                            that.elementCount += ele.count - 0
+                        })
+                        element.count = that.elementCount
+                    });
+                    console.log(that.orderList)
                     if (that.orderList.length < 1) {
                         that.empty = true
                     } else {
@@ -404,34 +419,89 @@
                 complete: () => {}
             });
         }
-        //   获取订单列表
-        getOrderAllList() {
-            console.log('全部调用')
+        //取消订单弹出框
+        cancleOrder(e) {
+            this.cancleShadow = true
+            this.orderNo = e.currentTarget.dataset.id
+            wx.setStorageSync('orderNo',this.orderNo)
+        }
+        //忍心拒绝
+        strongRefuse() {
             var that = this
-            wx.showLoading({
-                title: '加载中',
-                mask: true,
-                success: res => {}
-            });
             wx.request({
-                url: that.apiPath + '/szmktuser/order/queryuserorderlist',
+                url: that.apiPath + '/szmktuser/order/cancelOrder', //开发者服务器接口地址",
                 data: {
                     userid: that.$parent.globalData.userId,
-                    page: that.page,
-                    rows: 100,
+                    orderno: that.orderNo
+                }, //请求的参数",
+                method: 'GET',
+                dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+                success: res => {
+                    that.cancleShadow = false
+                    if (res.data.code == 1000) {
+                        wx.showToast({
+                            title: '取消订单成功', //提示的内容,
+                            icon: 'success', //图标,
+                            duration: 2000, //延迟时间,
+                            mask: true, //显示透明蒙层，防止触摸穿透,
+                            success: res => {
+                                setTimeout(() => {
+                                    that.getOrderList()
+                                }, 2000);
+                            }
+                        })
+                    } else {
+                        wx.showToast({
+                            title: '取消失败', //提示的内容,
+                            icon: 'none', //图标,
+                            duration: 2000, //延迟时间,
+                            mask: true, //显示透明蒙层，防止触摸穿透,
+                            success: res => {}
+                        })
+                    }
+                    that.$apply()
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+        //立即支付
+        payMoney(e) {
+            var that = this
+            that.orderNo = e.currentTarget.dataset.id?e.currentTarget.dataset.id:that.orderNo
+              wx.setStorageSync('orderNo',that.orderNo)
+            wx.request({
+                url: that.apiPath + '/szmktuser/pay/awakenpay', //开发者服务器接口地址",
+                data: {
+                    userid: that.$parent.globalData.userId,
+                    orderno: that.orderNo
                 },
                 method: 'GET',
                 dataType: 'json',
                 success: res => {
                     console.log(res)
-                    that.orderList = res.data.data.reverse()
-                    if (that.orderList.length < 1) {
-                        that.empty = true
-                    } else {
-                        that.empty = false
+                    if (res.data.code == 200) {
+                        wx.requestPayment({
+                            appId: res.data.data.appId,
+                            timeStamp: res.data.data.timeStamp,
+                            nonceStr: res.data.data.nonceStr,
+                            package: res.data.data.package,
+                            signType: 'MD5',
+                            paySign: res.data.data.paySign,
+                            success(res) {
+                                console.log(res)
+                                that.$navigate({
+                                    url: '../../payResult/paySuccess'
+                                })
+                            },
+                            fail(res) {
+                                console.log(res)
+                                that.$navigate({
+                                    url: '../../payResult/payFail'
+                                })
+                            }
+                        })
                     }
-                    that.$apply()
-                    wx.hideLoading();
                 },
                 fail: () => {},
                 complete: () => {}

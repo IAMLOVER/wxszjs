@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 21,
 			"list": [
 				{
 					"id": 0,
@@ -169,6 +169,20 @@
 					"name": "领取任务成功",
 					"pathName": "pages/secKill/choseTaskSuccess",
 					"query": "scene=AL2ETEGV",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/myCenter/myOrder/orderDetail",
+					"query": "scene=AL2ETEGV",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "组合商品单品详情",
+					"pathName": "pages/collocation/collocationSingle",
+					"query": "id=1&type=1",
 					"scene": null
 				}
 			]

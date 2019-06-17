@@ -666,13 +666,13 @@
       call() {
         wx.makePhoneCall({
           phoneNumber: this.storePhoneNum
-        });
+        })
       },
       openShadow() {
-        this.showShadow = true;
+        this.showShadow = true
       },
       closeShadow() {
-        this.showShadow = false;
+        this.showShadow = false
       },
       //选规格
       changeIndex(e) {

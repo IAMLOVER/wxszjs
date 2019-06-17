@@ -187,44 +187,44 @@
           <view>
             我的订单
           </view>
-          <view>
+          <view @tap="lookAll">
             查看全部
             <image src="{{imagePath + 'xiala_sz.png'}}" wx:if="{{imagePath}}" />
           </view>
         </view>
         <view class="my-order-content">
-          <navigator url="../myOrder/myOrder?type=0" class="detail">
+          <navigator url="../myOrder/myOrder?type=1" class="detail">
             <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/payment_sz.png');">
-              <view class="remind" wx:if="{{orderForWait>0}}">{{1}}</view>
+              <view class="remind" wx:if="{{orderForWaitPay>0}}">{{orderForWaitPay}}</view>
             </view>
             <view class="content-text">
               待支付
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=0" class="detail">
+          <navigator url="../myOrder/myOrder?type=2" class="detail">
             <view class="content-icon2" style="width:66rpx">
-              <view class="remind" wx:if="{{orderForWait>0}}">{{orderForWait}}</view>
+              <view class="remind" wx:if="{{orderForWaitSend>0}}">{{orderForWaitSend}}</view>
             </view>
             <view class="content-text">
               待发货
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=0" class="detail">
+          <navigator url="../myOrder/myOrder?type=3" class="detail">
             <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/collect_sz.png');">
-              <view class="remind" wx:if="{{orderForWait>0}}">{{orderForWait}}</view>
+              <view class="remind" wx:if="{{orderForWaitGet>0}}">{{orderForWaitGet}}</view>
             </view>
             <view class="content-text">
               待收货
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=1" class="detail">
+          <navigator url="../myOrder/myOrder?type=4" class="detail">
             <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/finish.png');">
             </view>
             <view class="content-text">
               已完成
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=1" class="detail">
+          <navigator url="../myOrder/myOrder?type=5" class="detail">
             <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/cancel_sz.png');">
             </view>
             <view class="content-text">
@@ -277,10 +277,16 @@
       apiPath: path.path.apiPath,
       identityType: '',
       userName: '',
-      orderForWait: 0,
+      orderForWaitPay: 0,
+      orderForWaitSend:0,
+      orderForWaitGet:0,
       avatarUrl: ''
     };
-    methods = {};
+    methods = {
+      lookAll(){
+        this.$navigate('../myOrder/myOrder',{type:0})
+      }
+    };
     onLoad() {
     }
     onShow() {
@@ -298,18 +304,18 @@
         success: res => {}
       });
       wx.request({
-        url: that.apiPath + '/szmktuser/order/queryuserorderlist',
+        url: that.apiPath + '/szmktuser/order/queryUserOrderLite',
         data: {
           userid: that.$parent.globalData.userId,
-          page: 1,
-          rows: 100,
-          type: 0
         },
         method: 'GET',
         dataType: 'json',
         success: res => {
           console.log(res)
-          that.orderForWait = res.data.data.length
+          that.orderForWaitPay = res.data.data[0]
+          that.orderForWaitSend = res.data.data[1]
+          that.orderForWaitGet = res.data.data[2]
+
           that.$apply()
           wx.hideLoading();
         },

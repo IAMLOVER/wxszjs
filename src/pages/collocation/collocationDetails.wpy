@@ -515,6 +515,82 @@
       }
     }
   }
+  .share-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 346rpx;
+      background-color: #F5F5F5;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      .tip {
+        text-align: center;
+        font-size: 28rpx;
+        color: #666;
+        margin-top: 30rpx;
+      }
+      .share-way {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 20rpx;
+        color: #222;
+        margin-top: 12rpx;
+        margin-bottom: 22rpx;
+        image {
+          width: 92rpx;
+          height: 92rpx;
+        }
+        button {
+          width: 100rpx;
+          height: 140rpx;
+          padding: 0;
+          line-height: 35rpx;
+          color: #222;
+          font-size: 20rpx;
+          margin: 0;
+        }
+      }
+      .cancle-share {
+        height: 96rpx;
+        background-color: #fff;
+        text-align: center;
+        font-size: 32rpx;
+        color: #666;
+        line-height: 96rpx;
+        z-index: 9999;
+      }
+    }
+  }
+  button[plain] {
+    border-color: #f5f5f5 !important;
+  } //生成海报的弹出框
+  .poster-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .save-ablum {
+      background: #EB4D4E;
+      border-radius: 42rpx;
+      width: 250rpx;
+      height: 84rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      margin: 50rpx auto 200rpx;
+      text-align: center;
+    }
+  }
 </style>
 <template>
   <view class='page'>
@@ -558,7 +634,7 @@
           邮费：包邮
         </view>
       </view>
-      <view class="share" @tap="shareSecKill">
+      <view class="share" @tap="openShareShadow">
         <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}" />
         <text>分享</text>
       </view>
@@ -604,11 +680,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-              <view class="kefu">
-            <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-            <view>客服</view>
-          </view>
-          </button>
+                        <view class="kefu">
+                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                      <view>客服</view>
+                    </view>
+                    </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -673,6 +749,30 @@
         </view>
       </view>
     </view>
+    <!-- 转发分享弹出框 -->
+    <view class="share-shadow" wx:if="{{showShareShadow}}">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+        <view class="tip">请选择转发方式</view>
+        <view class="share-way">
+          <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+            <image src="{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}" />
+            <view @tap="onCreatePoster">生成海报</view>
+          </poster>
+          <button open-type="share" class="poster" plain="true">
+                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                <view>微信好友</view>
+                              </button>
+        </view>
+        <view class="cancle-share" @tap="cancleShare">
+          取消
+        </view>
+      </view>
+    </view>
+    <!-- 点击生成海报的出现的弹出框 -->
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+      <image src="{{posterDetail}}" style="width:570rpx;height:800rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
+      <view class="save-ablum" @tap="saveAblum">保存到相册</view>
+    </view>
     <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
@@ -684,6 +784,9 @@
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "组合详情",
+      usingComponents: {
+        "poster": "../../components/miniprogram_dist/poster/index",
+      }
     };
     data = {
       isIphoneX: false,
@@ -694,20 +797,58 @@
       showShadow: false,
       collocationId: '',
       produceInfo: {},
-      wareHouseStock:0,
+      wareHouseStock: 0,
       promotion: {},
       pmtCollocation: {},
       goodsClassList: {},
       active: 1,
       activeIndex: 0,
       account: 1,
-      typeId:'',
+      typeId: '',
+      showShareShadow: false,
+      showPoster: false,
+      posterConfig: {},
+      posterDetail: ''
     };
     wxs = {
       m1: mywxs
     };
     components = {};
     methods = {
+      //打开，关闭分享弹出框
+      openShareShadow() {
+        this.showShareShadow = true
+      },
+      cancleShare() {
+        this.showShareShadow = false
+      },
+      onCreatePoster() {},
+      onPosterFail(err) {
+        console.error(err);
+      },
+      onPosterSuccess(e) {
+        this.showShareShadow = false
+        this.showPoster = true
+        const {
+          detail
+        } = e;
+        this.posterDetail = detail
+      },
+      onShareAppMessage: function(ops) {
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(ops.target)
+        }
+        return {
+          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+          imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
+          path: 'pages/collocation/collocationSingle?id=' + this.pmtCollocation.id + '&type=' + 1,
+          success: function(res) {
+          },
+          fail: function(res) {
+          }
+        }
+      },
       changeActive(e) {
         this.active = e.currentTarget.dataset.active
       },
@@ -773,8 +914,8 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-        //搭配的促销品需要的数量
-        pay.scount = this.pmtCollocation.promotionCount
+          //搭配的促销品需要的数量
+          pay.scount = this.pmtCollocation.promotionCount
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
@@ -820,9 +961,188 @@
           that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
           that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
           that.typeId = that.goodsClassList[this.activeIndex].id
-
           //促销商品的数量
           that.wareHouseStock = res.data.data.wareHouseStock
+          // 海报数据
+          that.posterConfig = {
+            width: 570,
+            height: 800,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
+                x: 162.6,
+                y: 82.4,
+                zIndex: 2,
+                text: [{
+                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
+                baseLine: 'middle',
+              },
+              {
+                x: 232.6,
+                y: 280.6,
+                zIndex: 3,
+                text: [{
+                  //促销商品的名称
+                  text: that.promotion.title,
+                  fontSize: 24,
+                  color: '#222',
+                  width: 240,
+                  lineHeight: 40,
+                  lineNum: 2,
+                }]
+              },
+              {
+                x: 232.6,
+                y: 448.6,
+                zIndex: 3,
+                text: [{
+                  //搭配商品的名称
+                  text: that.produceInfo.title,
+                  fontSize: 24,
+                  color: '#222',
+                  width: 240,
+                  lineHeight: 40,
+                  lineNum: 2,
+                }]
+              },
+              {
+                x: 280,
+                y: 660,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看店铺详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 800,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 408,
+                zIndex: 2,
+                x: 45.6,
+                y: 182.4,
+                borderRadius: 16,
+              },
+              //促销商品的图片
+              {
+                url: that.promotion.cover ? that.preImagePath + that.promotion.cover : that.preImagePath + that.promotion.picUrl1,
+                width: 128,
+                height: 128,
+                zIndex: 3,
+                x: 91.6,
+                y: 242.6,
+                borderRadius: 4
+              },
+              //搭配的商品的图片
+              {
+                url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
+                width: 128,
+                height: 128,
+                zIndex: 3,
+                x: 91.6,
+                y: 416.4,
+                borderRadius: 4
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 640,
+              },
+              //二维码
+              {
+                url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 640,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 616,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 710,
+              },
+              {
+                width: 418,
+                height: 160,
+                opacity: 1,
+                backgroundColor: '#fff',
+                borderRadius: 9,
+                x: 76,
+                y: 226.4,
+                zIndex: 2,
+              },
+              {
+                width: 418,
+                height: 160,
+                opacity: 1,
+                backgroundColor: '#fff',
+                borderRadius: 9,
+                x: 76,
+                y: 401.2,
+                zIndex: 2,
+              },
+            ],
+          }
           that.$apply()
         },
         fail: () => {},
@@ -859,6 +1179,60 @@
         fail: () => {},
         complete: () => {}
       });
+    }
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
+      })
     }
   }
 </script>

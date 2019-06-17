@@ -1,390 +1,584 @@
 <style lang="less">
-.container{
-    min-height: 100vh;
-    background: #f2f2f2;
-    display:flex;display:-webkit-flex;
-    align-items:center;
--webkit-align-items: center;
-    flex-direction: column;-webkit-flex-direction: column;
-    .confirm-wrapper{
-        position: absolute;
-        height:100vh;
-        width:100vw;
-        left:0;
-        bottom:0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 10;
-        display:flex;display:-webkit-flex;
-        justify-content: center;
--webkit-justify-content: center;
-        align-items:center;
--webkit-align-items: center;
-        .confirm-window{
-            height:292rpx;
-            width:540rpx;
-            background: #fcfcfc;
-            border-radius: 20rpx;
-            .question{
-                height:203rpx;
-                width: 100%;
-                display:flex;display:-webkit-flex;
-                justify-content: center;
--webkit-justify-content: center;
-                align-items:center;
--webkit-align-items: center;
-                font-size:32rpx;
-            }
-            .button-wrapper{
-                height:87rpx;
-                width:100%;
-                border:1rpx solid rgba(77,77,77,0.1);
-                font-size:32rpx;
-                display:flex;display:-webkit-flex;
-                align-items:center;
--webkit-align-items: center;
-                .cancel{
-                    color:#3C96FF;
-                   -webkit-flex: 1;-ms-flex: 1;flex: 1;
-                    border-right:1rpx solid rgba(77,77,77,0.1);
-                    text-align: center;
-                }
-                .confirm{
-                    color:#267FFE;
-                    font-weight: bold;
-                   -webkit-flex: 1;-ms-flex: 1;flex: 1;
-                    text-align: center;
-                }
-            }
-        }
-    }
-    .header{
-        height:180rpx;
-        background-image: linear-gradient(0deg, #F78486 0%, #EB4D4E 82%);
-        color:white;
-        font-size:32rpx;
-        display:flex;display:-webkit-flex;
-        justify-content: center;
--webkit-justify-content: center;
-        align-items:center;
--webkit-align-items: center;
-        width:100vw;
-        position: fixed;
-        top:0;
-        image{
-            height:90rpx;
-            width:140rpx;
-            margin-left:140rpx;
-        }
-    }
-    .pink{
-        height:44rpx;
-        width:720rpx;
-        margin-top:210rpx;
-        background: #fcc5ca;
-        border-radius: 16rpx;
-        position:absolute;
-        z-index:0;
-    }
-    .info-wrapper{
-        background: white;
-        border-top:8rpx solid #ee4555;
-        width:690rpx;
-        height:224rpx;
-        margin-top: 236rpx;
-        z-index:1;
-        padding: 32rpx 0 0 40rpx;
-        box-sizing:border-box;
-        font-size: 28rpx;
-        position:relative;
-        .name{
-            font-size:32rpx;
-        }
-        .more{
-            height:16rpx;
-            width:10rpx;
-            position:absolute;
-            top:86rpx;
-            right:40rpx;
-        }
-        .left-circle{
-            height:40rpx;
-            width:40rpx;
+    .container {
+        min-height: 100vh;
+        background: #f2f2f2;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        -webkit-align-items: center;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        .confirm-wrapper {
             position: absolute;
-            left:-15rpx;
-            bottom:-25rpx;
-            background: #f2f2f2;
-            border-radius: 40rpx;
-        }
-        .right-circle{
-            height:40rpx;
-            width:40rpx;
-            position: absolute;
-            right:-15rpx;
-            bottom:-25rpx;
-            background: #f2f2f2;
-            border-radius: 40rpx;
-        }
-    }
-    .order-wrapper{
-        min-height:300rpx;
-        width:690rpx;
-        background: white;
-        margin-top:10rpx;
-        padding: 24rpx 20rpx 0 40rpx;
-        font-size: 28rpx;
-        box-sizing: border-box;
-        border-radius: 0px 0px 4px 4px;
-        .order-detail{
-            height:180rpx;
-            width:100%;
-            padding-bottom:30rpx;
-            // margin-top: 30rpx;
-            display:flex;display:-webkit-flex;
-            .goods-pic{
-                height:180rpx;
-                width:180rpx;
-            }
-            .goods-text{
-                margin-left:20rpx;
-               -webkit-flex: 1;-ms-flex: 1;flex: 1;
-                .goods-name{
-                    font-size:28rpx;
-                    color:#222222;
-                }
-                .goods-style{
-                    margin-top:16rpx;
-                    font-size:24rpx;
-                    color:#959595;
-                }
-                .goods-price{
-                    color:#f25664;
-                    margin-top:32rpx;
-                    .price{
-                        font-size:32rpx;
-                    }
-                    .count{
-                        font-size:24rpx;
-                        margin-left:220rpx;
-                    }
-                }
-            }
-        }
-    }
-    .active-wrapper{
-        height:164rpx;
-        width:690rpx;
-        margin-top:10rpx;
-        background: white;
-        font-size:28rpx;
-        padding: 0 40rpx;
-        box-sizing:border-box;
-        border-radius: 8rpx;
-        view{
-            margin-top:10rpx;
-            display:flex;display:-webkit-flex;
-            justify-content: space-between;-webkit-justify-content: space-between;
-        }
-    }
-    .logistics-wrapper{
-        height:164rpx;
-        width:690rpx;
-        margin-top:10rpx;
-        background: white;
-        font-size:28rpx;
-        padding: 0 40rpx;
-        box-sizing:border-box;
-        border-radius: 8rpx;
-        color:#959595;
-        margin-bottom:120rpx;
-        view{
-            margin-top:10rpx;
-        }
-    }
-    .footer{
-        height:108rpx;
-        width:100%;
-        background: white;
-        display:flex;display:-webkit-flex;
-        align-items:center;
--webkit-align-items: center;
-        justify-content: flex-end;
-        font-size:32rpx;
-        position: fixed;
-        bottom:0;
-        padding-right: 40rpx;
-        .confirm{
-            background-image: linear-gradient(-45deg, #F25664 7%, #E176FF 100%);
-            border-radius: 22px;
-            width:216rpx;
-            height:84rpx;
-            color:white;
-            font-size:36rpx;
-            display:flex;display:-webkit-flex;
-            align-items:center;
--webkit-align-items: center;
+            height: 100vh;
+            width: 100vw;
+            left: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            display: flex;
+            display: -webkit-flex;
             justify-content: center;
--webkit-justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            .confirm-window {
+                height: 292rpx;
+                width: 540rpx;
+                background: #fcfcfc;
+                border-radius: 20rpx;
+                .question {
+                    height: 203rpx;
+                    width: 100%;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: center;
+                    -webkit-justify-content: center;
+                    align-items: center;
+                    -webkit-align-items: center;
+                    font-size: 32rpx;
+                }
+                .button-wrapper {
+                    height: 87rpx;
+                    width: 100%;
+                    border: 1rpx solid rgba(77, 77, 77, 0.1);
+                    font-size: 32rpx;
+                    display: flex;
+                    display: -webkit-flex;
+                    align-items: center;
+                    -webkit-align-items: center;
+                    .cancel {
+                        color: #3C96FF;
+                        -webkit-flex: 1;
+                        -ms-flex: 1;
+                        flex: 1;
+                        border-right: 1rpx solid rgba(77, 77, 77, 0.1);
+                        text-align: center;
+                    }
+                    .confirm {
+                        color: #267FFE;
+                        font-weight: bold;
+                        -webkit-flex: 1;
+                        -ms-flex: 1;
+                        flex: 1;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .header {
+            height: 180rpx;
+            background-image: linear-gradient(0deg, #F78486 0%, #EB4D4E 82%);
+            color: white;
+            font-size: 32rpx;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            image {
+                height: 90rpx;
+                width: 140rpx;
+                margin-left: 140rpx;
+            }
+        }
+        .pink {
+            height: 44rpx;
+            width: 720rpx;
+            margin-top: 210rpx;
+            background: #fcc5ca;
+            border-radius: 16rpx;
+            position: absolute;
+            z-index: 0;
+        }
+        .info-wrapper {
+            background: white;
+            border-top: 8rpx solid #ee4555;
+            width: 690rpx;
+            height: 224rpx;
+            margin-top: 236rpx;
+            z-index: 1;
+            padding: 32rpx 0 0 40rpx;
+            box-sizing: border-box;
+            font-size: 28rpx;
+            position: relative;
+            .name {
+                font-size: 32rpx;
+            }
+            .more {
+                height: 16rpx;
+                width: 10rpx;
+                position: absolute;
+                top: 86rpx;
+                right: 40rpx;
+            }
+            .left-circle {
+                height: 40rpx;
+                width: 40rpx;
+                position: absolute;
+                left: -15rpx;
+                bottom: -25rpx;
+                background: #f2f2f2;
+                border-radius: 40rpx;
+            }
+            .right-circle {
+                height: 40rpx;
+                width: 40rpx;
+                position: absolute;
+                right: -15rpx;
+                bottom: -25rpx;
+                background: #f2f2f2;
+                border-radius: 40rpx;
+            }
+        }
+        .order-wrapper {
+            min-height: 300rpx;
+            width: 690rpx;
+            background: white;
+            margin-top: 10rpx;
+            padding: 24rpx 20rpx 0 40rpx;
+            font-size: 28rpx;
+            box-sizing: border-box;
+            border-radius: 0px 0px 4px 4px;
+            .order-detail {
+                height: 180rpx;
+                width: 100%;
+                padding-bottom: 30rpx; // margin-top: 30rpx;
+                display: flex;
+                display: -webkit-flex;
+                .goods-pic {
+                    height: 180rpx;
+                    width: 180rpx;
+                }
+                .goods-text {
+                    margin-left: 20rpx;
+                    -webkit-flex: 1;
+                    -ms-flex: 1;
+                    flex: 1;
+                    .goods-name {
+                        font-size: 28rpx;
+                        color: #222222;
+                    }
+                    .goods-style {
+                        margin-top: 16rpx;
+                        font-size: 24rpx;
+                        color: #959595;
+                    }
+                    .goods-price {
+                        color: #f25664;
+                        margin-top: 32rpx;
+                        .price {
+                            font-size: 32rpx;
+                        }
+                        .count {
+                            font-size: 24rpx;
+                            float: right;
+                            margin-top: 8rpx;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        .active-wrapper {
+            height: 164rpx;
+            width: 690rpx;
+            margin-top: 10rpx;
+            background: white;
+            font-size: 28rpx;
+            padding: 0 40rpx;
+            box-sizing: border-box;
+            border-radius: 8rpx;
+            view {
+                margin-top: 10rpx;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: space-between;
+                -webkit-justify-content: space-between;
+            }
+        }
+        .logistics-wrapper {
+            height: 164rpx;
+            width: 690rpx;
+            margin-top: 10rpx;
+            background: white;
+            font-size: 28rpx;
+            padding: 0 40rpx;
+            box-sizing: border-box;
+            border-radius: 8rpx;
+            color: #959595;
+            margin-bottom: 120rpx;
+            view {
+                margin-top: 10rpx;
+            }
+            .copy {
+                color: #f25664;
+                text-align: right;
+            }
+        }
+        .footer {
+            height: 108rpx;
+            width: 100%;
+            background: white;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            -webkit-align-items: center;
+            justify-content: flex-end;
+            font-size: 32rpx;
+            position: fixed;
+            bottom: 0;
+            padding-right: 40rpx;
+            .confirm {
+                background-image: linear-gradient(-45deg, #F25664 7%, #E176FF 100%);
+                border-radius: 22px;
+                width: 216rpx;
+                height: 84rpx;
+                color: white;
+                font-size: 36rpx;
+                display: flex;
+                display: -webkit-flex;
+                align-items: center;
+                -webkit-align-items: center;
+                justify-content: center;
+                -webkit-justify-content: center;
+            }
+            .wait-btn {
+                display: flex;
+                display: -webkit-flex;
+                -webkit-justify-content: flex-end;
+                -webkit-align-content: center;
+                view {
+                    width: 148rpx;
+                    height: 60rpx;
+                    color: #fff;
+                    font-size: 24rpx;
+                    text-align: center;
+                    line-height: 60rpx;
+                    border-radius: 44rpx;
+                    &:first-child {
+                        margin-right: 24rpx;
+                        background-image: linear-gradient(-45deg, #F25664 7%, #E176FF 100%);
+                    }
+                    &:last-child {
+                        background-color: #fff;
+                        color: #959595;
+                        border: 2rpx solid #B5B5B5;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+    } // 取消订单的弹出框
+    .cancleShadow {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        .content {
+            width: 620rpx;
+            height: 576rpx;
+            background-color: #fff;
+            border-radius: 20rpx;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -310rpx;
+            margin-top: -288rpx;
+            text-align: center;
+            image {
+                width: 288rpx;
+                height: 150rpx;
+                margin-top: 100rpx;
+            }
+            .tip {
+                font-size: 14px;
+                color: #666666;
+                width: 448rpx;
+                text-align: left;
+                margin: 30rpx auto;
+            }
+            .btns {
+                display: flex;
+                display: -webkit-flex;
+                align-content: center;
+                -webkit-align-content: center;
+                justify-content: space-between;
+                padding: 20rpx 40rpx;
+                view {
+                    border: 2rpx solid #F25664;
+                    border-radius: 42rpx;
+                    width: 250rpx;
+                    height: 84rpx;
+                    line-height: 84rpx;
+                    text-align: center;
+                    font-size: 32rpx;
+                    color: #f25664;
+                    &:last-child {
+                        background-color: #f25664;
+                        color: #fff;
+                    }
+                }
+            }
         }
     }
-}
 </style>
 <template>
-  <view class="container">
-      <view class="confirm-wrapper" wx:if="{{isConfirm}}">
-          <view class="confirm-window">
-              <view class="question">是否确认收货？</view>
-              <view class="button-wrapper">
-                  <view class="cancel" @tap="cancel">取消</view>
-                  <view class="confirm" @tap="shou">确认</view>
-              </view>
-          </view>
-      </view>
-      <view class="header">
-          <text class="" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</text>
-          <text class="" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">待收货</text>
-          <text class="" wx:if="{{orderInfo.orderStatus == 0}}">已取消</text>
-          <image src="{{imagePath+'car02.png'}}" wx:if="{{imagePath}}"/>
-      </view>
-      <view class="pink"></view>
-      <view class="info-wrapper">
-          <view class="name">收件人：<text style="font-weight:bold">{{orderInfo.name}}</text></view>
-          <view>{{orderInfo.phone}}</view>
-          <view>收货地址：{{orderInfo.address}}</view>
-          <!-- <image src="{{imagePath + 'more04.png'}}" wx:if="{{imagePath}}" class="more"/> -->
-          <view class="left-circle"></view>
-          <view class="right-circle"></view>
-      </view>
-      <view class="order-wrapper">
-          <text style="">订单内容</text>
-          <view class="order-detail"> 
-                <image class="goods-pic" src="{{preImagePath+orderInfo.goodsPic}}" wx:if="{{preImagePath && orderInfo.goodsPic}}"/>
+    <view class="container">
+        <view class="confirm-wrapper" wx:if="{{isConfirm}}">
+            <view class="confirm-window">
+                <view class="question">是否确认收货？</view>
+                <view class="button-wrapper">
+                    <view class="cancel" @tap="cancel">取消</view>
+                    <view class="confirm" @tap="shou">确认</view>
+                </view>
+            </view>
+        </view>
+        <view class="header">
+            <text wx:if="{{orderInfo.type == 1}}">待支付</text>
+            <text wx:if="{{orderInfo.type == 2}}">待发货</text>
+            <text wx:if="{{orderInfo.type == 3}}">待收货</text>
+            <text wx:if="{{orderInfo.type == 4}}">已完成</text>
+            <text wx:if="{{orderInfo.type == 5}}">已取消</text>
+            <image src="{{imagePath+'car02.png'}}" wx:if="{{imagePath}}" />
+        </view>
+        <view class="pink"></view>
+        <view class="info-wrapper">
+            <view class="name">收件人：<text style="font-weight:bold">{{orderInfo.name}}</text></view>
+            <view>{{orderInfo.phone}}</view>
+            <view>收货地址：{{orderInfo.address}}</view>
+            <!-- <image src="{{imagePath + 'more04.png'}}" wx:if="{{imagePath}}" class="more"/> -->
+            <view class="left-circle"></view>
+            <view class="right-circle"></view>
+        </view>
+        <view class="order-wrapper">
+            <text style="">订单内容</text>
+            <view class="order-detail" wx:for="{{orderInfo.contentList}}" wx:for-item="itemList" wx:key="{{indexItem}}">
+                <image class="goods-pic" src="{{preImagePath+itemList.classPic}}" lazy-load wx:if="{{preImagePath && itemList.classPic}}" />
                 <view class="goods-text">
-                    <view class="goods-name">{{orderInfo.goodsName}}</view>
-                    <view class="goods-style">规格：{{orderInfo.className}}</view>
+                    <view class="goods-name">{{itemList.goodsName}}</view>
+                    <view class="goods-style" wx:if="{{itemList.className !== null}}">规格：{{itemList.className}}</view>
                     <view class="goods-price">
-                        <text class="price">￥{{m1.filter(orderInfo.goodsPrice*0.01)}}</text>
-                        <text class="count">数量：{{orderInfo.goodsCount}}</text>
+                        <text class="price">￥{{m1.filter(itemList.price*0.01)}}</text>
+                        <text class="count">数量：{{itemList.count}}</text>
                     </view>
                 </view>
             </view>
-            <view class="order-detail" wx:if="{{orderInfo.channelName}}"> 
-                <image class="goods-pic" src="{{preImagePath+orderInfo.channelPic}}" wx:if="{{preImagePath && orderInfo.channelPic}}"/>
-                <view class="goods-text">
-                    <view class="goods-name">{{orderInfo.channelName}}</view>
-                    <view class="goods-price">
-                        <text class="price">￥{{m1.filter(orderInfo.channelPrice*0.01)}}</text>
-                        <text class="count">数量：{{orderInfo.channelCount}}</text>
-                    </view>
+        </view>
+        <!-- <view class="active-wrapper">
+                                                      <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
+                                                      <view><text>有无优惠券：</text><text>无</text></view>
+                                                      <view><text>运费：</text><text>包邮</text></view>
+                                                  </view> -->
+        <view class="logistics-wrapper">
+            <view>订单编号：{{orderInfo.orderNo}}</view>
+            <view>订单时间：{{orderInfo.createTime}}</view>
+            <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}} <text class="copy">复制</text></view>
+        </view>
+        <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+            <text>合计金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
+            <view class="confirm" @tap="confirm" wx:if="{{orderInfo.type ==  3}}">确认收货</view>
+            <view class="wait-btn" wx:if="{{orderInfo.type == 1}}">
+                <view class="right-now" @tap="payMoney" data-id="{{item.orderNo}}">立即支付</view>
+                <view class="cancle" @tap="cancleOrder" data-id="{{item.orderNo}}">取消订单</view>
+            </view>
+        </view>
+        <!-- 取消订单弹出框 -->
+        <view class="cancleShadow" wx:if="{{cancleShadow}}">
+            <view class="content">
+                <image src="{{imagePath + 'popup_retain_sz.png'}}" wx:if="{{imagePath}}" />
+                <view class="tip">
+                    主人，你真的忍心取消订单吗，还差一点我就是你的人了。
+                </view>
+                <view class="btns">
+                    <view class="shadow-canle" @tap="strongRefuse">忍心拒绝</view>
+                    <view class="shadow-right" @tap="payMoney">立即支付</view>
                 </view>
             </view>
-      </view>
-      <!-- <view class="active-wrapper">
-          <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
-          <view><text>有无优惠券：</text><text>无</text></view>
-          <view><text>运费：</text><text>包邮</text></view>
-      </view> -->
-      <view class="logistics-wrapper">
-          <view>订单编号：{{orderInfo.orderNo}}</view>
-          <view>订单时间：{{orderInfo.payTime}}</view>
-          <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}}</view>
-      </view>
-      <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-          <text style="margin-left:190rpx">实付金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
-          <view class="confirm" @tap="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 0}}">确认收货</view>
-          <!-- <view class="confirm" wx:if="{{orderInfo.orderStatus == 1 && orderInfo.arrived == 1}}">已完成</view> -->
-      </view>
-  <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
-  </view>
+        </view>
+        <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
+    </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js'
-import time from '../../../common/time.js'
-import mywxs from '../../../wxs/mywxs.wxs'
-
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '订单详情',
-    navigationBarBackgroundColor: '#EB4D4E',
-    navigationBarTextStyle: 'white'
-  };
-  data = {
-      isIphoneX:false,
-      imagePath:path.path.imagePath,
-      apiPath:path.path.apiPath,
-      preImagePath:path.path.preImagePath,
-      isConfirm:false,
-      orderNo:'',
-      orderInfo:{}
-  };
-  wxs = {
-      m1: mywxs
-  };
-  methods= {
-      confirm(){
-          this.isConfirm = true
-      },
-      cancel(){
-          this.isConfirm = false
-      },
-      shou(){
-          this.getSure();
-      }
-  };
-  onLoad(options) {
-   console.log(options)
-   this.isIphoneX = this.$parent.globalData.isIphoneX
-   this.orderNo = options.id
-   this.getOrderDetail()
-  }
-  getOrderDetail(){
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktuser/order/queryOrderContent',
-        data: {
-            orderno:that.orderNo
-        },
-        method: 'GET',
-        dataType: 'json', 
-        success: res => {
-            console.log(res)
-            that.orderInfo = res.data.data
-            that.orderInfo.payTime = time.formatTime( that.orderInfo.payTime,'Y-M-D h:m:s')
-            that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-      
-  }
-
-  //点击收货按钮
-  getSure(){
-      var that = this 
-      wx.request({
-        url: that.apiPath + '/szmktuser/user/userconfirmreceipt',
-        data: {
-            orderno:that.orderNo
-        }, 
-        method: 'GET',
-        dataType: 'json', 
-        success: res => {
-            wx.showToast({
-              title: '确认成功', 
-              icon: 'success', 
-              duration: 2000, 
-              mask: true, 
-              success: res => {}
-            })
-            that.isConfirm = false
-            that.$switch('../myCenter/myCenter')
-            that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-      
-  }
-}
+    import wepy from 'wepy';
+    import path from '../../../common/path.js'
+    import time from '../../../common/time.js'
+    import mywxs from '../../../wxs/mywxs.wxs'
+    export default class Index extends wepy.page {
+        config = {
+            navigationBarTitleText: '订单详情',
+            navigationBarBackgroundColor: '#EB4D4E',
+            navigationBarTextStyle: 'white'
+        };
+        data = {
+            isIphoneX: false,
+            imagePath: path.path.imagePath,
+            apiPath: path.path.apiPath,
+            preImagePath: path.path.preImagePath,
+            isConfirm: false,
+            orderNo: '',
+            orderInfo: {},
+            cancleShadow: false
+        };
+        wxs = {
+            m1: mywxs
+        };
+        methods = {
+            confirm() {
+                this.isConfirm = true
+            },
+            cancel() {
+                this.isConfirm = false
+            },
+            shou() {
+                this.getSure();
+            },
+            //取消订单弹出框
+            cancleOrder(e) {
+                this.cancleShadow = true
+            },
+            //立即支付
+            payMoney() {
+                var that = this
+                wx.request({
+                    url: that.apiPath + '/szmktuser/pay/awakenpay', //开发者服务器接口地址",
+                    data: {
+                        userid: that.$parent.globalData.userId,
+                        orderno: that.orderNo
+                    },
+                    method: 'GET',
+                    dataType: 'json',
+                    success: res => {
+                        console.log(res)
+                        if (res.data.code == 200) {
+                            wx.requestPayment({
+                                appId: res.data.data.appId,
+                                timeStamp: res.data.data.timeStamp,
+                                nonceStr: res.data.data.nonceStr,
+                                package: res.data.data.package,
+                                signType: 'MD5',
+                                paySign: res.data.data.paySign,
+                                success(res) {
+                                    console.log(res)
+                                    that.$navigate({
+                                        url: '../../payResult/paySuccess'
+                                    })
+                                },
+                                fail(res) {
+                                    console.log(res)
+                                    that.$navigate({
+                                        url: '../../payResult/payFail'
+                                    })
+                                }
+                            })
+                        }
+                    },
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
+            //忍心拒绝
+            strongRefuse() {
+                var that = this
+                wx.request({
+                    url: that.apiPath + '/szmktuser/order/cancelOrder', //开发者服务器接口地址",
+                    data: {
+                        userid: that.$parent.globalData.userId,
+                        orderno: that.orderNo
+                    }, //请求的参数",
+                    method: 'GET',
+                    dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+                    success: res => {
+                        that.cancleShadow = false
+                        if (res.data.code == 1000) {
+                            wx.showToast({
+                                title: '取消订单成功', //提示的内容,
+                                icon: 'success', //图标,
+                                duration: 2000, //延迟时间,
+                                mask: true, //显示透明蒙层，防止触摸穿透,
+                                success: res => {
+                                    setTimeout(() => {
+                                        this.$switch('../myCenter/myCenter')
+                                    }, 2000);
+                                }
+                            })
+                        } else {
+                            wx.showToast({
+                                title: '取消失败', //提示的内容,
+                                icon: 'none', //图标,
+                                duration: 2000, //延迟时间,
+                                mask: true, //显示透明蒙层，防止触摸穿透,
+                                success: res => {}
+                            })
+                        }
+                        that.$apply()
+                    },
+                    fail: () => {},
+                    complete: () => {}
+                });
+            }
+        };
+        onLoad(options) {
+            console.log(options)
+            this.isIphoneX = this.$parent.globalData.isIphoneX
+            this.orderNo = options.id
+            wx.setStorageSync('orderNo',this.orderNo)
+            this.getOrderDetail()
+        }
+        getOrderDetail() {
+            var that = this
+            wx.request({
+                url: that.apiPath + '/szmktuser/order/queryOrderContent',
+                data: {
+                    orderno: that.orderNo
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: res => {
+                    console.log(res)
+                    that.orderInfo = res.data.data
+                    that.orderInfo.createTime = time.formatTime(that.orderInfo.createTime, 'Y-M-D h:m:s')
+                    that.$apply()
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+        //点击收货按钮
+        getSure() {
+            var that = this
+            wx.request({
+                url: that.apiPath + '/szmktuser/user/userconfirmreceipt',
+                data: {
+                    orderno: that.orderNo
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: res => {
+                    wx.showToast({
+                        title: '确认成功',
+                        icon: 'success',
+                        duration: 2000,
+                        mask: true,
+                        success: res => {}
+                    })
+                    that.isConfirm = false
+                    setTimeout(() => {
+                        that.$switch('../myCenter/myCenter')
+                    }, 2000);
+                    that.$apply()
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+    }
 </script>
