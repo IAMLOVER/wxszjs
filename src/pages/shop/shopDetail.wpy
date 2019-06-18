@@ -541,9 +541,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                  <view>微信好友</view>
-                </button>
+                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                      <view>微信好友</view>
+                    </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -588,6 +588,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       storeId: '',
       storeName: '',
       storeLogo: '',
@@ -598,7 +599,8 @@
       showShareShadow: false,
       showPoster: false,
       posterConfig: {},
-      posterDetail: ''
+      posterDetail: '',
+      QRCode: '',
     };
     wxs = {
       m1: mywxs
@@ -607,6 +609,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -648,10 +651,8 @@
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
           success: function(res) {
-            // 转发成功
           },
           fail: function(res) {
-            // 转发失败
           }
         }
       },
@@ -671,6 +672,142 @@
           that.storeName = res.data.data.name
           that.storeLogo = res.data.data.logo
           that.storePromote = res.data.data.promote
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
+      })
+    }
+    // 店铺内的满减商品
+    getReduceProduce() {
+      var that = this
+      wepy.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/coupons',
+        data: {
+          'storeId': that.storeId,
+          'size': 1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.reduceArr = res.data.data.content
+          that.$apply()
+          wepy.hideLoading();
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新任务
+    getTaskProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
+        data: {
+          'storeId': that.storeId,
+          'size': 1
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          that.taskArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 店铺内的最新单品
+    getNewProduce() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/goodsInfo/store/all',
+        data: {
+          'storeId': that.storeId,
+          // 'size':1
+        }, //请求的参数",
+        method: 'get',
+        dataType: 'json',
+        success: res => {
+          that.newArr = res.data.data.content
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //获取店铺详情的小程序码
+    getQRCode() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
+        data: {
+          id: that.storeId,
+          type: 9
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          that.QRCode = that.qrcodeImagePath + res.data.data
+          console.log(that.QRCode)
           that.posterConfig = {
             width: 570,
             height: 920,
@@ -773,7 +910,7 @@
               },
               //二维码
               {
-                url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+                url: that.QRCode,
                 width: 84,
                 height: 84,
                 x: 178,
@@ -801,122 +938,6 @@
               }
             ],
           }
-          that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-    //保存海报到相册
-    saveAblum() {
-      var that = this
-      wx.saveImageToPhotosAlbum({
-        filePath: that.posterDetail,
-        success(res) {
-          that.showPoster = false
-          wepy.showToast({
-            title: '保存成功',
-            icon: 'success',
-            duration: 2000,
-            mask: true,
-            success: res => {}
-          });
-          that.$apply()
-        },
-        fail(err) {
-          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
-            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
-            wx.showModal({
-              title: '提示',
-              content: '需要您授权保存相册',
-              showCancel: false,
-              success: res => {
-                wx.openSetting({
-                  success(settingdata) {
-                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
-                      wx.showModal({
-                        title: '提示',
-                        content: '获取权限成功,再次点击图片即可保存',
-                        showCancel: false,
-                      })
-                    } else {
-                      wx.showModal({
-                        title: '提示',
-                        content: '获取权限失败，将无法保存到相册哦~',
-                        showCancel: false,
-                      })
-                    }
-                  },
-                  fail(failData) {
-                    console.log("failData", failData)
-                  },
-                  complete(finishData) {
-                    console.log("finishData", finishData)
-                  }
-                })
-              }
-            })
-          }
-        },
-      })
-    }
-    // 店铺内的满减商品
-    getReduceProduce() {
-      var that = this
-      wepy.showLoading({
-        title: '加载中', //提示的内容,
-        mask: true, //显示透明蒙层，防止触摸穿透,
-        success: res => {}
-      });
-      wx.request({
-        url: that.apiPath + '/szmktstore/goodsInfo/store/coupons',
-        data: {
-          'storeId': that.storeId,
-          'size': 1
-        }, //请求的参数",
-        method: 'GET',
-        dataType: 'json',
-        success: res => {
-          that.reduceArr = res.data.data.content
-          that.$apply()
-          wepy.hideLoading();
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-    // 店铺内的最新任务
-    getTaskProduce() {
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktstore/goodsInfo/store/targets',
-        data: {
-          'storeId': that.storeId,
-          'size':1
-        }, //请求的参数",
-        method: 'GET',
-        dataType: 'json',
-        success: res => {
-          that.taskArr = res.data.data.content
-          that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-    // 店铺内的最新单品
-    getNewProduce() {
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktstore/goodsInfo/store/all',
-        data: {
-          'storeId': that.storeId,
-          // 'size':1
-        }, //请求的参数",
-        method: 'get',
-        dataType: 'json',
-        success: res => {
-          that.newArr = res.data.data.content
           that.$apply()
         },
         fail: () => {},

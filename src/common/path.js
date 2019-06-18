@@ -7,12 +7,14 @@ const path = {
     'apiPath':'https://op.sqplus.cn',
     'preImagePath':'https://picop.sqplus.cn/sqj/',
     'userImagePath':'https://picop.sqplus.cn/szmkt/userpic/',
+    'qrcodeImagePath':'https://picop.sqplus.cn/szmkt/qrcode/',
 
      //测试环境 
     'imagePath':'https://pictest.sqplus.cn/szjs/user/images/index/',
-    'apiPath':'https://optest.sqplus.cn',
-    'preImagePath':'https://pictest.sqplus.cn/sqj/',
-    'userImagePath':'https://pictest.sqplus.cn/szmkt/userpic/'
+    // 'apiPath':'https://optest.sqplus.cn',
+    // 'preImagePath':'https://pictest.sqplus.cn/sqj/',
+    // 'userImagePath':'https://pictest.sqplus.cn/szmkt/userpic/',
+    // 'qrcodeImagePath':'https://pictest.sqplus.cn/szmkt/qrcode/'
     // testenvend
 
 };
