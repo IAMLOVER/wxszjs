@@ -182,7 +182,7 @@
 					"id": 21,
 					"name": "组合商品单品详情",
 					"pathName": "pages/collocation/collocationSingle",
-					"query": "id=1&type=1",
+					"query": "id=95&type=0",
 					"scene": null
 				}
 			]

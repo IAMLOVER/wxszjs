@@ -534,9 +534,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                                  <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                                  <text>分享</text>
-                                </button>
+                                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                                        <text>分享</text>
+                                      </button>
       </view>
     </view>
     <!-- TA们都这么买 -->
@@ -557,7 +557,7 @@
           {{promotion.shortTitle}}+{{produceInfo.shortTitle}}
         </view>
         <view class="save-money">
-          这样买可劲省¥218.01
+          这样买可劲省¥{{m1.filter(saveMoney*0.01)}}
         </view>
       </view>
       <image src="{{imagePath + 'more07.png'}}" wx:if="{{imagePath}}" class="more" />
@@ -669,7 +669,7 @@
           </view>
         </view>
         <view class="save-money">
-          这样搭配，可劲省¥118.01
+          这样搭配，可劲省¥{{m1.filter(saveMoney*0.01)}}
         </view>
         <view class="chose-way">
           <view class="buy-single" @tap="closeTipShadow">
@@ -713,7 +713,8 @@
       account: 1,
       money: 0,
       storePhoneNum: '',
-      collocationShadow: true
+      collocationShadow: true,
+      saveMoney: 0
     };
     wxs = {
       m1: mywxs
@@ -805,6 +806,8 @@
       var type = options.type
       if (type == 1) {
         this.getPmtCollocation()
+      } else {
+        this.getChannelCollocation()
       }
     };
     onShow() {};
@@ -831,6 +834,41 @@
           // 店铺id
           that.storeId = res.data.data.goodsInfo.goods.storeId
           that.typeId = that.goodsClassList[that.activeIndex].id
+          //节省多少钱字段
+          that.saveMoney = res.data.data.saveMoney
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //获取引流品商品的搭配详情
+    getChannelCollocation() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/channelCollocation/info', //开发者服务器接口地址",
+        data: {
+          id: that.collocationId,
+          userid: that.$parent.globalData.userId
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          //引流品信息
+          that.pmtCollocation = res.data.data.collocation
+          that.pmtCollocation.promotionPrice = res.data.data.channelInfo.titPrice
+          that.promotion = res.data.data.channelInfo
+          //商品信息
+          that.produceInfo = res.data.data.goodsInfo.goods
+          that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
+          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
+          that.money = that.account * that.goodsClassList[0].salPrice * 0.01
+          // 店铺id
+          that.storeId = res.data.data.goodsInfo.goods.storeId
+          that.typeId = that.goodsClassList[that.activeIndex].id
+          //节省多少钱字段
+          that.saveMoney = res.data.data.saveMoney
           that.$apply()
         },
         fail: () => {},
