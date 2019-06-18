@@ -857,7 +857,7 @@
           console.log(res)
           //引流品信息
           that.pmtCollocation = res.data.data.collocation
-          that.pmtCollocation.promotionPrice = res.data.data.channelInfo.titPrice
+          that.pmtCollocation.promotionPrice = res.data.data.channelInfo.chaPrice
           that.promotion = res.data.data.channelInfo
           //商品信息
           that.produceInfo = res.data.data.goodsInfo.goods

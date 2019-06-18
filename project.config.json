@@ -181,8 +181,8 @@
 				{
 					"id": 21,
 					"name": "组合商品单品详情",
-					"pathName": "pages/collocation/collocationSingle",
-					"query": "id=95&type=0",
+					"pathName": "pages/collocation/collocationGroup",
+					"query": "id=96&type=1",
 					"scene": null
 				}
 			]

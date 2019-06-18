@@ -275,13 +275,320 @@
       }
     }
   }
+  .right-now-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    .content {
+      width: 100%;
+      height: 820rpx;
+      background-color: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-radius: 16rpx 16rpx 0rpx 0rpx;
+      padding: 34rpx 30rpx 0rpx 30rpx;
+      box-sizing: border-box;
+      .title {
+        display: flex;
+        display: -webkit-flex;
+        color: #222;
+        font-size: 28rpx;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        image {
+          width: 36rpx;
+          height: 36rpx;
+        }
+      }
+      .produce {
+        width: 690rpx;
+        height: 480rpx;
+        background: #FFFFFF;
+        box-shadow: 0 0 6rpx 2rpx rgba(208, 208, 208, 0.20);
+        border-radius: 4rpx;
+        margin: 0 auto;
+        margin-top: 10rpx;
+        padding: 24rpx;
+        box-sizing: border-box;
+        .produce-one {
+          border-bottom: 1px solid #F5F5F5;
+          box-sizing: border-box;
+          padding-bottom: 24rpx;
+          overflow: hidden;
+          margin-bottom: 24rpx;
+          .one-left {
+            float: left;
+            image {
+              width: 180rpx;
+              height: 180rpx;
+              border-radius: 16rpx;
+              margin-right: 20rpx;
+            }
+          }
+          .one-right {
+            float: left;
+            .one-name {
+              color: #222222;
+              font-size: 28rpx;
+              width: 430rpx;
+              font-weight: 600;
+              height: 126rpx;
+            }
+            .one-type {
+              color: #959595;
+              font-size: 24rpx;
+            }
+            .one-text {
+              display: flex;
+              display: -webkit-flex;
+              justify-content: space-between;
+              -webkit-justify-content: space-between;
+              view {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                font-size: 32rpx;
+                color: #F25664;
+              }
+              view:last-child {
+                text-align: right;
+                color: #F25664;
+                font-size: 24rpx;
+                padding-top: 10rpx;
+              }
+            }
+          }
+        }
+        .produce-two {
+          clear: both;
+          position: relative;
+          .two-left {
+            float: left;
+            image {
+              width: 180rpx;
+              height: 180rpx;
+              border-radius: 16rpx;
+              margin-right: 20rpx;
+            }
+          }
+          .two-right {
+            float: left;
+            .two-name {
+              color: #222222;
+              font-size: 28rpx;
+              width: 430rpx;
+            }
+            .two-type {
+              color: #959595;
+              font-size: 24rpx;
+              background-color: #f5f5f5;
+              display: inline-block;
+              border-radius: 8rpx;
+              padding: 0rpx 15rpx;
+              image {
+                width: 16rpx;
+                height: 10rpx;
+                margin-left: 20rpx;
+              }
+            }
+            .two-text {
+              display: flex;
+              display: -webkit-flex;
+              justify-content: space-between;
+              -webkit-justify-content: space-between;
+              view {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                font-size: 32rpx;
+                color: #F25664;
+              }
+              view:last-child {
+                text-align: right;
+                color: #F25664;
+                font-size: 24rpx;
+                padding-top: 10rpx;
+              }
+            }
+          }
+          .type-position {
+            background-color: #fff;
+            box-shadow: 0 0 3px 1px rgba(208, 208, 208, 0.20);
+            border-radius: 2rpx;
+            width: 418rpx;
+            position: absolute;
+            padding: 6rpx 20rpx;
+            top: 158rpx;
+            right: 40rpx;
+            box-sizing: border-box;
+            text {
+              display: inline-block;
+              font-size: 28rpx;
+              color: #222;
+              background-color: #f5f5f5;
+              height: 22rpx;
+              line-height: 22rpx;
+              padding: 10rpx 20rpx;
+              margin-right: 10rpx;
+              border-radius: 8rpx;
+            }
+            text:nth-child(3n+3) {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      .counts {
+        height: 120rpx;
+        line-height: 120rpx;
+        font-size: 28rpx;
+        color: #222;
+        display: flex;
+        display: -webkit-flex;
+        view {
+          -webkit-flex: 2;
+          -ms-flex: 2;
+          flex: 2;
+          justify-content: space-between;
+          -webkit-justify-content: space-between;
+          text-align: right;
+        }
+        view:last-child {
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+        }
+        .reduce {
+          width: 60rpx;
+          height: 54rpx;
+        }
+        .add {
+          width: 60rpx;
+          height: 54rpx;
+        }
+        .number {
+          width: 90rpx;
+          height: 54rpx;
+          background-color: #ededed;
+          font-size: 30rpx;
+          text-align: center;
+          display: inline-block;
+          margin: 0rpx 4rpx;
+          line-height: 54rpx;
+        }
+        .controal {
+          display: flex;
+          display: -webkit-flex;
+          align-items: center;
+          -webkit-align-items: center;
+          justify-content: center;
+          -webkit-justify-content: center;
+        }
+      }
+      .btn-box {
+        padding-top: 8rpx;
+        width: 100%;
+        .btn {
+          width: 690rpx;
+          height: 84rpx;
+          background-image: linear-gradient(-23deg, #D577EF 0%, #F25664 100%);
+          border-radius: 21px;
+          font-size: 32rpx;
+          color: #fff;
+          text-align: center;
+          line-height: 84rpx;
+        }
+      }
+    }
+  }
+  .share-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 346rpx;
+      background-color: #F5F5F5;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      .tip {
+        text-align: center;
+        font-size: 28rpx;
+        color: #666;
+        margin-top: 30rpx;
+      }
+      .share-way {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 20rpx;
+        color: #222;
+        margin-top: 12rpx;
+        margin-bottom: 22rpx;
+        image {
+          width: 92rpx;
+          height: 92rpx;
+        }
+        button {
+          width: 100rpx;
+          height: 140rpx;
+          padding: 0;
+          line-height: 35rpx;
+          color: #222;
+          font-size: 20rpx;
+          margin: 0;
+        }
+      }
+      .cancle-share {
+        height: 96rpx;
+        background-color: #fff;
+        text-align: center;
+        font-size: 32rpx;
+        color: #666;
+        line-height: 96rpx;
+        z-index: 9999;
+      }
+    }
+  }
+  button[plain] {
+    border-color: #fff !important;
+  } //生成海报的弹出框
+  .poster-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .save-ablum {
+      background: #EB4D4E;
+      border-radius: 42rpx;
+      width: 250rpx;
+      height: 84rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      margin: 50rpx auto 200rpx;
+      text-align: center;
+    }
+  }
 </style>
 <template>
   <view class='page'>
     <!-- 商品大图和滚动文字 -->
     <view class="image">
       <swiper autoplay circular indicatorDots indicator-active-color="#ffffff">
-        <swiper-item wx:for="{{produceInfo.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
+        <swiper-item wx:for="{{promotion.picUrls}}" wx:for-item="item" mode="aspectFill" wx:key="{{index}}">
           <image src="{{preImagePath+item}}" />
         </swiper-item>
       </swiper>
@@ -299,29 +606,27 @@
     <view class="general">
       <view class="price">
         <text class="type">￥</text>
-        <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
-        <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <!-- <text class="old">9.99</text> -->
+        <text>{{m1.filter(pmtCollocation.promotionPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称以及限购 -->
     <view class="main">
       <view class="produce-name">
-        {{produceInfo.title}}
+        {{promotion.title}}
       </view>
       <view class="produce-tip">
         <view class="limit">
-          邮费：包邮
+          邮费:包邮
         </view>
         <view class="limit" style="-webkit-flex: 2.5;-ms-flex: 2.5;flex: 2.5;">
-          {{produceInfo.buyNum}}人购买
+          热度:{{promotion.visitNum}}
         </view>
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-            <text>分享</text>
-          </button>
+                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                        <text>分享</text>
+                      </button>
       </view>
     </view>
     <!-- 组合商品 -->
@@ -333,11 +638,11 @@
       </view>
       <view class="product">
         <view class="product-img">
-          <image src="{{imagePath + 'timg.png'}}" wx:if="{{preImagePath}}" />
+          <image src="{{preImagePath + produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" />
         </view>
         <view class="product-details">
           <view class="title">
-            222
+            {{produceInfo.title}}
           </view>
           <view class="price">
             <text>￥{{m1.filter(produceInfo.minPrice*0.01)}}</text>
@@ -365,12 +670,12 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-            <view class="kefu">
-          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-          <view>客服</view>
-        </view>
-        </button>
-      <view class="skill-btn">
+                        <view class="kefu">
+                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                      <view>客服</view>
+                    </view>
+                    </button>
+      <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
     </view>
@@ -387,28 +692,28 @@
         <view class="produce">
           <view class="produce-one">
             <view class="one-left">
-              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill" />
+              <image src="{{preImagePath+promotion.picUrl1}}" wx:if="{{preImagePath && promotion.picUrl1}}" mode="aspectFill" />
             </view>
             <view class="one-right">
-              <view class="one-name">{{produceInfo.title}}</view>
+              <view class="one-name">{{promotion.title}}</view>
               <view class="one-text">
-                <view class="price">￥{{m1.filter(produceInfo.chaPrice*0.01)}}</view>
-                <view class="count">数量：1</view>
+                <view class="price">￥{{m1.filter(pmtCollocation.promotionPrice*0.01)}}</view>
+                <view class="count">数量：{{pmtCollocation.promotionCount}}</view>
               </view>
             </view>
           </view>
           <view class="produce-two">
             <view class="two-left">
-              <image src="{{preImagePath+rightProduceInfo.picUrl1}}" wx:if="{{preImagePath && rightProduceInfo.picUrl1}}" mode="aspectFill" />
+              <image src="{{preImagePath+produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" mode="aspectFill" />
             </view>
             <view class="two-right">
-              <view class="two-name">{{rightProduceInfo.title}}</view>
+              <view class="two-name">{{produceInfo.title}}</view>
               <view class="two-type" @tap="showTwoType">规格：{{goodsClassList[activeIndex].className}}
                 <image src="{{imagePath+'xiala@2x.png'}}" wx:if="{{imagePath}}" />
               </view>
               <view class="two-text">
                 <view class="price">￥{{m1.filter(goodsClassList[activeIndex].salPrice*0.01)}}</view>
-                <view class="count">数量：{{collocation.count}}</view>
+                <view class="count">数量：{{pmtCollocation.goodsCount}}</view>
               </view>
             </view>
             <!-- 商家商品的规格选取，根据定位到对应的位置 -->
@@ -429,7 +734,7 @@
         <!-- 确定按钮 -->
         <view class="btn-box">
           <view class="btn" @tap="payMoney">
-            确定(共￥{{m1.filter((produceInfo.chaPrice*0.01)*account + account*goodsClassList[activeIndex].salPrice*0.01*collocation.count) }})
+            确定(共￥{{m1.filter((pmtCollocation.promotionPrice*0.01*pmtCollocation.promotionCount)*account + account*goodsClassList[activeIndex].salPrice*0.01*pmtCollocation.goodsCount) }})
           </view>
         </view>
       </view>
@@ -451,19 +756,219 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
-      active: 1
+      showShadow: false,
+      showPosition: false,
+      collocationId: '',
+      pmtCollocation: {},
+      promotion: {},
+      produceInfo: {},
+      goodsClassList: {},
+      money: 0,
+      storeId: '',
+      typeId: '',
+      saveMoney: '',
+      active: 1,
+      type:0,
+      activeIndex: 0,
+      account: 1,
+      wareHouseStock: 0,
     };
     wxs = {
       m1: mywxs
     };
-    methods = {};
+    methods = {
+      changeActive(e) {
+        this.active = e.currentTarget.dataset.active
+      },
+      closeShadow() {
+        this.showShadow = false
+      },
+      rightNow() {
+        this.showShadow = true
+      },
+      showTwoType() {
+        this.showPosition = !this.showPosition
+      },
+      changeIndex(e) {
+        this.activeIndex = e.currentTarget.dataset.index
+        this.typeId = e.currentTarget.dataset.id
+        this.showPosition = !this.showPosition
+      },
+      // 加
+      addAccount() {
+        if (this.account >= this.goodsClassList[this.activeIndex].stock || this.account >= this.wareHouseStock) {
+          wx.showToast({
+            title: '库存不足',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          })
+        } else {
+          this.account++
+        }
+      },
+      //减
+      reduceAccount() {
+        if (this.account > 1) {
+          this.account--
+        } else {
+          wx.showToast({
+            title: '请选择最少数量',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        }
+      },
+      //购买数量的确定按钮
+      payMoney() {
+        if (this.account * this.pmtCollocation.promotionCount > this.wareHouseStock || this.account * this.pmtCollocation.goodsCount > this.goodsClassList[this.activeIndex].stock) {
+          wx.showToast({
+            title: '不好意思,商品库存不足',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          console.log(this.account + '-' + this.produceInfo.stock)
+          return
+        }
+        var pay = {}
+        //商品的搭配Id
+        pay.collocationId = this.pmtCollocation.id
+        // 商品规格id
+        pay.id = this.typeId
+        // 商品数量
+        pay.count = this.account,
+          //搭配的促销品需要的数量
+          pay.scount = this.pmtCollocation.promotionCount
+        //搭配的商品数量
+        pay.goodNeedCount = this.pmtCollocation.goodsCount
+        // 商品活动类型
+        pay.type = this.type
+        //任务关联id
+        pay.targetId = null
+        //优惠券id
+        pay.couponId = null
+        // 商品的价钱
+        pay.money = ((this.pmtCollocation.promotionPrice * 0.01 * this.pmtCollocation.promotionCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.pmtCollocation.goodsCount) * this.account).toFixed(2)
+        wx.setStorage({
+          key: 'pay',
+          data: pay
+        })
+        this.getUserAddress()
+      }
+    };
     onLoad(options) {
       var that = this;
       that.isIphoneX = that.$parent.globalData.isIphoneX
-      var collocationId = options.id
-      console.log(collocationId)
+      that.collocationId = options.id
+      that.type = options.type
+      if (that.type == 2) {
+        that.getPmtCollocation()
+      }else{
+        that.getChannelCollocation()
+      }
     };
     onShow() {};
+    //获取促销品搭配详情
+    getPmtCollocation() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/pmtCollocation/info', //开发者服务器接口地址",
+        data: {
+          id: that.collocationId,
+          userid: that.$parent.globalData.userId
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          //促销品信息
+          that.pmtCollocation = res.data.data.pmtCollocation
+          that.promotion = res.data.data.promotion
+          that.promotion.description = that.promotion.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
+          //商品信息
+          that.produceInfo = res.data.data.goodsInfo.goods
+          that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
+          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
+          that.money = that.account * that.goodsClassList[0].salPrice * 0.01
+          // 店铺id
+          that.storeId = res.data.data.goodsInfo.goods.storeId
+          that.typeId = that.goodsClassList[that.activeIndex].id
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //获取引流品商品的搭配详情
+    getChannelCollocation() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktstore/channelCollocation/info', //开发者服务器接口地址",
+        data: {
+          id: that.collocationId,
+          userid: that.$parent.globalData.userId
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          //引流品信息
+          that.pmtCollocation = res.data.data.collocation
+          that.pmtCollocation.promotionPrice = res.data.data.channelInfo.chaPrice
+          that.pmtCollocation.promotionCount = 1
+          that.promotion = res.data.data.channelInfo
+          that.pmtCollocation.goodsCount = that.pmtCollocation.count
+          //商品信息
+          that.produceInfo = res.data.data.goodsInfo.goods
+          that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
+          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
+          that.money = that.account * that.goodsClassList[0].salPrice * 0.01
+          // 店铺id
+          that.storeId = res.data.data.goodsInfo.goods.storeId
+          that.typeId = that.goodsClassList[that.activeIndex].id
+          //根据引流品库存结合商品的库存比较大小。得出最小值，就是最多的可购买量
+          that.wareHouseStock = that.goodsClassList[that.activeIndex].stock >= that.promotion.stock ? that.promotion.stock : that.goodsClassList[that.activeIndex].stock
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 获取用户的地址
+    getUserAddress() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/getaddress',
+        data: {
+          userid: that.$parent.globalData.userId,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          if (res.data.data) {
+            wx.setStorage({
+              key: 'addressId',
+              data: res.data.data.id
+            });
+            that.$navigate({
+              url: '../order/order'
+            })
+          } else {
+            that.$navigate({
+              url: '../address/address'
+            })
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
   }
 </script>
 

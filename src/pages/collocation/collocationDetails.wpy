@@ -680,11 +680,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-                        <view class="kefu">
-                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                      <view>客服</view>
-                    </view>
-                    </button>
+                          <view class="kefu">
+                        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                        <view>客服</view>
+                      </view>
+                      </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -759,9 +759,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                <view>微信好友</view>
-                              </button>
+                                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                  <view>微信好友</view>
+                                </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -843,10 +843,8 @@
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           path: 'pages/collocation/collocationSingle?id=' + this.pmtCollocation.id + '&type=' + 1,
-          success: function(res) {
-          },
-          fail: function(res) {
-          }
+          success: function(res) {},
+          fail: function(res) {}
         }
       },
       changeActive(e) {
