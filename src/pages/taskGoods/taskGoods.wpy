@@ -562,6 +562,82 @@
     padding: 0 !important;
     color: #959595
   }
+  .share-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .content {
+      width: 100%;
+      height: 346rpx;
+      background-color: #F5F5F5;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+      .tip {
+        text-align: center;
+        font-size: 28rpx;
+        color: #666;
+        margin-top: 30rpx;
+      }
+      .share-way {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 20rpx;
+        color: #222;
+        margin-top: 12rpx;
+        margin-bottom: 22rpx;
+        image {
+          width: 92rpx;
+          height: 92rpx;
+        }
+        button {
+          width: 100rpx;
+          height: 140rpx;
+          padding: 0;
+          line-height: 35rpx;
+          color: #222;
+          font-size: 20rpx;
+          margin: 0;
+        }
+      }
+      .cancle-share {
+        height: 96rpx;
+        background-color: #fff;
+        text-align: center;
+        font-size: 32rpx;
+        color: #666;
+        line-height: 96rpx;
+        z-index: 9999;
+      }
+    }
+  }
+  button[plain] {
+    border-color: #f5f5f5 !important;
+  } //生成海报的弹出框
+  .poster-shadow {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .save-ablum {
+      background: #EB4D4E;
+      border-radius: 42rpx;
+      width: 250rpx;
+      height: 84rpx;
+      color: #fff;
+      font-size: 32rpx;
+      line-height: 84rpx;
+      margin: 50rpx auto 200rpx;
+      text-align: center;
+    }
+  }
 </style>
 <template>
   <view class="page">
@@ -605,10 +681,10 @@
         </view>
       </view>
       <view class="share">
-        <button open-type="share" plain="true">
-            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-            <text>分享</text>
-          </button>
+        <view @tap="openShareShadow">
+          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}" />
+          <text>分享</text>
+        </view>
       </view>
     </view>
     <!-- 任务榜 -->
@@ -740,11 +816,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                    <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                    <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                       <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                   </view>
-                   </label>
+                              <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                              <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                 <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                             </view>
+                             </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -754,6 +830,30 @@
           <text>领取任务</text>
         </view>
       </view>
+    </view>
+    <!-- 转发分享弹出框 -->
+    <view class="share-shadow" wx:if="{{showShareShadow}}">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+        <view class="tip">请选择转发方式</view>
+        <view class="share-way">
+          <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+            <image src="{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}" />
+            <view @tap="onCreatePoster">生成海报</view>
+          </poster>
+          <button open-type="share" class="poster" plain="true">
+                                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                  <view>微信好友</view>
+                                </button>
+        </view>
+        <view class="cancle-share" @tap="cancleShare">
+          取消
+        </view>
+      </view>
+    </view>
+    <!-- 点击生成海报的出现的弹出框 -->
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
+      <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
     <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
@@ -766,7 +866,10 @@
   import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '商品详情'
+      navigationBarTitleText: '商品详情',
+      usingComponents: {
+        "poster": "../../components/miniprogram_dist/poster/index",
+      }
     };
     onLoad(options) {
       var that = this;
@@ -799,6 +902,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       showShadow: false,
       produceId: '',
       produceInfo: {},
@@ -816,19 +920,59 @@
       money: 0,
       storePhoneNum: '',
       haveThisGoodsTasks: null,
-      taskHaveCollocation:{}
+      taskHaveCollocation: {},
+      collocationFlag: false,
+      pmtCollocationFlag: false,
+      shareType: '',
+      showShareShadow: false,
+      showPoster: false,
+      posterConfig: {},
+      posterDetail: '',
+      QRCode: '',
+      codeType: ''
     };
     methods = {
+      //打开，关闭分享弹出框
+      openShareShadow() {
+        this.showShareShadow = true
+        this.getQRCode()
+      },
+      cancleShare() {
+        this.showShareShadow = false
+      },
+      onCreatePoster() {},
+      onPosterFail(err) {
+        console.error(err);
+      },
+      onPosterSuccess(e) {
+        this.showShareShadow = false
+        this.showPoster = true
+        const {
+          detail
+        } = e;
+        this.posterDetail = detail
+      },
       onShareAppMessage: function(ops) {
         var userTargetId = ''
         if (this.haveThisGoodsTasks) {
           var userTargetId = this.haveThisGoodsTasks.id
         }
         var getPath = ''
-        if (userTargetId == '') {
+        //1.未领取任务并且该商品没有任何搭配
+        if (userTargetId == '' && !this.collocationFlag && !this.pmtCollocationFlag) {
           getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
-        } else {
+        }
+        //2.领取了该商品的任务，但是该商品没有任何搭配
+        if (userTargetId && !this.collocationFlag && !this.pmtCollocationFlag) {
           getPath = 'pages/generalGoods/taskGenralGoods?id=' + this.produceId + '&userTargetId=' + userTargetId
+        }
+        //3.领取了该商品的任务，而且该商品有引流品的搭配
+        if (userTargetId && this.collocationFlag && !this.pmtCollocationFlag) {
+          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + userTargetId
+        }
+        //4.领取了该商品的任务，而且该商品有促销品的搭配
+        if (userTargetId && !this.collocationFlag && this.pmtCollocationFlag) {
+          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 2 + '&userTargetId=' + userTargetId
         }
         console.log(userTargetId)
         console.log(getPath)
@@ -976,18 +1120,25 @@
           // 店铺id
           that.storeId = res.data.data.goods.storeId
           //判断任务商品是否有搭配商品
-          if(res.data.data.collocation){
+          if (res.data.data.collocation) {
             that.taskHaveCollocation = res.data.data.collocation
-            wx.setStorageSync('taskHaveCollocation',that.taskHaveCollocation)
+            that.collocationFlag = true
+            that.taskHaveCollocation.collocationFlag = that.collocationFlag
+             that.taskHaveCollocation.pmtCollocationFlag = that.pmtCollocationFlag
+            that.shareType = 1
+            wx.setStorageSync('taskHaveCollocation', that.taskHaveCollocation)
           }
-          if(res.data.data.pmtCollocation){
+          if (res.data.data.pmtCollocation) {
             that.taskHaveCollocation = res.data.data.pmtCollocation
-            wx.setStorageSync('taskHaveCollocation',that.taskHaveCollocation)
+            that.pmtCollocationFlag = true
+            that.taskHaveCollocation.collocationFlag = that.collocationFlag
+            that.taskHaveCollocation.pmtCollocationFlag = that.pmtCollocationFlag
+            that.shareType = 2
+            wx.setStorageSync('taskHaveCollocation', that.taskHaveCollocation)
           }
-          if(res.data.data.pmtCollocation == null && res.data.data.collocation == null){
+          if (res.data.data.pmtCollocation == null && res.data.data.collocation == null) {
             wx.removeStorageSync('taskHaveCollocation')
           }
-
           that.$apply()
           this.getStorePhone()
           wepy.hideLoading()
@@ -1041,7 +1192,7 @@
                 if (that.produceInfo.relay) {
                   wx.setStorageSync('relay', that.produceInfo.relay)
                 }
-                wx.setStorageSync('taskGoodsName',that.produceInfo.title)
+                wx.setStorageSync('taskGoodsName', that.produceInfo.title)
               }
             });
             that.showChoseTask = false
@@ -1136,6 +1287,225 @@
     taskReport() {
       this.$navigate('../myCenter/myTask/myTaskDetail', {
         id: this.haveThisGoodsTasks.targetId
+      })
+    }
+    //获取普通商品的小程序码
+    getQRCode() {
+      var that = this
+      if (that.haveThisGoodsTasks) {
+        that.codeType = 0
+      } else {
+        that.codeType = 4
+      }
+      var id = ''
+      if (that.haveThisGoodsTasks) {
+        id = that.produceId + '_' + that.haveThisGoodsTasks.id
+      } else {
+        id = that.produceId
+      }
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
+        data: {
+          id: id,
+          type: that.codeType,
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res)
+          that.QRCode = that.qrcodeImagePath + res.data.data
+          // 海报数据
+          that.posterConfig = {
+            width: 570,
+            height: 920,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
+                x: 162.6,
+                y: 82.4,
+                zIndex: 2,
+                text: [{
+                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
+                baseLine: 'middle',
+              },
+              {
+                x: 76,
+                y: 664.4,
+                zIndex: 3,
+                text: [{
+                  text: that.produceInfo.shortTitle,
+                  fontSize: 26,
+                  color: '#000',
+                  width: 410,
+                  lineHeight: 40,
+                  lineNum: 2,
+                }]
+              },
+              {
+                x: 280,
+                y: 760,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看店铺详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 920,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 532,
+                zIndex: 2,
+                x: 45.6,
+                y: 164.4,
+                borderRadius: 16,
+              },
+              //商店的图片
+              {
+                url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
+                width: 418,
+                height: 418,
+                zIndex: 3,
+                x: 76,
+                y: 210
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 740,
+              },
+              //二维码
+              {
+                url: that.QRCode,
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 740,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 716,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 810,
+              }
+            ],
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
       })
     }
   }

@@ -389,9 +389,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-              <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-              <text>分享</text>
-            </button>
+                  <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                  <text>分享</text>
+                </button>
       </view>
     </view>
     <!-- 商品详情 -->
@@ -496,10 +496,17 @@
         }
       })
       console.log(options)
-      //商品id
-      this.produceId = options.id
-      //userTargetId
-      this.userTargetId = options.userTargetId
+      if (options.scene) {
+        console.log(options.scene)
+        let scene = decodeURIComponent(options.scene)
+        this.produceId = options.scene.split("_")[0]
+        this.userTargetId = options.scene.split('_')[1]
+      } else {
+        this.produceId = options.id
+        this.userTargetId = options.userTargetId
+      }
+      console.log(this.produceId)
+      console.log(this.userTargetId)
       this.getProduceInfo()
     }
     data = {

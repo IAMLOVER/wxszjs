@@ -542,7 +542,7 @@
         <!-- 用户操作提示是否符合满减要求 -->
         <view class="tip">
           <text wx:if="{{haveCoupon}}">
-                           <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
+                             <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)>0}}"> 还需{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(activityInfo.standard*0.01-money):0}}元可减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           </text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
@@ -575,9 +575,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                            <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                            <view>微信好友</view>
-                          </button>
+                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                              <view>微信好友</view>
+                            </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -633,6 +633,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       showShadow: false,
       produceId: '',
       produceInfo: {},
@@ -651,12 +652,14 @@
       showShareShadow: false,
       showPoster: false,
       posterConfig: {},
-      posterDetail: ''
+      posterDetail: '',
+      QRCode: '',
     };
     methods = {
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -812,137 +815,6 @@
           }
           // 店铺id
           that.storeId = res.data.data.goods.storeId
-          // 海报数据
-          that.posterConfig = {
-            width: 570,
-            height: 920,
-            debug: false,
-            texts: [{
-                x: 162.6,
-                y: 45.8,
-                zIndex: 2,
-                text: [{
-                  text: that.$parent.globalData.userName,
-                  fontSize: 24,
-                  color: '#FFD2D6',
-                  marginLeft: 0,
-                }]
-              },
-              {
-                x: 162.6,
-                y: 82.4,
-                zIndex: 2,
-                text: [{
-                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
-                  fontSize: 27,
-                  color: '#fff',
-                  opacity: 1,
-                  lineHeight: 40,
-                  lineNum: 2,
-                  width: 360,
-                }, ],
-                baseLine: 'middle',
-              },
-              {
-                x: 76,
-                y: 664.4,
-                zIndex: 3,
-                text: [{
-                  text: that.produceInfo.shortTitle,
-                  fontSize: 26,
-                  color: '#000',
-                }]
-              },
-              {
-                x: 280,
-                y: 760,
-                zIndex: 3,
-                text: [{
-                  text: '长按图片识别二维码查看店铺详情',
-                  fontSize: 20,
-                  color: '#666',
-                  opacity: 1,
-                  lineNum: 2,
-                  lineHeight: 32,
-                  width: 180,
-                }]
-              }
-            ],
-            images: [
-              //背景图
-              {
-                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-                width: 570,
-                height: 920,
-                zIndex: 1,
-              },
-              //人物头像
-              {
-                url: that.$parent.globalData.avatarUrl,
-                width: 100,
-                height: 100,
-                zIndex: 2,
-                x: 50.6,
-                y: 27.6,
-                borderRadius: 100,
-              },
-              //背景图
-              {
-                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
-                width: 480,
-                height: 532,
-                zIndex: 2,
-                x: 45.6,
-                y: 164.4,
-                borderRadius: 16,
-              },
-              //商店的logo
-              {
-                url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
-                width: 418,
-                height: 418,
-                zIndex: 3,
-                x: 76,
-                y: 210
-              },
-              //神州集市logo
-              {
-                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
-                width: 84,
-                height: 84,
-                x: 76,
-                y: 740,
-              },
-              //二维码
-              {
-                url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
-                width: 84,
-                height: 84,
-                x: 178,
-                y: 740,
-              },
-            ],
-            blocks: [{
-                width: 478,
-                height: 126,
-                opacity: 1,
-                backgroundColor: '#FDE5ED',
-                borderRadius: 9,
-                x: 45.6,
-                y: 716,
-                zIndex: 2,
-              },
-              {
-                width: 214,
-                height: 6,
-                borderRadius: 6,
-                backgroundColor: '#F25664',
-                zIndex: 3,
-                x: 278,
-                y: 810,
-              }
-            ],
-          }
           that.$apply()
           that.getCoupon()
           that.getStorePhone()
@@ -1082,6 +954,156 @@
           }
         },
       })
+    }
+    //获取普通商品的小程序码
+    getQRCode() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
+        data: {
+          id: that.produceId,
+          type: 2
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          that.QRCode = that.qrcodeImagePath + res.data.data
+          // 海报数据
+          that.posterConfig = {
+            width: 570,
+            height: 920,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
+                x: 162.6,
+                y: 82.4,
+                zIndex: 2,
+                text: [{
+                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
+                baseLine: 'middle',
+              },
+              {
+                x: 76,
+                y: 664.4,
+                zIndex: 3,
+                text: [{
+                  text: that.produceInfo.shortTitle,
+                  fontSize: 26,
+                  color: '#000',
+                }]
+              },
+              {
+                x: 280,
+                y: 760,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看店铺详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 920,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 532,
+                zIndex: 2,
+                x: 45.6,
+                y: 164.4,
+                borderRadius: 16,
+              },
+              //商品的转发封面
+              {
+                url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
+                width: 418,
+                height: 418,
+                zIndex: 3,
+                x: 76,
+                y: 210
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 740,
+              },
+              //二维码
+              {
+                url: that.QRCode,
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 740,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 716,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 810,
+              }
+            ],
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
     }
   }
 </script>

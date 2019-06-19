@@ -277,7 +277,7 @@
     }
   }
   button[plain] {
-    border-color: #fff !important;
+    border-color: #fff;
     line-height: 1 !important;
     font-size: 24rpx !important;
     padding: 0 !important;
@@ -570,7 +570,7 @@
     }
   }
   button[plain] {
-    border-color: #f5f5f5 !important;
+    border-color: #f5f5f5;
   } //生成海报的弹出框
   .poster-shadow {
     width: 100%;
@@ -679,12 +679,12 @@
     <rich-text wx:if="{{active == 2}}" nodes="{{produceInfo.description}}"></rich-text>
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-      <button open-type='contact' plain="true">
-                          <view class="kefu">
-                        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                        <view>客服</view>
-                      </view>
-                      </button>
+      <button open-type='contact' plain="true" style="border-color:#fff">
+                            <view class="kefu">
+                          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                          <view>客服</view>
+                        </view>
+                        </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -759,9 +759,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                  <view>微信好友</view>
-                                </button>
+                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                    <view>微信好友</view>
+                                  </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -793,6 +793,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       showPosition: false,
       showShadow: false,
       collocationId: '',
@@ -808,7 +809,8 @@
       showShareShadow: false,
       showPoster: false,
       posterConfig: {},
-      posterDetail: ''
+      posterDetail: '',
+      QRCode: '',
     };
     wxs = {
       m1: mywxs
@@ -818,6 +820,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -932,7 +935,11 @@
       }
     };
     onLoad(options) {
-      this.collocationId = options.id
+      if (options.scene) {
+        this.collocationId = decodeURIComponent(options.scene)
+      } else {
+        this.collocationId = options.id
+      }
       this.isIphoneX = this.$parent.globalData.isIphoneX
       this.getCollocation()
     };
@@ -961,6 +968,110 @@
           that.typeId = that.goodsClassList[this.activeIndex].id
           //促销商品的数量
           that.wareHouseStock = res.data.data.wareHouseStock
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    // 获取用户的地址
+    getUserAddress() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/user/getaddress',
+        data: {
+          userid: that.$parent.globalData.userId,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          console.log(res)
+          if (res.data.data) {
+            wx.setStorage({
+              key: 'addressId',
+              data: res.data.data.id
+            });
+            that.$navigate({
+              url: '../order/order'
+            })
+          } else {
+            that.$navigate({
+              url: '../address/address'
+            })
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
+      })
+    }
+    //获取普通商品的小程序码
+    getQRCode() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
+        data: {
+          id: that.collocationId,
+          type: 7
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          that.QRCode = that.qrcodeImagePath + res.data.data
           // 海报数据
           that.posterConfig = {
             width: 570,
@@ -1093,7 +1204,7 @@
               },
               //二维码
               {
-                url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
+                url: that.QRCode,
                 width: 84,
                 height: 84,
                 x: 178,
@@ -1146,91 +1257,6 @@
         fail: () => {},
         complete: () => {}
       });
-    }
-    // 获取用户的地址
-    getUserAddress() {
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
-        data: {
-          userid: that.$parent.globalData.userId,
-        },
-        method: 'GET',
-        dataType: 'json',
-        success: res => {
-          console.log(res)
-          if (res.data.data) {
-            wx.setStorage({
-              key: 'addressId',
-              data: res.data.data.id
-            });
-            that.$navigate({
-              url: '../order/order'
-            })
-          } else {
-            that.$navigate({
-              url: '../address/address'
-            })
-          }
-          that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-    //保存海报到相册
-    saveAblum() {
-      var that = this
-      wx.saveImageToPhotosAlbum({
-        filePath: that.posterDetail,
-        success(res) {
-          that.showPoster = false
-          wepy.showToast({
-            title: '保存成功',
-            icon: 'success',
-            duration: 2000,
-            mask: true,
-            success: res => {}
-          });
-          that.$apply()
-        },
-        fail(err) {
-          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
-            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
-            wx.showModal({
-              title: '提示',
-              content: '需要您授权保存相册',
-              showCancel: false,
-              success: res => {
-                wx.openSetting({
-                  success(settingdata) {
-                    console.log("settingdata", settingdata)
-                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
-                      wx.showModal({
-                        title: '提示',
-                        content: '获取权限成功,再次点击图片即可保存',
-                        showCancel: false,
-                      })
-                    } else {
-                      wx.showModal({
-                        title: '提示',
-                        content: '获取权限失败，将无法保存到相册哦~',
-                        showCancel: false,
-                      })
-                    }
-                  },
-                  fail(failData) {
-                    console.log("failData", failData)
-                  },
-                  complete(finishData) {
-                    console.log("finishData", finishData)
-                  }
-                })
-              }
-            })
-          }
-        },
-      })
     }
   }
 </script>

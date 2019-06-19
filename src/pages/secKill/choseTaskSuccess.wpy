@@ -236,6 +236,7 @@
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.3);
+    z-index: 99999;
     .content {
       width: 100%;
       height: 346rpx;
@@ -380,9 +381,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                              <view>微信好友</view>
-                            </button>
+                                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                      <view>微信好友</view>
+                                    </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -412,141 +413,9 @@
     onLoad() {
       this.isIphoneX = this.$parent.globalData.isIphoneX
       this.taskForShare = wx.getStorageSync('taskForShare')
-      console.log(this.taskForShare)
       this.taskHaveCollocation = wx.getStorageSync('taskHaveCollocation')
       if (this.taskHaveCollocation) {
         this.tipShadow = true
-      }
-      // 海报数据
-      this.posterConfig = {
-        width: 570,
-        height: 920,
-        debug: false,
-        texts: [{
-            x: 162.6,
-            y: 45.8,
-            zIndex: 2,
-            text: [{
-              text: this.$parent.globalData.userName,
-              fontSize: 24,
-              color: '#FFD2D6',
-              marginLeft: 0,
-            }]
-          },
-          {
-            x: 162.6,
-            y: 82.4,
-            zIndex: 2,
-            text: [{
-              text: wx.getStorageSync('relay'),
-              fontSize: 27,
-              color: '#fff',
-              opacity: 1,
-              lineHeight: 40,
-              lineNum: 2,
-              width: 360,
-            }, ],
-            baseLine: 'middle',
-          },
-          {
-            x: 76,
-            y: 664.4,
-            zIndex: 3,
-            text: [{
-              text: wx.getStorageSync('taskGoodsName'),
-              fontSize: 26,
-              color: '#000',
-            }]
-          },
-          {
-            x: 280,
-            y: 760,
-            zIndex: 3,
-            text: [{
-              text: '长按图片识别二维码查看店铺详情',
-              fontSize: 20,
-              color: '#666',
-              opacity: 1,
-              lineNum: 2,
-              lineHeight: 32,
-              width: 180,
-            }]
-          }
-        ],
-        images: [
-          //背景图
-          {
-            url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
-            width: 570,
-            height: 920,
-            zIndex: 1,
-          },
-          //人物头像
-          {
-            url: this.$parent.globalData.avatarUrl,
-            width: 100,
-            height: 100,
-            zIndex: 2,
-            x: 50.6,
-            y: 27.6,
-            borderRadius: 100,
-          },
-          //背景图
-          {
-            url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
-            width: 480,
-            height: 532,
-            zIndex: 2,
-            x: 45.6,
-            y: 164.4,
-            borderRadius: 16,
-          },
-          //商店的logo
-          {
-            url: wx.getStorageSync('cover'),
-            width: 418,
-            height: 418,
-            zIndex: 3,
-            x: 76,
-            y: 210
-          },
-          //神州集市logo
-          {
-            url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
-            width: 84,
-            height: 84,
-            x: 76,
-            y: 740,
-          },
-          //二维码
-          {
-            url: 'https://pictest.sqplus.cn/sqj/1557830239349_VTzNuosP18.jpg',
-            width: 84,
-            height: 84,
-            x: 178,
-            y: 740,
-          },
-        ],
-        blocks: [{
-            width: 478,
-            height: 126,
-            opacity: 1,
-            backgroundColor: '#FDE5ED',
-            borderRadius: 9,
-            x: 45.6,
-            y: 716,
-            zIndex: 2,
-          },
-          {
-            width: 214,
-            height: 6,
-            borderRadius: 6,
-            backgroundColor: '#F25664',
-            zIndex: 3,
-            x: 278,
-            y: 810,
-          }
-        ],
       }
       console.log(this.posterConfig)
       this.getTaskDetail()
@@ -556,6 +425,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       produceId: '',
       otherArr: {},
       taskForShare: {},
@@ -564,7 +434,9 @@
       showShareShadow: false,
       showPoster: false,
       posterConfig: {},
-      posterDetail: ''
+      posterDetail: '',
+      QRCode: '',
+      codeType: ''
     };
     wxs = {
       m1: mywxs
@@ -573,6 +445,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -593,6 +466,20 @@
         this.tipShadow = false
       },
       onShareAppMessage: function(ops) {
+        var getPath = ''
+        //如果领取的任务商品有引流品搭配
+        if (this.taskHaveCollocation.collocationFlag) {
+          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + this.taskForShare.id
+        }
+        //如果领取的任务商品有促销品搭配
+        if (this.taskHaveCollocation.pmtCollocationFlag) {
+          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 2 + '&userTargetId=' + this.taskForShare.id
+        }
+        //任务商品没有任何关联
+        if (!this.taskHaveCollocation.collocationFlag && !this.taskHaveCollocation.pmtCollocationFlag) {
+          getPath = 'pages/generalGoods/taskGenralGoods?id=' + this.taskForShare.goodsid + '&userTargetId=' + this.taskForShare.id
+        }
+        console.log(getPath)
         if (ops.from === 'button') {
           // 来自页面内转发按钮
           console.log(ops.target)
@@ -600,7 +487,7 @@
         return {
           title: wx.getStorageSync('relay'),
           imageUrl: wx.getStorageSync('cover'),
-          path: 'pages/generalGoods/taskGenralGoods?id=' + this.taskForShare.goodsid + '&userTargetId=' + this.taskForShare.id,
+          path: getPath,
           success: function(res) {
             // 转发成功
             console.log("转发成功:" + JSON.stringify(res));
@@ -631,7 +518,7 @@
         complete: () => {}
       });
     }
-        //保存海报到相册
+    //保存海报到相册
     saveAblum() {
       var that = this
       wx.saveImageToPhotosAlbum({
@@ -684,6 +571,170 @@
           }
         },
       })
+    }
+    //获取小程序码
+    getQRCode() {
+      var that = this
+      var id = ''
+      //如果领取的任务商品有引流品搭配
+      if (that.taskHaveCollocation.collocationFlag) {
+        that.codeType = 5
+        id = wx.getStorageSync('taskHaveCollocation').id + '_' + 1 + '_' + that.taskForShare.id
+      }
+      if (that.taskHaveCollocation.pmtCollocationFlag) {
+        that.codeType = 5
+        id = wx.getStorageSync('taskHaveCollocation').id + '_' + 2 + '_' + that.taskForShare.id
+      }
+      if (!that.taskHaveCollocation.collocationFlag && !that.taskHaveCollocation.pmtCollocationFlag) {
+        that.codeType = 4
+        id = that.taskForShare.goodsid + '_' + that.taskForShare.id
+      }
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode',
+        data: {
+          id: id,
+          type: that.codeType,
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json',
+        success: res => {
+          // 海报数据
+          that.QRCode = that.qrcodeImagePath + res.data.data
+          that.posterConfig = {
+            width: 570,
+            height: 920,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
+                x: 162.6,
+                y: 82.4,
+                zIndex: 2,
+                text: [{
+                  text: wx.getStorageSync('relay'),
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
+                baseLine: 'middle',
+              },
+              {
+                x: 76,
+                y: 664.4,
+                zIndex: 3,
+                text: [{
+                  text: wx.getStorageSync('taskGoodsName'),
+                  fontSize: 26,
+                  color: '#000',
+                }]
+              },
+              {
+                x: 280,
+                y: 760,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看店铺详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 920,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 532,
+                zIndex: 2,
+                x: 45.6,
+                y: 164.4,
+                borderRadius: 16,
+              },
+              //商店的logo
+              {
+                url: wx.getStorageSync('cover'),
+                width: 418,
+                height: 418,
+                zIndex: 3,
+                x: 76,
+                y: 210
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 740,
+              },
+              //二维码
+              {
+                url: that.QRCode,
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 740,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 716,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 810,
+              }
+            ],
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
     }
   }
 </script>

@@ -675,7 +675,7 @@
           <view class="buy-single" @tap="closeTipShadow">
             只买单品
           </view>
-          <view class="buy-group">
+          <view class="buy-group" @tap="LookGroup">
             查看组合
           </view>
         </view>
@@ -701,6 +701,8 @@
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
       collocationId: '',
+      userTargetId:'',
+      type:'',
       pmtCollocation: {},
       promotion: {},
       produceInfo: {},
@@ -720,6 +722,9 @@
       m1: mywxs
     };
     methods = {
+      LookGroup(){
+        this.$navigate('./collocationGroup',{id:this.collocationId,type:this.type,userTargetId:this.userTargetId})
+      },
       closeTipShadow() {
         this.collocationShadow = false
       },
@@ -786,7 +791,7 @@
           //搭配组合id
           pay.collocationId = null
           //任务关联id
-          pay.targetId = null
+          pay.targetId = this.userTargetId
           //优惠券id
           pay.couponId = null
           // 商品的价钱
@@ -803,8 +808,9 @@
       var that = this;
       that.isIphoneX = that.$parent.globalData.isIphoneX
       that.collocationId = options.id
-      var type = options.type
-      if (type == 1) {
+      that.type = options.type
+      that.userTargetId = options.userTargetId
+      if (that.type == 2) {
         this.getPmtCollocation()
       } else {
         this.getChannelCollocation()

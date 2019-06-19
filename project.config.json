@@ -151,10 +151,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "数据中心",
-					"pathName": "pages/myCenter/myShop/myShopAtmosphere",
-					"query": "",
+					"id": 17,
+					"name": "分享出去的任务商品",
+					"pathName": "pages/generalGoods/taskGenralGoods",
+					"query": "scene=170_692",
 					"scene": null
 				},
 				{

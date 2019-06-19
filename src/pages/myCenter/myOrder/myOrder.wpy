@@ -398,7 +398,7 @@
                 dataType: 'json',
                 success: res => {
                     console.log(res)
-                    that.orderList = res.data.data
+                    that.orderList = res.data.data.list
                     that.orderList.forEach(element => {
                         that.elementCount = 0
                         element.contentList.forEach(ele => {

@@ -759,6 +759,7 @@
       showShadow: false,
       showPosition: false,
       collocationId: '',
+      userTargetId:'',
       pmtCollocation: {},
       promotion: {},
       produceInfo: {},
@@ -842,14 +843,14 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-          //搭配的促销品需要的数量
-          pay.scount = this.pmtCollocation.promotionCount
+        //搭配的促销品需要的数量
+        pay.scount = this.pmtCollocation.promotionCount
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
         pay.type = this.type
         //任务关联id
-        pay.targetId = null
+        pay.targetId = this.userTargetId
         //优惠券id
         pay.couponId = null
         // 商品的价钱
@@ -866,6 +867,7 @@
       that.isIphoneX = that.$parent.globalData.isIphoneX
       that.collocationId = options.id
       that.type = options.type
+      that.userTargetId = options.userTargetId
       if (that.type == 2) {
         that.getPmtCollocation()
       }else{
