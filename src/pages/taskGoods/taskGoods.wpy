@@ -144,6 +144,16 @@
       .tip {
         color: #F25664;
         font-size: 32rpx;
+        font-weight: 600;
+        margin-bottom: 10rpx;
+      }
+      .bar {
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        background-color: #f25664;
+        margin-right: 12rpx;
+        border-radius: 4rpx;
       }
       .rule {
         color: #959595;
@@ -173,7 +183,7 @@
     .task-items {
       display: flex;
       display: -webkit-flex;
-      margin-top: 24rpx;
+      margin-top: 18rpx;
       .item {
         height: 154rpx;
         width: 214rpx;
@@ -209,13 +219,13 @@
       justify-content: center;
       -webkit-justify-content: center;
       text-align: center;
-      font-size: 24rpx;
+      font-size: 28rpx;
       color: #959595;
       .line {
         width: 28rpx;
         height: 4rpx;
         background-color: #959595;
-        margin: 30rpx 20rpx;
+        margin: 35rpx 20rpx;
         box-sizing: border-box;
       }
       .tip {
@@ -282,7 +292,7 @@
   .shadow {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     left: 0;
     top: 0;
@@ -424,7 +434,7 @@
     left: 0;
     top: 0;
     z-index: 99;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 656rpx;
       height: 732rpx;
@@ -464,7 +474,7 @@
     left: 0;
     top: 0;
     z-index: 999;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 100%;
       height: 474rpx;
@@ -568,7 +578,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 100%;
       height: 346rpx;
@@ -625,7 +635,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     .save-ablum {
       background: #EB4D4E;
       border-radius: 42rpx;
@@ -691,7 +701,7 @@
     <view class="task-wrapper">
       <view class="task-title">
         <view class="tip">
-          任务榜
+          <text class="bar"></text> 任务榜
         </view>
         <view class="rule" @tap="showRule">
           规则
@@ -816,11 +826,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                              <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                              <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                 <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                             </view>
-                             </label>
+                                <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                   <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                               </view>
+                               </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -841,9 +851,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                  <view>微信好友</view>
-                                </button>
+                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                    <view>微信好友</view>
+                                  </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -1107,10 +1117,10 @@
         },
         dataType: 'json',
         success: res => {
-          if(res.data.code != '1000'){
+          if (res.data.code != '1000') {
             wx.showToast({
               title: res.data.message, //提示的内容
-              icon:'none',
+              icon: 'none',
               duration: 2000, //延迟时间,
               mask: true, //显示透明蒙层，防止触摸穿透,
               success: res => {
@@ -1138,7 +1148,7 @@
             that.taskHaveCollocation = res.data.data.collocation
             that.collocationFlag = true
             that.taskHaveCollocation.collocationFlag = that.collocationFlag
-             that.taskHaveCollocation.pmtCollocationFlag = that.pmtCollocationFlag
+            that.taskHaveCollocation.pmtCollocationFlag = that.pmtCollocationFlag
             that.shareType = 1
             wx.setStorageSync('taskHaveCollocation', that.taskHaveCollocation)
           }

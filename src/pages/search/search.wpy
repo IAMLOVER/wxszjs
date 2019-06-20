@@ -406,7 +406,7 @@
         data: {
           keyWord: that.seachValue,
           page: that.page,
-          sortType:'hot',
+          sortType:'1',
           size: 15
         },
         success: res => {
@@ -442,7 +442,7 @@
         dataType: 'json',
         data: {
           keyWord: that.seachValue,
-          sortType:'hot',
+          sortType:'1',
           size: 15,
           page: that.page
         },

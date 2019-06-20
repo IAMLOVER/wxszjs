@@ -176,7 +176,7 @@
   .show-tip-shadow {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     left: 0;
     top: 0;
@@ -235,7 +235,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 99999;
     .content {
       width: 100%;
@@ -293,7 +293,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 99999;
     .save-ablum {
       background: #EB4D4E;
@@ -335,7 +335,7 @@
       </view>
       <view class="new-task">
         <view class="task-produces">
-          <view class="item" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
+          <view class="item" @tap="goTaskDetails" wx:for="{{otherArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.goodsid}}">
             <view class="item-left">
               <image src="{{preImagePath+item.pirUrl}}" mode="aspectFill" />
             </view>
@@ -517,6 +517,9 @@
         fail: () => {},
         complete: () => {}
       });
+    }
+    goTaskDetails(e){
+      this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
     }
     //保存海报到相册
     saveAblum() {

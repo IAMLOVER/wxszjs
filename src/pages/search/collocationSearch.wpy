@@ -78,7 +78,7 @@
           margin-top: 4rpx;
         }
         .left-price {
-          background-color: rgba(0, 0, 0, 0.3);
+          background-color: rgba(0, 0, 0, 0.6);
           font-size: 24rpx;
           color: #fff;
           position: absolute;
@@ -112,7 +112,7 @@
           margin-top: 4rpx;
         }
         .center-price {
-          background-color: rgba(0, 0, 0, 0.3);
+          background-color: rgba(0, 0, 0, 0.6);
           font-size: 24rpx;
           color: #fff;
           position: absolute;
