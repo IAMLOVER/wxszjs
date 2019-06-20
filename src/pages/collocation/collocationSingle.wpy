@@ -534,9 +534,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                                        <text>分享</text>
-                                      </button>
+                                            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                                            <text>分享</text>
+                                          </button>
       </view>
     </view>
     <!-- TA们都这么买 -->
@@ -701,8 +701,8 @@
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
       collocationId: '',
-      userTargetId:'',
-      type:'',
+      userTargetId: '',
+      type: '',
       pmtCollocation: {},
       promotion: {},
       produceInfo: {},
@@ -722,8 +722,12 @@
       m1: mywxs
     };
     methods = {
-      LookGroup(){
-        this.$navigate('./collocationGroup',{id:this.collocationId,type:this.type,userTargetId:this.userTargetId})
+      LookGroup() {
+        this.$navigate('./collocationGroup', {
+          id: this.collocationId,
+          type: this.type,
+          userTargetId: this.userTargetId
+        })
       },
       closeTipShadow() {
         this.collocationShadow = false
@@ -807,13 +811,20 @@
     onLoad(options) {
       var that = this;
       that.isIphoneX = that.$parent.globalData.isIphoneX
-      that.collocationId = options.id
-      that.type = options.type
-      that.userTargetId = options.userTargetId
-      if (that.type == 2) {
-        this.getPmtCollocation()
+      if (options.scene) {
+        let scene = decodeURIComponent(options.scene)
+        that.collocationId = options.scene.split("_")[0]
+        that.type = options.scene.split('_')[1]
+        that.userTargetId = options.scene.split('_')[2]
       } else {
-        this.getChannelCollocation()
+        that.collocationId = options.id
+        that.type = options.type
+        that.userTargetId = options.userTargetId
+      }
+      if (that.type == 2) {
+        that.getPmtCollocation()
+      } else {
+        that.getChannelCollocation()
       }
     };
     onShow() {};

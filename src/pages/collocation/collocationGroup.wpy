@@ -165,6 +165,7 @@
       justify-content: space-between;
       -webkit-justify-content: space-between;
       padding: 0rpx 36rpx 30rpx 36rpx;
+      position: relative;
       .product-img {
         flex: 1;
         -webkit-flex: 1;
@@ -182,9 +183,15 @@
           color: #222222;
           font-size: 28rpx;
           width: 460rpx;
+          height: 90rpx;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
         }
         .price {
-          margin-top: 36rpx;
+          margin-top: 0rpx;
           text {
             color: #F25664;
             font-size: 36rpx;
@@ -198,7 +205,7 @@
         .comeon {
           position: absolute;
           right: 30rpx;
-          bottom: -60rpx;
+          bottom: 48rpx;
           image {
             width: 132rpx;
             height: 22rpx;
@@ -624,9 +631,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                        <text>分享</text>
-                      </button>
+                          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                          <text>分享</text>
+                        </button>
       </view>
     </view>
     <!-- 组合商品 -->
@@ -670,11 +677,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-                        <view class="kefu">
-                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                      <view>客服</view>
-                    </view>
-                    </button>
+                          <view class="kefu">
+                        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                        <view>客服</view>
+                      </view>
+                      </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -759,7 +766,7 @@
       showShadow: false,
       showPosition: false,
       collocationId: '',
-      userTargetId:'',
+      userTargetId: '',
       pmtCollocation: {},
       promotion: {},
       produceInfo: {},
@@ -769,7 +776,7 @@
       typeId: '',
       saveMoney: '',
       active: 1,
-      type:0,
+      type: 0,
       activeIndex: 0,
       account: 1,
       wareHouseStock: 0,
@@ -843,8 +850,8 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-        //搭配的促销品需要的数量
-        pay.scount = this.pmtCollocation.promotionCount
+          //搭配的促销品需要的数量
+          pay.scount = this.pmtCollocation.promotionCount
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
@@ -870,7 +877,7 @@
       that.userTargetId = options.userTargetId
       if (that.type == 2) {
         that.getPmtCollocation()
-      }else{
+      } else {
         that.getChannelCollocation()
       }
     };

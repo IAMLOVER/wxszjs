@@ -421,9 +421,9 @@
           <text class="bar"></text> 热门店铺
         </view>
         <!-- <view>
-                <text class="more" @tap="moreShop">更多</text>
-                <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
-              </view> -->
+                  <text class="more" @tap="moreShop">更多</text>
+                  <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}"/>
+                </view> -->
       </view>
       <view class="content-wrapper">
         <swiper class="swiper" autoplay circular previous-margin="24rpx" next-margin="24rpx">
@@ -526,6 +526,9 @@
       }, 200);
       this.getNewProduce()
     };
+    onHide() {
+      this.getNewProduce()
+    }
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,

@@ -217,7 +217,7 @@
             }
             .copy {
                 color: #f25664;
-                text-align: right;
+                float: right;
             }
         }
         .footer {
@@ -343,11 +343,16 @@
         </view>
         <view class="header">
             <text wx:if="{{orderInfo.type == 1}}">待支付</text>
+            <view wx:if="{{orderInfo.type == 1}}" style="font-size:24rpx;margin-left:30rpx;margin-top:7rpx">{{overTime}}</view>
             <text wx:if="{{orderInfo.type == 2}}">待发货</text>
             <text wx:if="{{orderInfo.type == 3}}">待收货</text>
             <text wx:if="{{orderInfo.type == 4}}">已完成</text>
             <text wx:if="{{orderInfo.type == 5}}">已取消</text>
-            <image src="{{imagePath+'car02.png'}}" wx:if="{{imagePath}}" />
+            <image src="{{imagePath+'payment02_sz.png'}}" wx:if="{{imagePath && orderInfo.type == 1}}" />
+            <image src="{{imagePath+'car02.png'}}" wx:if="{{imagePath && orderInfo.type == 2}}" />
+            <image src="{{imagePath+'collect02_sz.png'}}" wx:if="{{imagePath && orderInfo.type == 3}}" />
+            <image src="{{imagePath+'finish02.png'}}" wx:if="{{imagePath && orderInfo.type == 4}}" />
+            <image src="{{imagePath+'cancel02_sz.png'}}" wx:if="{{imagePath && orderInfo.type == 5}}" />
         </view>
         <view class="pink"></view>
         <view class="info-wrapper">
@@ -373,14 +378,15 @@
             </view>
         </view>
         <!-- <view class="active-wrapper">
-                                                      <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
-                                                      <view><text>有无优惠券：</text><text>无</text></view>
-                                                      <view><text>运费：</text><text>包邮</text></view>
-                                                  </view> -->
+                                                                      <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
+                                                                      <view><text>有无优惠券：</text><text>无</text></view>
+                                                                      <view><text>运费：</text><text>包邮</text></view>
+                                                                  </view> -->
         <view class="logistics-wrapper">
             <view>订单编号：{{orderInfo.orderNo}}</view>
             <view>订单时间：{{orderInfo.createTime}}</view>
-            <view wx:if="{{orderInfo.goodsStreamNo}}">快递单号：{{orderInfo.goodsStreamName}}{{orderInfo.goodsStreamNo}} <text class="copy">复制</text></view>
+            <view wx:for="{{orderInfo.orderStream}}" wx:key="{{index}}" wx:for-item="item">快递单号：{{item.name}}{{item.streamNo}}<text class="copy" data-content="{{item.streamNo}}" @tap="copy">复制</text></view>
+            <view wx:if="{{orderInfo.orderStream.length<=0}}">快递单号：暂无</view>
         </view>
         <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
             <text>合计金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
@@ -426,7 +432,9 @@
             isConfirm: false,
             orderNo: '',
             orderInfo: {},
-            cancleShadow: false
+            cancleShadow: false,
+            overTime: '00:00:00',
+            interval: '',
         };
         wxs = {
             m1: mywxs
@@ -524,13 +532,28 @@
                     fail: () => {},
                     complete: () => {}
                 });
+            },
+            copy(e) {
+                var content = e.currentTarget.dataset.content
+                wx.setClipboardData({
+                    data: content,
+                    success: res => {
+                        wx.showToast({
+                            title: '复制成功', //提示的内容,
+                            icon: 'success', //图标,
+                            duration: 2000, //延迟时间,
+                            mask: true, //显示透明蒙层，防止触摸穿透,
+                            success: res => {}
+                        });
+                    }
+                })
             }
         };
         onLoad(options) {
             console.log(options)
             this.isIphoneX = this.$parent.globalData.isIphoneX
             this.orderNo = options.id
-            wx.setStorageSync('orderNo',this.orderNo)
+            wx.setStorageSync('orderNo', this.orderNo)
             this.getOrderDetail()
         }
         getOrderDetail() {
@@ -546,11 +569,31 @@
                     console.log(res)
                     that.orderInfo = res.data.data
                     that.orderInfo.createTime = time.formatTime(that.orderInfo.createTime, 'Y-M-D h:m:s')
+                    that.interval = setInterval(() => {
+                        var blockingTime = parseInt(that.orderInfo.blockingTime / 1000)
+                        var currentTime = parseInt((new Date().getTime()) / 1000)
+                        var Mytime = blockingTime - currentTime
+                        if (Mytime >= 1) {
+                            that.overTime = that.formatDuring(Mytime * 1000)
+                            that.$apply()
+                        } else {
+                            clearInterval(that.interval)
+                        }
+                    }, 1000);
                     that.$apply()
                 },
                 fail: () => {},
                 complete: () => {}
             });
+        }
+        formatDuring(mss) {
+            var hours = parseInt((mss / (1000 * 60 * 60)));
+            var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = (mss % (1000 * 60)) / 1000;
+            hours = hours < 10 ? ('0' + hours) : hours;
+            minutes = minutes < 10 ? ('0' + minutes) : minutes;
+            seconds = seconds < 10 && seconds >= 0 ? ('0' + seconds) : seconds;
+            return hours + " :" + minutes + " :" + seconds;
         }
         //点击收货按钮
         getSure() {

@@ -549,9 +549,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                        <view>微信好友</view>
-                      </button>
+                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                          <view>微信好友</view>
+                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -750,7 +750,7 @@
     // 获取商品详情
     getProduceInfo() {
       var that = this
-      wepy.showLoading({
+      wx.showLoading({
         title: '加载中', //提示的内容,
         mask: true, //显示透明蒙层，防止触摸穿透,
         success: res => {}
@@ -764,6 +764,20 @@
         dataType: 'json',
         success: res => {
           console.log(res)
+          if (res.data.code != '1000') {
+            wepy.showToast({
+              title: res.data.message, //提示的内容
+              duration: 2000, //延迟时间,
+              icon:'none',
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {
+                setTimeout(() => {
+                  that.$switch('../index/index')
+                }, 2000);
+              }
+            });
+            return
+          }
           that.produceInfo = res.data.data.goods
           that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"');
           that.goodsClassList = res.data.data.goods.goodsClass
@@ -773,10 +787,11 @@
           that.storeId = res.data.data.goods.storeId
           that.$apply()
           that.getStorePhone()
-          wepy.hideLoading()
         },
         fail: () => {},
-        complete: () => {}
+        complete: () => {
+          wepy.hideLoading()
+        }
       });
     };
     // 获取用户的地址

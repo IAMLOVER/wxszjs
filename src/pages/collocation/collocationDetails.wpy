@@ -845,7 +845,7 @@
         return {
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
-          path: 'pages/collocation/collocationSingle?id=' + this.pmtCollocation.id + '&type=' + 1,
+          path: 'pages/collocation/collocationDetails?id=' + this.collocationId.id,
           success: function(res) {},
           fail: function(res) {}
         }

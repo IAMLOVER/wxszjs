@@ -542,7 +542,7 @@
         <!-- 用户操作提示是否符合满减要求 -->
         <view class="tip">
           <text wx:if="{{haveCoupon}}">
-                             <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
+                               <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)>0}}"> 还需{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(activityInfo.standard*0.01-money):0}}元可减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           </text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
@@ -575,9 +575,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                              <view>微信好友</view>
-                            </button>
+                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                <view>微信好友</view>
+                              </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -803,6 +803,20 @@
         },
         dataType: 'json',
         success: res => {
+          if (res.data.code != '1000') {
+            wepy.showToast({
+              title: res.data.message, //提示的内容
+              duration: 2000, //延迟时间,
+              icon: 'none',
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {
+                setTimeout(() => {
+                  that.$switch('../index/index')
+                }, 2000);
+              }
+            });
+            return
+          }
           console.log(res)
           that.produceInfo = res.data.data.goods
           that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"');
@@ -818,10 +832,11 @@
           that.$apply()
           that.getCoupon()
           that.getStorePhone()
-          wepy.hideLoading();
         },
         fail: () => {},
-        complete: () => {}
+        complete: () => {
+          wepy.hideLoading();
+        }
       });
     };
     // 获取用户是否有这个商品的满减活动所需要的优惠券
