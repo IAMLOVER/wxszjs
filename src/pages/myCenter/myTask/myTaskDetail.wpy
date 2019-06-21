@@ -6,7 +6,7 @@
     height: 340rpx;
     background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_task01.png');
     background-repeat: no-repeat;
-    background-size: 690rpx 660rpx;
+    background-size: 750rpx 850rpx;
     background-position: center;
     background-position-y: 36rpx;
     .tip {

@@ -381,9 +381,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                      <view>微信好友</view>
-                                    </button>
+                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                        <view>微信好友</view>
+                                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -391,7 +391,7 @@
       </view>
     </view>
     <!-- 点击生成海报的出现的弹出框 -->
-    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+    <view class="poster-shadow" wx:if="{{showPoster}}" catchtap="hidePoster" style="text-aligin:center">
       <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
       <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
@@ -465,6 +465,9 @@
       closeTipShadow() {
         this.tipShadow = false
       },
+      hidePoster(e) {
+        this.showPoster = false
+      },
       onShareAppMessage: function(ops) {
         var getPath = ''
         //如果领取的任务商品有引流品搭配
@@ -518,8 +521,10 @@
         complete: () => {}
       });
     }
-    goTaskDetails(e){
-      this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+    goTaskDetails(e) {
+      this.$navigate('../taskGoods/taskGoods', {
+        id: e.currentTarget.dataset.id
+      })
     }
     //保存海报到相册
     saveAblum() {

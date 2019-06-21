@@ -541,9 +541,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                      <view>微信好友</view>
-                    </button>
+                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                        <view>微信好友</view>
+                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -551,7 +551,7 @@
       </view>
     </view>
     <!-- 点击生成海报的出现的弹出框 -->
-    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+    <view class="poster-shadow" wx:if="{{showPoster}}" catchtap="hidePoster" style="text-aligin:center">
       <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
       <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
@@ -626,6 +626,9 @@
         } = e;
         this.posterDetail = detail
       },
+      hidePoster(e) {
+        this.showPoster = false
+      },
       goDetails(e) {
         if (e.currentTarget.dataset.type == 0) {
           this.$navigate('../generalGoods/generalGoods', {
@@ -650,10 +653,8 @@
           title: '我在神州集市发现了热门店铺，快来看看吧!',
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
-          success: function(res) {
-          },
-          fail: function(res) {
-          }
+          success: function(res) {},
+          fail: function(res) {}
         }
       },
     };

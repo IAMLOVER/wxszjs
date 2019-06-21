@@ -223,11 +223,12 @@
       flex: 1;
       -webkit-flex: 1;
       font-size: 32rpx;
-      color: #F25664;
+      color: #222;
     }
     .active {
       text {
         display: inline-block;
+        color: #F25664;
         border-bottom: 4rpx solid #f25664;
       }
     }
@@ -680,11 +681,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-                            <view class="kefu">
-                          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                          <view>客服</view>
-                        </view>
-                        </button>
+                                <view class="kefu">
+                              <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                              <view>客服</view>
+                            </view>
+                            </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -693,7 +694,7 @@
     <view class="right-now-shadow" wx:if="{{showShadow}}">
       <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
         <view class="title">
-          <view>选择数量</view>
+          <view>选择数量与规格</view>
           <view @tap="closeShadow">
             <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" />
           </view>
@@ -759,9 +760,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                    <view>微信好友</view>
-                                  </button>
+                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                        <view>微信好友</view>
+                                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -769,7 +770,7 @@
       </view>
     </view>
     <!-- 点击生成海报的出现的弹出框 -->
-    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+    <view class="poster-shadow" wx:if="{{showPoster}}" catchtap="hidePoster" style="text-aligin:center">
       <image src="{{posterDetail}}" style="width:570rpx;height:800rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
       <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
@@ -837,6 +838,9 @@
         } = e;
         this.posterDetail = detail
       },
+      hidePoster(e) {
+        this.showPoster = false
+      },
       onShareAppMessage: function(ops) {
         if (ops.from === 'button') {
           // 来自页面内转发按钮
@@ -845,7 +849,7 @@
         return {
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
-          path: 'pages/collocation/collocationDetails?id=' + this.collocationId.id,
+          path: 'pages/collocation/collocationDetails?id=' + this.collocationId,
           success: function(res) {},
           fail: function(res) {}
         }

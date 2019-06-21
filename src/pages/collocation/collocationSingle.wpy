@@ -540,7 +540,7 @@
       </view>
     </view>
     <!-- TA们都这么买 -->
-    <view class="they-do">
+    <view class="they-do" @tap="LookGroup">
       <view class="title">
         <view class="tip">
           <text class="bar"></text> TA们都这么买

@@ -10,6 +10,8 @@
             display: -webkit-flex;
             align-items: center;
             -webkit-align-items: center;
+            position: fixed;
+            top: 0;
             .tab-list {
                 -webkit-flex: 1;
                 -ms-flex: 1;
@@ -49,6 +51,7 @@
         }
         .order-wrapper {
             width: 100vw;
+            padding-top: 80rpx;
             .order-list {
                 width: 690rpx;
                 background: white;
@@ -153,7 +156,7 @@
                         &:first-child {
                             margin-right: 24rpx;
                         }
-                        &:last-child {
+                        &:first-child {
                             background-color: #fff;
                             color: #959595;
                             border: 2rpx solid #B5B5B5;
@@ -286,8 +289,8 @@
                 </view>
                 <view class="list-footer">共{{item.count}}件商品，总金额：￥{{m1.filter(item.totalFee*0.01)}}</view>
                 <view class="wait-btn" wx:if="{{item.orderType == 1}}">
-                    <view class="right-now" @tap="payMoney" data-id="{{item.orderNo}}">立即支付</view>
                     <view class="cancle" @tap="cancleOrder" data-id="{{item.orderNo}}">取消订单</view>
+                    <view class="right-now" @tap="payMoney" data-id="{{item.orderNo}}">立即支付</view>
                 </view>
             </view>
         </view>

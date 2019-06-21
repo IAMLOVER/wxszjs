@@ -757,19 +757,19 @@
     getRightProduceClass() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktstore/goodsInfo/' + that.rightProduceId,
+        url: that.apiPath + '/szmktstore/channelCollocation/info',
         method: 'get',
         data: {
           userid: that.$parent.globalData.userId,
-          channelId: that.produceId,
-          collocationId: that.collocationId
+          // channelId: that.produceId,
+          id: that.collocationId
         },
         dataType: 'json',
         success: res => {
-          that.rightProduceInfo = res.data.data.goods
-          that.goodsClassList = res.data.data.goods.goodsClass
+          that.rightProduceInfo = res.data.data.goodsInfo.goods
+          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
           that.typeId = that.goodsClassList[this.activeIndex].id
-          that.collocation = res.data.data.collocation
+          that.collocation = res.data.data.goodsInfo.collocation
           that.$apply()
         },
         fail: () => {},

@@ -549,9 +549,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                          <view>微信好友</view>
-                        </button>
+                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                              <view>微信好友</view>
+                            </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -559,7 +559,7 @@
       </view>
     </view>
     <!-- 点击生成海报的出现的弹出框 -->
-    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center">
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center" catchtap="hidePoster">
       <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
       <view class="save-ablum" @tap="saveAblum">保存到相册</view>
     </view>
@@ -645,6 +645,9 @@
           detail
         } = e;
         this.posterDetail = detail
+      },
+      hidePoster(e) {
+        this.showPoster = false
       },
       onShareAppMessage: function(ops) {
         if (ops.from === 'button') {
@@ -768,14 +771,13 @@
             wepy.showToast({
               title: res.data.message, //提示的内容
               duration: 2000, //延迟时间,
-              icon:'none',
+              icon: 'none',
               mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {
-                setTimeout(() => {
-                  that.$switch('../index/index')
-                }, 2000);
-              }
+              success: res => {}
             });
+            setTimeout(() => {
+              that.$switch('../index/index')
+            }, 2000);
             return
           }
           that.produceInfo = res.data.data.goods
@@ -790,7 +792,7 @@
         },
         fail: () => {},
         complete: () => {
-          wepy.hideLoading()
+          wx.hideLoading()
         }
       });
     };

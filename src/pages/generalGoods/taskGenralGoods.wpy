@@ -389,9 +389,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                    <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                    <text>分享</text>
-                  </button>
+                      <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                      <text>分享</text>
+                    </button>
       </view>
     </view>
     <!-- 商品详情 -->
@@ -653,12 +653,11 @@
               duration: 2000, //延迟时间,
               icon: 'none',
               mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {
-                setTimeout(() => {
-                  that.$switch('../index/index')
-                }, 2000);
-              }
+              success: res => {}
             });
+            setTimeout(() => {
+              that.$switch('../index/index')
+            }, 2000);
             return
           }
           console.log(res)

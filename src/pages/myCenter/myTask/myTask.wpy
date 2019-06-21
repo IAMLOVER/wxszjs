@@ -61,6 +61,7 @@
     width: 690rpx;
     box-sizing: border-box;
     margin: 0 auto;
+    margin-bottom: 36rpx;
     .list {
       display: flex;
       display: -webkit-flex;
