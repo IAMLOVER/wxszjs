@@ -148,7 +148,7 @@
       <view class="use">已失效</view>
     </view>
     <view class="empty" wx:if="{{canArr.length<=0}}">
-      <image src="{{imagePath+'null_wallet@2x.png'}}" wx:if="{{imagePath}}" />
+      <image src="{{imagePath+'null_coupon@2x.png'}}" wx:if="{{imagePath}}" />
       <view>你的券包空空如也呢</view>
     </view>
   </view>

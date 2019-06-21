@@ -632,9 +632,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                            <text>分享</text>
-                          </button>
+                                <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                                <text>分享</text>
+                              </button>
       </view>
     </view>
     <!-- 组合商品 -->
@@ -678,11 +678,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-                            <view class="kefu">
-                          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                          <view>客服</view>
-                        </view>
-                        </button>
+                                <view class="kefu">
+                              <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                              <view>客服</view>
+                            </view>
+                            </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -895,6 +895,19 @@
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
+          if (res.data.code != '1000') {
+            wx.showToast({
+              title: res.data.message, //提示的内容
+              icon: 'none',
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            });
+            setTimeout(() => {
+              that.$switch('../index/index')
+            }, 2000)
+            return
+          }
           //促销品信息
           that.pmtCollocation = res.data.data.pmtCollocation
           that.promotion = res.data.data.promotion
@@ -925,6 +938,19 @@
         method: 'GET',
         dataType: 'json',
         success: res => {
+          if (res.data.code != '1000') {
+            wx.showToast({
+              title: res.data.message, //提示的内容
+              icon: 'none',
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            });
+            setTimeout(() => {
+              that.$switch('../index/index')
+            }, 2000)
+            return
+          }
           console.log(res)
           //引流品信息
           that.pmtCollocation = res.data.data.collocation

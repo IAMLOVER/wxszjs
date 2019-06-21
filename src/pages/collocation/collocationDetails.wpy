@@ -176,16 +176,18 @@
           color: #222222;
           font-size: 28rpx;
           width: 460rpx;
+          height: 110rpx;
         }
         .price {
-          margin-top: 36rpx;
           text {
             color: #F25664;
             font-size: 36rpx;
+            font-weight: 600;
             &:last-child {
               color: #C8C8C8;
               font-size: 24rpx;
               text-decoration: line-through;
+              font-weight: normal;
             }
           }
         }
@@ -660,7 +662,7 @@
             <text>￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
           </view>
           <!-- 助力有奖 -->
-          <view class="comeon" wx:if="{{produceInfo.activityType == 1}}">
+          <view class="comeon" wx:if="{{produceInfo.activityType == 1}}" @tap="goCome" data-id="{{produceInfo.id}}">
             <image src="{{imagePath + 'gift.png'}}" wx:if="{{imagePath}}" /> 助力有奖
           </view>
         </view>
@@ -681,11 +683,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-                                <view class="kefu">
-                              <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                              <view>客服</view>
-                            </view>
-                            </button>
+                                  <view class="kefu">
+                                <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                                <view>客服</view>
+                              </view>
+                              </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -760,9 +762,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                        <view>微信好友</view>
-                                      </button>
+                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                          <view>微信好友</view>
+                                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -853,6 +855,9 @@
           success: function(res) {},
           fail: function(res) {}
         }
+      },
+      goCome(e){
+        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
       },
       changeActive(e) {
         this.active = e.currentTarget.dataset.active
@@ -960,6 +965,19 @@
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
+          if (res.data.code != '1000') {
+            wx.showToast({
+              title: res.data.message, //提示的内容
+              icon: 'none',
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            });
+            setTimeout(() => {
+              that.$switch('../index/index')
+            }, 2000)
+            return
+          }
           console.log(res)
           //促销品信息
           that.pmtCollocation = res.data.data.pmtCollocation

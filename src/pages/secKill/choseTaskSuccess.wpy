@@ -97,9 +97,10 @@
       padding: 24rpx;
       box-sizing: border-box;
       width: 690rpx;
-      height: 240rpx;
+      // height: 240rpx;
       position: relative;
       margin-top: -14rpx;
+      margin-bottom: 30rpx;
       .item-left {
         float: left;
         margin-right: 16rpx;
@@ -168,6 +169,10 @@
         right: 24rpx;
         bottom: 34rpx;
       }
+    }
+    .item:first-child{
+      padding-top: 40rpx;
+      height: 240rpx;
     }
   }
   button[plain] {
@@ -666,7 +671,7 @@
             images: [
               //背景图
               {
-                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster02_sz.png',
                 width: 570,
                 height: 920,
                 zIndex: 1,

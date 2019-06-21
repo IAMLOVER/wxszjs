@@ -416,7 +416,7 @@
       </view>
       <view class="new-task">
         <view class="task-produces">
-          <view @tap="openTaskChoseShadow" wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" data-collocation-id = "{{item.collocationId}}" class="item">
+          <view @tap="openTaskChoseShadow" wx:for="{{targetGoods}}" wx:for-item="item" wx:key="{{index}}" data-index="{{index}}" data-id="{{item.id}}" data-collocation-id="{{item.collocationId}}" class="item">
             <view class="item-left">
               <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" lazy-load/>
             </view>
@@ -479,11 +479,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{targetGoodsDetails}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                        <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                        <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                           <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                       </view>
-                       </label>
+                          <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                          <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                             <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                         </view>
+                         </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -523,12 +523,12 @@
       targetGoods: {},
       targetGoodsId: {},
       targetGoodsDetails: {},
-      taskHaveCollocation:{},
+      taskHaveCollocation: {},
       choseTaskId: '',
       showRule: false,
       showChoseTask: false,
       empty: true,
-      collocationId:'',
+      collocationId: '',
       radioItems: [],
     };
     wxs = {
@@ -639,6 +639,11 @@
         success: res => {
           console.log(res)
           that.targetGoodsDetails = res.data.data
+          for (var item in that.targetGoodsDetails) {
+            that.targetGoodsDetails[item].checked = false
+            that.targetGoodsDetails[0].checked = true
+            that.choseTaskId = that.targetGoodsDetails[0].id
+          }
           that.$apply()
         },
         fail: () => {},
@@ -672,7 +677,6 @@
         success: res => {
           if (res.data.code == 1000) {
             wx.setStorageSync('taskForShare', res.data.data)
- 
             that.taskHaveCollocation.id = that.collocationId
             that.taskHaveCollocation.collocationFlag = true
             that.taskHaveCollocation.pmtCollocationFlag = false

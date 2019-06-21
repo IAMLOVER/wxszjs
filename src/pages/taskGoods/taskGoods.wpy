@@ -826,11 +826,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                                    <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                                    <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                       <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                                   </view>
-                                   </label>
+                                      <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                      <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                         <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                                     </view>
+                                     </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -851,9 +851,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                        <view>微信好友</view>
-                                      </button>
+                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                          <view>微信好友</view>
+                                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -1126,8 +1126,7 @@
               icon: 'none',
               duration: 2000, //延迟时间,
               mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {
-              }
+              success: res => {}
             });
             setTimeout(() => {
               that.$switch('../index/index')
@@ -1143,6 +1142,8 @@
           that.money = that.account * that.goodsClassList[0].salPrice * 0.01
           for (var item in that.taskItems) {
             that.taskItems[item].checked = false
+            that.taskItems[0].checked = true
+            that.choseTaskId = that.taskItems[0].id
           }
           // 店铺id
           that.storeId = res.data.data.goods.storeId

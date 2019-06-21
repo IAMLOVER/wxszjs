@@ -389,7 +389,7 @@
             <view wx:if="{{orderInfo.orderStream.length<=0}}">快递单号：暂无</view>
         </view>
         <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-            <text>合计金额：<text style="color:#F25664;margin-right:30rpx">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
+            <text>合计金额：<text style="color:#F25664;margin-right:30rpx;font-weight:600">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
             <view class="confirm" @tap="confirm" wx:if="{{orderInfo.type ==  3}}">确认收货</view>
             <view class="wait-btn" wx:if="{{orderInfo.type == 1}}">
                 <view class="right-now" @tap="payMoney" data-id="{{item.orderNo}}">立即支付</view>

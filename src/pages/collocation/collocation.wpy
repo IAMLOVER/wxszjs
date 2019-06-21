@@ -5,7 +5,7 @@
   .search-wrapper {
     position: fixed;
     top: 0rpx;
-    z-index: 1;
+    z-index: 3;
     width: 100%;
     background-color: #fff;
     padding-bottom: 14rpx;
@@ -189,7 +189,7 @@
     position: absolute;
     width: 80rpx;
     height: 80rpx;
-    z-index: 999;
+    z-index: 1;
     right: -8rpx;
     top: -8rpx;
   }
@@ -260,7 +260,7 @@
           <view class="equal-img">
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}" />
           </view>
-          <view class="item-right">
+          <view class="item-right"  @tap="rightNow" data-id="{{item.id}}">
             <view class="price">
               <view class="price-top">
                 ￥{{m1.filter(item.promotionPrice*0.01*item.promotionCount+item.goodsMinSalPrice*0.01*item.goodsCount)}}
@@ -268,7 +268,7 @@
               <view class="price-bottom">
                 ￥{{m1.filter(item.promotionMktPrice*0.01*item.promotionCount+item.goodsMinMktPrice*0.01*item.goodsCount)}}
               </view>
-              <view class="right-now" @tap="rightNow" data-id="{{item.id}}">
+              <view class="right-now">
                 马上抢
               </view>
             </view>
