@@ -155,7 +155,7 @@ page{
     <!-- 搜索框 -->
      <view class="search-wrapper">
         <view class="search">
-            <input type="text" @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595"/>
+            <input type="text" disabled @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595"/>
             <image src="{{imagePath+'search02.png'}}"  wx:if="{{imagePath}}"/>
         </view>
       </view>

@@ -86,8 +86,8 @@
           .content-icon,
           .content-icon2,
           .content-icon3 {
-            height: 55rpx;
-            width: 42rpx;
+            height: 46rpx;
+            width: 50rpx;
             background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/all.png');
             background-size: 100% 100%;
             position: relative;
@@ -111,7 +111,7 @@
             }
           }
           .content-icon2 {
-            height: 42rpx;
+            height: 46rpx;
             width: 50rpx;
             background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/car.png');
             background-size: 100% 100%;

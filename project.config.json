@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 22,
 			"list": [
 				{
 					"id": 0,
@@ -183,6 +183,13 @@
 					"name": "组合商品单品详情",
 					"pathName": "pages/collocation/collocationGroup",
 					"query": "id=96&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "维护中",
+					"pathName": "pages/maintain/maintain",
+					"query": "",
 					"scene": null
 				}
 			]

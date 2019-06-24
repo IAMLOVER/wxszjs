@@ -602,7 +602,7 @@
           </poster>
           <button open-type="share" class="poster" plain="true">
                     <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                    <view>微信好友</view>
+                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
                   </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">

@@ -61,7 +61,6 @@
     width: 690rpx;
     box-sizing: border-box;
     margin: 0 auto;
-    margin-bottom: 36rpx;
     .list {
       display: flex;
       display: -webkit-flex;
@@ -131,6 +130,9 @@
         }
       }
     }
+    .list:last-child{
+      margin-bottom: 36rpx;
+    }
   }
   .empty {
     width: 690rpx;
@@ -198,6 +200,7 @@
       <image src="{{imagePath+'null_task@2x.png'}}" wx:if="{{imagePath}}" />
       <view>你与赏金擦肩而过，快去领任务吧</view>
     </view>
+    <view style="height:30rpx;width:100vw"></view>
   </view>
 </template>
 
@@ -212,11 +215,13 @@
     onLoad() {
       this.getMytask()
       this.getTaskOverMoney()
+      this.isIphoneX = this.$parent.globalData.isIphoneX
     }
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      isIphoneX:false,
       status: 0,
       taskOverMoney: '',
       targetNum: '',

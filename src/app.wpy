@@ -72,8 +72,6 @@
         'pages/ediPay/ediPay',
         'pages/ediPay/ediPaySuccess',
         'pages/ediPay/ediPayFail',
-        //测试页面
-        // 'pages/test/test'
       ],
       window: {
         backgroundTextStyle: 'light',

@@ -79,6 +79,7 @@
     padding: 0rpx 24rpx 24rpx 24rpx;
     box-sizing: border-box;
     background-color: #fff;
+    margin-bottom: 25rpx;
     .title {
       font-size: 32rpx;
       color: #222;
@@ -568,7 +569,7 @@
       navigationBarTitleText: '秒杀详情'
     };
     onLoad(options) {
-      this.isIphoneX = this.$parent.globalData.isIphoneX
+      // this.isIphoneX = this.$parent.globalData.isIphoneX
       this.produceId = options.id
       this.getProduceInfo()
       this.getProduceItems()
@@ -627,9 +628,11 @@
         this.rightProduceId = e.currentTarget.dataset.id
         this.collocationId = e.currentTarget.dataset.collocationid
         this.getRightProduceClass()
+        this.isIphoneX = true
       },
       closeShadow() {
         this.showShadow = false
+        this.isIphoneX = false
       },
       showTwoType() {
         this.showPosition = !this.showPosition
