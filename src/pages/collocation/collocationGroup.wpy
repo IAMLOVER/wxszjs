@@ -805,7 +805,7 @@
       },
       // 加
       addAccount() {
-        if (this.account >= this.goodsClassList[this.activeIndex].stock || this.account >= this.wareHouseStock) {
+        if (this.account * this.pmtCollocation.promotionCount >= this.promotion.stock || this.account * this.pmtCollocation.goodsCount >= this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '库存不足',
             icon: 'none',
@@ -856,7 +856,7 @@
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
-        pay.type = this.type
+        pay.type = 2
         //任务关联id
         pay.targetId = this.userTargetId
         //优惠券id
@@ -876,11 +876,7 @@
       that.collocationId = options.id
       that.type = options.type
       that.userTargetId = options.userTargetId
-      if (that.type == 2) {
         that.getPmtCollocation()
-      } else {
-        that.getChannelCollocation()
-      }
     };
     onShow() {};
     //获取促销品搭配详情
@@ -917,57 +913,10 @@
           that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
           that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
           that.money = that.account * that.goodsClassList[0].salPrice * 0.01
-          // 店铺id
+          // 专区id
           that.storeId = res.data.data.goodsInfo.goods.storeId
           that.typeId = that.goodsClassList[that.activeIndex].id
-          that.$apply()
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-    //获取引流品商品的搭配详情
-    getChannelCollocation() {
-      var that = this
-      wx.request({
-        url: that.apiPath + '/szmktstore/channelCollocation/info', //开发者服务器接口地址",
-        data: {
-          id: that.collocationId,
-          userid: that.$parent.globalData.userId
-        }, //请求的参数",
-        method: 'GET',
-        dataType: 'json',
-        success: res => {
-          if (res.data.code != '1000') {
-            wx.showToast({
-              title: res.data.message, //提示的内容
-              icon: 'none',
-              duration: 2000, //延迟时间,
-              mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {}
-            });
-            setTimeout(() => {
-              that.$switch('../index/index')
-            }, 2000)
-            return
-          }
-          console.log(res)
-          //引流品信息
-          that.pmtCollocation = res.data.data.collocation
-          that.pmtCollocation.promotionPrice = res.data.data.channelInfo.chaPrice
-          that.pmtCollocation.promotionCount = 1
-          that.promotion = res.data.data.channelInfo
-          that.pmtCollocation.goodsCount = that.pmtCollocation.count
-          //商品信息
-          that.produceInfo = res.data.data.goodsInfo.goods
-          that.produceInfo.description = that.produceInfo.description.replace(/\<img/g, '<img style="width:100%;height:auto;display:block"')
-          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
-          that.money = that.account * that.goodsClassList[0].salPrice * 0.01
-          // 店铺id
-          that.storeId = res.data.data.goodsInfo.goods.storeId
-          that.typeId = that.goodsClassList[that.activeIndex].id
-          //根据引流品库存结合商品的库存比较大小。得出最小值，就是最多的可购买量
-          that.wareHouseStock = that.goodsClassList[that.activeIndex].stock >= that.promotion.stock ? that.promotion.stock : that.goodsClassList[that.activeIndex].stock
+          that.wareHouseStock  = res.data.data.wareHouseStock
           that.$apply()
         },
         fail: () => {},
@@ -1005,6 +954,7 @@
         complete: () => {}
       });
     }
+
   }
 </script>
 

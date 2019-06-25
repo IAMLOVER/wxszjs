@@ -417,11 +417,11 @@
     <view class="new-store">
       <view class="title">
         <view class="tip">
-          <text class="bar"></text> 新店推荐
+          <text class="bar"></text> 热门专区
         </view>
         <view>
-          <text class="more" @tap="moreShop">更多</text>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}" />
+          <!-- <text class="more" @tap="moreShop">更多</text> -->
+          <!-- <image wx:if="{{imagePath}}" src="{{imagePath+'more01.png'}}" /> -->
         </view>
       </view>
       <view class="content-wrapper">
@@ -432,7 +432,7 @@
                 <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}" />
                 <text>{{item.name}}</text>
                 <view class="button-wrapper">
-                  <view class="rightNow">进店逛逛</view>
+                  <view class="rightNow">看看专区</view>
                   <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}" />
                 </view>
               </view>

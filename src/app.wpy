@@ -35,6 +35,8 @@
         'pages/collocation/collocationDetails',
         'pages/collocation/collocationSingle',
         'pages/collocation/collocationGroup',
+        'pages/collocation/channelSingle',
+        'pages/collocation/channelGroup',
         'pages/generalGoods/generalGoods',
         'pages/generalGoods/taskGenralGoods',
         'pages/taskGoods/taskGoods',
@@ -58,6 +60,7 @@
         'pages/myCenter/myPackage/drawFail',
         'pages/myCenter/myShop/myShop',
         'pages/myCenter/myShop/myShopAtmosphere',
+        'pages/myCenter/myShop/myShopManagement',
         'pages/myCenter/myTask/myTask',
         'pages/myCenter/myTask/myTaskDetail',
         // 微信扫进入
@@ -97,12 +100,12 @@
             iconPath: './images/tabbar/type_un.png',
             selectedIconPath: './images/tabbar/type.png'
           },
-          {
-            pagePath: 'pages/shop/shop',
-            text: '店铺',
-            iconPath: './images/tabbar/store_un.png',
-            selectedIconPath: './images/tabbar/store.png'
-          },
+          // {
+          //   pagePath: 'pages/shop/shop',
+          //   text: '专区',
+          //   iconPath: './images/tabbar/store_un.png',
+          //   selectedIconPath: './images/tabbar/store.png'
+          // },
           {
             pagePath: 'pages/myCenter/myCenter/myCenter',
             text: '我的',

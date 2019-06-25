@@ -4,10 +4,10 @@
   }
   .main {
     width: 100%;
-    height: 610rpx;
+    height: 630rpx;
     background-image: url('https://img-blog.csdnimg.cn/20190409161514588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NTU3NzM5,size_16,color_FFFFFF,t_70');
     background-repeat: no-repeat;
-    background-size: 97% 100%;
+    background-size: 100% 130%;
     background-position: center;
     background-position-y: 30rpx;
     .content {
@@ -65,6 +65,7 @@
       line-height: 84rpx;
       font-weight: normal;
       margin: 0 auto;
+      box-shadow: 2rpx 2rpx 0rpx 2rpx rgba(179, 35, 35, 0.5);
     }
   }
   .other {
@@ -477,7 +478,7 @@
         var getPath = ''
         //如果领取的任务商品有引流品搭配
         if (this.taskHaveCollocation.collocationFlag) {
-          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + this.taskForShare.id
+          getPath = 'pages/collocation/channelSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + this.taskForShare.id
         }
         //如果领取的任务商品有促销品搭配
         if (this.taskHaveCollocation.pmtCollocationFlag) {
@@ -591,7 +592,7 @@
       var id = ''
       //如果领取的任务商品有引流品搭配
       if (that.taskHaveCollocation.collocationFlag) {
-        that.codeType = 5
+        that.codeType = 8
         id = wx.getStorageSync('taskHaveCollocation').id + '_' + 1 + '_' + that.taskForShare.id
       }
       if (that.taskHaveCollocation.pmtCollocationFlag) {
@@ -658,7 +659,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看店铺详情',
+                  text: '长按图片识别二维码查看专区详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

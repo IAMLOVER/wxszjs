@@ -191,10 +191,10 @@
     <view class="more-number">
       <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
             <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的专区</text></swiper-item>
       </swiper>
       <text @tap="reset" style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
     </view>
@@ -317,7 +317,7 @@
     wxs = {
       m1: mywxs
     };
-    //获取店铺数据
+    //获取专区数据
     getNumber() {
       var that = this
       wepy.showLoading({

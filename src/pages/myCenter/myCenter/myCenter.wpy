@@ -86,8 +86,8 @@
           .content-icon,
           .content-icon2,
           .content-icon3 {
-            height: 46rpx;
-            width: 50rpx;
+            height: 50rpx;
+            width: 90rpx;
             background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/all.png');
             background-size: 100% 100%;
             position: relative;
@@ -100,7 +100,7 @@
               color: #f25664;
               border: 2.6rpx solid #f25664;
               position: absolute;
-              right: -30rpx;
+              right: -20rpx;
               top: -12rpx;
               display: flex;
               display: -webkit-flex;
@@ -111,18 +111,18 @@
             }
           }
           .content-icon2 {
-            height: 46rpx;
-            width: 50rpx;
-            background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/car.png');
+            height: 50rpx;
+            width: 90rpx;
+            background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_ship_sz.png');
             background-size: 100% 100%;
           }
           .content-icon3 {
-            background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/finish.png');
+            background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_down_sz.png');
           }
           .content-text {
             font-size: 28rpx;
             color: #666666;
-            margin-top: 26rpx;
+            margin-top: 10rpx;
           }
         }
       }
@@ -194,7 +194,7 @@
         </view>
         <view class="my-order-content">
           <navigator url="../myOrder/myOrder?type=1" class="detail">
-            <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/payment_sz.png');">
+            <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_pay_sz.png');">
               <view class="remind" wx:if="{{orderForWaitPay>0}}">{{orderForWaitPay}}</view>
             </view>
             <view class="content-text">
@@ -202,7 +202,7 @@
             </view>
           </navigator>
           <navigator url="../myOrder/myOrder?type=2" class="detail">
-            <view class="content-icon2" style="width:66rpx">
+            <view class="content-icon2" style="width:90rpx">
               <view class="remind" wx:if="{{orderForWaitSend>0}}">{{orderForWaitSend}}</view>
             </view>
             <view class="content-text">
@@ -210,7 +210,7 @@
             </view>
           </navigator>
           <navigator url="../myOrder/myOrder?type=3" class="detail">
-            <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/collect_sz.png');">
+            <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_receipt_sz.png');">
               <view class="remind" wx:if="{{orderForWaitGet>0}}">{{orderForWaitGet}}</view>
             </view>
             <view class="content-text">
@@ -218,14 +218,14 @@
             </view>
           </navigator>
           <navigator url="../myOrder/myOrder?type=4" class="detail">
-            <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/finish.png');">
+            <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_down_sz.png');">
             </view>
             <view class="content-text">
               已完成
             </view>
           </navigator>
           <navigator url="../myOrder/myOrder?type=5" class="detail">
-            <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/cancel_sz.png');">
+            <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_cancel_sz.png');">
             </view>
             <view class="content-text">
               已取消
@@ -257,7 +257,7 @@
         <view class="item-icon">
           <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}" />
         </view>
-        <view class="item-text">我的店铺</view>
+        <view class="item-text">我的专区</view>
       </navigator>
     </view>
   </view>

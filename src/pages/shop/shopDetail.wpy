@@ -398,7 +398,7 @@
 </style>
 <template>
   <view class="page">
-    <!-- 店铺信息 -->
+    <!-- 专区信息 -->
     <view class="shop-info">
       <!-- <image src="{{imagePath+'storeBg.jpg'}}" style="width:100%;height:200rpx;position:absoulte"/> -->
       <view class="info-left">
@@ -409,7 +409,7 @@
           <!-- url="./company?storeId={{storeId}}" -->
           <view>
             <text>{{storeName}}</text>
-            <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" />
+            <!-- <image wx:if="{{imagePath}}" src="{{imagePath+'storeD.png'}}" /> -->
           </view>
         </navigator>
         <view class="how-many">
@@ -565,7 +565,7 @@
   import poster from '../../components/miniprogram_dist/poster/poster'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '店铺详情',
+      navigationBarTitleText: '专区详情',
       navigationBarBackgroundColor: '#EB4D4E',
       navigationBarTextStyle: 'white',
       usingComponents: {
@@ -650,7 +650,7 @@
           console.log(ops.target)
         }
         return {
-          title: '我在神州集市发现了热门店铺，快来看看吧!',
+          title: '我在神州集市发现了热门专区，快来看看吧!',
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
           success: function(res) {},
@@ -658,7 +658,7 @@
         }
       },
     };
-    // 获取店铺的基本信息
+    // 获取专区的基本信息
     getStoreInfo() {
       var that = this
       wx.request({
@@ -732,7 +732,7 @@
         },
       })
     }
-    // 店铺内的满减商品
+    // 专区内的满减商品
     getReduceProduce() {
       var that = this
       wepy.showLoading({
@@ -757,7 +757,7 @@
         complete: () => {}
       });
     }
-    // 店铺内的最新任务
+    // 专区内的最新任务
     getTaskProduce() {
       var that = this
       wx.request({
@@ -776,7 +776,7 @@
         complete: () => {}
       });
     }
-    // 店铺内的最新单品
+    // 专区内的最新单品
     getNewProduce() {
       var that = this
       wx.request({
@@ -795,7 +795,7 @@
         complete: () => {}
       });
     }
-    //获取店铺详情的小程序码
+    //获取专区详情的小程序码
     getQRCode() {
       var that = this
       wx.request({
@@ -829,7 +829,7 @@
                 y: 82.4,
                 zIndex: 2,
                 text: [{
-                  text: '我在神州集市发现了热门店铺，快来看看吧!',
+                  text: '我在神州集市发现了热门专区，快来看看吧!',
                   fontSize: 27,
                   color: '#fff',
                   opacity: 1,
@@ -854,7 +854,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看店铺详情',
+                  text: '长按图片识别二维码查看专区详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

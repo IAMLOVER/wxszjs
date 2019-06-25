@@ -413,7 +413,7 @@
       </view>
       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}" />
-        <view>店铺</view>
+        <view>专区</view>
       </navigator>
       <view class="general-btn" @tap="openShadow">
         <text>立即购买</text>
@@ -666,7 +666,7 @@
           that.goodsClassList = res.data.data.goods.goodsClass
           that.typeId = that.goodsClassList[0].id
           that.money = that.account * that.goodsClassList[0].salPrice * 0.01
-          // 店铺id
+          // 专区id
           that.storeId = res.data.data.goods.storeId
           that.$apply()
           that.getStorePhone()

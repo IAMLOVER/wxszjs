@@ -149,7 +149,7 @@ export default class Index extends wepy.page {
        if(res.data.code == 3006){
          wepy.hideLoading();
            wepy.showToast({
-           title: '还未绑定店铺', //提示的内容,
+           title: '还未绑定专区', //提示的内容,
            icon: 'none', //图标,
            duration: 2000, //延迟时间,
            mask: true, //显示透明蒙层，防止触摸穿透,

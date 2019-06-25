@@ -163,7 +163,7 @@
         <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
       </view>
     </view>
-    <!-- 店铺分类选择 -->
+    <!-- 专区分类选择 -->
     <view class="shop-classfiy">
       <scroll-view scroll-x="true">
         <view class="scroll-x">
@@ -179,7 +179,7 @@
         </view>
       </scroll-view>
     </view>
-    <!-- 店铺列表 -->
+    <!-- 专区列表 -->
     <view class="store-items">
       <navigator url="./shopDetail?id={{item.id}}" class="item" wx:for="{{shopArr}}" wx:for-item="item" wx:key="{{index}}">
         <view class="item-title">
@@ -188,7 +188,7 @@
             <text>{{item.name}}</text>
           </view>
           <view class="button-wrapper">
-            <view class="rightNow">进店逛逛</view>
+            <view class="rightNow">看看专区</view>
             <image class="button" src="{{imagePath+'button.png'}}" wx:if="{{imagePath}}" />
           </view>
         </view>
@@ -201,7 +201,7 @@
     <!-- 数据为空的时候 -->
     <view class="empty" wx:if="{{empty}}">
         <image src="{{imagePath+'null_shop@2x.png'}}" wx:if="{{imagePath}}" />
-        <view>店铺正在火热筹备中哦</view>
+        <view>专区正在火热筹备中哦</view>
     </view>
   </view>
 </template>
@@ -211,7 +211,7 @@
   import path from '../../common/path.js';
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '店铺',
+      navigationBarTitleText: '专区',
       navigationBarBackgroundColor: '#EB4D4E',
       navigationBarTextStyle: 'white'
     };
@@ -266,7 +266,7 @@
         this.getShop()
       }
     }
-    // 获取店铺的类别
+    // 获取专区的类别
     getShopClassfiy() {
       var that = this
       wx.request({
@@ -285,7 +285,7 @@
         complete: () => {}
       });
     }
-    // 根据类别id获取店铺
+    // 根据类别id获取专区
     getShop() {
       wx.showLoading({
         title: '加载中', //提示的内容,

@@ -236,7 +236,9 @@
   import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '分类'
+      navigationBarTitleText: '分类',
+      enablePullDownRefresh: true,
+      backgroundTextStyle: 'dark',
     };
     onLoad() {
       this.getClass();
@@ -257,6 +259,9 @@
     };
     methods = {
       getProduce(e) {
+        if (this.idx == e.currentTarget.dataset.index) {
+          return
+        }
         this.idx = e.currentTarget.dataset.index
         this.newSelect = false
         this.classifyId = e.currentTarget.dataset.id
@@ -267,6 +272,9 @@
         this.getClassfiyProduce()
       },
       choseNew() {
+        if (this.newSelect) {
+          return
+        }
         this.newSelect = true
         this.idx = -1
         this.classifyId = ''
@@ -295,7 +303,7 @@
     };
     wxs = {
       m1: mywxs
-    };
+    }
     //上拉加载更多
     onReachBottom() {
       if (this.page < this.totalPage - 1) {
@@ -303,6 +311,19 @@
           this.arr = this.classifyProduce
         this.getClassfiyProduce()
       }
+    }
+    //下拉刷新
+    onPullDownRefresh() {
+      this.page = 0
+      this.totalPages = 0
+      this.arr = []
+      this.getClass()
+      this.getClassfiyProduce()
+      //模拟加载
+      setTimeout(function() {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+      }, 1500);
     }
     // 获取分类列表
     getClass() {

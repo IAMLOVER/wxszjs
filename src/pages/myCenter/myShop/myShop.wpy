@@ -338,6 +338,19 @@
       }
     }
   }
+  .empty{
+    text-align: center;
+    margin-top: 220rpx;
+    image{
+      width: 400rpx;
+      height: 300rpx;
+    }
+    view{
+      font-size: 28rpx;
+      color: #959595;
+      margin-top: 20rpx;
+    }
+  }
   .footer {
     height: 100rpx;
     width: 100%;
@@ -445,7 +458,7 @@
 </style>
 <template>
   <view class="page">
-    <!-- 店铺信息 -->
+    <!-- 专区信息 -->
     <view class="shop-info">
       <view class="info-left">
         <image src="{{storeLogo?preImagePath+storeLogo:'../../../images/index/store_logobig.png'}}" />
@@ -470,10 +483,10 @@
     <view class="more-number">
       <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
       <swiper autoplay="true" vertical="true" circular="true" class="swiper">
-        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的店铺</text></swiper-item>
-        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的店铺</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的专区</text></swiper-item>
+        <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的专区</text></swiper-item>
       </swiper>
       <text style="float:right; text-decoration: underline" @tap="moreNumber">更多数据</text>
     </view>
@@ -585,11 +598,17 @@
         </view>
       </view>
     </view>
-    <view style="height:200rpx;text-align:center;clear:both; font-size: 12px;color: #B5B5B5;line-height:100rpx">
+
+    <view class="empty" wx:if="{{reduceArr.length<=0 && taskArr.length<=0 && newArr.length<=0}}">
+      <image src="{{imagePath + 'null_shop@2x.png'}}" wx:if="{{imagePath}}"/>
+      <view>暂无好物</view>
+      <view>点击更多店铺管理上传好物吧</view>
+    </view>
+    <view wx:if="{{reduceArr.length>0 || taskArr.length>0 || newArr.length>0}}" style="height:200rpx;text-align:center;clear:both; font-size: 12px;color: #B5B5B5;line-height:100rpx">
       已经到底部了
     </view>
     <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-      <view class="more" @tap="moreManagement">联系客服</view>
+      <view class="more" @tap="moreManagement">更多店铺管理</view>
     </view>
     <!-- 转发分享弹出框 -->
     <view class="share-shadow" wx:if="{{showShareShadow}}">
@@ -601,9 +620,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                  </button>
+                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                      <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                    </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -625,7 +644,7 @@
   import mywxs from '../../../wxs/mywxs.wxs';
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '我的店铺',
+      navigationBarTitleText: '我的专区',
       navigationBarBackgroundColor: '#EB4D4E',
       navigationBarTextStyle: 'white',
       usingComponents: {
@@ -750,9 +769,9 @@
         }
       },
       moreManagement() {
-        wx.makePhoneCall({
-          phoneNumber: '0755-88600299'
-        });
+        this.$navigate('./myShopManagement', {
+          id: this.storeId
+        })
       },
       moreNumber() {
         this.$navigate('./myShopAtmosphere')
@@ -763,7 +782,7 @@
           console.log(ops.target)
         }
         return {
-          title: '我在神州集市发现了热门店铺，快来看看吧!',
+          title: '我在神州集市发现了热门专区，快来看看吧!',
           imageUrl: this.storeLogo ? this.preImagePath + this.storeLogo : 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
           path: 'pages/shop/shopDetail?id=' + this.storeId,
           success: function(res) {
@@ -777,7 +796,7 @@
         }
       },
     };
-    // 获取我的店铺的简要信息
+    // 获取我的专区的简要信息
     getStoreInfo() {
       var that = this
       wx.request({
@@ -794,7 +813,7 @@
           that.storeLogo = res.data.data.logo
           that.storePromote = res.data.data.promote
           that.storeTurnover = res.data.data.turnover,
-          that.$apply()
+            that.$apply()
           that.getReduceProduce()
           that.getTaskProduce()
           that.getNewProduce()
@@ -803,7 +822,7 @@
         complete: () => {}
       });
     }
-    // 店铺内的满减商品
+    // 专区内的满减商品
     getReduceProduce() {
       var that = this
       wepy.showLoading({
@@ -828,7 +847,7 @@
         complete: () => {}
       });
     }
-    // 店铺内的最新任务
+    // 专区内的最新任务
     getTaskProduce() {
       var that = this
       wx.request({
@@ -847,7 +866,7 @@
         complete: () => {}
       });
     }
-    // 店铺内的最新单品
+    // 专区内的最新单品
     getNewProduce() {
       var that = this
       wx.request({
@@ -867,8 +886,7 @@
         complete: () => {}
       });
     }
-
-        //获取店铺详情的小程序码
+    //获取专区详情的小程序码
     getQRCode() {
       var that = this
       wx.request({
@@ -902,7 +920,7 @@
                 y: 82.4,
                 zIndex: 2,
                 text: [{
-                  text: '我在神州集市发现了热门店铺，快来看看吧!',
+                  text: '我在神州集市发现了热门专区，快来看看吧!',
                   fontSize: 27,
                   color: '#fff',
                   opacity: 1,
@@ -927,7 +945,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看店铺详情',
+                  text: '长按图片识别二维码查看专区详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

@@ -481,7 +481,7 @@
       background-color: #fff;
       position: absolute;
       bottom: 0;
-      left: 0;
+      // left: 0;
       border-radius: 20rpx 20rpx 0px 0px;
       .title {
         display: flex;
@@ -741,7 +741,7 @@
       </view>
       <navigator url="../shop/shopDetail?id={{storeId}}" class="kefu">
         <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}" />
-        <view>店铺</view>
+        <view>专区</view>
       </navigator>
       <view class="task-btn">
         <view @tap="openShadow">立即购买</view>
@@ -979,7 +979,7 @@
         }
         //3.领取了该商品的任务，而且该商品有引流品的搭配
         if (userTargetId && this.collocationFlag && !this.pmtCollocationFlag) {
-          getPath = 'pages/collocation/collocationSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + userTargetId
+          getPath = 'pages/collocation/channelSingle?id=' + wx.getStorageSync('taskHaveCollocation').id + '&type=' + 1 + '&userTargetId=' + userTargetId
         }
         //4.领取了该商品的任务，而且该商品有促销品的搭配
         if (userTargetId && !this.collocationFlag && this.pmtCollocationFlag) {
@@ -1136,7 +1136,7 @@
             that.taskItems[0].checked = true
             that.choseTaskId = that.taskItems[0].id
           }
-          // 店铺id
+          // 专区id
           that.storeId = res.data.data.goods.storeId
           //判断任务商品是否有搭配商品
           if (res.data.data.collocation) {
@@ -1328,7 +1328,7 @@
       }
       //3.领取了该商品的任务，而且该商品有引流品的搭配
       if (userTargetId && this.collocationFlag && !this.pmtCollocationFlag) {
-          that.codeType = 5
+          that.codeType = 8
           id = wx.getStorageSync('taskHaveCollocation').id + '_' + 1 + userTargetId
       }
       //4.领取了该商品的任务，而且该商品有促销品的搭配
@@ -1395,7 +1395,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看店铺详情',
+                  text: '长按图片识别二维码查看专区详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

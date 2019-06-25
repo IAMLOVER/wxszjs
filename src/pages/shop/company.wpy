@@ -219,7 +219,7 @@
     <view class="empty" wx:if="{{showEmpty}}">
       <image src="{{imagePath+'null_decoration@2x.png'}}" wx:if="{{imagePath}}" />
       <view class="tip">掌柜太懒了，啥也没留下</view>
-      <view class="tip">还是去看看他的店铺好货吧</view>
+      <view class="tip">还是去看看他的专区好货吧</view>
     </view>
   </view>
 </template>

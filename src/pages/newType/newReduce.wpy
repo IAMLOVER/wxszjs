@@ -151,7 +151,7 @@
       m1: mywxs
     };
     methods = {};
-    // 店铺内的满减商品
+    // 专区内的满减商品
     getReduceProduce() {
       var that = this
       wx.request({

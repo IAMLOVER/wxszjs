@@ -28,7 +28,7 @@ page{
 <template>
    <view class='page'>
     <image src="{{imagePath+'null_fail@2x.png'}}" wx:if="{{imagePath}}"/>
-    <view class="tip">对不起，您的微信已绑定其他店铺</view>
+    <view class="tip">对不起，您的微信已绑定其他专区</view>
     <button @tap="goIndex">前往首页</button>
   </view>
 </template>

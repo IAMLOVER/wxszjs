@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 22,
+			"current": 26,
 			"list": [
 				{
 					"id": 0,
@@ -40,7 +40,7 @@
 				},
 				{
 					"id": 1,
-					"name": "店铺",
+					"name": "专区",
 					"pathName": "pages/myCenter/myShop/myShop",
 					"query": "",
 					"scene": null
@@ -82,7 +82,7 @@
 				},
 				{
 					"id": 7,
-					"name": "我的店铺",
+					"name": "我的专区",
 					"pathName": "pages/secKill/choseTaskSuccess",
 					"query": "",
 					"scene": null
@@ -182,7 +182,7 @@
 					"id": 21,
 					"name": "组合商品单品详情",
 					"pathName": "pages/collocation/collocationGroup",
-					"query": "id=96&type=1",
+					"query": "id=52&type=2",
 					"scene": null
 				},
 				{
@@ -190,6 +190,34 @@
 					"name": "维护中",
 					"pathName": "pages/maintain/maintain",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "维护中",
+					"pathName": "pages/secKill/choseTaskSuccess",
+					"query": "id=129",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组合商品快秒杀关联单品详情",
+					"pathName": "pages/collocation/channelSingle",
+					"query": "id=59&type=1",
+					"scene": null
+				},
+				{
+					"id": 25,
+					"name": "组合商品快秒杀关联组合详情",
+					"pathName": "pages/collocation/channelGroup",
+					"query": "id=77&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组合商品快秒杀关联组合详情",
+					"pathName": "pages/collocation/collocationSingle",
+					"query": "id=52&type=1",
 					"scene": null
 				}
 			]

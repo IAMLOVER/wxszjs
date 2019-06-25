@@ -78,6 +78,7 @@
           font-size: 28rpx;
           color: #5F3118;
           margin-top: 4rpx;
+          text-align: center;
         }
         .left-price {
           background-color: rgba(0, 0, 0, 0.6);
@@ -112,6 +113,7 @@
           font-size: 28rpx;
           color: #5F3118;
           margin-top: 4rpx;
+          text-align: center;
         }
         .center-price {
           background-color: rgba(0, 0, 0, 0.6);
@@ -147,6 +149,7 @@
           .price-top {
             font-size: 28rpx;
             color: #f25664;
+            font-weight: 600;
           }
           .price-bottom {
             font-size: 20rpx;
@@ -228,7 +231,7 @@
         </view>
       </view>
       <view class="items">
-        <view class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+        <view class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}"   @tap="rightNow" data-id="{{item.id}}">
           <view class="item-left">
             <view class="left-img" style="position:relative">
               <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}" />
@@ -260,7 +263,7 @@
           <view class="equal-img">
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}" />
           </view>
-          <view class="item-right"  @tap="rightNow" data-id="{{item.id}}">
+          <view class="item-right">
             <view class="price">
               <view class="price-top">
                 ￥{{m1.filter(item.promotionPrice*0.01*item.promotionCount+item.goodsMinSalPrice*0.01*item.goodsCount)}}
@@ -289,7 +292,7 @@
         </view>
       </view>
       <view class="items">
-        <view class="item" style="margin-bottom:20rpx" wx:for="{{newCollocationArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+        <view class="item" style="margin-bottom:20rpx" wx:for="{{newCollocationArr}}"  @tap="rightNow"  wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
             <view class="left-img" style="position:relative">
               <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}" />
@@ -321,7 +324,7 @@
           <view class="equal-img">
             <image src="{{imagePath+'equal.png'}}" wx:if="{{imagePath}}" />
           </view>
-          <view class="item-right" @tap="rightNow" data-id="{{item.id}}">
+          <view class="item-right">
             <view class="price">
               <view class="price-top">
                 ￥{{m1.filter(item.promotionPrice*0.01*item.promotionCount+item.goodsMinSalPrice*0.01*item.goodsCount)}}

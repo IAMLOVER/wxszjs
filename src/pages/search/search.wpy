@@ -254,7 +254,7 @@
       <view class="produce {{showProduce?'active':''}}" @tap="showProduce">
         <text>商品</text>
       </view>
-      <view class="store {{showStore?'active':''}}" @tap="showStore"><text>店铺</text></view>
+      <view class="store {{showStore?'active':''}}" @tap="showStore"><text>专区</text></view>
     </view>
     <!-- 商品列表 -->
     <view class="produce-items" wx:if="{{showProduce}}">
@@ -284,7 +284,7 @@
         </view>
       </view>
     </view>
-    <!-- 店铺列表 -->
+    <!-- 专区列表 -->
     <view class="store-items" wx:if="{{showStore}}">
       <navigator url="../shop/shopDetail?id={{item.id}}" class="item" wx:for="{{storeArr}}" wx:key="index" wx:for-item="item" data-index="{{item.id}}">
         <view class="item-title">
@@ -293,7 +293,7 @@
             <text>{{item.name}}</text>
           </view>
           <view class="button-wrapper">
-            <view class="rightNow">进店逛逛</view>
+            <view class="rightNow">看看专区</view>
             <image class="button" src="{{imagePath + 'button.png'}}" wx:if="{{imagePath}}" />
           </view>
         </view>

@@ -263,7 +263,7 @@
       <view class="number">
         <view class="total">
           <text>合计：</text>
-          <text style="color: #F25664;">￥{{m1.filter(pay.money)}}</text>
+          <text style="color: #F25664;font-weight:600">￥{{m1.filter(pay.money)}}</text>
         </view>
         <view class="youhui">
           <text>优惠金额：</text>
