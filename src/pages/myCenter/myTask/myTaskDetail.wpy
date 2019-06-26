@@ -308,8 +308,8 @@
     <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <!-- <view class="poster">生成助力海报</view> -->
       <button open-type="share" plain="true">
-             <view class="poster">转发给好友</view>
-          </button>
+                       <view class="poster">转发给好友</view>
+                    </button>
     </view>
     <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
@@ -327,7 +327,6 @@
     onLoad(options) {
       this.taskId = options.id
       this.isIphoneX = this.$parent.globalData.isIphoneX
-      console.log(options)
       this.taskForShare = wx.getStorageSync('taskForShare')
       this.getTaskDetails()
       this.getGrounp()
@@ -354,7 +353,6 @@
     };
     methods = {
       onShareAppMessage: function(ops) {
-        console.log(this.taskForShare);
         if (ops.from === 'button') {
           // 来自页面内转发按钮
         }
@@ -364,11 +362,9 @@
           path: 'pages/generalGoods/taskGenralGoods?id=' + this.taskForShare.goodsId + '&userTargetId=' + this.taskForShare.id,
           success: function(res) {
             // 转发成功
-            console.log("转发成功:" + JSON.stringify(res));
           },
           fail: function(res) {
             // 转发失败
-            console.log("转发失败:" + JSON.stringify(res));
           }
         }
       }
@@ -376,25 +372,36 @@
     // 获取任务详情
     getTaskDetails() {
       var that = this
-      var inviteNum = Number(that.taskForShare.inviteNum)
-      var targetNum = Number(that.taskForShare.targetNum)
-      console.log(inviteNum / targetNum)
-      console.log(that.taskForShare)
-      if (inviteNum * 100 / targetNum < 50) {
-        that.tip = '您已发起助力，快邀请好友参与吧!'
-      } else if (50 <= inviteNum * 100 / targetNum && inviteNum * 100 / targetNum < 100) {
-        that.tip = '已经完成一半啦，继续加油!'
-      } else if (inviteNum * 100 / targetNum == 100) {
-        that.tip = '恭喜您！任务成功，佣金将在24小时内发至您的账户!'
-      }
+      wx.showLoading({
+        title: '加载中', //提示的内容,
+        mask: true, //显示透明蒙层，防止触摸穿透,
+        success: res => {}
+      });
+      
       that.interval = setInterval(() => {
         var blockingTime = (new Date(that.taskForShare.blockingTime.replace(/-/g, "/")).getTime()) / 1000
         var currentTime = parseInt((new Date().getTime()) / 1000)
         var Mytime = blockingTime - currentTime
+        wx.hideLoading();
         if (Mytime >= 1) {
           that.overTime = that.formatDuring(Mytime * 1000)
+          var inviteNum = Number(that.taskForShare.inviteNum)
+          var targetNum = Number(that.taskForShare.targetNum)
+          if (inviteNum * 100 / targetNum < 50) {
+            that.tip = '您已发起助力，快邀请好友参与吧!'
+          } else if (50 <= inviteNum * 100 / targetNum && inviteNum * 100 / targetNum < 100) {
+            that.tip = '已经完成一半啦，继续加油!'
+          } else if (inviteNum * 100 / targetNum == 100) {
+            that.tip = '恭喜您！任务成功，佣金将在24小时内发至您的账户!'
+          }
           that.$apply()
         } else {
+          var inviteNum = Number(that.taskForShare.inviteNum)
+          var targetNum = Number(that.taskForShare.targetNum)
+          if (that.overTime == '00:00:00' && inviteNum < targetNum) {
+            that.tip = '很遗憾，开团失败！不要气馁哦!'
+            that.$apply()
+          }
           clearInterval(that.interval)
         }
       }, 1000);
@@ -419,7 +426,6 @@
         method: 'GET',
         dataType: 'json',
         success: res => {
-          console.log(res)
           if (res.data.data.length) {
             that.showSituation = true
             that.groupContent = res.data.data

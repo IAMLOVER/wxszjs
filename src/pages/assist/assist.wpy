@@ -1,64 +1,44 @@
 <style lang='less'>
-page{
-  background-color: #FFF9E6;
-}
-.search-wrapper {
-  position: fixed;
-  top: 0rpx;
-  z-index: 2;
-  width: 100%;
-  background-color: #fff;
-  padding-bottom: 14rpx;
-  .search {
-    position: relative;
-    input {
-      width: 670rpx;
-      height: 64rpx;
-      background: rgba(225, 225, 225, 0.5);
-      border-radius: 16px;
-      font-size: 32rpx;
-      padding-left: 78rpx;
-      color: #959595;
-      box-sizing: border-box;
-      margin: 0 auto;
-    }
-    image {
-      width: 36rpx;
-      height: 36rpx;
-      position: absolute;
-      left: 60rpx;
-      top: 14rpx;
+  page {
+    background-color: #FFF9E6;
+  }
+  .search-wrapper {
+    position: fixed;
+    top: 0rpx;
+    z-index: 2;
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 14rpx;
+    .search {
+      position: relative;
+      input {
+        width: 670rpx;
+        height: 64rpx;
+        background: rgba(225, 225, 225, 0.5);
+        border-radius: 16px;
+        font-size: 32rpx;
+        padding-left: 78rpx;
+        color: #959595;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 60rpx;
+        top: 14rpx;
+      }
     }
   }
-}
-.hot-task{
-  margin-top: 80rpx;
-  .title .tip {
-      font-size: 32rpx;
-      color: #f25664;
-      line-height: 64rpx;
-      font-weight: 600;
-      padding:10rpx 30rpx 10rpx 30rpx;
-    }
-    .bar {
-      display: inline-block;
-      width: 8rpx;
-      height: 28rpx;
-      background-color: #f25664;
-      margin-right: 12rpx;
-      border-radius: 4rpx;
-    }
-    .item{
-      margin-bottom: 0rpx !important;
-    }
-}
-.new-task{
+  .hot-task {
+    margin-top: 80rpx;
     .title .tip {
       font-size: 32rpx;
       color: #f25664;
       line-height: 64rpx;
       font-weight: 600;
-      padding:10rpx 30rpx 10rpx 30rpx;      
+      padding: 10rpx 30rpx 10rpx 30rpx;
     }
     .bar {
       display: inline-block;
@@ -68,128 +48,155 @@ page{
       margin-right: 12rpx;
       border-radius: 4rpx;
     }
-}
-.task-produces{
-  padding: 0rpx 30rpx;
-  position: relative;
-  .item{
-    background-color: #fff;
-    border-radius: 20rpx;
-    padding: 24rpx;
-    box-sizing: border-box;
-    width: 690rpx;
-    height: 268rpx;
-    position: relative;
-    margin-bottom: 24rpx;
-    .item-left{
-      float: left;
-      margin-right: 16rpx;
-      image{
-        width: 220rpx;
-        height: 220rpx;
-        border-radius: 16rpx;
-      }
+    .item {
+      margin-bottom: 0rpx !important;
     }
-    .item-right{
-      .item-title{
-        font-size: 32rpx;
-        color: #222222;
-        height: 100rpx;
-        font-weight: 600;
-        width: 600rpx;
-      }
-      .hot{
-        font-size: 24rpx;
-        color:#F25664;
-        margin-bottom: 10rpx;
-        margin-top: 18rpx;
-        image{
-          width: 18rpx;
-          height: 20rpx;
-          margin-right: 8rpx;
+  }
+  .new-task {
+    .title .tip {
+      font-size: 32rpx;
+      color: #f25664;
+      line-height: 64rpx;
+      font-weight: 600;
+      padding: 10rpx 30rpx 10rpx 30rpx;
+    }
+    .bar {
+      display: inline-block;
+      width: 8rpx;
+      height: 28rpx;
+      background-color: #f25664;
+      margin-right: 12rpx;
+      border-radius: 4rpx;
+    }
+  }
+  .task-produces {
+    padding: 0rpx 30rpx;
+    position: relative;
+    .item {
+      background-color: #fff;
+      border-radius: 20rpx;
+      padding: 24rpx;
+      box-sizing: border-box;
+      width: 690rpx;
+      height: 268rpx;
+      position: relative;
+      margin-bottom: 24rpx;
+      display: flex;
+      display: -webkit-flex;
+      .item-left {
+        margin-right: 16rpx;
+        flex: 1;
+        -webkit-flex:1;
+        image {
+          width: 220rpx;
+          height: 220rpx;
+          border-radius: 16rpx;
         }
       }
-      .commision{
-        font-size: 24rpx;
-        color: #959595;
-        margin-top: 16rpx;
-      }
-      .item-price{
-        float: left;
-        .price{
-          min-width: 168rpx;
-          height: 48rpx;
-          line-height: 48rpx;
-          display: inline-block;
-          padding: 0rpx 6rpx;
-          border-radius: 24rpx;
-          margin-right: 16rpx;
+      .item-right {
+        flex: 3;
+        -webkit-flex:3;
+        .item-title {
+          font-size: 32rpx;
+          color: #222222;
+          height: 100rpx;
+          font-weight: 600;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .hot {
           font-size: 24rpx;
           color: #F25664;
-          font-weight: 600;
-          .really{
-            font-size: 36rpx;
+          margin-bottom: 10rpx;
+          margin-top: 18rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
+        }
+        .commision {
+          font-size: 24rpx;
+          color: #959595;
+          margin-top: 16rpx;
+        }
+        .item-price {
+          float: left;
+          .price {
+            min-width: 168rpx;
+            height: 48rpx;
+            line-height: 48rpx;
+            display: inline-block;
+            padding: 0rpx 6rpx;
+            border-radius: 24rpx;
+            margin-right: 16rpx;
+            font-size: 24rpx;
             color: #F25664;
+            font-weight: 600;
+            .really {
+              font-size: 36rpx;
+              color: #F25664;
+            }
           }
         }
       }
-    }
-    .tip{
-      display: inline-block;
-      padding: 0rpx 10rpx;
-      border:1px solid #F25664;
-      color: #F25664;
-      background-color: #fff;
-      border-radius: 8rpx;
-      font-size: 24rpx;
-      height: 36rpx;
-      position: absolute;
-      right: 24rpx;
-      bottom: 24rpx;
+      .tip {
+        display: inline-block;
+        padding: 0rpx 10rpx;
+        border: 1px solid #F25664;
+        color: #F25664;
+        background-color: #fff;
+        border-radius: 8rpx;
+        font-size: 24rpx;
+        height: 36rpx;
+        position: absolute;
+        right: 24rpx;
+        bottom: 24rpx;
+      }
     }
   }
-}
-.hot-img{
-  position: absolute;
-  width: 80rpx;
-  height: 80rpx;
-  z-index: 1;
-  right: 24rpx;
-  top:-8rpx;
-}
+  .hot-img {
+    position: absolute;
+    width: 80rpx;
+    height: 80rpx;
+    z-index: 1;
+    right: 24rpx;
+    top: -8rpx;
+  }
 </style>
 <!--  -->
 <template>
   <view class='page'>
-        <!-- 搜索框 -->
-     <view class="search-wrapper">
-        <view class="search">
-            <input type="text" disabled @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595"/>
-            <image src="{{imagePath+'search02.png'}}"  wx:if="{{imagePath}}"/>
+    <!-- 搜索框 -->
+    <view class="search-wrapper">
+      <view class="search">
+        <input type="text" disabled @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595" />
+        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
+      </view>
+    </view>
+    <!-- 人气任务 -->
+    <view class="hot-task">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 人气任务
         </view>
-     </view>
-
-     <!-- 人气任务 -->
-     <view class="hot-task">
-        <view class="title">
-          <view class="tip">
-           <text class="bar"></text>
-            人气任务
-         </view>
-       </view>
-    <view class="task-produces">
-       <image src="{{imagePath + 'hotnew_sz.png'}}" wx:if="{{imagePath}}" class="hot-img"/>
-       <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+      </view>
+      <view class="task-produces">
+        <image src="{{imagePath + 'hotnew_sz.png'}}" wx:if="{{imagePath}}" class="hot-img" />
+        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <view class="commision">
-               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
+              佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-               <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>                
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
           </view>
@@ -197,29 +204,27 @@ page{
             已经有{{item.receivedNum}}人领取
           </view>
         </navigator>
+      </view>
     </view>
-     </view>
-
     <!-- 最新任务 -->
-  <view class="new-task">
-        <view class="title">
-          <view class="tip">
-           <text class="bar"></text>
-            最新任务
-         </view>
-       </view>
-    <view class="task-produces">
-       <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+    <view class="new-task">
+      <view class="title">
+        <view class="tip">
+          <text class="bar"></text> 最新任务
+        </view>
+      </view>
+      <view class="task-produces">
+        <navigator url="../taskGoods/taskGoods?id={{item.id}}" class="item" wx:for="{{taskArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
-              <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill"/>
+            <image src="{{preImagePath+item.picUrl1}}" mode="aspectFill" />
           </view>
           <view class="item-right">
             <view class="item-title">{{item.title}}</view>
             <view class="commision">
-               佣金：{{item.minPercent}}%-{{item.maxPercent}}%
+              佣金：{{item.minPercent}}%-{{item.maxPercent}}%
             </view>
             <view class="hot">
-               <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}"/>                
+              <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />
               <text>热度{{item.visitNum}}</text>
             </view>
           </view>
@@ -227,8 +232,8 @@ page{
             已经有{{item.receivedNum}}人领取
           </view>
         </navigator>
+      </view>
     </view>
-  </view>
   </view>
 </template>
 
@@ -240,51 +245,48 @@ page{
     config = {
       navigationBarTitleText: "助力团",
     };
-
     data = {
-      imagePath:path.path.imagePath,
-      apiPath:path.path.apiPath,
-      preImagePath:path.path.preImagePath,
-      taskArr:{},
-      hotArr:{},
-      page:0,
-      totalPage:0,
-      arr:[]
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      preImagePath: path.path.preImagePath,
+      taskArr: {},
+      hotArr: {},
+      page: 0,
+      totalPage: 0,
+      arr: []
     };
-
     methods = {
-       navSearch() {
-          this.$navigate({url: '../search/search'})
-       },
+      navSearch() {
+        this.$navigate({
+          url: '../search/search'
+        })
+      },
     };
-
-  //上拉加载更多
-  onReachBottom(){
-    if(this.page<this.totalPage-1){
-      this.page++
-      this.arr = this.taskArr
-      this.getTasks()
+    //上拉加载更多
+    onReachBottom() {
+      if (this.page < this.totalPage - 1) {
+        this.page++
+          this.arr = this.taskArr
+        this.getTasks()
+      }
     }
-  }
     onLoad() {
       this.getTasks()
       this.getHotTask()
-     };
-
-    onShow() { };
-
+    };
+    onShow() {};
     //最新任务接口
-    getTasks(){
-      var that = this 
+    getTasks() {
+      var that = this
       wx.request({
         url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
         data: {
-          activityType:1,
-          size:15,
-          page:that.page
+          activityType: 1,
+          size: 15,
+          page: that.page
         }, //请求的参数",
         method: 'GET',
-        dataType: 'json', 
+        dataType: 'json',
         success: res => {
           console.log(res)
           that.taskArr = that.arr.concat(res.data.data.content)
@@ -294,21 +296,19 @@ page{
         fail: () => {},
         complete: () => {}
       });
-      
     }
-
     //人气任务接口
     getHotTask() {
-      var that = this 
+      var that = this
       wx.request({
         url: that.apiPath + '/szmktstore/goodsInfo/search', //开发者服务器接口地址",
         data: {
-          activityType:1,
-          sortType:'receive',
-          size:1,
+          activityType: 1,
+          sortType: 'receive',
+          size: 1,
         }, //请求的参数",
         method: 'GET',
-        dataType: 'json', 
+        dataType: 'json',
         success: res => {
           console.log(res)
           that.hotArr = res.data.data.content

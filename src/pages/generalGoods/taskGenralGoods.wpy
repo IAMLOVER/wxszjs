@@ -256,16 +256,19 @@
           font-size: 28rpx;
         }
         .type-item {
+          overflow: hidden;
           view {
-            display: inline-block;
-            padding: 8rpx 26rpx;
+            float: left;
+            display: block;
+            padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
             font-size: 28rpx;
             height: 44rpx;
             box-sizing: border-box;
-            line-height: 28rpx;
-            margin-right: 24rpx;
+            line-height: 44rpx;
+            margin-right: 15rpx;
+            margin-bottom: 15rpx;
           }
           .active {
             background: #F25664;
@@ -371,7 +374,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <!-- <text class="old">9.99</text> -->
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称以及限购 -->
@@ -389,9 +393,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                      <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                      <text>分享</text>
-                    </button>
+                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                        <text>分享</text>
+                      </button>
       </view>
     </view>
     <!-- 商品详情 -->
@@ -649,7 +653,6 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
           console.log(res)

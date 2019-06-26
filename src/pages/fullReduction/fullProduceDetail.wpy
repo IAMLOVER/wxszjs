@@ -81,6 +81,11 @@
         display: inline-block;
         padding-right: 10rpx;
       }
+      .old {
+        color: #b5b5b5;
+        text-decoration: line-through;
+        font-size: 24rpx;
+      }
     }
     .range {
       display: inline-block;
@@ -261,16 +266,19 @@
           font-size: 28rpx;
         }
         .type-item {
+          overflow: hidden;
           view {
-            display: inline-block;
-            padding: 8rpx 26rpx;
+            float: left;
+            display:block;
+            padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
             font-size: 28rpx;
             height: 44rpx;
             box-sizing: border-box;
-            line-height: 28rpx;
-            margin-right: 24rpx;
+            line-height: 44rpx;
+            margin-right: 15rpx;
+            margin-bottom: 15rpx;
           }
           .active {
             background: #F25664;
@@ -453,6 +461,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
+         <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
       <view class="range">
         满{{m1.filter(activityInfo.standard*0.01)}}元可用{{m1.filter(activityInfo.privilege*0.01)}}元券
@@ -542,7 +552,7 @@
         <!-- 用户操作提示是否符合满减要求 -->
         <view class="tip">
           <text wx:if="{{haveCoupon}}">
-                                   <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
+                                       <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)>0}}"> 还需{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(activityInfo.standard*0.01-money):0}}元可减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           </text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
@@ -575,9 +585,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                    <view style="font-size:20rpx;">微信好友</view>
-                                  </button>
+                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                        <view style="font-size:20rpx;">微信好友</view>
+                                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -808,7 +818,6 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
           console.log(res)

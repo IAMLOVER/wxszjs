@@ -213,25 +213,35 @@
       border-radius: 4rpx;
     }
   }
+  .empty {
+    text-align: center;
+    font-size: 28rpx;
+    color: #959595;
+    margin-top: 250rpx;
+    image {
+      width: 400rpx;
+      height: 300rpx;
+    }
+  }
 </style>
 <template>
   <view class='page'>
     <!-- 搜索框 -->
-    <view class="search-wrapper">
+    <view class="search-wrapper" wx:if="{{hotArr.length>0 || newCollocationArr.length>0}}">
       <view class="search">
         <input type="text" disabled @tap="navSearch" placeholder="搜你想要" placeholder-style="color:#959595" />
         <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
       </view>
     </view>
     <!-- 人气搭配 -->
-    <view class="hot-collocation">
+    <view class="hot-collocation" wx:if="{{hotArr.length>0}}">
       <view class="title">
         <view class="tip">
           <text class="bar"></text> 人气搭配
         </view>
       </view>
       <view class="items">
-        <view class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}"   @tap="rightNow" data-id="{{item.id}}">
+        <view class="item" wx:for="{{hotArr}}" wx:for-item="item" wx:key="{{index}}" @tap="rightNow" data-id="{{item.id}}">
           <view class="item-left">
             <view class="left-img" style="position:relative">
               <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}" />
@@ -285,14 +295,14 @@
       </view>
     </view>
     <!-- 最新搭配 -->
-    <view class="new-collocation">
+    <view class="new-collocation" wx:if="{{newCollocationArr.length>0}}">
       <view class="title">
         <view class="tip">
           <text class="bar"></text> 最新搭配
         </view>
       </view>
       <view class="items">
-        <view class="item" style="margin-bottom:20rpx" wx:for="{{newCollocationArr}}"  @tap="rightNow"  wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
+        <view class="item" style="margin-bottom:20rpx" wx:for="{{newCollocationArr}}" @tap="rightNow" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="item-left">
             <view class="left-img" style="position:relative">
               <image src="{{preImagePath + item.promotionPicUrl1}}" lazy-load mode="aspectFill" wx:if="{{preImagePath && item.promotionPicUrl1}}" />
@@ -344,6 +354,10 @@
         </view>
       </view>
     </view>
+    <view class="empty" wx:if="{{hotArr.length<=0 && newCollocationArr.length<=0}}">
+      <image src="{{imagePath + 'null_gift@2x.png'}}" wx:if="{{imagePath}}" />
+      <view>正在为你精心准备商品中哦</view>
+    </view>
   </view>
 </template>
 
@@ -361,9 +375,9 @@
       preImagePath: path.path.preImagePath,
       newCollocationArr: {},
       hotArr: {},
-      page:0,
-      totalpage:0,
-      arr:[]
+      page: 0,
+      totalpage: 0,
+      arr: []
     };
     methods = {
       rightNow(e) {
@@ -383,7 +397,7 @@
       this.getNewCollocation()
       this.getHotCollocation()
     };
-        //上拉加载更多
+    //上拉加载更多
     onReachBottom() {
       if (this.page < this.totalPage - 1) {
         this.page++
@@ -399,8 +413,8 @@
         url: that.apiPath + '/szmktstore/pmtCollocation/search', //开发者服务器接口地址",
         data: {
           sortType: 1,
-          size:4,
-          page:that.page
+          size: 4,
+          page: that.page
         }, //请求的参数",
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse

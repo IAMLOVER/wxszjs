@@ -261,7 +261,7 @@
         <view class="order-wrapper">
             <view class="order-list" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
                 <view class="list-header">
-                    <view class="header-left">
+                    <view class="header-left" data-store-id = "{{item.storeId}}" @tap="goShopDetail">
                         <image src="{{imagePath+'store02.png'}}" style="vertical-align:middle" class="list-icon" wx:if="{{imagePath}}" />
                         <text class="list-store" style="font-size:28rpx">{{item.storeName}}</text>
                         <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}" />
@@ -346,6 +346,9 @@
             m1: mywxs
         };
         methods = {
+            goShopDetail(e){
+                this.$navigate('../../shop/shopDetail',{id:e.currentTarget.dataset.storeId})
+            },
             chooseTab(index) {
                 this.nowIndex = index
                 this.type = this.nowIndex

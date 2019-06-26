@@ -257,16 +257,19 @@
           font-size: 28rpx;
         }
         .type-item {
+           overflow: hidden;
           view {
-            display: inline-block;
-            padding: 8rpx 26rpx;
+            float: left;
+            display:block;
+            padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
             font-size: 28rpx;
             height: 44rpx;
             box-sizing: border-box;
-            line-height: 28rpx;
-            margin-right: 24rpx;
+            line-height: 44rpx;
+            margin-right: 15rpx;
+            margin-bottom: 15rpx;
           }
           .active {
             background: #F25664;

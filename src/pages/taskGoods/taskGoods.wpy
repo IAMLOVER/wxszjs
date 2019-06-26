@@ -345,16 +345,19 @@
           font-size: 28rpx;
         }
         .type-item {
+          overflow: hidden;
           view {
-            display: inline-block;
-            padding: 8rpx 26rpx;
+            float: left;
+            display: block;
+            padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
             font-size: 28rpx;
             height: 44rpx;
             box-sizing: border-box;
-            line-height: 28rpx;
-            margin-right: 24rpx;
+            line-height: 44rpx;
+            margin-right: 15rpx;
+            margin-bottom: 15rpx;
           }
           .active {
             background: #F25664;
@@ -472,8 +475,7 @@
     height: 100%;
     position: fixed;
     left: 0;
-    top: 0;
-    // z-index: 999;
+    top: 0; // z-index: 999;
     background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 100%;
@@ -673,7 +675,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <!-- <text class="old">9.99</text> -->
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称 -->
@@ -825,11 +828,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                                            <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                                            <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                               <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                                           </view>
-                                           </label>
+                                                <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                                <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                                   <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                                               </view>
+                                               </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -850,9 +853,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                              </button>
+                                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                  </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -1117,7 +1120,6 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
           that.produceInfo = res.data.data.goods
