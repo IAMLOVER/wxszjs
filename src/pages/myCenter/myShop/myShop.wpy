@@ -34,7 +34,7 @@
           height: 32rpx;
           margin-left: 20rpx;
           vertical-align: top;
-          margin-top: 12rpx;
+          margin-top: 11rpx;
         }
       }
       .how-many {
@@ -57,6 +57,7 @@
           height: 27rpx;
           vertical-align: middle;
           margin-right: 12rpx;
+          margin-top: -2rpx;
         }
       }
     }
@@ -621,7 +622,7 @@
           </poster>
           <button open-type="share" class="poster" plain="true">
                       <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                      <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                      <view style="font-size:20rpx;">微信好友</view>
                     </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">

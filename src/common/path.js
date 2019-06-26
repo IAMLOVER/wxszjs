@@ -11,10 +11,10 @@ const path = {
 
      //测试环境 
     'imagePath':'https://pictest.sqplus.cn/szjs/user/images/index/',
-    'apiPath':'https://optest.sqplus.cn',
-    'preImagePath':'https://pictest.sqplus.cn/sqj/',
-    'userImagePath':'https://pictest.sqplus.cn/szmkt/userpic/',
-    'qrcodeImagePath':'https://pictest.sqplus.cn/szmkt/qrcode/'
+    // 'apiPath':'https://optest.sqplus.cn',
+    // 'preImagePath':'https://pictest.sqplus.cn/sqj/',
+    // 'userImagePath':'https://pictest.sqplus.cn/szmkt/userpic/',
+    // 'qrcodeImagePath':'https://pictest.sqplus.cn/szmkt/qrcode/'
     // testenvend
 
 };

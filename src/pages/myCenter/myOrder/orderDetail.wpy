@@ -170,7 +170,6 @@
                     }
                     .goods-price {
                         color: #f25664;
-                        margin-top: 32rpx;
                         .price {
                             font-size: 32rpx;
                         }

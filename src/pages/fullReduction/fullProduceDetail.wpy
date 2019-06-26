@@ -576,7 +576,7 @@
           </poster>
           <button open-type="share" class="poster" plain="true">
                                     <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                    <view style="font-size:20rpx;">微信好友</view>
                                   </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
@@ -619,11 +619,11 @@
         }
       })
       if (options.scene) {
-        this.produceId = decodeURIComponent(options.scene)
+        that.produceId = decodeURIComponent(options.scene)
       } else {
-        this.produceId = options.id
+        that.produceId = options.id
       }
-      this.getProduceInfo()
+      that.getProduceInfo()
     }
     wxs = {
       m1: mywxs
@@ -807,16 +807,8 @@
         dataType: 'json',
         success: res => {
           if (res.data.code != '1000') {
-            wepy.showToast({
-              title: res.data.message, //提示的内容
-              duration: 2000, //延迟时间,
-              icon: 'none',
-              mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {}
-            });
-            setTimeout(() => {
-              that.$switch('../index/index')
-            }, 2000);
+            that.$navigate('../undercarriage/undercarriage')
+
             return
           }
           console.log(res)
@@ -1021,7 +1013,7 @@
                 y: 664.4,
                 zIndex: 3,
                 text: [{
-                  text: that.produceInfo.shortTitle,
+                  text: that.produceInfo.title,
                   fontSize: 26,
                   color: '#000',
                 }]

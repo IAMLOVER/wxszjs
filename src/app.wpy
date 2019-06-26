@@ -75,6 +75,8 @@
         'pages/ediPay/ediPay',
         'pages/ediPay/ediPaySuccess',
         'pages/ediPay/ediPayFail',
+        //商品已经下架
+        'pages/undercarriage/undercarriage'
       ],
       window: {
         backgroundTextStyle: 'light',

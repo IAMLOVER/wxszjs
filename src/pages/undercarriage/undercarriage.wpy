@@ -1,0 +1,66 @@
+<!--  -->
+<template>
+  <view class='page'>
+    <image src="{{imagePath + 'download.png'}}" wx:if="{{imagePath}}" />
+    <view> 该宝贝下架啦！</view>
+    <view class="findMore" @tap="findMore">发现更多</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "神州集市",
+    };
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      maintainTime: ''
+    };
+    components = {};
+    methods = {
+      findMore() {
+        this.$switch('../index/index')
+      }
+    };
+    onLoad() {
+    };
+    onShow() {};
+    onUnload() {
+      wx.reLaunch({
+        url: '../index/index'
+      })
+    }
+  }
+</script>
+
+<style lang='less'>
+  page {
+    background-color: #f5f5f5;
+    text-align: center;
+    image {
+      width: 400rpx;
+      height: 300rpx;
+      margin-top: 198rpx;
+      margin-bottom: 40rpx;
+    }
+    view {
+      font-size: 32rpx;
+      color: #666;
+    }
+    .findMore {
+      width: 530rpx;
+      height: 88rpx;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 32rpx;
+      background-image: linear-gradient(-27deg, #F25664 0%, #E176FF 100%);
+      border-radius: 22px;
+      line-height: 88rpx;
+      color: #fff;
+      margin-top: 50rpx;
+    }
+  }
+</style>

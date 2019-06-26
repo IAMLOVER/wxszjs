@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 26,
+			"current": 27,
 			"list": [
 				{
 					"id": 0,
@@ -217,6 +217,13 @@
 					"id": -1,
 					"name": "组合商品快秒杀关联组合详情",
 					"pathName": "pages/collocation/collocationSingle",
+					"query": "id=52&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品已经下架",
+					"pathName": "pages/undercarriage/undercarriage",
 					"query": "id=52&type=1",
 					"scene": null
 				}

@@ -288,7 +288,7 @@
     height: 100%;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+    // z-index: 9999;
     left: 0;
     top: 0;
     .content {
@@ -891,16 +891,7 @@
         dataType: 'json',
         success: res => {
           if (res.data.code != '1000') {
-            wx.showToast({
-              title: res.data.message, //提示的内容
-              icon: 'none',
-              duration: 2000, //延迟时间,
-              mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {}
-            });
-            setTimeout(() => {
-              that.$switch('../index/index')
-            }, 2000)
+            that.$navigate('../undercarriage/undercarriage')
             return
           }
           console.log(res)

@@ -32,7 +32,7 @@
 
     data = {
       imagePath:path.path.imagePath,
-      secend:3,
+      secend:5,
     };
 
     wxs = {

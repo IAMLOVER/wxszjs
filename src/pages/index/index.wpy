@@ -429,7 +429,8 @@
           <swiper-item wx:for="{{recommendArr}}" wx:for-item="item" wx:key="{{index}}">
             <view class="store" data-id="{{item.id}}" @tap="goShop">
               <view style="display:flex;display:-webkit-flex;">
-                <image class="logo" src="{{item.logo?preImagePath+item.logo:'../../images/index/store_logomin.png'}}" />
+                <!-- item.logo?preImagePath+item.logo: -->
+                <image class="logo" src="{{'../../images/index/store_logomin.png'}}" />
                 <text>{{item.name}}</text>
                 <view class="button-wrapper">
                   <view class="rightNow">看看专区</view>
@@ -632,9 +633,17 @@
       wx.request({
         url: that.apiPath + '/szmktstore/storeInfo/recommend',
         method: 'post',
+        data:{
+          size:'5'
+        },
         dataType: 'json',
         success: res => {
           that.recommendArr = res.data.data.content
+          // that.recommendArr[0].name = '水果专区'
+          // that.recommendArr[1].name = '食品专区'
+          // that.recommendArr[2].name = '茅台酒专区'
+          // that.recommendArr[3].name = '化妆品专区'
+          // that.recommendArr[4].name = '美妆专区'
           that.$apply()
         },
         fail: () => {},

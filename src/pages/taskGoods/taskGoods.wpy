@@ -473,15 +473,14 @@
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 999;
+    // z-index: 999;
     background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 100%;
       height: 474rpx;
       background-color: #fff;
       position: absolute;
-      bottom: 0;
-      // left: 0;
+      bottom: 0; // left: 0;
       border-radius: 20rpx 20rpx 0px 0px;
       .title {
         display: flex;
@@ -826,11 +825,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                                          <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                                          <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                             <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                                         </view>
-                                         </label>
+                                            <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                            <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                               <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                                           </view>
+                                           </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -851,9 +850,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                              <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                            </button>
+                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                              </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -971,6 +970,10 @@
         var getPath = ''
         //1.未领取任务并且该商品没有任何搭配
         if (userTargetId == '' && !this.collocationFlag && !this.pmtCollocationFlag) {
+          getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
+        }
+        //1.1未领取任务并且该商品有一种搭配
+        if (userTargetId == '' && !this.collocationFlag || !this.pmtCollocationFlag) {
           getPath = 'pages/generalGoods/generalGoods?id=' + this.produceId
         }
         //2.领取了该商品的任务，但是该商品没有任何搭配
@@ -1113,16 +1116,8 @@
         dataType: 'json',
         success: res => {
           if (res.data.code != '1000') {
-            wx.showToast({
-              title: res.data.message, //提示的内容
-              icon: 'none',
-              duration: 2000, //延迟时间,
-              mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {}
-            });
-            setTimeout(() => {
-              that.$switch('../index/index')
-            }, 2000)
+            that.$navigate('../undercarriage/undercarriage')
+
             return
           }
           that.produceInfo = res.data.data.goods
@@ -1318,23 +1313,28 @@
       }
       //1.未领取任务并且该商品没有任何搭配
       if (userTargetId == '' && !that.collocationFlag && !that.pmtCollocationFlag) {
-          that.codeType = 0 
-          id = that.produceId
+        that.codeType = 0
+        id = that.produceId
+      }
+      //1.1未领取任务并且该商品有一种搭配
+      if (userTargetId == '' && !that.collocationFlag || !that.pmtCollocationFlag) {
+        that.codeType = 0
+        id = that.produceId
       }
       //2.领取了该商品的任务，但是该商品没有任何搭配
       if (userTargetId && !that.collocationFlag && !that.pmtCollocationFlag) {
-          that.codeType = 3
-          id = that.produceId + '_' + userTargetId
+        that.codeType = 3
+        id = that.produceId + '_' + userTargetId
       }
       //3.领取了该商品的任务，而且该商品有引流品的搭配
       if (userTargetId && this.collocationFlag && !this.pmtCollocationFlag) {
-          that.codeType = 8
-          id = wx.getStorageSync('taskHaveCollocation').id + '_' + 1 + userTargetId
+        that.codeType = 8
+        id = wx.getStorageSync('taskHaveCollocation').id + '_' + 1 + '_' + userTargetId
       }
       //4.领取了该商品的任务，而且该商品有促销品的搭配
       if (userTargetId && !this.collocationFlag && this.pmtCollocationFlag) {
-          that.codeType = 5
-          id = wx.getStorageSync('taskHaveCollocation').id + '_' + 2 + userTargetId      
+        that.codeType = 5
+        id = wx.getStorageSync('taskHaveCollocation').id + '_' + 2 + '_' + userTargetId
       }
       wx.request({
         url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
