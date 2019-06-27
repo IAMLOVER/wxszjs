@@ -942,12 +942,12 @@
                 y: 664.4,
                 zIndex: 3,
                 text: [{
-                  text: that.produceInfo.shortTitle,
+                  text: that.produceInfo.title,
                   fontSize: 26,
                   color: '#000',
                   width: 410,
                   lineHeight: 40,
-                  lineNum: 2,
+                  lineNum: 1,
                 }]
               },
               {
