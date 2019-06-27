@@ -130,7 +130,7 @@
         }
       }
     }
-    .list:last-child{
+    .list:last-child {
       margin-bottom: 36rpx;
     }
   }
@@ -187,11 +187,11 @@
           </view>
           <!-- 进度条 -->
           <view class="progress-box {{status==2?'fail':''}}">
-            <view class="progress" style="width:{{(item.inviteNum/item.targetNum)*100}}%"></view>
+            <view class="progress" style="width:{{item.inviteNum/item.targetNum*100}}%"></view>
             <text class="tip" wx:if="{{status == 0}}">进行中</text>
             <text class="tip" wx:if="{{status == 1}}">已成功</text>
             <text class="tip" wx:if="{{status == 2}}">已失败</text>
-            <text class="percent">{{(item.inviteNum/item.targetNum)*100}}%</text>
+            <text class="percent">{{m1.filter((item.inviteNum/item.targetNum)*100)}}%</text>
           </view>
         </view>
       </view>
@@ -206,8 +206,9 @@
 
 <script>
   import wepy from 'wepy';
-  import path from '../../../common/path.js';
+  import path from '../../../common/path.js'
   import time from '../../../common/time.js'
+  import mywxs from '../../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '我的任务'
@@ -221,7 +222,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
-      isIphoneX:false,
+      isIphoneX: false,
       status: 0,
       taskOverMoney: '',
       targetNum: '',
@@ -229,6 +230,9 @@
       taskArr: {},
       type: ['进行中', '已成功', '已失败'],
       empty: false
+    };
+    wxs = {
+      m1: mywxs
     };
     methods = {
       choseType(e) {
