@@ -1,0 +1,122 @@
+<!--  -->
+<template>
+  <view class="navbar" style="{{'height: ' + navigationBarHeight}}">
+    <view style="{{'height: ' + statusBarHeight}}"></view>
+    <view class='title-container'>
+      <view class='capsule' wx:if="{{ back || home }}">
+        <view bindtap='back' wx:if="{{back}}">
+          <image src='../components/img/back.png' />
+        </view>
+        <view bindtap='backHome' wx:if="{{home}}">
+          <image src='../components/img/home.png' />
+        </view>
+      </view>
+      <view class='title'>{{text}}</view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Example extends wepy.component {
+    props = {
+      text: String,
+      back: true,
+      home: true
+    }
+    data = {
+      statusBarHeight: '',
+      navigationBarHeight: ''
+    };
+    components = {};
+    methods = {
+      backHome() {
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+      },
+      back() {
+        var currentPages = getCurrentPages()
+        if (currentPages.length > 1) {
+          wx.navigateBack({
+            delta: 1
+          })
+        } else {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      }
+    };
+    events = {};
+    watch = {};
+    computed = {};
+    onLoad() {
+      console.log(this.$parent.$parent.globalData.statusBarHeight)
+      this.statusBarHeight = this.$parent.$parent.globalData.statusBarHeight + 'px'
+      this.navigationBarHeight = (this.$parent.$parent.globalData.statusBarHeight + 44) + 'px'
+      this.$apply()
+    };
+    onShow() {};
+  }
+</script>
+
+<style lang='less' scoped>
+  .navbar {
+    width: 100vw;
+    background-color: #fff;
+    position: fixed;
+    z-index: 4;
+  }
+  .title-container {
+    height: 84rpx;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .capsule {
+    margin-left: 20rpx;
+    height: 64rpx;
+    border: 1rpx solid #ebebeb;
+    border-radius: 32rpx;
+    display: flex;
+    align-items: center;
+    margin-top: 4rpx;
+  }
+  .capsule>view {
+    width: 90rpx;
+    height: 64rpx;
+    position: relative;
+  }
+  .capsule>view:nth-child(2) {
+    position: relative;
+  }
+  .capsule>view:nth-child(2)::before {
+    content: '';
+    width: 2rpx;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    top: 15rpx;
+    height: 36rpx;
+  }
+  .capsule image {
+    width: 36rpx;
+    height: 36rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .title {
+    color: #000;
+    position: absolute;
+    left: 208rpx;
+    right: 208rpx;
+    font-size: 32rpx;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
