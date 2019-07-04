@@ -4,8 +4,11 @@
     <!--搜索框-->
     <view class="search-wrapper">
       <view class="search">
-        <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595" />
-        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
+        <input type="text" placeholder="搜你想要" value="{{searchValue}}" confirm-type="search" bindinput="getValue" bindconfirm="confirm" focus="{{focus}}" placeholder-style="color:#959595" />
+        <image src="{{imagePath+'search02.png'}}" class="image" wx:if="{{imagePath}}" />
+      </view>
+      <view class="clear-wrapper" catchtap="clearSearch">
+        <image src="{{imagePath+'close02@2x.png'}}" class="clear-input" wx:if="{{imagePath && searchValue.length>0}}" />
       </view>
       <view class="search-btn" @tap="searchResult">搜索</view>
     </view>
@@ -28,8 +31,8 @@
         </view>
         <!-- 可以抢还是不可以抢 -->
         <text class="can">
-                  抢
-              </text>
+                            抢
+                        </text>
         <!-- 不可以抢的遮罩 -->
         <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
           <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}" />
@@ -62,14 +65,27 @@
       empty: false,
       page: 0,
       totalPage: 0,
-      arr: []
+      arr: [],
+      focus:true,
     };
     wxs = {
       m1: mywxs
     };
     methods = {
+      clearSearch() {
+            this.focus = false
+        this.searchValue = ''
+        return 
+      },
+      confirm(e) {
+        this.searchValue = e.detail.value
+        this.page = 0
+        this.arr = []
+        this.produceItems = {}
+        this.getSeckills()
+      },
       getValue(e) {
-        this.searchValue = e.detail.value;
+        this.searchValue = e.detail.value
       },
       searchResult() {
         this.page = 0
@@ -154,19 +170,34 @@
       input {
         height: 64rpx;
         background: rgba(237, 237, 237, 0.5);
-        border-radius: 16px;
+        border-radius: 32rpx 0rpx 0rpx 32rpx;
         font-size: 32rpx;
         padding-left: 78rpx;
         color: #222;
         box-sizing: border-box;
         margin-left: 30rpx;
       }
-      image {
+      .image {
         width: 36rpx;
         height: 36rpx;
         position: absolute;
-        left: 60rpx;
         top: 14rpx;
+        left: 60rpx;
+      }
+    }
+    .clear-wrapper {
+      flex: 1;
+      -webkit-flex: 1;
+      background: rgba(237, 237, 237, 0.5);
+      height: 64rpx;
+      border-radius: 0px 32rpx 32rpx 0rpx;
+      display: -webkit-flex;
+      -webkit-align-items: center;
+      -webkit-justify-content: center;
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        z-index: 99999;
       }
     }
     .search-btn {

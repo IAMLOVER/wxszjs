@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 27,
+			"current": 28,
 			"list": [
 				{
 					"id": 0,
@@ -224,6 +224,13 @@
 					"id": -1,
 					"name": "商品已经下架",
 					"pathName": "pages/undercarriage/undercarriage",
+					"query": "id=52&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品搜索",
+					"pathName": "pages/search/search",
 					"query": "id=52&type=1",
 					"scene": null
 				}

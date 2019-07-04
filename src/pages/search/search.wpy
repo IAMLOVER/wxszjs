@@ -19,19 +19,34 @@
         input {
           height: 64rpx;
           background: rgba(237, 237, 237, 0.5);
-          border-radius: 16px;
+          border-radius: 32rpx 0rpx 0rpx 32rpx;
           font-size: 32rpx;
           padding-left: 78rpx;
           color: #222;
           box-sizing: border-box;
           margin-left: 30rpx;
         }
-        image {
+        .image {
           width: 36rpx;
           height: 36rpx;
           position: absolute;
-          left: 60rpx;
           top: 14rpx;
+          left: 60rpx;
+        }
+      }
+      .clear-wrapper {
+        flex: 1;
+        -webkit-flex: 1;
+        background: rgba(237, 237, 237, 0.5);
+        height: 64rpx;
+        border-radius: 0px 32rpx 32rpx 0rpx;
+        display: -webkit-flex;
+        -webkit-align-items: center;
+        -webkit-justify-content: center;
+        image{
+          width: 36rpx;
+          height: 36rpx;
+          z-index: 99999;
         }
       }
       .search-btn {
@@ -244,8 +259,11 @@
     <!--搜索框-->
     <view class="search-wrapper">
       <view class="search">
-        <input type="text" placeholder="搜你想要" bindinput="getValue" auto-focus="{{true}}" placeholder-style="color:#959595" />
-        <image src="{{imagePath+'search02.png'}}" wx:if="{{imagePath}}" />
+        <input type="text" placeholder="搜你想要" value="{{seachValue}}" cursor-spacing="140" focus="{{focus}}" confirm-type="search" bindinput="getValue" bindconfirm="confirm" placeholder-style="color:#959595" />
+        <image src="{{imagePath+'search02.png'}}" class="image" wx:if="{{imagePath}}" />
+      </view>
+      <view class="clear-wrapper" catchtap="clearSearch" >
+        <image src="{{imagePath+'close02@2x.png'}}" class="clear-input" wx:if="{{imagePath && seachValue.length>0}}" />
       </view>
       <view class="search-btn" @tap="searchResult">搜索</view>
     </view>
@@ -336,11 +354,33 @@
       page: 0,
       totalPage: 0,
       seachValue: '',
+      focus:true,
     };
     wxs = {
       m1: mywxs
     };
     methods = {
+      clearSearch() {
+        this.focus = false
+        this.seachValue = ''
+        return 
+      },
+      confirm(e) {
+        this.seachValue = e.detail.value
+        if (this.showProduce) {
+          this.empty = false
+          this.page = 0
+          this.produceArr = {}
+          this.arrForProduce = []
+          this.getProdece()
+        } else {
+          this.empty = false
+          this.page = 0
+          this.storeArr = {}
+          this.arrForStore = []
+          this.getStore()
+        }
+      },
       showProduce() {
         this.empty = false
         this.showProduce = true
@@ -369,7 +409,7 @@
         }
       },
       getValue(e) {
-        this.seachValue = e.detail.value;
+        this.seachValue = e.detail.value
       },
       goDetails(e) {
         if (e.currentTarget.dataset.type == 0) {
@@ -406,7 +446,7 @@
         data: {
           keyWord: that.seachValue,
           page: that.page,
-          sortType:'1',
+          sortType: '1',
           size: 15
         },
         success: res => {
@@ -442,7 +482,7 @@
         dataType: 'json',
         data: {
           keyWord: that.seachValue,
-          sortType:'1',
+          sortType: '1',
           size: 15,
           page: that.page
         },

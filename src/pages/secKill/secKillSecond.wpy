@@ -624,7 +624,6 @@
         });
       },
       rightNow(e) {
-        this.showShadow = true
         this.rightProduceId = e.currentTarget.dataset.id
         this.collocationId = e.currentTarget.dataset.collocationid
         this.getRightProduceClass()
@@ -769,11 +768,24 @@
         },
         dataType: 'json',
         success: res => {
-          that.rightProduceInfo = res.data.data.goodsInfo.goods
+         if(res.data.code == '1000'){
+          that.showShadow = true
+            that.rightProduceInfo = res.data.data.goodsInfo.goods
           that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
           that.typeId = that.goodsClassList[this.activeIndex].id
           that.collocation = res.data.data.goodsInfo.collocation
           that.$apply()
+         }
+         else{
+          that.showShadow = false
+          wepy.showToast({
+          title: res.data.message, //提示的内容,
+          icon: 'none', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        });
+         }
         },
         fail: () => {},
         complete: () => {}

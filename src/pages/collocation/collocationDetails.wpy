@@ -968,10 +968,8 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
-          console.log(res)
           //促销品信息
           that.pmtCollocation = res.data.data.pmtCollocation
           that.promotion = res.data.data.promotion
