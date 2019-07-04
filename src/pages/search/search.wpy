@@ -361,8 +361,13 @@
     };
     methods = {
       clearSearch() {
-        this.focus = false
-        this.seachValue = ''
+        var that = this
+        that.focus = false
+        that.seachValue = ''
+        setTimeout(() => {
+          that.focus = true
+        that.$apply()
+        }, 1000)
         return 
       },
       confirm(e) {

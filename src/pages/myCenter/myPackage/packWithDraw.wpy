@@ -199,6 +199,7 @@ page{
     margin-left: -28rpx;
   }
 }
+
 </style>
 <template>
   <view class="page">
@@ -247,7 +248,7 @@ page{
             <view class="label-2__icon-checked" style="opacity:{{true ? 1: 0}}"></view>
         </view>
         <view style="color: #959595;">继续即表示同意</view>
-        <view style="color: #F25664;">《神州集市钱包服务协议》</view>
+        <view style="color: #F25664;" @tap="goArgee">《神州集市钱包服务协议》</view>
     </view>
 
     <!-- 手机验证的弹出框 -->
@@ -299,6 +300,9 @@ export default class Index extends wepy.page {
     code:''
   };
   methods = {
+    goArgee(){
+      this.$navigate('./drawArgee')
+    },
     closeShadow(){
       this.showShadow = false
     },

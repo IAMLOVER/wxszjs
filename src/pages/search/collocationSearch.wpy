@@ -310,8 +310,13 @@
     };
     methods = {
       clearSearch() {
-        this.focus = false
-        this.searchValue = ''
+        var that = this
+        that.focus = false
+        that.searchValue = ''
+        setTimeout(() => {
+          that.focus = true
+        that.$apply()
+        }, 1000)
         return 
       },
       confirm(e) {

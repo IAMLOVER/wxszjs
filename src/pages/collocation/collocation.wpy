@@ -259,7 +259,7 @@
           </view>
           <view class="item-center">
             <view class="center-img" style="position:relative">
-              <image src="{{preImagePath + item.goodsPicUrl1}}" wx:if="{{preImagePath && item.goodsPicUrl1}}" />
+              <image src="{{preImagePath + item.goodsPicUrl1}}" lazy-load wx:if="{{preImagePath && item.goodsPicUrl1}}" />
               <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.goodsCount}}件</text>
             </view>
             <view class="center-title">
@@ -320,7 +320,7 @@
           </view>
           <view class="item-center">
             <view class="center-img" style="position:relative">
-              <image src="{{preImagePath + item.goodsPicUrl1}}" wx:if="{{preImagePath && item.goodsPicUrl1}}" />
+              <image src="{{preImagePath + item.goodsPicUrl1}}" lazy-load wx:if="{{preImagePath && item.goodsPicUrl1}}" />
               <text style="border-radius:8rpx 4rpx 4rpx 0rpx;padding:4rpx 0rpx;box-size:border-box;min-width:56rpx;height:32rpx;text-align:center;background:#f25664;font-size:24rpx;color:#fff;display:inline-block;position:absolute;top:0;left:0">{{item.goodsCount}}件</text>
             </view>
             <view class="center-title">

@@ -58,6 +58,7 @@
         'pages/myCenter/myPackage/packWithDraw',
         'pages/myCenter/myPackage/drawSuccess',
         'pages/myCenter/myPackage/drawFail',
+        'pages/myCenter/myPackage/drawArgee',
         'pages/myCenter/myShop/myShop',
         'pages/myCenter/myShop/myShopAtmosphere',
         'pages/myCenter/myShop/myShopManagement',
