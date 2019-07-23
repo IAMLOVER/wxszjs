@@ -176,7 +176,7 @@ export default class Index extends wepy.page {
        }
        if(this.warn){
          wx.request({
-           url: this.apiPath + '/szmktuser/user/setaddress', 
+           url: this.apiPath + '/szmktuserservice/user/setaddress', 
            data: {
              userid: this.$parent.globalData.userId,
              name: this.userName,
@@ -227,7 +227,7 @@ export default class Index extends wepy.page {
   getUserAddress(){
     var that = this 
     wx.request({
-      url: this.apiPath + '/szmktuser/user/getaddress', 
+      url: this.apiPath + '/szmktuserservice/user/getaddress', 
       data: {
         userid:that.userId
       }, 

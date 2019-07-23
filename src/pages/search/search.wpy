@@ -289,7 +289,7 @@
                 <text class="mc">{{m1.filter(item.minPrice*0.01)}}</text>
                 <i class="mi" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">{{m1.filter(item.minMktPrice*0.01)}}</i>
               </view>
-              <view data-store="{{item.storeId}}">
+              <view data-store="{{item.storeId}}" catchtap="goShop">
                 <text class="item-store">{{item.storeName}}</text>
                 <image src="../../images/index/more04.png" class="jiantou" />
               </view>
@@ -360,6 +360,9 @@
       m1: mywxs
     };
     methods = {
+      goShop(e){
+        this.$navigate('../shop/shopDetail',{id:e.currentTarget.dataset.store})
+      },
       clearSearch() {
         var that = this
         that.focus = false

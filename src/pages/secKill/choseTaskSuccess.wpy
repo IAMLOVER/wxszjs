@@ -451,7 +451,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -512,7 +511,7 @@
     getTaskDetail() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/target/randomtarget',
+        url: that.apiPath + '/szmktuserservice/target/randomtarget',
         data: {
           targetid: that.taskForShare.targetid
         },
@@ -522,6 +521,7 @@
           console.log(res)
           that.otherArr = res.data.data
           that.$apply()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -659,7 +659,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

@@ -828,11 +828,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                                                <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                                                <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                                   <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                                               </view>
-                                               </label>
+                                                            <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                                            <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                                               <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                                                           </view>
+                                                           </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -853,9 +853,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                                  </button>
+                                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                              </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -900,16 +900,22 @@
       if (options.scene) {
         this.produceId = decodeURIComponent(options.scene)
       }
-      this.getProduceInfo()
-      // this.checkedIsHave()
     }
     onHide() {
-      this.checkedIsHave()
+      if (this.$parent.globalData.userId) {
+        this.checkedIsHave()
+      }
     }
     onShow() {
-      this.checkedIsHave()
+      var that = this
+      that.mini = that.$parent.globalData.mini
+      if (that.$parent.globalData.userId) {
+        that.checkedIsHave()
+      }
+      that.getProduceInfo()
     }
     data = {
+      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -947,12 +953,12 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
       },
-      onCreatePoster() {},
+      onCreatePoster() {
+      },
       onPosterFail(err) {},
       onPosterSuccess(e) {
         this.showShareShadow = false
@@ -1067,6 +1073,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account <= 0) {
           wx.showToast({
             title: '请选择最少数量',
@@ -1156,7 +1166,8 @@
             wx.removeStorageSync('taskHaveCollocation')
           }
           that.$apply()
-          this.getStorePhone()
+          that.getStorePhone()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {
@@ -1180,8 +1191,12 @@
     // 领取任务
     receiveTask() {
       var that = this
+      if (that.mini == false) {
+        that.$navigate('../bind/bind')
+        return
+      }
       wx.request({
-        url: that.apiPath + '/szmktuser/target/usergettarget',
+        url: that.apiPath + '/szmktuserservice/target/usergettarget',
         data: {
           'userid': that.$parent.globalData.userId,
           'targetid': that.choseTaskId
@@ -1216,7 +1231,7 @@
             that.$apply()
           } else {
             wx.showToast({
-              title: '领取失败',
+              title: res.data.message,
               icon: 'none',
               duration: 2000,
               mask: true,
@@ -1232,7 +1247,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -1280,7 +1295,7 @@
     checkedIsHave() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/target/usergettargetcount',
+        url: that.apiPath + '/szmktuserservice/target/usergettargetcount',
         data: {
           userid: that.$parent.globalData.userId,
           goodsid: that.produceId
@@ -1315,7 +1330,7 @@
       }
       //1.未领取任务并且该商品没有任何搭配
       if (userTargetId == '' && !that.collocationFlag && !that.pmtCollocationFlag) {
-        that.codeType = 0
+        that.codeType = 3
         id = that.produceId
       }
       //1.1未领取任务并且该商品有一种搭配
@@ -1325,7 +1340,7 @@
       }
       //2.领取了该商品的任务，但是该商品没有任何搭配
       if (userTargetId && !that.collocationFlag && !that.pmtCollocationFlag) {
-        that.codeType = 3
+        that.codeType = 4
         id = that.produceId + '_' + userTargetId
       }
       //3.领取了该商品的任务，而且该商品有引流品的搭配
@@ -1397,7 +1412,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,
@@ -1482,6 +1497,7 @@
               }
             ],
           }
+          console.log(that.posterConfig)
           that.$apply()
         },
         fail: () => {},

@@ -121,7 +121,7 @@ export default class Index extends wepy.page {
     });
     
     wx.request({
-      url: that.apiPath + '/szmktuser/external/authorizeForWeb', //开发者服务器接口地址",
+      url: that.apiPath + '/szmktuserservice/external/authorizeForWeb', //开发者服务器接口地址",
       data: {
         userid: that.$parent.globalData.userId,
         code: that.webToken

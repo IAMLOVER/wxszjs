@@ -102,7 +102,9 @@ export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '企业资料'
   };
-  onLoad() {
+  onLoad(options) {
+    console.log(options)
+    this.storeId = options.id
     var companyName = wx.getStorage({
       key: 'companyName',
       success: (result)=>{
@@ -115,7 +117,8 @@ export default class Index extends wepy.page {
   data = {
      imagePath:path.path.imagePath,
      apiPath:path.path.apiPath,
-     companyInfo:{}
+     companyInfo:{},
+     storeId:''
   };
   methods = {}; 
   getCompanyInfo(String){
@@ -127,9 +130,10 @@ export default class Index extends wepy.page {
     
     var that = this
     wx.request({
-      url: that.apiPath + '/sbchcompany/company/regcompany', 
+      url: that.apiPath + '/szmktstore/storeInfo/company', 
       data: {
-        company:String
+        company:String,
+        storeId:that.storeId
       }, 
       method: 'GET',
       dataType: 'json', 

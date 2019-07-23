@@ -214,7 +214,7 @@
     getCoupon() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/queryusernewcoupon',
+        url: that.apiPath + '/szmktuserservice/user/queryusernewcoupon',
         data: {
           userid: that.$parent.globalData.userId
         },

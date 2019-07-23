@@ -760,6 +760,7 @@
       navigationBarTitleText: "商品详情",
     };
     data = {
+      mini:true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -833,6 +834,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account * this.pmtCollocation.promotionCount > this.wareHouseStock || this.account * this.pmtCollocation.goodsCount > this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '不好意思,商品库存不足',
@@ -878,7 +883,10 @@
       that.userTargetId = options.userTargetId
         that.getPmtCollocation()
     };
-    onShow() {};
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    };
     //获取促销品搭配详情
     getPmtCollocation() {
       var that = this
@@ -919,7 +927,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },

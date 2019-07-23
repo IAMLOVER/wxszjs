@@ -2,16 +2,28 @@
 	"description": "A WePY project",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
+		"es6": true,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
-		"autoAudits": false
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": false,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"appid": "wxc24abbe285a3542d",
 	"projectname": "wxstore",
 	"miniprogramRoot": "dist/",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.7.7",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 28,
+			"current": 33,
 			"list": [
 				{
 					"id": 0,
@@ -232,6 +244,41 @@
 					"name": "商品搜索",
 					"pathName": "pages/search/search",
 					"query": "id=52&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "绑定手机",
+					"pathName": "pages/bind/bind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "单品",
+					"pathName": "pages/collocation/collocationSingle",
+					"query": "scene= 95_1_768",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "单品",
+					"pathName": "pages/collocation/collocationSingle",
+					"query": "id=95_1_768",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "单品",
+					"pathName": "pages/collocation/channelSingle",
+					"query": "id=95&type=1&userTargetId=768",
+					"scene": null
+				},
+				{
+					"id": 33,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "scene=FVIT2CFJ",
 					"scene": null
 				}
 			]

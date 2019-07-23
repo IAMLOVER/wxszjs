@@ -1,0 +1,540 @@
+<!--  -->
+<template>
+  <view class="page">
+    <view class="top-title">绑定手机号</view>
+    <view class="top-tip">为了提高您的购物体验，请绑定手机号码</view>
+    <view class="top-tip">绑定后即可通过微信快捷登录</view>
+    <view class="phone">
+      <input type="tel" value="{{phone}}" bindinput="phoneInput" placeholder="请输入你的手机号" />
+    </view>
+    <view class="code-wrapper">
+      <input type="number" value="{{code}}" bindinput="codeInput" placeholder="请输入验证码" />
+      <button @tap="getCode">{{btnText}}</button>
+    </view>
+    <view class="bind-btn" @tap="last">绑定</view>
+    <view class="shadow" wx:if="{{showShadow}}">
+      <view class="content">
+        <view class="tip">您输入的手机号码已绑定了其他微信账号，是否将关联的微信账号替换为本微信号</view>
+        <view class="btns">
+          <view class="cancle-btn" @tap="cancle">取消</view>
+          <view class="sure-btn" @tap="sure">替换</view>
+        </view>
+      </view>
+    </view>
+    <view class="shadow" wx:if="{{showChangeShadow}}">
+      <view class="content" style="height:480rpx">
+        <view class="tip">该微信已有用户信息，进行绑定后将为您覆盖原微信用户信息，原微信信息将不保留（包括头像、昵称、订单信息、钱包余额等），是否确认绑定操作？</view>
+        <view class="btns">
+          <view class="cancle-btn" @tap="cancle_change">取消</view>
+          <view class="sure-btn" @tap="sure_change">确定</view>
+        </view>
+      </view>
+    </view>
+    <view class='container' wx:if="{{couponNum.show}}">
+      <view class="main-red">
+        <image src="{{imagePath+'bg_02.png'}}" wx:if="{{imagePath}}" class="bg-top" />
+        <view class="tip">恭喜你获得一张优惠券</view>
+        <view class="red">
+          <view class="left">
+            <view><text style="font-size:50rpx;">{{m1.filter(couponNum.privilege*0.01)}}</text><text>满{{m1.filter(couponNum.standard*0.01)}}可使用</text></view>
+            <view style="font-size:24rpx;">(用于购买"大满减"商品)</view>
+          </view>
+          <navigator url="../fullReduction/fullReduction" class="right">
+            <view>去使用</view>
+          </navigator>
+        </view>
+        <view class="msg">已存入“我的-我的优惠券”中</view>
+        <!-- 倒数5秒的效果 -->
+        <view style="text-align:center;font-size:28rpx;color:#fff;padding-top:80rpx;">知道了（{{secend}}s）</view>
+      </view>
+      <image src="{{imagePath+'close.png'}}" wx:if="{{imagePath}}" @tap="closeShadow" class="close" />
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import path from '../../common/path.js'
+  import redPacket from '../../components/redPacket'
+  import mywxs from '../../wxs/mywxs.wxs'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '绑定手机'
+    };
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      codePath: path.path.codePath,
+      showShadow: false,
+      showChangeShadow: false,
+      btnText: '获取验证码',
+      number: 60,
+      phone: '',
+      code: '',
+      newcoupon: {},
+      couponNum: {
+        standard: '',
+        privilege: '',
+        show: false
+      },
+      secend: 5,
+      interval:''
+    }
+    wxs = {
+      m1: mywxs
+    }
+    methods = {
+      // 验证码的点击事件
+      getCode() {
+        if (!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))) {
+          wx.showToast({
+            title: '请输入正确手机号',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        } else {
+          wx.request({
+            url: this.apiPath + '/szmktuserservice/login/send/phoneCode',
+            data: {
+              phone: this.phone
+            },
+            method: 'GET',
+            dataType: 'json',
+            success: res => {
+              console.log(res)
+              if (res.data.code == 200) {
+                // this.code = res.data.data
+                this.disabledCodeBtn = true;
+                let interval = setInterval(() => {
+                  if (this.number > 0) {
+                    this.number = this.number - 1;
+                    this.btnText = this.number + 's';
+                    this.$apply();
+                  } else {
+                    this.number = 60;
+                    this.disabledCodeBtn = false;
+                    this.btnText = '获取验证码'
+                    clearInterval(interval);
+                    this.$apply();
+                  }
+                }, 1000);
+              } else {
+                wx.showToast({
+                  title: res.data.message,
+                  duration: 2000,
+                  icon: 'none',
+                  mask: true,
+                  success: res => {}
+                });
+              }
+            },
+            fail: () => {},
+            complete: () => {}
+          });
+        }
+      },
+      last() {
+        var that = this
+        if (!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(that.phone))) {
+          wx.showToast({
+            title: '请输入正确手机号',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        }
+        if (!that.code) {
+          wx.showToast({
+            title: '请输入验证码',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        }
+        wx.showLoading({
+          title: '绑定中...', //提示的内容,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        })
+        wx.request({
+          url: that.apiPath + '/szmktuserservice/login/bind/phone/byMini',
+          data: {
+            phoneNo: that.phone,
+            phoneCode: that.code,
+            reCode: that.$parent.globalData.reCode
+          },
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+            if (res.data.code == 1000) {
+              that.$parent.globalData.mini = true
+              that.$parent.globalData.userId = res.data.data.userid
+              that.$parent.globalData.identityType = res.data.data.identityType
+              that.$parent.globalData.key = res.data.data.sessionkey
+              wx.setStorageSync('userId', res.data.data.userid)
+              if (res.data.data.newcoupon) {
+                that.newcoupon = res.data.data.newcoupon
+                that.couponNum.standard = that.newcoupon.standard
+                that.couponNum.privilege = that.newcoupon.privilege
+                that.couponNum.show = true
+                that.$apply()
+                that.interval = setInterval(() => {
+                  if (that.secend > 0) {
+                    that.secend = that.secend - 1
+                    console.log(that.secend)
+                    that.$apply()
+                  } else {
+                    that.couponNum.show = false
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                    that.$apply()
+                    clearInterval(that.interval)
+                  }
+                }, 1000)
+              }
+            }
+            if (res.data.code == 3004) {
+              that.showShadow = true
+              that.$parent.globalData.userId = res.data.data
+              that.$apply()
+            }
+            if (res.data.code == 3005) {
+              that.showChangeShadow = true
+              that.$parent.globalData.userId = res.data.data
+              that.$apply()
+            }
+          },
+          fail: () => {},
+          complete: () => {
+            wx.hideLoading()
+          }
+        });
+      },
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      codeInput(e) {
+        this.code = e.detail.value
+      },
+      sure() {
+        var that = this
+        wx.request({
+          url: that.apiPath + '/szmktuserservice/login/reBind/weChat/byMini', //开发者服务器接口地址",
+          data: {
+            reCode: that.$parent.globalData.reCode,
+            userid: that.$parent.globalData.userId
+          }, //请求的参数",
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+            if (res.data.code == 1000) {
+              that.$parent.globalData.mini = true
+              that.$parent.globalData.userId = res.data.data.userid
+              that.$parent.globalData.identityType = res.data.data.identityType
+              that.$parent.globalData.key = res.data.data.sessionkey
+              wx.setStorageSync('userId', res.data.data.userid)
+              wepy.showToast({
+                title: '操作成功', //提示的内容,
+                icon: 'success', //图标,
+                duration: 2000, //延迟时间,
+                mask: true, //显示透明蒙层，防止触摸穿透,
+                success: res => {}
+              })
+              setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1500);
+            } else {
+              wepy.showToast({
+                title: res.data.message, //提示的内容,
+                icon: 'none', //图标,
+                duration: 2000, //延迟时间,
+                mask: true, //显示透明蒙层，防止触摸穿透,
+                success: res => {}
+              });
+            }
+          },
+          fail: () => {},
+          complete: () => {
+            that.showShadow = false
+            that.showChangeShadow = false
+          }
+        });
+      },
+      sure_change() {
+        var that = this
+        wx.request({
+          url: that.apiPath + '/szmktuserservice/login/reBind/weChat/byMini', //开发者服务器接口地址",
+          data: {
+            reCode: that.$parent.globalData.reCode,
+            userid: that.$parent.globalData.userId
+          }, //请求的参数",
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+            if (res.data.code == 1000) {
+              that.$parent.globalData.mini = true
+              that.$parent.globalData.userId = res.data.data.userid
+              that.$parent.globalData.identityType = res.data.data.identityType
+              that.$parent.globalData.key = res.data.data.sessionkey
+              wx.setStorageSync('userId', res.data.data.userid)
+              wepy.showToast({
+                title: '操作成功', //提示的内容,
+                icon: 'success', //图标,
+                duration: 2000, //延迟时间,
+                mask: true, //显示透明蒙层，防止触摸穿透,
+                success: res => {}
+              })
+              setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1500);
+            } else {
+              wepy.showToast({
+                title: res.data.message, //提示的内容,
+                icon: 'none', //图标,
+                duration: 2000, //延迟时间,
+                mask: true, //显示透明蒙层，防止触摸穿透,
+                success: res => {}
+              });
+            }
+          },
+          fail: () => {},
+          complete: () => {
+            that.showShadow = false
+            that.showChangeShadow = false
+          }
+        });
+      },
+      cancle() {
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      cancle_change() {
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      closeShadow() {
+        this.couponNum.show = false
+        clearInterval(this.interval)
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    }
+  }
+</script>
+
+<style lang='less'>
+  page {
+    background-color: #fff;
+    padding: 110rpx;
+    box-sizing: border-box;
+  }
+  .top-title {
+    font-size: 56rpx;
+    color: #222;
+    font-weight: 600;
+  }
+  .top-tip {
+    font-size: 28rpx;
+    color: #999;
+    line-height: 32rpx;
+    line-height: 60rpx;
+  }
+  .phone {
+    margin-top: 50rpx;
+    input {
+      width: 530rpx;
+      height: 92rpx;
+      line-height: 92rpx;
+      color: #222;
+      border: none;
+      outline: none;
+      border-bottom: 2rpx solid #f5f5f5;
+    }
+  }
+  .code-wrapper {
+    width: 530rpx;
+    height: 92rpx;
+    border-bottom: 2rpx solid #f5f5f5;
+    display: flex;
+    display: -webkit-flex;
+    margin-top: 30rpx;
+    input {
+      height: 92rpx;
+      line-height: 92rpx;
+      flex: 2;
+      -webkit-flex: 2;
+    }
+    button {
+      width: 180rpx;
+      height: 64rpx;
+      line-height: 64rpx;
+      border: 2rpx solid #959595;
+      box-sizing: border-box;
+      border-radius: 32rpx;
+      font-size: 24rpx;
+      color: #959595;
+      background-color: #fff;
+      margin-top: 18rpx;
+    }
+  }
+  .bind-btn {
+    width: 530rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    color: #fff;
+    background-image: linear-gradient(-136deg, #EB4D4E 0%, #D971D6 100%);
+    border-radius: 48rpx;
+    font-size: 32rpx;
+    margin-top: 86rpx;
+  }
+  .shadow {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    .content {
+      width: 620rpx;
+      height: 364rpx;
+      background-color: #fff;
+      border-radius: 12rpx;
+      padding: 60rpx 40rpx 0rpx 40rpx;
+      box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      margin-top: -182rpx;
+      margin-left: -310rpx;
+      .tip {
+        font-size: 32rpx;
+        color: #222;
+      }
+      .btns {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+        view {
+          width: 250rpx;
+          height: 84rpx;
+          border: 1px solid #eb4d4e;
+          border-radius: 21px;
+          color: #eb4d4e;
+          text-align: center;
+          line-height: 84rpx;
+          margin-top: 40rpx;
+          box-sizing: border-box;
+        }
+        view:last-child {
+          background-color: #eb4d4e;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999999999999999999999;
+    .main-red {
+      width: 556rpx;
+      height: 630rpx;
+      background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/bg_03.png');
+      background-size: 556rpx;
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -315rpx;
+      margin-left: -278rpx;
+      .bg-top {
+        width: 320rpx;
+        height: 136rpx;
+        margin: 0 auto;
+        display: block;
+        margin-top: -60rpx;
+      }
+      .tip {
+        font-size: 30rpx;
+        color: #F25664;
+        text-align: center;
+        margin-top: 30rpx;
+      }
+      .red {
+        width: 420rpx;
+        height: 124rpx;
+        background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/coupon.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin-top: 30rpx;
+        margin-left: 54rpx;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        align-items: center;
+        -webkit-align-items: center;
+        .left {
+          -webkit-flex: 2;
+          -ms-flex: 2;
+          flex: 2;
+          color: #fff;
+          font-size: 26rpx;
+          line-height: 36rpx;
+          padding-left: 26rpx;
+          padding-top: 6rpx;
+        }
+        .right {
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          view {
+            font-size: 24rpx;
+            color: #fff;
+            text-align: center;
+            border-radius: 8rpx;
+            border: 2rpx solid #fff;
+            width: 90rpx;
+            height: 40rpx;
+            margin-left: 10rpx;
+          }
+        }
+      }
+      .msg {
+        font-size: 22rpx;
+        color: #959595;
+        text-align: center;
+        margin-top: 20rpx;
+      }
+    }
+    .close {
+      width: 56rpx;
+      height: 56rpx;
+      position: absolute;
+      bottom: 16.2%;
+      left: 50%;
+      margin-left: -28rpx;
+    }
+  }
+</style>

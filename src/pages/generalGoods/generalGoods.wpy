@@ -259,7 +259,7 @@
           overflow: hidden;
           view {
             float: left;
-            display:block;
+            display: block;
             padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
@@ -443,7 +443,7 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
- <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
         <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
@@ -553,9 +553,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                              <view style="font-size:20rpx;">微信好友</view>
-                            </button>
+                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                <view style="font-size:20rpx;">微信好友</view>
+                              </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -581,9 +581,9 @@
       usingComponents: {
         "poster": "../../components/miniprogram_dist/poster/index",
       }
-    };
+    }
     onLoad(options) {
-      var that = this;
+      var that = this
       that.isIphoneX = that.$parent.globalData.isIphoneX
       // 查看是否授权
       wx.getSetting({
@@ -595,14 +595,18 @@
           }
         }
       })
-      console.log(options)
       this.produceId = options.id
       if (options.scene) {
         this.produceId = decodeURIComponent(options.scene)
       }
       this.getProduceInfo()
     }
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    }
     data = {
+      mini: true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
@@ -633,7 +637,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -649,6 +652,7 @@
           detail
         } = e;
         this.posterDetail = detail
+        this.$apply()
       },
       hidePoster(e) {
         this.showPoster = false
@@ -664,11 +668,9 @@
           path: 'pages/generalGoods/generalGoods?id=' + this.produceId,
           success: function(res) {
             // 转发成功
-            console.log("转发成功:" + JSON.stringify(res));
           },
           fail: function(res) {
             // 转发失败
-            console.log("转发失败:" + JSON.stringify(res));
           }
         }
       },
@@ -685,7 +687,6 @@
       },
       //选规格
       changeIndex(e) {
-        console.log(e)
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
@@ -722,6 +723,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account <= 0) {
           wx.showToast({
             title: '请选择最少数量',
@@ -770,7 +775,6 @@
         },
         dataType: 'json',
         success: res => {
-          console.log(res)
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
             return
@@ -784,6 +788,7 @@
           that.storeId = res.data.data.goods.storeId
           that.$apply()
           that.getStorePhone()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {
@@ -795,7 +800,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -955,7 +960,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

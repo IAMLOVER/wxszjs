@@ -93,7 +93,7 @@
             position: relative;
             .remind {
               height: 24rpx;
-              padding: 0 3rpx; 
+              padding: 0 3rpx;
               min-width: 24rpx;
               border-radius: 24rpx;
               font-size: 20rpx;
@@ -173,7 +173,7 @@
   <view class="container">
     <view class="header">
       <view class="avatar">
-        <image src="{{avatarUrl}}" wx:if="{{avatarUrl}}" />
+        <image src="{{avatarUrl?avatarUrl:imagePath+'default@2x.png'}}" wx:if="{{imagePath}}" />
       </view>
       <text class="name" style="color:#fff">{{userName}}</text>
       <image style="width:96rpx;height:42rpx;bottom:124rpx;right:320rpx" src="{{imagePath+'VIP.png'}}" wx:if="{{imagePath && identityType==2}}" class="head-type" />
@@ -193,7 +193,7 @@
           </view>
         </view>
         <view class="my-order-content">
-          <navigator url="../myOrder/myOrder?type=1" class="detail">
+          <navigator url="{{mini?'../myOrder/myOrder?type=1':'../../bind/bind'}}" class="detail">
             <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_pay_sz.png');">
               <view class="remind" wx:if="{{orderForWaitPay>0}}">{{orderForWaitPay}}</view>
             </view>
@@ -201,7 +201,7 @@
               待支付
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=2" class="detail">
+          <navigator url="{{mini?'../myOrder/myOrder?type=2':'../../bind/bind'}}" class="detail">
             <view class="content-icon2" style="width:90rpx">
               <view class="remind" wx:if="{{orderForWaitSend>0}}">{{orderForWaitSend}}</view>
             </view>
@@ -209,7 +209,7 @@
               待发货
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=3" class="detail">
+          <navigator url="{{mini?'../myOrder/myOrder?type=3':'../../bind/bind'}}" class="detail">
             <view class="content-icon2" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_receipt_sz.png');">
               <view class="remind" wx:if="{{orderForWaitGet>0}}">{{orderForWaitGet}}</view>
             </view>
@@ -217,14 +217,14 @@
               待收货
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=4" class="detail">
+          <navigator url="{{mini?'../myOrder/myOrder?type=4':'../../bind/bind'}}" class="detail">
             <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_down_sz.png');">
             </view>
             <view class="content-text">
               已完成
             </view>
           </navigator>
-          <navigator url="../myOrder/myOrder?type=5" class="detail">
+          <navigator url="{{mini?'../myOrder/myOrder?type=5':'../../bind/bind'}}" class="detail">
             <view class="content-icon3" style="background-image: url('https://pictest.sqplus.cn/szjs/user/images/index/order_cancel_sz.png');">
             </view>
             <view class="content-text">
@@ -235,25 +235,25 @@
       </view>
     </view>
     <view class="items">
-      <navigator url="../myPackage/myPackage" class="item">
+      <navigator url="{{mini?'../myPackage/myPackage':'../../bind/bind'}}" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'wallet.png'}}" wx:if="{{imagePath}}" />
         </view>
         <view class="item-text">我的钱包</view>
       </navigator>
-      <navigator url="../myTask/myTask" class="item">
+      <navigator url="{{mini?'../myTask/myTask':'../../bind/bind'}}" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'task.png'}}" wx:if="{{imagePath}}" />
         </view>
         <view class="item-text">我的任务</view>
       </navigator>
-      <navigator url="../myCoupon/myCoupon" class="item">
+      <navigator url="{{mini?'../myCoupon/myCoupon':'../../bind/bind'}}" class="item">
         <view class="item-icon">
           <image src="{{imagePath+'coupon02.png'}}" wx:if="{{imagePath}}" />
         </view>
         <view class="item-text">我的优惠券</view>
       </navigator>
-      <navigator url="../myShop/myShop" class="item" wx:if="{{identityType>=1}}">
+      <navigator url="{{mini?'../myShop/myShop':'../bind/bind'}}" class="item" wx:if="{{identityType>=1}}">
         <view class="item-icon">
           <image src="{{imagePath+'store02.png'}}" wx:if="{{imagePath}}" />
         </view>
@@ -273,28 +273,39 @@
       navigationBarTextStyle: 'white'
     };
     data = {
+      mini: true,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       identityType: '',
       userName: '',
       orderForWaitPay: 0,
-      orderForWaitSend:0,
-      orderForWaitGet:0,
+      orderForWaitSend: 0,
+      orderForWaitGet: 0,
       avatarUrl: ''
     };
     methods = {
-      lookAll(){
-        this.$navigate('../myOrder/myOrder',{type:0})
+      lookAll() {
+        if (this.mini) {
+          this.$navigate('../myOrder/myOrder', {
+            type: 0
+          })
+        } else {
+          this.$navigate('../../bind/bind')
+        }
       }
     };
-    onLoad() {
-    }
+    onLoad() {}
     onShow() {
-      this.identityType = this.$parent.globalData.identityType
-      this.userName = this.$parent.globalData.userName
-      this.avatarUrl = this.$parent.globalData.avatarUrl
-      console.log(this.avatarUrl)
-      this.getOrderList()
+      var that = this
+      that.mini = that.$parent.globalData.mini
+      if (that.mini != true) {
+        return
+      }
+      that.identityType = that.$parent.globalData.identityType
+      that.userName = that.$parent.globalData.userName
+      that.avatarUrl = that.$parent.globalData.avatarUrl
+      console.log(that.avatarUrl)
+      that.getOrderList()
     }
     getOrderList() {
       var that = this
@@ -302,7 +313,7 @@
         title: '加载中',
         mask: true,
         success: res => {}
-      });
+      })
       wx.request({
         url: that.apiPath + '/szmktuser/order/queryUserOrderLite',
         data: {
@@ -311,17 +322,29 @@
         method: 'GET',
         dataType: 'json',
         success: res => {
+          wx.hideLoading()
           console.log(res)
-          that.orderForWaitPay = res.data.data[0]
-          that.orderForWaitSend = res.data.data[1]
-          that.orderForWaitGet = res.data.data[2]
-
-          that.$apply()
-          wx.hideLoading();
+          if (res.data.code == 1000) {
+            that.orderForWaitPay = res.data.data[0]
+            that.orderForWaitSend = res.data.data[1]
+            that.orderForWaitGet = res.data.data[2]
+            that.$apply()
+          } else {
+            wepy.showToast({
+              title: res.data.message, //提示的内容,
+              icon: 'none', //图标,
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {
+                console.log(res + '666')
+                wepy.hideToast()
+              }
+            })
+          }
         },
         fail: () => {},
         complete: () => {}
-      });
+      })
     }
   }
 </script>

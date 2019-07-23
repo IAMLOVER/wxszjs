@@ -190,13 +190,13 @@
     <!-- 更多数据 -->
     <view class="more-number">
       <image src="{{imagePath + 'laba.png'}}" wx:if="{{imagePath}}" />
-            <swiper autoplay="true" vertical="true" circular="true" class="swiper">
+      <swiper autoplay="true" vertical="true" circular="true" class="swiper">
         <swiper-item><text>**{{m1.filterRandom(2431)}}查看了你的专区</text></swiper-item>
         <swiper-item><text>**{{m1.filterRandom(5531)}}查看了你的专区</text></swiper-item>
         <swiper-item><text>**{{m1.filterRandom(6631)}}查看了你的专区</text></swiper-item>
         <swiper-item><text>**{{m1.filterRandom(3231)}}查看了你的专区</text></swiper-item>
       </swiper>
-      <text @tap="reset" style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
+      <text catchtap="reset" style="float:right;dispaly:inline-block;width:110rpx;height:56rpx;color:#fff;background:#EB4D4E;border-radius:28rpx;text-align:center;line-height:56rpx;margin-top:10rpx;">刷新</text>
     </view>
     <!-- 数据统计 -->
     <view class="statistics">
@@ -249,7 +249,7 @@
         </view>
       </view>
       <view class="items">
-        <view class="item" wx:for="{{hotItem}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="item" wx:for="{{hotItem}}" wx:for-item="item" @tap="goDetails" data-id="{{item.id}}" data-type="{{item.activityType}}" wx:key="{{index}}">
           <view class="item-number" wx:if="{{index == 0}}">
             <image src="{{imagePath + 'top1_sz.png'}}" wx:if="{{imagePath}}" />
           </view>
@@ -271,7 +271,7 @@
             </view>
             <view class="item-price">
               ￥{{m1.filter(item.minPrice*0.01)}}
-              <text>{{m1.filter(item.minMktPrice*0.01)}}</text>
+              <text wx:if="{{item.minMktPrice>0}}">{{m1.filter(item.minMktPrice*0.01)}}</text>
             </view>
           </view>
           <view class="item-hot">
@@ -284,7 +284,7 @@
 </template>
 
 <script>
-  import wepy from 'wepy';
+  import wepy from 'wepy'
   import path from '../../../common/path.js'
   import time from '../../../common/time.js'
   import mywxs from '../../../wxs/mywxs.wxs'
@@ -296,7 +296,6 @@
       navigationBarTextStyle: 'white'
     };
     onLoad(options) {
-      console.log(options)
       this.storeId = options.id
       this.getNumber()
       this.getHotItems()
@@ -304,19 +303,41 @@
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
-      preImagePath:path.path.preImagePath,
+      preImagePath: path.path.preImagePath,
       storeId: '',
       dataNumber: {},
       hotItem: {}
     };
     methods = {
-      reset(){
-        this.getNumber()
+      goDetails(e) {
+        if (e.currentTarget.dataset.type == 0) {
+          this.$navigate('../../generalGoods/generalGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 1) {
+          this.$navigate('../../taskGoods/taskGoods', {
+            id: e.currentTarget.dataset.id
+          })
+        } else if (e.currentTarget.dataset.type == 2) {
+          this.$navigate('../../fullReduction/fullProduceDetail', {
+            id: e.currentTarget.dataset.id
+          })
+        }
+      },
+      reset() {
+        wepy.showLoading({
+          title: '加载中', //提示的内容,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+          success: res => {}
+        })
+        setTimeout(() => {
+          wepy.hideLoading()
+        }, 1000)
       }
     }
     wxs = {
       m1: mywxs
-    };
+    }
     //获取专区数据
     getNumber() {
       var that = this
@@ -325,7 +346,6 @@
         mask: true, //显示透明蒙层，防止触摸穿透,
         success: res => {}
       })
-      
       wx.request({
         url: that.apiPath + '/szmktstore/storeInfo/statistics', //开发者服务器接口地址",
         data: {
@@ -334,9 +354,7 @@
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
-          console.log(res)
           that.dataNumber = res.data.data
-          console.log(that.dataNumber.x)
           chart.chart.draw(this, 'canvas1', {
             title: {
               text: "近7日走势分析",
@@ -376,7 +394,6 @@
         method: 'GET',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
-          console.log(res)
           that.hotItem = res.data.data.content
           that.$apply()
         },

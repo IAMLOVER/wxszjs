@@ -232,10 +232,6 @@
       border-radius: 42rpx;
       margin-right: 1rpx;
     }
-    view:last-child {
-      // border-radius: 0rpx 42rpx 42rpx 0rpx;
-      // background-image: linear-gradient(58deg, #FF624A 0%, #FF9E51 93%);
-    }
   }
   button[plain] {
     border-color: transparent !important;
@@ -323,7 +319,8 @@
     <view class="header">
       <view class="tip">距完成任务还剩</view>
       <view class="time-wrapper">
-        <view class="time">{{overTime}}</view>
+        <view class="time" wx:if="{{overTime !== '00:00:00'}}">{{overTime}}</view>
+        <view class="time" wx:if="{{overTime === '00:00:00'}}" style="font-size:36rpx">任务已结束</view>
       </view>
     </view>
     <!-- 任务进度 -->
@@ -568,7 +565,7 @@
     getGrounp() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/target/groupcontent',
+        url: that.apiPath + '/szmktuserservice/target/groupcontent',
         data: {
           targetid: that.taskForShare.id
         },
@@ -747,7 +744,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

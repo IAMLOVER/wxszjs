@@ -99,13 +99,14 @@
             background: white;
             border-top: 8rpx solid #ee4555;
             width: 690rpx;
-            height: 224rpx;
+            min-height: 224rpx;
             margin-top: 236rpx;
             z-index: 1;
             padding: 32rpx 0 0 40rpx;
             box-sizing: border-box;
             font-size: 28rpx;
             position: relative;
+            padding-bottom: 30rpx;
             .name {
                 font-size: 32rpx;
             }
@@ -377,10 +378,10 @@
             </view>
         </view>
         <!-- <view class="active-wrapper">
-                                                                      <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
-                                                                      <view><text>有无优惠券：</text><text>无</text></view>
-                                                                      <view><text>运费：</text><text>包邮</text></view>
-                                                                  </view> -->
+                                                                          <view><text>优惠活动：</text><text style="color:#f25664">满500减50</text></view>
+                                                                          <view><text>有无优惠券：</text><text>无</text></view>
+                                                                          <view><text>运费：</text><text>包邮</text></view>
+                                                                      </view> -->
         <view class="logistics-wrapper">
             <view>订单编号：{{orderInfo.orderNo}}</view>
             <view>订单时间：{{orderInfo.createTime}}</view>
@@ -464,7 +465,6 @@
                     method: 'GET',
                     dataType: 'json',
                     success: res => {
-                        console.log(res)
                         if (res.data.code == 200) {
                             wx.requestPayment({
                                 appId: res.data.data.appId,
@@ -474,13 +474,11 @@
                                 signType: 'MD5',
                                 paySign: res.data.data.paySign,
                                 success(res) {
-                                    console.log(res)
                                     that.$navigate({
                                         url: '../../payResult/paySuccess'
                                     })
                                 },
                                 fail(res) {
-                                    console.log(res)
                                     that.$navigate({
                                         url: '../../payResult/payFail'
                                     })
@@ -549,7 +547,6 @@
             }
         };
         onLoad(options) {
-            console.log(options)
             this.isIphoneX = this.$parent.globalData.isIphoneX
             this.orderNo = options.id
             wx.setStorageSync('orderNo', this.orderNo)
@@ -565,7 +562,6 @@
                 method: 'GET',
                 dataType: 'json',
                 success: res => {
-                    console.log(res)
                     that.orderInfo = res.data.data
                     that.orderInfo.createTime = time.formatTime(that.orderInfo.createTime, 'Y-M-D h:m:s')
                     that.interval = setInterval(() => {

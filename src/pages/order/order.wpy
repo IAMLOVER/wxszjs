@@ -15,7 +15,7 @@
     width: 690rpx;
     margin: 0 auto;
     background-color: #fff;
-    height: 224rpx;
+    min-height: 224rpx;
     font-size: 28rpx;
     border-top: 8rpx solid #EE4555;
     border-radius: 8rpx 8rpx;
@@ -235,7 +235,6 @@
               <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
               <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
               <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.goodNeedCount * pay.count}}</view>
-
             </view>
           </view>
         </view>
@@ -323,7 +322,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: this.apiPath + '/szmktuser/user/getaddress',
+        url: this.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.userId
         },
@@ -435,6 +434,14 @@
               fail: () => {},
               complete: () => {}
             });
+          } else {
+            wepy.showToast({
+              title: res.data.message, //提示的内容,
+              icon: 'none', //图标,
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            })
           }
         },
         fail: () => {},

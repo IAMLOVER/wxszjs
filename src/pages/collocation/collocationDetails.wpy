@@ -113,9 +113,21 @@
       font-weight: 600;
       height: 96rpx;
     }
-    .limit {
-      color: #959595;
-      font-size: 24rpx;
+    .produce-tip {
+      display: flex;
+      display: -webkit-flex;
+      .limit {
+        color: #959595;
+        font-size: 24rpx;
+        flex: 0.8;
+        -webkit-flex:0.8;
+        justify-items: flex-start;
+        -webkit-justify-items: flex-start;
+      }
+      .limit:first-child{
+        flex: 0.6;
+        -webkit-flex:0.6;
+      }
     }
     .share {
       color: #F25664;
@@ -164,10 +176,27 @@
       .product-img {
         flex: 1;
         -webkit-flex: 1;
+        position: relative;
         image {
           width: 170rpx;
           height: 170rpx;
           border-radius: 16rpx;
+        }
+        .goodsCount {
+          border-radius: 4px 2px 2px 0px;
+          padding: 2px 0px;
+          box-sizing: border-box;
+          min-width: 28px;
+          height: 32rpx;
+          line-height: 26rpx;
+          text-align: center;
+          background: #f25664;
+          font-size: 12px;
+          color: #fff;
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
         }
       }
       .product-details {
@@ -292,8 +321,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    // z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5); // z-index: 9999;
     left: 0;
     top: 0;
     .content {
@@ -628,7 +656,7 @@
         <text>热度{{pmtCollocation.visitNum}}</text>
       </view>
     </view>
-    <!-- 商品名称以及限购 -->
+    <!-- 商品名称以及分享 -->
     <view class="main">
       <view class="produce-name">
         {{promotion.title}}
@@ -636,6 +664,9 @@
       <view class="produce-tip">
         <view class="limit">
           邮费：包邮
+        </view>
+        <view class="limit">
+          数量：{{pmtCollocation.promotionCount}}件
         </view>
       </view>
       <view class="share" @tap="openShareShadow">
@@ -653,6 +684,7 @@
       <view class="product">
         <view class="product-img">
           <image src="{{preImagePath + produceInfo.picUrl1}}" wx:if="{{preImagePath && produceInfo.picUrl1}}" />
+          <view class="goodsCount">{{pmtCollocation.goodsCount}}件</view>
         </view>
         <view class="product-details">
           <view class="title">
@@ -679,18 +711,18 @@
       </view>
     </view>
     <!-- 商品详情 -->
-    <rich-text wx:if="{{active == 1}}" nodes="{{promotion.description}}"></rich-text>
-    <rich-text wx:if="{{active == 2}}" nodes="{{produceInfo.description}}"></rich-text>
+    <rich-text style="min-height:100%" wx:if="{{active == 1}}" nodes="{{promotion.description}}"></rich-text>
+    <rich-text style="min-height:100%" wx:if="{{active == 2}}" nodes="{{produceInfo.description}}"></rich-text>
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-                                  <view class="kefu">
-                                <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                                <view>客服</view>
-                              </view>
-                              </button>
+              <view class="kefu">
+                  <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                   <view>客服</view>
+              </view>
+            </button>
       <view class="skill-btn" @tap="rightNow">
-        <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
+        <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01*pmtCollocation.promotionCount + produceInfo.minPrice*0.01*pmtCollocation.goodsCount)}})</text>
       </view>
     </view>
     <!-- 点击马上抢出现的弹出框 -->
@@ -763,9 +795,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                          <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                        </button>
+                                                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                      <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                    </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -793,6 +825,7 @@
       }
     };
     data = {
+      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -824,7 +857,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -850,15 +882,17 @@
           console.log(ops.target)
         }
         return {
-          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了超值组合，快来看看吧',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           path: 'pages/collocation/collocationDetails?id=' + this.collocationId,
           success: function(res) {},
           fail: function(res) {}
         }
       },
-      goCome(e){
-        this.$navigate('../taskGoods/taskGoods',{id:e.currentTarget.dataset.id})
+      goCome(e) {
+        this.$navigate('../taskGoods/taskGoods', {
+          id: e.currentTarget.dataset.id
+        })
       },
       changeActive(e) {
         this.active = e.currentTarget.dataset.active
@@ -907,6 +941,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account * this.pmtCollocation.promotionCount > this.wareHouseStock || this.account * this.pmtCollocation.goodsCount > this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '不好意思,商品库存不足',
@@ -953,7 +991,10 @@
       this.isIphoneX = this.$parent.globalData.isIphoneX
       this.getCollocation()
     };
-    onShow() {};
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    }
     //获取搭配详情
     getCollocation() {
       var that = this
@@ -982,6 +1023,7 @@
           //促销商品的数量
           that.wareHouseStock = res.data.data.wareHouseStock
           that.$apply()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -991,7 +1033,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -1106,7 +1148,7 @@
                 y: 82.4,
                 zIndex: 2,
                 text: [{
-                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了超值组合，快来看看吧',
                   fontSize: 27,
                   color: '#fff',
                   opacity: 1,
@@ -1149,7 +1191,7 @@
                 y: 660,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看组合详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

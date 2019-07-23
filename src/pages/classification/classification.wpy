@@ -138,6 +138,19 @@
         }
       }
     }
+    .empty{
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 150rpx;
+      image{
+        width: 400rpx;
+        height: 300rpx;
+      }
+      view{
+        font-size: 28rpx;
+        color: #959595;
+      }
+    }
   }
   /*隐藏滚动条*/
    ::-webkit-scrollbar {
@@ -226,13 +239,17 @@
           </view>
         </scroll-view>
       </view>
+      <view class="empty" wx:if="{{classifyProduce.length<=0}}">
+        <image src="{{imagePath + 'null_gift@2x.png'}}" wx:if="{{imagePath}}"/>
+        <view>小集正在为你筹备更多超值商品</view>
+      </view>
     </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy';
-  import path from '../../common/path.js';
+  import path from '../../common/path.js'
   import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
@@ -241,8 +258,8 @@
       backgroundTextStyle: 'dark',
     };
     onLoad() {
-      this.getClass();
-      this.getClassfiyProduce();
+      this.getClass()
+      this.getClassfiyProduce()
     }
     data = {
       imagePath: path.path.imagePath,

@@ -552,7 +552,7 @@
         <!-- 用户操作提示是否符合满减要求 -->
         <view class="tip">
           <text wx:if="{{haveCoupon}}">
-                                         <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
+                                             <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)<=0}}">已减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           <text wx:if="{{m1.filter(activityInfo.standard*0.01-money)>0}}"> 还需{{m1.filter(activityInfo.standard*0.01-money)>0?m1.filter(activityInfo.standard*0.01-money):0}}元可减{{m1.filter(activityInfo.privilege*0.01)}}元（ 满{{m1.filter(activityInfo.standard*0.01)}}减{{m1.filter(activityInfo.privilege*0.01)}}）</text>
           </text>
           <text wx:if="{{!haveCoupon}}">你还没有优惠券哦~</text>
@@ -585,9 +585,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                          <view style="font-size:20rpx;">微信好友</view>
-                                        </button>
+                                              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                              <view style="font-size:20rpx;">微信好友</view>
+                                            </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -617,7 +617,6 @@
     onLoad(options) {
       var that = this;
       that.isIphoneX = that.$parent.globalData.isIphoneX
-      console.log(that.isIphoneX + '66')
       // 查看是否授权
       wx.getSetting({
         success: function(res) {
@@ -633,12 +632,17 @@
       } else {
         that.produceId = options.id
       }
+    }
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
       that.getProduceInfo()
     }
     wxs = {
       m1: mywxs
     };
     data = {
+      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -669,7 +673,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -758,6 +761,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account <= 0) {
           wx.showToast({
             title: '请选择最少数量',
@@ -833,8 +840,11 @@
           // 专区id
           that.storeId = res.data.data.goods.storeId
           that.$apply()
-          that.getCoupon()
+          if (that.$parent.globalData.userId) {
+            that.getCoupon()
+          }
           that.getStorePhone()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {
@@ -846,7 +856,7 @@
     getCoupon() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/queryusercouponexistent',
+        url: that.apiPath + '/szmktuserservice/user/queryusercouponexistent',
         data: {
           userid: that.$parent.globalData.userId,
           couponid: that.activityInfo.id
@@ -873,7 +883,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -1035,7 +1045,7 @@
                 y: 760,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

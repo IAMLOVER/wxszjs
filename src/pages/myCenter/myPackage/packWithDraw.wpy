@@ -1,205 +1,214 @@
 <style lang="less">
-page{
-  background-color: #f5f5f5;
-}
-.you-can-with{
-  width: 100%;
-  height: 88rpx;
-  display:flex;display:-webkit-flex;
-  margin-top: 24rpx;
-  background-color: #fff;
-  .title{
-    font-size: 32rpx;
-    color: #666;
-    width: 160rpx;
-    padding: 0rpx 30rpx;
-    line-height: 88rpx;
+  page {
+    background-color: #f5f5f5;
   }
-  .you-can-number{
-    line-height: 88rpx;
-    padding-left: 30rpx;
-    font-size: 32rpx;
-    color: #666;
-  }
-}
-.user-input{
-  background-color: #fff;
-  padding: 30rpx 30rpx 26rpx 30rpx;
-  margin-top: 26rpx;
-  .title{
-    font-size: 30rpx;
-    color: #666;
-  }
-  .input-wrapper{
-    height: 90rpx;
-    border-bottom: 2rpx solid #F5F5F5;
-    line-height: 90rpx;
-    display:flex;display:-webkit-flex;
-    text{
-      font-size: 60rpx;
-      color: #222;
-    }
-    input{
-      width: 640rpx;
-      height: 90rpx;
-      font-size: 60rpx;
-    }
-    image{
-      width: 36rpx;
-      height: 36rpx;
-      margin-top: 20rpx;
-    }
-  }
-  .input-tip-wrapper{
-    color: #959595;
-    font-size: 24rpx;
-    display:flex;display:-webkit-flex;
-    justify-content: space-between;-webkit-justify-content: space-between;
-    padding-top: 23rpx;
-    .all{
-      color: #f25664;
-    }
-  }
-}
-.rule{
-  margin-top: 40rpx;
-  padding-left: 30rpx;
-  .title{
-    font-size: 24rpx;
-    color: #959595;
-    line-height: 48rpx;
-  }
-}
-.btn{
-  width: 530rpx;
-  height: 88rpx;
-  background-color: #b5b5b5;
-  text-align: center;
-  line-height: 88rpx;
-  border-radius: 48rpx;
-  margin: 0 auto;
-  margin-top: 180rpx;
-  color: #fff;
-  font-size: 32rpx;
-}
-.active{
-  background-color: #f25664 !important;
-}
-.label-2__icon {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 32rpx;
-  height: 32rpx;
-  background:  #fff;
-  border-radius: 50px;
-  border: 2rpx solid #B5b5b5;
-  box-sizing: border-box;
-  margin-right: 10rpx;
-  vertical-align: middle;
-}
-
-.label-2__icon-checked {
-  position: absolute;
-  left: 6rpx;
-  top: 6rpx;
-  width: 16rpx;
-  height: 16rpx;
-  background: #F25664;;
-  border-radius: 50%;
-}
-.agree{
-  display:flex;display:-webkit-flex;
-  font-size: 24rpx;
-  margin-top: 40rpx;
-  margin-left: 130rpx;
-}
-.shadow{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 9999;
-  .content{
-    width: 610rpx;
-    height: 608rpx;
+  .you-can-with {
+    width: 100%;
+    height: 88rpx;
+    display: flex;
+    display: -webkit-flex;
+    margin-top: 24rpx;
     background-color: #fff;
-    border-radius: 12rpx;
-    left: 50%;
-    margin-left: -305rpx;
-    top: 10%;
-    position: absolute;
-    padding: 60rpx 50rpx;
+    .title {
+      font-size: 32rpx;
+      color: #666;
+      width: 160rpx;
+      padding: 0rpx 30rpx;
+      line-height: 88rpx;
+    }
+    .you-can-number {
+      line-height: 88rpx;
+      padding-left: 30rpx;
+      font-size: 32rpx;
+      color: #666;
+    }
+  }
+  .user-input {
+    background-color: #fff;
+    padding: 30rpx 30rpx 26rpx 30rpx;
+    margin-top: 26rpx;
+    .title {
+      font-size: 30rpx;
+      color: #666;
+    }
+    .input-wrapper {
+      height: 90rpx;
+      border-bottom: 2rpx solid #F5F5F5;
+      line-height: 90rpx;
+      display: flex;
+      display: -webkit-flex;
+      text {
+        font-size: 60rpx;
+        color: #222;
+      }
+      input {
+        width: 640rpx;
+        height: 90rpx;
+        font-size: 60rpx;
+      }
+      image {
+        width: 36rpx;
+        height: 36rpx;
+        margin-top: 20rpx;
+      }
+    }
+    .input-tip-wrapper {
+      color: #959595;
+      font-size: 24rpx;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      padding-top: 23rpx;
+      .all {
+        color: #f25664;
+      }
+    }
+  }
+  .rule {
+    margin-top: 40rpx;
+    padding-left: 30rpx;
+    .title {
+      font-size: 24rpx;
+      color: #959595;
+      line-height: 48rpx;
+    }
+  }
+  .btn {
+    width: 530rpx;
+    height: 88rpx;
+    background-color: #b5b5b5;
+    text-align: center;
+    line-height: 88rpx;
+    border-radius: 48rpx;
+    margin: 0 auto;
+    margin-top: 180rpx;
+    color: #fff;
+    font-size: 32rpx;
+  }
+  .active {
+    background-color: #f25664 !important;
+  }
+  .label-2__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 32rpx;
+    height: 32rpx;
+    background: #fff;
+    border-radius: 50px;
+    border: 2rpx solid #B5b5b5;
     box-sizing: border-box;
-    .title{
-      color: #222222;
-      text-align: center;
-      font-size: 32rpx;
-    }
-    .phone{
-      margin-top: 40rpx;
-      margin-bottom: 40rpx;
-      input{
-        background: #F0F0F0;
-        border-radius: 4rpx;
-        width: 510rpx;
-        height: 76rpx;
-        font-size: 32rpx;
-        color: #999;
-        padding-left: 24rpx;
-        box-sizing: border-box;
-      }
-    }
-    .code-wrapper{
-      display:flex;display:-webkit-flex;
-      input{
-        -webkit-flex: 3;-ms-flex: 3;flex: 3;
-        height: 76rpx;
-        font-size: 32rpx;
-        color: #999;
-        padding-left: 24rpx;
-        background: #F0F0F0;
-        border-radius: 4rpx 0rpx 0rpx 4rpx;
-      }
-      button{
-        -webkit-flex: 2;-ms-flex: 2;flex: 2;
-        height: 76rpx;
-        background: #F25664;
-        color: #fff;
-        border-radius: 0rpx 4rpx 4rpx 0rpx;
-        font-size: 28rpx;
-      }
-      .disabled{
-        background: #B5B5B5;
-        color: #fff;
-      }
-    }
-    .sure-btn{
-      width: 490rpx;
-      height: 96rpx;
-      line-height: 96rpx;
-      background-color: #b5b5b5;
-      text-align: center;
-      font-size: 32rpx;
-      color: #fff;
-      margin: 0 auto;
-      margin-top: 60rpx;
-      clear: both;
-      border-radius: 8rpx;
-    }
+    margin-right: 10rpx;
+    vertical-align: middle;
   }
-  .close-shadow{
-    width: 56rpx;
-    height: 56rpx;
+  .label-2__icon-checked {
     position: absolute;
-    bottom: 260rpx;
-    left: 50%;
-    margin-left: -28rpx;
+    left: 6rpx;
+    top: 6rpx;
+    width: 16rpx;
+    height: 16rpx;
+    background: #F25664;
+    ;
+    border-radius: 50%;
   }
-}
-
+  .agree {
+    display: flex;
+    display: -webkit-flex;
+    font-size: 24rpx;
+    margin-top: 40rpx;
+    margin-left: 130rpx;
+  }
+  .shadow {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    .content {
+      width: 610rpx;
+      height: 608rpx;
+      background-color: #fff;
+      border-radius: 12rpx;
+      left: 50%;
+      margin-left: -305rpx;
+      top: 10%;
+      position: absolute;
+      padding: 60rpx 50rpx;
+      box-sizing: border-box;
+      .title {
+        color: #222222;
+        text-align: center;
+        font-size: 32rpx;
+      }
+      .phone {
+        margin-top: 40rpx;
+        margin-bottom: 40rpx;
+        input {
+          background: #F0F0F0;
+          border-radius: 4rpx;
+          width: 510rpx;
+          height: 76rpx;
+          font-size: 32rpx;
+          color: #999;
+          padding-left: 24rpx;
+          box-sizing: border-box;
+        }
+      }
+      .code-wrapper {
+        display: flex;
+        display: -webkit-flex;
+        input {
+          -webkit-flex: 3;
+          -ms-flex: 3;
+          flex: 3;
+          height: 76rpx;
+          font-size: 32rpx;
+          color: #999;
+          padding-left: 24rpx;
+          background: #F0F0F0;
+          border-radius: 4rpx 0rpx 0rpx 4rpx;
+        }
+        button {
+          -webkit-flex: 2;
+          -ms-flex: 2;
+          flex: 2;
+          height: 76rpx;
+          background: #F25664;
+          color: #fff;
+          border-radius: 0rpx 4rpx 4rpx 0rpx;
+          font-size: 28rpx;
+        }
+        .disabled {
+          background: #B5B5B5;
+          color: #fff;
+        }
+      }
+      .sure-btn {
+        width: 490rpx;
+        height: 96rpx;
+        line-height: 96rpx;
+        background-color: #b5b5b5;
+        text-align: center;
+        font-size: 32rpx;
+        color: #fff;
+        margin: 0 auto;
+        margin-top: 60rpx;
+        clear: both;
+        border-radius: 8rpx;
+      }
+    }
+    .close-shadow {
+      width: 56rpx;
+      height: 56rpx;
+      position: absolute;
+      bottom: 260rpx;
+      left: 50%;
+      margin-left: -28rpx;
+    }
+  }
 </style>
 <template>
   <view class="page">
@@ -212,15 +221,14 @@ page{
         {{m1.filter(myInCome*0.01)}}元
       </view>
     </view>
-
     <!-- 提现金额的输入提示区域 -->
     <view class="user-input">
       <view class="title">
         提现金额
       </view>
       <view class="input-wrapper">
-          <text>￥</text><input type="number" value="{{value}}" name="" id="" bindinput="getMoney"/>
-          <image wx:if="{{imagePath}}" src="{{imagePath+'close02@2x.png'}}" @tap="clear"/>
+        <text>￥</text><input type="number" value="{{value}}" name="" id="" bindinput="getMoney" />
+        <image wx:if="{{imagePath}}" src="{{imagePath+'close02@2x.png'}}" @tap="clear" />
       </view>
       <view class="input-tip-wrapper">
         <view class="tip" wx:if="{{!error}}">提现金额为整数，本次可提现¥{{m1.filterDown(myInCome*0.01)}}</view>
@@ -228,7 +236,6 @@ page{
         <view class="all" @tap="getAll" wx:if="{{showAll}}">全部提现</view>
       </view>
     </view>
-
     <view class="rule">
       <view class="title">提现规则：</view>
       <view class="title">1.提现至微信钱包，只能提现整数金额；</view>
@@ -236,21 +243,18 @@ page{
       <view class="title">3.每个用户每天最多可提现1次；</view>
       <view class="title">4.每次提现将收取提现金额的1%作为税额<text style="color:#7BB6FB">（税额说明）</text></view>
     </view>
-
     <!-- 提现到微信的按钮 -->
     <view class="btn {{value<=myInCome*0.01?'active':''}}" @tap="getBegin">
       提现至微信
     </view>
-
     <!-- 同意协议 -->
     <view class="agree">
-       <view class="label-2__icon" style="border-color:{{true ? '#F25664': '#B5B5B5'}}" >
-            <view class="label-2__icon-checked" style="opacity:{{true ? 1: 0}}"></view>
-        </view>
-        <view style="color: #959595;">继续即表示同意</view>
-        <view style="color: #F25664;" @tap="goArgee">《神州集市钱包服务协议》</view>
+      <view class="label-2__icon" style="border-color:{{true ? '#F25664': '#B5B5B5'}}">
+        <view class="label-2__icon-checked" style="opacity:{{true ? 1: 0}}"></view>
+      </view>
+      <view style="color: #959595;">继续即表示同意</view>
+      <view style="color: #F25664;" @tap="goArgee">《神州集市钱包服务协议》</view>
     </view>
-
     <!-- 手机验证的弹出框 -->
     <view class="shadow" wx:if="{{showShadow}}">
       <view class="content">
@@ -267,248 +271,243 @@ page{
         </view>
         <view class="sure-btn active" @tap="last">确认</view>
       </view>
-
       <!-- 关闭shadow按钮 -->
-      <image wx:if="{{imagePath}}" src="{{imagePath+'close.png'}}" class="close-shadow" @tap="closeShadow"/>
+      <image wx:if="{{imagePath}}" src="{{imagePath+'close.png'}}" class="close-shadow" @tap="closeShadow" />
     </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import path from '../../../common/path.js';
-import mywxs from '../../../wxs/mywxs.wxs';
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '提现'
-  };
-  onLoad() {
-    this.getMyIncome()
-  }
-  data = {
-    imagePath:path.path.imagePath,
-    apiPath:path.path.apiPath,
-    btnText:'获取验证码',
-    number:60,
-    disabledCodeBtn:false,
-    showShadow:false,
-    showAll:true,
-    myInCome:0,
-    value:'',
-    phone:'',
-    error:false,
-    code:''
-  };
-  methods = {
-    goArgee(){
-      this.$navigate('./drawArgee')
-    },
-    closeShadow(){
-      this.showShadow = false
-    },
-    // 验证码的点击事件
-    getCode() {
-      if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))){
-         wx.showToast({
-           title: '请输入正确手机号', 
-           icon: 'none', 
-           duration: 2000, 
-           mask: true,
-           success: res => {}
-         });
-         return
-      }else{
-        wx.request({
-          url: this.apiPath + '/sbchcommon/util/getphonecode', 
-          data:{
-            phone:this.phone
-          }, 
-          method: 'GET',
-          dataType: 'json', 
-          success: res => {
-            console.log(res)
-            if(res.data.code == 200){
+  import wepy from 'wepy';
+  import path from '../../../common/path.js';
+  import mywxs from '../../../wxs/mywxs.wxs';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '提现'
+    };
+    onLoad() {
+      this.getMyIncome()
+    }
+    data = {
+      imagePath: path.path.imagePath,
+      apiPath: path.path.apiPath,
+      btnText: '获取验证码',
+      number: 60,
+      disabledCodeBtn: false,
+      showShadow: false,
+      showAll: true,
+      myInCome: 0,
+      value: '',
+      phone: '',
+      error: false,
+      code: ''
+    };
+    methods = {
+      goArgee() {
+        this.$navigate('./drawArgee')
+      },
+      closeShadow() {
+        this.showShadow = false
+      },
+      // 验证码的点击事件
+      getCode() {
+        if (!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))) {
+          wx.showToast({
+            title: '请输入正确手机号',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        } else {
+          wx.request({
+            url: this.apiPath + '/szmktuserservice/login/send/phoneCode',
+            data: {
+              phone: this.phone
+            },
+            method: 'GET',
+            dataType: 'json',
+            success: res => {
+              console.log(res)
+              if (res.data.code == 200) {
                 // this.code = res.data.data
                 this.disabledCodeBtn = true;
                 let interval = setInterval(() => {
-                   if(this.number>0){
-                   this.number = this.number - 1;    
-                   this.btnText = this.number + 's';
-                  this.$apply();      
-           }
-           else{
-             this.number = 60;
-             this.disabledCodeBtn = false;
-             this.btnText = '获取验证码'
-             clearInterval(interval);
-            this.$apply();      
-          }
-           }, 1000);
-        }else{
-           wx.showToast({
-             title: res.data.message, 
-             duration: 2000,
-             icon:'none',
-             mask: true, 
-             success: res => {}
+                  if (this.number > 0) {
+                    this.number = this.number - 1;
+                    this.btnText = this.number + 's';
+                    this.$apply();
+                  } else {
+                    this.number = 60;
+                    this.disabledCodeBtn = false;
+                    this.btnText = '获取验证码'
+                    clearInterval(interval);
+                    this.$apply();
+                  }
+                }, 1000);
+              } else {
+                wx.showToast({
+                  title: res.data.message,
+                  duration: 2000,
+                  icon: 'none',
+                  mask: true,
+                  success: res => {}
+                });
+              }
+            },
+            fail: () => {},
+            complete: () => {}
           });
         }
-    },
-    fail: () => {},
-    complete: () => {}
-  });    
-  }
-},
-    getAll(){
-      this.value = Math.floor(this.myInCome*0.01)
-    },
-    getMoney(e){
-      this.value = e.detail.value
-      if(this.myInCome*0.01>this.value){
-        this.error = false
-        this.showAll = true
-      }else{
-        this.error = true
-        this.showAll = false
+      },
+      getAll() {
+        this.value = Math.floor(this.myInCome * 0.01)
+      },
+      getMoney(e) {
+        this.value = e.detail.value
+        if (this.myInCome * 0.01 > this.value) {
+          this.error = false
+          this.showAll = true
+        } else {
+          this.error = true
+          this.showAll = false
+        }
+      },
+      clear() {
+        this.value = 0
+      },
+      //提现开始
+      getBegin() {
+        if (this.value < 5) {
+          wx.showToast({
+            title: '最低提现金额不得少于5元',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        }
+        if (this.value <= this.myInCome) {
+          this.showShadow = true
+        } else {
+          wx.showToast({
+            title: '提现金额不足',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+        }
+      },
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      codeInput(e) {
+        this.code = e.detail.value
+      },
+      last() {
+        if (!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))) {
+          wx.showToast({
+            title: '请输入正确手机号',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        }
+        if (!this.code) {
+          wx.showToast({
+            title: '请输入验证码',
+            icon: 'none',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          return
+        }
+        wx.request({
+          url: this.apiPath + '/szmktuser/balance/createcashorder',
+          data: {
+            sessionkey: this.$parent.globalData.key,
+            amount: this.value * 100,
+            phone: this.phone,
+            code: this.code,
+          },
+          method: 'GET',
+          dataType: 'json',
+          success: res => {
+            if (res.data.code == 1000) {
+              console.log(res)
+              wx.request({
+                url: this.apiPath + '/szmktuser/balance/withdrawCash',
+                data: {
+                  sessionkey: this.$parent.globalData.key,
+                  orderno: res.data.data.orderNo
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: res => {
+                  console.log(res.data.code)
+                  if (res.data.code == 1000) {
+                    wx.showToast({
+                      title: '提现成功',
+                      icon: 'success',
+                      duration: 2000,
+                      mask: true,
+                      success: res => {}
+                    });
+                    this.$navigate('./drawSuccess')
+                  } else {
+                    wx.showToast({
+                      title: res.data.message,
+                      duration: 2000,
+                      icon: 'none',
+                      mask: true,
+                      success: res => {}
+                    });
+                  }
+                },
+                fail: () => {},
+                complete: () => {}
+              });
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                duration: 2000,
+                icon: 'none',
+                mask: true,
+                success: res => {}
+              });
+            }
+          },
+          fail: () => {},
+          complete: () => {}
+        });
       }
-    },
-    clear(){
-       this.value = 0
-    },
-    //提现开始
-    getBegin(){
-      if(this.value<5){
-         wx.showToast({
-           title: '最低提现金额不得少于5元', 
-           icon: 'none', 
-           duration: 2000, 
-           mask: true,
-           success: res => {}
-         });
-         return
-      }
-       if(this.value<=this.myInCome){
-         this.showShadow = true
-       }else{
-         wx.showToast({
-           title: '提现金额不足', 
-           icon: 'none', 
-           duration: 2000, 
-           mask: true,
-           success: res => {}
-         });
-       }
-    },
-    phoneInput(e){
-      this.phone = e.detail.value
-    },
-    codeInput(e){
-      this.code = e.detail.value
-    },
-    last(){
-      if(!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))){
-           wx.showToast({
-           title: '请输入正确手机号', 
-           icon: 'none', 
-           duration: 2000, 
-           mask: true,
-           success: res => {}
-         });
-         return
-      }if(!this.code){
-           wx.showToast({
-           title: '请输入验证码', 
-           icon: 'none', 
-           duration: 2000, 
-           mask: true,
-           success: res => {}
-         });
-         return
-      }
+    };
+    wxs = {
+      m1: mywxs
+    }
+    // 我的收入接口
+    getMyIncome() {
+      var that = this
       wx.request({
-        url: this.apiPath + '/szmktuser/balance/createcashorder',
+        url: that.apiPath + '/szmktuser/balance/queryuserbalance',
         data: {
-          sessionkey:this.$parent.globalData.key,
-          amount:this.value*100,
-          phone:this.phone,
-          code:this.code,
+          'userid': that.$parent.globalData.userId
         },
         method: 'GET',
         dataType: 'json',
         success: res => {
-          if(res.data.code == 1000){
-             console.log(res)
-             wx.request({
-               url: this.apiPath + '/szmktuser/balance/withdrawCash', 
-               data: {
-                 sessionkey:this.$parent.globalData.key,
-                 orderno:res.data.data.orderNo
-               },
-               method: 'GET',
-               dataType: 'json', 
-               success: res => {
-                 console.log(res.data.code)
-                 if(res.data.code == 1000){
-                   wx.showToast({
-                     title: '提现成功', 
-                     icon: 'success', 
-                     duration: 2000,
-                     mask: true, 
-                     success: res => {}
-                   }); 
-                   this.$navigate('./drawSuccess')
-                 }else{
-                    wx.showToast({
-                     title: res.data.message, 
-                     duration: 2000,
-                     icon:'none',
-                     mask: true, 
-                     success: res => {}
-                   });
-                 }
-               },
-               fail: () => {},
-               complete: () => {}
-             });
-             
-          }else{
-            wx.showToast({
-            title: res.data.message, 
-            duration: 2000,
-            icon:'none',
-            mask: true, 
-            success: res => {}
-           });
-          }
+          that.myInCome = res.data.data.balance
+          that.$apply()
         },
         fail: () => {},
         complete: () => {}
       });
-      
     }
-  }; 
-  wxs = {
-      m1: mywxs
-  } 
-  // 我的收入接口
-  getMyIncome(){
-    var that = this
-    wx.request({
-      url: that.apiPath + '/szmktuser/balance/queryuserbalance', 
-      data: {
-        'userid':that.$parent.globalData.userId
-      }, 
-      method: 'GET',
-      dataType: 'json', 
-      success: res => {
-        that.myInCome = res.data.data.balance
-        that.$apply()
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-    
   }
-
-}
 </script>

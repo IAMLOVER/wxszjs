@@ -261,7 +261,7 @@
         <view class="order-wrapper">
             <view class="order-list" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
                 <view class="list-header">
-                    <view class="header-left" data-store-id = "{{item.storeId}}" @tap="goShopDetail">
+                    <view class="header-left" data-store-id="{{item.storeId}}" @tap="goShopDetail">
                         <image src="{{imagePath+'store02.png'}}" style="vertical-align:middle" class="list-icon" wx:if="{{imagePath}}" />
                         <text class="list-store" style="font-size:28rpx">{{item.storeName}}</text>
                         <image src="{{imagePath+'more04.png'}}" class="arrow" wx:if="{{imagePath}}" />
@@ -346,8 +346,10 @@
             m1: mywxs
         };
         methods = {
-            goShopDetail(e){
-                this.$navigate('../../shop/shopDetail',{id:e.currentTarget.dataset.storeId})
+            goShopDetail(e) {
+                this.$navigate('../../shop/shopDetail', {
+                    id: e.currentTarget.dataset.storeId
+                })
             },
             chooseTab(index) {
                 this.nowIndex = index
@@ -404,22 +406,32 @@
                 dataType: 'json',
                 success: res => {
                     console.log(res)
-                    that.orderList = res.data.data.list
-                    that.orderList.forEach(element => {
-                        that.elementCount = 0
-                        element.contentList.forEach(ele => {
-                            that.elementCount += ele.count - 0
-                        })
-                        element.count = that.elementCount
-                    });
-                    console.log(that.orderList)
-                    if (that.orderList.length < 1) {
-                        that.empty = true
+                    if (res.data.code == 1000) {
+                        that.orderList = res.data.data.list
+                        that.orderList.forEach(element => {
+                            that.elementCount = 0
+                            element.contentList.forEach(ele => {
+                                that.elementCount += ele.count - 0
+                            })
+                            element.count = that.elementCount
+                        });
+                        console.log(that.orderList)
+                        if (that.orderList.length < 1) {
+                            that.empty = true
+                        } else {
+                            that.empty = false
+                        }
+                        that.$apply()
                     } else {
-                        that.empty = false
+                        wepy.showToast({
+                          title: res.data.message, //提示的内容,
+                          icon: 'none', //图标,
+                          duration: 2000, //延迟时间,
+                          mask: true, //显示透明蒙层，防止触摸穿透,
+                          success: res => {}
+                        })
                     }
-                    that.$apply()
-                    wx.hideLoading();
+                    wx.hideLoading()
                 },
                 fail: () => {},
                 complete: () => {}
@@ -429,7 +441,7 @@
         cancleOrder(e) {
             this.cancleShadow = true
             this.orderNo = e.currentTarget.dataset.id
-            wx.setStorageSync('orderNo',this.orderNo)
+            wx.setStorageSync('orderNo', this.orderNo)
         }
         //忍心拒绝
         strongRefuse() {
@@ -474,8 +486,8 @@
         //立即支付
         payMoney(e) {
             var that = this
-            that.orderNo = e.currentTarget.dataset.id?e.currentTarget.dataset.id:that.orderNo
-              wx.setStorageSync('orderNo',that.orderNo)
+            that.orderNo = e.currentTarget.dataset.id ? e.currentTarget.dataset.id : that.orderNo
+            wx.setStorageSync('orderNo', that.orderNo)
             wx.request({
                 url: that.apiPath + '/szmktuser/pay/awakenpay', //开发者服务器接口地址",
                 data: {
@@ -506,6 +518,14 @@
                                     url: '../../payResult/payFail'
                                 })
                             }
+                        })
+                    } else {
+                        wepy.showToast({
+                          title: res.data.message, //提示的内容,
+                          icon: 'none', //图标,
+                          duration: 2000, //延迟时间,
+                          mask: true, //显示透明蒙层，防止触摸穿透,
+                          success: res => {}
                         })
                     }
                 },

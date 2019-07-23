@@ -207,8 +207,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    // z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5); // z-index: 9999;
     left: 0;
     top: 0;
     .content {
@@ -500,7 +499,7 @@
     <view class="right-now-shadow" wx:if="{{showShadow}}">
       <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
         <view class="title">
-          <view>选择数量</view>
+          <view>选择数量与规格</view>
           <view @tap="closeShadow">
             <image src="{{imagePath+'close02@2x.png'}}" wx:if="{{imagePath}}" />
           </view>
@@ -569,12 +568,17 @@
       navigationBarTitleText: '秒杀详情'
     };
     onLoad(options) {
-      // this.isIphoneX = this.$parent.globalData.isIphoneX
+      this.isIphoneX = this.$parent.globalData.isIphoneX
       this.produceId = options.id
+    }
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
       this.getProduceInfo()
       this.getProduceItems()
     }
     data = {
+      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -672,6 +676,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account <= 0) {
           wx.showToast({
             title: '请选择最少数量',
@@ -699,7 +707,7 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-        pay.scount = this.collocation.count
+          pay.scount = this.collocation.count
         // 商品活动类型
         pay.type = 1
         //任务关联id
@@ -768,24 +776,23 @@
         },
         dataType: 'json',
         success: res => {
-         if(res.data.code == '1000'){
-          that.showShadow = true
+          if (res.data.code == '1000') {
+            that.showShadow = true
             that.rightProduceInfo = res.data.data.goodsInfo.goods
-          that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
-          that.typeId = that.goodsClassList[this.activeIndex].id
-          that.collocation = res.data.data.goodsInfo.collocation
-          that.$apply()
-         }
-         else{
-          that.showShadow = false
-          wepy.showToast({
-          title: res.data.message, //提示的内容,
-          icon: 'none', //图标,
-          duration: 2000, //延迟时间,
-          mask: true, //显示透明蒙层，防止触摸穿透,
-          success: res => {}
-        });
-         }
+            that.goodsClassList = res.data.data.goodsInfo.goods.goodsClass
+            that.typeId = that.goodsClassList[this.activeIndex].id
+            that.collocation = res.data.data.goodsInfo.collocation
+            that.$apply()
+          } else {
+            that.showShadow = false
+            wepy.showToast({
+              title: res.data.message, //提示的内容,
+              icon: 'none', //图标,
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            });
+          }
         },
         fail: () => {},
         complete: () => {}
@@ -795,7 +802,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },

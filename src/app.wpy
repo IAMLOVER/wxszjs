@@ -1,190 +1,205 @@
 <style src="./style/weui.wxss">
-
 </style>
 
 <script>
-  import wepy from 'wepy';
-  import 'wepy-async-function';
-  import path from './common/path.js';
-  export default class extends wepy.app {
-    constructor() {
-      super();
-      this.use('promisify');
-    }
-    config = {
-      pages: [
-        'pages/index/index',
-        'pages/authorize/authorize',
-        'pages/search/search',
-        'pages/search/secKillSearch',
-        'pages/search/collocationSearch',
-        'pages/address/address',
-        'pages/secKill/secKill',
-        'pages/secKill/secKillFirst',
-        'pages/secKill/secKillSecond',
-        'pages/secKill/choseGroup',
-        'pages/secKill/choseTaskSuccess',
-        'pages/order/order',
-        'pages/payResult/paySuccess',
-        'pages/payResult/payFail',
-        'pages/payResult/payNothing',
-        'pages/fullReduction/fullReduction',
-        'pages/fullReduction/fullProduceDetail',
-        'pages/assist/assist',
-        'pages/collocation/collocation',
-        'pages/collocation/collocationDetails',
-        'pages/collocation/collocationSingle',
-        'pages/collocation/collocationGroup',
-        'pages/collocation/channelSingle',
-        'pages/collocation/channelGroup',
-        'pages/generalGoods/generalGoods',
-        'pages/generalGoods/taskGenralGoods',
-        'pages/taskGoods/taskGoods',
-        'pages/classification/classification',
-        'pages/shop/shop',
-        'pages/shop/shopDetail',
-        'pages/shop/company',
-        'pages/shop/companyInfo',
-        'pages/newType/newReduce',
-        'pages/newType/newTask',
-        // bannar图文
-        'pages/banner/banner',
-        // 我的
-        'pages/myCenter/myCenter/myCenter',
-        'pages/myCenter/myOrder/myOrder',
-        'pages/myCenter/myOrder/orderDetail',
-        'pages/myCenter/myCoupon/myCoupon',
-        'pages/myCenter/myPackage/myPackage',
-        'pages/myCenter/myPackage/packWithDraw',
-        'pages/myCenter/myPackage/drawSuccess',
-        'pages/myCenter/myPackage/drawFail',
-        'pages/myCenter/myPackage/drawArgee',
-        'pages/myCenter/myShop/myShop',
-        'pages/myCenter/myShop/myShopAtmosphere',
-        'pages/myCenter/myShop/myShopManagement',
-        'pages/myCenter/myTask/myTask',
-        'pages/myCenter/myTask/myTaskDetail',
-        // 微信扫进入
-        'pages/empty/empty',
-        'pages/login/login',
-        'pages/empty/loginFail',
-        'pages/empty/bindFail',
-        'pages/empty/bindSuccess',
-        'pages/empty/loginSuccess',
-        //edi登陆
-        'pages/ediLogin/ediLogin',
-        'pages/ediPay/ediPay',
-        'pages/ediPay/ediPaySuccess',
-        'pages/ediPay/ediPayFail',
-        //商品已经下架
-        'pages/undercarriage/undercarriage'
-      ],
-      window: {
-        backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: '神州集市',
-        navigationBarTextStyle: 'black',
-        onReachBottomDistance: 50
-      },
-      tabBar: {
-        custom: false,
-        backgroundColor: '#FFFFFF',
-        color: '#6A375F',
-        selectedColor: '#F25664',
-        list: [{
-            pagePath: 'pages/index/index',
-            text: '首页',
-            iconPath: './images/tabbar/home_un.png',
-            selectedIconPath: './images/tabbar/home.png'
-          },
-          {
-            pagePath: 'pages/classification/classification',
-            text: '分类',
-            iconPath: './images/tabbar/type_un.png',
-            selectedIconPath: './images/tabbar/type.png'
-          },
-          // {
-          //   pagePath: 'pages/shop/shop',
-          //   text: '专区',
-          //   iconPath: './images/tabbar/store_un.png',
-          //   selectedIconPath: './images/tabbar/store.png'
-          // },
-          {
-            pagePath: 'pages/myCenter/myCenter/myCenter',
-            text: '我的',
-            iconPath: './images/tabbar/me_un.png',
-            selectedIconPath: './images/tabbar/me.png'
-          }
-        ]
-      }
-    };
-    onLaunch() {
-      var that = this;
-      // 查看是否授权
-      wx.getSetting({
-        success: function(res) {
-          if (res.authSetting['scope.userInfo']) {
-            wx.login({
-              success: res => {
-                // 获取到用户的 code 之后：res.code
-                that.code = res.code
-                wx.getUserInfo({
-                  success: function(res) {
-                    var encryptedData = res.encryptedData;
-                    var iv = res.iv;
-                    console.log(res)
-                    that.globalData.avatarUrl = res.userInfo.avatarUrl
-                    that.globalData.userName = res.userInfo.nickName
-                    wx.request({
-                      url: that.globalData.apiPath + '/szmktuser/user/authorize',
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                      }, // 默认值,
-                      data: {
-                        'encryptedData': encryptedData,
-                        'code': that.code,
-                        'iv': iv,
-                      }, //请求的参数",
-                      method: 'post',
-                      dataType: 'json',
-                      success: res => {
-                        that.globalData.userId = res.data.data.userid
-                        console.log(that.globalData.userId)
-                        that.globalData.identityType = res.data.data.identityType
-                        that.globalData.key = res.data.data.sessionkey
-                        wx.setStorageSync('userId', res.data.data.userid);
-                      },
-                      complete: () => {}
-                    });
-                  }
-                });
-              }
-            });
-          } else {
-            wx.navigateTo({
-              url: '/pages/authorize/authorize'
-            })
-          }
-        }
-      })
-      //查看手机是否是IphoneX
-      wx.getSystemInfo({
-        success: function(res) {
-          let model = res.model.substring(0, res.model.indexOf("X")) + "X"
-          if (model == 'iPhone X') {
-            that.globalData.isIphoneX = true
-          }
-        }
-      })　
-    }
-    globalData = {
-      userId: '',
-      userName: '',
-      avatarUrl: '',
-      identityType: '',
-      key: '',
-      apiPath: path.path.apiPath,
-      isIphoneX: false,
-    }
+import wepy from 'wepy';
+import 'wepy-async-function';
+import path from './common/path.js';
+export default class extends wepy.app {
+  constructor() {
+    super();
+    this.use('promisify');
   }
+  config = {
+    pages: [
+      'pages/index/index',
+      'pages/authorize/authorize',
+      'pages/bind/bind',
+      'pages/search/search',
+      'pages/search/secKillSearch',
+      'pages/search/collocationSearch',
+      'pages/address/address',
+      'pages/secKill/secKill',
+      'pages/secKill/secKillFirst',
+      'pages/secKill/secKillSecond',
+      'pages/secKill/choseGroup',
+      'pages/secKill/choseTaskSuccess',
+      'pages/order/order',
+      'pages/payResult/paySuccess',
+      'pages/payResult/payFail',
+      'pages/payResult/payNothing',
+      'pages/fullReduction/fullReduction',
+      'pages/fullReduction/fullProduceDetail',
+      'pages/assist/assist',
+      'pages/collocation/collocation',
+      'pages/collocation/collocationDetails',
+      'pages/collocation/collocationSingle',
+      'pages/collocation/collocationGroup',
+      'pages/collocation/channelSingle',
+      'pages/collocation/channelGroup',
+      'pages/generalGoods/generalGoods',
+      'pages/generalGoods/taskGenralGoods',
+      'pages/taskGoods/taskGoods',
+      'pages/classification/classification',
+      'pages/shop/shop',
+      'pages/shop/shopDetail',
+      'pages/shop/company',
+      'pages/shop/companyInfo',
+      'pages/newType/newReduce',
+      'pages/newType/newTask',
+      // bannar图文
+      'pages/banner/banner',
+      // 我的
+      'pages/myCenter/myCenter/myCenter',
+      'pages/myCenter/myOrder/myOrder',
+      'pages/myCenter/myOrder/orderDetail',
+      'pages/myCenter/myCoupon/myCoupon',
+      'pages/myCenter/myPackage/myPackage',
+      'pages/myCenter/myPackage/packWithDraw',
+      'pages/myCenter/myPackage/drawSuccess',
+      'pages/myCenter/myPackage/drawFail',
+      'pages/myCenter/myPackage/drawArgee',
+      'pages/myCenter/myShop/myShop',
+      'pages/myCenter/myShop/myShopAtmosphere',
+      'pages/myCenter/myShop/myShopManagement',
+      'pages/myCenter/myTask/myTask',
+      'pages/myCenter/myTask/myTaskDetail',
+      // 微信扫进入
+      'pages/empty/empty',
+      'pages/login/login',
+      'pages/empty/loginFail',
+      'pages/empty/bindFail',
+      'pages/empty/bindSuccess',
+      'pages/empty/loginSuccess',
+      //edi登陆
+      'pages/ediLogin/ediLogin',
+      'pages/ediPay/ediPay',
+      'pages/ediPay/ediPaySuccess',
+      'pages/ediPay/ediPayFail',
+      //商品已经下架
+      'pages/undercarriage/undercarriage'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: '神州集市',
+      navigationBarTextStyle: 'black',
+      onReachBottomDistance: 50
+    },
+    tabBar: {
+      custom: false,
+      backgroundColor: '#FFFFFF',
+      color: '#6A375F',
+      selectedColor: '#F25664',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '首页',
+          iconPath: './images/tabbar/home_un.png',
+          selectedIconPath: './images/tabbar/home.png'
+        },
+        {
+          pagePath: 'pages/classification/classification',
+          text: '分类',
+          iconPath: './images/tabbar/type_un.png',
+          selectedIconPath: './images/tabbar/type.png'
+        },
+        // {
+        //   pagePath: 'pages/shop/shop',
+        //   text: '专区',
+        //   iconPath: './images/tabbar/store_un.png',
+        //   selectedIconPath: './images/tabbar/store.png'
+        // },
+        {
+          pagePath: 'pages/myCenter/myCenter/myCenter',
+          text: '我的',
+          iconPath: './images/tabbar/me_un.png',
+          selectedIconPath: './images/tabbar/me.png'
+        }
+      ]
+    }
+  };
+  onLaunch() {
+    var that = this;
+    // 查看是否授权
+    wx.getSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.login({
+            success: res => {
+              // 获取到用户的 code 之后：res.code
+              that.code = res.code
+              console.log(that.code)
+              wx.setStorageSync('code',res.code)
+              wx.getUserInfo({
+                success: function(res) {
+                  var encryptedData = res.encryptedData
+                  wx.setStorageSync('encryptedData',res.encryptedData)
+                  var iv = res.iv
+                  wx.setStorageSync('iv',res.iv)
+                  that.globalData.avatarUrl = res.userInfo.avatarUrl;
+                  that.globalData.userName = res.userInfo.nickName;
+                  wx.request({
+                    url:
+                      that.globalData.apiPath + '/szmktuserservice/login/mini',
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded'
+                    }, // 默认值,
+                    data: {
+                      encryptedData: encryptedData,
+                      code: that.code,
+                      iv: iv
+                    }, //请求的参数",
+                    method: 'post',
+                    dataType: 'json',
+                    success: res => {
+                      if (res.data.code == 4002) {
+                        that.globalData.mini = false   
+                        console.log(res)
+                        that.globalData.reCode = res.data.data
+
+                      }
+                      if(res.data.code == 1000){
+                      that.globalData.userId = res.data.data.userid
+                      console.log(that.globalData.userId)
+                      that.globalData.identityType = res.data.data.identityType
+                      that.globalData.key = res.data.data.sessionkey
+                      wx.setStorageSync('userId', res.data.data.userid)
+                      }
+                    },
+                    complete: () => {}
+                  });
+                }
+              });
+            }
+          });
+        } else {
+          wx.navigateTo({
+            url: '/pages/authorize/authorize'
+          });
+        }
+      }
+    });
+    //查看手机是否是IphoneX
+    wx.getSystemInfo({
+      success: function(res) {
+        let model = res.model.substring(0, res.model.indexOf('X')) + 'X'
+        if (model == 'iPhone X') {
+          that.globalData.isIphoneX = true
+        }
+      }
+    });
+  }
+  globalData = {
+    userId: '',
+    userName: '',
+    avatarUrl: '',
+    identityType: '',
+    key: '',
+    apiPath: path.path.apiPath,
+    mini:true,
+    isIphoneX: false,
+    reCode:''
+  };
+}
 </script>

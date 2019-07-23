@@ -393,9 +393,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                        <text>分享</text>
-                      </button>
+                          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                          <text>分享</text>
+                        </button>
       </view>
     </view>
     <!-- 商品详情 -->
@@ -513,7 +513,12 @@
       console.log(this.userTargetId)
       this.getProduceInfo()
     }
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    }
     data = {
+      mini: true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
@@ -604,6 +609,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account <= 0) {
           wx.showToast({
             title: '请选择最少数量',
@@ -676,7 +685,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },

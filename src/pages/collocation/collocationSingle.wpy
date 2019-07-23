@@ -801,6 +801,7 @@
       }
     };
     data = {
+      mini:true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
@@ -836,7 +837,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -928,6 +928,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account >= this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '请选择最少数量',
@@ -975,7 +979,10 @@
       }
       that.getPmtCollocation()
     };
-    onShow() {};
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    };
     //获取促销品搭配详情
     getPmtCollocation() {
       var that = this
@@ -1007,6 +1014,7 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -1016,7 +1024,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -1191,7 +1199,7 @@
                 y: 660,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,

@@ -123,7 +123,7 @@ export default class Index extends wepy.page {
     wx.request({
       url: that.apiPath + '/szmktstore/login/WX/saveToken', //开发者服务器接口地址",
       data: {
-        userid: that.$parent.globalData.userId,
+        userid: '',
         webToken: that.webToken
       }, //请求的参数",
       method: 'GET',

@@ -494,7 +494,7 @@
       <image src="{{imagePath+'top.png'}}" @tap="goTop" />
     </view>
     <view class="footer">集好货，市不可挡</view>
-    <redPacket :msg="couponNum"></redPacket>
+    <redPacket :msg.sync="couponNum"></redPacket>
   </view>
 </template>
 
@@ -518,12 +518,7 @@
       // 新店推荐
       this.getRecommend()
       //轮播图
-      var interval = setInterval(() => {
-        if (this.$parent.globalData.userId) {
-          this.getSwiper()
-          clearInterval(interval)
-        }
-      }, 200);
+      this.getSwiper()
       this.getNewProduce()
     };
     onHide() {
@@ -633,17 +628,17 @@
       wx.request({
         url: that.apiPath + '/szmktstore/storeInfo/recommend',
         method: 'post',
-        data:{
-          size:'5'
+        data: {
+          size: '5'
         },
         dataType: 'json',
         success: res => {
           that.recommendArr = res.data.data.content
           that.recommendArr[0].name = '水果专区'
           that.recommendArr[1].name = '食品专区'
-          that.recommendArr[2].name = '茅台酒专区'
-          that.recommendArr[3].name = '化妆品专区'
-          that.recommendArr[4].name = '美妆专区'
+          // that.recommendArr[2].name = '茅台酒专区'
+          // that.recommendArr[3].name = '化妆品专区'
+          // that.recommendArr[4].name = '美妆专区'
           that.$apply()
         },
         fail: () => {},
@@ -708,8 +703,6 @@
       this.couponNum.privilege = this.newcoupon.privilege
       this.couponNum.show = true
     }
-
     //判断项目是否在维护中
-    
   }
 </script>

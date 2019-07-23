@@ -121,7 +121,7 @@
         <view class="tab-text">{{item}}</view>
       </view>
     </view>
-    <navigator url="../../fullReduction/fullReduction" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
+    <navigator url="../../fullReduction/fullReduction?id={{item.couponId}}" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
       <view style="margin-left:50rpx;">
         <view style="display:flex;display:-webkit-flex;-webkit-align-items:center;align-items:center;padding-top:4rpx;">
           <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
@@ -176,6 +176,7 @@
     };
     methods = {
       chooseTab(e) {
+        this.canArr = {}
         this.nowIndex = e.currentTarget.dataset.id
         this.couponStatus = e.currentTarget.dataset.id
         this.getMyCoupon()
@@ -194,7 +195,7 @@
       });
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/querycouponlist',
+        url: that.apiPath + '/szmktuserservice/user/querycouponlist',
         data: {
           userid: that.$parent.globalData.userId,
           status: that.couponStatus,
@@ -222,7 +223,7 @@
     getMySave() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/queryusercoupontotal',
+        url: that.apiPath + '/szmktuserservice/user/queryusercoupontotal',
         data: {
           userid: that.$parent.globalData.userId,
         },

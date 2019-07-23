@@ -539,6 +539,10 @@
         this.targetGoodsId = e.currentTarget.dataset.id
         var index = e.currentTarget.dataset.index
         this.getTargetDetail()
+        if(this.targetGoods[index].hide){
+          this.targetGoods[index].hide = false
+          return
+        }
         for (var item of this.targetGoods) {
           item.hide = false
         }
@@ -667,7 +671,7 @@
     receiveTask() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/target/usergettarget',
+        url: that.apiPath + '/szmktuserservice/target/usergettarget',
         data: {
           'userid': that.$parent.globalData.userId,
           'targetid': that.choseTaskId

@@ -260,7 +260,7 @@
           overflow: hidden;
           view {
             float: left;
-            display:block;
+            display: block;
             padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
@@ -771,9 +771,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                          <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                        </button>
+                                            <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                            <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                          </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -801,6 +801,7 @@
       }
     };
     data = {
+      mini:true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
@@ -836,7 +837,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -928,6 +928,10 @@
       },
       //购买数量的确定按钮
       payMoney() {
+        if (this.mini == false) {
+          this.$navigate('../bind/bind')
+          return
+        }
         if (this.account > this.goodsClassList[this.activeIndex].stock) {
           wx.showToast({
             title: '库存不足',
@@ -975,7 +979,10 @@
       }
       that.getChannelCollocation()
     };
-    onShow() {};
+    onShow() {
+      var that = this
+      that.mini = that.$parent.globalData.mini
+    };
     //获取引流品商品的搭配详情
     getChannelCollocation() {
       var that = this
@@ -990,7 +997,6 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
           console.log(res)
@@ -1009,6 +1015,7 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
+          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -1018,7 +1025,7 @@
     getUserAddress() {
       var that = this
       wx.request({
-        url: that.apiPath + '/szmktuser/user/getaddress',
+        url: that.apiPath + '/szmktuserservice/user/getaddress',
         data: {
           userid: that.$parent.globalData.userId,
         },
@@ -1193,7 +1200,7 @@
                 y: 660,
                 zIndex: 3,
                 text: [{
-                  text: '长按图片识别二维码查看专区详情',
+                  text: '长按图片识别二维码查看商品详情',
                   fontSize: 20,
                   color: '#666',
                   opacity: 1,
