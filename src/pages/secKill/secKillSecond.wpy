@@ -572,13 +572,10 @@
       this.produceId = options.id
     }
     onShow() {
-      var that = this
-      that.mini = that.$parent.globalData.mini
       this.getProduceInfo()
       this.getProduceItems()
     }
     data = {
-      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -677,7 +674,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.mini == false) {
+        if (this.$parent.globalData.mini == false) {
           this.$navigate('../bind/bind')
           return
         }

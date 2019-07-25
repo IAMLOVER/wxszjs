@@ -137,8 +137,8 @@ export default class extends wepy.app {
                   wx.setStorageSync('encryptedData',res.encryptedData)
                   var iv = res.iv
                   wx.setStorageSync('iv',res.iv)
-                  that.globalData.avatarUrl = res.userInfo.avatarUrl;
-                  that.globalData.userName = res.userInfo.nickName;
+                  that.globalData.avatarUrl = res.userInfo.avatarUrl
+                  that.globalData.userName = res.userInfo.nickName
                   wx.request({
                     url:
                       that.globalData.apiPath + '/szmktuserservice/login/mini',
@@ -167,7 +167,8 @@ export default class extends wepy.app {
                       wx.setStorageSync('userId', res.data.data.userid)
                       }
                     },
-                    complete: () => {}
+                    complete: () => {
+                    }
                   });
                 }
               });

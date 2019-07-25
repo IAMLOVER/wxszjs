@@ -825,7 +825,6 @@
       }
     };
     data = {
-      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -943,7 +942,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.mini == false) {
+        if (this.$parent.globalData.mini == false) {
           this.$navigate('../bind/bind')
           return
         }
@@ -994,8 +993,6 @@
       this.getCollocation()
     };
     onShow() {
-      var that = this
-      that.mini = that.$parent.globalData.mini
     }
     //获取搭配详情
     getCollocation() {

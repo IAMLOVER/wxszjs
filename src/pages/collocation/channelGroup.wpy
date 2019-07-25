@@ -131,7 +131,7 @@
     }
   }
   button[plain] {
-    border-color: #fff !important;
+    border-color: #f5f5f5 !important;
     line-height: 1 !important;
     font-size: 24rpx !important;
     padding: 0 !important;
@@ -568,7 +568,7 @@
     }
   }
   button[plain] {
-    border-color: #fff !important;
+    border-color: #f5f5f5 !important;
   } //生成海报的弹出框
   .poster-shadow {
     width: 100%;
@@ -630,10 +630,10 @@
         </view>
       </view>
       <view class="share">
-        <button open-type="share" plain="true">
-                                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                                        <text>分享</text>
-                                      </button>
+        <view @tap="openShareShadow">
+          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}" />
+          <text>分享</text>
+        </view>
       </view>
     </view>
     <!-- 组合商品 -->
@@ -677,11 +677,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-                                        <view class="kefu">
-                                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                                      <view>客服</view>
-                                    </view>
-                                    </button>
+                                            <view class="kefu">
+                                          <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                                          <view>客服</view>
+                                        </view>
+                                        </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(channelCollocation.channelInfoPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -746,6 +746,30 @@
         </view>
       </view>
     </view>
+    <!-- 转发分享弹出框 -->
+    <view class="share-shadow" wx:if="{{showShareShadow}}">
+      <view class="content" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
+        <view class="tip">请选择转发方式</view>
+        <view class="share-way">
+          <poster class="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+            <image src="{{imagePath + 'poster_sz.png'}}" wx:if="{{imagePath}}" />
+            <view @tap="onCreatePoster">生成海报</view>
+          </poster>
+          <button open-type="share" class="poster" plain="true">
+                                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                  </button>
+        </view>
+        <view class="cancle-share" @tap="cancleShare">
+          取消
+        </view>
+      </view>
+    </view>
+    <!-- 点击生成海报的出现的弹出框 -->
+    <view class="poster-shadow" wx:if="{{showPoster}}" style="text-aligin:center" catchtap="hidePoster">
+      <image src="{{posterDetail}}" style="width:570rpx;height:920rpx;display:block;margin:60rpx auto 0rpx;border-radius:16rpx" />
+      <view class="save-ablum" @tap="saveAblum">保存到相册</view>
+    </view>
     <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
@@ -757,13 +781,16 @@
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "商品详情",
+      usingComponents: {
+        "poster": "../../components/miniprogram_dist/poster/index",
+      }
     };
     data = {
-      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       showShadow: false,
       showPosition: false,
       collocationId: '',
@@ -780,11 +807,58 @@
       type: 0,
       activeIndex: 0,
       account: 1,
+      showShareShadow: false,
+      showPoster: false,
+      posterConfig: {},
+      posterDetail: '',
+      QRCode: '',
     };
     wxs = {
       m1: mywxs
     };
     methods = {
+      //打开，关闭分享弹出框
+      openShareShadow() {
+        this.showShareShadow = true
+        this.getQRCode()
+      },
+      cancleShare() {
+        this.showShareShadow = false
+      },
+      onCreatePoster() {},
+      onPosterFail(err) {
+        console.error(err);
+      },
+      onPosterSuccess(e) {
+        this.showShareShadow = false
+        this.showPoster = true
+        const {
+          detail
+        } = e;
+        this.posterDetail = detail
+      },
+      hidePoster(e) {
+        this.showPoster = false
+      },
+      onShareAppMessage: function(ops) {
+        if (ops.from === 'button') {
+          // 来自页面内转发按钮
+          console.log(ops.target)
+        }
+        return {
+          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+          imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
+          path: 'pages/collocation/channelSingle?id=' + this.collocationId + '&type=' + 1 + '&userTargetId=' + this.userTargetId,
+          success: function(res) {
+            // 转发成功
+            console.log("转发成功:" + JSON.stringify(res));
+          },
+          fail: function(res) {
+            // 转发失败
+            console.log("转发失败:" + JSON.stringify(res));
+          }
+        }
+      },
       changeActive(e) {
         this.active = e.currentTarget.dataset.active
       },
@@ -833,7 +907,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.mini == false) {
+        if (this.$parent.globalData.mini == false) {
           this.$navigate('../bind/bind')
           return
         }
@@ -877,14 +951,19 @@
     onLoad(options) {
       var that = this;
       that.isIphoneX = that.$parent.globalData.isIphoneX
-      that.collocationId = options.id
-      that.type = options.type
-      that.userTargetId = options.userTargetId
+      if (options.scene) {
+        let scene = decodeURIComponent(options.scene)
+        that.collocationId = options.scene.split("_")[0]
+        that.type = options.scene.split('_')[1]
+        that.userTargetId = options.scene.split('_')[2]
+      } else {
+        that.collocationId = options.id
+        that.type = options.type
+        that.userTargetId = options.userTargetId
+      }
       that.getChannelCollocation()
     };
     onShow() {
-      var that = this
-      that.mini = that.$parent.globalData.mini
     }
     //获取引流品商品的搭配详情
     getChannelCollocation() {
@@ -948,6 +1027,259 @@
             that.$navigate({
               url: '../address/address'
             })
+          }
+          that.$apply()
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    }
+    //保存海报到相册
+    saveAblum() {
+      var that = this
+      wx.saveImageToPhotosAlbum({
+        filePath: that.posterDetail,
+        success(res) {
+          that.showPoster = false
+          wepy.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: res => {}
+          });
+          that.$apply()
+        },
+        fail(err) {
+          if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+            // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+            wx.showModal({
+              title: '提示',
+              content: '需要您授权保存相册',
+              showCancel: false,
+              success: res => {
+                wx.openSetting({
+                  success(settingdata) {
+                    console.log("settingdata", settingdata)
+                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限成功,再次点击图片即可保存',
+                        showCancel: false,
+                      })
+                    } else {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取权限失败，将无法保存到相册哦~',
+                        showCancel: false,
+                      })
+                    }
+                  },
+                  fail(failData) {
+                    console.log("failData", failData)
+                  },
+                  complete(finishData) {
+                    console.log("finishData", finishData)
+                  }
+                })
+              }
+            })
+          }
+        },
+      })
+    }
+    //获取普通商品的小程序码
+    getQRCode() {
+      var that = this
+      wx.request({
+        url: that.apiPath + '/szmktuser/store/querycgoodsqrcode', //开发者服务器接口地址",
+        data: {
+          id: that.collocationId + '_' + 1 + '_' + that.userTargetId,
+          type: 8
+        }, //请求的参数",
+        method: 'GET',
+        dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          that.QRCode = that.qrcodeImagePath + res.data.data
+          // 海报数据
+          that.posterConfig = {
+            width: 570,
+            height: 800,
+            debug: false,
+            texts: [{
+                x: 162.6,
+                y: 45.8,
+                zIndex: 2,
+                text: [{
+                  text: that.$parent.globalData.userName,
+                  fontSize: 24,
+                  color: '#FFD2D6',
+                  marginLeft: 0,
+                }]
+              },
+              {
+                x: 162.6,
+                y: 82.4,
+                zIndex: 2,
+                text: [{
+                  text: that.produceInfo.relay ? that.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+                  fontSize: 27,
+                  color: '#fff',
+                  opacity: 1,
+                  lineHeight: 40,
+                  lineNum: 2,
+                  width: 360,
+                }, ],
+                baseLine: 'middle',
+              },
+              {
+                x: 232.6,
+                y: 280.6,
+                zIndex: 3,
+                text: [{
+                  //促销商品的名称
+                  text: that.channelInfo.title,
+                  fontSize: 24,
+                  color: '#222',
+                  width: 240,
+                  lineHeight: 40,
+                  lineNum: 2,
+                }]
+              },
+              {
+                x: 232.6,
+                y: 448.6,
+                zIndex: 3,
+                text: [{
+                  //搭配商品的名称
+                  text: that.produceInfo.title,
+                  fontSize: 24,
+                  color: '#222',
+                  width: 240,
+                  lineHeight: 40,
+                  lineNum: 2,
+                }]
+              },
+              {
+                x: 280,
+                y: 660,
+                zIndex: 3,
+                text: [{
+                  text: '长按图片识别二维码查看商品详情',
+                  fontSize: 20,
+                  color: '#666',
+                  opacity: 1,
+                  lineNum: 2,
+                  lineHeight: 32,
+                  width: 180,
+                }]
+              }
+            ],
+            images: [
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_poster01_sz.png',
+                width: 570,
+                height: 800,
+                zIndex: 1,
+              },
+              //人物头像
+              {
+                url: that.$parent.globalData.avatarUrl,
+                width: 100,
+                height: 100,
+                zIndex: 2,
+                x: 50.6,
+                y: 27.6,
+                borderRadius: 100,
+              },
+              //背景图
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/bg_talk02.png',
+                width: 480,
+                height: 408,
+                zIndex: 2,
+                x: 45.6,
+                y: 182.4,
+                borderRadius: 16,
+              },
+              //促销商品的图片
+              {
+                url: that.channelInfo.cover ? that.preImagePath + that.channelInfo.cover : that.preImagePath + that.channelInfo.picUrl1,
+                width: 128,
+                height: 128,
+                zIndex: 3,
+                x: 91.6,
+                y: 242.6,
+                borderRadius: 4
+              },
+              //搭配的商品的图片
+              {
+                url: that.produceInfo.cover ? that.preImagePath + that.produceInfo.cover : that.preImagePath + that.produceInfo.picUrl1,
+                width: 128,
+                height: 128,
+                zIndex: 3,
+                x: 91.6,
+                y: 416.4,
+                borderRadius: 4
+              },
+              //神州集市logo
+              {
+                url: 'https://pictest.sqplus.cn/szjs/user/images/index/logo.png',
+                width: 84,
+                height: 84,
+                x: 76,
+                y: 640,
+              },
+              //二维码
+              {
+                url: that.QRCode,
+                width: 84,
+                height: 84,
+                x: 178,
+                y: 640,
+              },
+            ],
+            blocks: [{
+                width: 478,
+                height: 126,
+                opacity: 1,
+                backgroundColor: '#FDE5ED',
+                borderRadius: 9,
+                x: 45.6,
+                y: 616,
+                zIndex: 2,
+              },
+              {
+                width: 214,
+                height: 6,
+                borderRadius: 6,
+                backgroundColor: '#F25664',
+                zIndex: 3,
+                x: 278,
+                y: 710,
+              },
+              {
+                width: 418,
+                height: 160,
+                opacity: 1,
+                backgroundColor: '#fff',
+                borderRadius: 9,
+                x: 76,
+                y: 226.4,
+                zIndex: 2,
+              },
+              {
+                width: 418,
+                height: 160,
+                opacity: 1,
+                backgroundColor: '#fff',
+                borderRadius: 9,
+                x: 76,
+                y: 401.2,
+                zIndex: 2,
+              },
+            ],
           }
           that.$apply()
         },

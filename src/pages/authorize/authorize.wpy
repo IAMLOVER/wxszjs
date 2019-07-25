@@ -131,6 +131,9 @@
                   console.log(res)
                   if (res.data.code == 4002) {
                     that.$parent.globalData.mini = false
+                    wx.switchTab({
+                      url: '../index/index'
+                    })
                   }
                   if (res.data.code == 1000) {
                     that.$parent.globalData.userId = res.data.data.userid

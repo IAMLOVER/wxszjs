@@ -908,14 +908,12 @@
     }
     onShow() {
       var that = this
-      that.mini = that.$parent.globalData.mini
       if (that.$parent.globalData.userId) {
         that.checkedIsHave()
       }
       that.getProduceInfo()
     }
     data = {
-      mini: true,
       isIphoneX: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
@@ -1074,7 +1072,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.mini == false) {
+        if (this.$parent.globalData.mini == false) {
           this.$navigate('../bind/bind')
           return
         }
@@ -1191,7 +1189,7 @@
     // 领取任务
     receiveTask() {
       var that = this
-      if (that.mini == false) {
+      if (that.$parent.globalData.mini == false) {
         that.$navigate('../bind/bind')
         return
       }

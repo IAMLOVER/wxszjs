@@ -801,7 +801,6 @@
       }
     };
     data = {
-      mini: true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
@@ -866,6 +865,7 @@
         return {
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
+          path:'pages/collocation/collocationSingle?id=' + this.collocationId + '&type=' + 2 + '&userTargetId=' + this.userTargetId,
           success: function(res) {
             // 转发成功
             console.log("转发成功:" + JSON.stringify(res));
@@ -931,7 +931,7 @@
       },
       //购买数量的确定按钮
       payMoney() {
-        if (this.mini == false) {
+        if (this.$parent.globalData.mini == false) {
           this.$navigate('../bind/bind')
           return
         }
@@ -983,8 +983,6 @@
       that.getPmtCollocation()
     };
     onShow() {
-      var that = this
-      that.mini = that.$parent.globalData.mini
     };
     //获取促销品搭配详情
     getPmtCollocation() {

@@ -285,8 +285,7 @@
     height: 100%;
     position: fixed;
     left: 0;
-    top: 0;
-    // z-index: 999;
+    top: 0; // z-index: 999;
     background-color: rgba(0, 0, 0, 0.6);
     .content {
       width: 100%;
@@ -484,11 +483,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{targetGoodsDetails}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                          <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                          <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                             <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                         </view>
-                         </label>
+                            <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                            <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                               <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                           </view>
+                           </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -544,7 +543,7 @@
         this.targetGoodsId = e.currentTarget.dataset.id
         var index = e.currentTarget.dataset.index
         this.getTargetDetail()
-        if(this.targetGoods[index].hide){
+        if (this.targetGoods[index].hide) {
           this.targetGoods[index].hide = false
           return
         }
@@ -675,6 +674,10 @@
     // 领取任务
     receiveTask() {
       var that = this
+      if (that.$parent.globalData.mini == false) {
+        that.$navigate('../bind/bind')
+        return
+      }
       wx.request({
         url: that.apiPath + '/szmktuserservice/target/usergettarget',
         data: {
