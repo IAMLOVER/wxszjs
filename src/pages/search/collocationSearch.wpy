@@ -251,7 +251,7 @@
           </view>
           <view class="center-price">
             ￥{{m1.filter(item.goodsMinSalPrice*0.01)}}
-            <text style="font-size:20rpx;text-decoration: line-through">￥{{m1.filter(item.goodsMinMktPrice*0.01)}}</text>
+            <text style="font-size:20rpx;text-decoration: line-through" wx:if="{{item.goodsMinMktPrice>0}}">￥{{m1.filter(item.goodsMinMktPrice*0.01)}}</text>
           </view>
         </view>
         <view class="equal-img">

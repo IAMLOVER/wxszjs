@@ -206,9 +206,6 @@
       navigationBarTitleText: '大满减'
     };
     onLoad(options) {
-      console.log(options.id)
-      this.activityId = options.id ? options.id : ''
-      console.log(this.activityId)
       this.getType()
     }
     wxs = {
@@ -261,7 +258,7 @@
         success: res => {
           that.typeArr = res.data.data
           that.$apply()
-          that.activityId = that.activityId?that.activityId:that.typeArr[0].id
+          that.activityId = that.typeArr[0].id
           that.getReduceProduct()
         },
         fail: () => {},

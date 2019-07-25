@@ -370,6 +370,7 @@
         color: #222;
         margin-top: 12rpx;
         margin-bottom: 22rpx;
+        text-align: center;
         image {
           width: 92rpx;
           height: 92rpx;
@@ -443,8 +444,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}-￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称以及限购 -->
@@ -637,6 +638,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -666,11 +668,14 @@
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           path: 'pages/generalGoods/generalGoods?id=' + this.produceId,
-          success: function(res) {
+          success: (res) => {
             // 转发成功
+            this.showShareShadow = false
+            console.log('转发成功')
           },
-          fail: function(res) {
+          fail: (res) => {
             // 转发失败
+            console.log('转发失败')
           }
         }
       },
@@ -690,6 +695,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
+        this.account = 1
       },
       // 加
       addAccount() {
@@ -735,7 +741,8 @@
             mask: true,
             success: res => {}
           });
-        } else {
+        }
+        else {
           var pay = {}
           // 商品活动类型
           pay.type = 0
@@ -788,7 +795,6 @@
           that.storeId = res.data.data.goods.storeId
           that.$apply()
           that.getStorePhone()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {

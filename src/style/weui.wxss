@@ -24,3 +24,7 @@ rich-text{
     width: 100%;
     background: #fff;
 }
+
+.share-way{
+    text-align: center !important;
+}

@@ -504,7 +504,7 @@
           // 来自页面内转发按钮
         }
         return {
-          title: this.taskForShare.relay,
+          title: this.taskForShare.relay ? this.taskForShare.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.taskForShare.cover ? this.preImagePath + this.taskForShare.cover : this.preImagePath + this.taskForShare.picUrl,
           path: getPath,
           success: function(res) {
@@ -716,7 +716,7 @@
                 y: 82.4,
                 zIndex: 2,
                 text: [{
-                  text: that.taskForShare.relay,
+                  text: that.taskForShare.relay ? that.taskForShare.relay : '我发现了一个超值好物，快来看看啊',
                   fontSize: 27,
                   color: '#fff',
                   opacity: 1,
@@ -784,7 +784,7 @@
               },
               //商店的图片
               {
-                url: that.preImagePath + that.taskForShare.cover,
+                url: that.taskForShare.cover ? that.preImagePath + that.taskForShare.cover : that.preImagePath + that.taskForShare.picUrl,
                 width: 418,
                 height: 418,
                 zIndex: 3,

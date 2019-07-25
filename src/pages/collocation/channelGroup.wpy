@@ -631,9 +631,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                                      <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                                      <text>分享</text>
-                                    </button>
+                                        <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                                        <text>分享</text>
+                                      </button>
       </view>
     </view>
     <!-- 组合商品 -->
@@ -677,11 +677,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true">
-                                      <view class="kefu">
-                                    <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                                    <view>客服</view>
-                                  </view>
-                                  </button>
+                                        <view class="kefu">
+                                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                                      <view>客服</view>
+                                    </view>
+                                    </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(channelCollocation.channelInfoPrice*0.01 + produceInfo.minPrice*0.01)}})</text>
       </view>
@@ -801,6 +801,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.typeId = e.currentTarget.dataset.id
         this.showPosition = !this.showPosition
+        this.account = 1
       },
       // 加
       addAccount() {

@@ -194,7 +194,7 @@
         收件人：<text>{{userName}}</text>
       </view>
       <view class="order-phone">
-        {{userNumber}}
+        手机号码：{{userNumber}}
       </view>
       <view class="order-address">
         收货地址：{{detailAddress}}

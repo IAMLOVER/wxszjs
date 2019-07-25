@@ -644,6 +644,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.typeId = e.currentTarget.dataset.id
         this.showPosition = !this.showPosition
+        this.account = 1
       },
       // 加
       addAccount() {

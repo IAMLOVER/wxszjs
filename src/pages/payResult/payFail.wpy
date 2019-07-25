@@ -131,7 +131,7 @@
           </view>
           <view class="list-right">
             <view class="list-name">{{item.goodsName}}</view>
-            <view class="list-type">规格：{{item.className}}</view>
+            <view class="list-type" wx:if="{{item.className.length > 0}}">规格：{{item.className}}</view>
             <view class="list-text">
               <view class="price">￥{{m1.filter(item.price*0.01)}}</view>
               <view class="count">数量：{{item.count}}</view>

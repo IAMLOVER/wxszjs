@@ -730,6 +730,7 @@
             </view>
             <view class="price">
               ￥{{m1.filter(channelCollocation.channelInfoPrice*0.01)}}
+              <text style="font-size:24rpx;color:#aaa;text-decoration:line-through" wx:if="{{channelInfo.mktPrice>0}}">￥{{m1.filter(channelInfo.mktPrice*0.01)}}</text>
             </view>
           </view>
         </view>
@@ -743,7 +744,7 @@
             </view>
             <view class="price">
               ￥{{m1.filter(produceInfo.minPrice*0.01)}}
-              <text style="font-size:24rpx;color:#aaa;text-decoration:line-through">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
+              <text style="font-size:24rpx;color:#aaa;text-decoration:line-through" wx:if="{{produceInfo.minMktPrice>0}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
             </view>
           </view>
         </view>
@@ -771,9 +772,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                            <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                            <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                          </button>
+                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                              </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -801,12 +802,13 @@
       }
     };
     data = {
-      mini:true,
+      mini: true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       collocationId: '',
       userTargetId: '',
       type: '',
@@ -837,6 +839,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -895,6 +898,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
+        this.account = 1
       },
       // 加
       addAccount() {
@@ -1015,7 +1019,6 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -1173,7 +1176,7 @@
                 zIndex: 3,
                 text: [{
                   //促销商品的名称
-                  text: that.promotion.title,
+                  text: that.channelInfo.title,
                   fontSize: 24,
                   color: '#222',
                   width: 240,
@@ -1240,7 +1243,7 @@
               },
               //促销商品的图片
               {
-                url: that.promotion.cover ? that.preImagePath + that.promotion.cover : that.preImagePath + that.promotion.picUrl1,
+                url: that.channelInfo.cover ? that.preImagePath + that.channelInfo.cover : that.preImagePath + that.channelInfo.picUrl1,
                 width: 128,
                 height: 128,
                 zIndex: 3,

@@ -374,8 +374,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}-￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称以及限购 -->
@@ -393,9 +393,9 @@
       </view>
       <view class="share">
         <button open-type="share" plain="true">
-                          <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
-                          <text>分享</text>
-                        </button>
+                            <image src="{{imagePath+'share02.png'}}" wx:if="{{imagePath}}"/>
+                            <text>分享</text>
+                          </button>
       </view>
     </view>
     <!-- 商品详情 -->
@@ -547,7 +547,7 @@
           console.log(ops.target)
         }
         return {
-          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
+          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊！',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           success: function(res) {
             // 转发成功
@@ -576,6 +576,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
+        this.account = 1
       },
       // 加
       addAccount() {

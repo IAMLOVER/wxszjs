@@ -182,7 +182,7 @@
   .store-items {
     border-radius: 20rpx 20rpx 0px 0px;
     .item {
-      height: 372rpx;
+      max-height: 372rpx;
       padding: 30rpx;
       box-sizing: border-box;
       border-bottom: 1px solid #F5F5F5;
@@ -315,8 +315,8 @@
             <image class="button" src="{{imagePath + 'button.png'}}" wx:if="{{imagePath}}" />
           </view>
         </view>
-        <view class="item-images">
-          <image wx:for="{{item.goods}}" lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{preImagePath+good.picUrl1}}" />
+        <view class="item-images" wx:if="{{item.goods.length != 0}}">
+          <image wx:for="{{item.goods}}"  lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{preImagePath+good.picUrl1}}" />
         </view>
       </navigator>
     </view>

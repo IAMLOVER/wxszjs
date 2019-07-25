@@ -451,6 +451,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -521,7 +522,6 @@
           console.log(res)
           that.otherArr = res.data.data
           that.$apply()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
@@ -652,6 +652,8 @@
                   text: wx.getStorageSync('taskGoodsName'),
                   fontSize: 26,
                   color: '#000',
+                  lineHeight: 40,
+                  lineNum: 1,
                 }]
               },
               {

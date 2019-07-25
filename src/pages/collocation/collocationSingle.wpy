@@ -257,10 +257,10 @@
           font-size: 28rpx;
         }
         .type-item {
-           overflow: hidden;
+          overflow: hidden;
           view {
             float: left;
-            display:block;
+            display: block;
             padding: 0rpx 12rpx;
             border-radius: 22rpx;
             background-color: #ededed;
@@ -771,9 +771,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                      <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                    </button>
+                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                        <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -801,12 +801,13 @@
       }
     };
     data = {
-      mini:true,
+      mini: true,
       isIphoneX: false,
       showShadow: false,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      qrcodeImagePath: path.path.qrcodeImagePath,
       collocationId: '',
       userTargetId: '',
       type: '',
@@ -837,6 +838,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()        
       },
       cancleShare() {
         this.showShareShadow = false
@@ -895,6 +897,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
+        this.account = 1
       },
       // 加
       addAccount() {
@@ -997,7 +1000,6 @@
         success: res => {
           if (res.data.code != '1000') {
             that.$navigate('../undercarriage/undercarriage')
-
             return
           }
           //促销品信息
@@ -1014,7 +1016,6 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}

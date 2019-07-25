@@ -675,8 +675,8 @@
         <text class="type">￥</text>
         <text class="now" wx:if="{{produceInfo.minPrice != produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}-{{m1.filter(produceInfo.maxPrice*0.01)}}</text>
         <text class="now" wx:if="{{produceInfo.minPrice == produceInfo.maxPrice}}">{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}-{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
-        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice != produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}-￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+        <text class="old" wx:if="{{produceInfo.minMktPrice>0 && produceInfo.minMktPrice == produceInfo.maxMktPrice}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
       </view>
     </view>
     <!-- 商品名称 -->
@@ -828,11 +828,11 @@
           <radio-group class="group" bindchange="radioChange">
             <view class="label-2" wx:for="{{taskItems}}" wx:for-item="item" wx:key="{{index}}">
               <label class="label-2__text" for="{{item.id}}">
-                                                            <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
-                                                            <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
-                                                               <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
-                                                           </view>
-                                                           </label>
+                                                                <text>助力<text style="color:#F25664">{{item.target}}</text>单，成功助力可获佣金：总成交额<text style="color:#F25664">{{item.percent}}</text>%</text>
+                                                                <view class="label-2__icon" style="border-color:{{item.checked ? '#F25664': '#B5B5B5'}}" >
+                                                                   <view class="label-2__icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+                                                               </view>
+                                                               </label>
               <radio id="{{item.id}}" hidden value="{{item.id}}" checked="{{item.checked}}"></radio>
             </view>
           </radio-group>
@@ -853,9 +853,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                                              </button>
+                                                                    <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                                    <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                                  </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -953,12 +953,12 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
       },
-      onCreatePoster() {
-      },
+      onCreatePoster() {},
       onPosterFail(err) {},
       onPosterSuccess(e) {
         this.showShareShadow = false
@@ -1040,6 +1040,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.money = this.account * this.goodsClassList[this.activeIndex].salPrice * 0.01
         this.typeId = e.currentTarget.dataset.id
+        this.account = 1
       },
       // 加
       addAccount() {
@@ -1167,7 +1168,6 @@
           }
           that.$apply()
           that.getStorePhone()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {

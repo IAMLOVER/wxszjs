@@ -609,6 +609,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -673,7 +674,6 @@
           that.storeLogo = res.data.data.logo
           that.storePromote = res.data.data.promote
           that.$apply()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}

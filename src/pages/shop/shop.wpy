@@ -218,7 +218,7 @@
     onLoad() {
       this.getShopClassfiy()
       this.getShop()
-    }
+    };
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,

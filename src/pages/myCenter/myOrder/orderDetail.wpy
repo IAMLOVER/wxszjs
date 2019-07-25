@@ -202,7 +202,7 @@
             }
         }
         .logistics-wrapper {
-            height: 164rpx;
+            min-height: 164rpx;
             width: 690rpx;
             margin-top: 10rpx;
             background: white;
@@ -266,7 +266,7 @@
                     &:first-child {
                         background-color: #fff;
                         color: #959595;
-                        margin-left: 24rpx;
+                        margin-right: 24rpx;
                         border: 2rpx solid #B5B5B5;
                         box-sizing: border-box;
                     }
@@ -357,7 +357,7 @@
         <view class="pink"></view>
         <view class="info-wrapper">
             <view class="name">收件人：<text style="font-weight:bold">{{orderInfo.name}}</text></view>
-            <view>{{orderInfo.phone}}</view>
+            <view>手机号码：{{orderInfo.phone}}</view>
             <view>收货地址：{{orderInfo.address}}</view>
             <!-- <image src="{{imagePath + 'more04.png'}}" wx:if="{{imagePath}}" class="more"/> -->
             <view class="left-circle"></view>

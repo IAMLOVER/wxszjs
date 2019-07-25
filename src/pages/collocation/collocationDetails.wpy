@@ -120,13 +120,13 @@
         color: #959595;
         font-size: 24rpx;
         flex: 0.8;
-        -webkit-flex:0.8;
+        -webkit-flex: 0.8;
         justify-items: flex-start;
         -webkit-justify-items: flex-start;
       }
-      .limit:first-child{
+      .limit:first-child {
         flex: 0.6;
-        -webkit-flex:0.6;
+        -webkit-flex: 0.6;
       }
     }
     .share {
@@ -692,7 +692,7 @@
           </view>
           <view class="price">
             <text>￥{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-            <text>￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+            <text wx:if="{{produceInfo.maxMktPrice>0}}">￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
           </view>
           <!-- 助力有奖 -->
           <view class="comeon" wx:if="{{produceInfo.activityType == 1}}" @tap="goCome" data-id="{{produceInfo.id}}">
@@ -716,11 +716,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-              <view class="kefu">
-                  <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                   <view>客服</view>
-              </view>
-            </button>
+                <view class="kefu">
+                    <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                     <view>客服</view>
+                </view>
+              </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01*pmtCollocation.promotionCount + produceInfo.minPrice*0.01*pmtCollocation.goodsCount)}})</text>
       </view>
@@ -795,9 +795,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                      <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                      <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                                    </button>
+                                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                        <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                      </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -857,6 +857,7 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -882,7 +883,7 @@
           console.log(ops.target)
         }
         return {
-          title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了超值组合，快来看看吧',
+          title:'我发现了超值组合，快来看看吧',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           path: 'pages/collocation/collocationDetails?id=' + this.collocationId,
           success: function(res) {},
@@ -910,6 +911,7 @@
         this.activeIndex = e.currentTarget.dataset.index
         this.typeId = e.currentTarget.dataset.id
         this.showPosition = !this.showPosition
+        this.account = 1
       },
       // 加
       addAccount() {
@@ -1023,7 +1025,6 @@
           //促销商品的数量
           that.wareHouseStock = res.data.data.wareHouseStock
           that.$apply()
-          that.getQRCode()
         },
         fail: () => {},
         complete: () => {}
