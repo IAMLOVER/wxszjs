@@ -189,9 +189,9 @@
           <view class="progress-box {{status==2?'fail':''}}">
             <view class="progress" style="width:{{item.inviteNum/item.targetNum*100}}%"></view>
             <text class="tip" wx:if="{{status == 0}}">进行中</text>
-            <text class="tip" wx:if="{{status == 1}}">已成功</text>
-            <text class="tip" wx:if="{{status == 2}}">已失败</text>
-            <text class="percent">{{m1.filter((item.inviteNum/item.targetNum)*100)}}%</text>
+            <text class="tip" wx:if="{{status == 1}}" style="text-algin:center">已成功</text>
+            <text class="tip" wx:if="{{status == 2}}" style="text-algin:center;width:130rpx;left:50%;margin-left:-65rpx">截止前未完成</text>
+            <text class="percent" wx:if="{{status != 2}}">{{m1.filter((item.inviteNum/item.targetNum)*100)}}%</text>
           </view>
         </view>
       </view>

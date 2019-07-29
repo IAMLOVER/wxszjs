@@ -266,6 +266,8 @@
 <script>
   import wepy from 'wepy';
   import path from '../../../common/path.js'
+  // import Base64 from '../../../common/userBase64.js'
+  import C from 'crypto-js'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '我的',
@@ -303,8 +305,8 @@
       }
       that.identityType = that.$parent.globalData.identityType
       that.userName = that.$parent.globalData.userName
+      // that.userName = C.enc.Utf8.stringify(C.enc.Base64.parse(that.userName));
       that.avatarUrl = that.$parent.globalData.avatarUrl
-      console.log(that.avatarUrl)
       that.getOrderList()
     }
     getOrderList() {

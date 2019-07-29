@@ -138,15 +138,15 @@
         }
       }
     }
-    .empty{
+    .empty {
       margin: 0 auto;
       text-align: center;
       margin-top: 150rpx;
-      image{
+      image {
         width: 400rpx;
         height: 300rpx;
       }
-      view{
+      view {
         font-size: 28rpx;
         color: #959595;
       }
@@ -238,9 +238,11 @@
             </view>
           </view>
         </scroll-view>
+        <!-- 没有更多啦 -->
+        <view wx:if="{{classifyProduce.length>0}}" style="font-size:24rpx;color:#B5B5B5;width:120rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
       </view>
       <view class="empty" wx:if="{{classifyProduce.length<=0}}">
-        <image src="{{imagePath + 'null_gift@2x.png'}}" wx:if="{{imagePath}}"/>
+        <image src="{{imagePath + 'null_gift@2x.png'}}" wx:if="{{imagePath}}" />
         <view>小集正在为你筹备更多超值商品</view>
       </view>
     </view>
@@ -273,6 +275,7 @@
       page: 0,
       totalPages: 0,
       arr: [],
+      showNo: false,
     };
     methods = {
       getProduce(e) {
@@ -286,6 +289,7 @@
         this.arr = []
         this.page = 0
         this.totalPages = 0
+        this.showNo = false
         this.getClassfiyProduce()
       },
       choseNew() {
@@ -327,6 +331,8 @@
         this.page++
           this.arr = this.classifyProduce
         this.getClassfiyProduce()
+      } else {
+        this.showNo = true
       }
     }
     //下拉刷新
@@ -334,6 +340,7 @@
       this.page = 0
       this.totalPages = 0
       this.arr = []
+      this.showNo = false
       this.getClass()
       this.getClassfiyProduce()
       //模拟加载

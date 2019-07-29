@@ -554,8 +554,6 @@
     -webkit-justify-content: center;
   }
   .label-2__icon-checked {
-    position: absolute; // left: 6rpx;
-    // top: 6rpx;
     width: 16rpx;
     height: 16rpx;
     background: #F25664;
@@ -689,7 +687,7 @@
           邮费：包邮
         </view>
         <view class="limit" style="-webkit-flex: 2.5;-ms-flex: 2.5;flex: 2.5;">
-          {{produceInfo.buyNum}}人购买
+          热度{{produceInfo.visitNum}}
         </view>
       </view>
       <view class="share">

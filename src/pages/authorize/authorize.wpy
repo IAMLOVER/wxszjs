@@ -114,7 +114,6 @@
               console.log(res)
               var iv = res.iv
               that.$parent.globalData.avatarUrl = res.userInfo.avatarUrl
-              that.$parent.globalData.userName = res.userInfo.nickName
               wx.request({
                 url: that.apiPath + '/szmktuserservice/login/mini',
                 header: {
@@ -139,6 +138,7 @@
                     that.$parent.globalData.userId = res.data.data.userid
                     that.$parent.globalData.identityType = res.data.data.identityType
                     that.$parent.globalData.key = res.data.data.sessionkey
+                    that.$parent.globalData.userName = res.data.data.username
                     wx.setStorageSync('userId', res.data.data.userid)
                     wx.switchTab({
                       url: '../index/index'

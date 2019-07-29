@@ -129,7 +129,6 @@ export default class extends wepy.app {
             success: res => {
               // 获取到用户的 code 之后：res.code
               that.code = res.code
-              console.log(that.code)
               wx.setStorageSync('code',res.code)
               wx.getUserInfo({
                 success: function(res) {
@@ -138,7 +137,7 @@ export default class extends wepy.app {
                   var iv = res.iv
                   wx.setStorageSync('iv',res.iv)
                   that.globalData.avatarUrl = res.userInfo.avatarUrl
-                  that.globalData.userName = res.userInfo.nickName
+                   console.log(res)
                   wx.request({
                     url:
                       that.globalData.apiPath + '/szmktuserservice/login/mini',
@@ -164,6 +163,7 @@ export default class extends wepy.app {
                       console.log(that.globalData.userId)
                       that.globalData.identityType = res.data.data.identityType
                       that.globalData.key = res.data.data.sessionkey
+                      that.globalData.userName = res.data.data.username
                       wx.setStorageSync('userId', res.data.data.userid)
                       }
                     },
@@ -175,7 +175,7 @@ export default class extends wepy.app {
             }
           });
         } else {
-          wx.navigateTo({
+          wx.reLaunch({
             url: '/pages/authorize/authorize'
           });
         }

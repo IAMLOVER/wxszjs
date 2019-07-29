@@ -486,7 +486,7 @@
             </view>
           </view>
           <view class="tip">
-            已经有{{item.receivedNum}}人领取
+            已有{{item.receivedNum}}人领取
           </view>
         </navigator>
       </view>

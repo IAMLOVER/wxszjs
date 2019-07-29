@@ -464,7 +464,7 @@
         <!-- 确定按钮 -->
         <view class="btn-box">
           <view class="btn" @tap="payMoney" wx:if="{{goodsClassList[activeIndex].stock > 0}}">
-            确定(共￥{{money}})
+            确定(共￥{{m1.filter(money)}})
           </view>
           <view class="btn" wx:if="{{goodsClassList[activeIndex].stock <= 0}}">
             暂无库存

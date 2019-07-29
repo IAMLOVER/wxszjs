@@ -363,10 +363,6 @@
     -webkit-justify-content: center;
   }
   .label-2__icon-checked {
-    position: absolute; // left: 50%;
-    // top: 50%;
-    // margin-left: -8rpx;
-    // margin-top: -8rpx;
     width: 16rpx;
     height: 16rpx;
     background: #F25664;

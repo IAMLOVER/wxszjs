@@ -43,7 +43,7 @@
         display: -webkit-flex;
         -webkit-align-items: center;
         -webkit-justify-content: center;
-        image{
+        image {
           width: 36rpx;
           height: 36rpx;
           z-index: 99999;
@@ -262,7 +262,7 @@
         <input type="text" placeholder="搜你想要" value="{{seachValue}}" cursor-spacing="140" focus="{{focus}}" confirm-type="search" bindinput="getValue" bindconfirm="confirm" placeholder-style="color:#959595" />
         <image src="{{imagePath+'search02.png'}}" class="image" wx:if="{{imagePath}}" />
       </view>
-      <view class="clear-wrapper" catchtap="clearSearch" >
+      <view class="clear-wrapper" catchtap="clearSearch">
         <image src="{{imagePath+'close02@2x.png'}}" class="clear-input" wx:if="{{imagePath && seachValue.length>0}}" />
       </view>
       <view class="search-btn" @tap="searchResult">搜索</view>
@@ -316,7 +316,7 @@
           </view>
         </view>
         <view class="item-images" wx:if="{{item.goods.length != 0}}">
-          <image wx:for="{{item.goods}}"  lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{preImagePath+good.picUrl1}}" />
+          <image wx:for="{{item.goods}}" lazy-load wx:key="index" mode="aspectFill" wx:for-item="good" data-index="{{good.id}}" src="{{preImagePath+good.picUrl1}}" />
         </view>
       </navigator>
     </view>
@@ -326,12 +326,14 @@
       <view>找不到你想查找的内容呢</view>
       <view>换个关键词试试吧</view>
     </view>
+    <!-- 没有更多啦 -->
+    <view wx:if="{{showNo}}" style="font-size:24rpx;color:#B5B5B5;width:120rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy';
-  import path from '../../common/path.js';
+  import path from '../../common/path.js'
   import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
@@ -354,14 +356,17 @@
       page: 0,
       totalPage: 0,
       seachValue: '',
-      focus:true,
+      focus: true,
+      showNo: false,
     };
     wxs = {
       m1: mywxs
     };
     methods = {
-      goShop(e){
-        this.$navigate('../shop/shopDetail',{id:e.currentTarget.dataset.store})
+      goShop(e) {
+        this.$navigate('../shop/shopDetail', {
+          id: e.currentTarget.dataset.store
+        })
       },
       clearSearch() {
         var that = this
@@ -369,9 +374,9 @@
         that.seachValue = ''
         setTimeout(() => {
           that.focus = true
-        that.$apply()
+          that.$apply()
         }, 1000)
-        return 
+        return
       },
       confirm(e) {
         this.seachValue = e.detail.value
@@ -393,13 +398,13 @@
         this.empty = false
         this.showProduce = true
         this.showStore = false
-        // this.getProdece()
+        this.showNo = false
       },
       showStore() {
         this.empty = false
         this.showProduce = false
         this.showStore = true
-        // this.getStore()
+        this.showNo = false
       },
       searchResult() {
         if (this.showProduce) {
@@ -523,11 +528,15 @@
         this.page++
           this.arrForStore = this.storeArr
         this.getStore()
+      } else {
+        this.showNo = true
       }
       if (this.page < this.totalPage - 1 && this.showProduce) {
         this.page++
           this.arrForProduce = this.produceArr
         this.getProdece()
+      } else {
+        this.showNo = true
       }
     }
   }
