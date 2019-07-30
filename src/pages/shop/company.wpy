@@ -55,8 +55,8 @@
         width: 24rpx;
         height: 24rpx;
         margin-left: 10rpx;
-        vertical-align: text-top;
-        margin-top: 6rpx;
+        vertical-align: middle;
+        margin-top: -4rpx;
       }
     }
     view:nth-child(2) {

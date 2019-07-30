@@ -257,6 +257,7 @@
             </view>
             <view class="left-price">
               ￥{{m1.filter(item.promotionPrice*0.01)}}
+               <text style="font-size:20rpx;text-decoration: line-through" wx:if="{{item.promotionMktPrice>0}}">￥{{m1.filter(item.promotionMktPrice*0.01)}}</text>
             </view>
           </view>
           <view class="add-img">
@@ -318,6 +319,7 @@
             </view>
             <view class="left-price">
               ￥{{m1.filter(item.promotionPrice*0.01)}}
+              <text style="font-size:20rpx;text-decoration: line-through" wx:if="{{item.promotionMktPrice>0}}">￥{{m1.filter(item.promotionMktPrice*0.01)}}</text>
             </view>
           </view>
           <view class="add-img">

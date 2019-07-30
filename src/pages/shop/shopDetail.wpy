@@ -58,6 +58,7 @@
           height: 27rpx;
           vertical-align: middle;
           margin-right: 12rpx;
+          margin-top: -4rpx;
         }
       }
     }

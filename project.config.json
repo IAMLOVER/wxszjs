@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 32,
+			"current": 34,
 			"list": [
 				{
 					"id": 0,
@@ -279,6 +279,13 @@
 					"name": "登录",
 					"pathName": "pages/login/login",
 					"query": "scene=FVIT2CFJ",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "调整样式",
+					"pathName": "pages/bind/bind",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -5,13 +5,14 @@
     <view class="top-tip">为了提高您的购物体验，请绑定手机号码</view>
     <view class="top-tip">绑定后即可通过微信快捷登录</view>
     <view class="phone">
-      <input type="tel" value="{{phone}}" bindinput="phoneInput" placeholder="请输入你的手机号" />
+      <input type="tel" value="{{phone}}" bindinput="phoneInput" style="border-color:{{phone.length>0 ? '#EB4D4E':'#F5F5F5'}}" placeholder="请输入你的手机号" />
+      <image src="{{imagePath + 'close02@2x.png'}}" class="clear-input" @tap="clearPhone" wx:if="{{imagePath && phone.length>0}}"/>
     </view>
-    <view class="code-wrapper">
+    <view class="code-wrapper" style="border-color:{{code.length>0 ? '#EB4D4E':'#F5F5F5'}}" >
       <input type="number" value="{{code}}" bindinput="codeInput" placeholder="请输入验证码" />
-      <button @tap="getCode">{{btnText}}</button>
+      <button @tap="getCode" style="border-color:{{phone.length == 11 ? '#EB4D4E' : '#DFDFDF'}};color:{{phone.length == 11 ? '#EB4D4E' : '#959595'}}" >{{btnText}}</button>
     </view>
-    <view class="bind-btn" @tap="last">绑定</view>
+    <view class="bind-btn" @tap="last" style="background-image:{{phone.length == 11 && code.length == 6 ? 'linear-gradient(-136deg, #EB4D4E 0%, #D971D6 100%)':''}}">绑定</view>
     <view class="shadow" wx:if="{{showShadow}}">
       <view class="content">
         <view class="tip">您输入的手机号码已绑定了其他微信账号，是否将关联的微信账号替换为本微信号</view>
@@ -83,6 +84,11 @@
       m1: mywxs
     }
     methods = {
+      //情况手机输入框
+      clearPhone(){
+        this.phone = ''
+        console.log(123)
+      },
       // 验证码的点击事件
       getCode() {
         if (!(/^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/.test(this.phone))) {
@@ -371,6 +377,7 @@
   }
   .phone {
     margin-top: 50rpx;
+    position: relative;
     input {
       width: 530rpx;
       height: 92rpx;
@@ -379,6 +386,15 @@
       border: none;
       outline: none;
       border-bottom: 2rpx solid #f5f5f5;
+      caret-color: #EB4D4E;
+    }
+    .clear-input{
+      width: 36rpx;
+      height: 36rpx;
+      position: absolute;
+      right: 0;
+      top: 28rpx;
+      z-index: 999;
     }
   }
   .code-wrapper {
@@ -393,6 +409,7 @@
       line-height: 92rpx;
       flex: 2;
       -webkit-flex: 2;
+      caret-color: #EB4D4E;
     }
     button {
       width: 180rpx;
@@ -413,7 +430,7 @@
     line-height: 88rpx;
     text-align: center;
     color: #fff;
-    background-image: linear-gradient(-136deg, #EB4D4E 0%, #D971D6 100%);
+    background: #DFDFDF;
     border-radius: 48rpx;
     font-size: 32rpx;
     margin-top: 86rpx;

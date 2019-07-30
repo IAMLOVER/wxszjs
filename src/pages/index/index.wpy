@@ -666,11 +666,6 @@
     // 获取最新单品
     getNewProduce() {
       var that = this
-      wepy.showLoading({
-        title: '加载中', //提示的内容,
-        mask: true, //显示透明蒙层，防止触摸穿透,
-        success: res => {}
-      });
       wx.request({
         url: that.apiPath + '/szmktstore/goodsInfo/search',
         method: 'GET',
@@ -686,13 +681,6 @@
           wepy.hideLoading()
         },
         fail: () => {
-          wepy.showToast({
-            title: '网络异常', //提示的内容,
-            icon: 'none', //图标,
-            duration: 2000, //延迟时间,
-            mask: true, //显示透明蒙层，防止触摸穿透,
-            success: res => {}
-          });
         },
         complete: () => {}
       });
@@ -703,6 +691,5 @@
       this.couponNum.privilege = this.newcoupon.privilege
       this.couponNum.show = true
     }
-    //判断项目是否在维护中
   }
 </script>

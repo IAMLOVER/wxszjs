@@ -138,6 +138,11 @@ export default class extends wepy.app {
                   wx.setStorageSync('iv',res.iv)
                   that.globalData.avatarUrl = res.userInfo.avatarUrl
                    console.log(res)
+                   wepy.showLoading({
+                     title: '登录中...', //提示的内容,
+                     mask: true, //显示透明蒙层，防止触摸穿透,
+                     success: res => {}
+                   })
                   wx.request({
                     url:
                       that.globalData.apiPath + '/szmktuserservice/login/mini',
@@ -168,6 +173,7 @@ export default class extends wepy.app {
                       }
                     },
                     complete: () => {
+                      wepy.hideLoading()
                     }
                   });
                 }

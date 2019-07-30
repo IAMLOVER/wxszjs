@@ -241,6 +241,7 @@
           </view>
           <view class="left-price">
             ￥{{m1.filter(item.promotionPrice*0.01)}}
+             <text style="font-size:20rpx;text-decoration: line-through" wx:if="{{item.promotionMktPrice>0}}">￥{{m1.filter(item.promotionMktPrice*0.01)}}</text>
           </view>
         </view>
         <view class="add-img">
@@ -294,7 +295,7 @@
 
 <script>
   import wepy from 'wepy';
-  import path from '../../common/path.js';
+  import path from '../../common/path.js'
   import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
