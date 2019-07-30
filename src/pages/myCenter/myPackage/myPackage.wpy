@@ -186,7 +186,7 @@
       draw() {
         if (this.myInCome * 0.01 < 5) {
           wx.showToast({
-            title: '对不起，您的收入低于5元，不可提现',
+            title: '抱歉，您的收入低于5元，不可提现',
             icon: 'none',
             duration: 2000,
             mask: true,

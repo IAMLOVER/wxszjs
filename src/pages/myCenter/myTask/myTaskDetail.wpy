@@ -329,12 +329,14 @@
         {{tip}}
       </view>
       <view class="main-count">
-        任务数{{taskForShare.targetNum}}，已完成{{taskForShare.inviteNum}}
+        任务数{{taskForShare.targetNum}}，已完成{{groupContent.length}}
       </view>
       <view class="progress-wrapper">
-        <view class="progress" style="width:{{taskForShare.inviteNum/taskForShare.targetNum*100}}%"></view>
-        <text style="left:15rpx;font-size:28rpx;">进度</text>
-        <text style="color:#F25664">{{m1.filter(taskForShare.inviteNum/taskForShare.targetNum*100)}}%</text>
+        <view class="progress" style="width:{{groupContent.length/taskForShare.targetNum*100}}%"></view>
+        <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 0}}">进行中</text>
+        <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 1}}">已成功</text>
+        <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 2}}">已失败</text>
+        <text style="color:#F25664">{{m1.filter(groupContent.length/taskForShare.targetNum*100)}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">
@@ -368,7 +370,7 @@
             </view>
             <view class="item-info">
               <view class="item-name">{{item.name}}</view>
-              <!-- <view class="item-time">2019-04-06 18:34</view> -->
+              <view class="item-time">{{item.buyTime}}</view>
             </view>
           </view>
           <view class="item-counts">
@@ -394,9 +396,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                          <view style="font-size:20rpx;">微信好友</view>
-                                        </button>
+                                            <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                            <view style="font-size:20rpx;">微信好友</view>
+                                          </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -572,9 +574,12 @@
         method: 'GET',
         dataType: 'json',
         success: res => {
-          if (res.data.code == '1000' && res.data.data.length>0) {
+          if (res.data.code == '1000' && res.data.data.length > 0) {
             that.showSituation = true
             that.groupContent = res.data.data
+            for (var item of that.groupContent) {
+              item.buyTime = time.formatTime(item.buyTime, 'Y-M-D h:m:s')
+            }
             that.$apply()
           }
         },

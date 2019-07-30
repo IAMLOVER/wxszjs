@@ -44,8 +44,8 @@
         position: fixed;
         left: 0;
         top: 84rpx;
-        height: 1048rpx;
-        padding-bottom: 25rpx;
+        height: calc(100% - 90rpx);
+        overflow-y: auto;
         view {
           height: 88rpx;
           line-height: 88rpx;

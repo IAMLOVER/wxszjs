@@ -730,6 +730,7 @@
             </view>
             <view class="price">
               ￥{{m1.filter(pmtCollocation.promotionPrice*0.01)}}
+              <text style="font-size:24rpx;color:#aaa;text-decoration:line-through" wx:if="{{pmtCollocation.mktPrice>0}}">￥{{m1.filter(pmtCollocation.mktPrice*0.01)}}</text>
             </view>
           </view>
         </view>
