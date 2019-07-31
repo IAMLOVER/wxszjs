@@ -20,7 +20,8 @@
         </view>
         <view class="item-right">
           <view class="item-title">{{item.title}}</view>
-          <view class="hot">热度{{item.visitNum}}</view>
+          <view class="hot">
+            <image wx:if="{{imagePath}}" src="{{imagePath+'hot01.png'}}" />热度{{item.visitNum}}</view>
           <view class="item-price">
             <view class="price">
               <image src="{{imagePath+'miaosa02.png'}}" wx:if="{{imagePath}}" />
@@ -30,9 +31,7 @@
           </view>
         </view>
         <!-- 可以抢还是不可以抢 -->
-        <text class="can">
-                            抢
-                        </text>
+        <text class="can">抢</text>
         <!-- 不可以抢的遮罩 -->
         <view class="nocan-shadow" wx:if="{{ item.stock == 0}}">
           <image wx:if="{{imagePath}}" src="{{imagePath+'over.png'}}" />
@@ -45,9 +44,8 @@
       <view>找不到你想查找的内容呢</view>
       <view>换个关键词试试吧</view>
     </view>
-
-      <!-- 没有更多啦 -->
-    <view wx:if="{{produceItems.length>0}}" style="font-size:24rpx;color:#B5B5B5;width:120rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
+    <!-- 没有更多啦 -->
+    <view wx:if="{{produceItems.length>0}}" style="font-size:24rpx;color:#B5B5B5;width:160rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
   </view>
 </template>
 
@@ -69,21 +67,21 @@
       page: 0,
       totalPage: 0,
       arr: [],
-      focus:true,
+      focus: true,
     };
     wxs = {
       m1: mywxs
     };
     methods = {
-       clearSearch() {
+      clearSearch() {
         var that = this
         that.focus = false
         that.searchValue = ''
         setTimeout(() => {
           that.focus = true
-        that.$apply()
+          that.$apply()
         }, 1000)
-        return 
+        return
       },
       confirm(e) {
         this.searchValue = e.detail.value
@@ -255,6 +253,11 @@
           color: #F25664;
           margin-bottom: 24rpx;
           margin-top: 8rpx;
+          image {
+            width: 18rpx;
+            height: 20rpx;
+            margin-right: 8rpx;
+          }
         }
         .item-price {
           float: left;

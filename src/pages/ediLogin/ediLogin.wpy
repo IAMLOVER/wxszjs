@@ -93,6 +93,9 @@ export default class Index extends wepy.page {
             if(that.$parent.globalData.userId){
               that.getLogin()               
               clearInterval(interval)        
+            }else{
+              that.$navigate('../bind/bind')
+              clearInterval(interval)
             }
           }, 1000);
          }

@@ -1,0 +1,36 @@
+<!--  -->
+<template>
+  <view class='container'>
+    <web-view src="https://files.sqplus.cn/files/license/szjstaxamount.html" @message="message">
+    
+    </web-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "税额说明",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+
+    events = {};
+
+    watch = {};
+
+    computed = {};
+
+    onLoad() { };
+
+    onShow() { };
+  }
+</script>
+
+<style lang='less'>
+</style>

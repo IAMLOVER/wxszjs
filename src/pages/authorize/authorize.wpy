@@ -130,6 +130,7 @@
                   console.log(res)
                   if (res.data.code == 4002) {
                     that.$parent.globalData.mini = false
+                    that.$parent.globalData.reCode = res.data.data
                     wx.switchTab({
                       url: '../index/index'
                     })

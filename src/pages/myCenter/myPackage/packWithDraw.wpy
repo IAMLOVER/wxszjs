@@ -241,7 +241,7 @@
       <view class="title">1.提现至微信钱包，只能提现整数金额；</view>
       <view class="title">2.单笔提现最小金额为5元，最多不超过5000元；</view>
       <view class="title">3.每个用户每天最多可提现1次；</view>
-      <view class="title">4.每次提现将收取提现金额的1%作为税额<text style="color:#7BB6FB">（税额说明）</text></view>
+      <view class="title">4.每次提现将收取提现金额的1%作为税额<text style="color:#7BB6FB" @tap="goTax">（税额说明）</text></view>
     </view>
     <!-- 提现到微信的按钮 -->
     <view class="btn {{value<=myInCome*0.01?'active':''}}" @tap="getBegin">
@@ -303,6 +303,9 @@
       code: ''
     };
     methods = {
+      goTax(){
+        this.$navigate('./taxStatement')
+      },
       goArgee() {
         this.$navigate('./drawArgee')
       },
@@ -324,7 +327,7 @@
           wx.request({
             url: this.apiPath + '/szmktuserservice/login/send/phoneCode',
             data: {
-              phone: this.phone
+              phone: this.phone,
             },
             method: 'GET',
             dataType: 'json',

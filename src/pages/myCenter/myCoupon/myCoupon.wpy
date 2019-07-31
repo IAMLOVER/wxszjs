@@ -112,7 +112,7 @@
       <view class="discount">
         <view>优惠券累计为你省下</view>
         <view>￥
-          <text style="font-size:50rpx;">{{mySave}}</text>
+          <text style="font-size:50rpx;">{{m1.filter(mySave*0.01)}}</text>
         </view>
       </view>
     </view>
@@ -124,7 +124,7 @@
     <navigator url="../../fullReduction/fullReduction?id={{item.couponId}}" class="discount-list" wx:for="{{canArr}}" wx:for-item="item" wx:key="{{index}}" data-id="{{item.id}}" wx:if="{{couponStatus == 0 && canArr.length>0}}">
       <view style="margin-left:50rpx;">
         <view style="display:flex;display:-webkit-flex;-webkit-align-items:center;align-items:center;padding-top:4rpx;">
-          <view style="font-size:80rpx;">{{item.privilege*0.01}}</view>
+          <view style="font-size:80rpx;">{{m1.filter(item.privilege*0.01)}}</view>
           <view style="margin-left:20rpx;">
             <view style="font-size:20rpx;">“满减”专享</view>
             <view style="font-size:28rpx;margin-top:5rpx">满{{m1.filter(item.standard*0.01)}}元可使用</view>

@@ -268,7 +268,7 @@
           <text>优惠金额：</text>
           <!-- {{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.salPrice*0.01)*pay.count-pay.money)}} -->
           <text wx:if="{{channelInfo != null}}">0</text>
-          <text wx:if="{{channelInfo == null && pay.have}}">{{(produceInfo.salPrice*0.01)*pay.count-pay.money}}</text>
+          <text wx:if="{{channelInfo == null && pay.have}}">{{m1.filter((produceInfo.salPrice*0.01)*pay.count-pay.money)}}</text>
           <text wx:if="{{channelInfo == null && !pay.have}}">0</text>
         </view>
       </view>

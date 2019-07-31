@@ -88,7 +88,7 @@
           vertical-align: middle;
         }
         .left-title {
-          font-size: 28rpx;
+          font-size: 26rpx;
           color: #5F3118;
           margin-top: 12rpx;
           text-align: center;
@@ -101,7 +101,7 @@
           position: absolute;
           width: 170rpx;
           border-radius: 0rpx 0rpx 8rpx 8rpx;
-          bottom: 64rpx;
+          bottom: 70rpx;
         }
       }
       .add-img {
@@ -124,7 +124,7 @@
           vertical-align: middle;
         }
         .center-title {
-          font-size: 28rpx;
+          font-size: 26rpx;
           color: #5F3118;
           margin-top: 12rpx;
           text-align: center;
@@ -137,7 +137,7 @@
           position: absolute;
           width: 170rpx;
           border-radius: 0rpx 0rpx 8rpx 8rpx;
-          bottom: 64rpx;
+          bottom: 70rpx;
         }
       }
       .equal-img {
@@ -171,7 +171,7 @@
             text-decoration: line-through;
           }
           .right-now {
-            width: 168rpx;
+            width: 170rpx;
             height: 60rpx;
             background-image: linear-gradient(90deg, #FD5B86 0%, #F81E1F 100%);
             color: #fff;
@@ -181,6 +181,7 @@
             position: absolute;
             bottom: 64rpx;
             border-radius: 8rpx;
+            margin-left: -1rpx;
           }
         }
         .hot {
@@ -289,7 +290,7 @@
       <view>换个关键词试试吧</view>
     </view>
       <!-- 没有更多啦 -->
-    <view wx:if="{{newCollocationArr.length>0}}" style="font-size:24rpx;color:#B5B5B5;width:120rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
+    <view wx:if="{{newCollocationArr.length>0}}" style="font-size:24rpx;color:#B5B5B5;width:160rpx;text-align:center;margin:30rpx auto;">没有更多啦</view>
   </view>
 </template>
 

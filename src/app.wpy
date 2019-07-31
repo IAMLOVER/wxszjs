@@ -56,6 +56,7 @@ export default class extends wepy.app {
       'pages/myCenter/myCoupon/myCoupon',
       'pages/myCenter/myPackage/myPackage',
       'pages/myCenter/myPackage/packWithDraw',
+      'pages/myCenter/myPackage/taxStatement',
       'pages/myCenter/myPackage/drawSuccess',
       'pages/myCenter/myPackage/drawFail',
       'pages/myCenter/myPackage/drawArgee',
@@ -161,7 +162,6 @@ export default class extends wepy.app {
                         that.globalData.mini = false   
                         console.log(res)
                         that.globalData.reCode = res.data.data
-
                       }
                       if(res.data.code == 1000){
                       that.globalData.userId = res.data.data.userid

@@ -452,7 +452,7 @@
         </view>
         <view class="produce-price">
           <text class="new">￥{{m1.filter(produceInfo.chaPrice*0.01)}}</text>
-          <text class="old">{{m1.filter(produceInfo.titPrice*0.01)}}</text>
+          <text class="old">￥{{m1.filter(produceInfo.titPrice*0.01)}}</text>
           <text class="older">￥{{m1.filter(produceInfo.mktPrice*0.01)}}</text>
         </view>
       </view>
