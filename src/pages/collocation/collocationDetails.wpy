@@ -213,12 +213,6 @@
             color: #F25664;
             font-size: 36rpx;
             font-weight: 600;
-            &:last-child {
-              color: #C8C8C8;
-              font-size: 24rpx;
-              text-decoration: line-through;
-              font-weight: normal;
-            }
           }
         }
         .comeon {
@@ -692,7 +686,7 @@
           </view>
           <view class="price">
             <text>￥{{m1.filter(produceInfo.minPrice*0.01)}}</text>
-            <text wx:if="{{produceInfo.maxMktPrice>0}}">￥{{m1.filter(produceInfo.maxMktPrice*0.01)}}</text>
+            <text style="color: #C8C8C8;font-size: 24rpx;text-decoration: line-through;font-weight: normal;" wx:if="{{produceInfo.minMktPrice>0}}">￥{{m1.filter(produceInfo.minMktPrice*0.01)}}</text>
           </view>
           <!-- 助力有奖 -->
           <view class="comeon" wx:if="{{produceInfo.activityType == 1}}" @tap="goCome" data-id="{{produceInfo.id}}">
@@ -716,11 +710,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-                <view class="kefu">
-                    <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                     <view>客服</view>
-                </view>
-              </button>
+                  <view class="kefu">
+                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                       <view>客服</view>
+                  </view>
+                </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01*pmtCollocation.promotionCount + produceInfo.minPrice*0.01*pmtCollocation.goodsCount)}})</text>
       </view>
@@ -795,9 +789,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                        <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                                      </button>
+                                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                          <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -882,7 +876,7 @@
           console.log(ops.target)
         }
         return {
-          title:'我发现了超值组合，快来看看吧',
+          title: '我发现了超值组合，快来看看吧',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
           path: 'pages/collocation/collocationDetails?id=' + this.collocationId,
           success: function(res) {},
@@ -992,8 +986,7 @@
       this.isIphoneX = this.$parent.globalData.isIphoneX
       this.getCollocation()
     };
-    onShow() {
-    }
+    onShow() {}
     //获取搭配详情
     getCollocation() {
       var that = this
