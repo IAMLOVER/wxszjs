@@ -184,6 +184,7 @@
               that.$parent.globalData.identityType = res.data.data.identityType
               that.$parent.globalData.key = res.data.data.sessionkey
               that.$parent.globalData.userName = res.data.data.username
+              that.$parent.globalData.avatarUrl = res.data.data.head
               wx.setStorageSync('userId', res.data.data.userid)
               if (res.data.data.newcoupon) {
                 that.newcoupon = res.data.data.newcoupon
@@ -260,6 +261,7 @@
               that.$parent.globalData.identityType = res.data.data.identityType
               that.$parent.globalData.key = res.data.data.sessionkey
               that.$parent.globalData.userName = res.data.data.username
+              that.$parent.globalData.avatarUrl = res.data.data.head
               wx.setStorageSync('userId', res.data.data.userid)
               wepy.showToast({
                 title: '操作成功', //提示的内容,
@@ -307,6 +309,7 @@
               that.$parent.globalData.identityType = res.data.data.identityType
               that.$parent.globalData.key = res.data.data.sessionkey
                that.$parent.globalData.userName = res.data.data.username
+               that.$parent.globalData.avatarUrl = res.data.data.head
               wx.setStorageSync('userId', res.data.data.userid)
               wepy.showToast({
                 title: '操作成功', //提示的内容,

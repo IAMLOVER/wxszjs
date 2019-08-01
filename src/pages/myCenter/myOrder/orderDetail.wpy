@@ -357,7 +357,7 @@
         <view class="pink"></view>
         <view class="info-wrapper">
             <view class="name">收件人：<text style="font-weight:bold">{{orderInfo.name}}</text></view>
-            <view>手机号码：{{orderInfo.phone}}</view>
+            <view>联系电话：{{orderInfo.phone}}</view>
             <view>收货地址：{{orderInfo.address}}</view>
             <!-- <image src="{{imagePath + 'more04.png'}}" wx:if="{{imagePath}}" class="more"/> -->
             <view class="left-circle"></view>
@@ -389,7 +389,7 @@
             <view wx:if="{{orderInfo.orderStream.length<=0}}">快递单号：暂无</view>
         </view>
         <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
-            <text>合计金额：<text style="color:#F25664;margin-right:30rpx;font-weight:600">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
+            <text>合计：<text style="color:#F25664;margin-right:30rpx;font-weight:600">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>
             <view class="confirm" @tap="confirm" wx:if="{{orderInfo.type ==  3}}">确认收货</view>
             <view class="wait-btn" wx:if="{{orderInfo.type == 1}}">
                 <view class="cancle" @tap="cancleOrder" data-id="{{item.orderNo}}">取消订单</view>

@@ -110,7 +110,7 @@
   <view class="container">
     <view class="header">
       <view class="discount">
-        <view>优惠券累计为你省下</view>
+        <view>优惠券累计为我省下</view>
         <view>￥
           <text style="font-size:50rpx;">{{m1.filter(mySave*0.01)}}</text>
         </view>
@@ -145,7 +145,7 @@
         </view>
         <view style="font-size:24rpx;padding-left:8rpx;margin-top:-12rpx">有效期至{{item.blockingTime}}</view>
       </view>
-      <view class="use">已失效</view>
+      <view class="use">已使用</view>
     </view>
     <view class="empty" wx:if="{{canArr.length<=0}}">
       <image src="{{imagePath+'null_coupon@2x.png'}}" wx:if="{{imagePath}}" />
@@ -168,7 +168,7 @@
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
-      tabLists: ['可使用', '已失效'],
+      tabLists: ['可使用', '已使用/失效'],
       nowIndex: 0,
       couponStatus: 0,
       canArr: {},
@@ -206,7 +206,7 @@
           console.log(res)
           that.canArr = res.data.data
           for (var item of that.canArr) {
-            item.blockingTime = time.formatTime(item.blockingTime, 'Y-M-D h:m:s')
+            item.blockingTime = time.formatTime(item.blockingTime, 'Y-M-D')
           }
           that.$apply()
         },

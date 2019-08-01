@@ -124,7 +124,7 @@
     </view>
     <!-- 订单内容 -->
     <view class="order-content">
-      <view class="content-lists" wx:for="{{orderInfo.contentList}}" wx:for-item="item" wx:index="{{index}}">
+      <view class="content-lists" wx:for="{{orderInfo.contentList}}" wx:for-item="item" wx:key="{{index}}">
         <view class="list">
           <view class="list-left">
             <image src="{{preImagePath+item.classPic}}" wx:if="{{preImagePath && item.classPic}}" mode="aspectFill" />

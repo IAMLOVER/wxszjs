@@ -194,7 +194,7 @@
         收件人：<text>{{userName}}</text>
       </view>
       <view class="order-phone">
-        手机号码：{{userNumber}}
+        联系电话：{{userNumber}}
       </view>
       <view class="order-address">
         收货地址：{{detailAddress}}
@@ -217,8 +217,8 @@
             <!-- <view class="list-type">规格：{{channelInfo.className}}</view> -->
             <view class="list-text">
               <view class="price">￥{{m1.filter(channelInfo.salePrice*0.01)}}</view>
-              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.count}}</view>
-              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.count * pay.scount}}</view>
+              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.scount}}</view>
+              <view class="count" wx:if="{{pay.channelCount}}">数量：{{pay.channelCount}}</view>
             </view>
           </view>
         </view>
@@ -233,8 +233,8 @@
             <view class="list-type">规格：{{produceInfo.className}}</view>
             <view class="list-text">
               <view class="price">￥{{m1.filter(produceInfo.salPrice*0.01)}}</view>
-              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.scount?pay.scount*pay.count:pay.count}}</view>
-              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.goodNeedCount * pay.count}}</view>
+              <view class="count" wx:if="{{!pay.goodNeedCount}}">数量：{{pay.scount?pay.scount:pay.count}}</view>
+              <view class="count" wx:if="{{pay.goodNeedCount}}">数量：{{pay.goodNeedCount}}</view>
             </view>
           </view>
         </view>
@@ -242,16 +242,26 @@
     </view>
     <!-- 优惠活动 -->
     <view class="action">
-      <view class="view" wx:if="{{haveJoinActivity}}">
-        <view>优惠活动：</view>
-        <view class="tip">满{{m1.filter(couponActivity.standard*0.01)}}减{{m1.filter(couponActivity.privilege*0.01)}}</view>
-      </view>
       <view class="view">
+        <view>优惠活动：</view>
+        <view class="tip" wx:if="{{!pay.scount && haveJoinActivity}}">满{{m1.filter(couponActivity.standard*0.01)}}减{{m1.filter(couponActivity.privilege*0.01)}}</view>
+        <view class="tip" style="color:#666" wx:if="{{!pay.scount && !haveJoinActivity}}">无</view>
+        <view class="tip" wx:if="{{pay.scount}}" style="color:#F25664">组合搭配</view>
+      </view>
+      <view class="view" wx:if="{{!pay.scount}}">
         <view>有无优惠券：</view>
         <view wx:if="{{pay.have}}">有</view>
         <view wx:if="{{!pay.have}}">无</view>
       </view>
-      <view class="view">
+      <view class="view" wx:if="{{pay.scount}}">
+        <view>组合数量：</view>
+        <view>{{pay.count}}</view>
+      </view>
+      <view class="view" wx:if="{{pay.scount}}">
+        <view>组合价：</view>
+        <view>{{pay.collocationMoney}}</view>
+      </view>
+      <view class="view" wx:if="{{!pay.scount}}">
         <view>运费：</view>
         <view>包邮</view>
       </view>
@@ -259,12 +269,12 @@
     <!-- 底部 立即支付按钮区域 -->
     <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <view></view>
-      <view class="number">
+      <view class="number" style="margin-top:{{pay.scount?'30rpx':'10rpx'}}">
         <view class="total">
           <text>合计：</text>
           <text style="color: #F25664;font-weight:600">￥{{m1.filter(pay.money)}}</text>
         </view>
-        <view class="youhui">
+        <view class="youhui" wx:if="{{!pay.scount}}">
           <text>优惠金额：</text>
           <!-- {{m1.filter((produceInfo.salPrice*0.01*pay.scount+channelInfo.salPrice*0.01)*pay.count-pay.money)}} -->
           <text wx:if="{{channelInfo != null}}">0</text>

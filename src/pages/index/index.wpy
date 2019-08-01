@@ -431,7 +431,7 @@
               <view style="display:flex;display:-webkit-flex;">
                 <!-- item.logo?preImagePath+item.logo: -->
                 <image class="logo" src="{{'../../images/index/store_logomin.png'}}" />
-                <text>{{item.name}}</text>
+                <text style="display:inline-block;line-height:80rpx;">{{item.name}}</text>
                 <view class="button-wrapper">
                   <view class="rightNow">看看专区</view>
                   <image class="button" wx:if="{{imagePath}}" src="{{imagePath + 'button.png'}}" />

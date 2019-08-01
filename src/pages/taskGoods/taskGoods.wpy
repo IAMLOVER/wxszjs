@@ -792,7 +792,7 @@
           <view class="btn" @tap="payMoney" wx:if="{{goodsClassList[activeIndex].stock > 0}}">
             确定(共￥{{m1.filter(money)}})
           </view>
-          <view class="btn" wx:if="{{goodsClassList[activeIndex].stock <= 0}}">
+          <view class="btn" style="background:#B5B5B5" wx:if="{{goodsClassList[activeIndex].stock <= 0}}">
             暂无库存
           </view>
         </view>

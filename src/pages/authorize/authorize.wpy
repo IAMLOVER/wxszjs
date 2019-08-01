@@ -113,7 +113,6 @@
               var encryptedData = res.encryptedData
               console.log(res)
               var iv = res.iv
-              that.$parent.globalData.avatarUrl = res.userInfo.avatarUrl
               wx.request({
                 url: that.apiPath + '/szmktuserservice/login/mini',
                 header: {
@@ -140,6 +139,7 @@
                     that.$parent.globalData.identityType = res.data.data.identityType
                     that.$parent.globalData.key = res.data.data.sessionkey
                     that.$parent.globalData.userName = res.data.data.username
+                    that.$parent.globalData.avatarUrl = res.data.data.head
                     wx.setStorageSync('userId', res.data.data.userid)
                     wx.switchTab({
                       url: '../index/index'

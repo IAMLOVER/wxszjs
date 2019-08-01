@@ -561,8 +561,8 @@
 
 <script>
   import wepy from 'wepy';
-  import path from '../../common/path.js';
-  import mywxs from '../../wxs/mywxs.wxs';
+  import path from '../../common/path.js'
+  import mywxs from '../../wxs/mywxs.wxs'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '秒杀详情'
@@ -703,9 +703,11 @@
         pay.collocationId = this.collocationId
         // 商品规格id
         pay.id = this.typeId
+        //引流品数量
+        pay.channelCount = 1
         // 商品数量
         pay.count = this.account,
-          pay.scount = this.collocation.count
+        pay.scount = this.collocation.count
         // 商品活动类型
         pay.type = 1
         //任务关联id
@@ -713,6 +715,8 @@
         //优惠券id
         pay.couponId = null
         // 商品的价钱
+        // 商品的组合价钱
+        pay.collocationMoney = (this.produceInfo.chaPrice * 0.01 + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.collocation.count).toFixed(2)
         pay.money = ((this.produceInfo.chaPrice * 0.01 + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.collocation.count) * this.account).toFixed(2)
         wx.setStorage({
           key: 'pay',

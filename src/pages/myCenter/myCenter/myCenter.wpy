@@ -23,6 +23,7 @@
         width: 120rpx;
         border-radius: 120rpx;
         overflow: hidden;
+        border: 4rpx solid #fff;
         image {
           width: 120rpx;
           height: 120rpx;
@@ -184,7 +185,7 @@
   <view class="container">
     <view class="header">
       <view class="avatar">
-        <image src="{{avatarUrl?avatarUrl:imagePath+'default@2x.png'}}" wx:if="{{imagePath}}" />
+        <image src="{{avatarUrl?userImagePath + avatarUrl:imagePath+'default@2x.png'}}" wx:if="{{imagePath && userImagePath}}" />
       </view>
       <view @tap="bindNumber" class="bindNumber" wx:if="{{!mini}}">立即绑定/登录</view>
       <text class="name" style="color:#fff" wx:if="{{mini}}">{{userName}}</text>
@@ -288,6 +289,7 @@
       mini: true,
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
+      userImagePath: path.path.userImagePath,
       identityType: '',
       userName: '',
       orderForWaitPay: 0,

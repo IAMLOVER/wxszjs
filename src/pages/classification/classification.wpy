@@ -361,7 +361,6 @@
         dataType: 'json',
         success: res => {
           let data = res.data.data
-          console.log(data)
           that.classArr = data
           that.$apply()
         },
@@ -395,11 +394,10 @@
         method: 'get',
         dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
         success: res => {
-          console.log(res)
           that.classifyProduce = that.arr.concat(res.data.data.content)
           that.totalPage = res.data.data.totalPages
           that.$apply()
-          wepy.hideLoading();
+          wepy.hideLoading()
         },
         fail: () => {},
         complete: () => {}

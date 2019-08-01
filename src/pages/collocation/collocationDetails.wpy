@@ -958,8 +958,8 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-          //搭配的促销品需要的数量
-          pay.scount = this.pmtCollocation.promotionCount
+        //搭配的促销品需要的数量
+        pay.scount = this.pmtCollocation.promotionCount
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
@@ -968,6 +968,8 @@
         pay.targetId = null
         //优惠券id
         pay.couponId = null
+        //组合价钱
+        pay.collocationMoney = ((this.pmtCollocation.promotionPrice * 0.01 * this.pmtCollocation.promotionCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.pmtCollocation.goodsCount)).toFixed(2)
         // 商品的价钱
         pay.money = ((this.pmtCollocation.promotionPrice * 0.01 * this.pmtCollocation.promotionCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.pmtCollocation.goodsCount) * this.account).toFixed(2)
         wx.setStorage({

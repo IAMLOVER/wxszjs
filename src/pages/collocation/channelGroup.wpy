@@ -939,6 +939,8 @@
         pay.targetId = this.userTargetId
         //优惠券id
         pay.couponId = null
+        //组合价钱
+        pay.collocationMoney = (this.channelCollocation.channelInfoPrice * 0.01 * this.channelCollocation.channelInfoCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.channelCollocation.goodsCount).toFixed(2)
         // 商品的价钱
         pay.money = ((this.channelCollocation.channelInfoPrice * 0.01 * this.channelCollocation.channelInfoCount + this.goodsClassList[this.activeIndex].salPrice * 0.01 * this.channelCollocation.goodsCount) * this.account).toFixed(2)
         wx.setStorage({
