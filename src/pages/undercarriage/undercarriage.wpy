@@ -8,18 +8,18 @@
 </template>
 
 <script>
-  import wepy from 'wepy';
+  import wepy from 'wepy'
   import path from '../../common/path.js'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "神州集市",
-    };
+    }
     data = {
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       maintainTime: ''
-    };
-    components = {};
+    }
+    components = {}
     methods = {
       findMore() {
         this.$switch('../index/index')

@@ -772,9 +772,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                              </button>
+                                                  <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                  <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -836,6 +836,11 @@
       m1: mywxs
     };
     methods = {
+      call() {
+        wx.makePhoneCall({
+          phoneNumber: this.storePhoneNum
+        })
+      },
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
@@ -846,7 +851,7 @@
       },
       onCreatePoster() {},
       onPosterFail(err) {
-        console.error(err);
+        console.error(err)
       },
       onPosterSuccess(e) {
         this.showShareShadow = false
@@ -870,11 +875,11 @@
           path: 'pages/collocation/channelSingle?id=' + this.collocationId + '&type=' + 1 + '&userTargetId=' + this.userTargetId,
           success: function(res) {
             // 转发成功
-            console.log("转发成功:" + JSON.stringify(res));
+            console.log("转发成功:" + JSON.stringify(res))
           },
           fail: function(res) {
             // 转发失败
-            console.log("转发失败:" + JSON.stringify(res));
+            console.log("转发失败:" + JSON.stringify(res))
           }
         }
       },
@@ -928,7 +933,7 @@
             duration: 2000,
             mask: true,
             success: res => {}
-          });
+          })
         }
       },
       //购买数量的确定按钮
@@ -970,7 +975,7 @@
       }
     };
     onLoad(options) {
-      var that = this;
+      var that = this
       that.isIphoneX = that.$parent.globalData.isIphoneX
       if (options.scene) {
         let scene = decodeURIComponent(options.scene)
@@ -984,8 +989,7 @@
       }
       that.getChannelCollocation()
     };
-    onShow() {
-    };
+    onShow() {};
     //获取引流品商品的搭配详情
     getChannelCollocation() {
       var that = this
@@ -1018,6 +1022,7 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
+          that.getStorePhone()
         },
         fail: () => {},
         complete: () => {}
@@ -1069,7 +1074,7 @@
         },
         fail: () => {},
         complete: () => {}
-      });
+      })
     }
     //保存海报到相册
     saveAblum() {
@@ -1084,7 +1089,7 @@
             duration: 2000,
             mask: true,
             success: res => {}
-          });
+          })
           that.$apply()
         },
         fail(err) {

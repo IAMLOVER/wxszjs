@@ -335,8 +335,8 @@
         <view class="progress" style="width:{{groupContent.length/taskForShare.targetNum*100}}%"></view>
         <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 0}}">进行中</text>
         <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 1}}">已成功</text>
-        <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 2}}">已失败</text>
-        <text style="color:#F25664">{{m1.filter(groupContent.length/taskForShare.targetNum*100)}}%</text>
+        <text style="left:15rpx;font-size:28rpx;" wx:if="{{taskForShare.status == 2}}">截止前未完成</text>
+        <text style="color:#F25664" wx:if="{{taskForShare.status != 2}}">{{m1.filter(groupContent.length/taskForShare.targetNum*100)}}%</text>
       </view>
       <view class="main-produce">
         <view class="produce-left">

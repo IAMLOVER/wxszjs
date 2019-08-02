@@ -772,9 +772,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                        <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                      </button>
+                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                          <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -836,10 +836,15 @@
       m1: mywxs
     };
     methods = {
+      call() {
+        wx.makePhoneCall({
+          phoneNumber: this.storePhoneNum
+        });
+      },
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()        
+        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -867,7 +872,7 @@
         return {
           title: this.produceInfo.relay ? this.produceInfo.relay : '我发现了一个超值好物，快来看看啊',
           imageUrl: this.produceInfo.cover ? this.preImagePath + this.produceInfo.cover : this.preImagePath + this.produceInfo.picUrl1,
-          path:'pages/collocation/collocationSingle?id=' + this.collocationId + '&type=' + 2 + '&userTargetId=' + this.userTargetId,
+          path: 'pages/collocation/collocationSingle?id=' + this.collocationId + '&type=' + 2 + '&userTargetId=' + this.userTargetId,
           success: function(res) {
             // 转发成功
             console.log("转发成功:" + JSON.stringify(res));
@@ -984,8 +989,7 @@
       }
       that.getPmtCollocation()
     };
-    onShow() {
-    };
+    onShow() {};
     //获取促销品搭配详情
     getPmtCollocation() {
       var that = this
@@ -1016,6 +1020,7 @@
           //节省多少钱字段
           that.saveMoney = res.data.data.saveMoney
           that.$apply()
+          that.getStorePhone()
         },
         fail: () => {},
         complete: () => {}
