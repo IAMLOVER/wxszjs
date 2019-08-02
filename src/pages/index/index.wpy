@@ -352,25 +352,25 @@
         <repeat for="{{swiperArr}}">
           <view>
             <swiper-item wx:if="{{item.type==1}}">
-              <navigator>
+              <navigator hover-class="none">
                 <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
               </navigator>
             </swiper-item>
             <!-- 普通商品 -->
             <swiper-item wx:if="{{item.type==2}}">
-              <navigator url='../generalGoods/generalGoods?id={{item.subId}}'>
+              <navigator  hover-class="none" url='../generalGoods/generalGoods?id={{item.subId}}'>
                 <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
               </navigator>
             </swiper-item>
             <!-- 引流品 -->
             <swiper-item wx:if="{{item.type==3}}">
-              <navigator url="../secKill/secKillFirst?id={{item.subId}}">
+              <navigator  hover-class="none" url="../secKill/secKillFirst?id={{item.subId}}">
                 <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
               </navigator>
             </swiper-item>
             <!-- 图文 -->
             <swiper-item wx:if="{{item.type==6}}">
-              <navigator url="../banner/banner?id={{item.id}}">
+              <navigator  hover-class="none" url="../banner/banner?id={{item.id}}">
                 <image src="{{preImagePath+item.picUrl}}" class="slide-image" mode="aspectFill" />
               </navigator>
             </swiper-item>

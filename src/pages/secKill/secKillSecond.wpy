@@ -263,6 +263,11 @@
               width: 430rpx;
               font-weight: 600;
               height: 126rpx;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
             .one-type {
               color: #959595;
@@ -307,6 +312,13 @@
               color: #222222;
               font-size: 28rpx;
               width: 430rpx;
+              font-weight: 600;
+              height: 100rpx;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
             .two-type {
               color: #959595;
@@ -555,7 +567,6 @@
         </view>
       </view>
     </view>
-    <view class="button-group {{isIphoneX ?'fix-iphonex-button':''}}"></view>
   </view>
 </template>
 
@@ -707,7 +718,7 @@
         pay.channelCount = 1
         // 商品数量
         pay.count = this.account,
-        pay.scount = this.collocation.count
+          pay.scount = this.collocation.count
         // 商品活动类型
         pay.type = 1
         //任务关联id

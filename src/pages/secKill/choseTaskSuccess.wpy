@@ -432,6 +432,7 @@
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
       qrcodeImagePath: path.path.qrcodeImagePath,
+      userImagePath: path.path.userImagePath,
       produceId: '',
       otherArr: {},
       taskForShare: {},
@@ -681,7 +682,7 @@
               },
               //人物头像
               {
-                url: that.$parent.globalData.avatarUrl,
+                url: that.userImagePath + that.$parent.globalData.avatarUrl,
                 width: 100,
                 height: 100,
                 zIndex: 2,

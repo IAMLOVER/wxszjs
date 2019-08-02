@@ -807,6 +807,7 @@
       imagePath: path.path.imagePath,
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
+      userImagePath: path.path.userImagePath,
       qrcodeImagePath: path.path.qrcodeImagePath,
       collocationId: '',
       userTargetId: '',
@@ -1219,7 +1220,7 @@
               },
               //人物头像
               {
-                url: that.$parent.globalData.avatarUrl,
+                url: that.userImagePath + that.$parent.globalData.avatarUrl,
                 width: 100,
                 height: 100,
                 zIndex: 2,

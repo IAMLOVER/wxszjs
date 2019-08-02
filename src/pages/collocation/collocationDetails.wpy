@@ -416,7 +416,14 @@
             .two-name {
               color: #222222;
               font-size: 28rpx;
+              font-weight: 600;
               width: 430rpx;
+              height: 100rpx;
+              display: -webkit-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
             .two-type {
               color: #959595;
@@ -710,11 +717,11 @@
     <!-- 客服，立即秒杀 -->
     <view class="dosome" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
       <button open-type='contact' plain="true" style="border-color:#fff">
-                  <view class="kefu">
-                      <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
-                       <view>客服</view>
-                  </view>
-                </button>
+                    <view class="kefu">
+                        <image src="{{imagePath+'kefu.png'}}" wx:if="{{imagePath}}"/>
+                         <view>客服</view>
+                    </view>
+                  </button>
       <view class="skill-btn" @tap="rightNow">
         <text>抢(组合价￥{{m1.filter(pmtCollocation.promotionPrice*0.01*pmtCollocation.promotionCount + produceInfo.minPrice*0.01*pmtCollocation.goodsCount)}})</text>
       </view>
@@ -789,9 +796,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                                          <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
-                                                        </button>
+                                                            <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                                            <view style="font-size:20rpx;margin-top:14rpx">微信好友</view>
+                                                          </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -824,6 +831,7 @@
       apiPath: path.path.apiPath,
       preImagePath: path.path.preImagePath,
       qrcodeImagePath: path.path.qrcodeImagePath,
+      userImagePath: path.path.userImagePath,
       showPosition: false,
       showShadow: false,
       collocationId: '',
@@ -958,8 +966,8 @@
         pay.id = this.typeId
         // 商品数量
         pay.count = this.account,
-        //搭配的促销品需要的数量
-        pay.scount = this.pmtCollocation.promotionCount
+          //搭配的促销品需要的数量
+          pay.scount = this.pmtCollocation.promotionCount
         //搭配的商品数量
         pay.goodNeedCount = this.pmtCollocation.goodsCount
         // 商品活动类型
@@ -1204,7 +1212,7 @@
               },
               //人物头像
               {
-                url: that.$parent.globalData.avatarUrl,
+                url: that.userImagePath + that.$parent.globalData.avatarUrl,
                 width: 100,
                 height: 100,
                 zIndex: 2,

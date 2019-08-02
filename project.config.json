@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 34,
+			"current": 33,
 			"list": [
 				{
 					"id": 0,
@@ -60,7 +60,7 @@
 				{
 					"id": 2,
 					"name": "大满减",
-					"pathName": "pages/myCenter/myPackage/drawSuccess",
+					"pathName": "pages/fullReduction/fullReduction",
 					"query": "",
 					"scene": null
 				},
@@ -276,9 +276,9 @@
 				},
 				{
 					"id": 33,
-					"name": "登录",
-					"pathName": "pages/login/login",
-					"query": "scene=FVIT2CFJ",
+					"name": "pages/empty/empty",
+					"pathName": "pages/empty/empty",
+					"query": "scene=13525759999",
 					"scene": null
 				},
 				{
