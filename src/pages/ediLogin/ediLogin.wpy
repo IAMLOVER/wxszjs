@@ -69,7 +69,7 @@ page{
 
 <script>
 import wepy from 'wepy';
-import path from '../../common/path.js';
+import path from '../../common/path.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '神州集市'
