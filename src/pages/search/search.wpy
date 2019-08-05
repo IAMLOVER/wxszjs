@@ -287,7 +287,7 @@
               <view class="item-money">
                 <text class="mt">￥</text>
                 <text class="mc">{{m1.filter(item.minPrice*0.01)}}</text>
-                <i class="mi" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">{{m1.filter(item.minMktPrice*0.01)}}</i>
+                <i class="mi" wx:if="{{m1.filter(item.minMktPrice*0.01)>0}}">￥{{m1.filter(item.minMktPrice*0.01)}}</i>
               </view>
               <view data-store="{{item.storeId}}" catchtap="goShop">
                 <text class="item-store">{{item.storeName}}</text>

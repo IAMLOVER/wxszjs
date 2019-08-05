@@ -109,9 +109,9 @@
             flex: 2;
             .item-title {
               font-size: 32rpx;
-              color: #222;
+              color: #222222;
+              height: 100rpx;
               font-weight: 600;
-              height: 96rpx;
               display: -webkit-box;
               overflow: hidden;
               text-overflow: ellipsis;
