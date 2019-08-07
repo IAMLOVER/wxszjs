@@ -343,7 +343,7 @@
         </view>
         <view class="header">
             <text wx:if="{{orderInfo.type == 1}}">待支付</text>
-            <view wx:if="{{orderInfo.type == 1}}" style="font-size:24rpx;margin-left:30rpx;margin-top:7rpx">{{overTime}}</view>
+            <view wx:if="{{orderInfo.type == 1}}" style="font-size:24rpx;margin-left:30rpx;margin-top:7rpx">{{overTime}}-自动取消</view>
             <text wx:if="{{orderInfo.type == 2}}">待发货</text>
             <text wx:if="{{orderInfo.type == 3}}">待收货</text>
             <text wx:if="{{orderInfo.type == 4}}">已完成</text>
@@ -386,7 +386,6 @@
             <view>订单编号：{{orderInfo.orderNo}}</view>
             <view>订单时间：{{orderInfo.createTime}}</view>
             <view wx:for="{{orderInfo.orderStream}}" wx:key="{{index}}" wx:for-item="item">快递单号：{{item.name}} {{item.streamNo}}<text class="copy" data-content="{{item.streamNo}}" @tap="copy">复制</text></view>
-            <view wx:if="{{orderInfo.orderStream.length<=0}}">快递单号：暂无</view>
         </view>
         <view class="footer" style="{{isIphoneX?'bottom:68rpx':'bottom:0rpx'}}">
             <text>合计：<text style="color:#F25664;margin-right:30rpx;font-weight:600">￥{{m1.filter(orderInfo.totalFee*0.01)}}</text></text>

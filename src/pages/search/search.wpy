@@ -459,7 +459,7 @@
         data: {
           keyWord: that.seachValue,
           page: that.page,
-          sortType: '1',
+          sortType: 'hot',
           size: 15
         },
         success: res => {

@@ -511,6 +511,7 @@
             <view class="produce-money">
               <text class="money-type">￥</text>
               <text class="number">{{m1.filter(item.minPrice*0.01)}}</text>
+              <text style="float:right;font-size:24rpx;color:#959595;margin-top:20rpx;margin-right:10rpx">{{item.saleNum}}人购买</text>
             </view>
           </view>
           <!-- 商品销售类型(满减，任务) -->
@@ -542,9 +543,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                        <view style="font-size:20rpx;">微信好友</view>
-                      </button>
+              <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+              <view style="font-size:20rpx;">微信好友</view>
+          </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -561,8 +562,8 @@
 
 <script>
   import wepy from 'wepy';
-  import path from '../../common/path.js';
-  import mywxs from '../../wxs/mywxs.wxs';
+  import path from '../../common/path.js'
+  import mywxs from '../../wxs/mywxs.wxs'
   import poster from '../../components/miniprogram_dist/poster/poster'
   export default class Index extends wepy.page {
     config = {

@@ -97,8 +97,7 @@
       border-radius: 20rpx;
       padding: 24rpx;
       box-sizing: border-box;
-      width: 690rpx;
-      // height: 240rpx;
+      width: 690rpx; // height: 240rpx;
       position: relative;
       margin-top: -14rpx;
       margin-bottom: 30rpx;
@@ -171,7 +170,7 @@
         bottom: 34rpx;
       }
     }
-    .item:first-child{
+    .item:first-child {
       padding-top: 40rpx;
       height: 240rpx;
     }
@@ -387,9 +386,9 @@
             <view @tap="onCreatePoster">生成海报</view>
           </poster>
           <button open-type="share" class="poster" plain="true">
-                                        <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
-                                        <view style="font-size:20rpx;">微信好友</view>
-                                      </button>
+                                          <image src = "{{imagePath + 'WeChat_sz.png'}}" wx:if="{{imagePath}}"/>
+                                          <view style="font-size:20rpx;">微信好友</view>
+                                        </button>
         </view>
         <view class="cancle-share" @tap="cancleShare">
           取消
@@ -423,8 +422,8 @@
       if (this.taskHaveCollocation) {
         this.tipShadow = true
       }
-      console.log(this.posterConfig)
       this.getTaskDetail()
+      this.getQRCode()
     }
     data = {
       isIphoneX: false,
@@ -452,7 +451,6 @@
       //打开，关闭分享弹出框
       openShareShadow() {
         this.showShareShadow = true
-        this.getQRCode()
       },
       cancleShare() {
         this.showShareShadow = false
@@ -653,6 +651,8 @@
                   text: wx.getStorageSync('taskGoodsName'),
                   fontSize: 26,
                   color: '#000',
+                  lineHeight: 40,
+                  width: 410,
                   lineHeight: 40,
                   lineNum: 1,
                 }]
